@@ -11,3 +11,21 @@ OPEN_CANADA_SECRET_KEY - The django SECRET_KEY setting.
 OPEN_CANADA_BASE_URL - Base URL to use when referring to full URLs within the 
 Wagtail admin backend. e.g. in notification emails. Don't include '/admin' or 
 a trailing slash.
+
+
+# Git Hooks
+Git hooks are provided in the hooks folder.
+
+To install the hooks:
+
+  -  navigate to the .git/hooks/ directory
+  -  run `ln -s ../../hooks/<hookfile> <hookname>`  
+    -  for example `ln -s ../../hooks/pre-commit.py pre-commit`
+ 
+
+Pre-Commit Hook
+---------------
+Performs flake8 and isort checks before allowing commit.
+
+
+
