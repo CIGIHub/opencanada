@@ -1,12 +1,12 @@
 from __future__ import absolute_import, unicode_literals
 
+from basic_site.models import BasePage
 from django.db import models
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, RichTextFieldPanel
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 
-from basic_site.models import BasePage
 from people import models as people_models
 
 
