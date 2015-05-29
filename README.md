@@ -31,3 +31,10 @@ To install the hooks:
 
 ###Pre-Commit Hook
 Performs flake8 and isort checks before allowing commit.
+
+
+## Running Tests
+To run the unit tests:
+
+  -  run `./manage.py tests`
+  

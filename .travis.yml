@@ -11,6 +11,6 @@ before_script:
   - flake8 .
   - isort -c -rc .
 script:
-  - coverage run --source=opencanada ./manage.py test --settings opencanada.settings.test
+  - coverage run --source='.' ./manage.py test --settings opencanada.settings.test
 after_success:
   - coveralls
