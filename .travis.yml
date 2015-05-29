@@ -8,8 +8,8 @@ install:
   - pip install -q Django==$DJANGO --use-mirrors
   - pip install -r requirements/test.txt --use-mirrors
 before_script:
-  flake8 .
-  isort -c -vb -rc .
+  - flake8 .
+  - isort -c -vb -rc .
 script:
   - coverage run --source=opencanada ./manage.py test --settings opencanada.settings.test
 after_success:
