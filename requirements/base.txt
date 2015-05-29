@@ -1,4 +1,5 @@
 # Minimal requirements
+Django>=1.8,<1.9
 wagtail==1.0b2
 
 # Recommended components (require additional setup):

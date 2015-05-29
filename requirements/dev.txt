@@ -1,5 +1,4 @@
 -r base.txt
-Django>=1.8,<1.9
 
 isort
 flake8
