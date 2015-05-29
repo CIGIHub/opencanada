@@ -1,0 +1,16 @@
+language: python
+python:
+  - "3.4"
+  - "2.7"
+env:
+  - DJANGO=1.7.8
+  - DJANGO=1.8
+install:
+  - pip install -q Django==$DJANGO --use-mirrors
+  - pip install -r requirements/test.txt --use-mirrors
+before_script:
+  flake8 .
+script:
+  - coverage run --source=opencanada python manage.py test --settings opencanada.settings.test
+after_success:
+  - coveralls

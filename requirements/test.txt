@@ -1,0 +1,5 @@
+-r base.txt
+
+isort
+flake8
+coveralls

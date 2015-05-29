@@ -1,0 +1,14 @@
+# Minimal requirements
+wagtail==1.0b2
+
+# Recommended components (require additional setup):
+# psycopg2==2.5.2
+elasticsearch==1.1.1
+
+# Recommended components to improve performance in production:
+# django-redis==3.8.2
+
+git+https://github.com/CIGIHub/wagtail-basic-site-components.git
+
+# Required for importing data.
+MySQL-python
