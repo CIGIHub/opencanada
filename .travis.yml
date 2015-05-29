@@ -11,6 +11,6 @@ install:
 before_script:
   flake8 .
 script:
-  - coverage run --source=opencanada python manage.py test --settings opencanada.settings.test
+  - coverage run --source=opencanada ./manage.py test --settings opencanada.settings.test
 after_success:
   - coveralls
