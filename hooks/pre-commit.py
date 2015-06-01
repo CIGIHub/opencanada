@@ -16,10 +16,12 @@ IGNORE = get_git_param('FLAKE8_IGNORE', None)
 LAZY = get_git_param('FLAKE8_LAZY', False)
 
 if __name__ == '__main__':
+    result = 0
     isort_result = isort_hook(strict=True)
 
     if isort_result:
-        sys.stdout('Run `isort -rc .` from the repository root directory to sort imports.')
+        sys.stdout.writelines('Run `isort -rc .` from the repository root directory to sort imports.')
+        result = 1
 
     flake8_result = flake8_hook(
         complexity=COMPLEXITY,
@@ -28,4 +30,7 @@ if __name__ == '__main__':
         lazy=LAZY,
     )
 
-    sys.exit(isort_result | flake8_result)
+    if flake8_result:
+        result += 1
+
+    sys.exit(result)
