@@ -3,6 +3,7 @@ from __future__ import absolute_import, unicode_literals
 
 from django.test import TestCase
 from wagtail.wagtailcore.models import Page
+from wagtail.wagtailimages.models import Image
 
 from core.models import LegacyArticlePage
 from people.models import Contributor
@@ -237,3 +238,15 @@ class TestCommandImportFromWordPressLoadPosts(TestCase):
              ),
         ]
         return data
+
+
+class TestCommandImportProcessHTMLForImages(TestCase):
+
+    def testHTMLHasImageImageCreated(self):
+        command = import_from_wordpress.Command()
+        html = "<div><img src='http://placekitten.com/g/200/300'></div>"
+        command.process_body_html_for_images(html)
+
+        images = Image.objects.filter(title='300')
+
+        self.assertEqual(1, images.count())

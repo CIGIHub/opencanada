@@ -4,8 +4,13 @@ import argparse
 import getpass
 
 import MySQLdb
+import requests
+from bs4 import BeautifulSoup
+from django.core.files.images import File, get_image_dimensions
 from django.core.management.base import BaseCommand
+from django.utils.six import BytesIO
 from wagtail.wagtailcore.models import Page
+from wagtail.wagtailimages.models import Image
 
 from core.models import LegacyArticlePage
 from people.models import Contributor
@@ -108,7 +113,9 @@ class Command(BaseCommand):
 
     def get_post_data(self):
         cursor = self.connection.cursor()
-        # post_author, post_date_gmt,
+        # TODO: get post time post_date_gmt
+        # TODO: setup better filtering so that we get only the data that we
+        # actually want to transfer.
         query = 'SELECT post_content, post_title, post_excerpt, post_name, user_email ' \
                 'FROM wp_posts INNER JOIN wp_users ' \
                 'ON wp_posts.post_author = wp_users.ID ' \
@@ -129,6 +136,7 @@ class Command(BaseCommand):
         return results
 
     def load_posts(self):
+        # TODO: store a list of IDs for the posts that we are migrating.
         results = self.get_post_data()
 
         features_page = Page.objects.get(slug="features")
@@ -149,6 +157,7 @@ class Command(BaseCommand):
             else:
                 page.title = ''
             if post_content:
+                self.process_body_html_for_images(post_content)
                 page.body = post_content
             else:
                 page.body = ''
@@ -165,3 +174,39 @@ class Command(BaseCommand):
                 submitted_for_moderation=False,
             )
             revision.publish()
+
+    def process_body_html_for_images(self, html):
+        # TODO: only do this for images that used to be hosted on the
+        # original site. If we were linking to a remote image, we should
+        # leave it.
+        parser = BeautifulSoup(html)
+        imgs = parser.find_all('img')
+
+        # TODO: check for existing image that is the same.  Maybe store the
+        # original urls and only download if it has not been processed before.
+
+        # TODO: refactor the image saving code out so that it can be used for
+        # contributor images as well.
+        for img in imgs:
+            source = img['src']
+
+            filename = source.split("/")[-1]
+            response = requests.get(source)
+
+            if response.status_code == 200:
+
+                f = BytesIO(response.content)
+
+                dim = get_image_dimensions(f)  # (width, height)
+
+                Image.objects.create(
+                    title=filename,
+                    uploaded_by_user=None,
+                    file=File(f, name=filename),
+                    width=dim[0],
+                    height=dim[1]
+                )
+                # TODO: update html with new src.
+            else:
+                pass
+                # TODO: maybe log something so we can look into it.
