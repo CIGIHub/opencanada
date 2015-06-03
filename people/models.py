@@ -14,8 +14,13 @@ class Contributor(models.Model):
     short_bio = models.TextField(blank=True, default="")
     long_bio = models.TextField(blank=True, default="")
 
-    # headshot =
-    # TODO: headshot images
+    headshot = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
 
     def __str__(self):
         return "{} {} - {}".format(self.first_name, self.last_name, self.email)

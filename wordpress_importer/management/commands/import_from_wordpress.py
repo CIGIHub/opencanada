@@ -14,6 +14,12 @@ from wagtail.wagtailimages.models import Image
 
 from core.models import LegacyArticlePage
 from people.models import Contributor
+from wordpress_importer.utils import get_setting
+
+try:
+    from urlparse import urlparse
+except ImportError:
+    from urllib.parse import urlparse
 
 
 class PasswordPromptAction(argparse.Action):
@@ -53,6 +59,7 @@ class Command(BaseCommand):
     def __init__(self, *args, **kwargs):
         super(Command, self).__init__(*args, **kwargs)
         self.connection = None
+        self.image_download_domains = get_setting("IMAGE_DOWNLOAD_DOMAINS", required=True)
 
     def handle(self, **options):
         db_config = {
@@ -77,7 +84,6 @@ class Command(BaseCommand):
 
         # TODO: twitter handle not coming through in this data.
         # TODO: where is the long bio?
-        # TODO: get the images.
         query = 'SELECT user_email, meta_key, meta_value FROM wp_users ' \
                 'inner join `wp_usermeta` ' \
                 'on id=user_id ' \
@@ -109,6 +115,11 @@ class Command(BaseCommand):
                 contributor.twitter_handle = meta_value
             elif meta_key == "description":
                 contributor.short_bio = meta_value
+            elif meta_key == "userphoto_image_file":
+                source = get_setting("USER_PHOTO_URL_PATTERN", True).format(meta_value)
+                filename = meta_value
+                self.download_image(source, filename)
+                contributor.headshot = Image.objects.get(title=filename)
             contributor.save()
 
     def get_post_data(self):
@@ -157,8 +168,8 @@ class Command(BaseCommand):
             else:
                 page.title = ''
             if post_content:
-                self.process_body_html_for_images(post_content)
-                page.body = post_content
+                updated_post_content = self.process_body_html_for_images(post_content)
+                page.body = updated_post_content
             else:
                 page.body = ''
             if post_excerpt:
@@ -176,37 +187,53 @@ class Command(BaseCommand):
             revision.publish()
 
     def process_body_html_for_images(self, html):
-        # TODO: only do this for images that used to be hosted on the
-        # original site. If we were linking to a remote image, we should
-        # leave it.
         parser = BeautifulSoup(html)
-        imgs = parser.find_all('img')
+        image_tags = parser.find_all('img')
 
         # TODO: check for existing image that is the same.  Maybe store the
         # original urls and only download if it has not been processed before.
 
-        # TODO: refactor the image saving code out so that it can be used for
-        # contributor images as well.
-        for img in imgs:
-            source = img['src']
+        for image_tag in image_tags:
+            source = image_tag['src']
 
-            filename = source.split("/")[-1]
-            response = requests.get(source)
+            parsed_url = urlparse(source)
+            if parsed_url.netloc in self.image_download_domains:
 
-            if response.status_code == 200:
+                filename = parsed_url.path.split("/")[-1]
 
-                f = BytesIO(response.content)
+                try:
+                    updated_source_url = self.download_image(source, filename)
 
-                dim = get_image_dimensions(f)  # (width, height)
+                    html = html.replace(source, updated_source_url)
+                except DownloadException:
+                    pass
+                    # TODO: maybe log something so we can look into it.
 
-                Image.objects.create(
-                    title=filename,
-                    uploaded_by_user=None,
-                    file=File(f, name=filename),
-                    width=dim[0],
-                    height=dim[1]
-                )
-                # TODO: update html with new src.
-            else:
-                pass
-                # TODO: maybe log something so we can look into it.
+        return html
+
+    def download_image(self, url, filename):
+        response = requests.get(url)
+
+        if response.status_code == 200:
+
+            f = BytesIO(response.content)
+
+            dim = get_image_dimensions(f)  # (width, height)
+
+            image = Image.objects.create(
+                title=filename,
+                uploaded_by_user=None,
+                file=File(f, name=filename),
+                width=dim[0],
+                height=dim[1]
+            )
+
+            updated_source_url = image.get_rendition('width-{}'.format(dim[0])).url
+            return updated_source_url
+        else:
+            raise DownloadException()
+
+
+class DownloadException(Exception):
+    pass
+    # TODO: make this include useful information like the url and the response info
