@@ -7,8 +7,7 @@ from wagtail.wagtailimages.models import Image
 
 from core.models import LegacyArticlePage
 from people.models import Contributor
-
-from .management.commands import import_from_wordpress
+from wordpress_importer.management.commands import import_from_wordpress
 
 
 class ImageCleanUp(object):

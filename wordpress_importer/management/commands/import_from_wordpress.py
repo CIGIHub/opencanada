@@ -59,7 +59,7 @@ class Command(BaseCommand):
     def __init__(self, *args, **kwargs):
         super(Command, self).__init__(*args, **kwargs)
         self.connection = None
-        self.image_download_domains = get_setting("IMAGE_DOWNLOAD_DOMAINS", required=True)
+        self.image_download_domains = get_setting("IMAGE_DOWNLOAD_DOMAINS")
 
     def handle(self, **options):
         db_config = {
@@ -116,7 +116,7 @@ class Command(BaseCommand):
             elif meta_key == "description":
                 contributor.short_bio = meta_value
             elif meta_key == "userphoto_image_file":
-                source = get_setting("USER_PHOTO_URL_PATTERN", True).format(meta_value)
+                source = get_setting("USER_PHOTO_URL_PATTERN").format(meta_value)
                 filename = meta_value
                 self.download_image(source, filename)
                 contributor.headshot = Image.objects.get(title=filename)
