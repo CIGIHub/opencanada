@@ -72,9 +72,12 @@ INSTALLED_APPS = (
     'wagtail.wagtailsearch',
     'wagtail.wagtailredirects',
     'wagtail.wagtailforms',
+    'wagtail.contrib.wagtailstyleguide',
+
 
     'core',
     'basic_site',
+    'articles',
     'people',
 
     'wordpress_importer',

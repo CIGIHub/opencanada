@@ -2,6 +2,7 @@ from __future__ import absolute_import, unicode_literals
 
 import argparse
 import getpass
+import json
 
 import MySQLdb
 import requests
@@ -12,7 +13,7 @@ from django.utils.six import BytesIO
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailimages.models import Image
 
-from core.models import LegacyArticlePage
+from articles.models import ArticlePage
 from people.models import Contributor
 from wordpress_importer.utils import get_setting
 
@@ -155,11 +156,11 @@ class Command(BaseCommand):
 
         for (post_content, post_title, post_excerpt, post_name,
              author_email) in results:
-            pages = LegacyArticlePage.objects.filter(slug=post_name)
+            pages = ArticlePage.objects.filter(slug=post_name)
             if pages.count() > 0:
                 page = pages.first()
             else:
-                page = LegacyArticlePage(owner=None)
+                page = ArticlePage(owner=None)
                 features_page.add_child(instance=page)
 
             page.slug = post_name
@@ -168,8 +169,8 @@ class Command(BaseCommand):
             else:
                 page.title = ''
             if post_content:
-                updated_post_content = self.process_body_html_for_images(post_content)
-                page.body = updated_post_content
+                updated_post_content = self.process_html_for_images(post_content)
+                page.body = json.dumps([{"type": "Paragraph", "value": updated_post_content}])
             else:
                 page.body = ''
             if post_excerpt:
@@ -186,7 +187,15 @@ class Command(BaseCommand):
             )
             revision.publish()
 
-    def process_body_html_for_images(self, html):
+    def process_html_for_stream_field(self, html):
+        parser = BeautifulSoup(html)
+        processed_html = []
+        for child in parser.body.children:
+            if child.name == 'p':
+                processed_html.append({'type': 'Paragraph', 'value': str(child)})
+        return processed_html
+
+    def process_html_for_images(self, html):
         parser = BeautifulSoup(html)
         image_tags = parser.find_all('img')
 
@@ -232,6 +241,10 @@ class Command(BaseCommand):
             return updated_source_url
         else:
             raise DownloadException()
+
+    def load_indepth_posts(self):
+        # links to other articles - class: idarticlecontainer
+        pass
 
 
 class DownloadException(Exception):
