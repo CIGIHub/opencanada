@@ -1,0 +1,58 @@
+{% load wagtailcore_tags static %}
+
+<header role="banner">
+    <div class="tagline">
+         <div class="container">
+            OpenCanada.org is a publication of the <a href="#">Canadian International Council</a>, the <a href="https://cigionline.org">Centre for International Governance Innovation</a> and the <a href="http://billgrahamcentre.utoronto.ca/">Bill Graham Centre</a>
+        </div>
+    </div>
+   <nav class="navbar navbar-static-top">
+    <div class="container">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+         <i class="fa fa-list-ul"></i>
+        </button>
+        <a class="navbar-brand" href="/"><img src="{% static 'img/opencanada-logo.png' %}" alt="OpenCanada Logo" class="img-responsive" ></a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav menu">
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contributors</a></li>
+          <li><a href="#">Topics</a></li>
+          <li><a href="#search">Search <i class="fa fa-search"></i></a></li>
+        </ul>
+        <ul class="nav navbar-nav share-links">
+          <li class="twitter"><a href="#"><i class="fa fa-twitter-square"></i></a></li>
+          <li class="facebook"><a href="#"><i class="fa fa-facebook-square"></i></a></li>
+          <li class="rss"><a href="#"><i class="fa fa-rss-square"></i></a></li>
+        </ul>
+  {#      <form class="navbar-form navbar-left" role="search">#}
+  {#        <div class="form-group">#}
+  {#          <input type="text" class="form-control" placeholder="Search">#}
+  {#        </div>#}
+  {#        <button type="submit" class="btn btn-default">Submit</button>#}
+  {#      </form>#}
+
+      </div><!-- /.navbar-collapse -->
+    </div>
+  </nav>
+  <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+            <div class="featured-topics">
+                <h3><i class="fa fa-tags"></i> Featured Topics:</h3>
+                <ul class="list-inline">
+                    <li><a href="#">Terrorism</a></li>
+                    <li><a href="#">Security and Intelligence</a></li>
+                    <li><a href="#">Canada's Foreign Policy</a></li>
+                    <li><a href="#">Digital Technology</a></li>
+                    <li><a href="#">The Canadian Forces</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+  </div>
+</header>

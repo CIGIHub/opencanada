@@ -1,0 +1,156 @@
+/**************   HEADER  **************/
+
+header{
+
+  .tagline{
+    display:block;
+    background: $red;
+    color: white;
+    font-size: 0.83em;
+    font-family: $serif;
+    font-style: italic;
+    padding: 20px 0;
+    a{
+      color: white;
+      text-decoration: underline;
+    }
+  }
+
+  nav{
+    .navbar-brand{
+      height: auto;
+      max-width: 50%;
+    }
+    .navbar-header button{
+      font-size: 24px;
+      color: $red;
+      margin-top:2.5%;
+    }
+    .navbar-toggle{
+      padding: 0px;
+    }
+    .navbar-right{
+      margin-top: 35px;
+    }
+    .share-links{
+      i{
+        opacity: 0.3;
+        font-size: 1.4em;
+        margin-right: 5px;
+      }
+    }
+    .navbar-nav.menu{
+      margin-right: 10px;
+    }
+    .navbar-nav.menu > li > a{
+      @include red-type;
+      padding: 0px;
+      font-size: 1.1em;
+    }
+    .navbar-nav.menu > li > a:after{
+      @include inline-divider(10px, 10px);
+    }
+    .navbar-nav.menu > li:last-child{
+      a:after{
+        content: '';
+      }
+    }
+    .navbar-nav.share-links > li > a{
+      color: #000;
+      padding: 0;
+    }
+  }
+
+  .featured-topics{
+    display: block;
+    h3{
+      display:inline-block;
+      @include type;
+      margin: 0 10px 0 0;
+    }
+    @include inline-list-red;
+  }
+
+  @media(min-width: $screen-md){
+    nav .navbar-brand{
+      max-width: 100%;
+    }
+  }
+
+  @media(max-width: $screen-sm){
+    .featured-topics, .tagline{display: none}
+    .navbar{margin-bottom: 0px;}
+  }
+}
+
+/**************   FOOTER  **************/
+
+footer{
+  background: $background-grey;
+  padding-bottom: 40px;
+
+  .row{
+    padding: 20px 0;
+  }
+
+  .newsletter{
+    border-bottom: $border-grey;
+    margin-bottom: 20px;
+  }
+  .newsletter-form{
+    @include centered-fixed-width(600px);
+    font-family: $serif;
+    font-weight: normal;
+    font-size: 1.0em;
+
+    #mc_embed_signup{
+      .form-control{
+        display: inline-block;
+        width: 60%;
+        height: 33px;
+      }
+      label{
+        font-style: italic;
+        text-align: center;
+        font-weight: normal;
+      }
+      input{
+        display: inline-block;
+        border-color: $red;
+      }
+
+      .button{
+        width: 25%;
+        font-weight: normal;
+        background-color: $red;
+        text-transform: uppercase;
+      }
+      .email{
+        padding: 6px 12px;
+        font-style: italic;
+        font-family: $sans-serif;
+      }
+
+    }
+  }
+
+  .logo{
+    text-align: center;
+    padding: 20px 0;
+    img{
+      display: inline;
+    }
+  }
+
+  .tagline{
+    @include centered-fixed-width(700px);
+    font-family: $serif;
+    font-style: italic;
+    text-align: center;
+  }
+  .contact{
+    @include  centered-fixed-width(600px);
+    text-align: center;
+    @include inline-list-red;
+  }
+}

@@ -1,0 +1,49 @@
+@mixin type{
+    font-family: $sans-serif;
+    font-size: 0.9em;
+    text-transform: uppercase;
+    color: $grey;
+}
+
+@mixin red-type{
+  @include type;
+  color: $red;
+}
+
+@mixin inline-divider($padding-left, $padding-right){
+  padding-left: $padding-left;
+  padding-right: $padding-right;
+  content: '/';
+  color: $grey;
+}
+
+@mixin centered{
+  margin: 0 auto;
+}
+
+@mixin centered-fixed-width($width){
+  @include centered;
+  max-width: $width;
+}
+
+@mixin inline-list-red{
+  ul{
+      display: inline-block;
+      margin: 0px;
+      li{
+        padding: 0px;
+      }
+    }
+    ul li a{
+      display: inline-block;
+      @include red-type;
+    }
+    ul li a:after{
+      @include inline-divider(5px, 0px);
+    }
+    ul li:last-child{
+      a:after{
+        content: '';
+      }
+    }
+}

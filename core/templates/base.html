@@ -1,4 +1,4 @@
-{% load compress static wagtailuserbar %}
+{% load core_tags cache compress static wagtailuserbar %}
 
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -9,12 +9,17 @@
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <title>{% block title %}{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}{% endblock %}{% block title_suffix %}{% endblock %}</title>
-        <meta name="description" content="" />
+        <meta name="description" content="{% if self.search_description %}{{ self.search_description }}{% endif %}" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+        <link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+        <link rel="stylesheet" type="text/x-scss" href="{% static 'css/font-awesome.min.css' %}">
+
         {% compress css %}
-            
-            <link rel="stylesheet" type="text/css" href="{% static 'css/opencanada.css' %}">
+            <link rel="stylesheet" type="text/x-scss" href="{% static 'css/opencanada.scss' %}">
         {% endcompress %}
 
         {% block extra_css %}
@@ -24,8 +29,17 @@
 
     <body class="{% block body_class %}{% endblock %}">
         {% wagtailuserbar %}
+        {% block header %}
+            {% include 'core/header.html' %}
+        {% endblock %}
 
-        {% block content %}{% endblock %}
+        <div class="container">
+            {% block content %}{% endblock %}
+        </div>
+        
+        {% block footer %}
+            {% include 'core/footer.html' %}
+        {% endblock %}
 
         {% compress js %}
             
