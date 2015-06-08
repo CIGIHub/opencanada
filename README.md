@@ -22,6 +22,13 @@ a trailing slash.
 ## Migrations
 Run any migrations required
 
+The following are online required if you are importing data from Wordpress:
+
+WP_IMPORTER_IMAGE_DOWNLOAD_DOMAINS - A tuple of domains for which any images 
+should be downloaded locally. example: ("www.example.com", "example.com", )
+
+WP_IMPORTER_USER_PHOTO_URL_PATTERN - The url pattern for the user photos.
+
 ## Git Hooks
 Git hooks are provided in the hooks folder.
 
@@ -39,5 +46,5 @@ Performs flake8 and isort checks before allowing commit.
 ## Running Tests
 To run the unit tests:
 
-  -  run `./manage.py tests`
+  -  run `./manage.py test --settings=opencanada.settings.test`
   

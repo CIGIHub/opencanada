@@ -11,9 +11,24 @@ from people.models import Contributor
 from .management.commands import import_from_wordpress
 
 
-class TestCommandImportFromWordPressLoadContributors(TestCase):
+class ImageCleanUp(object):
+    def delete_images(self):
+        # clean up any image files that were created.
+        images = Image.objects.all()
+
+        for image in images:
+            storage, path = image.file.storage, image.file.path
+            image.delete()
+            storage.delete(path)
+
+
+class TestCommandImportFromWordPressLoadContributors(TestCase, ImageCleanUp):
+
     def setUp(self):
         import_from_wordpress.Command.get_contributor_data = self.get_test_contributor_data
+
+    def tearDown(self):
+        self.delete_images()
 
     def testLoadContributorsCreatesContributor(self):
         command = import_from_wordpress.Command()
@@ -52,8 +67,16 @@ class TestCommandImportFromWordPressLoadContributors(TestCase):
         self.assertEqual('Bob Smith is a person who does stuff.',
                          contributors.first().short_bio)
 
+    def testLoadContributorsSetsImageFile(self):
+        command = import_from_wordpress.Command()
+        command.load_contributors()
+        contributors = Contributor.objects.filter(email='bob@example.com')
+
+        images = Image.objects.filter(title='50')
+        self.assertEqual(1, images.count())
+        self.assertEqual(images.first(), contributors.first().headshot)
+
     # TODO: Long Bio
-    # TODO: user photo
     # TODO: multiple contributors
 
     def get_test_contributor_data(self):
@@ -64,16 +87,19 @@ class TestCommandImportFromWordPressLoadContributors(TestCase):
             ('bob@example.com', 'twitter', '@bobsmith'),
             ('bob@example.com', 'description',
              'Bob Smith is a person who does stuff.'),
-            ('bob@example.com', 'userphoto_image_file', '956.jpg'),
+            ('bob@example.com', 'userphoto_image_file', '50'),
         ]
         return data
 
 
-class TestCommandImportFromWordPressLoadPosts(TestCase):
+class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
     fixtures = ['test.json']
 
     def setUp(self):
         import_from_wordpress.Command.get_post_data = self.get_test_post_data
+
+    def tearDown(self):
+        self.delete_images()
 
     def testCreatesLegacyPageWithSlug(self):
         command = import_from_wordpress.Command()
@@ -125,6 +151,17 @@ class TestCommandImportFromWordPressLoadPosts(TestCase):
                          pages.first().excerpt)
         self.assertEqual(
             '<p>This <strong>is</strong> <img src="http://www.example.com/test.jpg" /> a <a href="http://www.example.com">post</a> <span class="special">that has html</span></p><div>Yay!</div>',
+            pages.first().body)
+
+    def testPageUpdatesLocalImageUrls(self):
+        command = import_from_wordpress.Command()
+        command.load_posts()
+        pages = LegacyArticlePage.objects.filter(slug='html-local-image-post')
+
+        images = Image.objects.filter(title='300')
+
+        self.assertEqual(
+            '<div><img src="{}" />a cat</div>'.format(images.first().get_rendition('width-200').url),
             pages.first().body)
 
     def testPageNullFields(self):
@@ -236,13 +273,21 @@ class TestCommandImportFromWordPressLoadPosts(TestCase):
              'duplicate',
              'bob@example.com',
              ),
+            ('<div><img src="http://placekitten.com/g/200/300" />a cat</div>',
+             'title',
+             'excerpt',
+             'html-local-image-post',
+             'bob@example.com',),
         ]
         return data
 
 
-class TestCommandImportProcessHTMLForImages(TestCase):
+class TestCommandImportProcessHTMLForImages(TestCase, ImageCleanUp):
 
-    def testHTMLHasImageImageCreated(self):
+    def tearDown(self):
+        self.delete_images()
+
+    def testHTMLHasImageImageCreatedWhenDownloaded(self):
         command = import_from_wordpress.Command()
         html = "<div><img src='http://placekitten.com/g/200/300'></div>"
         command.process_body_html_for_images(html)
@@ -250,3 +295,45 @@ class TestCommandImportProcessHTMLForImages(TestCase):
         images = Image.objects.filter(title='300')
 
         self.assertEqual(1, images.count())
+
+    def testHTMLImageSourceUpdatedWhenDownloaded(self):
+        command = import_from_wordpress.Command()
+        html = "<div><img src='http://placekitten.com/g/200/300'></div>"
+        html = command.process_body_html_for_images(html)
+
+        images = Image.objects.filter(title='300')
+
+        self.assertEqual(html, "<div><img src='{}'></div>".format(images.first().get_rendition('width-200').url))
+
+    def testImageNotDownloadedForRemote(self):
+        command = import_from_wordpress.Command()
+        html = "<div><img src='http://upload.wikimedia.org/wikipedia/en/b/bd/Test.jpg'></div>"
+        command.process_body_html_for_images(html)
+        images = Image.objects.filter(title='Test.jpg')
+
+        self.assertEqual(0, images.count())
+
+    def testHTMLNotUpdatedForRemote(self):
+        command = import_from_wordpress.Command()
+        html = "<div><img src='http://upload.wikimedia.org/wikipedia/en/b/bd/Test.jpg'></div>"
+        html = command.process_body_html_for_images(html)
+
+        self.assertEqual(html, "<div><img src='http://upload.wikimedia.org/wikipedia/en/b/bd/Test.jpg'></div>")
+
+
+class TestCommandImportDownloadImage(TestCase, ImageCleanUp):
+
+    def tearDown(self):
+        self.delete_images()
+
+    def testImageCreatedWhenDownloaded(self):
+        command = import_from_wordpress.Command()
+        command.download_image('http://placekitten.com/g/200/300', '300')
+
+        images = Image.objects.filter(title='300')
+
+        self.assertEqual(1, images.count())
+
+    def testDownloadExceptionWhenError(self):
+        command = import_from_wordpress.Command()
+        self.assertRaises(import_from_wordpress.DownloadException, command.download_image, 'http://placekitten.com/g/200/purple', 'purple')
