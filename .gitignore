@@ -50,6 +50,8 @@ coverage.xml
 # Django stuff:
 *.log
 media/
+static
+!*/static/
 
 # Sphinx documentation
 docs/_build/

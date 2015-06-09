@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, unicode_literals
 
-import unittest
-
 from django.test import TestCase
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailimages.models import Image
@@ -101,7 +99,7 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
     def tearDown(self):
         self.delete_images()
 
-    def testCreatesLegacyPageWithSlug(self):
+    def testCreatesPageWithSlug(self):
         command = import_from_wordpress.Command()
         command.load_posts()
         pages = ArticlePage.objects.filter(
@@ -130,8 +128,9 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
         command.load_posts()
         pages = ArticlePage.objects.filter(
             slug='is-nato-ready-for-putin')
-        self.assertEqual([("Paragraph", "Vladimir Putin has challenged"), ],
-                         pages.first().body.stream_data)
+        self.assertEqual(
+            [("Paragraph", "<p>Vladimir Putin has challenged</p>"), ],
+            pages.first().body.stream_data)
 
     # TODO: various aspects of setting body:  long
 
@@ -144,8 +143,6 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
             'Political hurdles hold NATO back — how convenient for Russian tactics.',
             pages.first().excerpt)
 
-    # work in progress. Marked as expected failure to share models so far.
-    @unittest.expectedFailure
     def testPageImportsHTML(self):
         command = import_from_wordpress.Command()
         command.load_posts()
@@ -154,10 +151,11 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
                          pages.first().excerpt)
         self.assertEqual(
             [("Paragraph", '<p>This <strong>is</strong></p>'),
-             ("Image", '<img src="http://www.example.com/test.jpg" />'),
+             ("Paragraph",
+              '<p><img src="http://www.example.com/test.jpg"/></p>'),
              ("Paragraph",
               '<p>a <a href="http://www.example.com">post</a> <span class="special">that has html</span></p>'),
-             ("Paragraph", '<div>Yay!</div>'), ],
+             ("Paragraph", '<p>Yay!</p>'), ],
             pages.first().body.stream_data)
 
     def testPageUpdatesLocalImageUrls(self):
@@ -168,10 +166,9 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
         images = Image.objects.filter(title='300')
 
         self.assertEqual(
-            [("Paragraph",
-              '<div><img src="{}" />a cat</div>'.format(
-                  images.first().get_rendition('width-200').url)
-              )],
+            [('Image', images.first()),
+             ("Paragraph", "<p>a cat</p>"),
+             ],
             pages.first().body.stream_data)
 
     def testPageNullFields(self):
@@ -351,7 +348,7 @@ class TestCommandImportDownloadImage(TestCase, ImageCleanUp):
                           'http://placekitten.com/g/200/purple', 'purple')
 
 
-class TestCommandProcessHTLMForStreamField(TestCase):
+class TestCommandProcessHTLMForStreamField(TestCase, ImageCleanUp):
     def testSimpleParagraph(self):
         command = import_from_wordpress.Command()
         html = "<p>This is a simple paragraph.</p>"
@@ -362,3 +359,100 @@ class TestCommandProcessHTLMForStreamField(TestCase):
               "value": "<p>This is a simple paragraph.</p>"}],
             processed
         )
+
+    def testImageUploadedLocally(self):
+        command = import_from_wordpress.Command()
+        html = "<img src='http://placekitten.com/g/200/300' />"
+        processed = command.process_html_for_stream_field(html)
+
+        images = Image.objects.filter(title='300')
+        self.assertEqual(1, images.count())
+
+        self.assertEqual(processed, [{"type": "Image",
+                                      "value": 1}, ])
+
+    def testImageWithParagraphs(self):
+        command = import_from_wordpress.Command()
+        html = "<p>This is a simple paragraph.</p><img src='http://placekitten.com/g/200/300' /><p>This is a second paragraph.</p>"
+        processed = command.process_html_for_stream_field(html)
+
+        self.assertEqual(
+            [{"type": "Paragraph",
+              "value": "<p>This is a simple paragraph.</p>"},
+             {"type": "Image",
+              "value": 1},
+             {"type": "Paragraph",
+              "value": "<p>This is a second paragraph.</p>"},
+             ],
+            processed
+        )
+
+    def testImageInParagraph(self):
+        command = import_from_wordpress.Command()
+        html = "<p>This is a paragraph. <img src='http://placekitten.com/g/200/300' /> This is a second paragraph.</p>"
+        # import pdb; pdb.set_trace()
+        processed = command.process_html_for_stream_field(html)
+
+        self.assertEqual(
+            [{"type": "Paragraph",
+              "value": "<p>This is a paragraph.</p>"},
+             {"type": "Image",
+              "value": 1},
+             {"type": "Paragraph",
+              "value": "<p>This is a second paragraph.</p>"},
+             ],
+            processed
+        )
+
+    def testExternalImage(self):
+        command = import_from_wordpress.Command()
+        html = "<p>This is a simple paragraph.</p><img src='http://upload.wikimedia.org/wikipedia/en/b/bd/Test.jpg' /><p>This is a second paragraph.</p>"
+        processed = command.process_html_for_stream_field(html)
+
+        self.assertEqual(
+            [{"type": "Paragraph",
+              "value": "<p>This is a simple paragraph.</p>"},
+             {"type": "Paragraph",
+              "value": '<p><img src="http://upload.wikimedia.org/wikipedia/en/b/bd/Test.jpg"/></p>'},
+             {"type": "Paragraph",
+              "value": "<p>This is a second paragraph.</p>"},
+             ],
+            processed
+        )
+
+    def testDivs(self):
+        command = import_from_wordpress.Command()
+        html = "<div>This is a simple paragraph.</div><div>This is a second paragraph.</div>"
+        processed = command.process_html_for_stream_field(html)
+
+        self.assertEqual(
+            [{"type": "Paragraph",
+              "value": "<p>This is a simple paragraph.</p>"},
+             {"type": "Paragraph",
+              "value": "<p>This is a second paragraph.</p>"},
+             ],
+            processed
+        )
+
+    def testNonBlockTagStrong(self):
+        command = import_from_wordpress.Command()
+        html = "<p>This is a <strong>simple paragraph.</strong></p>"
+        processed = command.process_html_for_stream_field(html)
+
+        self.assertEqual(
+            [{"type": "Paragraph",
+              "value": "<p>This is a <strong>simple paragraph.</strong></p>"},
+             ],
+            processed
+        )
+
+    def testNonAndBlockSubTags(self):
+        command = import_from_wordpress.Command()
+        html = '<p>This <strong>is</strong> <img src="http://www.example.com/test.jpg" /></p>'
+        processed = command.process_html_for_stream_field(html)
+        self.assertEqual(
+            [{"type": "Paragraph", "value": '<p>This <strong>is</strong></p>'},
+             {"type": "Paragraph",
+              "value": '<p><img src="http://www.example.com/test.jpg"/></p>'},
+             ],
+            processed)

@@ -117,7 +117,8 @@ class Command(BaseCommand):
             elif meta_key == "description":
                 contributor.short_bio = meta_value
             elif meta_key == "userphoto_image_file":
-                source = get_setting("USER_PHOTO_URL_PATTERN").format(meta_value)
+                source = get_setting("USER_PHOTO_URL_PATTERN").format(
+                    meta_value)
                 filename = meta_value
                 self.download_image(source, filename)
                 contributor.headshot = Image.objects.get(title=filename)
@@ -169,8 +170,9 @@ class Command(BaseCommand):
             else:
                 page.title = ''
             if post_content:
-                updated_post_content = self.process_html_for_images(post_content)
-                page.body = json.dumps([{"type": "Paragraph", "value": updated_post_content}])
+                updated_post_content = self.process_html_for_stream_field(
+                    post_content)
+                page.body = json.dumps(updated_post_content)
             else:
                 page.body = ''
             if post_excerpt:
@@ -188,14 +190,88 @@ class Command(BaseCommand):
             revision.publish()
 
     def process_html_for_stream_field(self, html):
-        parser = BeautifulSoup(html)
         processed_html = []
+        html = self.process_html_for_images(html, use_image_names=True)
+        parser = BeautifulSoup(html)
+
         for child in parser.body.children:
-            if child.name == 'p':
-                processed_html.append({'type': 'Paragraph', 'value': str(child)})
+            # import pdb; pdb.set_trace()
+            processed_html.extend(self._process_element(child))
+            # if child.name == 'p' or child.name == 'div':
+            #     import pdb; pdb.set_trace()
+            #     inner = child.decode_contents(formatter="html")
+            #
+            #     sub_items = child.descendants
+            #     for item in sub_items:
+            #         if item.name == None:
+            #             processed_html.append({'type': 'Paragraph', 'value': "<p>{}</p>".format(item.strip())})
+            #         elif item.name == 'img':
+            #             processed_html.append(self._process_image_tag(item))
+            # elif child.name == 'img':
+            #     processed_html.append(self._process_image_tag(child))
+            # elif child.name == None:
+            #     processed_html.append({'type': 'Paragraph', 'value': "<p>{}</p>".format(child.strip())})
+
         return processed_html
 
-    def process_html_for_images(self, html):
+    def _process_element(self, html):
+        processed_element = []
+        if html.name is None:
+            processed_element.append({'type': 'Paragraph',
+                                      'value': "<p>{}</p>".format(
+                                          html.strip())})
+        elif html.name == 'img':
+            processed_element.append(self._process_image_tag(html))
+        elif html.name == 'p' or html.name == 'div':
+
+            children_contain_blocks = False
+            indices_of_children_with_blocks = []
+            all_children = list(html.children)
+            for index, child in enumerate(all_children):
+                if self._contains_stream_block(child):
+                    indices_of_children_with_blocks.append(index)
+                    children_contain_blocks = True
+
+            if children_contain_blocks:
+                last_index = 0
+                for current_index in indices_of_children_with_blocks:
+                    child = "".join([str(x) for x in
+                                     all_children[last_index:current_index]])
+                    if child:
+                        processed_element.append({'type': 'Paragraph',
+                                                  'value': "<p>{}</p>".format(
+                                                      child.strip())})
+                    child = all_children[current_index]
+                    processed_element.extend((self._process_element(child)))
+                    last_index = current_index + 1
+
+                child = "".join([str(x) for x in
+                                 all_children[last_index:len(all_children)]])
+                if child:
+                    processed_element.append({'type': 'Paragraph',
+                                              'value': "<p>{}</p>".format(
+                                                  child.strip())})
+            else:
+                inner = html.decode_contents(formatter="html")
+                if inner:
+                    processed_element.append({'type': 'Paragraph',
+                                              'value': "<p>{}</p>".format(
+                                                  inner.strip())})
+
+        return processed_element
+
+    def _contains_stream_block(self, html):
+        return html.name in ['div', 'p', 'img']
+
+    def _process_image_tag(self, item):
+        images = Image.objects.filter(title=item['src'])
+        if images.first():
+            return {'type': 'Image', 'value': images.first().id}
+        else:
+            return {'type': 'Paragraph',
+                    'value': "<p>{}</p>".format(str(item))}
+
+    def process_html_for_images(self, html, use_image_names=False):
         parser = BeautifulSoup(html)
         image_tags = parser.find_all('img')
 
@@ -211,7 +287,8 @@ class Command(BaseCommand):
                 filename = parsed_url.path.split("/")[-1]
 
                 try:
-                    updated_source_url = self.download_image(source, filename)
+                    updated_source_url = self.download_image(source, filename,
+                                                             use_image_names)
 
                     html = html.replace(source, updated_source_url)
                 except DownloadException:
@@ -220,7 +297,7 @@ class Command(BaseCommand):
 
         return html
 
-    def download_image(self, url, filename):
+    def download_image(self, url, filename, use_image_names=False):
         response = requests.get(url)
 
         if response.status_code == 200:
@@ -237,7 +314,11 @@ class Command(BaseCommand):
                 height=dim[1]
             )
 
-            updated_source_url = image.get_rendition('width-{}'.format(dim[0])).url
+            if use_image_names:
+                updated_source_url = image.title
+            else:
+                updated_source_url = image.get_rendition(
+                    'width-{}'.format(dim[0])).url
             return updated_source_url
         else:
             raise DownloadException()
