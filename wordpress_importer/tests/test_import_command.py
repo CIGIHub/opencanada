@@ -1,6 +1,11 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, unicode_literals
 
+from collections import namedtuple
+
+import mock
+import six
+from django.conf import settings
 from django.test import TestCase
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailimages.models import Image
@@ -21,6 +26,35 @@ class ImageCleanUp(object):
             storage.delete(path)
 
 
+FakeResponse = namedtuple('FakeResponse', 'status_code, content')
+
+
+def local_get_successful(url):
+    "Fetch a stream from local files."
+    p_url = six.moves.urllib.parse.urlparse(url)
+    if p_url.scheme != 'file':
+        raise ValueError("Expected file scheme")
+
+    filename = six.moves.urllib.request.url2pathname(p_url.path)
+
+    response = FakeResponse(200, open(filename, 'rb').read())
+    return response
+
+
+def local_get_404(url):
+    "Fetch a stream from local files."
+
+    response = FakeResponse(404, None)
+    return response
+
+
+test_image_url = 'file:///{}/wordpress_importer/tests/files/testcat.jpg'.format(
+    settings.PROJECT_ROOT)
+test_image_url_with_unicode = 'file:///{}/wordpress_importer/tests/files/testcat♥.jpg'.format(
+    settings.PROJECT_ROOT)
+
+
+@mock.patch('requests.get', local_get_successful)
 class TestCommandImportFromWordPressLoadContributors(TestCase, ImageCleanUp):
     def setUp(self):
         import_from_wordpress.Command.get_contributor_data = self.get_test_contributor_data
@@ -70,7 +104,7 @@ class TestCommandImportFromWordPressLoadContributors(TestCase, ImageCleanUp):
         command.load_contributors()
         contributors = Contributor.objects.filter(email='bob@example.com')
 
-        images = Image.objects.filter(title='50')
+        images = Image.objects.filter(title='testcat.jpg')
         self.assertEqual(1, images.count())
         self.assertEqual(images.first(), contributors.first().headshot)
 
@@ -85,11 +119,12 @@ class TestCommandImportFromWordPressLoadContributors(TestCase, ImageCleanUp):
             ('bob@example.com', 'twitter', '@bobsmith'),
             ('bob@example.com', 'description',
              'Bob Smith is a person who does stuff.'),
-            ('bob@example.com', 'userphoto_image_file', '50'),
+            ('bob@example.com', 'userphoto_image_file', 'testcat.jpg'),
         ]
         return data
 
 
+@mock.patch('requests.get', local_get_successful)
 class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
     fixtures = ['test.json']
 
@@ -163,7 +198,7 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
         command.load_posts()
         pages = ArticlePage.objects.filter(slug='html-local-image-post')
 
-        images = Image.objects.filter(title='300')
+        images = Image.objects.filter(title='testcat.jpg')
 
         self.assertEqual(
             [('Image', images.first()),
@@ -280,7 +315,7 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
              'duplicate',
              'bob@example.com',
              ),
-            ('<div><img src="http://placekitten.com/g/200/300" />a cat</div>',
+            ('<div><img src="{}" />a cat</div>'.format(test_image_url),
              'title',
              'excerpt',
              'html-local-image-post',
@@ -289,28 +324,29 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
         return data
 
 
+@mock.patch('requests.get', local_get_successful)
 class TestCommandImportProcessHTMLForImages(TestCase, ImageCleanUp):
     def tearDown(self):
         self.delete_images()
 
     def testHTMLHasImageImageCreatedWhenDownloaded(self):
         command = import_from_wordpress.Command()
-        html = "<div><img src='http://placekitten.com/g/200/300'></div>"
+        html = "<div><img src='{}'></div>".format(test_image_url)
         command.process_html_for_images(html)
 
-        images = Image.objects.filter(title='300')
+        images = Image.objects.filter(title='testcat.jpg')
 
         self.assertEqual(1, images.count())
 
     def testHTMLImageSourceUpdatedWhenDownloaded(self):
         command = import_from_wordpress.Command()
-        html = "<div><img src='http://placekitten.com/g/200/300'></div>"
+        html = "<div><img src='{}'></div>".format(test_image_url)
         html = command.process_html_for_images(html)
 
-        images = Image.objects.filter(title='300')
+        images = Image.objects.filter(title='testcat.jpg')
 
         self.assertEqual(html, "<div><img src='{}'></div>".format(
-            images.first().get_rendition('width-200').url))
+            images.first().get_rendition('width-100').url))
 
     def testImageNotDownloadedForRemote(self):
         command = import_from_wordpress.Command()
@@ -328,27 +364,54 @@ class TestCommandImportProcessHTMLForImages(TestCase, ImageCleanUp):
         self.assertEqual(html,
                          "<div><img src='http://upload.wikimedia.org/wikipedia/en/b/bd/Test.jpg'></div>")
 
+    def testHTMLWithUnicodeNoUpload(self):
+        command = import_from_wordpress.Command()
+        html = "<div><p>€</p><img src='http://upload.wikimedia.org/wikipedia/en/b/bd/Test€.jpg'></div>"
+        html = command.process_html_for_images(html)
+
+        self.assertEqual(html,
+                         "<div><p>€</p><img src='http://upload.wikimedia.org/wikipedia/en/b/bd/Test€.jpg'></div>")
+
+    # def testHTMLWithUnicodeImageSourceUpdatedWhenDownloaded(self):
+    #     command = import_from_wordpress.Command()
+    #     html = "<div<img src='{}'></div>".format(test_image_url_with_unicode)
+    #     html = command.process_html_for_images(html)
+    #
+    #     images = Image.objects.filter(title='testcat♥.jpg')
+    #
+    #     self.assertEqual(1, images.count())
+    #
+    #     self.assertEqual(html, "<div><img src='{}'></div>".format(
+    #         images.first().get_rendition('width-100').url))
+
 
 class TestCommandImportDownloadImage(TestCase, ImageCleanUp):
     def tearDown(self):
         self.delete_images()
 
+    @mock.patch('requests.get', local_get_successful)
     def testImageCreatedWhenDownloaded(self):
         command = import_from_wordpress.Command()
-        command.download_image('http://placekitten.com/g/200/300', '300')
+        command.download_image(test_image_url, 'testcat.jpg')
 
-        images = Image.objects.filter(title='300')
+        images = Image.objects.filter(title='testcat.jpg')
 
         self.assertEqual(1, images.count())
 
+    @mock.patch('requests.get', local_get_404)
     def testDownloadExceptionWhenError(self):
         command = import_from_wordpress.Command()
         self.assertRaises(import_from_wordpress.DownloadException,
                           command.download_image,
-                          'http://placekitten.com/g/200/purple', 'purple')
+                          'file:///{}/wordpress_importer/tests/files/purple.jpg'.format(
+                              settings.PROJECT_ROOT), 'purple.jpg')
 
 
+@mock.patch('requests.get', local_get_successful)
 class TestCommandProcessHTLMForStreamField(TestCase, ImageCleanUp):
+    def tearDown(self):
+        self.delete_images()
+
     def testSimpleParagraph(self):
         command = import_from_wordpress.Command()
         html = "<p>This is a simple paragraph.</p>"
@@ -362,10 +425,10 @@ class TestCommandProcessHTLMForStreamField(TestCase, ImageCleanUp):
 
     def testImageUploadedLocally(self):
         command = import_from_wordpress.Command()
-        html = "<img src='http://placekitten.com/g/200/300' />"
+        html = "<img src='{}' />".format(test_image_url)
         processed = command.process_html_for_stream_field(html)
 
-        images = Image.objects.filter(title='300')
+        images = Image.objects.filter(title='testcat.jpg')
         self.assertEqual(1, images.count())
 
         self.assertEqual(processed, [{"type": "Image",
@@ -373,7 +436,8 @@ class TestCommandProcessHTLMForStreamField(TestCase, ImageCleanUp):
 
     def testImageWithParagraphs(self):
         command = import_from_wordpress.Command()
-        html = "<p>This is a simple paragraph.</p><img src='http://placekitten.com/g/200/300' /><p>This is a second paragraph.</p>"
+        html = "<p>This is a simple paragraph.</p><img src='{}' /><p>This is a second paragraph.</p>".format(
+            test_image_url)
         processed = command.process_html_for_stream_field(html)
 
         self.assertEqual(
@@ -389,7 +453,8 @@ class TestCommandProcessHTLMForStreamField(TestCase, ImageCleanUp):
 
     def testImageInParagraph(self):
         command = import_from_wordpress.Command()
-        html = "<p>This is a paragraph. <img src='http://placekitten.com/g/200/300' /> This is a second paragraph.</p>"
+        html = "<p>This is a paragraph. <img src='{}' /> This is a second paragraph.</p>".format(
+            test_image_url)
         # import pdb; pdb.set_trace()
         processed = command.process_html_for_stream_field(html)
 
