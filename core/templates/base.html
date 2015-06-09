@@ -33,10 +33,12 @@
             {% include 'core/header.html' %}
         {% endblock %}
 
-        <div class="container">
-            {% block content %}{% endblock %}
-        </div>
-        
+
+            <main role="main">
+                {% block content %}{% endblock %}
+            </main>
+
+
         {% block footer %}
             {% include 'core/footer.html' %}
         {% endblock %}

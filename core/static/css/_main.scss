@@ -1,3 +1,25 @@
+/**************   General Styles  **************/
+body{
+  color: $text-color;
+  font-family: $serif;
+}
+
+h1{
+  font-size: 36px;
+}
+h2{
+  font-size: 24px;
+  margin-top: 0px;
+}
+
+
+@media(min-width: $screen-md){
+  h1, h2{
+    font-size: 60%;
+  }
+
+}
+
 /**************   HEADER  **************/
 
 header{
@@ -17,6 +39,9 @@ header{
   }
 
   nav{
+    &.navbar{
+      margin-top: 20px;
+    }
     .navbar-brand{
       height: auto;
       max-width: 50%;
@@ -43,7 +68,7 @@ header{
       margin-right: 10px;
     }
     .navbar-nav.menu > li > a{
-      @include red-type;
+      @include type($red);
       padding: 0px;
       font-size: 1.1em;
     }
@@ -63,9 +88,10 @@ header{
 
   .featured-topics{
     display: block;
+    margin-bottom: 10px;
     h3{
       display:inline-block;
-      @include type;
+      @include type($grey);
       margin: 0 10px 0 0;
     }
     @include inline-list-red;
@@ -130,7 +156,6 @@ footer{
         font-style: italic;
         font-family: $sans-serif;
       }
-
     }
   }
 
@@ -151,6 +176,113 @@ footer{
   .contact{
     @include  centered-fixed-width(600px);
     text-align: center;
+    @include type($grey);
     @include inline-list-red;
+  }
+}
+
+/**************   Homepage Feature  **************/
+
+.feature{
+  position: relative;
+  color: white;
+
+  .feature-image{
+    position: relative;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 0;
+    padding-top: 66.65%;
+  }
+
+  .feature-image-overlay{
+    position: absolute;
+    z-index: 2;
+    display: block;
+    content: "";
+    top: 0; right: 0; bottom: 0; left: 0;
+    background: hsla(0,0%,0%,0.5);
+  }
+
+  .feature-text{
+    position: absolute;
+    z-index:10;
+    top: 10%;
+    left: 10%;
+    max-width: 770px;
+    margin-right: 10%;
+    font-family: $serif;
+    h1{
+      font-size: 2.4em;
+    }
+    .feature-line{
+      font-size: 1.4em;
+    }
+    .author{
+      margin-top: 5%;
+      font-family: $sans-serif;
+      @include type($white);
+      a{color: white;}
+      span{color: #00ccff;}
+    }
+  }
+
+   .image-caption{
+     z-index: 10;
+    position: absolute;
+    right: 2%;
+    bottom: 3%;
+  }
+
+  @media(max-width: $screen-lg){
+    background: white;
+  }
+
+  @media(max-width: $screen-sm){
+    .feature-text, .image-caption{font-size: 75%;}
+    .feature-text h1{
+      font-size: 24px;
+    }
+  }
+
+}
+
+/**************   Main  **************/
+
+.boxes{
+  margin-bottom: 20px;
+
+  .row{
+    @include row-divider;
+  }
+  .quad .col-sm-12{
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  .row.single .col-sm-6:first-child{
+    border-right: $border-grey;
+  }
+  .teaser{
+    margin: 5% 0;
+  }
+
+  @media(max-width: $screen-sm){
+    .row.single .col-sm-6:first-child{
+      border-right: none;
+      border-bottom: $border-grey;
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+    }
+  }
+}
+
+.author{
+  @include type($text-color);
+  span{
+    span{color: #00ccff;}
+  }
+  a{
+    color: $text-color;
   }
 }
