@@ -339,7 +339,7 @@ class TestCommandImportProcessHTMLForImages(TestCase, ImageCleanUp):
 
     def testHTMLHasImageImageCreatedWhenDownloaded(self):
         command = import_from_wordpress.Command()
-        html = "<div><img src='{}'></div>".format(test_image_url)
+        html = "<div><img src='{}'/></div>".format(test_image_url)
         command.process_html_for_images(html)
 
         images = Image.objects.filter(title='testcat.jpg')
@@ -348,17 +348,17 @@ class TestCommandImportProcessHTMLForImages(TestCase, ImageCleanUp):
 
     def testHTMLImageSourceUpdatedWhenDownloaded(self):
         command = import_from_wordpress.Command()
-        html = "<div><img src='{}'></div>".format(test_image_url)
+        html = "<div><img src='{}'/></div>".format(test_image_url)
         html = command.process_html_for_images(html)
 
         images = Image.objects.filter(title='testcat.jpg')
 
-        self.assertEqual(html, "<div><img src='{}'></div>".format(
+        self.assertEqual(html, "<div><img src='{}'/></div>".format(
             images.first().get_rendition('width-100').url))
 
     def testImageNotDownloadedForRemote(self):
         command = import_from_wordpress.Command()
-        html = "<div><img src='http://upload.wikimedia.org/wikipedia/en/b/bd/Test.jpg'></div>"
+        html = "<div><img src='http://upload.wikimedia.org/wikipedia/en/b/bd/Test.jpg'/></div>"
         command.process_html_for_images(html)
         images = Image.objects.filter(title='Test.jpg')
 
@@ -366,31 +366,31 @@ class TestCommandImportProcessHTMLForImages(TestCase, ImageCleanUp):
 
     def testHTMLNotUpdatedForRemote(self):
         command = import_from_wordpress.Command()
-        html = "<div><img src='http://upload.wikimedia.org/wikipedia/en/b/bd/Test.jpg'></div>"
+        html = "<div><img src='http://upload.wikimedia.org/wikipedia/en/b/bd/Test.jpg'/></div>"
         html = command.process_html_for_images(html)
 
         self.assertEqual(html,
-                         "<div><img src='http://upload.wikimedia.org/wikipedia/en/b/bd/Test.jpg'></div>")
+                         "<div><img src='http://upload.wikimedia.org/wikipedia/en/b/bd/Test.jpg'/></div>")
 
     def testHTMLWithUnicodeNoUpload(self):
         command = import_from_wordpress.Command()
-        html = "<div><p>€</p><img src='http://upload.wikimedia.org/wikipedia/en/b/bd/Test€.jpg'></div>"
+        html = "<div><p>€</p><img src='http://upload.wikimedia.org/wikipedia/en/b/bd/Test€.jpg'/></div>"
         html = command.process_html_for_images(html)
 
         self.assertEqual(html,
-                         "<div><p>€</p><img src='http://upload.wikimedia.org/wikipedia/en/b/bd/Test€.jpg'></div>")
+                         "<div><p>€</p><img src='http://upload.wikimedia.org/wikipedia/en/b/bd/Test€.jpg'/></div>")
 
-    # def testHTMLWithUnicodeImageSourceUpdatedWhenDownloaded(self):
-    #     command = import_from_wordpress.Command()
-    #     html = "<div<img src='{}'></div>".format(test_image_url_with_unicode)
-    #     html = command.process_html_for_images(html)
-    #
-    #     images = Image.objects.filter(title='testcat♥.jpg')
-    #
-    #     self.assertEqual(1, images.count())
-    #
-    #     self.assertEqual(html, "<div><img src='{}'></div>".format(
-    #         images.first().get_rendition('width-100').url))
+    def testHTMLWithUnicodeImageSourceUpdatedWhenDownloaded(self):
+        command = import_from_wordpress.Command()
+        html = "<div><img src='{}' /></div>".format(test_image_url_with_unicode)
+        html = command.process_html_for_images(html)
+
+        images = Image.objects.filter(title='testcat♥.jpg')
+
+        self.assertEqual(1, images.count())
+
+        self.assertEqual(html, "<div><img src='{}' /></div>".format(
+            images.first().get_rendition('width-100').url))
 
 
 class TestCommandImportDownloadImage(TestCase, ImageCleanUp):

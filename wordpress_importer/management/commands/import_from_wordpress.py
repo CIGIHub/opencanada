@@ -9,7 +9,7 @@ import requests
 from bs4 import BeautifulSoup
 from django.core.files.images import File, get_image_dimensions
 from django.core.management.base import BaseCommand
-from django.utils.six import BytesIO
+from django.utils.six import StringIO, text_type
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailimages.models import Image
 
@@ -68,6 +68,7 @@ class Command(BaseCommand):
             'passwd': options.get('password', ''),
             'host': options.get('host', ''),
             'db': options.get('db', ''),
+            'charset': 'utf8'
         }
         self.open_connection(db_config)
         self.load_contributors()
@@ -195,22 +196,7 @@ class Command(BaseCommand):
         parser = BeautifulSoup(html)
 
         for child in parser.body.children:
-            # import pdb; pdb.set_trace()
             processed_html.extend(self._process_element(child))
-            # if child.name == 'p' or child.name == 'div':
-            #     import pdb; pdb.set_trace()
-            #     inner = child.decode_contents(formatter="html")
-            #
-            #     sub_items = child.descendants
-            #     for item in sub_items:
-            #         if item.name == None:
-            #             processed_html.append({'type': 'Paragraph', 'value': "<p>{}</p>".format(item.strip())})
-            #         elif item.name == 'img':
-            #             processed_html.append(self._process_image_tag(item))
-            # elif child.name == 'img':
-            #     processed_html.append(self._process_image_tag(child))
-            # elif child.name == None:
-            #     processed_html.append({'type': 'Paragraph', 'value': "<p>{}</p>".format(child.strip())})
 
         return processed_html
 
@@ -233,30 +219,37 @@ class Command(BaseCommand):
                     children_contain_blocks = True
 
             if children_contain_blocks:
-                last_index = 0
-                for current_index in indices_of_children_with_blocks:
-                    child = "".join([str(x) for x in
-                                     all_children[last_index:current_index]])
-                    if child:
-                        processed_element.append({'type': 'Paragraph',
-                                                  'value': "<p>{}</p>".format(
-                                                      child.strip())})
-                    child = all_children[current_index]
-                    processed_element.extend((self._process_element(child)))
-                    last_index = current_index + 1
+                processed_element.extend(self._process_container_element_children(indices_of_children_with_blocks, all_children))
 
-                child = "".join([str(x) for x in
-                                 all_children[last_index:len(all_children)]])
-                if child:
-                    processed_element.append({'type': 'Paragraph',
-                                              'value': "<p>{}</p>".format(
-                                                  child.strip())})
             else:
                 inner = html.decode_contents(formatter="html")
                 if inner:
                     processed_element.append({'type': 'Paragraph',
                                               'value': "<p>{}</p>".format(
                                                   inner.strip())})
+
+        return processed_element
+
+    def _process_container_element_children(self, indices_of_children_with_blocks, all_children):
+        processed_element = []
+        last_index = 0
+        for current_index in indices_of_children_with_blocks:
+            child = "".join([text_type(x) for x in
+                             all_children[last_index:current_index]])
+            if child:
+                processed_element.append({'type': 'Paragraph',
+                                          'value': "<p>{}</p>".format(
+                                              child.strip())})
+            child = all_children[current_index]
+            processed_element.extend((self._process_element(child)))
+            last_index = current_index + 1
+
+        child = "".join([text_type(x) for x in
+                         all_children[last_index:len(all_children)]])
+        if child:
+            processed_element.append({'type': 'Paragraph',
+                                      'value': "<p>{}</p>".format(
+                                          child.strip())})
 
         return processed_element
 
@@ -269,7 +262,7 @@ class Command(BaseCommand):
             return {'type': 'Image', 'value': images.first().id}
         else:
             return {'type': 'Paragraph',
-                    'value': "<p>{}</p>".format(str(item))}
+                    'value': "<p>{}</p>".format(text_type(item))}
 
     def process_html_for_images(self, html, use_image_names=False):
         parser = BeautifulSoup(html)
@@ -302,7 +295,7 @@ class Command(BaseCommand):
 
         if response.status_code == 200:
 
-            f = BytesIO(response.content)
+            f = StringIO(response.content)
 
             dim = get_image_dimensions(f)  # (width, height)
 
