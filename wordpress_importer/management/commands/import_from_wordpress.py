@@ -129,7 +129,7 @@ class Command(BaseCommand):
         # TODO: get post time post_date_gmt
         # TODO: setup better filtering so that we get only the data that we
         # actually want to transfer.
-        query = 'SELECT post_content, post_title, post_excerpt, post_name, user_email ' \
+        query = 'SELECT wp_posts.id, post_content, post_title, post_excerpt, post_name, user_email ' \
                 'FROM wp_posts INNER JOIN wp_users ' \
                 'ON wp_posts.post_author = wp_users.ID ' \
                 'WHERE wp_posts.ID in ' \
@@ -155,7 +155,7 @@ class Command(BaseCommand):
         features_page = Page.objects.get(slug="features")
         # user = User.objects.all().first()
 
-        for (post_content, post_title, post_excerpt, post_name,
+        for (post_id, post_content, post_title, post_excerpt, post_name,
              author_email) in results:
             pages = ArticlePage.objects.filter(slug=post_name)
             if pages.count() > 0:
