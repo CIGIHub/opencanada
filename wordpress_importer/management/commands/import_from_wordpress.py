@@ -15,6 +15,7 @@ from wagtail.wagtailimages.models import Image
 
 from articles.models import ArticlePage
 from people.models import Contributor
+from wordpress_importer.models import ImageImports, PostImports
 from wordpress_importer.utils import get_setting
 
 try:
@@ -158,6 +159,7 @@ class Command(BaseCommand):
 
         for (post_id, post_content, post_title, post_excerpt, post_name,
              author_email) in results:
+
             pages = ArticlePage.objects.filter(slug=post_name)
             if pages.count() > 0:
                 page = pages.first()
@@ -189,6 +191,8 @@ class Command(BaseCommand):
                 submitted_for_moderation=False,
             )
             revision.publish()
+
+            import_record, created = PostImports.objects.get_or_create(post_id=post_id)
 
     def process_html_for_stream_field(self, html):
         processed_html = []
@@ -291,30 +295,37 @@ class Command(BaseCommand):
         return html
 
     def download_image(self, url, filename, use_image_names=False):
-        response = requests.get(url)
-
-        if response.status_code == 200:
-
-            f = StringIO(response.content)
-
-            dim = get_image_dimensions(f)  # (width, height)
-
-            image = Image.objects.create(
-                title=filename,
-                uploaded_by_user=None,
-                file=File(f, name=filename),
-                width=dim[0],
-                height=dim[1]
-            )
-
-            if use_image_names:
-                updated_source_url = image.title
-            else:
-                updated_source_url = image.get_rendition(
-                    'width-{}'.format(dim[0])).url
-            return updated_source_url
+        images = ImageImports.objects.filter(original_url=url)
+        if images.count() > 0:
+            image = images.first()
         else:
-            raise DownloadException()
+            response = requests.get(url)
+
+            if response.status_code == 200:
+
+                f = BytesIO(response.content)
+
+                dim = get_image_dimensions(f)  # (width, height)
+
+                image = Image.objects.create(
+                    title=filename,
+                    uploaded_by_user=None,
+                    file=File(f, name=filename),
+                    width=dim[0],
+                    height=dim[1]
+                )
+
+                image_record, created = ImageImports.objects.get_or_create(original_url=url, name=image.title)
+                image_record.save()
+            else:
+                raise DownloadException()
+
+        if use_image_names:
+            updated_source_url = image.title
+        else:
+            updated_source_url = image.get_rendition(
+                'width-{}'.format(dim[0])).url
+        return updated_source_url
 
     def load_indepth_posts(self):
         # links to other articles - class: idarticlecontainer

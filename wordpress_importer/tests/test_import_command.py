@@ -13,6 +13,7 @@ from wagtail.wagtailimages.models import Image
 from articles.models import ArticlePage
 from people.models import Contributor
 from wordpress_importer.management.commands import import_from_wordpress
+from wordpress_importer.models import ImageImports, PostImports
 
 
 class ImageCleanUp(object):
@@ -414,6 +415,14 @@ class TestCommandImportDownloadImage(TestCase, ImageCleanUp):
                           'file:///{}/wordpress_importer/tests/files/purple.jpg'.format(
                               settings.PROJECT_ROOT), 'purple.jpg')
 
+    @mock.patch('requests.get', local_get_successful)
+    def testImageImportRecordCreatedWhenDownloaded(self):
+        command = import_from_wordpress.Command()
+        command.download_image(test_image_url, 'testcat.jpg')
+
+        image_records = ImageImports.objects.filter(name='testcat.jpg')
+
+        self.assertEqual(1, image_records.count())
 
 @mock.patch('requests.get', local_get_successful)
 class TestCommandProcessHTLMForStreamField(TestCase, ImageCleanUp):
