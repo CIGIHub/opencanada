@@ -256,6 +256,12 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
         self.assertEqual(pages.count(), 1)
         self.assertEqual(pages.first().title, "title 2")
 
+    def testImportTrackingCreated(self):
+        command = import_from_wordpress.Command()
+        command.load_posts()
+        imports = PostImports.objects.filter(post_id=5)
+        self.assertEqual(imports.count(), 1)
+
     # TODO: Multiple Authors? Is that a thing on OpenCanada?
 
     # TODO: Tags
@@ -423,6 +429,7 @@ class TestCommandImportDownloadImage(TestCase, ImageCleanUp):
         image_records = ImageImports.objects.filter(name='testcat.jpg')
 
         self.assertEqual(1, image_records.count())
+
 
 @mock.patch('requests.get', local_get_successful)
 class TestCommandProcessHTLMForStreamField(TestCase, ImageCleanUp):
