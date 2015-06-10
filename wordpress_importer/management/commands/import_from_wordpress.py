@@ -9,7 +9,7 @@ import requests
 from bs4 import BeautifulSoup
 from django.core.files.images import File, get_image_dimensions
 from django.core.management.base import BaseCommand
-from django.utils.six import StringIO, text_type
+from django.utils.six import BytesIO, text_type
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailimages.models import Image
 
