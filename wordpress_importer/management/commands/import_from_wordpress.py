@@ -6,7 +6,7 @@ import json
 
 import MySQLdb
 import requests
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, element
 from django.core.files.images import File, get_image_dimensions
 from django.core.management.base import BaseCommand
 from django.utils.six import BytesIO, text_type
@@ -143,7 +143,7 @@ class Command(BaseCommand):
                 'inner join wp_terms ' \
                 'on wp_term_taxonomy.term_id=wp_terms.term_id ' \
                 'where taxonomy="category" ' \
-                'and post_status = "publish" and wp_terms.name="Features")'
+                'and post_status = "publish" and wp_terms.name="Features") and wp_posts.ID = 51546'
 
         cursor.execute(query)
         results = cursor.fetchall()
@@ -155,7 +155,6 @@ class Command(BaseCommand):
         results = self.get_post_data()
 
         features_page = Page.objects.get(slug="features")
-        # user = User.objects.all().first()
 
         for (post_id, post_content, post_title, post_excerpt, post_name,
              author_email) in results:
@@ -192,15 +191,19 @@ class Command(BaseCommand):
             )
             revision.publish()
 
-            import_record, created = PostImports.objects.get_or_create(post_id=post_id)
+            import_record, created = PostImports.objects.get_or_create(
+                post_id=post_id)
 
     def process_html_for_stream_field(self, html):
         processed_html = []
         html = self.process_html_for_images(html, use_image_names=True)
         parser = BeautifulSoup(html)
 
-        for child in parser.body.children:
-            processed_html.extend(self._process_element(child))
+        if parser.body.children:
+            for child in parser.body.children:
+                processed_html.extend(self._process_element(child))
+        else:
+            processed_html.extend(self._process_base_element(html))
 
         return processed_html
 
@@ -212,53 +215,66 @@ class Command(BaseCommand):
                                           html.strip())})
         elif html.name == 'img':
             processed_element.append(self._process_image_tag(html))
-        elif html.name == 'p' or html.name == 'div':
-
-            children_contain_blocks = False
-            indices_of_children_with_blocks = []
+        elif html.name == 'h1' or html.name == 'h2' or html.name == 'h3' \
+                or html.name == 'h4' or html.name == 'h5' \
+                or html.name == 'h6' or html.name == 'p' \
+                or html.name == 'div':
             all_children = list(html.children)
+            all_children = self._join_non_block_children(all_children,
+                                                         html.name)
+
             for index, child in enumerate(all_children):
-                if self._contains_stream_block(child):
-                    indices_of_children_with_blocks.append(index)
-                    children_contain_blocks = True
+                if self._contains_stream_block(child) and len(
+                        all_children) > 1:
+                    child_blocks = self._process_element(child)
+                    processed_element.extend(child_blocks)
+                elif child.name is None:
+                    tag = element.Tag(parser="html", name=html.name)
+                    tag.string = child
+                    processed_element.append(self._process_base_element(tag))
+                else:
+                    processed_element.append(self._process_base_element(child))
 
-            if children_contain_blocks:
-                processed_element.extend(self._process_container_element_children(indices_of_children_with_blocks, all_children))
+        return processed_element
 
+    def _join_non_block_children(self, all_children, parent_tag_name):
+        updated_children = []
+        last_child_was_block = True
+        for child in all_children:
+            if self._contains_stream_block(child):
+                updated_children.append(child)
+                last_child_was_block = True
             else:
-                inner = html.decode_contents(formatter="html")
-                if inner:
-                    processed_element.append({'type': 'Paragraph',
-                                              'value': "<p>{}</p>".format(
-                                                  inner.strip())})
+                if last_child_was_block:
+                    tag = element.Tag(parser="html", name=parent_tag_name)
+                    tag.contents.append(child)
+                    updated_children.append(tag)
+                    last_child_was_block = False
+                else:
+                    last_child = updated_children[-1]
+                    last_child.contents.append(child)
+        return updated_children
 
-        return processed_element
-
-    def _process_container_element_children(self, indices_of_children_with_blocks, all_children):
-        processed_element = []
-        last_index = 0
-        for current_index in indices_of_children_with_blocks:
-            child = "".join([text_type(x) for x in
-                             all_children[last_index:current_index]])
-            if child:
-                processed_element.append({'type': 'Paragraph',
-                                          'value': "<p>{}</p>".format(
-                                              child.strip())})
-            child = all_children[current_index]
-            processed_element.extend((self._process_element(child)))
-            last_index = current_index + 1
-
-        child = "".join([text_type(x) for x in
-                         all_children[last_index:len(all_children)]])
-        if child:
-            processed_element.append({'type': 'Paragraph',
-                                      'value': "<p>{}</p>".format(
-                                          child.strip())})
-
-        return processed_element
+    def _process_base_element(self, html):
+        if html.name == 'img':
+            return self._process_image_tag(html)
+        elif html.name == 'h1' or html.name == 'h2' or html.name == 'h3' \
+                or html.name == 'h4' or html.name == 'h5' or html.name == 'h6':
+            return {'type': 'Header', 'value': html.text}
+        elif html.name == 'p' or html.name == 'div':
+            inner = html.decode_contents(formatter="html")
+            return {'type': 'Paragraph',
+                    'value': "<p>{}</p>".format(inner.strip())}
+        elif html.name is None:
+            return {'type': 'Paragraph',
+                    'value': "<p>{}</p>".format(html.strip())}
+        else:
+            return {'type': 'Paragraph',
+                    'value': "<p>{}</p>".format(html)}
 
     def _contains_stream_block(self, html):
-        return html.name in ['div', 'p', 'img']
+        return html.name in ['div', 'p', 'img', 'h1', 'h2', 'h3', 'h4', 'h5',
+                             'h6']
 
     def _process_image_tag(self, item):
         images = Image.objects.filter(title=item['src'])
@@ -295,8 +311,9 @@ class Command(BaseCommand):
         return html
 
     def download_image(self, url, filename, use_image_names=False):
-        images = ImageImports.objects.filter(original_url=url)
-        if images.count() > 0:
+        image_records = ImageImports.objects.filter(original_url=url)
+        if image_records.count() > 0:
+            images = Image.objects.filter(title=image_records.first().name)
             image = images.first()
         else:
             response = requests.get(url)
@@ -315,7 +332,8 @@ class Command(BaseCommand):
                     height=dim[1]
                 )
 
-                image_record, created = ImageImports.objects.get_or_create(original_url=url, name=image.title)
+                image_record, created = ImageImports.objects.get_or_create(
+                    original_url=url, name=image.title)
                 image_record.save()
             else:
                 raise DownloadException()
@@ -324,7 +342,7 @@ class Command(BaseCommand):
             updated_source_url = image.title
         else:
             updated_source_url = image.get_rendition(
-                'width-{}'.format(dim[0])).url
+                'width-{}'.format(image.width)).url
         return updated_source_url
 
     def load_indepth_posts(self):

@@ -275,11 +275,11 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
              'is-nato-ready-for-putin',
              'bob@example.com',),
             (2,
-                '<p>This <strong>is</strong> <img src="http://www.example.com/test.jpg" /> a <a href="http://www.example.com">post</a> <span class="special">that has html</span></p><div>Yay!</div>',
-                'HTML Works?',
-                'The excerpt also has some <strong>HTML</strong>.',
-                'html-post',
-                'bob@example.com',),
+             '<p>This <strong>is</strong> <img src="http://www.example.com/test.jpg" /> a <a href="http://www.example.com">post</a> <span class="special">that has html</span></p><div>Yay!</div>',
+             'HTML Works?',
+             'The excerpt also has some <strong>HTML</strong>.',
+             'html-post',
+             'bob@example.com',),
             (3,
              None,
              None,
@@ -346,7 +346,7 @@ class TestCommandImportProcessHTMLForImages(TestCase, ImageCleanUp):
 
     def testHTMLHasImageImageCreatedWhenDownloaded(self):
         command = import_from_wordpress.Command()
-        html = "<div><img src='{}'/></div>".format(test_image_url)
+        html = "<img src='{}'/>".format(test_image_url)
         command.process_html_for_images(html)
 
         images = Image.objects.filter(title='testcat.jpg')
@@ -355,17 +355,17 @@ class TestCommandImportProcessHTMLForImages(TestCase, ImageCleanUp):
 
     def testHTMLImageSourceUpdatedWhenDownloaded(self):
         command = import_from_wordpress.Command()
-        html = "<div><img src='{}'/></div>".format(test_image_url)
+        html = "<img src='{}'/>".format(test_image_url)
         html = command.process_html_for_images(html)
 
         images = Image.objects.filter(title='testcat.jpg')
 
-        self.assertEqual(html, "<div><img src='{}'/></div>".format(
+        self.assertEqual(html, "<img src='{}'/>".format(
             images.first().get_rendition('width-100').url))
 
     def testImageNotDownloadedForRemote(self):
         command = import_from_wordpress.Command()
-        html = "<div><img src='http://upload.wikimedia.org/wikipedia/en/b/bd/Test.jpg'/></div>"
+        html = "<img src='http://upload.wikimedia.org/wikipedia/en/b/bd/Test.jpg'/>"
         command.process_html_for_images(html)
         images = Image.objects.filter(title='Test.jpg')
 
@@ -373,30 +373,30 @@ class TestCommandImportProcessHTMLForImages(TestCase, ImageCleanUp):
 
     def testHTMLNotUpdatedForRemote(self):
         command = import_from_wordpress.Command()
-        html = "<div><img src='http://upload.wikimedia.org/wikipedia/en/b/bd/Test.jpg'/></div>"
+        html = "<img src='http://upload.wikimedia.org/wikipedia/en/b/bd/Test.jpg'/>"
         html = command.process_html_for_images(html)
 
         self.assertEqual(html,
-                         "<div><img src='http://upload.wikimedia.org/wikipedia/en/b/bd/Test.jpg'/></div>")
+                         "<img src='http://upload.wikimedia.org/wikipedia/en/b/bd/Test.jpg'/>")
 
     def testHTMLWithUnicodeNoUpload(self):
         command = import_from_wordpress.Command()
-        html = "<div><p>€</p><img src='http://upload.wikimedia.org/wikipedia/en/b/bd/Test€.jpg'/></div>"
+        html = "<p>€</p><img src='http://upload.wikimedia.org/wikipedia/en/b/bd/Test€.jpg'/>"
         html = command.process_html_for_images(html)
 
         self.assertEqual(html,
-                         "<div><p>€</p><img src='http://upload.wikimedia.org/wikipedia/en/b/bd/Test€.jpg'/></div>")
+                         "<p>€</p><img src='http://upload.wikimedia.org/wikipedia/en/b/bd/Test€.jpg'/>")
 
     def testHTMLWithUnicodeImageSourceUpdatedWhenDownloaded(self):
         command = import_from_wordpress.Command()
-        html = "<div><img src='{}' /></div>".format(test_image_url_with_unicode)
+        html = "<img src='{}' />".format(test_image_url_with_unicode)
         html = command.process_html_for_images(html)
 
         images = Image.objects.filter(title='testcat♥.jpg')
 
         self.assertEqual(1, images.count())
 
-        self.assertEqual(html, "<div><img src='{}' /></div>".format(
+        self.assertEqual(html, "<img src='{}' />".format(
             images.first().get_rendition('width-100').url))
 
 
@@ -479,7 +479,6 @@ class TestCommandProcessHTLMForStreamField(TestCase, ImageCleanUp):
         command = import_from_wordpress.Command()
         html = "<p>This is a paragraph. <img src='{}' /> This is a second paragraph.</p>".format(
             test_image_url)
-        # import pdb; pdb.set_trace()
         processed = command.process_html_for_stream_field(html)
 
         self.assertEqual(
@@ -511,15 +510,97 @@ class TestCommandProcessHTLMForStreamField(TestCase, ImageCleanUp):
 
     def testDivs(self):
         command = import_from_wordpress.Command()
-        html = "<div>This is a simple paragraph.</div><div>This is a second paragraph.</div>"
+        html = "<div><div>This is a simple paragraph.</div><img src='{}' /><div>This is a second paragraph.<img src='{}' /></div></div>".format(
+            test_image_url, test_image_url)
         processed = command.process_html_for_stream_field(html)
 
         self.assertEqual(
             [{"type": "Paragraph",
               "value": "<p>This is a simple paragraph.</p>"},
+             {"type": "Image",
+              "value": 1},
              {"type": "Paragraph",
               "value": "<p>This is a second paragraph.</p>"},
+             {"type": "Image",
+              "value": 1},
              ],
+            processed
+        )
+
+    def testHeaders(self):
+        command = import_from_wordpress.Command()
+        html = "<h1>This is a header 1</h1><h2>This is a header 2</h2>" \
+               "<h3>This is a header 3</h3><h4>This is a header 4</h4>" \
+               "<h5>This is a header 5</h5><h6>This is a header 6</h6>"
+        processed = command.process_html_for_stream_field(html)
+
+        self.assertEqual(
+            [{"type": "Header",
+              "value": "This is a header 1"},
+             {"type": "Header",
+              "value": "This is a header 2"},
+             {"type": "Header",
+              "value": "This is a header 3"},
+             {"type": "Header",
+              "value": "This is a header 4"},
+             {"type": "Header",
+              "value": "This is a header 5"},
+             {"type": "Header",
+              "value": "This is a header 6"},
+             ],
+            processed
+        )
+
+    def testImagesInHeaders(self):
+        command = import_from_wordpress.Command()
+        html = "<h2><img src='{}' />This is the heading</h2>".format(
+            test_image_url)
+        processed = command.process_html_for_stream_field(html)
+
+        self.assertEqual(
+            [{"type": "Image",
+              "value": 1},
+             {"type": "Header",
+              "value": "This is the heading"},
+             ],
+            processed
+        )
+
+    def testImagesInHeadersFollowingText(self):
+        command = import_from_wordpress.Command()
+        html = "<h2>This is the heading<img src='{}' /></h2>".format(
+            test_image_url)
+        processed = command.process_html_for_stream_field(html)
+
+        self.assertEqual(
+            [
+                {"type": "Header",
+                 "value": "This is the heading"},
+                {"type": "Image",
+                 "value": 1},
+            ],
+            processed
+        )
+
+    def testImagesInHeadersWrappedInText(self):
+        command = import_from_wordpress.Command()
+        html = "<h2>This is the heading<img src='{0}' />This is more heading<img src='{0}' />This is even more heading</h2>".format(
+            test_image_url)
+        processed = command.process_html_for_stream_field(html)
+
+        self.assertEqual(
+            [
+                {"type": "Header",
+                 "value": "This is the heading"},
+                {"type": "Image",
+                 "value": 1},
+                {"type": "Header",
+                 "value": "This is more heading"},
+                {"type": "Image",
+                 "value": 1},
+                {"type": "Header",
+                 "value": "This is even more heading"},
+            ],
             processed
         )
 
