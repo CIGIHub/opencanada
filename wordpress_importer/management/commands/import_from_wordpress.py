@@ -9,12 +9,13 @@ import requests
 from bs4 import BeautifulSoup
 from django.core.files.images import File, get_image_dimensions
 from django.core.management.base import BaseCommand
-from django.utils.six import BytesIO
+from django.utils.six import BytesIO, text_type
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailimages.models import Image
 
 from articles.models import ArticlePage
 from people.models import Contributor
+from wordpress_importer.models import ImageImports, PostImports
 from wordpress_importer.utils import get_setting
 
 try:
@@ -68,6 +69,7 @@ class Command(BaseCommand):
             'passwd': options.get('password', ''),
             'host': options.get('host', ''),
             'db': options.get('db', ''),
+            'charset': 'utf8'
         }
         self.open_connection(db_config)
         self.load_contributors()
@@ -129,7 +131,7 @@ class Command(BaseCommand):
         # TODO: get post time post_date_gmt
         # TODO: setup better filtering so that we get only the data that we
         # actually want to transfer.
-        query = 'SELECT post_content, post_title, post_excerpt, post_name, user_email ' \
+        query = 'SELECT wp_posts.id, post_content, post_title, post_excerpt, post_name, user_email ' \
                 'FROM wp_posts INNER JOIN wp_users ' \
                 'ON wp_posts.post_author = wp_users.ID ' \
                 'WHERE wp_posts.ID in ' \
@@ -155,8 +157,9 @@ class Command(BaseCommand):
         features_page = Page.objects.get(slug="features")
         # user = User.objects.all().first()
 
-        for (post_content, post_title, post_excerpt, post_name,
+        for (post_id, post_content, post_title, post_excerpt, post_name,
              author_email) in results:
+
             pages = ArticlePage.objects.filter(slug=post_name)
             if pages.count() > 0:
                 page = pages.first()
@@ -189,28 +192,15 @@ class Command(BaseCommand):
             )
             revision.publish()
 
+            import_record, created = PostImports.objects.get_or_create(post_id=post_id)
+
     def process_html_for_stream_field(self, html):
         processed_html = []
         html = self.process_html_for_images(html, use_image_names=True)
         parser = BeautifulSoup(html)
 
         for child in parser.body.children:
-            # import pdb; pdb.set_trace()
             processed_html.extend(self._process_element(child))
-            # if child.name == 'p' or child.name == 'div':
-            #     import pdb; pdb.set_trace()
-            #     inner = child.decode_contents(formatter="html")
-            #
-            #     sub_items = child.descendants
-            #     for item in sub_items:
-            #         if item.name == None:
-            #             processed_html.append({'type': 'Paragraph', 'value': "<p>{}</p>".format(item.strip())})
-            #         elif item.name == 'img':
-            #             processed_html.append(self._process_image_tag(item))
-            # elif child.name == 'img':
-            #     processed_html.append(self._process_image_tag(child))
-            # elif child.name == None:
-            #     processed_html.append({'type': 'Paragraph', 'value': "<p>{}</p>".format(child.strip())})
 
         return processed_html
 
@@ -233,30 +223,37 @@ class Command(BaseCommand):
                     children_contain_blocks = True
 
             if children_contain_blocks:
-                last_index = 0
-                for current_index in indices_of_children_with_blocks:
-                    child = "".join([str(x) for x in
-                                     all_children[last_index:current_index]])
-                    if child:
-                        processed_element.append({'type': 'Paragraph',
-                                                  'value': "<p>{}</p>".format(
-                                                      child.strip())})
-                    child = all_children[current_index]
-                    processed_element.extend((self._process_element(child)))
-                    last_index = current_index + 1
+                processed_element.extend(self._process_container_element_children(indices_of_children_with_blocks, all_children))
 
-                child = "".join([str(x) for x in
-                                 all_children[last_index:len(all_children)]])
-                if child:
-                    processed_element.append({'type': 'Paragraph',
-                                              'value': "<p>{}</p>".format(
-                                                  child.strip())})
             else:
                 inner = html.decode_contents(formatter="html")
                 if inner:
                     processed_element.append({'type': 'Paragraph',
                                               'value': "<p>{}</p>".format(
                                                   inner.strip())})
+
+        return processed_element
+
+    def _process_container_element_children(self, indices_of_children_with_blocks, all_children):
+        processed_element = []
+        last_index = 0
+        for current_index in indices_of_children_with_blocks:
+            child = "".join([text_type(x) for x in
+                             all_children[last_index:current_index]])
+            if child:
+                processed_element.append({'type': 'Paragraph',
+                                          'value': "<p>{}</p>".format(
+                                              child.strip())})
+            child = all_children[current_index]
+            processed_element.extend((self._process_element(child)))
+            last_index = current_index + 1
+
+        child = "".join([text_type(x) for x in
+                         all_children[last_index:len(all_children)]])
+        if child:
+            processed_element.append({'type': 'Paragraph',
+                                      'value': "<p>{}</p>".format(
+                                          child.strip())})
 
         return processed_element
 
@@ -269,7 +266,7 @@ class Command(BaseCommand):
             return {'type': 'Image', 'value': images.first().id}
         else:
             return {'type': 'Paragraph',
-                    'value': "<p>{}</p>".format(str(item))}
+                    'value': "<p>{}</p>".format(text_type(item))}
 
     def process_html_for_images(self, html, use_image_names=False):
         parser = BeautifulSoup(html)
@@ -298,30 +295,37 @@ class Command(BaseCommand):
         return html
 
     def download_image(self, url, filename, use_image_names=False):
-        response = requests.get(url)
-
-        if response.status_code == 200:
-
-            f = BytesIO(response.content)
-
-            dim = get_image_dimensions(f)  # (width, height)
-
-            image = Image.objects.create(
-                title=filename,
-                uploaded_by_user=None,
-                file=File(f, name=filename),
-                width=dim[0],
-                height=dim[1]
-            )
-
-            if use_image_names:
-                updated_source_url = image.title
-            else:
-                updated_source_url = image.get_rendition(
-                    'width-{}'.format(dim[0])).url
-            return updated_source_url
+        images = ImageImports.objects.filter(original_url=url)
+        if images.count() > 0:
+            image = images.first()
         else:
-            raise DownloadException()
+            response = requests.get(url)
+
+            if response.status_code == 200:
+
+                f = BytesIO(response.content)
+
+                dim = get_image_dimensions(f)  # (width, height)
+
+                image = Image.objects.create(
+                    title=filename,
+                    uploaded_by_user=None,
+                    file=File(f, name=filename),
+                    width=dim[0],
+                    height=dim[1]
+                )
+
+                image_record, created = ImageImports.objects.get_or_create(original_url=url, name=image.title)
+                image_record.save()
+            else:
+                raise DownloadException()
+
+        if use_image_names:
+            updated_source_url = image.title
+        else:
+            updated_source_url = image.get_rendition(
+                'width-{}'.format(dim[0])).url
+        return updated_source_url
 
     def load_indepth_posts(self):
         # links to other articles - class: idarticlecontainer

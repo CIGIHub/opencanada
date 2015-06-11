@@ -68,3 +68,5 @@ target/
 #SQLite3
 *.sqlite3
 
+#Mac Stuff
+.DS_Store
