@@ -6,7 +6,7 @@ import json
 
 import MySQLdb
 import requests
-from bs4 import BeautifulSoup, element
+from bs4 import BeautifulSoup, Comment, element
 from django.core.files.images import File, get_image_dimensions
 from django.core.management.base import BaseCommand
 from django.utils.six import BytesIO, text_type
@@ -143,7 +143,7 @@ class Command(BaseCommand):
                 'inner join wp_terms ' \
                 'on wp_term_taxonomy.term_id=wp_terms.term_id ' \
                 'where taxonomy="category" ' \
-                'and post_status = "publish" and wp_terms.name="Features") and wp_posts.ID = 51546'
+                'and post_status = "publish" and wp_terms.name="Features")'
 
         cursor.execute(query)
         results = cursor.fetchall()
@@ -199,8 +199,12 @@ class Command(BaseCommand):
         html = self.process_html_for_images(html, use_image_names=True)
         parser = BeautifulSoup(html)
 
-        if parser.body.children:
-            for child in parser.body.children:
+        # processed_html.extend(self._process_element(parser.body))
+        all_children = list(parser.body.children)
+        if all_children:
+            if len(all_children) > 1:
+                all_children = self._join_non_block_children(all_children, 'p')
+            for child in all_children:
                 processed_html.extend(self._process_element(child))
         else:
             processed_html.extend(self._process_base_element(html))
@@ -240,8 +244,13 @@ class Command(BaseCommand):
     def _join_non_block_children(self, all_children, parent_tag_name):
         updated_children = []
         last_child_was_block = True
+
         for child in all_children:
-            if self._contains_stream_block(child):
+            if isinstance(child, Comment):
+                continue
+            elif isinstance(child, text_type) and child.strip() == "":
+                continue
+            elif self._contains_stream_block(child):
                 updated_children.append(child)
                 last_child_was_block = True
             else:
@@ -260,7 +269,7 @@ class Command(BaseCommand):
             return self._process_image_tag(html)
         elif html.name == 'h1' or html.name == 'h2' or html.name == 'h3' \
                 or html.name == 'h4' or html.name == 'h5' or html.name == 'h6':
-            return {'type': 'Header', 'value': html.text}
+            return {'type': 'Heading', 'value': html.text}
         elif html.name == 'p' or html.name == 'div':
             inner = html.decode_contents(formatter="html")
             return {'type': 'Paragraph',

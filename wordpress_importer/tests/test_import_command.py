@@ -189,7 +189,7 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
              ("Paragraph",
               '<p><img src="http://www.example.com/test.jpg"/></p>'),
              ("Paragraph",
-              '<p>a <a href="http://www.example.com">post</a> <span class="special">that has html</span></p>'),
+              '<p>a <a href="http://www.example.com">post</a><span class="special">that has html</span></p>'),
              ("Paragraph", '<p>Yay!</p>'), ],
             pages.first().body.stream_data)
 
@@ -275,7 +275,7 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
              'is-nato-ready-for-putin',
              'bob@example.com',),
             (2,
-             '<p>This <strong>is</strong> <img src="http://www.example.com/test.jpg" /> a <a href="http://www.example.com">post</a> <span class="special">that has html</span></p><div>Yay!</div>',
+             '<p>This <strong>is</strong> <img src="http://www.example.com/test.jpg" /> a <a href="http://www.example.com">post</a><span class="special">that has html</span></p><div>Yay!</div>',
              'HTML Works?',
              'The excerpt also has some <strong>HTML</strong>.',
              'html-post',
@@ -535,17 +535,17 @@ class TestCommandProcessHTLMForStreamField(TestCase, ImageCleanUp):
         processed = command.process_html_for_stream_field(html)
 
         self.assertEqual(
-            [{"type": "Header",
+            [{"type": "Heading",
               "value": "This is a header 1"},
-             {"type": "Header",
+             {"type": "Heading",
               "value": "This is a header 2"},
-             {"type": "Header",
+             {"type": "Heading",
               "value": "This is a header 3"},
-             {"type": "Header",
+             {"type": "Heading",
               "value": "This is a header 4"},
-             {"type": "Header",
+             {"type": "Heading",
               "value": "This is a header 5"},
-             {"type": "Header",
+             {"type": "Heading",
               "value": "This is a header 6"},
              ],
             processed
@@ -560,7 +560,7 @@ class TestCommandProcessHTLMForStreamField(TestCase, ImageCleanUp):
         self.assertEqual(
             [{"type": "Image",
               "value": 1},
-             {"type": "Header",
+             {"type": "Heading",
               "value": "This is the heading"},
              ],
             processed
@@ -574,7 +574,7 @@ class TestCommandProcessHTLMForStreamField(TestCase, ImageCleanUp):
 
         self.assertEqual(
             [
-                {"type": "Header",
+                {"type": "Heading",
                  "value": "This is the heading"},
                 {"type": "Image",
                  "value": 1},
@@ -590,15 +590,15 @@ class TestCommandProcessHTLMForStreamField(TestCase, ImageCleanUp):
 
         self.assertEqual(
             [
-                {"type": "Header",
+                {"type": "Heading",
                  "value": "This is the heading"},
                 {"type": "Image",
                  "value": 1},
-                {"type": "Header",
+                {"type": "Heading",
                  "value": "This is more heading"},
                 {"type": "Image",
                  "value": 1},
-                {"type": "Header",
+                {"type": "Heading",
                  "value": "This is even more heading"},
             ],
             processed
@@ -626,3 +626,36 @@ class TestCommandProcessHTLMForStreamField(TestCase, ImageCleanUp):
               "value": '<p><img src="http://www.example.com/test.jpg"/></p>'},
              ],
             processed)
+
+    def testExtraWhiteSpaceIsRemoved(self):
+        command = import_from_wordpress.Command()
+        html = "  <p>Test</p>         <div>Second</div>  &nbsp;   <p>Third</p>"
+        processed = command.process_html_for_stream_field(html)
+
+        self.assertEqual(
+            [{'type': 'Paragraph', 'value': '<p>Test</p>'},
+             {'type': 'Paragraph', 'value': '<p>Second</p>'},
+             {'type': 'Paragraph', 'value': '<p>Third</p>'},
+             ],
+            processed
+        )
+
+    def testCommentsOutsideStructureAreRemoved(self):
+        command = import_from_wordpress.Command()
+        html = '&nbsp;<!--more-->    <p>This has a <!--more--> comment</p>'
+        processed = command.process_html_for_stream_field(html)
+
+        self.assertEqual(
+            [{'type': 'Paragraph', 'value': '<p>This has a  comment</p>'}],
+            processed
+        )
+
+    def testSimpleCommentsAreRemoved(self):
+        command = import_from_wordpress.Command()
+        html = '<p>This has a <!--more--> comment</p>'
+        processed = command.process_html_for_stream_field(html)
+
+        self.assertEqual(
+            [{'type': 'Paragraph', 'value': '<p>This has a  comment</p>'}],
+            processed
+        )
