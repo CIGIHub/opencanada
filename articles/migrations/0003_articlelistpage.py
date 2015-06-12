@@ -1,26 +1,25 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-import wagtail.wagtailcore.fields
 from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('core', '0001_initial'),
+        ('wagtailcore', '0015_add_more_verbose_names'),
+        ('articles', '0002_articlepage_excerpt'),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='LegacyArticlePage',
+            name='ArticleListPage',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('body', wagtail.wagtailcore.fields.RichTextField()),
-                ('excerpt', models.TextField()),
+                ('page_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='wagtailcore.Page')),
             ],
             options={
                 'abstract': False,
             },
+            bases=('wagtailcore.page',),
         ),
     ]

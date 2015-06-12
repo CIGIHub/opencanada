@@ -4,3 +4,4 @@ from . import models
 
 # Register your models here.
 admin.site.register(models.ArticlePage)
+admin.site.register(models.ArticleListPage)

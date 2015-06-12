@@ -11,6 +11,10 @@ from people import models as people_models
 from . import fields as article_fields
 
 
+class ArticleListPage(Page):
+    pass
+
+
 class ArticlePage(Page):
     subtitle = RichTextField(blank=True, default="")
     author = models.ForeignKey(
