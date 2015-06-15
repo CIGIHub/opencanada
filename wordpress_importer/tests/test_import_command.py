@@ -694,7 +694,8 @@ class TestCommandProcessHTLMForStreamField(TestCase, ImageCleanUp):
 
         self.assertEqual(
             [{'type': 'Paragraph', 'value': '<p>This is text.</p>'},
-             {'type': 'Paragraph', 'value': '<p>That should be in paragraphs.</p>'}],
+             {'type': 'Paragraph',
+              'value': '<p>That should be in paragraphs.</p>'}],
             processed
         )
 
@@ -705,7 +706,8 @@ class TestCommandProcessHTLMForStreamField(TestCase, ImageCleanUp):
 
         self.assertEqual(
             [{'type': 'Paragraph', 'value': '<p>This is text.</p>'},
-             {'type': 'Paragraph', 'value': '<p>That should be in paragraphs.</p>'}],
+             {'type': 'Paragraph',
+              'value': '<p>That should be in paragraphs.</p>'}],
             processed
         )
 
@@ -715,7 +717,8 @@ class TestCommandProcessHTLMForStreamField(TestCase, ImageCleanUp):
         processed = command.process_html_for_stream_field(html)
 
         self.assertEqual(
-            [{'type': 'Paragraph', 'value': '<p>This is text.<br/>That should be in paragraphs.</p>'}],
+            [{'type': 'Paragraph',
+              'value': '<p>This is text.<br/>That should be in paragraphs.</p>'}],
             processed
         )
 
