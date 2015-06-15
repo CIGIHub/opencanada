@@ -659,3 +659,73 @@ class TestCommandProcessHTLMForStreamField(TestCase, ImageCleanUp):
             [{'type': 'Paragraph', 'value': '<p>This has a  comment</p>'}],
             processed
         )
+
+    def testStringsWithNoTagsWithRNBreaks(self):
+        command = import_from_wordpress.Command()
+        html = "This is text.\r\n\r\nThat should be in paragraphs."
+        processed = command.process_html_for_stream_field(html)
+
+        self.assertEqual(
+            [{'type': 'Paragraph', 'value': '<p>This is text.</p>'},
+             {'type': 'Paragraph', 'value': '<p>That should be in paragraphs.</p>'}],
+            processed
+        )
+
+    def testStringsWithNoTagsWithNNBreaks(self):
+        command = import_from_wordpress.Command()
+        html = "This is text.\n\nThat should be in paragraphs."
+        processed = command.process_html_for_stream_field(html)
+
+        self.assertEqual(
+            [{'type': 'Paragraph', 'value': '<p>This is text.</p>'},
+             {'type': 'Paragraph', 'value': '<p>That should be in paragraphs.</p>'}],
+            processed
+        )
+
+    def testStringsWithNoTagsWithNBreaks(self):
+        command = import_from_wordpress.Command()
+        html = """This is text.\nThat should be in paragraphs."""
+        processed = command.process_html_for_stream_field(html)
+
+        self.assertEqual(
+            [{'type': 'Paragraph', 'value': '<p>This is text.<br/>That should be in paragraphs.</p>'}],
+            processed
+        )
+
+
+class TestProcessForLineBreaks(TestCase):
+    def testStringNoTags(self):
+        command = import_from_wordpress.Command()
+        html = "This is a string."
+        processed = command.process_for_line_breaks(html)
+        self.assertEqual("<p>This is a string.</p>", processed)
+
+    def testStringsWithNoTagsWithRNBreaks(self):
+        command = import_from_wordpress.Command()
+        html = "This is text.\r\n\r\nThat should be in paragraphs."
+        processed = command.process_for_line_breaks(html)
+
+        self.assertEqual(
+            "<p>This is text.</p><p>That should be in paragraphs.</p>",
+            processed
+        )
+
+    def testStringsWithNoTagsWithNNBreaks(self):
+        command = import_from_wordpress.Command()
+        html = "This is text.\n\nThat should be in paragraphs."
+        processed = command.process_for_line_breaks(html)
+
+        self.assertEqual(
+            "<p>This is text.</p><p>That should be in paragraphs.</p>",
+            processed
+        )
+
+    def testStringsWithNoTagsWithNBreaks(self):
+        command = import_from_wordpress.Command()
+        html = "This is text.\nThat has a line break."
+        processed = command.process_for_line_breaks(html)
+
+        self.assertEqual(
+            "<p>This is text.<br/>That has a line break.</p>",
+            processed
+        )
