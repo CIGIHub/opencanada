@@ -3,6 +3,7 @@ from __future__ import absolute_import, unicode_literals
 import argparse
 import getpass
 import json
+import re
 
 import MySQLdb
 import requests
@@ -196,6 +197,7 @@ class Command(BaseCommand):
 
     def process_html_for_stream_field(self, html):
         processed_html = []
+        html = self.process_for_line_breaks(html)
         html = self.process_html_for_images(html, use_image_names=True)
         parser = BeautifulSoup(html)
 
@@ -210,6 +212,12 @@ class Command(BaseCommand):
             processed_html.extend(self._process_base_element(html))
 
         return processed_html
+
+    def process_for_line_breaks(self, text):
+        line_splits = re.split('\r\n\r\n|\n\n', text)
+        line_splits = ["<p>{}</p>".format(x.replace('\n', '<br/>')) for x in line_splits]
+
+        return "".join(line_splits)
 
     def _process_element(self, html):
         processed_element = []
