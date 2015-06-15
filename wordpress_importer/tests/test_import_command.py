@@ -126,6 +126,33 @@ class TestCommandImportFromWordPressLoadContributors(TestCase, ImageCleanUp):
 
 
 @mock.patch('requests.get', local_get_successful)
+class TestCommandImportFromWordPressUnicodeSlug(TestCase, ImageCleanUp):
+    def setUp(self):
+        import_from_wordpress.Command.get_post_data = self.get_test_post_data
+
+    def tearDown(self):
+        self.delete_images()
+
+    def testCreatesPageWithAsciiSlug(self):
+        command = import_from_wordpress.Command()
+        command.load_posts()
+        pages = ArticlePage.objects.filter(
+            slug='crisis-at-home-for-canadas-armed-forces')
+        self.assertEqual(1, pages.count())
+
+    def get_test_post_data(self):
+        data = [
+            (1,
+             'Crisis At Home',
+             'Test?',
+             'Body.',
+             "crisis-at-home-for-canadas-armed-forces%e2%80%a8",
+             'bob@example.com',),
+        ]
+        return data
+
+
+@mock.patch('requests.get', local_get_successful)
 class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
     fixtures = ['test.json']
 

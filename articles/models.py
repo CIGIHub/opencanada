@@ -1,6 +1,7 @@
 from __future__ import absolute_import, unicode_literals
 
 from django.db import models
+from django.utils.encoding import python_2_unicode_compatible
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel
 from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailcore.models import Page
@@ -11,10 +12,13 @@ from people import models as people_models
 from . import fields as article_fields
 
 
+@python_2_unicode_compatible
 class ArticleListPage(Page):
-    pass
+    def __str__(self):
+        return self.title
 
 
+@python_2_unicode_compatible
 class ArticlePage(Page):
     subtitle = RichTextField(blank=True, default="")
     author = models.ForeignKey(
@@ -35,6 +39,8 @@ class ArticlePage(Page):
     )
     # TODO: specify date here or use wagtail page built in date?
 
+    def __str__(self):
+        return self.title
 
 ArticlePage.content_panels = Page.content_panels + [
     FieldPanel('subtitle'),

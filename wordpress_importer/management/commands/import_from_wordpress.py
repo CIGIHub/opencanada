@@ -21,8 +21,10 @@ from wordpress_importer.utils import get_setting
 
 try:
     from urlparse import urlparse
+    from urlparse import unquote
 except ImportError:
     from urllib.parse import urlparse
+    from urllib.parse import unquote
 
 
 class PasswordPromptAction(argparse.Action):
@@ -160,14 +162,17 @@ class Command(BaseCommand):
         for (post_id, post_content, post_title, post_excerpt, post_name,
              author_email) in results:
 
-            pages = ArticlePage.objects.filter(slug=post_name)
+            cleaned_post_name = unquote(post_name).encode('ascii', 'ignore')
+
+            pages = ArticlePage.objects.filter(slug=cleaned_post_name)
             if pages.count() > 0:
                 page = pages.first()
             else:
                 page = ArticlePage(owner=None)
                 features_page.add_child(instance=page)
 
-            page.slug = post_name
+            page.slug = cleaned_post_name
+
             if post_title:
                 page.title = post_title
             else:
