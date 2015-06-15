@@ -125,8 +125,13 @@ class Command(BaseCommand):
                 source = get_setting("USER_PHOTO_URL_PATTERN").format(
                     meta_value)
                 filename = meta_value
-                self.download_image(source, filename)
-                contributor.headshot = Image.objects.get(title=filename)
+                try:
+                    self.download_image(source, filename)
+                    contributor.headshot = Image.objects.get(title=filename)
+                except DownloadException:
+                    # TODO: log issue here
+                    pass
+
             contributor.save()
 
     def get_post_data(self):
@@ -309,9 +314,6 @@ class Command(BaseCommand):
     def process_html_for_images(self, html, use_image_names=False):
         parser = BeautifulSoup(html)
         image_tags = parser.find_all('img')
-
-        # TODO: check for existing image that is the same.  Maybe store the
-        # original urls and only download if it has not been processed before.
 
         for image_tag in image_tags:
             source = image_tag['src']
