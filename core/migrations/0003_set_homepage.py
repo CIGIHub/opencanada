@@ -9,8 +9,10 @@ def set_homepage(apps, schema_editor):
     HomePage = apps.get_model("core", "HomePage")
     homepage = HomePage.objects.get(slug="home")
 
+    Site.objects.filter(hostname='localhost').delete()
+
     # Create default site
-    Site.objects.create(
+    Site.objects.get_or_create(
         hostname='localhost',
         root_page_id=homepage.id,
         is_default_site=True
