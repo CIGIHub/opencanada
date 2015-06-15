@@ -26,6 +26,14 @@ class ArticlePage(Page):
     )
     body = article_fields.BodyField()
     excerpt = RichTextField(blank=True, default="")
+    main_image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+    # TODO: specify date here or use wagtail page built in date?
 
 
 ArticlePage.content_panels = Page.content_panels + [
