@@ -33,10 +33,13 @@
             {% include 'core/header.html' %}
         {% endblock %}
 
+        {% block homepage_feature %}
+            {% include 'core/homepage-feature.html' %}
+        {% endblock %}
 
-            <main role="main">
-                {% block content %}{% endblock %}
-            </main>
+        <main role="main">
+            {% block content %}{% endblock %}
+        </main>
 
 
         {% block footer %}

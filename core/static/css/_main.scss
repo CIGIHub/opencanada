@@ -12,7 +12,6 @@ h2{
   margin-top: 0px;
 }
 
-
 @media(min-width: $screen-md){
   h1, h2{
 
@@ -23,32 +22,36 @@ h2{
 /**************   HEADER  **************/
 
 header{
-
-  .tagline{
-    display:block;
-    background: $red;
-    color: white;
-    font-size: 0.83em;
-    font-family: $serif;
-    font-style: italic;
-    padding: 20px 0;
-    a{
-      color: white;
-      text-decoration: underline;
-    }
-  }
+  color: white;
+  background-color: $red;
+  //.tagline{
+  //  display:block;
+  //  background: $red;
+  //  color: white;
+  //  font-size: 0.83em;
+  //  font-family: $serif;
+  //  font-style: italic;
+  //  padding: 20px 0;
+  //  a{
+  //    color: white;
+  //    text-decoration: underline;
+  //  }
+  //}
 
   nav{
     &.navbar{
-      margin-top: 20px;
+      margin: 0;
+      padding: 10px 0;
+      position: relative;
     }
     .navbar-brand{
       height: auto;
+      padding: 15px 0;
       max-width: 50%;
     }
     .navbar-header button{
       font-size: 24px;
-      color: $red;
+      color: white;
       margin-top:2.5%;
     }
     .navbar-toggle{
@@ -59,7 +62,7 @@ header{
     }
     .share-links{
       i{
-        opacity: 0.3;
+        color: white;
         font-size: 1.4em;
         margin-right: 5px;
       }
@@ -68,12 +71,12 @@ header{
       margin-right: 10px;
     }
     .navbar-nav.menu > li > a{
-      @include type($red);
+      @include type(white);
       padding: 0px;
       font-size: 1.1em;
     }
     .navbar-nav.menu > li > a:after{
-      @include inline-divider(10px, 10px);
+      @include inline-divider(10px, 10px, white);
     }
     .navbar-nav.menu > li:last-child{
       a:after{
@@ -88,13 +91,13 @@ header{
 
   .featured-topics{
     display: block;
-    margin-bottom: 10px;
+    padding-bottom: 10px;
     h3{
       display:inline-block;
-      @include type($grey);
+      @include type(white);
       margin: 0 10px 0 0;
     }
-    @include inline-list-red;
+    @include inline-list(white);
   }
 
   @media(min-width: $screen-md){
@@ -177,11 +180,12 @@ footer{
     @include  centered-fixed-width(600px);
     text-align: center;
     @include type($grey);
-    @include inline-list-red;
+    @include inline-list($red);
   }
 }
 
 /**************   Homepage Feature  **************/
+
 
 .feature{
   position: relative;
@@ -193,8 +197,10 @@ footer{
     background-repeat: no-repeat;
     background-position: 50% 0;
     width: 100%;
-    height: 0;
-    min-height: 700px;
+
+  }
+
+  #features & .feature-image{
     padding-top: 66.65%;
   }
 

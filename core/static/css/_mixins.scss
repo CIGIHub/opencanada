@@ -5,11 +5,11 @@
     color: $color;
 }
 
-@mixin inline-divider($padding-left, $padding-right){
+@mixin inline-divider($padding-left, $padding-right, $color){
   padding-left: $padding-left;
   padding-right: $padding-right;
   content: '/';
-  color: $grey;
+  color: $color;
 }
 
 @mixin centered{
@@ -21,7 +21,7 @@
   max-width: $width;
 }
 
-@mixin inline-list-red{
+@mixin inline-list($color){
   ul{
       display: inline-block;
       margin: 0px;
@@ -31,10 +31,10 @@
     }
     ul li a{
       display: inline-block;
-      @include type($red);
+      @include type($color);
     }
     ul li a:after{
-      @include inline-divider(5px, 0px);
+      @include inline-divider(5px, 0px, $color);
     }
     ul li:last-child{
       a:after{
