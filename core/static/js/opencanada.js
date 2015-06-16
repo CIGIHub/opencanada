@@ -18,12 +18,20 @@ jQuery(document).ready(function($){
           }
         }
     });
+
+    //drop cap on articles
+
+    $('.story p').first().html(function (index, html) {
+        return '<span class="dropcap">' + html.slice(0, 1) + '</span>' + html.slice(1);
+    });
+
 });
 
 function setFeatureHeight(){
     var windowHeight = $(window).height();
     var bannerHeight = $('header').height();
-    var featureHeight = windowHeight - bannerHeight;
+    var tagsHeight = $('.featured-topics').height();
+    var featureHeight = windowHeight - bannerHeight - tagsHeight;
 
     $('.jumbotron .feature-image').css("height", featureHeight + "px");
 }

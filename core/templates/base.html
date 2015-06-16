@@ -31,16 +31,15 @@
         {% wagtailuserbar %}
         {% block header %}
             {% include 'core/header.html' %}
+            {% block featured-tags %}{% endblock %}
         {% endblock %}
 
-        {% block homepage_feature %}
-            {% include 'core/homepage-feature.html' %}
-        {% endblock %}
 
-        <main role="main">
+        {% block feature %}{% endblock %}
+
+        <main>
             {% block content %}{% endblock %}
         </main>
-
 
         {% block footer %}
             {% include 'core/footer.html' %}

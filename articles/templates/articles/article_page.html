@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static core_tags wagtailcore_tags wagtailimages_tags %}
+
+{% block content %}
+    <div class="container">
+        <article>
+
+            <div class="title centered">
+                <div class="tags">
+                    <div class="tag-icon"><i class="fa fa-tags"></i></div>
+                    <ul class="list-inline">
+                        <li><a href="#">R2P</a></li>
+                        <li><a href="#">Iraq</a></li>
+                    </ul>
+                </div>
+
+                <h1>{{ self.title }}</h1>
+                <h2>{{ self.subtitle|richtext }}</h2>
+
+                <div class="contributors">By: <a href="#">{{ self.author }}</a> {{ self.author.twitter_handle }}</div>
+                <div class="date"></div>
+            </div>
+            <figure>
+                <img src="{% static 'img/assets/R2P-at-10.png' %}">
+            </figure>
+
+            <div class="story">
+                {% for block in self.body %}
+                    <section class="block-{{ block.block_type }}">{{ block }}</section>
+                {% endfor %}
+            </div>
+        </article>
+    </div>
+
+
+{% endblock %}

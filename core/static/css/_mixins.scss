@@ -1,6 +1,6 @@
 @mixin type($color){
     font-family: $sans-serif;
-    font-size: 0.9em;
+    font-size: 12px;
     text-transform: uppercase;
     color: $color;
 }

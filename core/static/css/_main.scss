@@ -8,7 +8,7 @@ h1{
   font-size: 36px;
 }
 h2{
-  font-size: 24px;
+  font-size: 18px;
   margin-top: 0px;
 }
 
@@ -16,7 +16,10 @@ h2{
   h1, h2{
 
   }
+}
 
+img{
+  @include img-responsive;
 }
 
 /**************   HEADER  **************/
@@ -24,19 +27,6 @@ h2{
 header{
   color: white;
   background-color: $red;
-  //.tagline{
-  //  display:block;
-  //  background: $red;
-  //  color: white;
-  //  font-size: 0.83em;
-  //  font-family: $serif;
-  //  font-style: italic;
-  //  padding: 20px 0;
-  //  a{
-  //    color: white;
-  //    text-decoration: underline;
-  //  }
-  //}
 
   nav{
     &.navbar{
@@ -89,7 +79,20 @@ header{
     }
   }
 
-  .featured-topics{
+  @media(min-width: $screen-md){
+    nav .navbar-brand{
+      max-width: 100%;
+    }
+  }
+
+  @media(max-width: $screen-sm){
+    .tagline{display: none}
+    .navbar{margin-bottom: 0px;}
+  }
+}
+
+.featured-topics{
+    background: $red;
     display: block;
     padding-bottom: 10px;
     h3{
@@ -98,20 +101,10 @@ header{
       margin: 0 10px 0 0;
     }
     @include inline-list(white);
-  }
-
-  @media(min-width: $screen-md){
-    nav .navbar-brand{
-      max-width: 100%;
-    }
-  }
-
-  @media(max-width: $screen-sm){
-    .featured-topics, .tagline{display: none}
-    .navbar{margin-bottom: 0px;}
-  }
 }
-
+@media(max-width: $screen-sm){
+      .featured-topics{display: none}
+    }
 /**************   FOOTER  **************/
 
 footer{
@@ -230,7 +223,7 @@ footer{
     .feature-line{
       font-size: 1.4em;
     }
-    .author{
+    .contributors{
       margin-top: 5%;
       font-family: $sans-serif;
       @include type($white);
@@ -265,7 +258,7 @@ footer{
 
 }
 
-/**************   Main  **************/
+/**************  Main  **************/
 
 .boxes{
   margin-bottom: 20px;
@@ -301,5 +294,51 @@ footer{
   }
   a{
     color: $text-color;
+  }
+}
+
+/**************  Article  **************/
+
+article{
+  h1, h2{
+    margin: 0 0 20px 0;
+  }
+  .title, .story{
+    padding: 40px 75px 10px 75px;
+  }
+
+  .contributors{
+    @include type(#000);
+  }
+  .contributors a{
+    @include type($red);
+  }
+
+  .tags{
+    display: block;
+    .tag-icon{
+      color: $red;
+      display: inline-block;
+      @include type($red);
+    }
+    @include inline-list($red);
+  }
+
+  .dropcap{
+    color: $red;
+    font-size: 65px;
+    line-height: 55px;
+    margin-right: 10px;
+    font-family: $sans-serif;
+    float: left;
+  }
+
+  .block-Sharable{
+    margin: 20px;
+    padding-left: 20px;
+    border-left: solid $red 5px;
+    font-size: 26px;
+    line-height: 120%;
+    color: $red;
   }
 }

@@ -4,31 +4,38 @@
 
 {% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
 
+{% block featured-tags %}
+    {% include 'core/featured-tags.html' %}
+{% endblock %}
+
+{% block feature %}
+    {% include 'core/homepage-feature.html' %}
+{% endblock %}
+
+
 {% block content %}
-
-
 
     <div class="container boxes" id="features">
         <div class="row double">
             <div class="col-sm-6">
                 <h2>Tennis and Diplomacy: Do Winners Need to Take All?</h2>
-                <div class="author">By: <a href="#">Jeremy Kinsman</a></div>
+                <div class="contributors">By: <a href="#">Jeremy Kinsman</a></div>
                 <div class="teaser">The Federation Cup is an international tennis competition for women professionals, the rough equivalent of the Davis Cup for men, in which countries compete as national teams. For once, Canada has been considered a rising force to be reckoned with, principally because of Eugenie Bouchard, the 21-year old beauty from Westmount, Quebec, whose break-out year in 2014 shot her to the Wimbledon final, the semi-finals of two other Grand Slams, and status of media darling before whom endorsements dangled. As she herself recently bragged, she has become a brand.</div>
             </div>
             <div class="col-sm-6">
-                <img src="{% static 'img/assets/tennis-diplomacy.png' %}" class="img-responsive">
+                <img src="{% static 'img/assets/tennis-diplomacy.png' %}">
             </div>
         </div>
         <div class="row single">
             <div class="col-sm-6">
                 <h2>The Crisis in Yemen: Let's Listen to the Yemini People</h2>
-                <div class="author">By: <a href="#">Anthony Billingsley</a></div>
+                <div class="contributors">By: <a href="#">Anthony Billingsley</a></div>
                 <div class="teaser">Obama was referring to US drone attacks against suspected terrorists in Yemen, despite evidence that this was driving people into the arms of Al-Qaida in the Arabian Peninsula and other radical groups. The policy has culminated in attacks by Saudi Arabia and some Gulf allies on the Houthis, the tribal group that has overrun much of Yemen. Some policy. Some success. </div>
 
             </div>
             <div class="col-sm-6">
                 <h2>Road map for Canada: A foreign policy for the future</h2>
-                <div class="author">By: <a href="#">Roland Paris</a> (<a href="#"><span>@</span>rolandparis</a>)</div>
+                <div class="contributors">By: <a href="#">Roland Paris</a> (<a href="#"><span>@</span>rolandparis</a>)</div>
                 <div class="teaser">Obama was referring to US drone attacks against suspected terrorists in Yemen, despite evidence that this was driving people into the arms of Al-Qaida in the Arabian Peninsula and other radical groups. The policy has culminated in attacks by Saudi Arabia and some Gulf allies on the Houthis, the tribal group that has overrun much of Yemen. Some policy. Some success. </div>
 
             </div>
@@ -41,7 +48,7 @@
         <div class="feature-text">
             <h1>Who Knows What Evils Lurk in the Shadows?</h1>
             <div class="feature-line">The story of the powerful spy agency most Canadians still don't know, and the security bill that would expand its resources and reach.</div>
-            <div class="author">By: Ron Deirbert (<a href="https://twitter.com/@rondeibert"><span>@</span>rondeibert</a>)</div>
+            <div class="contributors">By: Ron Deirbert (<a href="https://twitter.com/@rondeibert"><span>@</span>rondeibert</a>)</div>
         </div>
         <div class="image-caption"><i class="fa fa-camera"></i> Illustration by Abhilasha Dewan</div>
             </div>
