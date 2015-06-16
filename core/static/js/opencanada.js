@@ -29,10 +29,18 @@ jQuery(document).ready(function($){
 
 function setFeatureHeight(){
     var windowHeight = $(window).height();
+    var windowWidth = $(window).width();
+
     var bannerHeight = $('header').height();
     var tagsHeight = $('.featured-topics').height();
     var featureHeight = windowHeight - bannerHeight - tagsHeight;
 
+    if(windowWidth > 768){
+        var featureHeight = windowHeight - bannerHeight - tagsHeight;
+    }
+    else{
+        var featureHeight = windowHeight - bannerHeight;
+    }
     $('.jumbotron .feature-image').css("height", featureHeight + "px");
 }
 

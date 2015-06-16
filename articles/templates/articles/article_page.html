@@ -4,9 +4,8 @@
 {% block content %}
     <div class="container">
         <article>
-
             <div class="title centered">
-                <div class="tags">
+                <div class="topics main">
                     <div class="tag-icon"><i class="fa fa-tags"></i></div>
                     <ul class="list-inline">
                         <li><a href="#">R2P</a></li>
@@ -17,19 +16,36 @@
                 <h1>{{ self.title }}</h1>
                 <h2>{{ self.subtitle|richtext }}</h2>
 
-                <div class="contributors">By: <a href="#">{{ self.author }}</a> {{ self.author.twitter_handle }}</div>
+                <div class="contributors">By: <a href="#">{{ self.author }}</a> <span>@</span>{{ self.author.twitter_handle }}</div>
                 <div class="date"></div>
             </div>
             <figure>
                 <img src="{% static 'img/assets/R2P-at-10.png' %}">
             </figure>
+            <ul class="share-links">
+                <li><span class="facebook-share-link" data-url="{{ self.url }}"><i class="fa fa-facebook"></i></span></li>
+                <li><a href="https://twitter.com/share?text={{ self.title }}"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="javascript:window.print()"><i class="fa fa-print"></i></a></li>
+                <li><a HREF="mailto:?subject={{ self }}&body={{ self.url }}"><i class="fa fa-envelope"></i></a></li>
+            </ul>
+            <div class="story">{{ self.body }}</div>
 
-            <div class="story">
-                {% for block in self.body %}
-                    <section class="block-{{ block.block_type }}">{{ block }}</section>
-                {% endfor %}
-            </div>
+            <div class="topics related">
+                    <div class="tag-icon"><i class="fa fa-tags"></i> Topics:</div>
+                    <ul class="list-inline">
+                        <li><a href="#">R2P</a></li>
+                        <li><a href="#">Iraq</a></li>
+                    </ul>
+                </div>
         </article>
+
+        {% block in_the_series %}
+            {% include 'articles/in_the_series.html' %}
+        {% endblock %}
+
+        {% block related_articles %}
+            {% include 'articles/related_articles.html' %}
+        {% endblock %}
     </div>
 
 

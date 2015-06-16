@@ -16,6 +16,10 @@
   margin: 0 auto;
 }
 
+@mixin gutter($top:0px, $bottom:0px){
+  padding: $top 75px $bottom 75px;
+}
+
 @mixin centered-fixed-width($width){
   @include centered;
   max-width: $width;
