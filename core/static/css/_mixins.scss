@@ -37,6 +37,10 @@
       display: inline-block;
       @include type($color);
     }
+    ul li a:hover,
+    ul li a:active{
+      text-decoration: none;
+    }
     ul li a:after{
       @include inline-divider(5px, 0px, $color);
     }

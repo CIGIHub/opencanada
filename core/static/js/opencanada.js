@@ -1,5 +1,7 @@
 jQuery(document).ready(function($){
 
+    setFeatureHeight();
+
     $('.fa-camera').click(function(){
         $('.feature-text').fadeToggle();
         $('.feature-image-overlay').fadeToggle();
@@ -41,14 +43,11 @@ function setFeatureHeight(){
     else{
         var featureHeight = windowHeight - bannerHeight;
     }
-    $('.jumbotron .feature-image').css("height", featureHeight + "px");
+    $('.jumbotron.feature').css("height", featureHeight + "px");
 }
 
 $(window).resize(function(){
     setFeatureHeight();
 });
 
-$(window).load(function(){
-    setFeatureHeight();
-});
 

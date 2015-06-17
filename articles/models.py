@@ -47,7 +47,7 @@ ArticlePage.content_panels = Page.content_panels + [
     SnippetChooserPanel('author', people_models.Contributor),
     StreamFieldPanel('body'),
 ]
-#
+
 # class InDepthArticleLink(models.Model):
 #     image = models.ForeignKey(
 #         'wagtailimages.Image',
@@ -74,7 +74,7 @@ ArticlePage.content_panels = Page.content_panels + [
 #         ImageChooserPanel("image"),
 #         PageChooserPanel("article", 'core.ArticlePage')
 #     ]
-#
+
 #
 # class InDepthPage(Page):
 #     intro = RichTextField(blank=True, default="")

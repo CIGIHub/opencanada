@@ -5,23 +5,11 @@
     <div class="container">
         <article>
             <div class="title centered">
-                <div class="topics main">
-                    <div class="tag-icon"><i class="fa fa-tags"></i></div>
-                    <ul class="list-inline">
-                        <li><a href="#">R2P</a></li>
-                        <li><a href="#">Iraq</a></li>
-                    </ul>
-                </div>
-
+                <div class="type">In Depth</div>
                 <h1>{{ self.title }}</h1>
                 <h2>{{ self.subtitle|richtext }}</h2>
-
-                <div class="contributors">By: <a href="#">{{ self.author }}</a> (<span>@</span>{{ self.author.twitter_handle }})</div>
-                <div class="date"> / May 4, 2015</div>
+                <div class="contributors">Series Contributors: <a href="#">{{ self.author }}</a> <span>@</span>{{ self.author.twitter_handle }}</div>
             </div>
-            <figure>
-                <img src="{% static 'img/assets/R2P-at-10.png' %}">
-            </figure>
             <ul class="share-links">
                 <li><span class="facebook-share-link" data-url="{{ self.url }}"><i class="fa fa-facebook"></i></span></li>
                 <li><a href="https://twitter.com/share?text={{ self.title }}"><i class="fa fa-twitter"></i></a></li>
@@ -29,6 +17,10 @@
                 <li><a HREF="mailto:?subject={{ self }}&body={{ self.url }}"><i class="fa fa-envelope"></i></a></li>
             </ul>
             <div class="story">{{ self.body }}</div>
+
+            {% block in_the_series %}
+                {% include 'articles/in_the_series.html' %}
+            {% endblock %}
 
             <div class="topics related">
                     <div class="tag-icon"><i class="fa fa-tags"></i> Topics:</div>
@@ -38,10 +30,6 @@
                     </ul>
                 </div>
         </article>
-
-        {% block in_the_series %}
-            {% include 'articles/in_the_series.html' %}
-        {% endblock %}
 
         {% block related_articles %}
             {% include 'articles/related_articles.html' %}
