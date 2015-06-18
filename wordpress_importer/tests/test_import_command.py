@@ -443,10 +443,26 @@ class TestCommandImportDownloadImage(TestCase, ImageCleanUp):
     @mock.patch('requests.get', local_get_404)
     def testDownloadExceptionWhenError(self):
         command = import_from_wordpress.Command()
-        self.assertRaises(import_from_wordpress.DownloadException,
-                          command.download_image,
-                          'file:///{}/wordpress_importer/tests/files/purple.jpg'.format(
-                              settings.PROJECT_ROOT), 'purple.jpg')
+        with self.assertRaises(import_from_wordpress.DownloadException):
+            command.download_image(
+                'file:///{}/wordpress_importer/tests/files/purple.jpg'.format(
+                    settings.PROJECT_ROOT),
+                'purple.jpg'
+            )
+
+    @mock.patch('requests.get', local_get_404)
+    def testDownloadExceptionHasDetails(self):
+        command = import_from_wordpress.Command()
+        try:
+            command.download_image(
+                'file:///{}/wordpress_importer/tests/files/purple.jpg'.format(
+                    settings.PROJECT_ROOT),
+                'purple.jpg'
+            )
+        except import_from_wordpress.DownloadException as e:
+            self.assertEqual('file:///{}/wordpress_importer/tests/files/purple.jpg'.format(
+                    settings.PROJECT_ROOT), e.url)
+            self.assertEqual(e.response.status_code, 404)
 
     @mock.patch('requests.get', local_get_successful)
     def testImageImportRecordCreatedWhenDownloaded(self):

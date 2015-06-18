@@ -360,7 +360,7 @@ class Command(BaseCommand):
                     original_url=url, name=image.title)
                 image_record.save()
             else:
-                raise DownloadException()
+                raise DownloadException(url, response)
 
         if use_image_names:
             updated_source_url = image.title
@@ -375,5 +375,6 @@ class Command(BaseCommand):
 
 
 class DownloadException(Exception):
-    pass
-    # TODO: make this include useful information like the url and the response info
+    def __init__(self, url, response):
+        self.url = url
+        self.response = response
