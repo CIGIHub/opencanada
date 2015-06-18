@@ -7,7 +7,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('wagtailcore', '0001_squashed_0016_change_page_url_path_to_text_field'),
+        ('wagtailcore', '__latest__'),
         ('articles', '0006_auto_20150618_1750'),
     ]
 
