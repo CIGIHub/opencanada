@@ -15,7 +15,7 @@ class BodyField(StreamField):
             ('Embed', EmbedBlock(icon="site")),
             ('List', blocks.ListBlock(blocks.RichTextBlock(label="item"), icon="list-ul")),
             ('Sharable', SharableBlock()),
-            # TODO: do we want to have the author blurb placed by the editor or algorithmically placed?
+            ('AuthorBlurb', AuthorBlurbBlock()),
         ]
 
         super(BodyField, self).__init__(block_types, **kwargs)
@@ -25,3 +25,9 @@ class SharableBlock(blocks.CharBlock):
     class Meta:
         template = "articles/blocks/sharable.html"
         icon = "openquote"
+
+
+class AuthorBlurbBlock(blocks.CharBlock):
+    class Meta:
+        template = "articles/blocks/author_blurb.html"
+        icon = "user"
