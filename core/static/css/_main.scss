@@ -67,6 +67,11 @@ header{
       content: '/';
       padding-left: 5px;
     }
+    .navbar-nav.menu > li:last-child{
+      a:after{
+        content: '';
+      }
+    }
 
     .navbar-nav.menu > li > a{
       @include type(white);
@@ -132,7 +137,11 @@ header{
 /**************   FOOTER  **************/
 
 footer{
-  background: $background-grey;
+  color: white;
+  a{
+    color: white;
+  }
+  background: $red;
   padding-bottom: 40px;
 
   .row{
@@ -140,16 +149,19 @@ footer{
   }
 
   .newsletter{
-    border-bottom: $border-grey;
+    border-bottom: white 1px solid;
     margin-bottom: 20px;
   }
   .newsletter-form{
     @include centered-fixed-width(600px);
-    font-family: $serif;
     font-weight: normal;
     font-size: 1.0em;
 
     #mc_embed_signup{
+      font-family: $sans-serif;
+      form{
+        padding: 0px;
+      }
       .form-control{
         display: inline-block;
         width: 60%;
@@ -162,19 +174,17 @@ footer{
       }
       input{
         display: inline-block;
-        border-color: $red;
       }
 
       .button{
         width: 25%;
-        font-weight: normal;
-        background-color: $red;
+        background-color: white;
+        color: $red;
         text-transform: uppercase;
       }
       .email{
         padding: 6px 12px;
         font-style: italic;
-        font-family: $sans-serif;
       }
     }
   }
@@ -196,8 +206,7 @@ footer{
   .contact{
     @include  centered-fixed-width(600px);
     text-align: center;
-    @include type($grey);
-    @include inline-list($red);
+    @include type(white);
   }
 }
 
