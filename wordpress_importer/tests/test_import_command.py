@@ -460,7 +460,8 @@ class TestCommandImportDownloadImage(TestCase, ImageCleanUp):
                 'purple.jpg'
             )
         except import_from_wordpress.DownloadException as e:
-            self.assertEqual('file:///{}/wordpress_importer/tests/files/purple.jpg'.format(
+            self.assertEqual(
+                'file:///{}/wordpress_importer/tests/files/purple.jpg'.format(
                     settings.PROJECT_ROOT), e.url)
             self.assertEqual(e.response.status_code, 404)
 
