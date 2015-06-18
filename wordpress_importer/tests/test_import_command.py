@@ -191,7 +191,7 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
         pages = ArticlePage.objects.filter(
             slug='is-nato-ready-for-putin')
         self.assertEqual(
-            [("Paragraph", "<p>Vladimir Putin has challenged</p>"), ],
+            [{'type': "Paragraph", 'value': "<p>Vladimir Putin has challenged</p>"}, ],
             pages.first().body.stream_data)
 
     # TODO: various aspects of setting body:  long
@@ -212,12 +212,12 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
         self.assertEqual('The excerpt also has some <strong>HTML</strong>.',
                          pages.first().excerpt)
         self.assertEqual(
-            [("Paragraph", '<p>This <strong>is</strong></p>'),
-             ("Paragraph",
-              '<p><img src="http://www.example.com/test.jpg"/></p>'),
-             ("Paragraph",
-              '<p>a <a href="http://www.example.com">post</a><span class="special">that has html</span></p>'),
-             ("Paragraph", '<p>Yay!</p>'), ],
+            [{"type": "Paragraph", "value": '<p>This <strong>is</strong></p>'},
+             {"type": "Paragraph",
+              "value": '<p><img src="http://www.example.com/test.jpg"/></p>'},
+             {"type": "Paragraph",
+              "value": '<p>a <a href="http://www.example.com">post</a><span class="special">that has html</span></p>'},
+             {"type": "Paragraph", "value": '<p>Yay!</p>'}, ],
             pages.first().body.stream_data)
 
     def testPageUpdatesLocalImageUrls(self):
@@ -228,8 +228,8 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
         images = Image.objects.filter(title='testcat.jpg')
 
         self.assertEqual(
-            [('Image', images.first()),
-             ("Paragraph", "<p>a cat</p>"),
+            [{'type': 'Image', 'value': images.first().id},
+             {'type': "Paragraph", 'value': "<p>a cat</p>"},
              ],
             pages.first().body.stream_data)
 
@@ -443,10 +443,27 @@ class TestCommandImportDownloadImage(TestCase, ImageCleanUp):
     @mock.patch('requests.get', local_get_404)
     def testDownloadExceptionWhenError(self):
         command = import_from_wordpress.Command()
-        self.assertRaises(import_from_wordpress.DownloadException,
-                          command.download_image,
-                          'file:///{}/wordpress_importer/tests/files/purple.jpg'.format(
-                              settings.PROJECT_ROOT), 'purple.jpg')
+        with self.assertRaises(import_from_wordpress.DownloadException):
+            command.download_image(
+                'file:///{}/wordpress_importer/tests/files/purple.jpg'.format(
+                    settings.PROJECT_ROOT),
+                'purple.jpg'
+            )
+
+    @mock.patch('requests.get', local_get_404)
+    def testDownloadExceptionHasDetails(self):
+        command = import_from_wordpress.Command()
+        try:
+            command.download_image(
+                'file:///{}/wordpress_importer/tests/files/purple.jpg'.format(
+                    settings.PROJECT_ROOT),
+                'purple.jpg'
+            )
+        except import_from_wordpress.DownloadException as e:
+            self.assertEqual(
+                'file:///{}/wordpress_importer/tests/files/purple.jpg'.format(
+                    settings.PROJECT_ROOT), e.url)
+            self.assertEqual(e.response.status_code, 404)
 
     @mock.patch('requests.get', local_get_successful)
     def testImageImportRecordCreatedWhenDownloaded(self):
