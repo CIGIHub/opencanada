@@ -7,7 +7,7 @@ from wagtail.wagtailadmin.edit_handlers import (FieldPanel, InlinePanel,
                                                 PageChooserPanel,
                                                 StreamFieldPanel)
 from wagtail.wagtailcore.fields import RichTextField
-from wagtail.wagtailcore.models import Page
+from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 
@@ -63,15 +63,24 @@ class InDepthListPage(Page):
         return self.title
 
 
-class InDepthArticleLink(models.Model):
-    image = models.ForeignKey(
+class InDepthArticleLink(Orderable, models.Model):
+    override_image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
-        related_name='+'
+        related_name='+',
+        help_text="This field is optional. If not provided, the image will be "
+                  "pulled from the article page automatically. This field "
+                  "allows you to override the automatic image."
     )
-    text = RichTextField()
+    override_text = RichTextField(
+        blank=True,
+        default="",
+        help_text="This field is optional. If not provided, the text will be "
+                  "pulled from the article page automatically. This field "
+                  "allows you to override the automatic text."
+    )
     article = models.ForeignKey(
         "ArticlePage",
         null=True,
@@ -85,9 +94,10 @@ class InDepthArticleLink(models.Model):
     )
 
     panels = [
-        FieldPanel("text"),
-        ImageChooserPanel("image"),
-        PageChooserPanel("article", 'articles.ArticlePage')
+        PageChooserPanel("article", 'articles.ArticlePage'),
+        FieldPanel("override_text"),
+        ImageChooserPanel("override_image"),
+
     ]
 
 
