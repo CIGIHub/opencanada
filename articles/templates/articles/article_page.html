@@ -2,7 +2,7 @@
 {% load static core_tags wagtailcore_tags wagtailimages_tags %}
 
 {% block content %}
-    <div class="container">
+    <div class="container article-page">
         <article>
             <div class="title centered">
                 <div class="topics main">
@@ -16,7 +16,7 @@
                 <h1>{{ self.title }}</h1>
                 <h2>{{ self.subtitle|richtext }}</h2>
 
-                <div class="contributors">By: <a href="#">{{ self.author }}</a> (<span>@</span>{{ self.author.twitter_handle }})</div>
+                <div class="contributors">By: <a href="#">{{ self.author.first_name }} {{ self.author.last_name }}</a> (<span>@</span>{{ self.author.twitter_handle }})</div>
                 <div class="date"> / May 4, 2015</div>
             </div>
             <figure>
@@ -28,7 +28,11 @@
                 <li><a href="javascript:window.print()"><i class="fa fa-print"></i></a></li>
                 <li><a HREF="mailto:?subject={{ self }}&body={{ self.url }}"><i class="fa fa-envelope"></i></a></li>
             </ul>
-            <div class="story">{{ self.body }}</div>
+            <div class="story">
+                {{ self.body }}
+                <div class="home-link"><a href="/"><img src="{% static 'img/opencanada-mark.png' %}"></a></div>
+            </div>
+
 
             <div class="topics related">
                     <div class="tag-icon"><i class="fa fa-tags"></i> Topics:</div>
@@ -39,9 +43,11 @@
                 </div>
         </article>
 
-        {% block in_the_series %}
-            {% include 'articles/in_the_series.html' %}
-        {% endblock %}
+        {% with heading_text='Also in the series' %}
+                {% block in_the_series %}
+                    {% include 'articles/in_the_series.html' %}
+                {% endblock %}
+            {% endwith %}
 
         {% block related_articles %}
             {% include 'articles/related_articles.html' %}

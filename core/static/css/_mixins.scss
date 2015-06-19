@@ -25,7 +25,7 @@
   max-width: $width;
 }
 
-@mixin inline-list($color){
+@mixin inline-list($color, $divider-color:$color){
   ul{
       display: inline-block;
       margin: 0px;
@@ -42,7 +42,7 @@
       text-decoration: none;
     }
     ul li a:after{
-      @include inline-divider(5px, 0px, $color);
+      @include inline-divider(5px, 0px, $divider-color);
     }
     ul li:last-child{
       a:after{

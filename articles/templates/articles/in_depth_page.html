@@ -2,25 +2,27 @@
 {% load static core_tags wagtailcore_tags wagtailimages_tags %}
 
 {% block content %}
-    <div class="container">
+    <div class="container in-depth-page">
         <article>
-            <div class="title centered">
-                <div class="type">In Depth</div>
-                <h1>{{ self.title }}</h1>
-                <h2>{{ self.subtitle|richtext }}</h2>
-                <div class="contributors">Series Contributors: <a href="#">{{ self.author }}</a> <span>@</span>{{ self.author.twitter_handle }}</div>
-            </div>
             <ul class="share-links">
                 <li><span class="facebook-share-link" data-url="{{ self.url }}"><i class="fa fa-facebook"></i></span></li>
                 <li><a href="https://twitter.com/share?text={{ self.title }}"><i class="fa fa-twitter"></i></a></li>
                 <li><a href="javascript:window.print()"><i class="fa fa-print"></i></a></li>
                 <li><a HREF="mailto:?subject={{ self }}&body={{ self.url }}"><i class="fa fa-envelope"></i></a></li>
             </ul>
+            <div class="title centered">
+                <div class="type">In Depth</div>
+                <h1>{{ self.title }}</h1>
+                <h2>{{ self.subtitle|richtext }}</h2>
+                <div class="contributors">Series Contributors: <a href="#">{{ self.author }}</a></div>
+            </div>
             <div class="story">{{ self.body }}</div>
 
-            {% block in_the_series %}
-                {% include 'articles/in_the_series.html' %}
-            {% endblock %}
+            {% with heading_text='In the series' %}
+                {% block in_the_series %}
+                    {% include 'articles/in_the_series.html' %}
+                {% endblock %}
+            {% endwith %}
 
             <div class="topics related">
                     <div class="tag-icon"><i class="fa fa-tags"></i> Topics:</div>

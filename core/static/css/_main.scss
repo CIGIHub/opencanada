@@ -321,18 +321,19 @@ footer{
 
 .contributors{
   @include type($text-color);
+  a{
+    color: $text_color;
+  }
   span{
     color: $twitter_blue;
   }
-  a{
-    color: $text-color;
-  }
+
 }
 
 /**************  Article  **************/
 
 main{
-  .contributors a, .date{
+  .date{
     @include type(#000);
   }
 }
@@ -344,7 +345,9 @@ article{
   .contributors, .date{
     display:inline-block;
   }
-
+  .contributors a{
+    color: $red;
+  }
   h1, h2{
     margin: 0 0 20px 0;
   }
@@ -355,14 +358,16 @@ article{
     @include gutter(0px, 20px);
   }
 
+  .type{
+    @include type($red);
+  }
   .topics{
     display: block;
     .tag-icon{
-      color: $red;
       display: inline-block;
-      @include type($red);
+      @include type($text_color);
     }
-    @include inline-list($red);
+    @include inline-list($red, $text_color);
   }
 
   ul.share-links{
@@ -407,6 +412,25 @@ article{
       text-align: right;
     }
   }
+  .home-link{
+    text-align: center;
+    img{
+      display: inline-block;
+    }
+  }
+}
+
+.in-depth-page{
+  article{
+    .story{
+      @include gutter(0px, 20px);
+      border-bottom: $border-grey;
+    }
+    ul.share-links {
+      margin-top: 40px;
+    }
+  }
+
 }
 
 .in-the-series, .related-articles{
@@ -431,7 +455,6 @@ article{
     @include gutter(0, 20px);
   }
 }
-
 
 .related-articles{
   h3{
