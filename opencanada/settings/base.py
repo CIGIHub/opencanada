@@ -39,7 +39,7 @@ DEBUG = True
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [get_env_variable('ALLOWED_HOSTS')]
 
 
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
