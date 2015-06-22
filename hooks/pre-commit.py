@@ -11,7 +11,7 @@ from isort.hooks import git_hook as isort_hook
 # For example, to set the complexity, you'll need to do:
 #   git config flake8.complexity 10
 COMPLEXITY = get_git_param('FLAKE8_COMPLEXITY', 10)
-STRICT = get_git_param('FLAKE8_STRICT', False)
+STRICT = get_git_param('FLAKE8_STRICT', True)
 IGNORE = get_git_param('FLAKE8_IGNORE', None)
 LAZY = get_git_param('FLAKE8_LAZY', False)
 
