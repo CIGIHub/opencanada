@@ -1,4 +1,10 @@
 -r base.txt
 
+# For coverage and PEP8 linting
+coverage>=3.7.0
+flake8>=2.2.0
+
+# Required for running the tests
+mock>=1.0.0
+
 isort
-flake8

@@ -1,1 +1,8 @@
 -r base.txt
+
+django-storages==1.1.8
+boto==2.38.0
+
+psycopg2==2.5.2
+
+raven
