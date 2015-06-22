@@ -37,7 +37,7 @@ DATABASES = {
         'PASSWORD': get_env_variable('DB_PASSWORD'),
         'HOST': get_env_variable('DB_HOST'),
         'PORT': get_env_variable('DB_PORT'),
-        'CONN_MAX_AGE': 600,  # number of seconds database connections should persist for
+        'CONN_MAX_AGE': 600,
     }
 }
 
@@ -46,7 +46,7 @@ RAVEN_CONFIG = {
 }
 
 INSTALLED_APPS = INSTALLED_APPS + (
-  'raven.contrib.django.raven_compat',
+    'raven.contrib.django.raven_compat',
 )
 
 FAVICON_PATH = STATIC_URL + 'images/favicon.png'
