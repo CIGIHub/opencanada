@@ -348,6 +348,15 @@ article{
   .contributors a{
     color: $red;
   }
+  .contributor{
+    display: inline-block;
+  }
+  .contributor:after{
+    content: ', ';
+  }
+  .contributor:last-child:after{
+    content: '';
+  }
   h1, h2{
     margin: 0 0 20px 0;
   }

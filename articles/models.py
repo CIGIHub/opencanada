@@ -2,6 +2,7 @@ from __future__ import absolute_import, unicode_literals
 
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
+from django.utils.timezone import now
 from modelcluster.fields import ParentalKey
 from wagtail.wagtailadmin.edit_handlers import (FieldPanel, InlinePanel,
                                                 PageChooserPanel,
@@ -19,6 +20,14 @@ from . import fields as article_fields
 @python_2_unicode_compatible
 class ArticleListPage(Page):
     subpage_types = ['ArticlePage']
+
+    @property
+    def subpages(self):
+        # Get list of live event pages that are descendants of this page
+        today = now().date()
+        subpages = ArticlePage.objects.live().descendant_of(self).order_by('-first_published_at')
+
+        return subpages
 
     def __str__(self):
         return self.title
@@ -52,12 +61,22 @@ ArticlePage.content_panels = Page.content_panels + [
     FieldPanel('subtitle'),
     SnippetChooserPanel('author', people_models.Contributor),
     StreamFieldPanel('body'),
+    FieldPanel('excerpt'),
+    ImageChooserPanel('main_image'),
 ]
 
 
 @python_2_unicode_compatible
 class InDepthListPage(Page):
     subpage_types = ['InDepthPage']
+
+    @property
+    def subpages(self):
+        # Get list of live event pages that are descendants of this page
+        today = now().date()
+        subpages = InDepthPage.objects.live().descendant_of(self).order_by('-first_published_at')
+
+        return subpages
 
     def __str__(self):
         return self.title

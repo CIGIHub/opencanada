@@ -19,6 +19,7 @@ urlpatterns = [
     url(r'^documents/', include(wagtaildocs_urls)),
 
     url(r'', include(wagtail_urls)),
+    url(r'^', include('favicon.urls')),
 ]
 
 

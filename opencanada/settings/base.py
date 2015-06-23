@@ -74,6 +74,7 @@ INSTALLED_APPS = (
     'wagtail.wagtailforms',
     'wagtail.contrib.wagtailstyleguide',
 
+    'favicon',
 
     'core',
     'basic_site',
@@ -186,3 +187,5 @@ WAGTAIL_SITE_NAME = "opencanada"
 
 # Whether to use face/feature detection to improve image cropping - requires OpenCV
 WAGTAILIMAGES_FEATURE_DETECTION_ENABLED = False
+
+FAVICON_PATH = STATIC_URL + 'img/favicon.png'

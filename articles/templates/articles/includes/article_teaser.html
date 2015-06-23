@@ -1,0 +1,19 @@
+{% load static core_tags wagtailcore_tags wagtailimages_tags %}
+
+<article class="row">
+    <div class="col-xs-2">
+        <figure>
+                <img src="{% static 'img/assets/series-article.png' %}">
+            </figure>
+    </div>
+    <div class="col-xs-10">
+            <h2><a href="{{ article.url }}">{{ article.title }}</a></h2>
+            <h3>{{ article.subtitle|richtext }}</h3>
+            <div class="contributors">By: <a href="#">{{ article.author.first_name }} {{ article.author.last_name }}</a></div>
+            <div class="date"> / {{ article.first_published_at|date:"F j, Y" }}</div>
+
+            <div class="teaser">
+                {{ article.excerpt|richtext }}
+            </div>
+        </div>
+</article>
