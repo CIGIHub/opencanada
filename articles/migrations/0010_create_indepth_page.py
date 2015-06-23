@@ -17,13 +17,13 @@ def create_indepth_page(apps, schema_editor):
         defaults={'name': 'indepthlistpage'} if DJANGO_VERSION < (1, 8) else {}
     )
 
-    print(indepth_list_page_content_type.model)
+    print(indepth_list_page_content_type.pk)
 
     # Create indepth page
     indepth_page = InDepthListPage.objects.create(
         title="InDepth",
         slug='indepth',
-        content_type=indepth_list_page_content_type,
+        content_type_id=indepth_list_page_content_type.pk,
         path='000100010002',
         depth=3,
         numchild=0,
