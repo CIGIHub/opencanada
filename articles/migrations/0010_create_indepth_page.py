@@ -17,7 +17,9 @@ def create_indepth_page(apps, schema_editor):
         defaults={'name': 'indepthlistpage'} if DJANGO_VERSION < (1, 8) else {}
     )
 
-    # Create features page
+    print(indepth_list_page_content_type.model)
+
+    # Create indepth page
     indepth_page = InDepthListPage.objects.create(
         title="InDepth",
         slug='indepth',
@@ -35,7 +37,8 @@ def create_indepth_page(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('articles', '0009_auto_20150619_2156'),
+        ('contenttypes', '__latest__'),
+        ('articles', '0007_indepthlistpage'),
         ('core', '__latest__'),
     ]
 

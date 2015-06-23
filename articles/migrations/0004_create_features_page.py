@@ -35,6 +35,7 @@ def create_features_page(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
+        ('contenttypes', '__latest__'),
         ('core', '__latest__'),
         ('articles', '0003_articlelistpage'),
     ]
