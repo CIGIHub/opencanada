@@ -17,8 +17,6 @@ def create_indepth_page(apps, schema_editor):
         defaults={'name': 'indepthlistpage'} if DJANGO_VERSION < (1, 8) else {}
     )
 
-    print(indepth_list_page_content_type.pk)
-
     # Create indepth page
     indepth_page = InDepthListPage.objects.create(
         title="InDepth",
