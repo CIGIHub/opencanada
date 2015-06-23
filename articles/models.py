@@ -105,7 +105,7 @@ class InDepthArticleLink(Orderable, models.Model):
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
-        related_name='+'
+        related_name='series'
     )
     in_depth = ParentalKey(
         "InDepthPage",

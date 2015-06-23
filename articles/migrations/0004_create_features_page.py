@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django import VERSION as DJANGO_VERSION
 from django.db import migrations, models
 
 
@@ -9,7 +10,12 @@ def create_features_page(apps, schema_editor):
     ArticleListPage = apps.get_model("articles", "ArticleListPage")
     home_page = Page.objects.get(slug="home")
     ContentType = apps.get_model("contenttypes", "ContentType")
-    article_list_page_content_type = ContentType.objects.get_for_model(ArticleListPage)
+
+    article_list_page_content_type, created = ContentType.objects.get_or_create(
+        model='articlelistpage',
+        app_label='articles',
+        defaults={'name': 'articlelistpage'} if DJANGO_VERSION < (1, 8) else {}
+    )
 
     # Create features page
     features_page = ArticleListPage.objects.create(
