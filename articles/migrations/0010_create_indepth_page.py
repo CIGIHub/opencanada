@@ -38,7 +38,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('contenttypes', '__latest__'),
-        ('articles', '0007_indepthlistpage'),
+        ('articles', '0009_auto_20150619_2156'),
         ('core', '__latest__'),
     ]
 
