@@ -12,8 +12,9 @@ def create_indepth_page(apps, schema_editor):
     InDepthListPage = apps.get_model("articles", "InDepthListPage")
     home_page = Page.objects.get(slug="home")
     ContentType = apps.get_model("contenttypes", "ContentType")
-    indepth_list_page_content_type = ContentType.objects.get_for_model(InDepthListPage)
-
+    # indepth_list_page_content_type = ContentType.objects.get_for_model(InDepthListPage)
+    indepth_list_page_content_type = ContentType.objects.get(pk=1)
+    
     # Create features page
     indepth_page = InDepthListPage.objects.create(
         title="InDepth",
@@ -32,9 +33,9 @@ def create_indepth_page(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('articles', '0009_auto_20150619_2156'),
         ('contenttypes', '__latest__'),
         ('core', '__latest__'),
+        ('articles', '0009_auto_20150619_2156'),
     ]
 
     operations = [
