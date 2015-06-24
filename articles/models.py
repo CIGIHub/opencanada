@@ -228,6 +228,15 @@ class InDepthPage(Page):
                 author_list.append(author_link.author)
         return author_list
 
+    @property
+    def topics(self):
+        all_topics = [self.primary_topic]
+        for article_link in self.related_articles.all():
+            all_topics.extend(article_link.article.topics)
+
+        all_topics = list(set(all_topics))
+        all_topics.sort(key=attrgetter('name'))
+        return all_topics
 
 InDepthPage.content_panels = Page.content_panels + [
     StreamFieldPanel('body'),

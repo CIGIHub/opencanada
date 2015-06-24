@@ -22,6 +22,28 @@ class InDepthPageTestCase(TestCase):
     # TODO: verify articles in the series, order
     # TODO: verify overridden details for articles
 
+    def test_topics_includes_allprimary_and_secondary_topics(self):
+        indepth = InDepthPage.objects.all().first()
+        topics = indepth.topics
+
+        t1 = Topic.objects.get(pk=1)
+        t2 = Topic.objects.get(pk=2)
+        t4 = Topic.objects.get(pk=4)
+        self.assertIn(t1, topics)
+        self.assertIn(t2, topics)
+        self.assertIn(t4, topics)
+
+    def test_topics_sorted_alphabetically(self):
+        indepth = InDepthPage.objects.all().first()
+        topics = indepth.topics
+        self.assertEqual("Topic 1", topics[0].name)
+        self.assertEqual("Topic 2", topics[1].name)
+        self.assertEqual("Topic 4", topics[2].name)
+
+    def test_topics_removes_duplicates(self):
+        indepth = InDepthPage.objects.all().first()
+        self.assertEqual(len(indepth.topics), 3)
+
 
 class ArticlePageTestCase(TestCase):
     fixtures = ["articlestest.json", ]

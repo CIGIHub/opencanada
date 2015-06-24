@@ -53,6 +53,30 @@
   },
   {
     "fields": {
+      "topic": 2,
+      "article": 6
+    },
+    "model": "articles.articletopiclink",
+    "pk": 4
+  },
+  {
+    "fields": {
+      "topic": 4,
+      "article": 6
+    },
+    "model": "articles.articletopiclink",
+    "pk": 5
+  },
+  {
+    "fields": {
+      "topic": 2,
+      "article": 7
+    },
+    "model": "articles.articletopiclink",
+    "pk": 6
+  },
+  {
+    "fields": {
       "article": 6,
       "sort_order": 0,
       "author": 1
@@ -297,99 +321,11 @@
   },
   {
     "fields": {
-      "approved_go_live_at": null,
-      "created_at": "2015-06-24T15:00:04.913Z",
-      "submitted_for_moderation": false,
-      "content_json": "{\"subtitle\": \"<p>My Subtitle</p>\", \"authors\": [{\"pk\": 1, \"article\": 6, \"sort_order\": 0, \"author\": 1}], \"excerpt\": \"<p>This is an excerpt.</p>\", \"search_description\": \"\", \"owner\": 1, \"latest_revision_created_at\": null, \"go_live_at\": null, \"title\": \"Test Article 1\", \"seo_title\": \"\", \"slug\": \"test-article-1\", \"live\": false, \"has_unpublished_changes\": false, \"body\": \"[{\\\"type\\\": \\\"Heading\\\", \\\"value\\\": \\\"This is a heading\\\"}, {\\\"type\\\": \\\"Paragraph\\\", \\\"value\\\": \\\"<p>And some body text.</p>\\\"}]\", \"blocks\": [], \"numchild\": 0, \"content_type\": 33, \"show_in_menus\": false, \"path\": \"0001000100010001\", \"url_path\": \"/home/features/test-article-1/\", \"expired\": false, \"pk\": 6, \"main_image\": null, \"locked\": false, \"depth\": 4, \"first_published_at\": null, \"expire_at\": null}",
-      "page": 6
-    },
-    "model": "wagtailcore.pagerevision",
-    "pk": 1
-  },
-  {
-    "fields": {
-      "approved_go_live_at": null,
-      "created_at": "2015-06-24T15:00:07.133Z",
-      "submitted_for_moderation": false,
-      "content_json": "{\"subtitle\": \"<p>My Subtitle</p>\", \"authors\": [{\"pk\": 1, \"article\": null, \"sort_order\": 0, \"author\": 1}], \"excerpt\": \"<p>This is an excerpt.</p>\", \"search_description\": \"\", \"owner\": 1, \"latest_revision_created_at\": \"2015-06-24T15:00:04.913Z\", \"go_live_at\": null, \"title\": \"Test Article 1\", \"seo_title\": \"\", \"slug\": \"test-article-1\", \"live\": false, \"has_unpublished_changes\": true, \"body\": \"[{\\\"type\\\": \\\"Heading\\\", \\\"value\\\": \\\"This is a heading\\\"}, {\\\"type\\\": \\\"Paragraph\\\", \\\"value\\\": \\\"<p>And some body text.</p>\\\"}]\", \"blocks\": [], \"numchild\": 0, \"content_type\": 33, \"show_in_menus\": false, \"path\": \"0001000100010001\", \"url_path\": \"/home/features/test-article-1/\", \"expired\": false, \"pk\": 6, \"main_image\": null, \"locked\": false, \"depth\": 4, \"first_published_at\": null, \"expire_at\": null}",
-      "page": 6
-    },
-    "model": "wagtailcore.pagerevision",
-    "pk": 2
-  },
-  {
-    "fields": {
-      "approved_go_live_at": null,
-      "created_at": "2015-06-24T15:00:36.117Z",
-      "submitted_for_moderation": false,
-      "content_json": "{\"subtitle\": \"\", \"authors\": [{\"pk\": 2, \"article\": 7, \"sort_order\": 0, \"author\": 2}], \"excerpt\": \"\", \"search_description\": \"\", \"owner\": 1, \"latest_revision_created_at\": null, \"go_live_at\": null, \"title\": \"Test Article 2\", \"seo_title\": \"\", \"slug\": \"test-article-2\", \"live\": false, \"has_unpublished_changes\": false, \"body\": \"[{\\\"type\\\": \\\"Paragraph\\\", \\\"value\\\": \\\"<p>This is some text.</p>\\\"}]\", \"blocks\": [], \"numchild\": 0, \"content_type\": 33, \"show_in_menus\": false, \"path\": \"0001000100010002\", \"url_path\": \"/home/features/test-article-2/\", \"expired\": false, \"pk\": 7, \"main_image\": null, \"locked\": false, \"depth\": 4, \"first_published_at\": null, \"expire_at\": null}",
-      "page": 7
-    },
-    "model": "wagtailcore.pagerevision",
-    "pk": 3
-  },
-  {
-    "fields": {
-      "approved_go_live_at": null,
-      "created_at": "2015-06-24T15:00:38.067Z",
-      "submitted_for_moderation": false,
-      "content_json": "{\"subtitle\": \"\", \"authors\": [{\"pk\": 2, \"article\": null, \"sort_order\": 0, \"author\": 2}], \"excerpt\": \"\", \"search_description\": \"\", \"owner\": 1, \"latest_revision_created_at\": \"2015-06-24T15:00:36.117Z\", \"go_live_at\": null, \"title\": \"Test Article 2\", \"seo_title\": \"\", \"slug\": \"test-article-2\", \"live\": false, \"has_unpublished_changes\": true, \"body\": \"[{\\\"type\\\": \\\"Paragraph\\\", \\\"value\\\": \\\"<p>This is some text.</p>\\\"}]\", \"blocks\": [], \"numchild\": 0, \"content_type\": 33, \"show_in_menus\": false, \"path\": \"0001000100010002\", \"url_path\": \"/home/features/test-article-2/\", \"expired\": false, \"pk\": 7, \"main_image\": null, \"locked\": false, \"depth\": 4, \"first_published_at\": null, \"expire_at\": null}",
-      "page": 7
-    },
-    "model": "wagtailcore.pagerevision",
-    "pk": 4
-  },
-  {
-    "fields": {
-      "approved_go_live_at": null,
-      "created_at": "2015-06-24T15:01:43.197Z",
-      "submitted_for_moderation": false,
-      "content_json": "{\"subtitle\": \"\", \"authors\": [{\"pk\": 3, \"article\": 8, \"sort_order\": 0, \"author\": 3}], \"excerpt\": \"\", \"search_description\": \"\", \"owner\": 1, \"latest_revision_created_at\": null, \"go_live_at\": null, \"title\": \"Test Article 3\", \"seo_title\": \"\", \"slug\": \"test-article-3\", \"live\": false, \"has_unpublished_changes\": false, \"body\": \"[{\\\"type\\\": \\\"Paragraph\\\", \\\"value\\\": \\\"<p>Yay! Article</p>\\\"}]\", \"blocks\": [], \"numchild\": 0, \"content_type\": 33, \"show_in_menus\": false, \"path\": \"0001000100010003\", \"url_path\": \"/home/features/test-article-3/\", \"expired\": false, \"pk\": 8, \"main_image\": null, \"locked\": false, \"depth\": 4, \"first_published_at\": null, \"expire_at\": null}",
-      "page": 8
-    },
-    "model": "wagtailcore.pagerevision",
-    "pk": 5
-  },
-  {
-    "fields": {
-      "approved_go_live_at": null,
-      "created_at": "2015-06-24T15:01:45.411Z",
-      "submitted_for_moderation": false,
-      "content_json": "{\"subtitle\": \"\", \"authors\": [{\"pk\": 3, \"article\": null, \"sort_order\": 0, \"author\": 3}], \"excerpt\": \"\", \"search_description\": \"\", \"owner\": 1, \"latest_revision_created_at\": \"2015-06-24T15:01:43.197Z\", \"go_live_at\": null, \"title\": \"Test Article 3\", \"seo_title\": \"\", \"slug\": \"test-article-3\", \"live\": false, \"has_unpublished_changes\": true, \"body\": \"[{\\\"type\\\": \\\"Paragraph\\\", \\\"value\\\": \\\"<p>Yay! Article</p>\\\"}]\", \"blocks\": [], \"numchild\": 0, \"content_type\": 33, \"show_in_menus\": false, \"path\": \"0001000100010003\", \"url_path\": \"/home/features/test-article-3/\", \"expired\": false, \"pk\": 8, \"main_image\": null, \"locked\": false, \"depth\": 4, \"first_published_at\": null, \"expire_at\": null}",
-      "page": 8
-    },
-    "model": "wagtailcore.pagerevision",
-    "pk": 6
-  },
-  {
-    "fields": {
-      "approved_go_live_at": null,
-      "created_at": "2015-06-24T15:03:02.538Z",
-      "submitted_for_moderation": false,
-      "content_json": "{\"image\": null, \"search_description\": \"\", \"owner\": 1, \"latest_revision_created_at\": null, \"go_live_at\": null, \"title\": \"In Depth Articles\", \"seo_title\": \"\", \"slug\": \"depth-articles\", \"live\": false, \"has_unpublished_changes\": false, \"body\": \"[{\\\"type\\\": \\\"Paragraph\\\", \\\"value\\\": \\\"<p>This is about the In Depth.</p>\\\"}]\", \"blocks\": [], \"numchild\": 0, \"related_articles\": [{\"override_image\": null, \"override_text\": \"\", \"sort_order\": 0, \"article\": 6, \"pk\": 1, \"in_depth\": 9}, {\"override_image\": null, \"override_text\": \"<p>This is overridden text.</p>\", \"sort_order\": 1, \"article\": 7, \"pk\": 2, \"in_depth\": 9}], \"content_type\": 36, \"show_in_menus\": false, \"path\": \"0001000100020001\", \"url_path\": \"/home/indepth/depth-articles/\", \"expired\": false, \"pk\": 9, \"locked\": false, \"depth\": 4, \"first_published_at\": null, \"expire_at\": null}",
-      "page": 9
-    },
-    "model": "wagtailcore.pagerevision",
-    "pk": 7
-  },
-  {
-    "fields": {
-      "approved_go_live_at": null,
-      "created_at": "2015-06-24T15:03:04.918Z",
-      "submitted_for_moderation": false,
-      "content_json": "{\"image\": null, \"search_description\": \"\", \"owner\": 1, \"latest_revision_created_at\": \"2015-06-24T15:03:02.538Z\", \"go_live_at\": null, \"title\": \"In Depth Articles\", \"seo_title\": \"\", \"slug\": \"depth-articles\", \"live\": false, \"has_unpublished_changes\": true, \"body\": \"[{\\\"type\\\": \\\"Paragraph\\\", \\\"value\\\": \\\"<p>This is about the In Depth.</p>\\\"}]\", \"blocks\": [], \"numchild\": 0, \"related_articles\": [{\"override_image\": null, \"override_text\": \"\", \"sort_order\": 0, \"article\": 6, \"pk\": 1, \"in_depth\": null}, {\"override_image\": null, \"override_text\": \"<p>This is overridden text.</p>\", \"sort_order\": 1, \"article\": 7, \"pk\": 2, \"in_depth\": null}], \"content_type\": 36, \"show_in_menus\": false, \"path\": \"0001000100020001\", \"url_path\": \"/home/indepth/depth-articles/\", \"expired\": false, \"pk\": 9, \"locked\": false, \"depth\": 4, \"first_published_at\": null, \"expire_at\": null}",
-      "page": 9
-    },
-    "model": "wagtailcore.pagerevision",
-    "pk": 8
-  },
-  {
-    "fields": {
       "body": "[{\"type\": \"Heading\", \"value\": \"This is a heading\"}, {\"type\": \"Paragraph\", \"value\": \"<p>And some body text.</p>\"}]",
       "excerpt": "<p>This is an excerpt.</p>",
       "main_image": null,
       "subtitle": "<p>My Subtitle</p>",
-      "primary_topic": null
+      "primary_topic": 4
     },
     "model": "articles.articlepage",
     "pk": 6
@@ -430,7 +366,8 @@
   {
     "fields": {
       "body": "[{\"type\": \"Paragraph\", \"value\": \"<p>This is about the In Depth.</p>\"}]",
-      "image": null
+      "image": null,
+      "primary_topic": 2
     },
     "model": "articles.indepthpage",
     "pk": 9
