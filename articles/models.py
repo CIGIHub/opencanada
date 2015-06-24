@@ -1,5 +1,7 @@
 from __future__ import absolute_import, unicode_literals
 
+from operator import attrgetter
+
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from modelcluster.fields import ParentalKey
@@ -76,6 +78,15 @@ class ArticlePage(Page):
             indepth_page = series.in_depth
             return ArticlePage.objects.filter(series__in_depth=indepth_page).exclude(pk=self.pk)
 
+    @property
+    def topics(self):
+        primary_topic = self.primary_topic
+        all_topics = [link.topic for link in self.topic_links.all()]
+        all_topics.append(primary_topic)
+        all_topics = list(set(all_topics))
+        all_topics.sort(key=attrgetter('name'))
+        return all_topics
+
 
 ArticlePage.content_panels = Page.content_panels + [
     FieldPanel('subtitle'),
@@ -100,10 +111,9 @@ class ArticleTopicLink(models.Model):
     )
 
     def __str__(self):
-        return "{} {} {}".format(
+        return "{} - {}".format(
             self.article.title,
-            self.author.first_name,
-            self.author.last_name
+            self.topic.name
         )
 
     panels = [

@@ -1,6 +1,58 @@
 [
   {
     "fields": {
+      "name": "Topic 1"
+    },
+    "model": "articles.topic",
+    "pk": 1
+  },
+  {
+    "fields": {
+      "name": "Topic 2"
+    },
+    "model": "articles.topic",
+    "pk": 2
+  },
+  {
+    "fields": {
+      "name": "Topic 3"
+    },
+    "model": "articles.topic",
+    "pk": 3
+  },
+  {
+    "fields": {
+      "name": "Topic 4"
+    },
+    "model": "articles.topic",
+    "pk": 4
+  },
+  {
+    "fields": {
+      "topic": 2,
+      "article": 10
+    },
+    "model": "articles.articletopiclink",
+    "pk": 1
+  },
+  {
+    "fields": {
+      "topic": 3,
+      "article": 10
+    },
+    "model": "articles.articletopiclink",
+    "pk": 2
+  },
+  {
+    "fields": {
+      "topic": 2,
+      "article": 8
+    },
+    "model": "articles.articletopiclink",
+    "pk": 3
+  },
+  {
+    "fields": {
       "article": 6,
       "sort_order": 0,
       "author": 1
@@ -336,7 +388,8 @@
       "body": "[{\"type\": \"Heading\", \"value\": \"This is a heading\"}, {\"type\": \"Paragraph\", \"value\": \"<p>And some body text.</p>\"}]",
       "excerpt": "<p>This is an excerpt.</p>",
       "main_image": null,
-      "subtitle": "<p>My Subtitle</p>"
+      "subtitle": "<p>My Subtitle</p>",
+      "primary_topic": null
     },
     "model": "articles.articlepage",
     "pk": 6
@@ -346,7 +399,8 @@
       "body": "[{\"type\": \"Paragraph\", \"value\": \"<p>This is some text.</p>\"}]",
       "excerpt": "",
       "main_image": null,
-      "subtitle": ""
+      "subtitle": "",
+      "primary_topic": 1
     },
     "model": "articles.articlepage",
     "pk": 7
@@ -356,7 +410,8 @@
       "body": "[{\"type\": \"Paragraph\", \"value\": \"<p>Yay! Article</p>\"}]",
       "excerpt": "",
       "main_image": null,
-      "subtitle": ""
+      "subtitle": "",
+      "primary_topic": 2
     },
     "model": "articles.articlepage",
     "pk": 8
@@ -366,7 +421,8 @@
       "body": "[{\"type\": \"Paragraph\", \"value\": \"<p>Yay! Some Stuff.</p>\"}]",
       "excerpt": "",
       "main_image": null,
-      "subtitle": ""
+      "subtitle": "",
+      "primary_topic": 1
     },
     "model": "articles.articlepage",
     "pk": 10
