@@ -36,13 +36,6 @@ class ArticleListPage(Page):
 @python_2_unicode_compatible
 class ArticlePage(Page):
     subtitle = RichTextField(blank=True, default="")
-    author = models.ForeignKey(
-        "people.Contributor",
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+'
-    )
     body = article_fields.BodyField()
     excerpt = RichTextField(blank=True, default="")
     main_image = models.ForeignKey(
@@ -67,11 +60,33 @@ class ArticlePage(Page):
 
 ArticlePage.content_panels = Page.content_panels + [
     FieldPanel('subtitle'),
-    SnippetChooserPanel('author', people_models.Contributor),
+    InlinePanel('authors', label="Authors"),
     StreamFieldPanel('body'),
     FieldPanel('excerpt'),
     ImageChooserPanel('main_image'),
 ]
+
+
+@python_2_unicode_compatible
+class ArticleAuthorLink(Orderable, models.Model):
+    author = models.ForeignKey(
+        "people.Contributor",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='articles'
+    )
+    article = ParentalKey(
+        "ArticlePage",
+        related_name='authors'
+    )
+
+    def __str__(self):
+        return "{} {} {}".format(self.article.title, self.author.first_name, self.author.last_name)
+
+    panels = [
+        SnippetChooserPanel('author', people_models.Contributor),
+    ]
 
 
 @python_2_unicode_compatible

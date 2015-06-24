@@ -14,7 +14,7 @@ from django.utils.six import BytesIO, text_type
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailimages.models import Image
 
-from articles.models import ArticlePage
+from articles.models import ArticleAuthorLink, ArticlePage
 from people.models import Contributor
 from wordpress_importer.models import ImageImports, PostImports
 from wordpress_importer.utils import get_setting
@@ -193,8 +193,13 @@ class Command(BaseCommand):
             else:
                 page.excerpt = ''
 
-            contributors = Contributor.objects.filter(email=author_email)
-            page.author = contributors.first()
+            contributor = Contributor.objects.filter(email=author_email).first()
+            if contributor:
+                author_link, created = ArticleAuthorLink.objects.get_or_create(
+                    author=contributor,
+                    article=page
+                )
+                author_link.save()
 
             revision = page.save_revision(
                 user=None,

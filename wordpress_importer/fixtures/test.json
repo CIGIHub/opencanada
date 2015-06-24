@@ -16,5 +16,19 @@
     },
     "model": "auth.user",
     "pk": 1
+  },
+  {
+    "fields": {
+      "first_name": "Bob",
+      "last_name": "Smith",
+      "twitter_handle": "@bobsmith",
+      "short_bio": "bio",
+      "headshot": null,
+      "long_bio": "long bio",
+      "nickname": "Bobby Smith",
+      "email": "bob@example.com"
+    },
+    "model": "people.contributor",
+    "pk": 1
   }
 ]
