@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static core_tags wagtailcore_tags wagtailimages_tags %}
+
+{% block content %}
+<div class="container article-list">
+    {% if self.title %}
+        <h1>{{  self.title }}</h1>
+    {% endif %}
+
+    {% for article in self.subpages %}
+        {% include "articles/includes/article_teaser.html" %}
+    {% endfor %}
+
+</div>
+{% endblock %}
+

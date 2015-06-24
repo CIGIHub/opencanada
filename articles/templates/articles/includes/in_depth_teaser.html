@@ -1,0 +1,22 @@
+{% load static core_tags wagtailcore_tags wagtailimages_tags %}
+
+<article class="row">
+    <div class="col-xs-12">
+        <h2><a href="{{ in_depth.url }}">{{ in_depth.title }}</a></h2>
+        <div class="contributors">By:
+        {% for linked_article in in_depth.related_articles.all %}
+            <div class="contributor">
+                <a href="{{ linked_article.article.author.url  }}">
+                    {{ linked_article.article.author.first_name }}
+                    {{ linked_article.article.author.last_name }}
+                </a>
+            </div>
+        {% endfor %}
+        </div>
+        <div class="date"> / {{ in_depth.first_published_at|date:"F j, Y" }}</div>
+        <div class="teaser">
+            {{ in_depth.body }}
+        </div>
+
+    </div>
+</article>
