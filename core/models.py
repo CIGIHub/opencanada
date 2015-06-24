@@ -1,7 +1,9 @@
 from __future__ import absolute_import, unicode_literals
 
+from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
-from wagtail.wagtailadmin.edit_handlers import FieldPanel, RichTextFieldPanel
+from wagtail.wagtailadmin.edit_handlers import (FieldPanel, PageChooserPanel,
+                                                RichTextFieldPanel)
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailsnippets.models import register_snippet
 
@@ -16,8 +18,20 @@ class HomePage(Page):
         article_models.InDepthListPage
     ]
 
+    featured_item = models.ForeignKey(
+        'wagtailcore.Page',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
     def __str__(self):
         return self.title
+
+HomePage.content_panels = Page.content_panels + [
+    PageChooserPanel("featured_item", "articles.ArticlePage"),
+]
 
 
 register_snippet(people_models.Contributor)
