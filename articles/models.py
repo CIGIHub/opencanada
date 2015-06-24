@@ -74,9 +74,9 @@ class ArticlePage(Page):
 
     @property
     def series_articles(self):
-        for series in self.series.all():
-            indepth_page = series.in_depth
-            return ArticlePage.objects.filter(series__in_depth=indepth_page).exclude(pk=self.pk)
+        for link in self.in_depth_links.all():
+            indepth_page = link.in_depth
+            return ArticlePage.objects.filter(in_depth_links__in_depth=indepth_page).exclude(pk=self.pk)
 
     @property
     def topics(self):
@@ -181,11 +181,11 @@ class InDepthArticleLink(Orderable, models.Model):
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
-        related_name='series'
+        related_name='in_depth_links'
     )
     in_depth = ParentalKey(
         "InDepthPage",
-        related_name='related_articles'
+        related_name='related_article_links'
     )
 
     panels = [
@@ -216,14 +216,14 @@ class InDepthPage(Page):
     @property
     def in_depth_articles(self):
         article_list = []
-        for article_link in self.related_articles.all():
+        for article_link in self.related_article_links.all():
             article_list.append(article_link.article)
         return article_list
 
     @property
     def authors(self):
         author_list = []
-        for article_link in self.related_articles.all():
+        for article_link in self.related_article_links.all():
             for author_link in article_link.article.author_links.all():
                 author_list.append(author_link.author)
         return author_list
@@ -231,7 +231,7 @@ class InDepthPage(Page):
     @property
     def topics(self):
         all_topics = [self.primary_topic]
-        for article_link in self.related_articles.all():
+        for article_link in self.related_article_links.all():
             all_topics.extend(article_link.article.topics)
 
         all_topics = list(set(all_topics))
@@ -241,5 +241,5 @@ class InDepthPage(Page):
 InDepthPage.content_panels = Page.content_panels + [
     StreamFieldPanel('body'),
     ImageChooserPanel('image'),
-    InlinePanel('related_articles', label="Articles")
+    InlinePanel('related_article_links', label="Articles")
 ]
