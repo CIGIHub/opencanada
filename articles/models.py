@@ -2,7 +2,6 @@ from __future__ import absolute_import, unicode_literals
 
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
-from django.utils.timezone import now
 from modelcluster.fields import ParentalKey
 from wagtail.wagtailadmin.edit_handlers import (FieldPanel, InlinePanel,
                                                 PageChooserPanel,
@@ -24,7 +23,6 @@ class ArticleListPage(Page):
     @property
     def subpages(self):
         # Get list of live event pages that are descendants of this page
-        today = now().date()
         subpages = ArticlePage.objects.live().descendant_of(self).order_by('-first_published_at')
 
         return subpages
@@ -51,6 +49,10 @@ class ArticlePage(Page):
         return self.title
 
     @property
+    def authors(self):
+        return [link.author for link in self.author_links.all()]
+
+    @property
     def series_articles(self):
 
         for series in self.series.all():
@@ -60,7 +62,7 @@ class ArticlePage(Page):
 
 ArticlePage.content_panels = Page.content_panels + [
     FieldPanel('subtitle'),
-    InlinePanel('authors', label="Authors"),
+    InlinePanel('author_links', label="Authors"),
     StreamFieldPanel('body'),
     FieldPanel('excerpt'),
     ImageChooserPanel('main_image'),
@@ -74,11 +76,11 @@ class ArticleAuthorLink(Orderable, models.Model):
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
-        related_name='articles'
+        related_name='article_links'
     )
     article = ParentalKey(
         "ArticlePage",
-        related_name='authors'
+        related_name='author_links'
     )
 
     def __str__(self):
@@ -96,7 +98,6 @@ class InDepthListPage(Page):
     @property
     def subpages(self):
         # Get list of live event pages that are descendants of this page
-        today = now().date()
         subpages = InDepthPage.objects.live().descendant_of(self).order_by('-first_published_at')
 
         return subpages
@@ -159,6 +160,14 @@ class InDepthPage(Page):
         for article_link in self.related_articles.all():
             article_list.append(article_link.article)
         return article_list
+
+    @property
+    def authors(self):
+        author_list = []
+        for article_link in self.related_articles.all():
+            for author_link in article_link.article.author_links.all():
+                author_list.append(author_link.author)
+        return author_list
 
 
 InDepthPage.content_panels = Page.content_panels + [
