@@ -30,11 +30,13 @@
             <div class="story">{{ self.body }}</div>
 
             <div class="in-the-series">
-                {% with heading_text='In the series' %}
+                 <h2>In the series</h2>
+
+                {% for linked_article in self.in_depth_articles %}
                     {% block in_the_series %}
                         {% include 'articles/includes/in_the_series.html' %}
                     {% endblock %}
-                {% endwith %}
+                {% endfor %}
             </div>
 
             <div class="topics related">

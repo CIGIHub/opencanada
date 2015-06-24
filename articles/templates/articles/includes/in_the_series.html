@@ -1,8 +1,6 @@
 {% load static core_tags wagtailcore_tags wagtailimages_tags %}
 
 {% block in_the_series %}
-    <h2>{{ heading_text }}</h2>
-    {% for linked_article in self.related_articles.all %}
         <div class="row">
             <div class="col-xs-2">
                 <figure>
@@ -10,9 +8,8 @@
             </figure>
             </div>
             <div class="col-xs-10">
-                <h3><a href="{{ linked_article.article.url }}">{{ linked_article.article.title }}</a></h3>
-                {{ linked_article.article.excerpt|richtext }}
+                <h3><a href="{{ linked_article.url }}">{{ linked_article.title }}</a></h3>
+                {{ linked_article.excerpt|richtext }}
             </div>
         </div>
-    {% endfor %}
 {% endblock %}

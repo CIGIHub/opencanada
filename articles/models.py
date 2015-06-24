@@ -57,6 +57,14 @@ class ArticlePage(Page):
     def __str__(self):
         return self.title
 
+    @property
+    def series_articles(self):
+
+        for series in self.series.all():
+            indepth_page = series.in_depth
+            return ArticlePage.objects.filter(series__in_depth=indepth_page).exclude(pk=self.pk)
+
+
 ArticlePage.content_panels = Page.content_panels + [
     FieldPanel('subtitle'),
     SnippetChooserPanel('author', people_models.Contributor),
@@ -129,6 +137,13 @@ class InDepthPage(Page):
         on_delete=models.SET_NULL,
         related_name='+'
     )
+
+    @property
+    def in_depth_articles(self):
+        article_list = []
+        for article_link in self.related_articles.all():
+            article_list.append(article_link.article)
+        return article_list
 
 
 InDepthPage.content_panels = Page.content_panels + [

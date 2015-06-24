@@ -33,7 +33,6 @@
                 <div class="home-link"><a href="/"><img src="{% static 'img/opencanada-mark.png' %}"></a></div>
             </div>
 
-
             <div class="topics related">
                     <div class="tag-icon"><i class="fa fa-tags"></i> Topics:</div>
                     <ul class="list-inline">
@@ -43,11 +42,15 @@
                 </div>
         </article>
 
-        {% with heading_text='Also in the series' %}
+        <div class="in-the-series">
+            <h2>Also in the series</h2>
+
+            {% for linked_article in self.series_articles %}
                 {% block in_the_series %}
                     {% include 'articles/includes/in_the_series.html' %}
                 {% endblock %}
-            {% endwith %}
+            {%  endfor %}
+        </div>
 
         {% block related_articles %}
             {% include 'articles/includes/related_articles.html' %}
