@@ -10,6 +10,7 @@ from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
+from wagtail.wagtailsnippets.models import register_snippet
 
 from people import models as people_models
 
@@ -31,6 +32,15 @@ class ArticleListPage(Page):
         return self.title
 
 
+class Topic(models.Model):
+    name = models.CharField(max_length=1024)
+
+    def __str__(self):
+        return self.name
+
+register_snippet(Topic)
+
+
 @python_2_unicode_compatible
 class ArticlePage(Page):
     subtitle = RichTextField(blank=True, default="")
@@ -43,6 +53,14 @@ class ArticlePage(Page):
         on_delete=models.SET_NULL,
         related_name='+'
     )
+    primary_topic = models.ForeignKey(
+        'articles.Topic',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
     # TODO: specify date here or use wagtail page built in date?
 
     def __str__(self):
@@ -54,7 +72,6 @@ class ArticlePage(Page):
 
     @property
     def series_articles(self):
-
         for series in self.series.all():
             indepth_page = series.in_depth
             return ArticlePage.objects.filter(series__in_depth=indepth_page).exclude(pk=self.pk)
@@ -66,7 +83,32 @@ ArticlePage.content_panels = Page.content_panels + [
     StreamFieldPanel('body'),
     FieldPanel('excerpt'),
     ImageChooserPanel('main_image'),
+    SnippetChooserPanel('primary_topic', Topic),
+    InlinePanel('topic_links', label="Secondary Topics"),
 ]
+
+
+@python_2_unicode_compatible
+class ArticleTopicLink(models.Model):
+    topic = models.ForeignKey(
+        "Topic",
+        related_name='article_links'
+    )
+    article = ParentalKey(
+        "ArticlePage",
+        related_name='topic_links'
+    )
+
+    def __str__(self):
+        return "{} {} {}".format(
+            self.article.title,
+            self.author.first_name,
+            self.author.last_name
+        )
+
+    panels = [
+        SnippetChooserPanel('topic', Topic),
+    ]
 
 
 @python_2_unicode_compatible
@@ -148,6 +190,13 @@ class InDepthPage(Page):
     body = article_fields.BodyField(blank=True, default="")
     image = models.ForeignKey(
         'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+    primary_topic = models.ForeignKey(
+        'articles.Topic',
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
