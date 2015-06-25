@@ -4,7 +4,7 @@
     <div class="col-xs-12">
         <h2><a href="{{ in_depth.url }}">{{ in_depth.title }}</a></h2>
         <div class="contributors">By:
-        {% for linked_article in in_depth.related_articles.all %}
+        {% for linked_article in in_depth.related_article_links.all %}
             <div class="contributor">
                 <a href="{{ linked_article.article.author.url  }}">
                     {{ linked_article.article.author.first_name }}

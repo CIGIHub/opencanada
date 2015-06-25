@@ -16,7 +16,7 @@
                 <h1>{{ self.title }}</h1>
                 <h2>{{ self.subtitle|richtext }}</h2>
 
-                <div class="contributors">By: <a href="{{ self.author.url }}">{{ self.author.first_name }} {{ self.author.last_name }}</a> (<span>@</span>{{ self.author.twitter_handle }})</div>
+                <div class="contributors">By: {% for author in self.authors %}<a href="#">{{ author.first_name }} {{ author.last_name }}</a> (<span>@</span>{{ author.twitter_handle }})</div>{% if not forloop.last %}, {% endif %}{% endfor %}
                 <div class="date"> / {{ self.first_published_at|date:"F j, Y" }}</div>
             </div>
             <figure>

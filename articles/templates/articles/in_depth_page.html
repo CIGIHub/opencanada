@@ -16,7 +16,7 @@
                 <h1>{{ self.title }}</h1>
                 <h2>{{ self.subtitle|richtext }}</h2>
                 <div class="contributors">Series Contributors:
-                    {% for linked_article in self.related_articles.all %}
+                    {% for linked_article in self.related_article_links.all %}
                         <div class="contributor">
                             <a href="{{ linked_article.article.author.url  }}">
                              {{ linked_article.article.author.first_name }}

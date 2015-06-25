@@ -255,27 +255,27 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
         pages = ArticlePage.objects.filter(
             slug='is-nato-ready-for-putin')
         contributors = Contributor.objects.filter(email='bob@example.com')
-        self.assertEqual(pages.first().authors.count(), 1)
-        self.assertEqual(pages.first().authors.first().author, contributors.first())
+        self.assertEqual(pages.first().author_links.count(), 1)
+        self.assertEqual(pages.first().author_links.first().author, contributors.first())
 
     def testPageAuthorNotSet(self):
         command = import_from_wordpress.Command()
         command.load_posts()
         pages = ArticlePage.objects.filter(slug='null-author')
-        self.assertEqual(pages.first().authors.count(), 0)
+        self.assertEqual(pages.first().author_links.count(), 0)
 
     def testPageEmptyAuthor(self):
         command = import_from_wordpress.Command()
         command.load_posts()
         pages = ArticlePage.objects.filter(slug='empty-author')
-        self.assertEqual(pages.first().authors.count(), 0)
+        self.assertEqual(pages.first().author_links.count(), 0)
 
     def testPageNonExistantAuthor(self):
         # TODO: should this cause an error
         command = import_from_wordpress.Command()
         command.load_posts()
         pages = ArticlePage.objects.filter(slug='nonexistant-author')
-        self.assertEqual(pages.first().authors.count(), 0)
+        self.assertEqual(pages.first().author_links.count(), 0)
 
     def testUpdatesDuplicateSlug(self):
         command = import_from_wordpress.Command()

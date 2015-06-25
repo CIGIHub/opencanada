@@ -1,0 +1,375 @@
+[
+  {
+    "fields": {
+      "name": "Topic 1"
+    },
+    "model": "articles.topic",
+    "pk": 1
+  },
+  {
+    "fields": {
+      "name": "Topic 2"
+    },
+    "model": "articles.topic",
+    "pk": 2
+  },
+  {
+    "fields": {
+      "name": "Topic 3"
+    },
+    "model": "articles.topic",
+    "pk": 3
+  },
+  {
+    "fields": {
+      "name": "Topic 4"
+    },
+    "model": "articles.topic",
+    "pk": 4
+  },
+  {
+    "fields": {
+      "topic": 2,
+      "article": 10
+    },
+    "model": "articles.articletopiclink",
+    "pk": 1
+  },
+  {
+    "fields": {
+      "topic": 3,
+      "article": 10
+    },
+    "model": "articles.articletopiclink",
+    "pk": 2
+  },
+  {
+    "fields": {
+      "topic": 2,
+      "article": 8
+    },
+    "model": "articles.articletopiclink",
+    "pk": 3
+  },
+  {
+    "fields": {
+      "topic": 2,
+      "article": 6
+    },
+    "model": "articles.articletopiclink",
+    "pk": 4
+  },
+  {
+    "fields": {
+      "topic": 4,
+      "article": 6
+    },
+    "model": "articles.articletopiclink",
+    "pk": 5
+  },
+  {
+    "fields": {
+      "topic": 2,
+      "article": 7
+    },
+    "model": "articles.articletopiclink",
+    "pk": 6
+  },
+  {
+    "fields": {
+      "article": 6,
+      "sort_order": 0,
+      "author": 1
+    },
+    "model": "articles.articleauthorlink",
+    "pk": 1
+  },
+  {
+    "fields": {
+      "article": 7,
+      "sort_order": 0,
+      "author": 2
+    },
+    "model": "articles.articleauthorlink",
+    "pk": 2
+  },
+  {
+    "fields": {
+      "article": 8,
+      "sort_order": 0,
+      "author": 3
+    },
+    "model": "articles.articleauthorlink",
+    "pk": 3
+  },
+  {
+    "fields": {
+      "article": 10,
+      "sort_order": 1,
+      "author": 2
+    },
+    "model": "articles.articleauthorlink",
+    "pk": 4
+  },
+  {
+    "fields": {
+      "article": 10,
+      "sort_order": 0,
+      "author": 3
+    },
+    "model": "articles.articleauthorlink",
+    "pk": 5
+  },
+  {
+    "fields": {
+      "override_image": null,
+      "article": 6,
+      "sort_order": 0,
+      "in_depth": 9,
+      "override_text": ""
+    },
+    "model": "articles.indeptharticlelink",
+    "pk": 1
+  },
+  {
+    "fields": {
+      "override_image": null,
+      "article": 7,
+      "sort_order": 1,
+      "in_depth": 9,
+      "override_text": "<p>This is overridden text.</p>"
+    },
+    "model": "articles.indeptharticlelink",
+    "pk": 2
+  },
+  {
+    "fields": {
+      "first_name": "Bob",
+      "last_name": "Smith",
+      "twitter_handle": "@bobsmith",
+      "short_bio": "This is a short bit about Bob.",
+      "headshot": null,
+      "long_bio": "This is a seemingly longer bit about Bob.",
+      "nickname": "bsmith",
+      "email": "bobsmith@example.com"
+    },
+    "model": "people.contributor",
+    "pk": 1
+  },
+  {
+    "fields": {
+      "first_name": "Joe",
+      "last_name": "Sampson",
+      "twitter_handle": "@joesampson",
+      "short_bio": "This is a short bit about Joe.",
+      "headshot": null,
+      "long_bio": "This is a seemingly longer bit about Joe.",
+      "nickname": "jsampson",
+      "email": "joesampson@example.com"
+    },
+    "model": "people.contributor",
+    "pk": 2
+  },
+  {
+    "fields": {
+      "first_name": "Mary",
+      "last_name": "Sue",
+      "twitter_handle": "@marysue",
+      "short_bio": "",
+      "headshot": null,
+      "long_bio": "",
+      "nickname": "msue",
+      "email": "marysue@example.com"
+    },
+    "model": "people.contributor",
+    "pk": 3
+  },
+  {
+    "fields": {
+      "locked": false,
+      "title": "Test Article 1",
+      "numchild": 0,
+      "show_in_menus": false,
+      "live": true,
+      "seo_title": "",
+      "latest_revision_created_at": "2015-06-24T15:00:07.133Z",
+      "depth": 4,
+      "search_description": "",
+      "content_type": [
+        "articles",
+        "articlepage"
+      ],
+      "has_unpublished_changes": false,
+      "path": "0001000100010001",
+      "first_published_at": "2015-06-24T15:00:07.143Z",
+      "url_path": "/home/features/test-article-1/",
+      "expired": false,
+      "slug": "test-article-1",
+      "expire_at": null,
+      "go_live_at": null
+    },
+    "model": "wagtailcore.page",
+    "pk": 6
+  },
+  {
+    "fields": {
+      "locked": false,
+      "title": "Test Article 2",
+      "numchild": 0,
+      "show_in_menus": false,
+      "live": true,
+      "seo_title": "",
+      "latest_revision_created_at": "2015-06-24T15:00:38.067Z",
+      "depth": 4,
+      "search_description": "",
+      "content_type": [
+        "articles",
+        "articlepage"
+      ],
+      "has_unpublished_changes": false,
+      "path": "0001000100010002",
+      "first_published_at": "2015-06-24T15:00:38.081Z",
+      "url_path": "/home/features/test-article-2/",
+      "expired": false,
+      "slug": "test-article-2",
+      "expire_at": null,
+      "go_live_at": null
+    },
+    "model": "wagtailcore.page",
+    "pk": 7
+  },
+  {
+    "fields": {
+      "locked": false,
+      "title": "Test Article 3",
+      "numchild": 0,
+      "show_in_menus": false,
+      "live": true,
+      "seo_title": "",
+      "latest_revision_created_at": "2015-06-24T15:01:45.411Z",
+      "depth": 4,
+      "search_description": "",
+      "content_type": [
+        "articles",
+        "articlepage"
+      ],
+      "has_unpublished_changes": false,
+      "path": "0001000100010003",
+      "first_published_at": "2015-06-24T15:01:45.426Z",
+      "url_path": "/home/features/test-article-3/",
+      "expired": false,
+      "slug": "test-article-3",
+      "expire_at": null,
+      "go_live_at": null
+    },
+    "model": "wagtailcore.page",
+    "pk": 8
+  },
+  {
+    "fields": {
+      "locked": false,
+      "title": "Test Article 4",
+      "numchild": 0,
+      "show_in_menus": false,
+      "live": true,
+      "seo_title": "",
+      "latest_revision_created_at": "2015-06-24T15:01:45.411Z",
+      "depth": 4,
+      "search_description": "",
+      "content_type": [
+        "articles",
+        "articlepage"
+      ],
+      "has_unpublished_changes": false,
+      "path": "0001000100010004",
+      "first_published_at": "2015-06-24T15:01:45.426Z",
+      "url_path": "/home/features/test-article-4/",
+      "expired": false,
+      "slug": "test-article-4",
+      "expire_at": null,
+      "go_live_at": null
+    },
+    "model": "wagtailcore.page",
+    "pk": 10
+  },
+  {
+    "fields": {
+      "locked": false,
+      "title": "In Depth Articles",
+      "numchild": 0,
+      "show_in_menus": false,
+      "live": true,
+      "seo_title": "",
+      "latest_revision_created_at": "2015-06-24T15:03:04.918Z",
+      "depth": 4,
+      "search_description": "",
+      "content_type": [
+        "articles",
+        "indepthpage"
+      ],
+      "has_unpublished_changes": false,
+      "path": "0001000100020001",
+      "first_published_at": "2015-06-24T15:03:04.936Z",
+      "url_path": "/home/indepth/depth-articles/",
+      "expired": false,
+      "slug": "depth-articles",
+      "expire_at": null,
+      "go_live_at": null
+    },
+    "model": "wagtailcore.page",
+    "pk": 9
+  },
+  {
+    "fields": {
+      "body": "[{\"type\": \"Heading\", \"value\": \"This is a heading\"}, {\"type\": \"Paragraph\", \"value\": \"<p>And some body text.</p>\"}]",
+      "excerpt": "<p>This is an excerpt.</p>",
+      "main_image": null,
+      "subtitle": "<p>My Subtitle</p>",
+      "primary_topic": 4
+    },
+    "model": "articles.articlepage",
+    "pk": 6
+  },
+  {
+    "fields": {
+      "body": "[{\"type\": \"Paragraph\", \"value\": \"<p>This is some text.</p>\"}]",
+      "excerpt": "",
+      "main_image": null,
+      "subtitle": "",
+      "primary_topic": 1
+    },
+    "model": "articles.articlepage",
+    "pk": 7
+  },
+  {
+    "fields": {
+      "body": "[{\"type\": \"Paragraph\", \"value\": \"<p>Yay! Article</p>\"}]",
+      "excerpt": "",
+      "main_image": null,
+      "subtitle": "",
+      "primary_topic": 2
+    },
+    "model": "articles.articlepage",
+    "pk": 8
+  },
+  {
+    "fields": {
+      "body": "[{\"type\": \"Paragraph\", \"value\": \"<p>Yay! Some Stuff.</p>\"}]",
+      "excerpt": "",
+      "main_image": null,
+      "subtitle": "",
+      "primary_topic": 1
+    },
+    "model": "articles.articlepage",
+    "pk": 10
+  },
+  {
+    "fields": {
+      "body": "[{\"type\": \"Paragraph\", \"value\": \"<p>This is about the In Depth.</p>\"}]",
+      "image": null,
+      "primary_topic": 2
+    },
+    "model": "articles.indepthpage",
+    "pk": 9
+  }
+]
