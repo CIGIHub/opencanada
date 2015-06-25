@@ -32,11 +32,11 @@
             <div class="in-the-series">
                  <h2>In the series</h2>
 
-                {% for linked_article in self.in_depth_articles %}
+                {% with articles=self.articles %}
                     {% block in_the_series %}
                         {% include 'articles/includes/in_the_series.html' %}
                     {% endblock %}
-                {% endfor %}
+                {% endwith %}
             </div>
 
             <div class="topics related">

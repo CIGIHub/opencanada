@@ -45,7 +45,8 @@
         <div class="in-the-series">
             <h2>Also in the series</h2>
 
-            {% for linked_article in self.series_articles %}
+            {% for indepth, articles in self.series_articles %}
+                <h3>{{ indepth.title }}</h3> {# TODO: This was added to handle the off chance that an article is in more than one indepth. Change theming as appropriate.  #}
                 {% block in_the_series %}
                     {% include 'articles/includes/in_the_series.html' %}
                 {% endblock %}

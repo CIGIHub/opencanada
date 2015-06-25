@@ -1,15 +1,17 @@
 {% load static core_tags wagtailcore_tags wagtailimages_tags %}
 
 {% block in_the_series %}
+    {% for article in articles %}
         <div class="row">
             <div class="col-xs-2">
                 <figure>
-                <img src="{% static 'img/assets/series-article.png' %}">
+                {% if article.override_image %}{% image article.override_image width-150 %}{% else %}{% image article.main_image width-150 %}{% endif %}
             </figure>
             </div>
             <div class="col-xs-10">
-                <h3><a href="{{ linked_article.url }}">{{ linked_article.title }}</a></h3>
-                {{ linked_article.excerpt|richtext }}
+                <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
+                {% if article.override_text %}{{ article.override_text|richtext }}{% else %}{{ article.excerpt|richtext }}{% endif %}
             </div>
         </div>
+    {% endfor %}
 {% endblock %}

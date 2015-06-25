@@ -63,8 +63,6 @@ class ArticlePage(Page):
         related_name='+'
     )
 
-    # TODO: specify date here or use wagtail page built in date?
-
     def __str__(self):
         return self.title
 
@@ -74,9 +72,13 @@ class ArticlePage(Page):
 
     @property
     def series_articles(self):
+        related_series_data = []
         for link in self.in_depth_links.all():
             indepth_page = link.in_depth
-            return ArticlePage.objects.filter(in_depth_links__in_depth=indepth_page).exclude(pk=self.pk)
+            indepth_articles = indepth_page.articles
+            indepth_articles.remove(self)
+            related_series_data.append((indepth_page, indepth_articles))
+        return related_series_data
 
     @property
     def topics(self):
@@ -214,9 +216,11 @@ class InDepthPage(Page):
     )
 
     @property
-    def in_depth_articles(self):
+    def articles(self):
         article_list = []
         for article_link in self.related_article_links.all():
+            article_link.article.override_text = article_link.override_text
+            article_link.article.override_image = article_link.override_image
             article_list.append(article_link.article)
         return article_list
 
@@ -226,6 +230,7 @@ class InDepthPage(Page):
         for article_link in self.related_article_links.all():
             for author_link in article_link.article.author_links.all():
                 author_list.append(author_link.author)
+        author_list.sort(key=attrgetter('last_name'))
         return author_list
 
     @property
