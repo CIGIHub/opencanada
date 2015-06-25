@@ -120,8 +120,21 @@ class ArticlePageTestCase(TestCase):
         self.assertEqual(article.authors[0], mary)
         self.assertEqual(article.authors[1], joe)
 
-#   TODO: verify series articles, order, overridden details
 #   TODO: verify related articles
+
+    def test_related_articles_returns_the_number_requested(self):
+        article = ArticlePage.objects.get(id=8)
+        related_articles = article.related_articles(number=2)
+        self.assertEqual(2, len(related_articles))
+
+    def test_related_articles_excludes_self(self):
+        article = ArticlePage.objects.get(id=8)
+        related_articles = article.related_articles(number=10)
+        self.assertNotIn(article, related_articles)
+
+    # TODO: Includes primary topic as filter
+    # TODO: Includes secondary topics as filter
+    # TODO: Includes authors as filter
 
     def test_in_depth_contains_in_depth(self):
         article = ArticlePage.objects.get(pk=6)

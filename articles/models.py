@@ -89,6 +89,10 @@ class ArticlePage(Page):
         all_topics.sort(key=attrgetter('name'))
         return all_topics
 
+    def related_articles(self, number):
+        articles = ArticlePage.objects.live().all().exclude(id=self.id)[:number]
+        # TODO: pick actual related articles based on primary topic, secondary topics, authors
+        return articles
 
 ArticlePage.content_panels = Page.content_panels + [
     FieldPanel('subtitle'),
