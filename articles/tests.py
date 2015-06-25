@@ -1,4 +1,5 @@
 from django.test import TestCase
+from wagtail.wagtailimages.models import Image
 
 from people.models import Contributor
 
@@ -17,10 +18,58 @@ class InDepthPageTestCase(TestCase):
         indepth = InDepthPage.objects.all().first()
         bob = Contributor.objects.get(email="bobsmith@example.com")
         joe = Contributor.objects.get(email="joesampson@example.com")
-        self.assertEqual(indepth.authors, [bob, joe])
 
-    # TODO: verify articles in the series, order
-    # TODO: verify overridden details for articles
+        self.assertIn(bob, indepth.authors)
+        self.assertIn(joe, indepth.authors)
+
+    def test_authors_in_alphabetical_order(self):
+        indepth = InDepthPage.objects.all().first()
+        bob = Contributor.objects.get(email="bobsmith@example.com")
+        joe = Contributor.objects.get(email="joesampson@example.com")
+
+        self.assertEqual(joe, indepth.authors[0])
+        self.assertEqual(bob, indepth.authors[1])
+
+        bob.last_name = "Achange"
+        bob.save()
+
+        self.assertEqual(bob, indepth.authors[0])
+        self.assertEqual(joe, indepth.authors[1])
+
+    def test_in_depth_articles(self):
+        indepth = InDepthPage.objects.all().first()
+
+        a6 = ArticlePage.objects.get(pk=6)
+        a7 = ArticlePage.objects.get(pk=7)
+
+        self.assertEqual(2, len(indepth.articles))
+
+        self.assertIn(a6, indepth.articles)
+        self.assertIn(a7, indepth.articles)
+
+    def test_in_depth_articles_order(self):
+        indepth = InDepthPage.objects.all().first()
+
+        a6 = ArticlePage.objects.get(pk=6)
+        a7 = ArticlePage.objects.get(pk=7)
+
+        self.assertEqual(a7, indepth.articles[0])
+        self.assertEqual(a6, indepth.articles[1])
+
+    def test_article_has_override_text(self):
+        indepth = InDepthPage.objects.all().first()
+
+        override = indepth.articles[0].override_text
+
+        self.assertEqual("<p>This is overridden text.</p>", override)
+
+    def test_article_has_override_image(self):
+        indepth = InDepthPage.objects.all().first()
+
+        image = Image.objects.get(pk=1)
+        override = indepth.articles[0].override_image
+
+        self.assertEqual(image, override)
 
     def test_topics_includes_allprimary_and_secondary_topics(self):
         indepth = InDepthPage.objects.all().first()
@@ -43,6 +92,8 @@ class InDepthPageTestCase(TestCase):
     def test_topics_removes_duplicates(self):
         indepth = InDepthPage.objects.all().first()
         self.assertEqual(len(indepth.topics), 3)
+
+#   TODO: verify related articles
 
 
 class ArticlePageTestCase(TestCase):
@@ -71,6 +122,35 @@ class ArticlePageTestCase(TestCase):
 
 #   TODO: verify series articles, order, overridden details
 #   TODO: verify related articles
+
+    def test_in_depth_contains_in_depth(self):
+        article = ArticlePage.objects.get(pk=6)
+        indepth = InDepthPage.objects.all().first()
+        actual = article.series_articles
+        self.assertEqual(1, len(actual))
+        self.assertEqual(indepth, actual[0][0])
+
+    def test_other_articles_in_in_depth(self):
+        article = ArticlePage.objects.get(pk=6)
+        other_article = ArticlePage.objects.get(pk=7)
+        actual = article.series_articles
+        self.assertIn(other_article, actual[0][1])
+
+    def test_in_depth_artcles_does_not_contain_self(self):
+        article = ArticlePage.objects.get(pk=6)
+        actual = article.series_articles
+        self.assertNotIn(article, actual[0][1])
+
+    def test_article_has_override_text_for_in_depth_related(self):
+        article = ArticlePage.objects.get(pk=6)
+        override = article.series_articles[0][1][0].override_text
+        self.assertEqual("<p>This is overridden text.</p>", override)
+
+    def test_article_has_override_image_for_in_depth_related(self):
+        article = ArticlePage.objects.get(pk=6)
+        image = Image.objects.get(pk=1)
+        override = article.series_articles[0][1][0].override_image
+        self.assertEqual(image, override)
 
     def test_topics_includes_allprimary_and_secondary_topics(self):
         article = ArticlePage.objects.get(slug="test-article-4")

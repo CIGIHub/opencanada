@@ -124,7 +124,7 @@
     "fields": {
       "override_image": null,
       "article": 6,
-      "sort_order": 0,
+      "sort_order": 1,
       "in_depth": 9,
       "override_text": ""
     },
@@ -133,14 +133,29 @@
   },
   {
     "fields": {
-      "override_image": null,
+      "override_image": 1,
       "article": 7,
-      "sort_order": 1,
+      "sort_order": 0,
       "in_depth": 9,
       "override_text": "<p>This is overridden text.</p>"
     },
     "model": "articles.indeptharticlelink",
     "pk": 2
+  },
+  {
+    "fields": {
+      "focal_point_width": null,
+      "title": "testcat.jpg",
+      "focal_point_height": null,
+      "created_at": "2015-06-25T17:50:43.166Z",
+      "focal_point_x": null,
+      "focal_point_y": null,
+      "height": 67,
+      "width": 100,
+      "file": "original_images/testcat.jpg"
+    },
+    "model": "wagtailimages.image",
+    "pk": 1
   },
   {
     "fields": {
