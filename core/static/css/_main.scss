@@ -2,6 +2,7 @@
 body{
   color: $text-color;
   font-family: $serif;
+  padding-top: 100px;
 }
 
 h1{
@@ -32,7 +33,6 @@ header{
     &.navbar{
       margin: 0;
       padding: 10px 0;
-      position: relative;
     }
     .navbar-brand{
       height: auto;
@@ -58,6 +58,7 @@ header{
     }
     .navbar-right{
       margin-top: 35px;
+      margin-right: 0px;
     }
     .navbar-nav.menu{
       margin-right: 10px;
@@ -92,6 +93,50 @@ header{
     }
   }
 
+  &.article-page{
+     .navbar-brand{
+       display:none;
+     }
+    .navbar-header{
+      margin: 0 15px;
+      float:none;
+      button{
+        margin-top: 0px;
+      }
+    }
+    .navbar-toggle{
+        display: block;
+        float:none;
+      margin-bottom: 0px;
+    }
+    .navbar-collapse.collapse {
+        display: none !important;
+    }
+    .navbar-collapse.collapse.in {
+        display: block !important;
+    }
+
+    .navbar-nav{
+      float: none;
+        > li {
+          display:block;
+          position:relative;
+          float: none;
+          > a {
+              padding-top: 10px;
+              padding-bottom: 10px;
+              line-height: 20px;
+          }
+        }
+    }
+
+    @media(max-width: $screen-md){
+      .navbar-brand{
+       display:block;
+     }
+    }
+  }
+
   @media(min-width: $screen-md){
     nav .navbar-brand{
       max-width: 100%;
@@ -100,6 +145,8 @@ header{
 
   @media(max-width: $screen-sm){
     .tagline{display: none}
+
+
 
     nav{
       .navbar{
@@ -116,6 +163,10 @@ header{
       }
     }
   }
+
+
+
+
 }
 
 .featured-topics{

@@ -1,21 +1,18 @@
 {% load wagtailcore_tags static %}
 
-<header role="banner">
-    <div class="container">
-        <div class="header-content">
-
-        <nav class="navbar navbar-fixed-top">
-
+<header role="banner" class="navbar-fixed-top">
+    <div class="main-menu container-fluid">
+        <nav class="navbar">
             <!-- Brand and toggle get grouped for better mobile display -->
               <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-menu">
                  <i class="fa fa-list-ul"></i>
                 </button>
                 <a class="navbar-brand" href="/"><img src="{% static 'img/opencanada-logo-white.png' %}" alt="OpenCanada Logo" class="img-responsive" ></a>
               </div>
 
               <!-- Collect the nav links, forms, and other content for toggling -->
-              <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+              <div class="collapse navbar-collapse navbar-right" id="main-menu">
                 <ul class="nav navbar-nav menu">
                   <li><a href="#">About</a></li>
                   <li><a href="#">Contributors</a></li>
@@ -34,7 +31,7 @@
           {#      </form>#}
 
               </div><!-- /.navbar-collapse -->
-
         </nav>
     </div>
+
 </header>
