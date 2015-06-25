@@ -95,6 +95,11 @@ class InDepthPageTestCase(TestCase):
 
 #   TODO: verify related articles
 
+    def test_related_articles_returns_the_number_requested(self):
+        indepth = InDepthPage.objects.all().first()
+        related_articles = indepth.related_articles(number=2)
+        self.assertEqual(2, len(related_articles))
+
 
 class ArticlePageTestCase(TestCase):
     fixtures = ["articlestest.json", ]

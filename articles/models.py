@@ -247,6 +247,11 @@ class InDepthPage(Page):
         all_topics.sort(key=attrgetter('name'))
         return all_topics
 
+    def related_articles(self, number):
+        articles = ArticlePage.objects.live().all()[:number]
+        # TODO: pick actual related articles based on primary topic, secondary topics, authors
+        return articles
+
 InDepthPage.content_panels = Page.content_panels + [
     StreamFieldPanel('body'),
     ImageChooserPanel('image'),
