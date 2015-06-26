@@ -1,7 +1,7 @@
 from django.test import TestCase
 from wagtail.wagtailimages.models import Image
 
-from people.models import Contributor
+from people.models import ContributorPage
 
 from .models import (ArticleListPage, ArticlePage, ArticleTopicLink,
                      InDepthListPage, InDepthPage, Topic)
@@ -16,22 +16,27 @@ class InDepthPageTestCase(TestCase):
 
     def test_has_right_authors_from_articles(self):
         indepth = InDepthPage.objects.all().first()
-        bob = Contributor.objects.get(email="bobsmith@example.com")
-        joe = Contributor.objects.get(email="joesampson@example.com")
+        bob = ContributorPage.objects.get(email="bobsmith@example.com")
+        joe = ContributorPage.objects.get(email="joesampson@example.com")
 
         self.assertIn(bob, indepth.authors)
         self.assertIn(joe, indepth.authors)
 
     def test_authors_in_alphabetical_order(self):
         indepth = InDepthPage.objects.all().first()
-        bob = Contributor.objects.get(email="bobsmith@example.com")
-        joe = Contributor.objects.get(email="joesampson@example.com")
+        bob = ContributorPage.objects.get(email="bobsmith@example.com")
+        joe = ContributorPage.objects.get(email="joesampson@example.com")
 
         self.assertEqual(joe, indepth.authors[0])
         self.assertEqual(bob, indepth.authors[1])
 
         bob.last_name = "Achange"
-        bob.save()
+
+        revision = bob.save_revision(
+            user=None,
+            submitted_for_moderation=False,
+        )
+        revision.publish()
 
         self.assertEqual(bob, indepth.authors[0])
         self.assertEqual(joe, indepth.authors[1])
@@ -39,8 +44,8 @@ class InDepthPageTestCase(TestCase):
     def test_in_depth_articles(self):
         indepth = InDepthPage.objects.all().first()
 
-        a6 = ArticlePage.objects.get(pk=6)
-        a7 = ArticlePage.objects.get(pk=7)
+        a6 = ArticlePage.objects.get(pk=7)
+        a7 = ArticlePage.objects.get(pk=8)
 
         self.assertEqual(2, len(indepth.articles))
 
@@ -50,8 +55,8 @@ class InDepthPageTestCase(TestCase):
     def test_in_depth_articles_order(self):
         indepth = InDepthPage.objects.all().first()
 
-        a6 = ArticlePage.objects.get(pk=6)
-        a7 = ArticlePage.objects.get(pk=7)
+        a6 = ArticlePage.objects.get(pk=7)
+        a7 = ArticlePage.objects.get(pk=8)
 
         self.assertEqual(a7, indepth.articles[0])
         self.assertEqual(a6, indepth.articles[1])
@@ -95,6 +100,11 @@ class InDepthPageTestCase(TestCase):
 
 #   TODO: verify related articles
 
+    def test_related_articles_returns_the_number_requested(self):
+        indepth = InDepthPage.objects.all().first()
+        related_articles = indepth.related_articles(number=2)
+        self.assertEqual(2, len(related_articles))
+
 
 class ArticlePageTestCase(TestCase):
     fixtures = ["articlestest.json", ]
@@ -105,7 +115,7 @@ class ArticlePageTestCase(TestCase):
 
     def test_single_author_has_expected_author(self):
         article = ArticlePage.objects.get(slug="test-article-1")
-        bob = Contributor.objects.get(email="bobsmith@example.com")
+        bob = ContributorPage.objects.get(email="bobsmith@example.com")
         self.assertEqual(article.authors[0], bob)
 
     def test_multiple_authors(self):
@@ -114,40 +124,53 @@ class ArticlePageTestCase(TestCase):
 
     def test_single_author_has_expected_author_in_order(self):
         article = ArticlePage.objects.get(slug="test-article-4")
-        mary = Contributor.objects.get(email="marysue@example.com")
-        joe = Contributor.objects.get(email="joesampson@example.com")
+        mary = ContributorPage.objects.get(email="marysue@example.com")
+        joe = ContributorPage.objects.get(email="joesampson@example.com")
 
         self.assertEqual(article.authors[0], mary)
         self.assertEqual(article.authors[1], joe)
 
-#   TODO: verify series articles, order, overridden details
 #   TODO: verify related articles
 
+    def test_related_articles_returns_the_number_requested(self):
+        article = ArticlePage.objects.get(id=9)
+        related_articles = article.related_articles(number=2)
+        self.assertEqual(2, len(related_articles))
+
+    def test_related_articles_excludes_self(self):
+        article = ArticlePage.objects.get(id=9)
+        related_articles = article.related_articles(number=10)
+        self.assertNotIn(article, related_articles)
+
+    # TODO: Includes primary topic as filter
+    # TODO: Includes secondary topics as filter
+    # TODO: Includes authors as filter
+
     def test_in_depth_contains_in_depth(self):
-        article = ArticlePage.objects.get(pk=6)
+        article = ArticlePage.objects.get(pk=7)
         indepth = InDepthPage.objects.all().first()
         actual = article.series_articles
         self.assertEqual(1, len(actual))
         self.assertEqual(indepth, actual[0][0])
 
     def test_other_articles_in_in_depth(self):
-        article = ArticlePage.objects.get(pk=6)
-        other_article = ArticlePage.objects.get(pk=7)
+        article = ArticlePage.objects.get(pk=7)
+        other_article = ArticlePage.objects.get(pk=8)
         actual = article.series_articles
         self.assertIn(other_article, actual[0][1])
 
     def test_in_depth_artcles_does_not_contain_self(self):
-        article = ArticlePage.objects.get(pk=6)
+        article = ArticlePage.objects.get(pk=7)
         actual = article.series_articles
         self.assertNotIn(article, actual[0][1])
 
     def test_article_has_override_text_for_in_depth_related(self):
-        article = ArticlePage.objects.get(pk=6)
+        article = ArticlePage.objects.get(pk=7)
         override = article.series_articles[0][1][0].override_text
         self.assertEqual("<p>This is overridden text.</p>", override)
 
     def test_article_has_override_image_for_in_depth_related(self):
-        article = ArticlePage.objects.get(pk=6)
+        article = ArticlePage.objects.get(pk=7)
         image = Image.objects.get(pk=1)
         override = article.series_articles[0][1][0].override_image
         self.assertEqual(image, override)

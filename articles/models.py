@@ -14,8 +14,6 @@ from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 
-from people import models as people_models
-
 from . import fields as article_fields
 
 
@@ -89,6 +87,10 @@ class ArticlePage(Page):
         all_topics.sort(key=attrgetter('name'))
         return all_topics
 
+    def related_articles(self, number):
+        articles = ArticlePage.objects.live().all().exclude(id=self.id)[:number]
+        # TODO: pick actual related articles based on primary topic, secondary topics, authors
+        return articles
 
 ArticlePage.content_panels = Page.content_panels + [
     FieldPanel('subtitle'),
@@ -126,7 +128,7 @@ class ArticleTopicLink(models.Model):
 @python_2_unicode_compatible
 class ArticleAuthorLink(Orderable, models.Model):
     author = models.ForeignKey(
-        "people.Contributor",
+        "people.ContributorPage",
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
@@ -141,7 +143,7 @@ class ArticleAuthorLink(Orderable, models.Model):
         return "{} {} {}".format(self.article.title, self.author.first_name, self.author.last_name)
 
     panels = [
-        SnippetChooserPanel('author', people_models.Contributor),
+        PageChooserPanel('author', 'people.ContributorPage'),
     ]
 
 
@@ -242,6 +244,11 @@ class InDepthPage(Page):
         all_topics = list(set(all_topics))
         all_topics.sort(key=attrgetter('name'))
         return all_topics
+
+    def related_articles(self, number):
+        articles = ArticlePage.objects.live().all()[:number]
+        # TODO: pick actual related articles based on primary topic, secondary topics, authors
+        return articles
 
 InDepthPage.content_panels = Page.content_panels + [
     StreamFieldPanel('body'),

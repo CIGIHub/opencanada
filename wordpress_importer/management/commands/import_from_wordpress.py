@@ -15,7 +15,7 @@ from wagtail.wagtailcore.models import Page
 from wagtail.wagtailimages.models import Image
 
 from articles.models import ArticleAuthorLink, ArticlePage
-from people.models import Contributor
+from people.models import ContributorListPage, ContributorPage
 from wordpress_importer.models import ImageImports, PostImports
 from wordpress_importer.utils import get_setting
 
@@ -108,31 +108,45 @@ class Command(BaseCommand):
     def load_contributors(self):
         results = self.get_contributor_data()
 
+        contributor_list_page = ContributorListPage.objects.get(slug="contributors")
+
         for (user_email, meta_key, meta_value) in results:
-            contributor, created = Contributor.objects.get_or_create(
-                email=user_email)
+
+            pages = ContributorPage.objects.filter(email=user_email)
+            if pages.count() > 0:
+                page = pages.first()
+            else:
+                page = ContributorPage(owner=None)
+                contributor_list_page.add_child(instance=page)
+
+            page.email = user_email\
+
             if meta_key == "first_name":
-                contributor.first_name = meta_value
+                page.first_name = meta_value
             elif meta_key == "last_name":
-                contributor.last_name = meta_value
+                page.last_name = meta_value
             elif meta_key == "nickname":
-                contributor.nickname = meta_value
+                page.nickname = meta_value
             elif meta_key == "twitter":
-                contributor.twitter_handle = meta_value
+                page.twitter_handle = meta_value
             elif meta_key == "description":
-                contributor.short_bio = meta_value
+                page.short_bio = meta_value
             elif meta_key == "userphoto_image_file":
                 source = get_setting("USER_PHOTO_URL_PATTERN").format(
                     meta_value)
                 filename = meta_value
                 try:
                     self.download_image(source, filename)
-                    contributor.headshot = Image.objects.get(title=filename)
+                    page.headshot = Image.objects.get(title=filename)
                 except DownloadException:
                     # TODO: log issue here
                     pass
 
-            contributor.save()
+            revision = page.save_revision(
+                user=None,
+                submitted_for_moderation=False,
+            )
+            revision.publish()
 
     def get_post_data(self):
         cursor = self.connection.cursor()
@@ -193,7 +207,7 @@ class Command(BaseCommand):
             else:
                 page.excerpt = ''
 
-            contributor = Contributor.objects.filter(email=author_email).first()
+            contributor = ContributorPage.objects.filter(email=author_email).first()
             if contributor:
                 author_link, created = ArticleAuthorLink.objects.get_or_create(
                     author=contributor,

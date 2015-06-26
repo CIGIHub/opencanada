@@ -1,5 +1,5 @@
-from django.contrib import admin
-
-from . import models
-
-admin.site.register(models.Contributor)
+# from django.contrib import admin
+#
+# from . import models
+#
+# admin.site.register(models.Contributor)

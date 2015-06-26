@@ -2,19 +2,35 @@
 from __future__ import unicode_literals
 
 from django import VERSION as DJANGO_VERSION
-from django.db import migrations
+from django.db import migrations, models
 
 
-def create_indepth_page(apps, schema_editor):
+def create_pages(apps, schema_editor):
     Page = apps.get_model("wagtailcore", "Page")
     InDepthListPage = apps.get_model("articles", "InDepthListPage")
+    ArticleListPage = apps.get_model("articles", "ArticleListPage")
     home_page = Page.objects.get(slug="home")
     ContentType = apps.get_model("contenttypes", "ContentType")
 
+    article_list_page_content_type, created = ContentType.objects.get_or_create(
+        model='articlelistpage',
+        app_label='articles'
+    )
+    # Create features page
+    features_page = ArticleListPage.objects.create(
+        title="Features",
+        slug='features',
+        content_type_id=article_list_page_content_type.pk,
+        path='000100010001',
+        depth=3,
+        numchild=0,
+        url_path='/home/features/',
+    )
+    home_page.numchild += 1
+
     indepth_list_page_content_type, created = ContentType.objects.get_or_create(
         model='indepthlistpage',
-        app_label='articles',
-        defaults={'name': 'indepthlistpage'} if DJANGO_VERSION < (1, 8) else {}
+        app_label='articles'
     )
 
     # Create indepth page
@@ -36,10 +52,10 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('contenttypes', '__latest__'),
-        ('articles', '0009_auto_20150619_2156'),
         ('core', '__latest__'),
+        ('articles', '0002_articleauthorlink_author'),
     ]
 
     operations = [
-        migrations.RunPython(create_indepth_page),
+        migrations.RunPython(create_pages),
     ]

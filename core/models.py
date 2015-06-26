@@ -2,14 +2,12 @@ from __future__ import absolute_import, unicode_literals
 
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
-from wagtail.wagtailadmin.edit_handlers import (FieldPanel, PageChooserPanel,
-                                                RichTextFieldPanel)
+from wagtail.wagtailadmin.edit_handlers import FieldPanel, PageChooserPanel
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 
 from articles import models as article_models
-from people import models as people_models
 
 
 @python_2_unicode_compatible
@@ -62,17 +60,4 @@ class HomePage(Page):
 HomePage.content_panels = Page.content_panels + [
     PageChooserPanel("featured_item", "articles.ArticlePage"),
     SnippetChooserPanel("featured_item_font_style", FontStyle),
-]
-
-
-register_snippet(people_models.Contributor)
-
-people_models.Contributor.panels = [
-    FieldPanel('first_name'),
-    FieldPanel('last_name'),
-    FieldPanel('nickname'),
-    FieldPanel('email'),
-    FieldPanel('twitter_handle'),
-    RichTextFieldPanel('short_bio'),
-    RichTextFieldPanel('long_bio'),
 ]

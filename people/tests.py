@@ -4,6 +4,8 @@ from . import models
 
 
 class ContributorTestCase(TestCase):
-    def testNoRequiredFields(self):
-        contributor = models.Contributor.objects.create()
+    def test_title_from_name(self):
+        contributor = models.ContributorPage.objects.create(first_name="Bob", last_name="Smith", depth=1)
         contributor.save()
+
+        self.assertEqual(contributor.title, "Bob Smith")

@@ -28,7 +28,7 @@
       "nickname": "Bobby Smith",
       "email": "bob@example.com"
     },
-    "model": "people.contributor",
+    "model": "people.contributorpage",
     "pk": 1
   }
 ]
