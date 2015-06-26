@@ -1,28 +1,32 @@
 [
   {
     "fields": {
-      "name": "Topic 1"
+      "name": "Topic 1",
+      "slug": "topic-1"
     },
     "model": "articles.topic",
     "pk": 1
   },
   {
     "fields": {
-      "name": "Topic 2"
+      "name": "Topic 2",
+      "slug": "topic-2"
     },
     "model": "articles.topic",
     "pk": 2
   },
   {
     "fields": {
-      "name": "Topic 3"
+      "name": "Topic 3",
+      "slug": "topic-3"
     },
     "model": "articles.topic",
     "pk": 3
   },
   {
     "fields": {
-      "name": "Topic 4"
+      "name": "Topic 4",
+      "slug": "topic-4"
     },
     "model": "articles.topic",
     "pk": 4
