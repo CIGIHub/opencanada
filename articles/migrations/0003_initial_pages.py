@@ -20,7 +20,7 @@ def create_pages(apps, schema_editor):
     features_page = ArticleListPage.objects.create(
         title="Features",
         slug='features',
-        content_type=article_list_page_content_type,
+        content_type_id=article_list_page_content_type.pk,
         path='000100010001',
         depth=3,
         numchild=0,

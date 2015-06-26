@@ -20,7 +20,7 @@ def create_page(apps, schema_editor):
     features_page = ContributorListPage.objects.create(
         title="Contributors",
         slug='contributors',
-        content_type=contributor_list_page_content_type,
+        content_type_id=contributor_list_page_content_type.pk,
         path='000100010003',
         depth=3,
         numchild=0,
