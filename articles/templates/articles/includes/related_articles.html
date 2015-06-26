@@ -5,13 +5,21 @@
     <section class="related-articles">
         <h2>Related Articles</h2>
         <div class="row">
-            {% for article in self|related_articles:3 %}
+            {% for article in self|related_articles:article_count %}
             <div class="col-xs-4">
                 <figure>
-                    <img src="{% static 'img/assets/related-article.png' %}">
+                    {% image article.main_image width-400 %}
                 </figure>
-                <h3><a href="#">{{ article.title }}</a></h3>
-                <div class="contributors">By: <a href="#">Kirsty Duncan</a> (<span>@</span>kirstyduncan)</div>
+                <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
+                <div class="contributors">By:
+                    {% for author in article.authors %}
+                        <div class="contributor">
+                            <a href="{{ author.url  }}">
+                             {{ author.first_name }} {{ author.last_name }}
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
 
             {% endfor %}

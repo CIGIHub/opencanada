@@ -3,12 +3,12 @@
 {% block in_the_series %}
     {% for article in articles %}
         <div class="row">
-            <div class="col-xs-2">
+            <div class="col-xs-3">
                 <figure>
-                {% if article.override_image %}{% image article.override_image width-150 %}{% else %}{% image article.main_image width-150 %}{% endif %}
+                {% if article.override_image %}{% image article.override_image width-175 %}{% else %}{% image article.main_image width-175 %}{% endif %}
             </figure>
             </div>
-            <div class="col-xs-10">
+            <div class="col-xs-9">
                 <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
                 {% if article.override_text %}{{ article.override_text|richtext }}{% else %}{{ article.excerpt|richtext }}{% endif %}
             </div>

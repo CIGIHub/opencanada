@@ -37,32 +37,36 @@
                 <div class="home-link"><a href="/"><img src="{% static 'img/opencanada-mark.png' %}"></a></div>
             </div>
 
-            <div class="topics related">
+            {% if self.topics %}
+                <div class="topics related">
                     <div class="tag-icon"><i class="fa fa-tags"></i> Topics:</div>
-{#                    <ul class="list-inline">#}
-{#                        {% for topic in self.topics %}#}
-{#                            <li><a href="{{ topic.url }}">{{ topic }}</a></li>#}
-{#                        {% endfor %}#}
-{#                    </ul>#}
+                    <ul class="list-inline">
+                        {% for topic in self.topics %}
+                            <li><a href="{{ topic.url }}">{{ topic }}</a></li>
+                        {% endfor %}
+                    </ul>
                 </div>
+            {% endif %}
         </article>
 
-        <div class="in-the-series">
+        <section class="in-the-series">
             <h2>Also in the series</h2>
-
+            {# TODO: This was added to handle the off chance that an article is in more than one indepth. Change theming as appropriate.  #}
             {% for indepth, articles in self.series_articles %}
-                <div class="indepth-teaser">
-                    <a href="{{ indepth.url }}">{{ indepth.title }}</a> {# TODO: This was added to handle the off chance that an article is in more than one indepth. Change theming as appropriate.  #}
+                <div class="series-teaser">
+                    <a href="{{ indepth.url }}">{{ indepth.title }}</a>
                     {{ indepth.body }}
                 </div>
                 {% block in_the_series %}
                     {% include 'articles/includes/in_the_series.html' %}
                 {% endblock %}
             {%  endfor %}
-        </div>
+        </section>
 
         {% block related_articles %}
-            {% include 'articles/includes/related_articles.html' %}
+            {% with article_count=3 %}
+                {% include 'articles/includes/related_articles.html' %}
+            {% endwith %}
         {% endblock %}
     </div>
 

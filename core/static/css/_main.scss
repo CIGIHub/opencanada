@@ -364,7 +364,7 @@ footer{
   }
 }
 
-.contributors{
+.contributor{
   @include type($text-color);
   a{
     color: $text_color;
@@ -383,10 +383,7 @@ main{
   }
 }
 
-article{
-  border-bottom: $border-grey;
-  margin-bottom: 20px;
-
+article, .related-articles{
   .contributors, .date{
     display:inline-block;
   }
@@ -402,6 +399,12 @@ article{
   .contributor:last-child:after{
     content: '';
   }
+}
+article{
+  border-bottom: $border-grey;
+  margin-bottom: 20px;
+
+
   h1, h2{
     margin: 0 0 20px 0;
   }
@@ -445,7 +448,6 @@ article{
     font-size: 65px;
     line-height: 55px;
     margin-right: 10px;
-    font-family: $sans-serif;
     float: left;
   }
 
@@ -489,7 +491,6 @@ article{
       margin-top: 40px;
     }
   }
-
 }
 
 .in-the-series, .related-articles{
@@ -510,9 +511,10 @@ article{
 }
 
 .in-the-series{
-  .intro, .row{
+  .intro, .row, .series-teaser{
     @include gutter(0, 20px);
   }
+  border-bottom: $border-grey;
 }
 
 .related-articles{

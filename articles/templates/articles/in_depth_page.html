@@ -16,13 +16,8 @@
                 <h1>{{ self.title }}</h1>
                 <h2>{{ self.subtitle|richtext }}</h2>
                 <div class="contributors">Series Contributors:
-                    {% for linked_article in self.related_article_links.all %}
-                        <div class="contributor">
-                            <a href="{{ linked_article.article.author.url  }}">
-                             {{ linked_article.article.author.first_name }}
-                                {{ linked_article.article.author.last_name }}
-                            </a>
-                        </div>
+                    {% for author in self.authors %}
+                        <div class="contributor"><a href="{{ author.url  }}">{{ author.first_name }} {{ author.last_name }}</a></div>
                     {% endfor %}
 
                 </div>
@@ -31,7 +26,6 @@
 
             <div class="in-the-series">
                  <h2>In the series</h2>
-
                 {% with articles=self.articles %}
                     {% block in_the_series %}
                         {% include 'articles/includes/in_the_series.html' %}
@@ -39,17 +33,22 @@
                 {% endwith %}
             </div>
 
-            <div class="topics related">
-                    <div class="tag-icon"><i class="fa fa-tags"></i> Topics:</div>
-                    <ul class="list-inline">
-                        <li><a href="#">R2P</a></li>
-                        <li><a href="#">Iraq</a></li>
-                    </ul>
-                </div>
+{#            {% if self.topics %}#}
+{#                <div class="topics related">#}
+{#                    <div class="tag-icon"><i class="fa fa-tags"></i> Topics:</div>#}
+{#                    <ul class="list-inline">#}
+{#                        {% for topic in self.topics %}#}
+{#                            <li><a href="{{ topic.url }}">{{ topic }}</a></li>#}
+{#                        {% endfor %}#}
+{#                    </ul>#}
+{#                </div>#}
+{#            {% endif %}#}
         </article>
 
         {% block related_articles %}
-            {% include 'articles/includes/related_articles.html' %}
+            {% with article_count=6 %}
+                {% include 'articles/includes/related_articles.html' %}
+            {% endwith %}
         {% endblock %}
     </div>
 
