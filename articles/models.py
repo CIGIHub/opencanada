@@ -255,3 +255,33 @@ InDepthPage.content_panels = Page.content_panels + [
     ImageChooserPanel('image'),
     InlinePanel('related_article_links', label="Articles")
 ]
+
+
+@python_2_unicode_compatible
+class Headline(models.Model):
+    containing_page = models.ForeignKey(
+        'wagtailcore.Page',
+        related_name='historic_headlines'
+    )
+
+    featured_item = models.ForeignKey(
+        'wagtailcore.Page',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    featured_item_font_style = models.ForeignKey(
+        'core.FontStyle',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    start_date = models.DateTimeField(auto_now_add=True)
+    end_date = models.DateTimeField(null=True)
+
+    def __str__(self):
+        return "{}".format(self.id)
