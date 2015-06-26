@@ -146,8 +146,6 @@ header{
   @media(max-width: $screen-sm){
     .tagline{display: none}
 
-
-
     nav{
       .navbar{
         margin-bottom: 0px;
@@ -163,10 +161,6 @@ header{
       }
     }
   }
-
-
-
-
 }
 
 .featured-topics{
@@ -414,6 +408,13 @@ article{
   .title, .story{
     @include gutter(40px, 20px);
   }
+  .topics{
+    .tag-icon{
+      display:inline-block;
+    }
+    @include type($text-color);
+    @include inline-list($red);
+  }
   .topics.related{
     @include gutter(0px, 20px);
   }
@@ -421,13 +422,11 @@ article{
   .type{
     @include type($red);
   }
-  .topics{
-    display: block;
-    .tag-icon{
-      display: inline-block;
-      @include type($text_color);
+  .primary-topic{
+    @include type($red);
+    i{
+      color: $text-color;
     }
-    @include inline-list($red, $text_color);
   }
 
   ul.share-links{

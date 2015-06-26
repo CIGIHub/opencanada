@@ -5,22 +5,26 @@
     <div class="container article-page">
         <article>
             <div class="title centered">
-                <div class="topics main">
-                    <div class="tag-icon"><i class="fa fa-tags"></i></div>
-                    <ul class="list-inline">
-                        <li><a href="#">R2P</a></li>
-                        <li><a href="#">Iraq</a></li>
-                    </ul>
+                <div class="primary-topic">
+                    <i class="fa fa-tags"></i>
+                    <a href="{{ self.primary_topic.url }}">{{ self.primary_topic }}</a>
                 </div>
 
                 <h1>{{ self.title }}</h1>
                 <h2>{{ self.subtitle|richtext }}</h2>
 
-                <div class="contributors">By: {% for author in self.authors %}<a href="#">{{ author.first_name }} {{ author.last_name }}</a> (<span>@</span>{{ author.twitter_handle }})</div>{% if not forloop.last %}, {% endif %}{% endfor %}
+                <div class="contributors">By:
+                    {% for author in self.authors %}
+                    <div class="contributor">
+                        <a href="author.url">{{ author.first_name }} {{ author.last_name }}</a>
+                        {% if author.twitter_handle %}
+                            (<span>@</span>{{ author.twitter_handle }})
+                        {% endif %}
+                    </div>{% endfor %}</div>
                 <div class="date"> / {{ self.first_published_at|date:"F j, Y" }}</div>
             </div>
             <figure>
-                <img src="{% static 'img/assets/R2P-at-10.png' %}">
+                {% image self.main_image width-940 %}
             </figure>
             <ul class="share-links">
                 <li><span class="facebook-share-link" data-url="{{ self.url }}"><i class="fa fa-facebook"></i></span></li>
@@ -35,10 +39,11 @@
 
             <div class="topics related">
                     <div class="tag-icon"><i class="fa fa-tags"></i> Topics:</div>
-                    <ul class="list-inline">
-                        <li><a href="#">R2P</a></li>
-                        <li><a href="#">Iraq</a></li>
-                    </ul>
+{#                    <ul class="list-inline">#}
+{#                        {% for topic in self.topics %}#}
+{#                            <li><a href="{{ topic.url }}">{{ topic }}</a></li>#}
+{#                        {% endfor %}#}
+{#                    </ul>#}
                 </div>
         </article>
 
@@ -46,7 +51,10 @@
             <h2>Also in the series</h2>
 
             {% for indepth, articles in self.series_articles %}
-                <h3>{{ indepth.title }}</h3> {# TODO: This was added to handle the off chance that an article is in more than one indepth. Change theming as appropriate.  #}
+                <div class="indepth-teaser">
+                    <a href="{{ indepth.url }}">{{ indepth.title }}</a> {# TODO: This was added to handle the off chance that an article is in more than one indepth. Change theming as appropriate.  #}
+                    {{ indepth.body }}
+                </div>
                 {% block in_the_series %}
                     {% include 'articles/includes/in_the_series.html' %}
                 {% endblock %}
