@@ -52,7 +52,6 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('contenttypes', '__latest__'),
-        ('core', '__latest__'),
         ('articles', '0002_articleauthorlink_author'),
     ]
 

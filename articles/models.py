@@ -2,9 +2,12 @@ from __future__ import absolute_import, unicode_literals
 
 from operator import attrgetter
 
+from basic_site.models import UniquelySlugable
 from django.db import models
+from django.shortcuts import get_object_or_404, render
 from django.utils.encoding import python_2_unicode_compatible
 from modelcluster.fields import ParentalKey
+from wagtail.contrib.wagtailroutablepage.models import RoutablePageMixin, route
 from wagtail.wagtailadmin.edit_handlers import (FieldPanel, InlinePanel,
                                                 PageChooserPanel,
                                                 StreamFieldPanel)
@@ -32,13 +35,40 @@ class ArticleListPage(Page):
         return self.title
 
 
-class Topic(models.Model):
+class Topic(UniquelySlugable):
     name = models.CharField(max_length=1024)
 
     def __str__(self):
         return self.name
 
+
 register_snippet(Topic)
+
+
+class TopicListPage(RoutablePageMixin, Page):
+
+    @property
+    def topics(self):
+        return Topic.objects.all().order_by("name")
+
+    @route(r'^$', name="topic_list")
+    def topics_list(self, request):
+        context = {
+            "self": self,
+        }
+        return render(request, "articles/topic_list_page.html", context)
+
+    @route(r'^([\w-]+)/$', name="topic")
+    def topic_view(self, request, topic_slug):
+        topic = get_object_or_404(Topic, slug=topic_slug)
+
+        articles = ArticlePage.objects.live().filter(primary_topic=topic).order_by('-first_published_at')
+        context = {
+            "self": self,
+            "topic": topic,
+            "articles": articles,
+        }
+        return render(request, "articles/topic_page.html", context)
 
 
 @python_2_unicode_compatible
@@ -82,9 +112,11 @@ class ArticlePage(Page):
     def topics(self):
         primary_topic = self.primary_topic
         all_topics = [link.topic for link in self.topic_links.all()]
-        all_topics.append(primary_topic)
+        if primary_topic:
+            all_topics.append(primary_topic)
         all_topics = list(set(all_topics))
-        all_topics.sort(key=attrgetter('name'))
+        if len(all_topics) > 0:
+            all_topics.sort(key=attrgetter('name'))
         return all_topics
 
     def related_articles(self, number):
@@ -237,12 +269,15 @@ class InDepthPage(Page):
 
     @property
     def topics(self):
-        all_topics = [self.primary_topic]
+        all_topics = []
+        if self.primary_topic:
+            all_topics.append(self.primary_topic)
         for article_link in self.related_article_links.all():
             all_topics.extend(article_link.article.topics)
 
         all_topics = list(set(all_topics))
-        all_topics.sort(key=attrgetter('name'))
+        if all_topics:
+            all_topics.sort(key=attrgetter('name'))
         return all_topics
 
     def related_articles(self, number):
@@ -255,3 +290,33 @@ InDepthPage.content_panels = Page.content_panels + [
     ImageChooserPanel('image'),
     InlinePanel('related_article_links', label="Articles")
 ]
+
+
+@python_2_unicode_compatible
+class Headline(models.Model):
+    containing_page = models.ForeignKey(
+        'wagtailcore.Page',
+        related_name='historic_headlines'
+    )
+
+    featured_item = models.ForeignKey(
+        'wagtailcore.Page',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    featured_item_font_style = models.ForeignKey(
+        'core.FontStyle',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    start_date = models.DateTimeField(auto_now_add=True)
+    end_date = models.DateTimeField(null=True)
+
+    def __str__(self):
+        return "{}".format(self.id)
