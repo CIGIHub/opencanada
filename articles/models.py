@@ -2,9 +2,12 @@ from __future__ import absolute_import, unicode_literals
 
 from operator import attrgetter
 
+from basic_site.models import UniquelySlugable
 from django.db import models
+from django.shortcuts import get_object_or_404, render
 from django.utils.encoding import python_2_unicode_compatible
 from modelcluster.fields import ParentalKey
+from wagtail.contrib.wagtailroutablepage.models import RoutablePageMixin, route
 from wagtail.wagtailadmin.edit_handlers import (FieldPanel, InlinePanel,
                                                 PageChooserPanel,
                                                 StreamFieldPanel)
@@ -32,13 +35,40 @@ class ArticleListPage(Page):
         return self.title
 
 
-class Topic(models.Model):
+class Topic(UniquelySlugable):
     name = models.CharField(max_length=1024)
 
     def __str__(self):
         return self.name
 
+
 register_snippet(Topic)
+
+
+class TopicListPage(RoutablePageMixin, Page):
+
+    @property
+    def topics(self):
+        return Topic.objects.all().order_by("name")
+
+    @route(r'^$', name="topic_list")
+    def topics_list(self, request):
+        context = {
+            "self": self,
+        }
+        return render(request, "articles/topic_list_page.html", context)
+
+    @route(r'^([\w-]+)/$', name="topic")
+    def topic_view(self, request, topic_slug):
+        topic = get_object_or_404(Topic, slug=topic_slug)
+
+        articles = ArticlePage.objects.live().filter(primary_topic=topic).order_by('-first_published_at')
+        context = {
+            "self": self,
+            "topic": topic,
+            "articles": articles,
+        }
+        return render(request, "articles/topic_page.html", context)
 
 
 @python_2_unicode_compatible

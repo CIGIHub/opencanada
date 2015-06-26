@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load static core_tags wagtailcore_tags wagtailimages_tags wagtailroutablepage_tags  %}
+
+{% block content %}
+    <div>
+    {% for article in articles %}
+        {% include "articles/includes/article_teaser.html" %}
+    {% endfor %}
+    </div>
+
+{% endblock %}
