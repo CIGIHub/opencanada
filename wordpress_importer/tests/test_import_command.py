@@ -11,7 +11,7 @@ from wagtail.wagtailcore.models import Page
 from wagtail.wagtailimages.models import Image
 
 from articles.models import ArticlePage
-from people.models import Contributor
+from people.models import ContributorPage
 from wordpress_importer.management.commands import import_from_wordpress
 from wordpress_importer.models import ImageImports, PostImports
 
@@ -66,44 +66,44 @@ class TestCommandImportFromWordPressLoadContributors(TestCase, ImageCleanUp):
     def testLoadContributorsCreatesContributor(self):
         command = import_from_wordpress.Command()
         command.load_contributors()
-        contributors = Contributor.objects.filter(email='bob@example.com')
+        contributors = ContributorPage.objects.filter(email='bob@example.com')
         self.assertEqual(1, contributors.count())
 
     def testLoadContributorsSetsFirstName(self):
         command = import_from_wordpress.Command()
         command.load_contributors()
-        contributors = Contributor.objects.filter(email='bob@example.com')
+        contributors = ContributorPage.objects.filter(email='bob@example.com')
         self.assertEqual('Bob', contributors.first().first_name)
 
     def testLoadContributorsSetsLastName(self):
         command = import_from_wordpress.Command()
         command.load_contributors()
-        contributors = Contributor.objects.filter(email='bob@example.com')
+        contributors = ContributorPage.objects.filter(email='bob@example.com')
         self.assertEqual('Smith', contributors.first().last_name)
 
     def testLoadContributorsSetsNickname(self):
         command = import_from_wordpress.Command()
         command.load_contributors()
-        contributors = Contributor.objects.filter(email='bob@example.com')
+        contributors = ContributorPage.objects.filter(email='bob@example.com')
         self.assertEqual('Bobby Smith', contributors.first().nickname)
 
     def testLoadContributorsSetsTwitterHandle(self):
         command = import_from_wordpress.Command()
         command.load_contributors()
-        contributors = Contributor.objects.filter(email='bob@example.com')
+        contributors = ContributorPage.objects.filter(email='bob@example.com')
         self.assertEqual('@bobsmith', contributors.first().twitter_handle)
 
     def testLoadContributorsSetsShortBio(self):
         command = import_from_wordpress.Command()
         command.load_contributors()
-        contributors = Contributor.objects.filter(email='bob@example.com')
+        contributors = ContributorPage.objects.filter(email='bob@example.com')
         self.assertEqual('Bob Smith is a person who does stuff.',
                          contributors.first().short_bio)
 
     def testLoadContributorsSetsImageFile(self):
         command = import_from_wordpress.Command()
         command.load_contributors()
-        contributors = Contributor.objects.filter(email='bob@example.com')
+        contributors = ContributorPage.objects.filter(email='bob@example.com')
 
         images = Image.objects.filter(title='testcat.jpg')
         self.assertEqual(1, images.count())
@@ -254,7 +254,7 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
         command.load_posts()
         pages = ArticlePage.objects.filter(
             slug='is-nato-ready-for-putin')
-        contributors = Contributor.objects.filter(email='bob@example.com')
+        contributors = ContributorPage.objects.filter(email='bob@example.com')
         self.assertEqual(pages.first().author_links.count(), 1)
         self.assertEqual(pages.first().author_links.first().author, contributors.first())
 

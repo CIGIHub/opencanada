@@ -79,7 +79,7 @@
     "fields": {
       "article": 6,
       "sort_order": 0,
-      "author": 1
+      "author": 11
     },
     "model": "articles.articleauthorlink",
     "pk": 1
@@ -88,7 +88,7 @@
     "fields": {
       "article": 7,
       "sort_order": 0,
-      "author": 2
+      "author": 12
     },
     "model": "articles.articleauthorlink",
     "pk": 2
@@ -97,7 +97,7 @@
     "fields": {
       "article": 8,
       "sort_order": 0,
-      "author": 3
+      "author": 13
     },
     "model": "articles.articleauthorlink",
     "pk": 3
@@ -106,7 +106,7 @@
     "fields": {
       "article": 10,
       "sort_order": 1,
-      "author": 2
+      "author": 12
     },
     "model": "articles.articleauthorlink",
     "pk": 4
@@ -115,7 +115,7 @@
     "fields": {
       "article": 10,
       "sort_order": 0,
-      "author": 3
+      "author": 13
     },
     "model": "articles.articleauthorlink",
     "pk": 5
@@ -156,48 +156,6 @@
     },
     "model": "wagtailimages.image",
     "pk": 1
-  },
-  {
-    "fields": {
-      "first_name": "Bob",
-      "last_name": "Smith",
-      "twitter_handle": "@bobsmith",
-      "short_bio": "This is a short bit about Bob.",
-      "headshot": null,
-      "long_bio": "This is a seemingly longer bit about Bob.",
-      "nickname": "bsmith",
-      "email": "bobsmith@example.com"
-    },
-    "model": "people.contributor",
-    "pk": 1
-  },
-  {
-    "fields": {
-      "first_name": "Joe",
-      "last_name": "Sampson",
-      "twitter_handle": "@joesampson",
-      "short_bio": "This is a short bit about Joe.",
-      "headshot": null,
-      "long_bio": "This is a seemingly longer bit about Joe.",
-      "nickname": "jsampson",
-      "email": "joesampson@example.com"
-    },
-    "model": "people.contributor",
-    "pk": 2
-  },
-  {
-    "fields": {
-      "first_name": "Mary",
-      "last_name": "Sue",
-      "twitter_handle": "@marysue",
-      "short_bio": "",
-      "headshot": null,
-      "long_bio": "",
-      "nickname": "msue",
-      "email": "marysue@example.com"
-    },
-    "model": "people.contributor",
-    "pk": 3
   },
   {
     "fields": {
@@ -336,6 +294,87 @@
   },
   {
     "fields": {
+      "locked": false,
+      "title": "Bob Smith",
+      "numchild": 0,
+      "show_in_menus": false,
+      "live": true,
+      "seo_title": "",
+      "latest_revision_created_at": "2015-06-24T15:03:04.918Z",
+      "depth": 4,
+      "search_description": "",
+      "content_type": [
+        "people",
+        "contributorpage"
+      ],
+      "has_unpublished_changes": false,
+      "path": "0001000100030001",
+      "first_published_at": "2015-06-24T15:03:04.936Z",
+      "url_path": "/home/contributor/bob-smith/",
+      "expired": false,
+      "slug": "bob-smith",
+      "expire_at": null,
+      "go_live_at": null
+    },
+    "model": "wagtailcore.page",
+    "pk": 11
+  },
+  {
+    "fields": {
+      "locked": false,
+      "title": "Joe Sampson",
+      "numchild": 0,
+      "show_in_menus": false,
+      "live": true,
+      "seo_title": "",
+      "latest_revision_created_at": "2015-06-24T15:03:04.918Z",
+      "depth": 4,
+      "search_description": "",
+      "content_type": [
+        "people",
+        "contributorpage"
+      ],
+      "has_unpublished_changes": false,
+      "path": "0001000100030002",
+      "first_published_at": "2015-06-24T15:03:04.936Z",
+      "url_path": "/home/contributor/joe-sampson/",
+      "expired": false,
+      "slug": "joe-sampson",
+      "expire_at": null,
+      "go_live_at": null
+    },
+    "model": "wagtailcore.page",
+    "pk": 12
+  },
+  {
+    "fields": {
+      "locked": false,
+      "title": "Mary Sue",
+      "numchild": 0,
+      "show_in_menus": false,
+      "live": true,
+      "seo_title": "",
+      "latest_revision_created_at": "2015-06-24T15:03:04.918Z",
+      "depth": 4,
+      "search_description": "",
+      "content_type": [
+        "people",
+        "contributorpage"
+      ],
+      "has_unpublished_changes": false,
+      "path": "0001000100030003",
+      "first_published_at": "2015-06-24T15:03:04.936Z",
+      "url_path": "/home/contributor/mary-sue/",
+      "expired": false,
+      "slug": "mary-sue",
+      "expire_at": null,
+      "go_live_at": null
+    },
+    "model": "wagtailcore.page",
+    "pk": 13
+  },
+  {
+    "fields": {
       "body": "[{\"type\": \"Heading\", \"value\": \"This is a heading\"}, {\"type\": \"Paragraph\", \"value\": \"<p>And some body text.</p>\"}]",
       "excerpt": "<p>This is an excerpt.</p>",
       "main_image": null,
@@ -377,6 +416,48 @@
     },
     "model": "articles.articlepage",
     "pk": 10
+  },
+  {
+    "fields": {
+      "first_name": "Bob",
+      "last_name": "Smith",
+      "twitter_handle": "@bobsmith",
+      "short_bio": "This is a short bit about Bob.",
+      "headshot": null,
+      "long_bio": "This is a seemingly longer bit about Bob.",
+      "nickname": "bsmith",
+      "email": "bobsmith@example.com"
+    },
+    "model": "people.contributorpage",
+    "pk": 11
+  },
+  {
+    "fields": {
+      "first_name": "Joe",
+      "last_name": "Sampson",
+      "twitter_handle": "@joesampson",
+      "short_bio": "This is a short bit about Joe.",
+      "headshot": null,
+      "long_bio": "This is a seemingly longer bit about Joe.",
+      "nickname": "jsampson",
+      "email": "joesampson@example.com"
+    },
+    "model": "people.contributorpage",
+    "pk": 12
+  },
+  {
+    "fields": {
+      "first_name": "Mary",
+      "last_name": "Sue",
+      "twitter_handle": "@marysue",
+      "short_bio": "",
+      "headshot": null,
+      "long_bio": "",
+      "nickname": "msue",
+      "email": "marysue@example.com"
+    },
+    "model": "people.contributorpage",
+    "pk": 13
   },
   {
     "fields": {

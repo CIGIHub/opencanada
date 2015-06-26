@@ -14,8 +14,6 @@ from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 
-from people import models as people_models
-
 from . import fields as article_fields
 
 
@@ -130,7 +128,7 @@ class ArticleTopicLink(models.Model):
 @python_2_unicode_compatible
 class ArticleAuthorLink(Orderable, models.Model):
     author = models.ForeignKey(
-        "people.Contributor",
+        "people.ContributorPage",
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
@@ -145,7 +143,7 @@ class ArticleAuthorLink(Orderable, models.Model):
         return "{} {} {}".format(self.article.title, self.author.first_name, self.author.last_name)
 
     panels = [
-        SnippetChooserPanel('author', people_models.Contributor),
+        PageChooserPanel('author', 'people.ContributorPage'),
     ]
 
 

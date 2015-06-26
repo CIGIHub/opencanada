@@ -1,7 +1,7 @@
 from django.test import TestCase
 from wagtail.wagtailimages.models import Image
 
-from people.models import Contributor
+from people.models import ContributorPage
 
 from .models import (ArticleListPage, ArticlePage, ArticleTopicLink,
                      InDepthListPage, InDepthPage, Topic)
@@ -16,16 +16,16 @@ class InDepthPageTestCase(TestCase):
 
     def test_has_right_authors_from_articles(self):
         indepth = InDepthPage.objects.all().first()
-        bob = Contributor.objects.get(email="bobsmith@example.com")
-        joe = Contributor.objects.get(email="joesampson@example.com")
+        bob = ContributorPage.objects.get(email="bobsmith@example.com")
+        joe = ContributorPage.objects.get(email="joesampson@example.com")
 
         self.assertIn(bob, indepth.authors)
         self.assertIn(joe, indepth.authors)
 
     def test_authors_in_alphabetical_order(self):
         indepth = InDepthPage.objects.all().first()
-        bob = Contributor.objects.get(email="bobsmith@example.com")
-        joe = Contributor.objects.get(email="joesampson@example.com")
+        bob = ContributorPage.objects.get(email="bobsmith@example.com")
+        joe = ContributorPage.objects.get(email="joesampson@example.com")
 
         self.assertEqual(joe, indepth.authors[0])
         self.assertEqual(bob, indepth.authors[1])
@@ -110,7 +110,7 @@ class ArticlePageTestCase(TestCase):
 
     def test_single_author_has_expected_author(self):
         article = ArticlePage.objects.get(slug="test-article-1")
-        bob = Contributor.objects.get(email="bobsmith@example.com")
+        bob = ContributorPage.objects.get(email="bobsmith@example.com")
         self.assertEqual(article.authors[0], bob)
 
     def test_multiple_authors(self):
@@ -119,8 +119,8 @@ class ArticlePageTestCase(TestCase):
 
     def test_single_author_has_expected_author_in_order(self):
         article = ArticlePage.objects.get(slug="test-article-4")
-        mary = Contributor.objects.get(email="marysue@example.com")
-        joe = Contributor.objects.get(email="joesampson@example.com")
+        mary = ContributorPage.objects.get(email="marysue@example.com")
+        joe = ContributorPage.objects.get(email="joesampson@example.com")
 
         self.assertEqual(article.authors[0], mary)
         self.assertEqual(article.authors[1], joe)
