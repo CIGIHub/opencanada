@@ -82,9 +82,11 @@ class ArticlePage(Page):
     def topics(self):
         primary_topic = self.primary_topic
         all_topics = [link.topic for link in self.topic_links.all()]
-        all_topics.append(primary_topic)
+        if primary_topic:
+            all_topics.append(primary_topic)
         all_topics = list(set(all_topics))
-        all_topics.sort(key=attrgetter('name'))
+        if len(all_topics) > 0:
+            all_topics.sort(key=attrgetter('name'))
         return all_topics
 
     def related_articles(self, number):
@@ -237,12 +239,15 @@ class InDepthPage(Page):
 
     @property
     def topics(self):
-        all_topics = [self.primary_topic]
+        all_topics = []
+        if self.primary_topic:
+            all_topics.append(self.primary_topic)
         for article_link in self.related_article_links.all():
             all_topics.extend(article_link.article.topics)
 
         all_topics = list(set(all_topics))
-        all_topics.sort(key=attrgetter('name'))
+        if all_topics:
+            all_topics.sort(key=attrgetter('name'))
         return all_topics
 
     def related_articles(self, number):

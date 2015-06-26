@@ -98,6 +98,10 @@ class InDepthPageTestCase(TestCase):
         indepth = InDepthPage.objects.all().first()
         self.assertEqual(len(indepth.topics), 3)
 
+    def test_topics_when_non_set_returns_empty_list(self):
+        indepth = InDepthPage.objects.get(slug="depth-articles-no-topics")
+        self.assertEqual(indepth.topics, [])
+
 #   TODO: verify related articles
 
     def test_related_articles_returns_the_number_requested(self):
@@ -197,6 +201,11 @@ class ArticlePageTestCase(TestCase):
         article = ArticlePage.objects.get(slug="test-article-3")
         self.assertEqual(len(article.topics), 1)
 
+    def test_topics_when_non_set_returns_empty_list(self):
+        article = ArticlePage.objects.get(slug="no-topics")
+
+        self.assertEqual(article.topics, [])
+
 
 class ArticleListPageTestCase(TestCase):
     fixtures = ["articlestest.json", ]
@@ -204,7 +213,7 @@ class ArticleListPageTestCase(TestCase):
     def test_get_list_of_articles(self):
         features = ArticleListPage.objects.get(slug='features')
         articles = features.subpages
-        self.assertEqual(len(articles), 4)
+        self.assertEqual(len(articles), 5)
 
 
 class InDepthListPageTestCase(TestCase):
@@ -213,7 +222,7 @@ class InDepthListPageTestCase(TestCase):
     def test_get_list_of_indepths(self):
         indepth = InDepthListPage.objects.get(slug='indepth')
         indepth_pages = indepth.subpages
-        self.assertEqual(len(indepth_pages), 1)
+        self.assertEqual(len(indepth_pages), 2)
 
 
 class ArticleTopicLinkTestCase(TestCase):
