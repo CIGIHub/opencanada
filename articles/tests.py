@@ -31,7 +31,12 @@ class InDepthPageTestCase(TestCase):
         self.assertEqual(bob, indepth.authors[1])
 
         bob.last_name = "Achange"
-        bob.save()
+
+        revision = bob.save_revision(
+            user=None,
+            submitted_for_moderation=False,
+        )
+        revision.publish()
 
         self.assertEqual(bob, indepth.authors[0])
         self.assertEqual(joe, indepth.authors[1])
@@ -39,8 +44,8 @@ class InDepthPageTestCase(TestCase):
     def test_in_depth_articles(self):
         indepth = InDepthPage.objects.all().first()
 
-        a6 = ArticlePage.objects.get(pk=6)
-        a7 = ArticlePage.objects.get(pk=7)
+        a6 = ArticlePage.objects.get(pk=7)
+        a7 = ArticlePage.objects.get(pk=8)
 
         self.assertEqual(2, len(indepth.articles))
 
@@ -50,8 +55,8 @@ class InDepthPageTestCase(TestCase):
     def test_in_depth_articles_order(self):
         indepth = InDepthPage.objects.all().first()
 
-        a6 = ArticlePage.objects.get(pk=6)
-        a7 = ArticlePage.objects.get(pk=7)
+        a6 = ArticlePage.objects.get(pk=7)
+        a7 = ArticlePage.objects.get(pk=8)
 
         self.assertEqual(a7, indepth.articles[0])
         self.assertEqual(a6, indepth.articles[1])
@@ -128,12 +133,12 @@ class ArticlePageTestCase(TestCase):
 #   TODO: verify related articles
 
     def test_related_articles_returns_the_number_requested(self):
-        article = ArticlePage.objects.get(id=8)
+        article = ArticlePage.objects.get(id=9)
         related_articles = article.related_articles(number=2)
         self.assertEqual(2, len(related_articles))
 
     def test_related_articles_excludes_self(self):
-        article = ArticlePage.objects.get(id=8)
+        article = ArticlePage.objects.get(id=9)
         related_articles = article.related_articles(number=10)
         self.assertNotIn(article, related_articles)
 
@@ -142,30 +147,30 @@ class ArticlePageTestCase(TestCase):
     # TODO: Includes authors as filter
 
     def test_in_depth_contains_in_depth(self):
-        article = ArticlePage.objects.get(pk=6)
+        article = ArticlePage.objects.get(pk=7)
         indepth = InDepthPage.objects.all().first()
         actual = article.series_articles
         self.assertEqual(1, len(actual))
         self.assertEqual(indepth, actual[0][0])
 
     def test_other_articles_in_in_depth(self):
-        article = ArticlePage.objects.get(pk=6)
-        other_article = ArticlePage.objects.get(pk=7)
+        article = ArticlePage.objects.get(pk=7)
+        other_article = ArticlePage.objects.get(pk=8)
         actual = article.series_articles
         self.assertIn(other_article, actual[0][1])
 
     def test_in_depth_artcles_does_not_contain_self(self):
-        article = ArticlePage.objects.get(pk=6)
+        article = ArticlePage.objects.get(pk=7)
         actual = article.series_articles
         self.assertNotIn(article, actual[0][1])
 
     def test_article_has_override_text_for_in_depth_related(self):
-        article = ArticlePage.objects.get(pk=6)
+        article = ArticlePage.objects.get(pk=7)
         override = article.series_articles[0][1][0].override_text
         self.assertEqual("<p>This is overridden text.</p>", override)
 
     def test_article_has_override_image_for_in_depth_related(self):
-        article = ArticlePage.objects.get(pk=6)
+        article = ArticlePage.objects.get(pk=7)
         image = Image.objects.get(pk=1)
         override = article.series_articles[0][1][0].override_image
         self.assertEqual(image, override)

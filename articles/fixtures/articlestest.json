@@ -30,7 +30,7 @@
   {
     "fields": {
       "topic": 2,
-      "article": 10
+      "article": 11
     },
     "model": "articles.articletopiclink",
     "pk": 1
@@ -38,7 +38,7 @@
   {
     "fields": {
       "topic": 3,
-      "article": 10
+      "article": 11
     },
     "model": "articles.articletopiclink",
     "pk": 2
@@ -46,7 +46,7 @@
   {
     "fields": {
       "topic": 2,
-      "article": 8
+      "article": 9
     },
     "model": "articles.articletopiclink",
     "pk": 3
@@ -54,7 +54,7 @@
   {
     "fields": {
       "topic": 2,
-      "article": 6
+      "article": 7
     },
     "model": "articles.articletopiclink",
     "pk": 4
@@ -62,7 +62,7 @@
   {
     "fields": {
       "topic": 4,
-      "article": 6
+      "article": 7
     },
     "model": "articles.articletopiclink",
     "pk": 5
@@ -70,19 +70,10 @@
   {
     "fields": {
       "topic": 2,
-      "article": 7
+      "article": 8
     },
     "model": "articles.articletopiclink",
     "pk": 6
-  },
-  {
-    "fields": {
-      "article": 6,
-      "sort_order": 0,
-      "author": 11
-    },
-    "model": "articles.articleauthorlink",
-    "pk": 1
   },
   {
     "fields": {
@@ -91,7 +82,7 @@
       "author": 12
     },
     "model": "articles.articleauthorlink",
-    "pk": 2
+    "pk": 1
   },
   {
     "fields": {
@@ -100,22 +91,31 @@
       "author": 13
     },
     "model": "articles.articleauthorlink",
+    "pk": 2
+  },
+  {
+    "fields": {
+      "article": 9,
+      "sort_order": 0,
+      "author": 14
+    },
+    "model": "articles.articleauthorlink",
     "pk": 3
   },
   {
     "fields": {
-      "article": 10,
+      "article": 11,
       "sort_order": 1,
-      "author": 12
+      "author": 13
     },
     "model": "articles.articleauthorlink",
     "pk": 4
   },
   {
     "fields": {
-      "article": 10,
+      "article": 11,
       "sort_order": 0,
-      "author": 13
+      "author": 14
     },
     "model": "articles.articleauthorlink",
     "pk": 5
@@ -123,9 +123,9 @@
   {
     "fields": {
       "override_image": null,
-      "article": 6,
+      "article": 7,
       "sort_order": 1,
-      "in_depth": 9,
+      "in_depth": 10,
       "override_text": ""
     },
     "model": "articles.indeptharticlelink",
@@ -134,9 +134,9 @@
   {
     "fields": {
       "override_image": 1,
-      "article": 7,
+      "article": 8,
       "sort_order": 0,
-      "in_depth": 9,
+      "in_depth": 10,
       "override_text": "<p>This is overridden text.</p>"
     },
     "model": "articles.indeptharticlelink",
@@ -182,7 +182,7 @@
       "go_live_at": null
     },
     "model": "wagtailcore.page",
-    "pk": 6
+    "pk": 7
   },
   {
     "fields": {
@@ -209,7 +209,7 @@
       "go_live_at": null
     },
     "model": "wagtailcore.page",
-    "pk": 7
+    "pk": 8
   },
   {
     "fields": {
@@ -236,7 +236,7 @@
       "go_live_at": null
     },
     "model": "wagtailcore.page",
-    "pk": 8
+    "pk": 9
   },
   {
     "fields": {
@@ -263,7 +263,7 @@
       "go_live_at": null
     },
     "model": "wagtailcore.page",
-    "pk": 10
+    "pk": 11
   },
   {
     "fields": {
@@ -290,7 +290,7 @@
       "go_live_at": null
     },
     "model": "wagtailcore.page",
-    "pk": 9
+    "pk": 10
   },
   {
     "fields": {
@@ -317,7 +317,7 @@
       "go_live_at": null
     },
     "model": "wagtailcore.page",
-    "pk": 11
+    "pk": 12
   },
   {
     "fields": {
@@ -344,7 +344,7 @@
       "go_live_at": null
     },
     "model": "wagtailcore.page",
-    "pk": 12
+    "pk": 13
   },
   {
     "fields": {
@@ -371,7 +371,7 @@
       "go_live_at": null
     },
     "model": "wagtailcore.page",
-    "pk": 13
+    "pk": 14
   },
   {
     "fields": {
@@ -382,7 +382,7 @@
       "primary_topic": 4
     },
     "model": "articles.articlepage",
-    "pk": 6
+    "pk": 7
   },
   {
     "fields": {
@@ -393,7 +393,7 @@
       "primary_topic": 1
     },
     "model": "articles.articlepage",
-    "pk": 7
+    "pk": 8
   },
   {
     "fields": {
@@ -404,7 +404,7 @@
       "primary_topic": 2
     },
     "model": "articles.articlepage",
-    "pk": 8
+    "pk": 9
   },
   {
     "fields": {
@@ -415,7 +415,7 @@
       "primary_topic": 1
     },
     "model": "articles.articlepage",
-    "pk": 10
+    "pk": 11
   },
   {
     "fields": {
@@ -429,7 +429,7 @@
       "email": "bobsmith@example.com"
     },
     "model": "people.contributorpage",
-    "pk": 11
+    "pk": 12
   },
   {
     "fields": {
@@ -443,7 +443,7 @@
       "email": "joesampson@example.com"
     },
     "model": "people.contributorpage",
-    "pk": 12
+    "pk": 13
   },
   {
     "fields": {
@@ -457,7 +457,7 @@
       "email": "marysue@example.com"
     },
     "model": "people.contributorpage",
-    "pk": 13
+    "pk": 14
   },
   {
     "fields": {
@@ -466,6 +466,6 @@
       "primary_topic": 2
     },
     "model": "articles.indepthpage",
-    "pk": 9
+    "pk": 10
   }
 ]
