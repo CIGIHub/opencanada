@@ -34,7 +34,7 @@ class ContributorListPageTestCase(TestCase):
         contributor_list = models.ContributorListPage(title="This is the title.")
         self.assertEqual(str(contributor_list), "This is the title.")
 
-    def list_of_contributors_contains_all_live_contributors(self):
+    def test_list_of_contributors_contains_all_live_contributors(self):
         contributor_list = models.ContributorListPage.objects.all().first()
         all_live_contributors = models.ContributorPage.objects.live()
 
@@ -44,7 +44,7 @@ class ContributorListPageTestCase(TestCase):
             contributor_list.contributors
         )
 
-    def list_of_contributors_sorted_by_last_name(self):
+    def test_list_of_contributors_sorted_by_last_name(self):
         contributor_list = models.ContributorListPage.objects.all().first()
         contributors = contributor_list.contributors
 

@@ -5,8 +5,8 @@ from wagtail.wagtailimages.models import Image
 from people.models import ContributorPage
 
 from .models import (ArticleAuthorLink, ArticleListPage, ArticlePage,
-                     ArticleTopicLink, InDepthListPage, InDepthPage, Topic,
-                     TopicListPage)
+                     ArticleTopicLink, Headline, InDepthListPage, InDepthPage,
+                     Topic, TopicListPage)
 
 
 class InDepthPageTestCase(TestCase):
@@ -291,3 +291,11 @@ class TopicListPageTestCase(TestCase):
             topics_page.topics,
             [topic_1, topic_2, topic_3, topic_4]
         )
+
+
+class HeadlineTestCase(TestCase):
+    def test_str_returns_id(self):
+        page = TopicListPage.objects.all().first()
+        headline = Headline.objects.create(containing_page=page)
+
+        self.assertEqual(str(headline), '1')

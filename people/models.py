@@ -16,7 +16,7 @@ class ContributorListPage(Page):
 
     @property
     def contributors(self):
-        contributors = ContributorPage.objects.live().descendant_of(self).order_by('-last_name')
+        contributors = ContributorPage.objects.live().descendant_of(self).order_by('last_name', 'first_name')
         return contributors
 
     def __str__(self):
