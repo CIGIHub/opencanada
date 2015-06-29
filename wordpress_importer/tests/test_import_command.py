@@ -13,7 +13,7 @@ from wagtail.wagtailimages.models import Image
 from articles.models import ArticlePage
 from people.models import ContributorPage
 from wordpress_importer.management.commands import import_from_wordpress
-from wordpress_importer.models import ImageImports, PostImports
+from wordpress_importer.models import ImageImport, PostImport
 
 
 class ImageCleanUp(object):
@@ -287,7 +287,7 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
     def testImportTrackingCreated(self):
         command = import_from_wordpress.Command()
         command.load_posts()
-        imports = PostImports.objects.filter(post_id=5)
+        imports = PostImport.objects.filter(post_id=5)
         self.assertEqual(imports.count(), 1)
 
     # TODO: Multiple Authors? Is that a thing on OpenCanada?
@@ -471,7 +471,7 @@ class TestCommandImportDownloadImage(TestCase, ImageCleanUp):
         command = import_from_wordpress.Command()
         command.download_image(test_image_url, 'testcat.jpg')
 
-        image_records = ImageImports.objects.filter(name='testcat.jpg')
+        image_records = ImageImport.objects.filter(name='testcat.jpg')
 
         self.assertEqual(1, image_records.count())
 

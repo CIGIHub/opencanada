@@ -16,7 +16,7 @@ from wagtail.wagtailimages.models import Image
 
 from articles.models import ArticleAuthorLink, ArticlePage
 from people.models import ContributorListPage, ContributorPage
-from wordpress_importer.models import ImageImports, PostImports
+from wordpress_importer.models import ImageImport, PostImport
 from wordpress_importer.utils import get_setting
 
 try:
@@ -221,7 +221,7 @@ class Command(BaseCommand):
             )
             revision.publish()
 
-            import_record, created = PostImports.objects.get_or_create(
+            import_record, created = PostImport.objects.get_or_create(
                 post_id=post_id)
 
     def process_html_for_stream_field(self, html):
@@ -354,7 +354,7 @@ class Command(BaseCommand):
         return html
 
     def download_image(self, url, filename, use_image_names=False):
-        image_records = ImageImports.objects.filter(original_url=url)
+        image_records = ImageImport.objects.filter(original_url=url)
         if image_records.count() > 0:
             images = Image.objects.filter(title=image_records.first().name)
             image = images.first()
@@ -375,7 +375,7 @@ class Command(BaseCommand):
                     height=dim[1]
                 )
 
-                image_record, created = ImageImports.objects.get_or_create(
+                image_record, created = ImageImport.objects.get_or_create(
                     original_url=url, name=image.title)
                 image_record.save()
             else:
