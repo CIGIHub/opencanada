@@ -172,7 +172,7 @@ class ArticleAuthorLink(Orderable, models.Model):
     )
 
     def __str__(self):
-        return "{} {} {}".format(self.article.title, self.author.first_name, self.author.last_name)
+        return "{} - {}".format(self.article.title, self.author.full_name)
 
     panels = [
         PageChooserPanel('author', 'people.ContributorPage'),

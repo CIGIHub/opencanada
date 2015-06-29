@@ -48,6 +48,14 @@ class ContributorPage(Page):
         self.slug = slugify(self.title)
         super(ContributorPage, self).save(*args, **kwargs)
 
+    @property
+    def full_name(self):
+        return "{} {}".format(self.first_name, self.last_name)
+
+    @property
+    def last_comma_first_name(self):
+        return "{}, {}".format(self.last_name, self.first_name)
+
     def __str__(self):
         return "{} {} - {}".format(self.first_name, self.last_name, self.email)
 
