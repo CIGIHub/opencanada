@@ -2,7 +2,6 @@ from __future__ import absolute_import, unicode_literals
 
 from operator import attrgetter
 
-from basic_site.models import UniquelySlugable
 from django.db import models
 from django.shortcuts import get_object_or_404, render
 from django.utils.encoding import python_2_unicode_compatible
@@ -16,6 +15,8 @@ from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
+
+from basic_site.models import UniquelySlugable
 
 from . import fields as article_fields
 

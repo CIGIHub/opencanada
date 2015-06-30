@@ -11,6 +11,8 @@ from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 
 from articles import models as article_models
+from basic_site import models as basic_site_models
+from people import models as people_models
 
 
 @python_2_unicode_compatible
@@ -36,9 +38,12 @@ register_snippet(FontStyle)
 
 @python_2_unicode_compatible
 class HomePage(Page):
-    sub_types = [
+    subpage_types = [
         article_models.ArticleListPage,
-        article_models.InDepthListPage
+        article_models.InDepthListPage,
+        article_models.TopicListPage,
+        people_models.ContributorListPage,
+        basic_site_models.BasicStreamPage,
     ]
 
     featured_item = models.ForeignKey(
