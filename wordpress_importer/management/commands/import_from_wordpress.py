@@ -10,6 +10,7 @@ import requests
 from bs4 import BeautifulSoup, Comment, element
 from django.core.files.images import File, get_image_dimensions
 from django.core.management.base import BaseCommand
+from django.utils import timezone
 from django.utils.six import BytesIO, text_type
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailimages.models import Image
@@ -175,7 +176,7 @@ class Command(BaseCommand):
         # TODO: get post time post_date_gmt
         # TODO: setup better filtering so that we get only the data that we
         # actually want to transfer.
-        query = 'SELECT wp_posts.id, post_content, post_title, post_excerpt, post_name, user_email ' \
+        query = 'SELECT wp_posts.id, post_content, post_title, post_excerpt, post_name, user_email, post_date_gmt ' \
                 'FROM wp_posts INNER JOIN wp_users ' \
                 'ON wp_posts.post_author = wp_users.ID ' \
                 'WHERE wp_posts.ID in ' \
@@ -201,7 +202,7 @@ class Command(BaseCommand):
         features_page = Page.objects.get(slug="features")
 
         for (post_id, post_content, post_title, post_excerpt, post_name,
-             author_email) in results:
+             author_email, post_date) in results:
 
             cleaned_post_name = unquote(post_name).encode('ascii', 'ignore')
 
@@ -218,6 +219,8 @@ class Command(BaseCommand):
                 page.title = post_title
             else:
                 page.title = ''
+            if post_date:
+                page.first_published_at = timezone.make_aware(post_date, timezone.pytz.timezone('GMT'))
             if post_content:
                 updated_post_content = self.process_html_for_stream_field(
                     post_content)

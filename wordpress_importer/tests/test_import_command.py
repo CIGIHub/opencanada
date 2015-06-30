@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, unicode_literals
 
+import datetime
 from collections import namedtuple
 
 import mock
 import six
 from django.conf import settings
 from django.test import TestCase
+from django.utils import timezone
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailimages.models import Image
 
@@ -176,7 +178,9 @@ class TestCommandImportFromWordPressUnicodeSlug(TestCase, ImageCleanUp):
              'Test?',
              'Body.',
              "crisis-at-home-for-canadas-armed-forces%e2%80%a8",
-             'bob@example.com',),
+             'bob@example.com',
+             datetime.datetime(2011, 2, 22, 5, 48, 31),
+             ),
         ]
         return data
 
@@ -319,6 +323,15 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
         imports = PostImport.objects.filter(post_id=5)
         self.assertEqual(imports.count(), 1)
 
+    def testSetsDate(self):
+        command = import_from_wordpress.Command()
+        command.load_posts()
+        pages = ArticlePage.objects.filter(
+            slug='is-nato-ready-for-putin')
+        self.assertEqual(
+            timezone.datetime(2011, 2, 22, 5, 48, 31, tzinfo=timezone.pytz.timezone('GMT')),
+            pages.first().first_published_at)
+
     # TODO: Multiple Authors? Is that a thing on OpenCanada?
 
     # TODO: Tags
@@ -330,19 +343,24 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
              'Is NATO Ready for Putin?',
              'Political hurdles hold NATO back — how convenient for Russian tactics.',
              'is-nato-ready-for-putin',
-             'bob@example.com',),
+             'bob@example.com',
+             datetime.datetime(2011, 2, 22, 5, 48, 31),
+             ),
             (2,
              '<p>This <strong>is</strong> <img src="http://www.example.com/test.jpg" /> a <a href="http://www.example.com">post</a><span class="special">that has html</span></p><div>Yay!</div>',
              'HTML Works?',
              'The excerpt also has some <strong>HTML</strong>.',
              'html-post',
-             'bob@example.com',),
+             'bob@example.com',
+             datetime.datetime(2011, 2, 22, 5, 48, 31),
+             ),
             (3,
              None,
              None,
              None,
              'null-fields',
              'bob@example.com',
+             datetime.datetime(2011, 2, 22, 5, 48, 31),
              ),
             (5,
              '',
@@ -350,6 +368,7 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
              '',
              'blank-fields',
              'bob@example.com',
+             datetime.datetime(2011, 2, 22, 5, 48, 31),
              ),
             (6,
              'body',
@@ -357,6 +376,7 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
              'excerpt',
              'null-author',
              None,
+             datetime.datetime(2011, 2, 22, 5, 48, 31),
              ),
             (7,
              'body',
@@ -364,6 +384,7 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
              'excerpt',
              'empty-author',
              '',
+             datetime.datetime(2011, 2, 22, 5, 48, 31),
              ),
             (8,
              'body',
@@ -371,6 +392,7 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
              'excerpt',
              'nonexistant-author',
              'doesnotexist@here.com',
+             datetime.datetime(2011, 2, 22, 5, 48, 31),
              ),
             (9,
              'body',
@@ -378,6 +400,7 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
              'excerpt',
              'duplicate',
              'bob@example.com',
+             datetime.datetime(2011, 2, 22, 5, 48, 31),
              ),
             (10,
              'body',
@@ -385,13 +408,16 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
              'excerpt',
              'duplicate',
              'bob@example.com',
+             datetime.datetime(2011, 2, 22, 5, 48, 31),
              ),
             (11,
              '<div><img src="{}" />a cat</div>'.format(test_image_url),
              'title',
              'excerpt',
              'html-local-image-post',
-             'bob@example.com',),
+             'bob@example.com',
+             datetime.datetime(2011, 2, 22, 5, 48, 31),
+             ),
         ]
         return data
 
