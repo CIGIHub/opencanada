@@ -3,11 +3,8 @@ from __future__ import absolute_import, unicode_literals
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.text import slugify
-from wagtail.wagtailadmin.edit_handlers import (FieldPanel, RichTextFieldPanel,
-                                                StreamFieldPanel)
+from wagtail.wagtailadmin.edit_handlers import FieldPanel, RichTextFieldPanel
 from wagtail.wagtailcore.models import Page
-
-from .fields import BioField
 
 
 @python_2_unicode_compatible
@@ -33,7 +30,7 @@ class ContributorPage(Page):
     twitter_handle = models.CharField(max_length=16, blank=True, default="")
 
     short_bio = models.TextField(blank=True, default="")
-    long_bio = BioField(blank=True, default="")
+    long_bio = models.TextField(blank=True, default="")
 
     headshot = models.ForeignKey(
         'wagtailimages.Image',
@@ -66,5 +63,5 @@ ContributorPage.content_panels = [
     FieldPanel('email'),
     FieldPanel('twitter_handle'),
     RichTextFieldPanel('short_bio'),
-    StreamFieldPanel('long_bio'),
+    RichTextFieldPanel('long_bio'),
 ]

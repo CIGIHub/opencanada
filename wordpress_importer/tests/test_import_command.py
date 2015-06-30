@@ -93,11 +93,25 @@ class TestCommandImportFromWordPressLoadContributors(TestCase, ImageCleanUp):
         contributors = ContributorPage.objects.filter(email='bob@example.com')
         self.assertEqual('@bobsmith', contributors.first().twitter_handle)
 
-    def testLoadContributorsSetsShortBio(self):
+    def testLoadContributorsSetsTwitterHandleFromUrl(self):
+        import_from_wordpress.Command.get_contributor_data = self.get_test_contributor_data_twitter_url
+        command = import_from_wordpress.Command()
+        command.load_contributors()
+        contributors = ContributorPage.objects.filter(email='bob@example.com')
+        self.assertEqual('@bobsmith', contributors.first().twitter_handle)
+
+    def testLoadContributorsSetsLongBio(self):
         command = import_from_wordpress.Command()
         command.load_contributors()
         contributors = ContributorPage.objects.filter(email='bob@example.com')
         self.assertEqual('Bob Smith is a person who does stuff.',
+                         contributors.first().long_bio)
+
+    def testLoadContributorsSetsShortBio(self):
+        command = import_from_wordpress.Command()
+        command.load_contributors()
+        contributors = ContributorPage.objects.filter(email='bob@example.com')
+        self.assertEqual('He does stuff.',
                          contributors.first().short_bio)
 
     def testLoadContributorsSetsImageFile(self):
@@ -109,7 +123,6 @@ class TestCommandImportFromWordPressLoadContributors(TestCase, ImageCleanUp):
         self.assertEqual(1, images.count())
         self.assertEqual(images.first(), contributors.first().headshot)
 
-    # TODO: Long Bio
     # TODO: multiple contributors
 
     def get_test_contributor_data(self):
@@ -120,6 +133,22 @@ class TestCommandImportFromWordPressLoadContributors(TestCase, ImageCleanUp):
             ('bob@example.com', 'twitter', '@bobsmith'),
             ('bob@example.com', 'description',
              'Bob Smith is a person who does stuff.'),
+            ('bob@example.com', 'SHORT_BIO',
+             'He does stuff.'),
+            ('bob@example.com', 'userphoto_image_file', 'testcat.jpg'),
+        ]
+        return data
+
+    def get_test_contributor_data_twitter_url(self):
+        data = [
+            ('bob@example.com', 'first_name', 'Bob'),
+            ('bob@example.com', 'last_name', 'Smith'),
+            ('bob@example.com', 'nickname', 'Bobby Smith'),
+            ('bob@example.com', 'TWITTER', 'https://twitter.com/bobsmith'),
+            ('bob@example.com', 'description',
+             'Bob Smith is a person who does stuff.'),
+            ('bob@example.com', 'SHORT_BIO',
+             'He does stuff.'),
             ('bob@example.com', 'userphoto_image_file', 'testcat.jpg'),
         ]
         return data

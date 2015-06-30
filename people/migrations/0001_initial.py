@@ -26,7 +26,7 @@ class Migration(migrations.Migration):
                 ('email', models.EmailField(default='', max_length=254, blank=True)),
                 ('twitter_handle', models.CharField(default='', max_length=16, blank=True)),
                 ('short_bio', models.TextField(default='', blank=True)),
-                ('long_bio', people.fields.BioField([('Paragraph', wagtail.wagtailcore.blocks.RichTextBlock(icon='doc-full'))], default='', blank=True)),
+                ('long_bio', models.TextField(default='', blank=True)),
                 ('headshot', models.ForeignKey(related_name='+', on_delete=django.db.models.deletion.SET_NULL, blank=True, to='wagtailimages.Image', null=True)),
             ],
             options={

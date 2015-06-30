@@ -98,11 +98,27 @@ class Command(BaseCommand):
                 'inner join `wp_usermeta` ' \
                 'on id=user_id ' \
                 'where meta_value like "%contributor%"' \
-                ') AND meta_key in ("first_name", "last_name", "nickname", "twitter", "description", "userphoto_image_file")'
+                ') AND meta_key in ("first_name", "last_name", "nickname", "twitter", "description", "userphoto_image_file") ' \
+                'AND meta_value != ""'
 
         cursor.execute(query)
         results = cursor.fetchall()
         cursor.close()
+
+        cursor = self.connection.cursor()
+        query = 'SELECT user_email, fields.name, data.value FROM wp_users ' \
+                'inner join wp_cimy_uef_data as data ' \
+                'on wp_users.id = data.user_id ' \
+                'inner join wp_cimy_uef_fields as fields ' \
+                'on fields.id = data.field_id ' \
+                'WHERE fields.name IN ("TWITTER", "SHORT_BIO") ' \
+                'AND data.value != ""'
+
+        cursor.execute(query)
+        extra_results = cursor.fetchall()
+        cursor.close()
+        results += extra_results
+
         return results
 
     def load_contributors(self):
@@ -127,10 +143,16 @@ class Command(BaseCommand):
                 page.last_name = meta_value
             elif meta_key == "nickname":
                 page.nickname = meta_value
-            elif meta_key == "twitter":
+            elif meta_key == "twitter" or meta_key == "TWITTER":
+                if meta_value.find("/") > 0:
+                    meta_value = meta_value.split("/")[-1]
+                if not meta_value.startswith("@"):
+                    meta_value = "@{}".format(meta_value)
                 page.twitter_handle = meta_value
-            elif meta_key == "description":
+            elif meta_key == "SHORT_BIO":
                 page.short_bio = meta_value
+            elif meta_key == "description":
+                page.long_bio = meta_value
             elif meta_key == "userphoto_image_file":
                 source = get_setting("USER_PHOTO_URL_PATTERN").format(
                     meta_value)
