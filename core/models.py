@@ -1,5 +1,6 @@
 from __future__ import absolute_import, unicode_literals
 
+from basic_site import models as basic_site_models
 from django.db import models
 from django.dispatch.dispatcher import receiver
 from django.utils.encoding import python_2_unicode_compatible
@@ -11,7 +12,6 @@ from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 
 from articles import models as article_models
-from basic_site import models as basic_site_models
 from people import models as people_models
 
 
