@@ -12,7 +12,7 @@ from django.utils import timezone
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailimages.models import Image
 
-from articles.models import ArticlePage
+from articles.models import ArticleCategory, ArticlePage
 from people.models import ContributorPage
 from wordpress_importer.management.commands import import_from_wordpress
 from wordpress_importer.models import ImageImport, PostImport
@@ -331,6 +331,14 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
         self.assertEqual(
             timezone.datetime(2011, 2, 22, 5, 48, 31, tzinfo=timezone.pytz.timezone('GMT')),
             pages.first().first_published_at)
+
+    def testDefaultCategorySet(self):
+        command = import_from_wordpress.Command()
+        command.load_posts()
+        page = ArticlePage.objects.filter(
+            slug='is-nato-ready-for-putin').first()
+        default_category = ArticleCategory.objects.get(slug="feature")
+        self.assertEqual(default_category, page.category)
 
     # TODO: Multiple Authors? Is that a thing on OpenCanada?
 

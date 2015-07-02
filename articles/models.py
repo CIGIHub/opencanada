@@ -35,6 +35,7 @@ class ArticleListPage(Page):
         return self.title
 
 
+@python_2_unicode_compatible
 class Topic(UniquelySlugable):
     name = models.CharField(max_length=1024)
 
@@ -71,6 +72,30 @@ class TopicListPage(RoutablePageMixin, Page):
         return render(request, "articles/topic_page.html", context)
 
 
+class ArticleCategoryManager(models.Manager):
+    def get_by_natural_key(self, slug):
+        return self.get(slug=slug)
+
+
+@python_2_unicode_compatible
+class ArticleCategory(UniquelySlugable):
+    objects = ArticleCategoryManager()
+
+    name = models.CharField(max_length=1024)
+
+    class Meta:
+        verbose_name_plural = "Article Categories"
+
+    def natural_key(self):
+        return (self.slug, )
+
+    def __str__(self):
+        return self.name
+
+
+register_snippet(ArticleCategory)
+
+
 @python_2_unicode_compatible
 class ArticlePage(Page):
     subtitle = RichTextField(blank=True, default="")
@@ -89,6 +114,13 @@ class ArticlePage(Page):
         blank=True,
         on_delete=models.SET_NULL,
         related_name='+'
+    )
+
+    category = models.ForeignKey(
+        'articles.ArticleCategory',
+        related_name='articles',
+        on_delete=models.SET_NULL,
+        null=True
     )
 
     def __str__(self):
@@ -132,6 +164,7 @@ ArticlePage.content_panels = Page.content_panels + [
     ImageChooserPanel('main_image'),
     SnippetChooserPanel('primary_topic', Topic),
     InlinePanel('topic_links', label="Secondary Topics"),
+    SnippetChooserPanel('category', ArticleCategory),
 ]
 
 

@@ -15,7 +15,7 @@ from django.utils.six import BytesIO, text_type
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailimages.models import Image
 
-from articles.models import ArticleAuthorLink, ArticlePage
+from articles.models import ArticleAuthorLink, ArticleCategory, ArticlePage
 from people.models import ContributorListPage, ContributorPage
 from wordpress_importer.models import ImageImport, PostImport
 from wordpress_importer.utils import get_setting
@@ -200,6 +200,7 @@ class Command(BaseCommand):
         results = self.get_post_data()
 
         features_page = Page.objects.get(slug="features")
+        feature_category = ArticleCategory.objects.get(slug="feature")
 
         for (post_id, post_content, post_title, post_excerpt, post_name,
              author_email, post_date) in results:
@@ -210,7 +211,7 @@ class Command(BaseCommand):
             if pages.count() > 0:
                 page = pages.first()
             else:
-                page = ArticlePage(owner=None)
+                page = ArticlePage(owner=None, category=feature_category)
                 features_page.add_child(instance=page)
 
             page.slug = cleaned_post_name

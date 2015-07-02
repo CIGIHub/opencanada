@@ -437,7 +437,10 @@
       "excerpt": "<p>This is an excerpt.</p>",
       "main_image": null,
       "subtitle": "<p>My Subtitle</p>",
-      "primary_topic": 4
+      "primary_topic": 4,
+      "category": [
+        "feature"
+      ]
     },
     "model": "articles.articlepage",
     "pk": 107
@@ -448,7 +451,10 @@
       "excerpt": "",
       "main_image": null,
       "subtitle": "",
-      "primary_topic": 1
+      "primary_topic": 1,
+      "category": [
+        "feature"
+      ]
     },
     "model": "articles.articlepage",
     "pk": 108
@@ -459,7 +465,10 @@
       "excerpt": "",
       "main_image": null,
       "subtitle": "",
-      "primary_topic": 2
+      "primary_topic": 2,
+      "category": [
+        "feature"
+      ]
     },
     "model": "articles.articlepage",
     "pk": 109
@@ -470,7 +479,10 @@
       "excerpt": "",
       "main_image": null,
       "subtitle": "",
-      "primary_topic": 1
+      "primary_topic": 1,
+      "category": [
+        "feature"
+      ]
     },
     "model": "articles.articlepage",
     "pk": 111
@@ -481,7 +493,10 @@
       "excerpt": "",
       "main_image": null,
       "subtitle": "",
-      "primary_topic": null
+      "primary_topic": null,
+      "category": [
+        "feature"
+      ]
     },
     "model": "articles.articlepage",
     "pk": 115
