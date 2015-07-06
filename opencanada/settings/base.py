@@ -81,6 +81,7 @@ INSTALLED_APPS = (
     'basic_site',
     'articles',
     'people',
+    'images',
 
     'wordpress_importer',
 
@@ -191,3 +192,5 @@ WAGTAILIMAGES_FEATURE_DETECTION_ENABLED = False
 
 FAVICON_PATH = STATIC_URL + 'img/favicon.png'
 WP_IMPORTER_IMAGE_DOWNLOAD_DOMAINS = ('opencanada.org', 'www.opencanada.org')
+
+WAGTAILIMAGES_IMAGE_MODEL = 'images.AttributedImage'

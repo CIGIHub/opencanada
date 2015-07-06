@@ -13,9 +13,9 @@ from django.core.management.base import BaseCommand
 from django.utils import timezone
 from django.utils.six import BytesIO, text_type
 from wagtail.wagtailcore.models import Page
-from wagtail.wagtailimages.models import Image
 
 from articles.models import ArticleAuthorLink, ArticleCategory, ArticlePage
+from images.models import AttributedImage
 from people.models import ContributorListPage, ContributorPage
 from wordpress_importer.models import ImageImport, PostImport
 from wordpress_importer.utils import get_setting
@@ -89,8 +89,6 @@ class Command(BaseCommand):
     def get_contributor_data(self):
         cursor = self.connection.cursor()
 
-        # TODO: twitter handle not coming through in this data.
-        # TODO: where is the long bio?
         query = 'SELECT user_email, meta_key, meta_value FROM wp_users ' \
                 'inner join `wp_usermeta` ' \
                 'on id=user_id ' \
@@ -160,7 +158,7 @@ class Command(BaseCommand):
                 filename = meta_value
                 try:
                     self.download_image(source, filename)
-                    page.headshot = Image.objects.get(title=filename)
+                    page.headshot = AttributedImage.objects.get(title=filename)
                 except DownloadException:
                     # TODO: log issue here
                     pass
@@ -349,7 +347,7 @@ class Command(BaseCommand):
                              'h6']
 
     def _process_image_tag(self, item):
-        images = Image.objects.filter(title=item['src'])
+        images = AttributedImage.objects.filter(title=item['src'])
         if images.first():
             return {'type': 'Image', 'value': images.first().id}
         else:
@@ -382,7 +380,7 @@ class Command(BaseCommand):
     def download_image(self, url, filename, use_image_names=False):
         image_records = ImageImport.objects.filter(original_url=url)
         if image_records.count() > 0:
-            images = Image.objects.filter(title=image_records.first().name)
+            images = AttributedImage.objects.filter(title=image_records.first().name)
             image = images.first()
         else:
             response = requests.get(url)
@@ -393,7 +391,7 @@ class Command(BaseCommand):
 
                 dim = get_image_dimensions(f)  # (width, height)
 
-                image = Image.objects.create(
+                image = AttributedImage.objects.create(
                     title=filename,
                     uploaded_by_user=None,
                     file=File(f, name=filename),

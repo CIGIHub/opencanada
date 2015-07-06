@@ -10,9 +10,9 @@ from django.conf import settings
 from django.test import TestCase
 from django.utils import timezone
 from wagtail.wagtailcore.models import Page
-from wagtail.wagtailimages.models import Image
 
 from articles.models import ArticleCategory, ArticlePage
+from images.models import AttributedImage
 from people.models import ContributorPage
 from wordpress_importer.management.commands import import_from_wordpress
 from wordpress_importer.models import ImageImport, PostImport
@@ -21,7 +21,7 @@ from wordpress_importer.models import ImageImport, PostImport
 class ImageCleanUp(object):
     def delete_images(self):
         # clean up any image files that were created.
-        images = Image.objects.all()
+        images = AttributedImage.objects.all()
 
         for image in images:
             storage, path = image.file.storage, image.file.path
@@ -121,7 +121,7 @@ class TestCommandImportFromWordPressLoadContributors(TestCase, ImageCleanUp):
         command.load_contributors()
         contributors = ContributorPage.objects.filter(email='bob@example.com')
 
-        images = Image.objects.filter(title='testcat.jpg')
+        images = AttributedImage.objects.filter(title='testcat.jpg')
         self.assertEqual(1, images.count())
         self.assertEqual(images.first(), contributors.first().headshot)
 
@@ -258,7 +258,7 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
         command.load_posts()
         pages = ArticlePage.objects.filter(slug='html-local-image-post')
 
-        images = Image.objects.filter(title='testcat.jpg')
+        images = AttributedImage.objects.filter(title='testcat.jpg')
 
         self.assertEqual(
             [{'type': 'Image', 'value': images.first().id},
@@ -440,7 +440,7 @@ class TestCommandImportProcessHTMLForImages(TestCase, ImageCleanUp):
         html = "<img src='{}'/>".format(test_image_url)
         command.process_html_for_images(html)
 
-        images = Image.objects.filter(title='testcat.jpg')
+        images = AttributedImage.objects.filter(title='testcat.jpg')
 
         self.assertEqual(1, images.count())
 
@@ -449,7 +449,7 @@ class TestCommandImportProcessHTMLForImages(TestCase, ImageCleanUp):
         html = "<img src='{}'/>".format(test_image_url)
         html = command.process_html_for_images(html)
 
-        images = Image.objects.filter(title='testcat.jpg')
+        images = AttributedImage.objects.filter(title='testcat.jpg')
 
         self.assertEqual(html, "<img src='{}'/>".format(
             images.first().get_rendition('width-100').url))
@@ -458,7 +458,7 @@ class TestCommandImportProcessHTMLForImages(TestCase, ImageCleanUp):
         command = import_from_wordpress.Command()
         html = "<img src='http://upload.wikimedia.org/wikipedia/en/b/bd/Test.jpg'/>"
         command.process_html_for_images(html)
-        images = Image.objects.filter(title='Test.jpg')
+        images = AttributedImage.objects.filter(title='Test.jpg')
 
         self.assertEqual(0, images.count())
 
@@ -483,7 +483,7 @@ class TestCommandImportProcessHTMLForImages(TestCase, ImageCleanUp):
         html = "<img src='{}' />".format(test_image_url_with_unicode)
         html = command.process_html_for_images(html)
 
-        images = Image.objects.filter(title='testcat♥.jpg')
+        images = AttributedImage.objects.filter(title='testcat♥.jpg')
 
         self.assertEqual(1, images.count())
 
@@ -500,7 +500,7 @@ class TestCommandImportDownloadImage(TestCase, ImageCleanUp):
         command = import_from_wordpress.Command()
         command.download_image(test_image_url, 'testcat.jpg')
 
-        images = Image.objects.filter(title='testcat.jpg')
+        images = AttributedImage.objects.filter(title='testcat.jpg')
 
         self.assertEqual(1, images.count())
 
@@ -560,7 +560,7 @@ class TestCommandProcessHTLMForStreamField(TestCase, ImageCleanUp):
         html = "<img src='{}' />".format(test_image_url)
         processed = command.process_html_for_stream_field(html)
 
-        images = Image.objects.filter(title='testcat.jpg')
+        images = AttributedImage.objects.filter(title='testcat.jpg')
         self.assertEqual(1, images.count())
 
         self.assertEqual(processed, [{"type": "Image",

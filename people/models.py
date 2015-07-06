@@ -33,7 +33,7 @@ class ContributorPage(Page):
     long_bio = models.TextField(blank=True, default="")
 
     headshot = models.ForeignKey(
-        'wagtailimages.Image',
+        'images.AttributedImage',
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
@@ -43,6 +43,8 @@ class ContributorPage(Page):
     def save(self, *args, **kwargs):
         self.title = "{} {}".format(self.first_name, self.last_name)
         self.slug = slugify(self.title)
+        if self.twitter_handle and not self.twitter_handle.startswith("@"):
+            self.twitter_handle = "@{}".format(self.twitter_handle)
         super(ContributorPage, self).save(*args, **kwargs)
 
     @property

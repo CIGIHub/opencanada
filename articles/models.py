@@ -46,6 +46,11 @@ class Topic(UniquelySlugable):
 register_snippet(Topic)
 
 
+Topic.panels = [
+    FieldPanel("name"),
+]
+
+
 class TopicListPage(RoutablePageMixin, Page):
 
     @property
@@ -102,7 +107,7 @@ class ArticlePage(Page):
     body = article_fields.BodyField()
     excerpt = RichTextField(blank=True, default="")
     main_image = models.ForeignKey(
-        'wagtailimages.Image',
+        'images.AttributedImage',
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
@@ -229,7 +234,7 @@ class InDepthListPage(Page):
 
 class InDepthArticleLink(Orderable, models.Model):
     override_image = models.ForeignKey(
-        'wagtailimages.Image',
+        'images.AttributedImage',
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
@@ -268,7 +273,7 @@ class InDepthArticleLink(Orderable, models.Model):
 class InDepthPage(Page):
     body = article_fields.BodyField(blank=True, default="")
     image = models.ForeignKey(
-        'wagtailimages.Image',
+        'images.AttributedImage',
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
