@@ -67,13 +67,14 @@ function setBodyPadding(){
 function setArticleHeading(windowWidth){
 
     function disableArticleHeader(){
-        $('h1').css("width", " ");
+        $('h1').css("width", "");
         $('body').removeClass('article-scroll');
         $('.navbar-collapse').addClass('navbar-right');
         $('.main-menu').removeClass('container-fluid').addClass('container');
     }
 
     if(windowWidth > 768){
+        console.log('here');
 
         var offset = $('header').height();
 
