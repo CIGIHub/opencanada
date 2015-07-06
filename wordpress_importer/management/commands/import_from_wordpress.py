@@ -89,8 +89,6 @@ class Command(BaseCommand):
     def get_contributor_data(self):
         cursor = self.connection.cursor()
 
-        # TODO: twitter handle not coming through in this data.
-        # TODO: where is the long bio?
         query = 'SELECT user_email, meta_key, meta_value FROM wp_users ' \
                 'inner join `wp_usermeta` ' \
                 'on id=user_id ' \

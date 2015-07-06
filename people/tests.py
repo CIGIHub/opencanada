@@ -26,6 +26,21 @@ class ContributorPageTestCase(TestCase):
 
         self.assertEqual(contributor.last_comma_first_name, "Smith, Bob")
 
+    def test_twitter_handle_has_at_when_not_specified(self):
+        contributor = models.ContributorPage(first_name="Bob", last_name="Smith", depth=1, twitter_handle="bob")
+        contributor.save()
+        self.assertEqual(contributor.twitter_handle, "@bob")
+
+    def test_twitter_handle_has_at_when_specified(self):
+        contributor = models.ContributorPage(first_name="Bob", last_name="Smith", depth=1, twitter_handle="@bob")
+        contributor.save()
+        self.assertEqual(contributor.twitter_handle, "@bob")
+
+    def test_twitter_handle_not_modified_if_not_specified(self):
+        contributor = models.ContributorPage(first_name="Bob", last_name="Smith", depth=1)
+        contributor.save()
+        self.assertEqual(contributor.twitter_handle, "")
+
 
 class ContributorListPageTestCase(TestCase):
     fixtures = ["people_test.json", ]
