@@ -33,7 +33,7 @@ class ContributorPage(Page):
     long_bio = models.TextField(blank=True, default="")
 
     headshot = models.ForeignKey(
-        'wagtailimages.Image',
+        'images.AttributedImage',
         null=True,
         blank=True,
         on_delete=models.SET_NULL,

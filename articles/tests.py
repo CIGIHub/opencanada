@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.utils import six
-from wagtail.wagtailimages.models import Image
 
+from images.models import AttributedImage
 from people.models import ContributorPage
 
 from .models import (ArticleAuthorLink, ArticleListPage, ArticlePage,
@@ -73,7 +73,7 @@ class InDepthPageTestCase(TestCase):
     def test_article_has_override_image(self):
         indepth = InDepthPage.objects.all().first()
 
-        image = Image.objects.get(pk=1)
+        image = AttributedImage.objects.get(pk=1)
         override = indepth.articles[0].override_image
 
         self.assertEqual(image, override)
@@ -185,7 +185,7 @@ class ArticlePageTestCase(TestCase):
 
     def test_article_has_override_image_for_in_depth_related(self):
         article = ArticlePage.objects.get(pk=107)
-        image = Image.objects.get(pk=1)
+        image = AttributedImage.objects.get(pk=1)
         override = article.series_articles[0][1][0].override_image
         self.assertEqual(image, override)
 
