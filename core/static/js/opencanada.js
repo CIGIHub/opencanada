@@ -1,6 +1,6 @@
 jQuery(document).ready(function($){
 
-    setFeatureHeight();
+    initForWindow();
 
     $('.fa-camera').click(function(){
         $('.feature-text').fadeToggle();
@@ -29,9 +29,21 @@ jQuery(document).ready(function($){
 
 });
 
-function setFeatureHeight(){
+function initForWindow(){
     var windowHeight = $(window).height();
     var windowWidth = $(window).width();
+
+    setBodyPadding();
+
+    if($('body').hasClass('template-home-page')){
+        setFeatureHeight(windowHeight, windowWidth);
+    }
+    if($('#article-page').length){
+        setArticleHeading(windowWidth);
+    }
+}
+
+function setFeatureHeight(windowHeight, windowWidth){
 
     var bannerHeight = $('header').height();
     var tagsHeight = $('.featured-topics').height();
@@ -46,8 +58,54 @@ function setFeatureHeight(){
     $('.jumbotron.feature').css("height", featureHeight + "px");
 }
 
+function setBodyPadding(){
+    var bannerHeight = $('header').height();
+    $('body').css("padding-top", bannerHeight + "px");
+
+}
+
+function setArticleHeading(windowWidth){
+
+    function disableArticleHeader(){
+        $('h1').css("width", " ");
+        $('body').removeClass('article-scroll');
+        $('.navbar-collapse').addClass('navbar-right');
+        $('.main-menu').removeClass('container-fluid').addClass('container');
+    }
+
+    if(windowWidth > 768){
+
+        var offset = $('header').height();
+
+        $(window).scroll(function () {
+            var titleWidth = $('.title').width();
+            $('h1').css("width", titleWidth + "px");
+
+            var fromTop = $(window).scrollTop();
+
+            if (fromTop > offset) {
+                $('body').addClass('article-scroll');
+                $('.navbar-collapse').removeClass('navbar-right');
+                $('.main-menu').addClass('container-fluid').removeClass('container');
+            }
+            else {
+                disableArticleHeader()
+            }
+
+        });
+    }
+    else{
+        disableArticleHeader()
+         $(window).scroll(function () {
+             disableArticleHeader()
+         });
+    }
+}
+
 $(window).resize(function(){
-    setFeatureHeight();
+
+    initForWindow()
+
 });
 
 

@@ -2,9 +2,9 @@
 {% load static core_tags wagtailcore_tags wagtailimages_tags %}
 
 {% block content %}
-    <div class="container article-page">
+    <div id="article-page" class="container">
         <article>
-            <div class="title centered">
+            <div class="title">
                 <div class="primary-topic">
                     <i class="fa fa-tags"></i>
                     <a href="{{ self.primary_topic.url }}">{{ self.primary_topic }}</a>
@@ -27,10 +27,10 @@
                 {% image self.main_image width-940 %}
             </figure>
             <ul class="share-links">
-                <li><span class="facebook-share-link" data-url="{{ self.url }}"><i class="fa fa-facebook"></i></span></li>
-                <li><a href="https://twitter.com/share?text={{ self.title }}"><i class="fa fa-twitter"></i></a></li>
-                <li><a href="javascript:window.print()"><i class="fa fa-print"></i></a></li>
-                <li><a HREF="mailto:?subject={{ self }}&body={{ self.url }}"><i class="fa fa-envelope"></i></a></li>
+                <li class="facebook"><span class="facebook-share-link" data-url="{{ self.url }}"><i class="fa fa-facebook"></i></span></li>
+                <li class="twitter"><a href="https://twitter.com/share?text={{ self.title }}"><i class="fa fa-twitter"></i></a></li>
+                <li class="print"><a href="javascript:window.print()"><i class="fa fa-print"></i></a></li>
+                <li class="email"><a HREF="mailto:?subject={{ self }}&body={{ self.url }}"><i class="fa fa-envelope"></i></a></li>
             </ul>
             <div class="story">
                 {{ self.body }}
