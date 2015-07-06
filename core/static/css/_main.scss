@@ -365,7 +365,7 @@ footer{
   }
 }
 
-.contributor{
+.contributors{
   @include type($text-color);
   a{
     color: $text_color;
@@ -373,7 +373,6 @@ footer{
   span{
     color: $twitter_blue;
   }
-
 }
 
 /**************  Article  **************/
