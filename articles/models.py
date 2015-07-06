@@ -46,6 +46,11 @@ class Topic(UniquelySlugable):
 register_snippet(Topic)
 
 
+Topic.panels = [
+    FieldPanel("name"),
+]
+
+
 class TopicListPage(RoutablePageMixin, Page):
 
     @property
