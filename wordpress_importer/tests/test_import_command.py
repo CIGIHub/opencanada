@@ -171,7 +171,7 @@ class TestCommandImportFromWordPressUnicodeSlug(TestCase, ImageCleanUp):
             slug='crisis-at-home-for-canadas-armed-forces')
         self.assertEqual(1, pages.count())
 
-    def get_test_post_data(self):
+    def get_test_post_data(self, post_type):
         data = [
             (1,
              'Crisis At Home',
@@ -344,7 +344,7 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
 
     # TODO: Tags
 
-    def get_test_post_data(self):
+    def get_test_post_data(self, post_type):
         data = [
             (1,
              'Vladimir Putin has challenged',

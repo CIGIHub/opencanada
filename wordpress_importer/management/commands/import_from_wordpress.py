@@ -169,12 +169,9 @@ class Command(BaseCommand):
             )
             revision.publish()
 
-    def get_post_data(self):
-        cursor = self.connection.cursor()
-        # TODO: get post time post_date_gmt
-        # TODO: setup better filtering so that we get only the data that we
-        # actually want to transfer.
-        query = 'SELECT wp_posts.id, post_content, post_title, post_excerpt, post_name, user_email, post_date_gmt ' \
+    def get_post_query(self, post_type):
+        query = 'SELECT DISTINCT wp_posts.id, post_content, post_title, ' \
+                'post_excerpt, post_name, user_email, post_date_gmt ' \
                 'FROM wp_posts INNER JOIN wp_users ' \
                 'ON wp_posts.post_author = wp_users.ID ' \
                 'WHERE wp_posts.ID in ' \
@@ -186,67 +183,118 @@ class Command(BaseCommand):
                 'inner join wp_terms ' \
                 'on wp_term_taxonomy.term_id=wp_terms.term_id ' \
                 'where taxonomy="category" ' \
-                'and post_status = "publish" and wp_terms.name="Features")'
+                'and post_status = "publish" and wp_terms.name="{}")'
 
+        if post_type == "explainer":
+            return query.format("101s")
+        elif post_type == "roundtable-blog-post":
+            return query.format("Roundtable")
+        elif post_type == "dispatch-blog-post":
+            return query.format("Dispatch")
+        elif post_type == "commentary":
+            return query.format("Comments")
+        elif post_type == "essay":
+            return query.format("Essays")
+        elif post_type == "infographic":
+            return query.format('Graphics" or wp_terms.name="Visualizations')
+        elif post_type == "interview":
+            return query.format("Interviews")
+        elif post_type == "rapid-response":
+            return query.format("Rapid Response Group")
+        elif post_type == "series":
+            return query.format("In Depth")
+        elif post_type == "feature":
+            return "{} {}".format(
+                query.format("Features"),
+                """
+                and wp_posts.ID not in
+                (SELECT wp_posts.ID FROM `wp_term_relationships`
+                inner join `wp_posts`
+                on object_id=wp_posts.ID
+                inner join wp_term_taxonomy
+                on wp_term_taxonomy.term_taxonomy_id=wp_term_relationships.term_taxonomy_id
+                inner join wp_terms
+                on wp_term_taxonomy.term_id=wp_terms.term_id
+                where taxonomy="category"
+                and post_status = "publish" and (wp_terms.name="Dispatch"
+                or wp_terms.name="Roundtable"
+                or wp_terms.name="Blogs"
+                or wp_terms.name = 'The Think Tank'
+                or wp_terms.name = 'National Capital Branch News'
+                or wp_terms.name = 'Readings'
+                or wp_terms.name = 'CIC in the News'
+                or wp_terms.name = 'Op-eds'
+                or wp_terms.name = 'Reports'
+                or wp_terms.name = 'Open Watch'
+                or wp_terms.name = 'Visualizations'))"""
+            )
+
+    def get_post_data(self, post_type):
+        cursor = self.connection.cursor()
+        query = self.get_post_query(post_type)
         cursor.execute(query)
         results = cursor.fetchall()
         cursor.close()
         return results
 
     def load_posts(self):
-        # TODO: store a list of IDs for the posts that we are migrating.
-        results = self.get_post_data()
 
-        features_page = Page.objects.get(slug="features")
-        feature_category = ArticleCategory.objects.get(slug="feature")
+        for post_type in ["feature", "explainer", "roundtable-blog-post",
+                          "dispatch-blog-post", "commentary", "essay",
+                          "infographic", "interview", "rapid-response"]:
 
-        for (post_id, post_content, post_title, post_excerpt, post_name,
-             author_email, post_date) in results:
+            results = self.get_post_data(post_type)
 
-            cleaned_post_name = unquote(post_name).encode('ascii', 'ignore')
+            features_page = Page.objects.get(slug="features")
+            feature_category = ArticleCategory.objects.get(slug=post_type)
 
-            pages = ArticlePage.objects.filter(slug=cleaned_post_name)
-            if pages.count() > 0:
-                page = pages.first()
-            else:
-                page = ArticlePage(owner=None, category=feature_category)
-                features_page.add_child(instance=page)
+            for (post_id, post_content, post_title, post_excerpt, post_name,
+                 author_email, post_date) in results:
 
-            page.slug = cleaned_post_name
+                cleaned_post_name = unquote(post_name).encode('ascii', 'ignore')
 
-            if post_title:
-                page.title = post_title
-            else:
-                page.title = ''
-            if post_date:
-                page.first_published_at = timezone.make_aware(post_date, timezone.pytz.timezone('GMT'))
-            if post_content:
-                updated_post_content = self.process_html_for_stream_field(
-                    post_content)
-                page.body = json.dumps(updated_post_content)
-            else:
-                page.body = ''
-            if post_excerpt:
-                page.excerpt = post_excerpt
-            else:
-                page.excerpt = ''
+                pages = ArticlePage.objects.filter(slug=cleaned_post_name)
+                if pages.count() > 0:
+                    page = pages.first()
+                else:
+                    page = ArticlePage(owner=None, category=feature_category)
+                    features_page.add_child(instance=page)
 
-            contributor = ContributorPage.objects.filter(email=author_email).first()
-            if contributor:
-                author_link, created = ArticleAuthorLink.objects.get_or_create(
-                    author=contributor,
-                    article=page
+                page.slug = cleaned_post_name
+
+                if post_title:
+                    page.title = post_title
+                else:
+                    page.title = ''
+                if post_date:
+                    page.first_published_at = timezone.make_aware(post_date, timezone.pytz.timezone('GMT'))
+                if post_content:
+                    updated_post_content = self.process_html_for_stream_field(
+                        post_content)
+                    page.body = json.dumps(updated_post_content)
+                else:
+                    page.body = ''
+                if post_excerpt:
+                    page.excerpt = post_excerpt
+                else:
+                    page.excerpt = ''
+
+                contributor = ContributorPage.objects.filter(email=author_email).first()
+                if contributor:
+                    author_link, created = ArticleAuthorLink.objects.get_or_create(
+                        author=contributor,
+                        article=page
+                    )
+                    author_link.save()
+
+                revision = page.save_revision(
+                    user=None,
+                    submitted_for_moderation=False,
                 )
-                author_link.save()
+                revision.publish()
 
-            revision = page.save_revision(
-                user=None,
-                submitted_for_moderation=False,
-            )
-            revision.publish()
-
-            import_record, created = PostImport.objects.get_or_create(
-                post_id=post_id)
+                import_record, created = PostImport.objects.get_or_create(
+                    post_id=post_id)
 
     def process_html_for_stream_field(self, html):
         processed_html = []
