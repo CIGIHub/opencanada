@@ -8,7 +8,7 @@
     <div class="feature-text">
         <h1>
         <a style="color: {{ self.featured_item_font_style.text_colour }}; font-size: {{ self.featured_item_font_style.font_size }}em; line-height: {{ self.featured_item_font_style.line_size }}%; "href="{{ self.featured_item.url }}">{{ self.featured_item.title }}</a></h1>
-        <div class="feature-line">{{ self.featured_item.articlepage.subtitle|richtext }}</div>
+        <div class="feature-line" style="color: {{ self.featured_item_font_style.text_colour }};">{{ self.featured_item.articlepage.subtitle|richtext }}</div>
         <div class="contributors">By:
             {% for author in self.featured_item.articlepage.authors %}
                 <div class="contributor">
