@@ -51,7 +51,8 @@ class ContributorPage(Page):
         elif self.nickname:
             self.title = self.nickname
         else:
-            self.title = ""
+            if not self.title:
+                self.title = ""
         self.slug = slugify(self.title)
         if self.twitter_handle and not self.twitter_handle.startswith("@"):
             self.twitter_handle = "@{}".format(self.twitter_handle)
@@ -60,6 +61,7 @@ class ContributorPage(Page):
         if not self.slug:
             self.title = str(self.id)
             self.slug = slugify(self.title)
+            self.save()
 
     @property
     def full_name(self):
