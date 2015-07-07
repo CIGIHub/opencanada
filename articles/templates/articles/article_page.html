@@ -5,10 +5,12 @@
     <div id="article-page" class="container">
         <article>
             <div class="title">
-                <div class="primary-topic">
-                    <i class="fa fa-tags"></i>
-                    <a href="{{ self.primary_topic.url }}">{{ self.primary_topic }}</a>
-                </div>
+                {% if self.primary_topic %}
+                    <div class="primary-topic">
+                        <i class="fa fa-tags"></i>
+                        <a href="{{ self.primary_topic.url }}">{{ self.primary_topic }}</a>
+                    </div>
+                {% endif %}
 
                 <h1>{{ self.title }}</h1>
                 <h2>{{ self.subtitle|richtext }}</h2>
@@ -17,8 +19,8 @@
                     {% for author in self.authors %}
                     <div class="contributor">
                         <a href="author.url">{{ author.first_name }} {{ author.last_name }}</a>
-                        {% if author.twitter_handle %}
-                            (<span>@</span>{{ author.twitter_handle }})
+                        {% if author.display_twitter_handle %}
+                            (<span>@</span>{{ author.display_twitter_handle }})
                         {% endif %}
                     </div>{% endfor %}</div>
                 <div class="date"> / {{ self.first_published_at|date:"F j, Y" }}</div>
