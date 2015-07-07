@@ -5,6 +5,7 @@ from django.utils.encoding import python_2_unicode_compatible
 from django.utils.text import slugify
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, RichTextFieldPanel
 from wagtail.wagtailcore.models import Page
+from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
 
 @python_2_unicode_compatible
@@ -66,4 +67,5 @@ ContributorPage.content_panels = [
     FieldPanel('twitter_handle'),
     RichTextFieldPanel('short_bio'),
     RichTextFieldPanel('long_bio'),
+    ImageChooserPanel('headshot'),
 ]
