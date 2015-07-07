@@ -62,28 +62,14 @@ class HomePage(Page):
         related_name='+'
     )
 
-    # current_headline = models.ForeignKey(
-    #     'articles.Headline',
-    #     null=True,
-    #     blank=True,
-    #     on_delete=models.SET_NULL,
-    #     related_name='+'
-    # )
-
-    # def __init__(self, *args, **kwargs):
-    #     super(HomePage, self).__init__(*args, **kwargs)
+    number_of_articles = models.IntegerField(default=12)
 
     def __str__(self):
         return self.title
 
-    # def save(self, *args, **kwargs):
-    #     # try:
-    #     #     live_home_page = HomePage.objects.get(id=self.id)
-    #     #     self.current_headline = live_home_page.current_headline
-    #     # except HomePage.DoesNotExist:
-    #     #     pass
-    #
-    #     super(HomePage, self).save(*args, **kwargs)
+    def articles(self):
+        articles = article_models.ArticlePage.objects.live().all().order_by("-first_published_at")[:self.number_of_articles]
+        return articles
 
 
 @receiver(page_published, sender=HomePage)
@@ -114,4 +100,5 @@ def on_publish(**kwargs):
 HomePage.content_panels = Page.content_panels + [
     PageChooserPanel("featured_item", "articles.ArticlePage"),
     SnippetChooserPanel("featured_item_font_style", FontStyle),
+    FieldPanel("number_of_articles"),
 ]
