@@ -97,7 +97,8 @@ class Command(BaseCommand):
                 'inner join `wp_usermeta` ' \
                 'on id=user_id ' \
                 'where meta_value like "%contributor%"' \
-                ') AND meta_key in ("first_name", "last_name", "nickname", "twitter", "description", "userphoto_image_file") ' \
+                ') AND meta_key in ("first_name", "last_name", "nickname", ' \
+                '"twitter", "description", "userphoto_image_file") ' \
                 'AND meta_value != ""'
 
         cursor.execute(query)
