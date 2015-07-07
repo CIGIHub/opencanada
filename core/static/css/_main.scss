@@ -297,23 +297,24 @@ footer{
     font-family: $serif;
     h1{
       font-size: 2.4em;
+      a{
+       text-decoration: none;
+      }
     }
     .feature-line{
       font-size: 1.4em;
     }
     .contributors{
       margin-top: 5%;
-      font-family: $sans-serif;
       @include type($white);
       a{color: white;}
-      span{color: $twitter-blue;}
     }
   }
   .scroll{
     font-size: 60px;
     bottom: 15%;
     left: 50%;
-    a{color: white;}
+    a{color: $red;}
   }
    .image-caption{
     right: 2%;
@@ -373,6 +374,15 @@ footer{
   span{
     color: $twitter_blue;
   }
+  .contributor{
+    display: inline-block;
+  }
+  .contributor:after{
+    content: ', ';
+  }
+  .contributor:last-child:after{
+    content: '';
+  }
 }
 
 /**************  Article  **************/
@@ -424,15 +434,6 @@ article, .related-articles{
   }
   .contributors a{
     color: $red;
-  }
-  .contributor{
-    display: inline-block;
-  }
-  .contributor:after{
-    content: ', ';
-  }
-  .contributor:last-child:after{
-    content: '';
   }
 }
 article{
