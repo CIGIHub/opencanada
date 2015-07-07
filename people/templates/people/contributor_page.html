@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static core_tags wagtailcore_tags wagtailimages_tags wagtailroutablepage_tags  %}
+
+{% block content %}
+    <div class="container">
+        <h1>{{ self.title }}</h1>
+        <div class="twitter"><span>@</span>{{ self.display_twitter_handle }}</div>
+        <div class="email">{{ self.email }}</div>
+        <div class="bio">{{ self.long_bio|richtext }}</div>
+        <figure>
+            {% image self.headshot width-300 %}
+        </figure>
+    </div>
+
+
+{% endblock %}
