@@ -273,7 +273,7 @@ class InDepthArticleLink(Orderable, models.Model):
 class InDepthPage(Page):
     subtitle = RichTextField(blank=True, default="")
     body = article_fields.BodyField(blank=True, default="")
-    image = models.ForeignKey(
+    main_image = models.ForeignKey(
         'images.AttributedImage',
         null=True,
         blank=True,

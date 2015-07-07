@@ -14,7 +14,8 @@ from django.utils import timezone
 from django.utils.six import BytesIO, text_type
 from wagtail.wagtailcore.models import Page
 
-from articles.models import ArticleAuthorLink, ArticleCategory, ArticlePage
+from articles.models import (ArticleAuthorLink, ArticleCategory, ArticlePage,
+                             InDepthPage)
 from images.models import AttributedImage
 from people.models import ContributorListPage, ContributorPage
 from wordpress_importer.models import ImageImport, PostImport
@@ -78,6 +79,7 @@ class Command(BaseCommand):
         self.open_connection(db_config)
         self.load_contributors()
         self.load_posts()
+        self.load_indepth_posts()
         self.close_connection()
 
     def open_connection(self, database_configuration):
@@ -322,7 +324,7 @@ class Command(BaseCommand):
                 revision.publish()
 
                 import_record, created = PostImport.objects.get_or_create(
-                    post_id=post_id)
+                    post_id=post_id, article_page=page)
 
     def process_html_for_stream_field(self, html):
         processed_html = []
@@ -489,8 +491,50 @@ class Command(BaseCommand):
         return updated_source_url
 
     def load_indepth_posts(self):
-        # links to other articles - class: idarticlecontainer
-        pass
+        for post_type in ["series", ]:
+
+            results = self.get_post_data(post_type)
+
+            series_list_page = Page.objects.get(slug="indepth")
+
+            for (post_id, post_content, post_title, post_excerpt, post_name,
+                 author_email, post_date) in results:
+
+                cleaned_post_name = unquote(post_name).encode('ascii', 'ignore')
+
+                pages = InDepthPage.objects.filter(slug=cleaned_post_name)
+                if pages.count() > 0:
+                    page = pages.first()
+                else:
+                    page = InDepthPage(owner=None)
+                    series_list_page.add_child(instance=page)
+
+                if not page.main_image:
+                    self.update_post_image_data(page, post_id)
+
+                page.slug = cleaned_post_name
+
+                if post_title:
+                    page.title = post_title
+                else:
+                    page.title = ''
+                if post_date:
+                    page.first_published_at = timezone.make_aware(post_date, timezone.pytz.timezone('GMT'))
+                if post_content:
+                    updated_post_content = self.process_html_for_stream_field(
+                        post_content)
+                    page.body = json.dumps(updated_post_content)
+                else:
+                    page.body = ''
+
+                revision = page.save_revision(
+                    user=None,
+                    submitted_for_moderation=False,
+                )
+                revision.publish()
+
+                import_record, created = PostImport.objects.get_or_create(
+                    post_id=post_id, article_page=page)
 
 
 class DownloadException(Exception):
