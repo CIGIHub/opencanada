@@ -49,4 +49,4 @@ INSTALLED_APPS = INSTALLED_APPS + (
     'raven.contrib.django.raven_compat',
 )
 
-FAVICON_PATH = STATIC_URL + 'images/favicon.png'
+FAVICON_PATH = STATIC_URL + 'img/favicon.png'
