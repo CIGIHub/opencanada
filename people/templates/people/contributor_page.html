@@ -1,16 +1,32 @@
 {% extends "base.html" %}
-{% load static core_tags wagtailcore_tags wagtailimages_tags wagtailroutablepage_tags  %}
+{% load static core_tags wagtailcore_tags wagtailimages_tags wagtailroutablepage_tags people_tags%}
 
 {% block content %}
     <div class="container">
-        <h1>{{ self.title }}</h1>
-        <div class="twitter"><span>@</span>{{ self.display_twitter_handle }}</div>
-        <div class="email">{{ self.email }}</div>
-        <div class="bio">{{ self.long_bio|richtext }}</div>
-        <figure>
-            {% image self.headshot width-300 %}
-        </figure>
+        <div class="contributor-profile">
+            <h1>{{ self.title }}</h1>
+            {% if self.display_twitter_handle %}
+                <div class="twitter"><span>@</span>{{ self.display_twitter_handle }}</div>
+            {% endif %}
+            {% if self.email %}
+                <div class="email"><a href="mailto:{{ self.email }}">{{ self.email }}</a></div>
+            {% endif %}
+            <div class="bio">{{ self.long_bio|richtext }}</div>
+            {% if self.headshot %}
+                <figure>
+                    {% image self.headshot width-300 %}
+                </figure>
+            {% endif %}
+        </div>
+
+        {% for article in self|contributor_articles %}
+            <div class="row">
+                <div class="col-xs-12">
+                    <h2><a href="{{ article.url }}">{{ article.title }}</a></h2>
+                </div>
+            </div>
+
+        {% endfor %}
+
     </div>
-
-
 {% endblock %}
