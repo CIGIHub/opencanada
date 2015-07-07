@@ -41,6 +41,11 @@ class ContributorPageTestCase(TestCase):
         contributor.save()
         self.assertEqual(contributor.twitter_handle, "")
 
+    def test_display_twitter_handle_does_not_contain_at(self):
+        contributor = models.ContributorPage(first_name="Bob", last_name="Smith", depth=1, twitter_handle="@bob")
+        contributor.save()
+        self.assertEqual(contributor.display_twitter_handle, "bob")
+
 
 class ContributorListPageTestCase(TestCase):
     fixtures = ["people_test.json", ]

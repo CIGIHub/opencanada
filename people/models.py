@@ -56,6 +56,12 @@ class ContributorPage(Page):
     def last_comma_first_name(self):
         return "{}, {}".format(self.last_name, self.first_name)
 
+    @property
+    def display_twitter_handle(self):
+        if self.twitter_handle:
+            return self.twitter_handle[1:]
+        return self.twitter_handle
+
     def __str__(self):
         return "{} {} - {}".format(self.first_name, self.last_name, self.email)
 
