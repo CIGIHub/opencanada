@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="name"><a href="{{ contributor.url }}">{{ contributor.first_name }}, {{ contributor.last_name }}</a></div>
-                <div class="title">{{ contributor.short_bio }}</div>
+                <div class="title">{{ contributor.short_bio|richtext }}</div>
             </div>
         </div>
         {% endif %}
