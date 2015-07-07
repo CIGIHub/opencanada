@@ -160,6 +160,7 @@ class TestCommandImportFromWordPressLoadContributors(TestCase, ImageCleanUp):
 class TestCommandImportFromWordPressUnicodeSlug(TestCase, ImageCleanUp):
     def setUp(self):
         import_from_wordpress.Command.get_post_data = self.get_test_post_data
+        import_from_wordpress.Command.get_post_image_data = self.get_test_post_image_data
 
     def tearDown(self):
         self.delete_images()
@@ -184,6 +185,9 @@ class TestCommandImportFromWordPressUnicodeSlug(TestCase, ImageCleanUp):
         ]
         return data
 
+    def get_test_post_image_data(self, post_id):
+        return None
+
 
 @mock.patch('requests.get', local_get_successful)
 class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
@@ -191,6 +195,7 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
 
     def setUp(self):
         import_from_wordpress.Command.get_post_data = self.get_test_post_data
+        import_from_wordpress.Command.get_post_image_data = self.get_test_post_image_data
 
     def tearDown(self):
         self.delete_images()
@@ -343,6 +348,9 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
     # TODO: Multiple Authors? Is that a thing on OpenCanada?
 
     # TODO: Tags
+
+    def get_test_post_image_data(self, post_id):
+        return None
 
     def get_test_post_data(self, post_type):
         data = [

@@ -240,7 +240,7 @@ class Command(BaseCommand):
         cursor.close()
         return results
 
-    def update_post_image_data(self, post, post_id):
+    def get_post_image_data(self, post_id):
         cursor = self.connection.cursor()
         query = "SELECT guid " \
                 "FROM wp_posts " \
@@ -252,8 +252,13 @@ class Command(BaseCommand):
         cursor.execute(query)
         results = cursor.fetchone()
         cursor.close()
+
+        return results[0]
+
+    def update_post_image_data(self, post, post_id):
+        results = self.get_post_image_data(post_id)
         if results:
-            original_photo_url = results[0]
+            original_photo_url = results
 
             parsed_url = urlparse(original_photo_url)
             filename = parsed_url.path.split("/")[-1]

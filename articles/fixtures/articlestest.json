@@ -546,7 +546,7 @@
   {
     "fields": {
       "body": "[{\"type\": \"Paragraph\", \"value\": \"<p>This is about the In Depth.</p>\"}]",
-      "image": null,
+      "main_image": null,
       "primary_topic": 2
     },
     "model": "articles.indepthpage",
@@ -555,7 +555,7 @@
    {
     "fields": {
       "body": "[{\"type\": \"Paragraph\", \"value\": \"<p>This is about the In Depth.</p>\"}]",
-      "image": null,
+      "main_image": null,
       "primary_topic": null
     },
     "model": "articles.indepthpage",
