@@ -1,15 +1,26 @@
 {% load wagtailcore_tags static %}
 
-<div class="jumbotron feature" style="height: 400px">
+<div class="jumbotron feature" style="height: 400px;">
 
     <div class="feature-image" style="background-image: url('{% static 'img/assets/diplomacy-unbound.png' %}')">
         <div class="feature-image-overlay"></div>
     </div>
     <div class="feature-text">
-        <h1>Who Knows What Evils Lurk in the Shadows?</h1>
-        <div class="feature-line">The story of the powerful spy agency most Canadians still don't know, and the security bill that would expand its resources and reach.</div>
-        <div class="contributors">By: Ron Deirbert (<a href="https://twitter.com/@rondeibert"><span>@</span>rondeibert</a>)</div>
+        <h1>
+        <a style="color: {{ self.featured_item_font_style.text_colour }}; font-size: {{ self.featured_item_font_style.font_size }}em; line-height: {{ self.featured_item_font_style.line_size }}%; "href="{{ self.featured_item.url }}">{{ self.featured_item.title }}</a></h1>
+        <div class="feature-line">{{ self.featured_item.articlepage.subtitle|richtext }}</div>
+        <div class="contributors">By:
+            {% for author in self.featured_item.articlepage.authors %}
+                <div class="contributor">
+                    <a href="author.url">{{ author.first_name }} {{ author.last_name }}</a>
+                    {% if author.display_twitter_handle %}
+                        (<span>@</span>{{ author.display_twitter_handle }})
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
     </div>
+
     <div class="scroll"><a href="#features"><i class="fa fa-angle-double-down"></i></a></div>
     <div class="image-caption"><i class="fa fa-camera"></i> Illustration by Abhilasha Dewan</div>
 
