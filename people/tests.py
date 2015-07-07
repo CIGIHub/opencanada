@@ -46,6 +46,40 @@ class ContributorPageTestCase(TestCase):
         contributor.save()
         self.assertEqual(contributor.display_twitter_handle, "bob")
 
+    def test_save_creates_slug_with_firstname_lastname(self):
+        contributor = models.ContributorPage(first_name="Bob", last_name="Smith", depth=1)
+        contributor.save()
+        self.assertEqual(contributor.slug, "bob-smith")
+
+    def test_save_creates_slug_with_firstname(self):
+        contributor = models.ContributorPage(first_name="Bob", depth=1)
+        contributor.save()
+        self.assertEqual(contributor.slug, "bob")
+
+    def test_save_creates_slug_with_lastname(self):
+        contributor = models.ContributorPage(last_name="Smith", depth=1)
+        contributor.save()
+        self.assertEqual(contributor.slug, "smith")
+
+    def test_save_creates_slug_when_no_names_uses_nickname(self):
+        contributor = models.ContributorPage(nickname="Joey Sampson", depth=1)
+        contributor.save()
+        self.assertEqual(contributor.slug, "joey-sampson")
+
+    def test_save_creates_slug_when_no_names_or_nickname_uses_id(self):
+        contributor = models.ContributorPage(depth=1)
+        contributor.save()
+        self.assertEqual(contributor.slug, "{}".format(contributor.id))
+
+    def test_save_updates_to_names(self):
+        contributor = models.ContributorPage(depth=1)
+        contributor.save()
+
+        contributor.first_name = "Bob"
+        contributor.last_name = "Smith"
+        contributor.save()
+        self.assertEqual(contributor.slug, "bob-smith")
+
 
 class ContributorListPageTestCase(TestCase):
     fixtures = ["people_test.json", ]
