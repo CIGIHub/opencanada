@@ -238,8 +238,32 @@ class Command(BaseCommand):
         cursor.close()
         return results
 
-    def load_posts(self):
+    def update_post_image_data(self, post, post_id):
+        cursor = self.connection.cursor()
+        query = "SELECT guid " \
+                "FROM wp_posts " \
+                "WHERE ID in " \
+                "(SELECT meta_value " \
+                "FROM wp_postmeta " \
+                "WHERE post_id={} " \
+                "AND meta_key='_thumbnail_id')".format(post_id)
+        cursor.execute(query)
+        results = cursor.fetchone()
+        cursor.close()
+        if results:
+            original_photo_url = results[0]
 
+            parsed_url = urlparse(original_photo_url)
+            filename = parsed_url.path.split("/")[-1]
+
+            source = get_setting("ARTICLE_PHOTO_URL_PATTERN").format(filename)
+            try:
+                self.download_image(source, filename)
+                post.main_image = AttributedImage.objects.get(title=filename)
+            except DownloadException:
+                pass
+
+    def load_posts(self):
         for post_type in ["feature", "explainer", "roundtable-blog-post",
                           "dispatch-blog-post", "commentary", "essay",
                           "infographic", "interview", "rapid-response"]:
@@ -260,6 +284,9 @@ class Command(BaseCommand):
                 else:
                     page = ArticlePage(owner=None, category=feature_category)
                     features_page.add_child(instance=page)
+
+                if not page.main_image:
+                    self.update_post_image_data(page, post_id)
 
                 page.slug = cleaned_post_name
 
