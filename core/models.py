@@ -67,6 +67,7 @@ class HomePage(Page):
     def __str__(self):
         return self.title
 
+    @property
     def articles(self):
         articles = article_models.ArticlePage.objects.live().all().order_by("-first_published_at")[:self.number_of_articles]
         return articles
