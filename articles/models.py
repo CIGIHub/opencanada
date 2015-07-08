@@ -327,7 +327,7 @@ class InDepthPage(Page):
 InDepthPage.content_panels = Page.content_panels + [
     FieldPanel('subtitle'),
     StreamFieldPanel('body'),
-    ImageChooserPanel('image'),
+    ImageChooserPanel('main_image'),
     InlinePanel('related_article_links', label="Articles")
 ]
 
