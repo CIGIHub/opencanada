@@ -4,10 +4,6 @@
 
 {% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
 
-{% block featured-tags %}
-    {% include 'core/featured-tags.html' %}
-{% endblock %}
-
 {% block feature %}
     {% include 'core/homepage-feature.html' %}
 {% endblock %}
@@ -22,6 +18,9 @@
                 <div class="contributors">By:
                     {% for author in article.authors %}
                     <div class="contributor">
+                        {% if author.twitter_handle %}
+                            <span><a href="{{ author.twitter_handle }}">@</a></span>
+                        {% endif %}
                         <a href="author.url">{{ author.first_name }} {{ author.last_name }}</a>
                     </div>
                 {% endfor %}

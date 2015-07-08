@@ -1,7 +1,7 @@
 /**************   General Styles  **************/
 body{
   color: $text-color;
-  font-family: $serif;
+  font-family: $sans-serif;
 }
 
 h1{
@@ -13,7 +13,7 @@ h2{
   margin-top: 0px;
 }
 
-a{
+a, a:hover{
   color: $red;
 }
 
@@ -164,18 +164,6 @@ header{
   }
 }
 
-.featured-topics{
-    background: $red;
-    display: block;
-    padding-bottom: 10px;
-    h3{
-      display:inline-block;
-      @include type(white);
-      margin: 0 10px 0 0;
-    }
-    @include inline-list(white);
-}
-
 @media(max-width: $screen-md){
   .featured-topics{display: none}
 }
@@ -261,6 +249,7 @@ footer{
 .feature{
   position: relative;
   color: white;
+  font-family: $sans-serif;
 
   .feature-image{
     position: relative;
@@ -281,7 +270,7 @@ footer{
     display: block;
     content: "";
     top: 0; right: 0; bottom: 0; left: 0;
-    background: hsla(0,0%,0%,0.5);
+    background: hsla(0, 0%, 0%, 0.3);
   }
 
   .feature-text, .image-caption, .scroll{
@@ -291,14 +280,16 @@ footer{
 
   .feature-text{
     top: 10%;
-    left: 10%;
-    max-width: 770px;
+    left: 25%;
+    max-width: 670px;
     margin-right: 10%;
-    font-family: $serif;
     h1{
       font-size: 2.4em;
       a{
        text-decoration: none;
+      }
+      a:hover{
+        color: $red;
       }
     }
     .feature-line{
@@ -306,7 +297,7 @@ footer{
     }
     .contributors{
       margin-top: 5%;
-      @include type($white);
+      @include type(white);
       a{color: white;}
     }
   }
@@ -314,9 +305,32 @@ footer{
     font-size: 60px;
     bottom: 15%;
     left: 50%;
-    a{color: $red;}
+
+    a{color: $red; }
+  }
+  @keyframes bounce {
+	0%, 20%, 60%, 100% {
+		-webkit-transform: translateY(0);
+		transform: translateY(0);
+	}
+	40% {
+		-webkit-transform: translateY(0.2em);
+		transform: translateY(0.2em);
+	}
+  }
+
+  .scroll a{
+    text-decoration: none;
+  }
+  .scroll a:hover{
+    -webkit-animation: bounce 2s;
+    -moz-animation:    bounce 2s;
+    -o-animation:     bounce 2s;
+    animation: bounce 2s;
+
   }
    .image-caption{
+     font-family: $sans-serif;
     right: 2%;
     bottom: 3%;
   }
@@ -371,8 +385,12 @@ footer{
   a{
     color: $text_color;
   }
-  span{
+  span a{
     color: $twitter_blue;
+  }
+  span a:hover{
+    text-decoration: none;
+    color: $red;
   }
   .contributor{
     display: inline-block;
