@@ -51,6 +51,7 @@
             {% endif %}
         </article>
 
+        {% if self.series_articles %}
         <section class="in-the-series">
             <h2>Also in the series</h2>
             {# TODO: This was added to handle the off chance that an article is in more than one indepth. Change theming as appropriate.  #}
@@ -64,6 +65,7 @@
                 {% endblock %}
             {%  endfor %}
         </section>
+        {% endif %}
 
         {% block related_articles %}
             {% with article_count=3 %}
