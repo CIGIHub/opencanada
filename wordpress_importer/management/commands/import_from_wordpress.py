@@ -15,7 +15,7 @@ from django.utils.six import BytesIO, text_type
 from wagtail.wagtailcore.models import Page
 
 from articles.models import (ArticleAuthorLink, ArticleCategory, ArticlePage,
-                             InDepthPage)
+                             InDepthArticleLink, InDepthPage)
 from images.models import AttributedImage
 from people.models import ContributorListPage, ContributorPage
 from wordpress_importer.models import ImageImport, PostImport
@@ -554,6 +554,24 @@ class Command(BaseCommand):
 
                 import_record, created = PostImport.objects.get_or_create(
                     post_id=post_id, article_page=page)
+
+                if post_content:
+                    self.process_html_for_series_links(post_content, page)
+
+    def process_html_for_series_links(self, html, series):
+        parser = BeautifulSoup(html)
+        link_tags = parser.find_all('a')
+
+        for link_tag in link_tags:
+            if link_tag.has_attr('href'):
+                link = link_tag['href']
+                path_parts = link.strip("/").split("/")
+                potential_article_slug = path_parts[-1]
+                try:
+                    article = ArticlePage.objects.get(slug=potential_article_slug)
+                    InDepthArticleLink.objects.create(article=article, in_depth=series)
+                except ArticlePage.DoesNotExist:
+                    pass  # skip it as it doesn't seem to exist.
 
 
 class DownloadException(Exception):
