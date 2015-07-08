@@ -253,17 +253,31 @@ class Command(BaseCommand):
         results = cursor.fetchone()
         cursor.close()
 
-        return results[0]
+        if results:
+            return results[0]
+        else:
+            return None
+
+    def get_download_path_and_filename(self, original_url, url_pattern, images_folder="uploads"):
+        parsed_url = urlparse(original_url)
+        path_parts = parsed_url.path.split("/")
+        uploads_index = path_parts.index(images_folder)
+        partial_path = "/".join(path_parts[uploads_index + 1:])
+        filename = "_".join(path_parts[uploads_index + 1:])
+
+        source = url_pattern.format(partial_path)
+
+        return source, filename
 
     def update_post_image_data(self, post, post_id):
         results = self.get_post_image_data(post_id)
         if results:
             original_photo_url = results
 
-            parsed_url = urlparse(original_photo_url)
-            filename = parsed_url.path.split("/")[-1]
-
-            source = get_setting("ARTICLE_PHOTO_URL_PATTERN").format(filename)
+            source, filename = self.get_download_path_and_filename(
+                original_photo_url,
+                get_setting("ARTICLE_PHOTO_URL_PATTERN")
+            )
             try:
                 self.download_image(source, filename)
                 post.main_image = AttributedImage.objects.get(title=filename)

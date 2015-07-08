@@ -848,3 +848,25 @@ class TestProcessForLineBreaks(TestCase):
             "<p>This is text.<br/>That has a line break.</p>",
             processed
         )
+
+
+class TestGetDownloadPathAndFilename(TestCase):
+    def testNoSubFolderReturnsFilenameAndUrl(self):
+        command = import_from_wordpress.Command()
+        url, filename = command.get_download_path_and_filename(
+            "http://example.com/uploads/my_image.jpg",
+            "http://newdomain.com/images/{}"
+        )
+
+        self.assertEqual("http://newdomain.com/images/my_image.jpg", url)
+        self.assertEqual("my_image.jpg", filename)
+
+    def testSubFolderReturnsFilenameAndUrlWithSubfolders(self):
+        command = import_from_wordpress.Command()
+        url, filename = command.get_download_path_and_filename(
+            "http://example.com/uploads/2011/04/my_image.jpg",
+            "http://newdomain.com/images/{}"
+        )
+
+        self.assertEqual("http://newdomain.com/images/2011/04/my_image.jpg", url)
+        self.assertEqual("2011_04_my_image.jpg", filename)
