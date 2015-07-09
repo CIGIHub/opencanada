@@ -161,6 +161,7 @@ class TestCommandImportFromWordPressUnicodeSlug(TestCase, ImageCleanUp):
     def setUp(self):
         import_from_wordpress.Command.get_post_data = self.get_test_post_data
         import_from_wordpress.Command.get_post_image_data = self.get_test_post_image_data
+        import_from_wordpress.Command.get_data_for_topics = self.get_test_data_for_topics
 
     def tearDown(self):
         self.delete_images()
@@ -188,6 +189,11 @@ class TestCommandImportFromWordPressUnicodeSlug(TestCase, ImageCleanUp):
     def get_test_post_image_data(self, post_id):
         return None
 
+    def get_test_data_for_topics(self, post_id, primary_topic=False):
+        return (
+            ('Topic 1', 'topic-1'),
+        )
+
 
 @mock.patch('requests.get', local_get_successful)
 class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
@@ -196,6 +202,7 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
     def setUp(self):
         import_from_wordpress.Command.get_post_data = self.get_test_post_data
         import_from_wordpress.Command.get_post_image_data = self.get_test_post_image_data
+        import_from_wordpress.Command.get_data_for_topics = self.get_test_data_for_topics
 
     def tearDown(self):
         self.delete_images()
@@ -351,6 +358,11 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
 
     def get_test_post_image_data(self, post_id):
         return None
+
+    def get_test_data_for_topics(self, post_id, primary_topic=False):
+        return (
+            ('Topic 1', 'topic-1'),
+        )
 
     def get_test_post_data(self, post_type):
         data = [
