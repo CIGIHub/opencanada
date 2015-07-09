@@ -433,7 +433,7 @@
   },
   {
     "fields": {
-      "body": "[{\"type\": \"Heading\", \"value\": \"This is a heading\"}, {\"type\": \"Paragraph\", \"value\": \"<p>And some body text.</p>\"}]",
+      "body": "[{\"type\": \"Heading\", \"value\": \"This is a heading\"}, {\"type\": \"Paragraph\", \"value\": {\"text\": \"<p>And some body text.</p>\", \"use_dropcap\": false}}]",
       "excerpt": "<p>This is an excerpt.</p>",
       "main_image": null,
       "subtitle": "<p>My Subtitle</p>",
@@ -447,7 +447,7 @@
   },
   {
     "fields": {
-      "body": "[{\"type\": \"Paragraph\", \"value\": \"<p>This is some text.</p>\"}]",
+      "body": "[{\"type\": \"Paragraph\", \"value\": {\"text\": \"<p>This is some text.</p>\", \"use_dropcap\": false}}]",
       "excerpt": "",
       "main_image": null,
       "subtitle": "",
@@ -461,7 +461,7 @@
   },
   {
     "fields": {
-      "body": "[{\"type\": \"Paragraph\", \"value\": \"<p>Yay! Article</p>\"}]",
+      "body": "[{\"type\": \"Paragraph\", \"value\": {\"text\": \"<p>Yay! Article</p>\", \"use_dropcap\": false}}]",
       "excerpt": "",
       "main_image": null,
       "subtitle": "",
@@ -475,7 +475,7 @@
   },
   {
     "fields": {
-      "body": "[{\"type\": \"Paragraph\", \"value\": \"<p>Yay! Some Stuff.</p>\"}]",
+      "body": "[{\"type\": \"Paragraph\", \"value\": {\"text\": \"<p>Yay! Some Stuff.</p>\", \"use_dropcap\": false} }]",
       "excerpt": "",
       "main_image": null,
       "subtitle": "",
@@ -489,7 +489,7 @@
   },
   {
     "fields": {
-      "body": "[{\"type\": \"Paragraph\", \"value\": \"<p>Yay! Some Stuff.</p>\"}]",
+      "body": "[{\"type\": \"Paragraph\", \"value\": {\"text\": \"<p>Yay! Some Stuff.</p>\", \"use_dropcap\": false} }}]",
       "excerpt": "",
       "main_image": null,
       "subtitle": "",
@@ -545,7 +545,7 @@
   },
   {
     "fields": {
-      "body": "[{\"type\": \"Paragraph\", \"value\": \"<p>This is about the In Depth.</p>\"}]",
+      "body": "[{\"type\": \"Paragraph\", \"value\": {\"text\": \"<p>This is about the In Depth.</p>\", \"use_dropcap\": false}}]",
       "main_image": null,
       "primary_topic": 2
     },
@@ -554,7 +554,7 @@
   },
    {
     "fields": {
-      "body": "[{\"type\": \"Paragraph\", \"value\": \"<p>This is about the In Depth.</p>\"}]",
+      "body": "[{\"type\": \"Paragraph\", \"value\": {\"text\": \"<p>This is about the In Depth.</p>\", \"use_dropcap\": false}}]",
       "main_image": null,
       "primary_topic": null
     },
