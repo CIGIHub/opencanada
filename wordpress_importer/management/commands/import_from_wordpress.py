@@ -12,14 +12,16 @@ from django.core.files.images import File, get_image_dimensions
 from django.core.management.base import BaseCommand
 from django.utils import timezone
 from django.utils.six import BytesIO, text_type
+from django.utils.text import slugify
 from wagtail.wagtailcore.models import Page
 
 from articles.models import (ArticleAuthorLink, ArticleCategory, ArticlePage,
-                             InDepthArticleLink, InDepthPage)
+                             ArticleTopicLink, InDepthArticleLink, InDepthPage,
+                             Topic)
 from images.models import AttributedImage
 from people.models import ContributorListPage, ContributorPage
 from wordpress_importer.models import (ImageImport, ImportDownloadError,
-                                       PostImport)
+                                       PostImport, TagImport)
 from wordpress_importer.utils import get_setting
 
 try:
@@ -78,9 +80,9 @@ class Command(BaseCommand):
             'charset': 'utf8'
         }
         self.open_connection(db_config)
-        self.load_contributors()
+        # self.load_contributors()
         self.load_posts()
-        self.load_indepth_posts()
+        # self.load_indepth_posts()
         self.close_connection()
 
     def open_connection(self, database_configuration):
@@ -178,8 +180,8 @@ class Command(BaseCommand):
                 'FROM wp_posts INNER JOIN wp_users ' \
                 'ON wp_posts.post_author = wp_users.ID ' \
                 'WHERE wp_posts.ID in ' \
-                '(SELECT wp_posts.ID FROM `wp_term_relationships` ' \
-                'inner join `wp_posts` ' \
+                '(SELECT wp_posts.ID FROM wp_term_relationships ' \
+                'inner join wp_posts ' \
                 'on object_id=wp_posts.ID ' \
                 'inner join wp_term_taxonomy ' \
                 'on wp_term_taxonomy.term_taxonomy_id=wp_term_relationships.term_taxonomy_id ' \
@@ -247,7 +249,7 @@ class Command(BaseCommand):
                 "WHERE ID in " \
                 "(SELECT meta_value " \
                 "FROM wp_postmeta " \
-                "WHERE post_id={} " \
+                "WHERE post_id='{}' " \
                 "AND meta_key='_thumbnail_id')".format(post_id)
         cursor.execute(query)
         results = cursor.fetchone()
@@ -344,6 +346,15 @@ class Command(BaseCommand):
 
                 import_record, created = PostImport.objects.get_or_create(
                     post_id=post_id, article_page=page)
+
+                self.load_primary_topic(post_id, page)
+                self.load_additional_topics(post_id, page)
+
+                revision = page.save_revision(
+                    user=None,
+                    submitted_for_moderation=False,
+                )
+                revision.publish()
 
     def process_html_for_stream_field(self, html):
         processed_html = []
@@ -521,6 +532,57 @@ class Command(BaseCommand):
                 'width-{}'.format(image.width)).url
         return updated_source_url
 
+    def get_data_for_topics(self, post_id, primary_topic=False):
+        taxonomy = 'post_tag'
+        if primary_topic:
+            taxonomy = 'subject'
+
+        query = "SELECT wp_terms.name, wp_terms.slug " \
+                "FROM wp_term_relationships " \
+                "INNER JOIN wp_posts " \
+                "ON object_id=wp_posts.ID  " \
+                "INNER JOIN wp_term_taxonomy " \
+                "ON wp_term_taxonomy.term_taxonomy_id=wp_term_relationships.term_taxonomy_id " \
+                "INNER JOIN wp_terms " \
+                "ON wp_term_taxonomy.term_id=wp_terms.term_id " \
+                "WHERE post_status = 'publish' " \
+                "AND taxonomy = '{}'" \
+                "AND wp_posts.ID = '{}'".format(taxonomy, post_id)
+
+        cursor = self.connection.cursor()
+        cursor.execute(query)
+        results = cursor.fetchall()
+        cursor.close()
+        return results
+
+    def load_primary_topic(self, post_id, post):
+        primary_topic_results = self.get_data_for_topics(post_id, primary_topic=True)
+
+        if primary_topic_results:
+            for name, original_slug in primary_topic_results:
+                new_slug = slugify(name)
+                try:
+                    topic = Topic.objects.get(slug=new_slug)
+                except Topic.DoesNotExist:
+                    topic = Topic.objects.create(name=name, slug=new_slug)
+
+                TagImport.objects.get_or_create(topic=topic, original_slug=original_slug)
+                post.primary_topic = topic
+
+    def load_additional_topics(self, post_id, post):
+        topic_results = self.get_data_for_topics(post_id)
+
+        if topic_results:
+            for name, original_slug in topic_results:
+                new_slug = slugify(name)
+                try:
+                    topic = Topic.objects.get(slug=new_slug)
+                except Topic.DoesNotExist:
+                    topic = Topic.objects.create(name=name, slug=new_slug)
+
+                TagImport.objects.get_or_create(topic=topic, original_slug=original_slug)
+                ArticleTopicLink.objects.get_or_create(topic=topic, article=post)
+
     def load_indepth_posts(self):
         for post_type in ["series", ]:
 
@@ -569,6 +631,14 @@ class Command(BaseCommand):
 
                 if post_content:
                     self.process_html_for_series_links(post_content, page)
+
+                self.load_primary_topic(post_id, page)
+
+                revision = page.save_revision(
+                    user=None,
+                    submitted_for_moderation=False,
+                )
+                revision.publish()
 
     def process_html_for_series_links(self, html, series):
         parser = BeautifulSoup(html)

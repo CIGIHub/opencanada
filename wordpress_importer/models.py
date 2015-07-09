@@ -30,3 +30,12 @@ class ImportDownloadError(models.Model):
 
     def __str__(self):
         return "{} - {}".format(self.status_code, self.url)
+
+
+@python_2_unicode_compatible
+class TagImport(models.Model):
+    original_slug = models.CharField(max_length=1024)
+    topic = models.ForeignKey("articles.Topic", null=True)
+
+    def __str__(self):
+        return self.name
