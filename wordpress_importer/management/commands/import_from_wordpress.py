@@ -80,9 +80,9 @@ class Command(BaseCommand):
             'charset': 'utf8'
         }
         self.open_connection(db_config)
-        # self.load_contributors()
+        self.load_contributors()
         self.load_posts()
-        # self.load_indepth_posts()
+        self.load_indepth_posts()
         self.close_connection()
 
     def open_connection(self, database_configuration):
@@ -95,11 +95,11 @@ class Command(BaseCommand):
         cursor = self.connection.cursor()
 
         query = 'SELECT user_email, meta_key, meta_value FROM wp_users ' \
-                'inner join `wp_usermeta` ' \
+                'inner join wp_usermeta ' \
                 'on id=user_id ' \
                 'WHERE ID IN ' \
-                '(SELECT ID FROM `wp_users` ' \
-                'inner join `wp_usermeta` ' \
+                '(SELECT ID FROM wp_users ' \
+                'inner join wp_usermeta ' \
                 'on id=user_id ' \
                 'where meta_value like "%contributor%"' \
                 ') AND meta_key in ("first_name", "last_name", "nickname", ' \
