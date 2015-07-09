@@ -2,8 +2,9 @@ from __future__ import absolute_import, unicode_literals
 
 from django.test import TestCase
 
+from articles.models import Topic
 from wordpress_importer.models import (ImageImport, ImportDownloadError,
-                                       PostImport)
+                                       PostImport, TagImport)
 
 
 class PostImportTestCase(TestCase):
@@ -20,8 +21,17 @@ class ImageImportTestCase(TestCase):
         self.assertEqual(str(image_import), "cat.jpg")
 
 
+
 class ImportDownloadErrorsTestCase(TestCase):
     def test_str_returns_url_and_code(self):
         download_error = ImportDownloadError(url="http://example.com/cat.jpg", status_code=404)
 
         self.assertEqual(str(download_error), "404 - http://example.com/cat.jpg")
+
+
+class TagImportTestCase(TestCase):
+    def test_str_returns_slug_tag_name(self):
+        topic, created = Topic.objects.get_or_create(name="Topic 1")
+        tag_import = TagImport(original_slug="my-slug", topic=topic)
+
+        self.assertEqual(str(tag_import), "my-slug - Topic 1")

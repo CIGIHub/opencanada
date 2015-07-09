@@ -38,4 +38,4 @@ class TagImport(models.Model):
     topic = models.ForeignKey("articles.Topic", null=True)
 
     def __str__(self):
-        return self.name
+        return "{} - {}".format(self.original_slug, self.topic.name)
