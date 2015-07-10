@@ -15,7 +15,7 @@ from django.utils.six import BytesIO, text_type
 from wagtail.wagtailcore.models import Page
 
 from articles.models import (ArticleAuthorLink, ArticleCategory, ArticlePage,
-                             InDepthPage)
+                             InDepthArticleLink, InDepthPage)
 from images.models import AttributedImage
 from people.models import ContributorListPage, ContributorPage
 from wordpress_importer.models import ImageImport, PostImport
@@ -253,17 +253,31 @@ class Command(BaseCommand):
         results = cursor.fetchone()
         cursor.close()
 
-        return results[0]
+        if results:
+            return results[0]
+        else:
+            return None
+
+    def get_download_path_and_filename(self, original_url, url_pattern, images_folder="uploads"):
+        parsed_url = urlparse(original_url)
+        path_parts = parsed_url.path.split("/")
+        uploads_index = path_parts.index(images_folder)
+        partial_path = "/".join(path_parts[uploads_index + 1:])
+        filename = "_".join(path_parts[uploads_index + 1:])
+
+        source = url_pattern.format(partial_path)
+
+        return source, filename
 
     def update_post_image_data(self, post, post_id):
         results = self.get_post_image_data(post_id)
         if results:
             original_photo_url = results
 
-            parsed_url = urlparse(original_photo_url)
-            filename = parsed_url.path.split("/")[-1]
-
-            source = get_setting("ARTICLE_PHOTO_URL_PATTERN").format(filename)
+            source, filename = self.get_download_path_and_filename(
+                original_photo_url,
+                get_setting("ARTICLE_PHOTO_URL_PATTERN")
+            )
             try:
                 self.download_image(source, filename)
                 post.main_image = AttributedImage.objects.get(title=filename)
@@ -359,8 +373,9 @@ class Command(BaseCommand):
         processed_element = []
         if html.name is None:
             processed_element.append({'type': 'Paragraph',
-                                      'value': "<p>{}</p>".format(
-                                          html.strip())})
+                                      'value': {"text": "<p>{}</p>".format(
+                                          html.strip()),
+                                          "use_dropcap": False}})
         elif html.name == 'img':
             processed_element.append(self._process_image_tag(html))
         elif html.name == 'h1' or html.name == 'h2' or html.name == 'h3' \
@@ -417,13 +432,22 @@ class Command(BaseCommand):
         elif html.name == 'p' or html.name == 'div':
             inner = html.decode_contents(formatter="html")
             return {'type': 'Paragraph',
-                    'value': "<p>{}</p>".format(inner.strip())}
+                    'value': {"text": "<p>{}</p>".format(inner.strip()),
+                              "use_dropcap": False
+                              }
+                    }
         elif html.name is None:
             return {'type': 'Paragraph',
-                    'value': "<p>{}</p>".format(html.strip())}
+                    'value': {"text": "<p>{}</p>".format(html.strip()),
+                              "use_dropcap": False
+                              }
+                    }
         else:
             return {'type': 'Paragraph',
-                    'value': "<p>{}</p>".format(html)}
+                    'value': {"text": "<p>{}</p>".format(html),
+                              "use_dropcap": False
+                              }
+                    }
 
     def _contains_stream_block(self, html):
         return html.name in ['div', 'p', 'img', 'h1', 'h2', 'h3', 'h4', 'h5',
@@ -435,7 +459,10 @@ class Command(BaseCommand):
             return {'type': 'Image', 'value': images.first().id}
         else:
             return {'type': 'Paragraph',
-                    'value': "<p>{}</p>".format(text_type(item))}
+                    'value': {"text": "<p>{}</p>".format(text_type(item)),
+                              "use_dropcap": False
+                              }
+                    }
 
     def process_html_for_images(self, html, use_image_names=False):
         parser = BeautifulSoup(html)
@@ -540,6 +567,24 @@ class Command(BaseCommand):
 
                 import_record, created = PostImport.objects.get_or_create(
                     post_id=post_id, article_page=page)
+
+                if post_content:
+                    self.process_html_for_series_links(post_content, page)
+
+    def process_html_for_series_links(self, html, series):
+        parser = BeautifulSoup(html)
+        link_tags = parser.find_all('a')
+
+        for link_tag in link_tags:
+            if link_tag.has_attr('href'):
+                link = link_tag['href']
+                path_parts = link.strip("/").split("/")
+                potential_article_slug = path_parts[-1]
+                try:
+                    article = ArticlePage.objects.get(slug=potential_article_slug)
+                    InDepthArticleLink.objects.create(article=article, in_depth=series)
+                except ArticlePage.DoesNotExist:
+                    pass  # skip it as it doesn't seem to exist.
 
 
 class DownloadException(Exception):

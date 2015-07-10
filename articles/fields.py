@@ -10,7 +10,7 @@ class BodyField(StreamField):
     def __init__(self, block_types=None, **kwargs):
         block_types = [
             ('Heading', blocks.CharBlock(icon="title", classname="heading")),
-            ('Paragraph', blocks.RichTextBlock(icon="doc-full")),
+            ('Paragraph', ParagraphBlock()),
             ('Image', ImageChooserBlock(icon="image")),
             ('Embed', EmbedBlock(icon="site")),
             ('List', blocks.ListBlock(blocks.RichTextBlock(label="item"), icon="list-ul")),
@@ -31,3 +31,12 @@ class AuthorBlurbBlock(blocks.CharBlock):
     class Meta:
         template = "articles/blocks/author_blurb.html"
         icon = "user"
+
+
+class ParagraphBlock(blocks.StructBlock):
+    use_dropcap = blocks.BooleanBlock(required=False)
+    text = blocks.RichTextBlock()
+
+    class Meta:
+        template = "articles/blocks/paragraph_block.html"
+        icon = "doc-full"
