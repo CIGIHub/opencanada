@@ -1,5 +1,11 @@
 /**************   General Styles  **************/
+html {
+    position: relative;
+    min-height: 100%;
+}
+
 body{
+  min-height: 100%;
   color: $text-color;
   font-family: $sans-serif;
 }
@@ -21,151 +27,68 @@ img{
   @include img-responsive;
 }
 
+button{
+  border:none;
+  background: none;
+}
+button:focus {outline:0;}
+
 /**************   HEADER  **************/
 
 header{
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
   color: white;
-  background-color: $red;
+  background: $red;
+  transition: height 2s, background 2s;
 
-  nav{
-
-    &.navbar{
-      margin: 0;
-      padding: 10px 0;
-    }
-    .navbar-brand{
-      height: auto;
-      padding: 15px 0;
-      max-width: 50%;
-    }
-    .navbar-header button{
-      font-size: 24px;
-      color: white;
-      margin-top:3.5%;
-    }
-    .navbar-toggle{
-      padding: 0px;
-    }
-
-    .share-links{
-      display: block;
-      i{
-        color: white;
-        font-size: 1.4em;
-        margin-right: 5px;
-      }
-    }
-    .navbar-right{
-      margin-top: 35px;
-      margin-right: 0px;
-    }
-    .navbar-nav.menu{
-      margin-right: 10px;
-    }
-
-    .navbar-nav.menu > li > a:after{
-      content: '/';
-      padding-left: 5px;
-    }
-    .navbar-nav.menu > li:last-child{
-      a:after{
-        content: '';
-      }
-    }
-
-    .navbar-nav.menu > li > a{
-      @include type(white);
-
-      font-size: 1.1em;
-    }
-    .navbar-nav.menu > li > a:hover,
-    .navbar-nav.menu > li > a:active{
-      background: transparent;
-    }
-
-    .navbar-nav.share-links > li > a{
-      padding: 0;
-    }
-    .navbar-nav.share-links > li > a:hover,
-    .navbar-nav.share-links > li > a:active{
-      background: transparent;
-    }
+  .banner{
+    padding-top: 20px;
+    padding-bottom: 20px;
   }
 
-  @media(min-width: $screen-md){
-    nav .navbar-brand{
-      max-width: 100%;
-    }
-  }
-
-  @media(max-width: $screen-sm){
-    .tagline{display: none}
-
-    nav{
-      .navbar{
-        margin-bottom: 0px;
-      }
-      .navbar-right{
-        margin-top: 0px;
-      }
-      .navbar-nav.menu > li > a:after{
-        content: '';
-      }
-      .navbar-nav.share-links{
-        display: none;
-      }
-    }
-  }
+  .vcenter {
+    margin-top: 2.2%;
 }
-
-.article-scroll{
-  nav{
-     .navbar-brand{
-       display:none;
-     }
-    .navbar-header{
-      margin: 0 15px;
-      float:none;
-      button{
-        margin-top: 0px;
-      }
+  .share-links{
+    @include inline-list(white, 20px);
+    &.vcenter{
+      margin-top: 2.0%;
     }
-    .navbar-toggle{
-        display: block;
-        float:none;
-      margin-bottom: 0px;
-    }
-    .navbar-collapse.collapse {
-        display: none !important;
-    }
-    .navbar-collapse.collapse.in {
-        display: block !important;
-    }
-
-    .navbar-nav{
-      float: none;
-        > li {
-          display:block;
-          position:relative;
-          float: none;
-          > a {
-              padding-top: 10px;
-              padding-bottom: 10px;
-              line-height: 20px;
-          }
-        }
-    }
-
-    @media(max-width: $screen-sm){
-      .navbar-brand{
-       display:block;
-     }
-    }
+    text-align:right;
   }
-}
 
-@media(max-width: $screen-md){
-  .featured-topics{display: none}
+  #main-menu{
+    @include inline-list-divided(white, 16px);
+    text-align:right;
+  }
+
+  .toggle-nav{
+      display:none;
+      font-size: 20px;
+  }
+
+  &.collapsed.scrolled{
+    background: #333;
+  }
+
+  &.collapsed {
+    @include collapsed;
+  }
+
+  @media(max-width: $screen-md){
+    @include collapsed;
+  }
+
+  @media(max-width: $screen-xs){
+    .share-links ul li a{
+      font-size: 16px;
+    }
+
+  }
+
 }
 
 /**************   FOOTER  **************/
@@ -407,13 +330,22 @@ footer{
 
 .article-scroll{
 
+  header{
+    .share-links, .logo{
+      display: none;}
+  }
+
+  .title{
+    width: 70%;
+    text-align:center;
+  }
   h1, .share-links{
     position: fixed;
     z-index: 1100;
   }
   h1{
     width:inherit;
-    top: 20px;
+    top: 18px;
     color: white;
     font-size: 16px;
     text-align: center;
@@ -470,7 +402,7 @@ article{
       display:inline-block;
     }
     @include type($text-color);
-    @include inline-list($red);
+    @include inline-list-divided($red);
   }
   .topics.related{
     @include gutter(0px, 20px);

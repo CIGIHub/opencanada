@@ -1,6 +1,6 @@
-@mixin type($color){
+@mixin type($color, $font-size:12px){
     font-family: $sans-serif;
-    font-size: 12px;
+    font-size: $font-size;
     text-transform: uppercase;
     color: $color;
 }
@@ -17,7 +17,7 @@
 }
 
 @mixin gutter($top:0px, $bottom:0px){
-  padding: $top 95px $bottom 95px;
+  padding: $top 100px $bottom 100px;
 }
 
 @mixin centered-fixed-width($width){
@@ -25,24 +25,30 @@
   max-width: $width;
 }
 
-@mixin inline-list($color, $divider-color:$color){
+@mixin inline-list($color, $font-size:12px){
   ul{
       display: inline-block;
       margin: 0px;
+      padding: 0px;
       li{
+        display: inline-block;
+        list-style: none;
         padding: 0px;
       }
     }
     ul li a{
-      display: inline-block;
-      @include type($color);
+      @include type($color, $font-size);
     }
     ul li a:hover,
     ul li a:active{
       text-decoration: none;
     }
+}
+
+@mixin inline-list-divided($color, $font-size:12px, $divider-color:$color){
+  @include inline-list($color, $font-size);
     ul li a:after{
-      @include inline-divider(5px, 0px, $divider-color);
+      @include inline-divider(10px, 5px, $divider-color);
     }
     ul li:last-child{
       a:after{
@@ -55,4 +61,60 @@
   border-top: $border-grey;
   padding-top: 20px;
   margin-top: 20px;
+}
+
+@mixin collapsed{
+  .banner{
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+  .logo, .share-links, .toggle-nav{
+    text-align: center;
+  }
+  .logo{
+    img{
+      height: 30px;
+      display: inline;
+    }
+  }
+
+  .share-links.vcenter {
+    margin-top: 0.3%;
+    @media(max-width: $screen-xs){
+      margin-top: 1.5%;
+    }
+  }
+
+  .toggle-nav{
+      display:inline;
+    }
+
+  #main-menu{
+    display: none;
+    &.mobile-menu{
+      display: block;
+      position: fixed;
+      z-index: 200;
+      top: 53px;
+      height: 100%;
+      padding: 25px;
+      background: $background-grey;
+      border-right: $border-red;
+      text-align: left;
+
+      ul{
+        margin-top: 0px;
+        li{
+          display: block;
+            padding: 5px;
+          a{
+            color: $red;
+          }
+          a:after{
+            content: '';
+          }
+        }
+      }
+    }
+  }
 }
