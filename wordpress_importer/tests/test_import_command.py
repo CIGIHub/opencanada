@@ -229,7 +229,7 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
         pages = ArticlePage.objects.filter(
             slug='is-nato-ready-for-putin')
         self.assertEqual(
-            [{'type': "Paragraph", 'value': "<p>Vladimir Putin has challenged</p>"}, ],
+            [{'type': "Paragraph", 'value': {"text": "<p>Vladimir Putin has challenged</p>", "use_dropcap": False}}, ],
             pages.first().body.stream_data)
 
     # TODO: various aspects of setting body:  long
@@ -250,12 +250,12 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
         self.assertEqual('The excerpt also has some <strong>HTML</strong>.',
                          pages.first().excerpt)
         self.assertEqual(
-            [{"type": "Paragraph", "value": '<p>This <strong>is</strong></p>'},
+            [{"type": "Paragraph", "value": {'text': '<p>This <strong>is</strong></p>', 'use_dropcap': False}},
              {"type": "Paragraph",
-              "value": '<p><img src="http://www.example.com/test.jpg"/></p>'},
+              "value": {'text': '<p><img src="http://www.example.com/test.jpg"/></p>', 'use_dropcap': False}},
              {"type": "Paragraph",
-              "value": '<p>a <a href="http://www.example.com">post</a><span class="special">that has html</span></p>'},
-             {"type": "Paragraph", "value": '<p>Yay!</p>'}, ],
+              "value": {'text': '<p>a <a href="http://www.example.com">post</a><span class="special">that has html</span></p>', 'use_dropcap': False}},
+             {"type": "Paragraph", "value": {'text': '<p>Yay!</p>', 'use_dropcap': False}}, ],
             pages.first().body.stream_data)
 
     def testPageUpdatesLocalImageUrls(self):
@@ -267,7 +267,7 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
 
         self.assertEqual(
             [{'type': 'Image', 'value': images.first().id},
-             {'type': "Paragraph", 'value': "<p>a cat</p>"},
+             {'type': "Paragraph", 'value': {"text": "<p>a cat</p>", 'use_dropcap': False}},
              ],
             pages.first().body.stream_data)
 
@@ -559,7 +559,7 @@ class TestCommandProcessHTLMForStreamField(TestCase, ImageCleanUp):
 
         self.assertEqual(
             [{"type": "Paragraph",
-              "value": "<p>This is a simple paragraph.</p>"}],
+              "value": {"text": "<p>This is a simple paragraph.</p>", 'use_dropcap': False}}],
             processed
         )
 
@@ -582,11 +582,11 @@ class TestCommandProcessHTLMForStreamField(TestCase, ImageCleanUp):
 
         self.assertEqual(
             [{"type": "Paragraph",
-              "value": "<p>This is a simple paragraph.</p>"},
+              "value": {"text": "<p>This is a simple paragraph.</p>", 'use_dropcap': False}},
              {"type": "Image",
               "value": 1},
              {"type": "Paragraph",
-              "value": "<p>This is a second paragraph.</p>"},
+              "value": {"text": "<p>This is a second paragraph.</p>", 'use_dropcap': False}},
              ],
             processed
         )
@@ -599,11 +599,11 @@ class TestCommandProcessHTLMForStreamField(TestCase, ImageCleanUp):
 
         self.assertEqual(
             [{"type": "Paragraph",
-              "value": "<p>This is a paragraph.</p>"},
+              "value": {"text": "<p>This is a paragraph.</p>", 'use_dropcap': False}},
              {"type": "Image",
               "value": 1},
              {"type": "Paragraph",
-              "value": "<p>This is a second paragraph.</p>"},
+              "value": {"text": "<p>This is a second paragraph.</p>", 'use_dropcap': False}},
              ],
             processed
         )
@@ -615,11 +615,11 @@ class TestCommandProcessHTLMForStreamField(TestCase, ImageCleanUp):
 
         self.assertEqual(
             [{"type": "Paragraph",
-              "value": "<p>This is a simple paragraph.</p>"},
+              "value": {"text": "<p>This is a simple paragraph.</p>", 'use_dropcap': False}},
              {"type": "Paragraph",
-              "value": '<p><img src="http://upload.wikimedia.org/wikipedia/en/b/bd/Test.jpg"/></p>'},
+              "value": {"text": '<p><img src="http://upload.wikimedia.org/wikipedia/en/b/bd/Test.jpg"/></p>', 'use_dropcap': False}},
              {"type": "Paragraph",
-              "value": "<p>This is a second paragraph.</p>"},
+              "value": {"text": "<p>This is a second paragraph.</p>", 'use_dropcap': False}},
              ],
             processed
         )
@@ -632,11 +632,11 @@ class TestCommandProcessHTLMForStreamField(TestCase, ImageCleanUp):
 
         self.assertEqual(
             [{"type": "Paragraph",
-              "value": "<p>This is a simple paragraph.</p>"},
+              "value": {"text": "<p>This is a simple paragraph.</p>", 'use_dropcap': False}},
              {"type": "Image",
               "value": 1},
              {"type": "Paragraph",
-              "value": "<p>This is a second paragraph.</p>"},
+              "value": {"text": "<p>This is a second paragraph.</p>", 'use_dropcap': False}},
              {"type": "Image",
               "value": 1},
              ],
@@ -727,7 +727,7 @@ class TestCommandProcessHTLMForStreamField(TestCase, ImageCleanUp):
 
         self.assertEqual(
             [{"type": "Paragraph",
-              "value": "<p>This is a <strong>simple paragraph.</strong></p>"},
+              "value": {"text": "<p>This is a <strong>simple paragraph.</strong></p>", 'use_dropcap': False}},
              ],
             processed
         )
@@ -737,9 +737,9 @@ class TestCommandProcessHTLMForStreamField(TestCase, ImageCleanUp):
         html = '<p>This <strong>is</strong> <img src="http://www.example.com/test.jpg" /></p>'
         processed = command.process_html_for_stream_field(html)
         self.assertEqual(
-            [{"type": "Paragraph", "value": '<p>This <strong>is</strong></p>'},
+            [{"type": "Paragraph", "value": {"text": '<p>This <strong>is</strong></p>', 'use_dropcap': False}},
              {"type": "Paragraph",
-              "value": '<p><img src="http://www.example.com/test.jpg"/></p>'},
+              "value": {"text": '<p><img src="http://www.example.com/test.jpg"/></p>', 'use_dropcap': False}},
              ],
             processed)
 
@@ -749,9 +749,9 @@ class TestCommandProcessHTLMForStreamField(TestCase, ImageCleanUp):
         processed = command.process_html_for_stream_field(html)
 
         self.assertEqual(
-            [{'type': 'Paragraph', 'value': '<p>Test</p>'},
-             {'type': 'Paragraph', 'value': '<p>Second</p>'},
-             {'type': 'Paragraph', 'value': '<p>Third</p>'},
+            [{'type': 'Paragraph', 'value': {"text": '<p>Test</p>', 'use_dropcap': False}},
+             {'type': 'Paragraph', 'value': {"text": '<p>Second</p>', 'use_dropcap': False}},
+             {'type': 'Paragraph', 'value': {"text": '<p>Third</p>', 'use_dropcap': False}},
              ],
             processed
         )
@@ -762,7 +762,7 @@ class TestCommandProcessHTLMForStreamField(TestCase, ImageCleanUp):
         processed = command.process_html_for_stream_field(html)
 
         self.assertEqual(
-            [{'type': 'Paragraph', 'value': '<p>This has a  comment</p>'}],
+            [{'type': 'Paragraph', 'value': {'text': '<p>This has a  comment</p>', 'use_dropcap': False}}],
             processed
         )
 
@@ -772,7 +772,7 @@ class TestCommandProcessHTLMForStreamField(TestCase, ImageCleanUp):
         processed = command.process_html_for_stream_field(html)
 
         self.assertEqual(
-            [{'type': 'Paragraph', 'value': '<p>This has a  comment</p>'}],
+            [{'type': 'Paragraph', 'value': {"text": '<p>This has a  comment</p>', 'use_dropcap': False}}],
             processed
         )
 
@@ -782,9 +782,9 @@ class TestCommandProcessHTLMForStreamField(TestCase, ImageCleanUp):
         processed = command.process_html_for_stream_field(html)
 
         self.assertEqual(
-            [{'type': 'Paragraph', 'value': '<p>This is text.</p>'},
+            [{'type': 'Paragraph', 'value': {"text": '<p>This is text.</p>', 'use_dropcap': False}},
              {'type': 'Paragraph',
-              'value': '<p>That should be in paragraphs.</p>'}],
+              'value': {"text": '<p>That should be in paragraphs.</p>', 'use_dropcap': False}}],
             processed
         )
 
@@ -794,9 +794,9 @@ class TestCommandProcessHTLMForStreamField(TestCase, ImageCleanUp):
         processed = command.process_html_for_stream_field(html)
 
         self.assertEqual(
-            [{'type': 'Paragraph', 'value': '<p>This is text.</p>'},
+            [{'type': 'Paragraph', 'value': {"text": '<p>This is text.</p>', 'use_dropcap': False}},
              {'type': 'Paragraph',
-              'value': '<p>That should be in paragraphs.</p>'}],
+              'value': {"text": '<p>That should be in paragraphs.</p>', 'use_dropcap': False}}],
             processed
         )
 
@@ -807,7 +807,7 @@ class TestCommandProcessHTLMForStreamField(TestCase, ImageCleanUp):
 
         self.assertEqual(
             [{'type': 'Paragraph',
-              'value': '<p>This is text.<br/>That should be in paragraphs.</p>'}],
+              'value': {"text": '<p>This is text.<br/>That should be in paragraphs.</p>', 'use_dropcap': False}}],
             processed
         )
 

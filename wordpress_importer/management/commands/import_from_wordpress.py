@@ -373,8 +373,9 @@ class Command(BaseCommand):
         processed_element = []
         if html.name is None:
             processed_element.append({'type': 'Paragraph',
-                                      'value': "<p>{}</p>".format(
-                                          html.strip())})
+                                      'value': {"text": "<p>{}</p>".format(
+                                          html.strip()),
+                                          "use_dropcap": False}})
         elif html.name == 'img':
             processed_element.append(self._process_image_tag(html))
         elif html.name == 'h1' or html.name == 'h2' or html.name == 'h3' \
@@ -431,13 +432,22 @@ class Command(BaseCommand):
         elif html.name == 'p' or html.name == 'div':
             inner = html.decode_contents(formatter="html")
             return {'type': 'Paragraph',
-                    'value': "<p>{}</p>".format(inner.strip())}
+                    'value': {"text": "<p>{}</p>".format(inner.strip()),
+                              "use_dropcap": False
+                              }
+                    }
         elif html.name is None:
             return {'type': 'Paragraph',
-                    'value': "<p>{}</p>".format(html.strip())}
+                    'value': {"text": "<p>{}</p>".format(html.strip()),
+                              "use_dropcap": False
+                              }
+                    }
         else:
             return {'type': 'Paragraph',
-                    'value': "<p>{}</p>".format(html)}
+                    'value': {"text": "<p>{}</p>".format(html),
+                              "use_dropcap": False
+                              }
+                    }
 
     def _contains_stream_block(self, html):
         return html.name in ['div', 'p', 'img', 'h1', 'h2', 'h3', 'h4', 'h5',
@@ -449,7 +459,10 @@ class Command(BaseCommand):
             return {'type': 'Image', 'value': images.first().id}
         else:
             return {'type': 'Paragraph',
-                    'value': "<p>{}</p>".format(text_type(item))}
+                    'value': {"text": "<p>{}</p>".format(text_type(item)),
+                              "use_dropcap": False
+                              }
+                    }
 
     def process_html_for_images(self, html, use_image_names=False):
         parser = BeautifulSoup(html)
