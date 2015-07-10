@@ -34,10 +34,3 @@ class TagImportTestCase(TestCase):
         tag_import = TagImport(original_slug="my-slug", topic=topic)
 
         self.assertEqual(str(tag_import), "my-slug - Topic 1")
-
-
-class ImportDownloadErrorsTestCase(TestCase):
-    def test_str_returns_url_and_code(self):
-        download_error = ImportDownloadError(url="http://example.com/cat.jpg", status_code=404)
-
-        self.assertEqual(str(download_error), "404 - http://example.com/cat.jpg")
