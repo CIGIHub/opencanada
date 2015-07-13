@@ -15,7 +15,8 @@ from articles.models import ArticleCategory, ArticlePage
 from images.models import AttributedImage
 from people.models import ContributorPage
 from wordpress_importer.management.commands import import_from_wordpress
-from wordpress_importer.models import ImageImport, PostImport
+from wordpress_importer.models import (ImageImport, ImportDownloadError,
+                                       PostImport)
 
 
 class ImageCleanUp(object):
@@ -57,7 +58,6 @@ test_image_url_with_unicode = 'file:///{}/wordpress_importer/tests/files/testcat
     settings.PROJECT_ROOT)
 
 
-@mock.patch('requests.get', local_get_successful)
 class TestCommandImportFromWordPressLoadContributors(TestCase, ImageCleanUp):
     def setUp(self):
         import_from_wordpress.Command.get_contributor_data = self.get_test_contributor_data
@@ -65,36 +65,42 @@ class TestCommandImportFromWordPressLoadContributors(TestCase, ImageCleanUp):
     def tearDown(self):
         self.delete_images()
 
+    @mock.patch('requests.get', local_get_successful)
     def testLoadContributorsCreatesContributor(self):
         command = import_from_wordpress.Command()
         command.load_contributors()
         contributors = ContributorPage.objects.filter(email='bob@example.com')
         self.assertEqual(1, contributors.count())
 
+    @mock.patch('requests.get', local_get_successful)
     def testLoadContributorsSetsFirstName(self):
         command = import_from_wordpress.Command()
         command.load_contributors()
         contributors = ContributorPage.objects.filter(email='bob@example.com')
         self.assertEqual('Bob', contributors.first().first_name)
 
+    @mock.patch('requests.get', local_get_successful)
     def testLoadContributorsSetsLastName(self):
         command = import_from_wordpress.Command()
         command.load_contributors()
         contributors = ContributorPage.objects.filter(email='bob@example.com')
         self.assertEqual('Smith', contributors.first().last_name)
 
+    @mock.patch('requests.get', local_get_successful)
     def testLoadContributorsSetsNickname(self):
         command = import_from_wordpress.Command()
         command.load_contributors()
         contributors = ContributorPage.objects.filter(email='bob@example.com')
         self.assertEqual('Bobby Smith', contributors.first().nickname)
 
+    @mock.patch('requests.get', local_get_successful)
     def testLoadContributorsSetsTwitterHandle(self):
         command = import_from_wordpress.Command()
         command.load_contributors()
         contributors = ContributorPage.objects.filter(email='bob@example.com')
         self.assertEqual('@bobsmith', contributors.first().twitter_handle)
 
+    @mock.patch('requests.get', local_get_successful)
     def testLoadContributorsSetsTwitterHandleFromUrl(self):
         import_from_wordpress.Command.get_contributor_data = self.get_test_contributor_data_twitter_url
         command = import_from_wordpress.Command()
@@ -102,6 +108,7 @@ class TestCommandImportFromWordPressLoadContributors(TestCase, ImageCleanUp):
         contributors = ContributorPage.objects.filter(email='bob@example.com')
         self.assertEqual('@bobsmith', contributors.first().twitter_handle)
 
+    @mock.patch('requests.get', local_get_successful)
     def testLoadContributorsSetsLongBio(self):
         command = import_from_wordpress.Command()
         command.load_contributors()
@@ -109,6 +116,7 @@ class TestCommandImportFromWordPressLoadContributors(TestCase, ImageCleanUp):
         self.assertEqual('Bob Smith is a person who does stuff.',
                          contributors.first().long_bio)
 
+    @mock.patch('requests.get', local_get_successful)
     def testLoadContributorsSetsShortBio(self):
         command = import_from_wordpress.Command()
         command.load_contributors()
@@ -116,6 +124,7 @@ class TestCommandImportFromWordPressLoadContributors(TestCase, ImageCleanUp):
         self.assertEqual('He does stuff.',
                          contributors.first().short_bio)
 
+    @mock.patch('requests.get', local_get_successful)
     def testLoadContributorsSetsImageFile(self):
         command = import_from_wordpress.Command()
         command.load_contributors()
@@ -125,7 +134,15 @@ class TestCommandImportFromWordPressLoadContributors(TestCase, ImageCleanUp):
         self.assertEqual(1, images.count())
         self.assertEqual(images.first(), contributors.first().headshot)
 
-    # TODO: multiple contributors
+    @mock.patch('requests.get', local_get_404)
+    def testDownloadErrorLoggedWhenErrorGettingImage(self):
+        command = import_from_wordpress.Command()
+        command.load_contributors()
+
+        errors = ImportDownloadError.objects.all()
+        self.assertEqual(1, errors.count())
+        self.assertEqual(404, errors.first().status_code)
+        self.assertEqual(settings.WP_IMPORTER_USER_PHOTO_URL_PATTERN.format("testcat.jpg"), errors.first().url)
 
     def get_test_contributor_data(self):
         data = [
@@ -195,7 +212,6 @@ class TestCommandImportFromWordPressUnicodeSlug(TestCase, ImageCleanUp):
         )
 
 
-@mock.patch('requests.get', local_get_successful)
 class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
     fixtures = ['test.json']
 
@@ -207,6 +223,7 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
     def tearDown(self):
         self.delete_images()
 
+    @mock.patch('requests.get', local_get_successful)
     def testCreatesPageWithSlug(self):
         command = import_from_wordpress.Command()
         command.load_posts()
@@ -214,6 +231,7 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
             slug='is-nato-ready-for-putin')
         self.assertEqual(1, pages.count())
 
+    @mock.patch('requests.get', local_get_successful)
     def testPageIsChildOfFeatures(self):
         command = import_from_wordpress.Command()
         command.load_posts()
@@ -223,6 +241,7 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
 
         self.assertTrue(pages.first().is_descendant_of(features_page))
 
+    @mock.patch('requests.get', local_get_successful)
     def testPageSetsTitle(self):
         command = import_from_wordpress.Command()
         command.load_posts()
@@ -230,6 +249,7 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
             slug='is-nato-ready-for-putin')
         self.assertEqual('Is NATO Ready for Putin?', pages.first().title)
 
+    @mock.patch('requests.get', local_get_successful)
     def testPageSetsBody(self):
         command = import_from_wordpress.Command()
         command.load_posts()
@@ -239,8 +259,7 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
             [{'type': "Paragraph", 'value': {"text": "<p>Vladimir Putin has challenged</p>", "use_dropcap": False}}, ],
             pages.first().body.stream_data)
 
-    # TODO: various aspects of setting body:  long
-
+    @mock.patch('requests.get', local_get_successful)
     def testPageSetsExcerptContainingUnicode(self):
         command = import_from_wordpress.Command()
         command.load_posts()
@@ -250,6 +269,7 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
             'Political hurdles hold NATO back — how convenient for Russian tactics.',
             pages.first().excerpt)
 
+    @mock.patch('requests.get', local_get_successful)
     def testPageImportsHTML(self):
         command = import_from_wordpress.Command()
         command.load_posts()
@@ -265,6 +285,7 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
              {"type": "Paragraph", "value": {'text': '<p>Yay!</p>', 'use_dropcap': False}}, ],
             pages.first().body.stream_data)
 
+    @mock.patch('requests.get', local_get_successful)
     def testPageUpdatesLocalImageUrls(self):
         command = import_from_wordpress.Command()
         command.load_posts()
@@ -278,6 +299,15 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
              ],
             pages.first().body.stream_data)
 
+    @mock.patch('requests.get', local_get_404)
+    def testDownloadErrorLoggedWhenErrorGettingImage(self):
+        command = import_from_wordpress.Command()
+        command.load_posts()
+
+        errors = ImportDownloadError.objects.filter(url=test_image_url)
+        self.assertEqual(404, errors.first().status_code)
+
+    @mock.patch('requests.get', local_get_successful)
     def testPageNullFields(self):
         command = import_from_wordpress.Command()
         command.load_posts()
@@ -286,6 +316,7 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
         self.assertEqual([], pages.first().body.stream_data)
         self.assertEqual('', pages.first().title)
 
+    @mock.patch('requests.get', local_get_successful)
     def testPageBlankFields(self):
         command = import_from_wordpress.Command()
         command.load_posts()
@@ -294,6 +325,7 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
         self.assertEqual([], pages.first().body.stream_data)
         self.assertEqual('', pages.first().title)
 
+    @mock.patch('requests.get', local_get_successful)
     def testPageHasAuthor(self):
         command = import_from_wordpress.Command()
         command.load_posts()
@@ -303,18 +335,21 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
         self.assertEqual(pages.first().author_links.count(), 1)
         self.assertEqual(pages.first().author_links.first().author, contributors.first())
 
+    @mock.patch('requests.get', local_get_successful)
     def testPageAuthorNotSet(self):
         command = import_from_wordpress.Command()
         command.load_posts()
         pages = ArticlePage.objects.filter(slug='null-author')
         self.assertEqual(pages.first().author_links.count(), 0)
 
+    @mock.patch('requests.get', local_get_successful)
     def testPageEmptyAuthor(self):
         command = import_from_wordpress.Command()
         command.load_posts()
         pages = ArticlePage.objects.filter(slug='empty-author')
         self.assertEqual(pages.first().author_links.count(), 0)
 
+    @mock.patch('requests.get', local_get_successful)
     def testPageNonExistantAuthor(self):
         # TODO: should this cause an error
         command = import_from_wordpress.Command()
@@ -322,6 +357,7 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
         pages = ArticlePage.objects.filter(slug='nonexistant-author')
         self.assertEqual(pages.first().author_links.count(), 0)
 
+    @mock.patch('requests.get', local_get_successful)
     def testUpdatesDuplicateSlug(self):
         command = import_from_wordpress.Command()
         command.load_posts()
@@ -329,12 +365,14 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
         self.assertEqual(pages.count(), 1)
         self.assertEqual(pages.first().title, "title 2")
 
+    @mock.patch('requests.get', local_get_successful)
     def testImportTrackingCreated(self):
         command = import_from_wordpress.Command()
         command.load_posts()
         imports = PostImport.objects.filter(post_id=5)
         self.assertEqual(imports.count(), 1)
 
+    @mock.patch('requests.get', local_get_successful)
     def testSetsDate(self):
         command = import_from_wordpress.Command()
         command.load_posts()
@@ -344,6 +382,7 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
             timezone.datetime(2011, 2, 22, 5, 48, 31, tzinfo=timezone.pytz.timezone('GMT')),
             pages.first().first_published_at)
 
+    @mock.patch('requests.get', local_get_successful)
     def testDefaultCategorySet(self):
         command = import_from_wordpress.Command()
         command.load_posts()
@@ -352,6 +391,7 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
         default_category = ArticleCategory.objects.get(slug="feature")
         self.assertEqual(default_category, page.category)
 
+    @mock.patch('requests.get', local_get_successful)
     def testSetsPrimaryTopic(self):
         command = import_from_wordpress.Command()
         command.load_posts()
@@ -360,6 +400,7 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
 
         self.assertEqual("Primary Topic 1", page.primary_topic.name)
 
+    @mock.patch('requests.get', local_get_successful)
     def testSetsSecondaryTopics(self):
         command = import_from_wordpress.Command()
         command.load_posts()
@@ -468,11 +509,11 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
         return data
 
 
-@mock.patch('requests.get', local_get_successful)
 class TestCommandImportProcessHTMLForImages(TestCase, ImageCleanUp):
     def tearDown(self):
         self.delete_images()
 
+    @mock.patch('requests.get', local_get_successful)
     def testHTMLHasImageImageCreatedWhenDownloaded(self):
         command = import_from_wordpress.Command()
         html = "<img src='{}'/>".format(test_image_url)
@@ -482,6 +523,7 @@ class TestCommandImportProcessHTMLForImages(TestCase, ImageCleanUp):
 
         self.assertEqual(1, images.count())
 
+    @mock.patch('requests.get', local_get_successful)
     def testHTMLImageSourceUpdatedWhenDownloaded(self):
         command = import_from_wordpress.Command()
         html = "<img src='{}'/>".format(test_image_url)
@@ -492,6 +534,7 @@ class TestCommandImportProcessHTMLForImages(TestCase, ImageCleanUp):
         self.assertEqual(html, "<img src='{}'/>".format(
             images.first().get_rendition('width-100').url))
 
+    @mock.patch('requests.get', local_get_successful)
     def testImageNotDownloadedForRemote(self):
         command = import_from_wordpress.Command()
         html = "<img src='http://upload.wikimedia.org/wikipedia/en/b/bd/Test.jpg'/>"
@@ -500,6 +543,7 @@ class TestCommandImportProcessHTMLForImages(TestCase, ImageCleanUp):
 
         self.assertEqual(0, images.count())
 
+    @mock.patch('requests.get', local_get_successful)
     def testHTMLNotUpdatedForRemote(self):
         command = import_from_wordpress.Command()
         html = "<img src='http://upload.wikimedia.org/wikipedia/en/b/bd/Test.jpg'/>"
@@ -508,6 +552,7 @@ class TestCommandImportProcessHTMLForImages(TestCase, ImageCleanUp):
         self.assertEqual(html,
                          "<img src='http://upload.wikimedia.org/wikipedia/en/b/bd/Test.jpg'/>")
 
+    @mock.patch('requests.get', local_get_successful)
     def testHTMLWithUnicodeNoUpload(self):
         command = import_from_wordpress.Command()
         html = "<p>€</p><img src='http://upload.wikimedia.org/wikipedia/en/b/bd/Test€.jpg'/>"
@@ -516,6 +561,7 @@ class TestCommandImportProcessHTMLForImages(TestCase, ImageCleanUp):
         self.assertEqual(html,
                          "<p>€</p><img src='http://upload.wikimedia.org/wikipedia/en/b/bd/Test€.jpg'/>")
 
+    @mock.patch('requests.get', local_get_successful)
     def testHTMLWithUnicodeImageSourceUpdatedWhenDownloaded(self):
         command = import_from_wordpress.Command()
         html = "<img src='{}' />".format(test_image_url_with_unicode)
@@ -527,6 +573,17 @@ class TestCommandImportProcessHTMLForImages(TestCase, ImageCleanUp):
 
         self.assertEqual(html, "<img src='{}' />".format(
             images.first().get_rendition('width-100').url))
+
+    @mock.patch('requests.get', local_get_404)
+    def testDownloadErrorLoggedWhenError(self):
+        command = import_from_wordpress.Command()
+        html = "<img src='{}' />".format(test_image_url_with_unicode)
+        html = command.process_html_for_images(html)
+
+        errors = ImportDownloadError.objects.filter(url=test_image_url_with_unicode)
+
+        self.assertEqual(1, errors.count())
+        self.assertEqual(404, errors.first().status_code)
 
 
 class TestCommandImportDownloadImage(TestCase, ImageCleanUp):

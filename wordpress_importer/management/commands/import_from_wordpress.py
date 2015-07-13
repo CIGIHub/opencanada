@@ -20,7 +20,8 @@ from articles.models import (ArticleAuthorLink, ArticleCategory, ArticlePage,
                              Topic)
 from images.models import AttributedImage
 from people.models import ContributorListPage, ContributorPage
-from wordpress_importer.models import ImageImport, PostImport, TagImport
+from wordpress_importer.models import (ImageImport, ImportDownloadError,
+                                       PostImport, TagImport)
 from wordpress_importer.utils import get_setting
 
 try:
@@ -164,9 +165,8 @@ class Command(BaseCommand):
                 try:
                     self.download_image(source, filename)
                     page.headshot = AttributedImage.objects.get(title=filename)
-                except DownloadException:
-                    # TODO: log issue here
-                    pass
+                except DownloadException as e:
+                    ImportDownloadError.objects.create(url=e.url, status_code=e.response.status_code)
 
             revision = page.save_revision(
                 user=None,
@@ -283,8 +283,8 @@ class Command(BaseCommand):
             try:
                 self.download_image(source, filename)
                 post.main_image = AttributedImage.objects.get(title=filename)
-            except DownloadException:
-                pass
+            except DownloadException as e:
+                ImportDownloadError.objects.create(url=e.url, status_code=e.response.status_code)
 
     def load_posts(self):
         for post_type in ["feature", "explainer", "roundtable-blog-post",
@@ -492,9 +492,8 @@ class Command(BaseCommand):
                                                              use_image_names)
 
                     html = html.replace(source, updated_source_url)
-                except DownloadException:
-                    pass
-                    # TODO: maybe log something so we can look into it.
+                except DownloadException as e:
+                    ImportDownloadError.objects.create(url=e.url, status_code=e.response.status_code)
 
         return html
 
