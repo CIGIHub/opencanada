@@ -1,0 +1,5 @@
+{% load wagtailimages_tags %}
+<div class="image{% if self.placement == 'left' %} left-aligned{% elif self.placement == 'right' %} right-aligned{% elif self.placement == 'full' %} full-width{% endif %}">
+    {% image self.image original as tmp_photo %}
+    <img src="{{ tmp_photo.url }}" {% if tmp_photo.alt %}alt="{{ tmp_photo.alt }}"{% endif %} />
+</div>
