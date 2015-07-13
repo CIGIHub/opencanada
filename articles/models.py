@@ -101,8 +101,23 @@ class ArticleCategory(UniquelySlugable):
 register_snippet(ArticleCategory)
 
 
+class FeatureStyleFields(models.Model):
+    feature_style = models.CharField(
+        max_length=20,
+        choices=[
+            ("simple", "Single Column - Text Only"),
+            ("simpleimage", "Single Column - Text and Image"),
+            ("coverimage", "Full Width - Text overlayed on image"),
+            ("tallcoverimage", "Full Width - Double Height - Text overlayed on image"),
+        ],
+        default="simple")
+
+    class Meta:
+        abstract = True
+
+
 @python_2_unicode_compatible
-class ArticlePage(Page):
+class ArticlePage(Page, FeatureStyleFields):
     subtitle = RichTextField(blank=True, default="")
     body = article_fields.BodyField()
     excerpt = RichTextField(blank=True, default="")
@@ -170,6 +185,10 @@ ArticlePage.content_panels = Page.content_panels + [
     SnippetChooserPanel('primary_topic', Topic),
     InlinePanel('topic_links', label="Secondary Topics"),
     SnippetChooserPanel('category', ArticleCategory),
+]
+
+ArticlePage.promote_panels = Page.promote_panels + [
+    FieldPanel('feature_style'),
 ]
 
 
