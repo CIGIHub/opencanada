@@ -391,6 +391,7 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
         default_category = ArticleCategory.objects.get(slug="feature")
         self.assertEqual(default_category, page.category)
 
+    @mock.patch('requests.get', local_get_successful)
     def testSetsPrimaryTopic(self):
         command = import_from_wordpress.Command()
         command.load_posts()
@@ -399,6 +400,7 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
 
         self.assertEqual("Primary Topic 1", page.primary_topic.name)
 
+    @mock.patch('requests.get', local_get_successful)
     def testSetsSecondaryTopics(self):
         command = import_from_wordpress.Command()
         command.load_posts()
