@@ -161,6 +161,7 @@ class TestCommandImportFromWordPressUnicodeSlug(TestCase, ImageCleanUp):
     def setUp(self):
         import_from_wordpress.Command.get_post_data = self.get_test_post_data
         import_from_wordpress.Command.get_post_image_data = self.get_test_post_image_data
+        import_from_wordpress.Command.get_data_for_topics = self.get_test_data_for_topics
 
     def tearDown(self):
         self.delete_images()
@@ -188,6 +189,11 @@ class TestCommandImportFromWordPressUnicodeSlug(TestCase, ImageCleanUp):
     def get_test_post_image_data(self, post_id):
         return None
 
+    def get_test_data_for_topics(self, post_id, primary_topic=False):
+        return (
+            ('Topic 1', 'topic-1'),
+        )
+
 
 @mock.patch('requests.get', local_get_successful)
 class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
@@ -196,6 +202,7 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
     def setUp(self):
         import_from_wordpress.Command.get_post_data = self.get_test_post_data
         import_from_wordpress.Command.get_post_image_data = self.get_test_post_image_data
+        import_from_wordpress.Command.get_data_for_topics = self.get_test_data_for_topics
 
     def tearDown(self):
         self.delete_images()
@@ -266,7 +273,7 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
         images = AttributedImage.objects.filter(title='testcat.jpg')
 
         self.assertEqual(
-            [{'type': 'Image', 'value': images.first().id},
+            [{'type': 'Image', 'value': {'image': images.first().id, 'placement': 'full'}},
              {'type': "Paragraph", 'value': {"text": "<p>a cat</p>", 'use_dropcap': False}},
              ],
             pages.first().body.stream_data)
@@ -345,12 +352,35 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
         default_category = ArticleCategory.objects.get(slug="feature")
         self.assertEqual(default_category, page.category)
 
-    # TODO: Multiple Authors? Is that a thing on OpenCanada?
+    def testSetsPrimaryTopic(self):
+        command = import_from_wordpress.Command()
+        command.load_posts()
+        page = ArticlePage.objects.filter(
+            slug='is-nato-ready-for-putin').first()
 
-    # TODO: Tags
+        self.assertEqual("Primary Topic 1", page.primary_topic.name)
+
+    def testSetsSecondaryTopics(self):
+        command = import_from_wordpress.Command()
+        command.load_posts()
+        page = ArticlePage.objects.filter(
+            slug='is-nato-ready-for-putin').first()
+
+        self.assertEqual(1, page.topic_links.count())
+        self.assertEqual("Secondary Topic 1", page.topic_links.first().topic.name)
 
     def get_test_post_image_data(self, post_id):
         return None
+
+    def get_test_data_for_topics(self, post_id, primary_topic=False):
+        if primary_topic:
+            return (
+                ('Primary Topic 1', 'primary-topic-1'),
+            )
+        else:
+            return (
+                ('Secondary Topic 1', 'secondary-topic-1'),
+            )
 
     def get_test_post_data(self, post_type):
         data = [
@@ -572,7 +602,7 @@ class TestCommandProcessHTLMForStreamField(TestCase, ImageCleanUp):
         self.assertEqual(1, images.count())
 
         self.assertEqual(processed, [{"type": "Image",
-                                      "value": 1}, ])
+                                      "value": {'image': 1, 'placement': 'full'}}, ])
 
     def testImageWithParagraphs(self):
         command = import_from_wordpress.Command()
@@ -584,7 +614,7 @@ class TestCommandProcessHTLMForStreamField(TestCase, ImageCleanUp):
             [{"type": "Paragraph",
               "value": {"text": "<p>This is a simple paragraph.</p>", 'use_dropcap': False}},
              {"type": "Image",
-              "value": 1},
+              "value": {'image': 1, 'placement': 'full'}},
              {"type": "Paragraph",
               "value": {"text": "<p>This is a second paragraph.</p>", 'use_dropcap': False}},
              ],
@@ -601,7 +631,7 @@ class TestCommandProcessHTLMForStreamField(TestCase, ImageCleanUp):
             [{"type": "Paragraph",
               "value": {"text": "<p>This is a paragraph.</p>", 'use_dropcap': False}},
              {"type": "Image",
-              "value": 1},
+              "value": {'image': 1, 'placement': 'full'}},
              {"type": "Paragraph",
               "value": {"text": "<p>This is a second paragraph.</p>", 'use_dropcap': False}},
              ],
@@ -634,11 +664,11 @@ class TestCommandProcessHTLMForStreamField(TestCase, ImageCleanUp):
             [{"type": "Paragraph",
               "value": {"text": "<p>This is a simple paragraph.</p>", 'use_dropcap': False}},
              {"type": "Image",
-              "value": 1},
+              "value": {'image': 1, 'placement': 'full'}},
              {"type": "Paragraph",
               "value": {"text": "<p>This is a second paragraph.</p>", 'use_dropcap': False}},
              {"type": "Image",
-              "value": 1},
+              "value": {'image': 1, 'placement': 'full'}},
              ],
             processed
         )
@@ -675,7 +705,7 @@ class TestCommandProcessHTLMForStreamField(TestCase, ImageCleanUp):
 
         self.assertEqual(
             [{"type": "Image",
-              "value": 1},
+              "value": {'image': 1, 'placement': 'full'}},
              {"type": "Heading",
               "value": "This is the heading"},
              ],
@@ -693,7 +723,7 @@ class TestCommandProcessHTLMForStreamField(TestCase, ImageCleanUp):
                 {"type": "Heading",
                  "value": "This is the heading"},
                 {"type": "Image",
-                 "value": 1},
+                 "value": {'image': 1, 'placement': 'full'}},
             ],
             processed
         )
@@ -709,11 +739,11 @@ class TestCommandProcessHTLMForStreamField(TestCase, ImageCleanUp):
                 {"type": "Heading",
                  "value": "This is the heading"},
                 {"type": "Image",
-                 "value": 1},
+                 "value": {'image': 1, 'placement': 'full'}},
                 {"type": "Heading",
                  "value": "This is more heading"},
                 {"type": "Image",
-                 "value": 1},
+                 "value": {'image': 1, 'placement': 'full'}},
                 {"type": "Heading",
                  "value": "This is even more heading"},
             ],

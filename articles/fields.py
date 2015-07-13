@@ -11,7 +11,7 @@ class BodyField(StreamField):
         block_types = [
             ('Heading', blocks.CharBlock(icon="title", classname="heading")),
             ('Paragraph', ParagraphBlock()),
-            ('Image', ImageChooserBlock(icon="image")),
+            ('Image', ImageBlock()),
             ('Embed', EmbedBlock(icon="site")),
             ('List', blocks.ListBlock(blocks.RichTextBlock(label="item"), icon="list-ul")),
             ('Sharable', SharableBlock()),
@@ -34,9 +34,22 @@ class AuthorBlurbBlock(blocks.CharBlock):
 
 
 class ParagraphBlock(blocks.StructBlock):
-    use_dropcap = blocks.BooleanBlock(required=False)
     text = blocks.RichTextBlock()
+    use_dropcap = blocks.BooleanBlock(required=False)
 
     class Meta:
         template = "articles/blocks/paragraph_block.html"
         icon = "doc-full"
+
+
+class ImageBlock(blocks.StructBlock):
+    image = ImageChooserBlock()
+    placement = blocks.ChoiceBlock(choices=[
+        ('left', 'Left Aligned'),
+        ('right', 'Right Aligned'),
+        ('full', 'Full Width'),
+    ], default='full')
+
+    class Meta:
+        template = "articles/blocks/image_block.html"
+        icon = "image"
