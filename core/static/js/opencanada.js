@@ -49,27 +49,20 @@ function initForWindow(){
     var windowHeight = $(window).height();
     var windowWidth = $(window).width();
 
+    setBodyPadding(windowWidth);
     if($('body').hasClass('template-home-page')){
         setFeatureHeight(windowHeight, windowWidth);
     }
 
     toggleHeading(windowWidth);
-    setBodyPadding(windowWidth);
 
 }
 
 function setFeatureHeight(windowHeight, windowWidth){
 
     var bannerHeight = $('header').height();
-    var tagsHeight = $('.featured-topics').height();
-    var featureHeight = windowHeight - bannerHeight - tagsHeight;
+    var featureHeight = windowHeight - bannerHeight;
 
-    if(windowWidth > 992){
-        var featureHeight = windowHeight - bannerHeight - tagsHeight;
-    }
-    else{
-        var featureHeight = windowHeight - bannerHeight;
-    }
     $('.jumbotron.feature').css("height", featureHeight + "px");
 }
 
