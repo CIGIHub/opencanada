@@ -30,6 +30,11 @@ img{
 button{
   border:none;
   background: none;
+  padding: 0px;
+
+  .fa-list-ul{
+    padding: 10px;
+  }
 }
 button:focus {outline:0;}
 
