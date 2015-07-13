@@ -467,7 +467,7 @@ class Command(BaseCommand):
     def _process_image_tag(self, item):
         images = AttributedImage.objects.filter(title=item['src'])
         if images.first():
-            return {'type': 'Image', 'value': images.first().id}
+            return {'type': 'Image', 'value': {'image': images.first().id, 'placement': 'full'}}
         else:
             return {'type': 'Paragraph',
                     'value': {"text": "<p>{}</p>".format(text_type(item)),
