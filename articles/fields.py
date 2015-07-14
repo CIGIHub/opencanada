@@ -33,7 +33,7 @@ class HeadingBlock(blocks.StructBlock):
             (5, "5"),
             (6, "6"),
         ],
-        default=6
+        default=2
     )
 
     class Meta:
