@@ -441,7 +441,34 @@ article{
     margin-right: 10px;
     float: left;
   }
+  .block-Image{
+    .image{
+      margin: 0 0 10px 0;
+    }
+    .credit{
+      margin-top: 10px;
+      font-size: 0.8em;
+      text-transform: uppercase;
+      color: $grey;
+    }
+    .left-aligned{
+      float: left;
+      margin: 20px 20px 20px 0;
+    }
+    .right-aligned{
+      float: right;
+      margin: 20px 0px 20px 20px;
+    }
+    .full-width{
+      img{
+        margin: 0 auto;
+      }
+      .credit{
+        text-align: center;
+      }
 
+    }
+  }
   .block-Sharable{
     display: table;
     margin: 20px;

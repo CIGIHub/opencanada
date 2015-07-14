@@ -118,9 +118,8 @@ class FeatureStyleFields(models.Model):
 
 @python_2_unicode_compatible
 class ArticlePage(Page, FeatureStyleFields):
-    subtitle = RichTextField(blank=True, default="")
-    body = article_fields.BodyField()
     excerpt = RichTextField(blank=True, default="")
+    body = article_fields.BodyField()
     main_image = models.ForeignKey(
         'images.AttributedImage',
         null=True,
@@ -177,10 +176,9 @@ class ArticlePage(Page, FeatureStyleFields):
         return articles
 
 ArticlePage.content_panels = Page.content_panels + [
-    FieldPanel('subtitle'),
+    FieldPanel('excerpt'),
     InlinePanel('author_links', label="Authors"),
     StreamFieldPanel('body'),
-    FieldPanel('excerpt'),
     ImageChooserPanel('main_image'),
     SnippetChooserPanel('primary_topic', Topic),
     InlinePanel('topic_links', label="Secondary Topics"),
