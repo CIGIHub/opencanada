@@ -439,7 +439,8 @@ class Command(BaseCommand):
             return self._process_image_tag(html)
         elif html.name == 'h1' or html.name == 'h2' or html.name == 'h3' \
                 or html.name == 'h4' or html.name == 'h5' or html.name == 'h6':
-            return {'type': 'Heading', 'value': html.text}
+            return {'type': 'Heading', 'value': {'text': html.text, 'heading_level': 2}}
+
         elif html.name == 'p' or html.name == 'div':
             inner = html.decode_contents(formatter="html")
             return {'type': 'Paragraph',

@@ -37,7 +37,7 @@ class HeadingBlock(blocks.StructBlock):
     )
 
     class Meta:
-        templage = "articles/blocks/heading.html"
+        template = "articles/blocks/heading.html"
         icon = "title"
 
 
