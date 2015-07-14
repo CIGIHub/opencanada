@@ -9,7 +9,7 @@ from wagtail.wagtailimages.blocks import ImageChooserBlock
 class BodyField(StreamField):
     def __init__(self, block_types=None, **kwargs):
         block_types = [
-            ('Heading', blocks.CharBlock(icon="title", classname="heading")),
+            ('Heading', HeadingBlock()),
             ('Paragraph', ParagraphBlock()),
             ('Image', ImageBlock()),
             ('Embed', EmbedBlock(icon="site")),
