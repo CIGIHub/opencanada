@@ -15,8 +15,24 @@ h1{
 }
 
 h2{
-  font-size: 18px;
+  font-size: 24px;
   margin-top: 0px;
+}
+
+h3{
+  font-size: 18px;
+  color: $red;
+}
+
+h4{
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+h5, h6{
+  font-style: bold;
+  font-size: 14px;
 }
 
 a, a:hover{
@@ -399,9 +415,16 @@ article{
   margin-bottom: 20px;
 
 
-  h1, h2{
+  h1{
     margin: 0 0 20px 0;
   }
+  h2, h3{
+    margin: 10px 0;
+  }
+  h4, h5, h6{
+    margin: 10px 0 5px 0;
+  }
+
   .title, .story{
     @include gutter(40px, 20px);
   }
