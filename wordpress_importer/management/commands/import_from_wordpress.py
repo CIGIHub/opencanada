@@ -651,7 +651,7 @@ class Command(BaseCommand):
                 potential_article_slug = path_parts[-1]
                 try:
                     article = ArticlePage.objects.get(slug=potential_article_slug)
-                    InDepthArticleLink.objects.create(article=article, in_depth=series)
+                    InDepthArticleLink.objects.get_or_create(article=article, in_depth=series)
                 except ArticlePage.DoesNotExist:
                     pass  # skip it as it doesn't seem to exist.
 
