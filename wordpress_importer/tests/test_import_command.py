@@ -739,17 +739,17 @@ class TestCommandProcessHTLMForStreamField(TestCase, ImageCleanUp):
 
         self.assertEqual(
             [{"type": "Heading",
-              "value": "This is a header 1"},
+              "value": {'text': "This is a header 1", 'heading_level': 2}},
              {"type": "Heading",
-              "value": "This is a header 2"},
+              "value": {'text': "This is a header 2", 'heading_level': 2}},
              {"type": "Heading",
-              "value": "This is a header 3"},
+              "value": {'text': "This is a header 3", 'heading_level': 2}},
              {"type": "Heading",
-              "value": "This is a header 4"},
+              "value": {'text': "This is a header 4", 'heading_level': 2}},
              {"type": "Heading",
-              "value": "This is a header 5"},
+              "value": {'text': "This is a header 5", 'heading_level': 2}},
              {"type": "Heading",
-              "value": "This is a header 6"},
+              "value": {'text': "This is a header 6", 'heading_level': 2}},
              ],
             processed
         )
@@ -764,7 +764,7 @@ class TestCommandProcessHTLMForStreamField(TestCase, ImageCleanUp):
             [{"type": "Image",
               "value": {'image': 1, 'placement': 'full'}},
              {"type": "Heading",
-              "value": "This is the heading"},
+              "value": {'text': "This is the heading", 'heading_level': 2}},
              ],
             processed
         )
@@ -778,7 +778,7 @@ class TestCommandProcessHTLMForStreamField(TestCase, ImageCleanUp):
         self.assertEqual(
             [
                 {"type": "Heading",
-                 "value": "This is the heading"},
+                 "value": {'text': "This is the heading", 'heading_level': 2}},
                 {"type": "Image",
                  "value": {'image': 1, 'placement': 'full'}},
             ],
@@ -794,15 +794,15 @@ class TestCommandProcessHTLMForStreamField(TestCase, ImageCleanUp):
         self.assertEqual(
             [
                 {"type": "Heading",
-                 "value": "This is the heading"},
+                 "value": {'text': "This is the heading", 'heading_level': 2}},
                 {"type": "Image",
                  "value": {'image': 1, 'placement': 'full'}},
                 {"type": "Heading",
-                 "value": "This is more heading"},
+                 "value": {'text': "This is more heading", 'heading_level': 2}},
                 {"type": "Image",
                  "value": {'image': 1, 'placement': 'full'}},
                 {"type": "Heading",
-                 "value": "This is even more heading"},
+                 "value": {'text': "This is even more heading", 'heading_level': 2}},
             ],
             processed
         )
