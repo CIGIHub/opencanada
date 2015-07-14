@@ -25,16 +25,14 @@ jQuery(document).ready(function($) {
         }
     });
 
-    //slide out menu
-    $('html').on('touchstart click', function (e) {
-        toggleMenu(e);
-    });
+
 
 
 });
 
 //initialize window based on width and height
 function initForWindow(){
+
     var windowHeight = $(window).height();
     var windowWidth = $(window).width();
 
@@ -45,6 +43,17 @@ function initForWindow(){
     }
 
     toggleHeading(windowWidth);
+
+    //slide out menu
+    if(windowWidth < fullScreen){
+         $('html').on('touchstart click', function (e) {
+            toggleMenu(e);
+        });
+    }
+    else{
+        $('html').off('touchstart click');
+    }
+
 
 }
 
@@ -138,7 +147,9 @@ function toggleHeading(windowWidth){
 }
 
 $(window).resize(function(){
-    initForWindow()
+
+    initForWindow();
+
 
 });
 

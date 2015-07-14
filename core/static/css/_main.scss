@@ -59,6 +59,9 @@ header{
 }
   .share-links{
     @include inline-list(white, 20px);
+    ul li{
+      margin-right: 7px;
+    }
     &.vcenter{
       margin-top: 2.0%;
     }
