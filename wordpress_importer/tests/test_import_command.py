@@ -898,6 +898,25 @@ class TestCommandProcessHTLMForStreamField(TestCase, ImageCleanUp):
             processed
         )
 
+    def testNoExtraLineBreakks(self):
+        command = import_from_wordpress.Command()
+        html = """As one of Canada's principal security and intelligence agencies.
+<h4>What is CSE?</h4>
+Little is known about CSE because of secrecy."""
+        processed = command.process_html_for_stream_field(html)
+
+        self.assertEqual(
+            [{'type': 'Paragraph',
+              'value': {"text": "<p>As one of Canada's principal security and intelligence agencies.</p>", 'use_dropcap': False}},
+             {'type': 'Heading',
+              'value': {"text": 'What is CSE?', 'heading_level': 2}},
+             {'type': 'Paragraph',
+              'value': {"text": '<p>Little is known about CSE because of secrecy.</p>', 'use_dropcap': False}}
+
+             ],
+            processed
+        )
+
 
 class TestProcessForLineBreaks(TestCase):
     def testStringNoTags(self):

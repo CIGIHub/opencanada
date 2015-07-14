@@ -451,6 +451,10 @@ class Command(BaseCommand):
 
         paragraphs = []
         if pre:
+            while pre.startswith("<br/>"):
+                pre = pre[5:]
+            while pre.endswith("<br/>"):
+                pre = pre[:len(pre) - 5]
             paragraphs.append(
                 {'type': 'Paragraph',
                  'value': {"text": "<p>{}</p>".format(pre),
@@ -465,9 +469,13 @@ class Command(BaseCommand):
                  }
             )
         if post:
+            while post.startswith("<br/>"):
+                post = post[5:]
+            while post.endswith("<br/>"):
+                post = post[:len(post) - 5]
             paragraphs.append(
                 {'type': 'Paragraph',
-                 'value': {"text": "<p>{}</p>".format(pre),
+                 'value': {"text": "<p>{}</p>".format(post),
                            "use_dropcap": False
                            }
                  }
