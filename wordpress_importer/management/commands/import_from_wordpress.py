@@ -383,10 +383,7 @@ class Command(BaseCommand):
     def _process_element(self, html):
         processed_element = []
         if html.name is None:
-            processed_element.append({'type': 'Paragraph',
-                                      'value': {"text": "<p>{}</p>".format(
-                                          html.strip()),
-                                          "use_dropcap": False}})
+            processed_element.append(self._create_paragraph(html.strip()))
         elif html.name == 'img':
             processed_element.append(self._process_image_tag(html))
         elif html.name == 'h1' or html.name == 'h2' or html.name == 'h3' \
@@ -405,9 +402,9 @@ class Command(BaseCommand):
                 elif child.name is None:
                     tag = element.Tag(parser="html", name=html.name)
                     tag.string = child
-                    processed_element.append(self._process_base_element(tag))
+                    processed_element.extend(self._process_base_element(tag))
                 else:
-                    processed_element.append(self._process_base_element(child))
+                    processed_element.extend(self._process_base_element(child))
 
         return processed_element
 
@@ -436,34 +433,65 @@ class Command(BaseCommand):
 
     def _process_base_element(self, html):
         if html.name == 'img':
-            return self._process_image_tag(html)
+            return [self._process_image_tag(html)]
         elif html.name == 'h1' or html.name == 'h2' or html.name == 'h3' \
                 or html.name == 'h4' or html.name == 'h5' or html.name == 'h6':
-            return {'type': 'Heading', 'value': {'text': html.text, 'heading_level': 2}}
+            return [{'type': 'Heading', 'value': {'text': html.text, 'heading_level': 2}}]
 
         elif html.name == 'p' or html.name == 'div':
             inner = html.decode_contents(formatter="html")
-            return {'type': 'Paragraph',
-                    'value': {"text": "<p>{}</p>".format(inner.strip()),
-                              "use_dropcap": False
-                              }
-                    }
+            return self._create_paragraph(inner.strip())
         elif html.name is None:
-            return {'type': 'Paragraph',
-                    'value': {"text": "<p>{}</p>".format(html.strip()),
-                              "use_dropcap": False
-                              }
-                    }
+            return self._create_paragraph(html.strip())
         else:
-            return {'type': 'Paragraph',
-                    'value': {"text": "<p>{}</p>".format(html),
-                              "use_dropcap": False
-                              }
-                    }
+            return self._create_paragraph(html)
+
+    def _create_paragraph(self, text):
+        pre, embed, post = self.parse_string_for_embed(text)
+
+        paragraphs = []
+        if pre:
+            paragraphs.append(
+                {'type': 'Paragraph',
+                 'value': {"text": "<p>{}</p>".format(pre),
+                           "use_dropcap": False
+                           }
+                 }
+            )
+        if embed:
+            paragraphs.append(
+                {'type': 'Embed',
+                 'value': embed
+                 }
+            )
+        if post:
+            paragraphs.append(
+                {'type': 'Paragraph',
+                 'value': {"text": "<p>{}</p>".format(pre),
+                           "use_dropcap": False
+                           }
+                 }
+            )
+
+        return paragraphs
 
     def _contains_stream_block(self, html):
         return html.name in ['div', 'p', 'img', 'h1', 'h2', 'h3', 'h4', 'h5',
                              'h6']
+
+    def parse_string_for_embed(self, original_value):
+        pre_embed = original_value
+        embed_url = ""
+        post_embed = ""
+
+        stream_regex = "(?P<pre_embed>.*)(?P<embed>\[stream .* flv=(?P<embed_url>[\w:/\%\.]+) .* /\])(?P<post_embed>.*)"
+        result = re.match(stream_regex, original_value)
+        if result:
+            embed_url = unquote(result.group('embed_url').strip())
+            pre_embed = result.group('pre_embed').strip()
+            post_embed = result.group('post_embed').strip()
+
+        return pre_embed, embed_url, post_embed
 
     def _process_image_tag(self, item):
         images = AttributedImage.objects.filter(title=item['src'])
