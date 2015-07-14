@@ -13,7 +13,7 @@
                 {% endif %}
 
                 <h1>{{ self.title }}</h1>
-                <h2>{{ self.subtitle|richtext }}</h2>
+                <h2>{{ self.excerpt|richtext }}</h2>
 
                 <div class="contributors">By:
                     {% for author in self.authors %}
