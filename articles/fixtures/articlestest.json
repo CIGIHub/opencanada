@@ -436,7 +436,6 @@
       "body": "[{\"type\": \"Heading\", \"value\": \"This is a heading\"}, {\"type\": \"Paragraph\", \"value\": {\"text\": \"<p>And some body text.</p>\", \"use_dropcap\": false}}]",
       "excerpt": "<p>This is an excerpt.</p>",
       "main_image": null,
-      "subtitle": "<p>My Subtitle</p>",
       "primary_topic": 4,
       "category": [
         "feature"
@@ -450,7 +449,6 @@
       "body": "[{\"type\": \"Paragraph\", \"value\": {\"text\": \"<p>This is some text.</p>\", \"use_dropcap\": false}}]",
       "excerpt": "",
       "main_image": null,
-      "subtitle": "",
       "primary_topic": 1,
       "category": [
         "feature"
@@ -464,7 +462,6 @@
       "body": "[{\"type\": \"Paragraph\", \"value\": {\"text\": \"<p>Yay! Article</p>\", \"use_dropcap\": false}}]",
       "excerpt": "",
       "main_image": null,
-      "subtitle": "",
       "primary_topic": 2,
       "category": [
         "feature"
@@ -478,7 +475,6 @@
       "body": "[{\"type\": \"Paragraph\", \"value\": {\"text\": \"<p>Yay! Some Stuff.</p>\", \"use_dropcap\": false} }]",
       "excerpt": "",
       "main_image": null,
-      "subtitle": "",
       "primary_topic": 1,
       "category": [
         "feature"
@@ -492,7 +488,6 @@
       "body": "[{\"type\": \"Paragraph\", \"value\": {\"text\": \"<p>Yay! Some Stuff.</p>\", \"use_dropcap\": false} }}]",
       "excerpt": "",
       "main_image": null,
-      "subtitle": "",
       "primary_topic": null,
       "category": [
         "feature"
