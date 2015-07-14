@@ -2,7 +2,10 @@ var fullScreen = 992;
 
 jQuery(document).ready(function($) {
 
-    initForWindow();
+    var windowHeight = $(window).height();
+    var windowWidth = $(window).width();
+
+    initForWindow( windowHeight, windowWidth);
 
     $('.fa-camera').click(function () {
         $('.feature-text').fadeToggle();
@@ -26,17 +29,21 @@ jQuery(document).ready(function($) {
     });
 
     //slide out menu
-    $('html').on('touchstart click', function (e) {
-        toggleMenu(e);
-    });
+    if(windowWidth < fullScreen){
+         $('html').on('touchstart click', function (e) {
+            toggleMenu(e);
+        });
+    }
+    else{
+        $('html').off('touchstart click');
+    }
+
 
 
 });
 
 //initialize window based on width and height
-function initForWindow(){
-    var windowHeight = $(window).height();
-    var windowWidth = $(window).width();
+function initForWindow(windowHeight, windowWidth){
 
     setBodyPadding(windowWidth);
 
@@ -138,7 +145,19 @@ function toggleHeading(windowWidth){
 }
 
 $(window).resize(function(){
-    initForWindow()
+    var windowHeight = $(window).height();
+    var windowWidth = $(window).width();
+
+    initForWindow( windowHeight, windowWidth);
+
+    if(windowWidth < fullScreen){
+         $('html').on('touchstart click', function (e) {
+            toggleMenu(e);
+        });
+    }
+    else{
+        $('html').off('touchstart click');
+    }
 
 });
 

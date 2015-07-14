@@ -73,13 +73,13 @@
   }
   .logo{
     img{
-      height: 30px;
+      max-height: 40px;
       display: inline;
     }
   }
 
   .share-links.vcenter {
-    margin-top: 0.3%;
+    margin-top: 0.7%;
     @media(max-width: $screen-xs){
       margin-top: 1.5%;
     }
