@@ -13,12 +13,32 @@ class BodyField(StreamField):
             ('Paragraph', ParagraphBlock()),
             ('Image', ImageBlock()),
             ('Embed', EmbedBlock(icon="site")),
-            ('List', blocks.ListBlock(blocks.RichTextBlock(label="item"), icon="list-ul")),
+            ('List', blocks.ListBlock(
+                blocks.RichTextBlock(label="item"), icon="list-ul")
+             ),
             ('Sharable', SharableBlock()),
             ('AuthorBlurb', AuthorBlurbBlock()),
         ]
 
         super(BodyField, self).__init__(block_types, **kwargs)
+
+
+class HeadingBlock(blocks.StructBlock):
+    text = blocks.CharBlock()
+    heading_level = blocks.ChoiceBlock(
+        choices=[
+            (2, "2"),
+            (3, "3"),
+            (4, "4"),
+            (5, "5"),
+            (6, "6"),
+        ],
+        default=2
+    )
+
+    class Meta:
+        templage = "articles/blocks/heading.html"
+        icon = "title"
 
 
 class SharableBlock(blocks.CharBlock):
