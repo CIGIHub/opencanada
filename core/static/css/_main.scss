@@ -434,7 +434,7 @@ article{
       list-style: none;}
   }
 
-  .dropcap{
+  .dropcap-start::first-letter{
     color: $red;
     font-size: 65px;
     line-height: 55px;

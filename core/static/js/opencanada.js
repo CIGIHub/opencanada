@@ -25,11 +25,6 @@ jQuery(document).ready(function($) {
         }
     });
 
-    //drop cap on articles
-    $('.story p').first().html(function (index, html) {
-        return '<span class="dropcap">' + html.slice(0, 1) + '</span>' + html.slice(1);
-    });
-
     //slide out menu
     $('html').on('touchstart click', function (e) {
         toggleMenu(e);
