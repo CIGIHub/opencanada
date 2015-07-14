@@ -1,9 +1,14 @@
 from __future__ import absolute_import, unicode_literals
 
+from django.contrib.contenttypes.models import ContentType
+from django.utils.functional import cached_property
+from django.utils.html import format_html
 from wagtail.wagtailcore import blocks
 from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtailembeds.blocks import EmbedBlock
 from wagtail.wagtailimages.blocks import ImageChooserBlock
+
+from people.models import ContributorPage
 
 
 class BodyField(StreamField):
@@ -47,7 +52,27 @@ class SharableBlock(blocks.CharBlock):
         icon = "openquote"
 
 
-class AuthorBlurbBlock(blocks.CharBlock):
+class ContributorChooser(blocks.ChooserBlock):
+    @cached_property
+    def target_model(self):
+        return ContributorPage
+
+    @cached_property
+    def widget(self):
+        from wagtail.wagtailadmin.widgets import AdminPageChooser
+        return AdminPageChooser(content_type=ContentType.objects.get_for_model(ContributorPage))
+
+    def render_basic(self, value):
+        if value:
+            return format_html('<a href="{0}">{1}</a>', value.url, value.title)
+        else:
+            return ''
+
+
+class AuthorBlurbBlock(blocks.StructBlock):
+    author = ContributorChooser()
+    number_of_articles = blocks.CharBlock(default=3)
+
     class Meta:
         template = "articles/blocks/author_blurb.html"
         icon = "user"
