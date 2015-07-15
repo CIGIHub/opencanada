@@ -8,32 +8,9 @@ from django.utils.timezone import now
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, PageChooserPanel
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailcore.signals import page_published
-from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
-from wagtail.wagtailsnippets.models import register_snippet
 
 from articles import models as article_models
 from people import models as people_models
-
-
-@python_2_unicode_compatible
-class FontStyle(models.Model):
-    name = models.CharField(max_length=1024)
-    font_size = models.FloatField(default=1, help_text="The size of the fonts in ems.")
-    line_size = models.FloatField(default=100, help_text="The line height as a percentage.")
-    text_colour = models.CharField(max_length=64, default="#000000", help_text="The colour of the text in hexidecimal. For example, to get black enter '#000000'.")
-
-    panels = [
-        FieldPanel('name'),
-        FieldPanel('font_size'),
-        FieldPanel('line_size'),
-        FieldPanel('text_colour'),
-    ]
-
-    def __str__(self):
-        return self.name
-
-
-register_snippet(FontStyle)
 
 
 @python_2_unicode_compatible
@@ -48,14 +25,6 @@ class HomePage(Page):
 
     featured_item = models.ForeignKey(
         'wagtailcore.Page',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+'
-    )
-
-    featured_item_font_style = models.ForeignKey(
-        'core.FontStyle',
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
@@ -77,29 +46,58 @@ class HomePage(Page):
 def on_publish(**kwargs):
     instance = kwargs["instance"]
 
+    featured_item = instance.featured_item.content_type.get_object_for_this_type(id=instance.featured_item.id)
+
+    if hasattr(featured_item, 'feature_style'):
+        style = featured_item.feature_style
+    else:
+        style = "simple"
+    if hasattr(featured_item, 'image_overlay_color'):
+        color = featured_item.image_overlay_color
+    else:
+        color = None
+    if hasattr(featured_item, 'image_overlay_opacity'):
+        opacity = featured_item.image_overlay_opacity
+    else:
+        opacity = 50
+    if hasattr(featured_item, 'font_style'):
+        font = featured_item.font_style
+    else:
+        font = None
+
     headline = article_models.Headline.objects.filter(containing_page=instance).order_by('-start_date')[:1].first()
+
     if headline:
-        if instance.featured_item != headline.featured_item:
+        if featured_item != headline.featured_item:
             headline.end_date = now()
             headline.save()
             article_models.Headline.objects.create(
                 containing_page=instance,
-                featured_item=instance.featured_item,
-                featured_item_font_style=instance.featured_item_font_style
+                featured_item=featured_item,
+                feature_style=style,
+                image_overlay_color=color,
+                image_overlay_opacity=opacity,
+                font_style=font
             )
         else:
-            headline.featured_item_font_style = instance.featured_item_font_style
+            headline.feature_style = style
+            headline.image_overlay_color = color
+            headline.image_overlay_opacity = opacity
+            headline.font_style = font
+
     else:
         if instance.featured_item:
             article_models.Headline.objects.create(
                 containing_page=instance,
-                featured_item=instance.featured_item,
-                featured_item_font_style=instance.featured_item_font_style
+                featured_item=featured_item,
+                feature_style=style,
+                image_overlay_color=color,
+                image_overlay_opacity=opacity,
+                font_style=font
             )
 
 
 HomePage.content_panels = Page.content_panels + [
-    PageChooserPanel("featured_item", "articles.ArticlePage"),
-    SnippetChooserPanel("featured_item_font_style", FontStyle),
+    PageChooserPanel("featured_item", "wagtailcore.Page"),
     FieldPanel("number_of_articles"),
 ]

@@ -3,12 +3,14 @@ from __future__ import absolute_import, unicode_literals
 from operator import attrgetter
 
 from basic_site.models import UniquelySlugable
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.shortcuts import get_object_or_404, render
 from django.utils.encoding import python_2_unicode_compatible
 from modelcluster.fields import ParentalKey
 from wagtail.contrib.wagtailroutablepage.models import RoutablePageMixin, route
 from wagtail.wagtailadmin.edit_handlers import (FieldPanel, InlinePanel,
+                                                MultiFieldPanel,
                                                 PageChooserPanel,
                                                 StreamFieldPanel)
 from wagtail.wagtailcore.fields import RichTextField
@@ -18,6 +20,48 @@ from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 
 from . import fields as article_fields
+
+
+@python_2_unicode_compatible
+class Colour(models.Model):
+    name = models.CharField(max_length=100)
+    rgb_value = models.CharField(max_length=7)
+
+    def __str__(self):
+        return self.name
+
+    def save(self, *args, **kwargs):
+        if not self.rgb_value.startswith("#"):
+            self.rgb_value = "#{}".format(self.rgb_value)
+
+
+register_snippet(Colour)
+
+
+@python_2_unicode_compatible
+class FontStyle(models.Model):
+    name = models.CharField(max_length=1024)
+    font_size = models.FloatField(default=1, help_text="The size of the fonts in ems.")
+    line_size = models.FloatField(default=100, help_text="The line height as a percentage.")
+    text_colour = models.ForeignKey(
+        Colour,
+        default=1,
+        null=True,
+        on_delete=models.SET_NULL
+    )
+
+    panels = [
+        FieldPanel('name'),
+        FieldPanel('font_size'),
+        FieldPanel('line_size'),
+        FieldPanel('text_colour'),
+    ]
+
+    def __str__(self):
+        return self.name
+
+
+register_snippet(FontStyle)
 
 
 @python_2_unicode_compatible
@@ -112,6 +156,27 @@ class FeatureStyleFields(models.Model):
         ],
         default="simple")
 
+    image_overlay_color = models.ForeignKey(
+        Colour,
+        default=1,
+        null=True,
+        on_delete=models.SET_NULL
+    )
+
+    image_overlay_opacity = models.PositiveIntegerField(
+        validators=[MinValueValidator(0), MaxValueValidator(100)],
+        default=50,
+        help_text="Set the value from 0 (Solid overlay, original image not visible) to 100 (No overlay, original image completely visible)"
+    )
+
+    font_style = models.ForeignKey(
+        'articles.FontStyle',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
     class Meta:
         abstract = True
 
@@ -186,7 +251,22 @@ ArticlePage.content_panels = Page.content_panels + [
 ]
 
 ArticlePage.promote_panels = Page.promote_panels + [
-    FieldPanel('feature_style'),
+    MultiFieldPanel(
+        [
+            FieldPanel('feature_style'),
+            MultiFieldPanel(
+                [
+                    FieldPanel('image_overlay_opacity'),
+                    SnippetChooserPanel('image_overlay_color', Colour),
+                    SnippetChooserPanel("font_style", FontStyle),
+                ],
+                heading="Image Overlay Settings"
+            )
+        ],
+        heading="Featuring Settings"
+    )
+
+
 ]
 
 
@@ -350,7 +430,7 @@ InDepthPage.content_panels = Page.content_panels + [
 
 
 @python_2_unicode_compatible
-class Headline(models.Model):
+class Headline(FeatureStyleFields):
     containing_page = models.ForeignKey(
         'wagtailcore.Page',
         related_name='historic_headlines'
@@ -358,14 +438,6 @@ class Headline(models.Model):
 
     featured_item = models.ForeignKey(
         'wagtailcore.Page',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+'
-    )
-
-    featured_item_font_style = models.ForeignKey(
-        'core.FontStyle',
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
