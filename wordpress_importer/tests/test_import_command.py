@@ -898,6 +898,25 @@ class TestCommandProcessHTLMForStreamField(TestCase, ImageCleanUp):
             processed
         )
 
+    def testNoExtraLineBreakks(self):
+        command = import_from_wordpress.Command()
+        html = """As one of Canada's principal security and intelligence agencies.
+<h4>What is CSE?</h4>
+Little is known about CSE because of secrecy."""
+        processed = command.process_html_for_stream_field(html)
+
+        self.assertEqual(
+            [{'type': 'Paragraph',
+              'value': {"text": "<p>As one of Canada's principal security and intelligence agencies.</p>", 'use_dropcap': False}},
+             {'type': 'Heading',
+              'value': {"text": 'What is CSE?', 'heading_level': 2}},
+             {'type': 'Paragraph',
+              'value': {"text": '<p>Little is known about CSE because of secrecy.</p>', 'use_dropcap': False}}
+
+             ],
+            processed
+        )
+
 
 class TestProcessForLineBreaks(TestCase):
     def testStringNoTags(self):
@@ -957,3 +976,29 @@ class TestGetDownloadPathAndFilename(TestCase):
 
         self.assertEqual("http://newdomain.com/images/2011/04/my_image.jpg", url)
         self.assertEqual("2011_04_my_image.jpg", filename)
+
+
+class TestParseEmbed(TestCase):
+    def testParagraphWithStreamDataReturnsURL(self):
+        command = import_from_wordpress.Command()
+
+        pre, url, post = command.parse_string_for_embed('[stream provider=youtube flv=http%3A//www.youtube.com/watch%3Fv%3DdiTubVRKdz0 embed=false share=false width=646 height=390 dock=true controlbar=over bandwidth=high autostart=false /]')
+        self.assertEqual('http://www.youtube.com/watch?v=diTubVRKdz0', url)
+        self.assertEqual('', pre)
+        self.assertEqual('', post)
+
+    def testEmbedWithPreAndPost(self):
+        command = import_from_wordpress.Command()
+
+        pre, url, post = command.parse_string_for_embed('Stuff before the embed. [stream provider=youtube flv=http%3A//www.youtube.com/watch%3Fv%3DdiTubVRKdz0 embed=false share=false width=646 height=390 dock=true controlbar=over bandwidth=high autostart=false /] Stuff after the embed.')
+        self.assertEqual('http://www.youtube.com/watch?v=diTubVRKdz0', url)
+        self.assertEqual('Stuff before the embed.', pre)
+        self.assertEqual('Stuff after the embed.', post)
+
+    def testNoEmbed(self):
+        command = import_from_wordpress.Command()
+
+        pre, url, post = command.parse_string_for_embed('Just a regular paragraph.')
+        self.assertEqual('', url)
+        self.assertEqual('Just a regular paragraph.', pre)
+        self.assertEqual('', post)
