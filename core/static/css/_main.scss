@@ -115,6 +115,62 @@ header{
 
 }
 
+/**************  Search  **************/
+
+#search-box{
+    width: 100%;
+    position: fixed;
+    overflow-y: hidden;
+	height: 0;
+    background: $background-grey;
+
+    z-index: 200;
+    opacity: 0.9;
+
+	transition: 0.8s;
+
+    &.open{
+      overflow-y: visible;
+      padding: 20px;
+      height: 80px;
+      border-bottom: $border-red;
+
+  }
+
+  button{
+    background: $red;
+    border-radius: 4px;
+    border: none;
+    color: white;
+    padding: 6px;
+    width: 20%;
+    text-transform: uppercase;
+  }
+  input{
+    width: 75%;
+    margin-right: 10px;
+    border-radius: 4px;
+    border: $border-red;
+    padding: 5px;
+  }
+  .input-group{
+    width: 60%;
+    margin: 0 auto;
+    @media(max-width: $screen-sm){
+      width: 100%;
+    }
+  }
+
+}
+
+.search-results{
+  @include gutter();
+  ul li{
+    list-style: none;
+  }
+}
+
+
 /**************   FOOTER  **************/
 
 footer{
