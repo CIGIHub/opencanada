@@ -373,7 +373,7 @@ class InDepthArticleLink(Orderable, models.Model):
     ]
 
 
-class InDepthPage(Page, Sticky):
+class InDepthPage(Page, FeatureStyleFields, Sticky):
     subtitle = RichTextField(blank=True, default="")
     body = article_fields.BodyField(blank=True, default="")
     main_image = models.ForeignKey(
@@ -438,6 +438,15 @@ InDepthPage.promote_panels = Page.promote_panels + [
     MultiFieldPanel(
         [
             FieldPanel('sticky'),
+            FieldPanel('feature_style'),
+            MultiFieldPanel(
+                [
+                    FieldPanel('image_overlay_opacity'),
+                    SnippetChooserPanel('image_overlay_color', Colour),
+                    SnippetChooserPanel("font_style", FontStyle),
+                ],
+                heading="Image Overlay Settings"
+            )
         ],
         heading="Featuring Settings"
     )

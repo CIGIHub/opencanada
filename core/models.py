@@ -41,6 +41,11 @@ class HomePage(Page):
         articles = article_models.ArticlePage.objects.live().all().order_by("-first_published_at")[:self.number_of_articles]
         return articles
 
+    @property
+    def typed_featured_item(self):
+        featured_item = self.featured_item.content_type.get_object_for_this_type(id=self.featured_item.id)
+        return featured_item
+
 
 @receiver(page_published, sender=HomePage)
 def on_publish(**kwargs):
