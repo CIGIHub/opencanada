@@ -8,7 +8,6 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('core', '0006_fontstyle_name'),
         ('wagtailcore', '0001_squashed_0016_change_page_url_path_to_text_field'),
         ('articles', '0003_initial_pages'),
     ]
@@ -22,7 +21,6 @@ class Migration(migrations.Migration):
                 ('end_date', models.DateTimeField(null=True)),
                 ('containing_page', models.ForeignKey(related_name='historic_headlines', to='wagtailcore.Page')),
                 ('featured_item', models.ForeignKey(related_name='+', on_delete=django.db.models.deletion.SET_NULL, blank=True, to='wagtailcore.Page', null=True)),
-                ('featured_item_font_style', models.ForeignKey(related_name='+', on_delete=django.db.models.deletion.SET_NULL, blank=True, to='core.FontStyle', null=True)),
             ],
         ),
     ]

@@ -7,7 +7,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('core', '0006_fontstyle_name'),
+        ('core', '0004_homepage_featured_item'),
     ]
 
     operations = [
