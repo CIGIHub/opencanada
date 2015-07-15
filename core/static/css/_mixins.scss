@@ -90,13 +90,15 @@
     }
 
   #main-menu{
-    display: none;
+
     &.mobile-menu{
-      display: block;
       position: fixed;
-      z-index: 200;
       top: 0;
+      transition: 1s;
+      left: -400px;
+      z-index: 200;
       height: 100%;
+      width: 200px;
       padding: 25px;
       background: $background-grey;
       border-right: $border-red;
@@ -115,6 +117,11 @@
           }
         }
       }
+    }
+
+    &.mobile-menu.open{
+      transition: 1s;
+      left: 0;
     }
   }
 }

@@ -27,16 +27,7 @@ img{
   @include img-responsive;
 }
 
-button{
-  border:none;
-  background: none;
-  padding: 0px;
 
-  .fa-list-ul{
-    padding: 10px;
-  }
-}
-button:focus {outline:0;}
 
 /**************   HEADER  **************/
 
@@ -49,6 +40,16 @@ header{
   background: $red;
   transition: height 2s, background 2s;
 
+  button{
+    border:none;
+    background: none;
+    padding: 0px;
+
+    .fa-list-ul{
+      padding: 10px;
+    }
+  }
+  button:focus {outline:0;}
   .banner{
     padding-top: 20px;
     padding-bottom: 20px;
@@ -98,6 +99,51 @@ header{
   }
 
 }
+
+/**************  Search  **************/
+
+#search-box{
+    width: 100%;
+    position: fixed;
+    overflow-y: hidden;
+	max-height: 0;
+
+	transition-property: all;
+	transition-duration: .5s;
+	transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+
+    &.open{
+      overflow-y: visible;
+      max-height: 100px;
+      padding: 20px;
+      background: $background-grey;
+      border-bottom: $border-red;
+      z-index: 200;
+      opacity: 0.9;
+  }
+
+  button{
+    background: $red;
+    border-radius: 4px;
+    border: none;
+    color: white;
+    padding: 6px;
+    width: 20%;
+    text-transform: uppercase;
+  }
+  input{
+    width: 75%;
+    margin-right: 10px;
+    border-radius: 4px;
+    border: $border-red;
+    padding: 5px;
+  }
+  .input-group{
+    width: 60%;
+    margin: 0 auto;
+  }
+}
+
 
 /**************   FOOTER  **************/
 
@@ -279,7 +325,6 @@ footer{
       font-size: 36px;
     }
   }
-
 }
 
 /**************  Main  **************/
