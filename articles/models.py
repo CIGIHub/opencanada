@@ -145,6 +145,13 @@ class ArticleCategory(UniquelySlugable):
 register_snippet(ArticleCategory)
 
 
+class Sticky(models.Model):
+    sticky = models.BooleanField(default=False)
+
+    class Meta:
+        abstract = True
+
+
 class FeatureStyleFields(models.Model):
     feature_style = models.CharField(
         max_length=20,
@@ -182,7 +189,7 @@ class FeatureStyleFields(models.Model):
 
 
 @python_2_unicode_compatible
-class ArticlePage(Page, FeatureStyleFields):
+class ArticlePage(Page, FeatureStyleFields, Sticky):
     excerpt = RichTextField(blank=True, default="")
     body = article_fields.BodyField()
     main_image = models.ForeignKey(
@@ -253,6 +260,7 @@ ArticlePage.content_panels = Page.content_panels + [
 ArticlePage.promote_panels = Page.promote_panels + [
     MultiFieldPanel(
         [
+            FieldPanel('sticky'),
             FieldPanel('feature_style'),
             MultiFieldPanel(
                 [
@@ -265,8 +273,6 @@ ArticlePage.promote_panels = Page.promote_panels + [
         ],
         heading="Featuring Settings"
     )
-
-
 ]
 
 
@@ -367,7 +373,7 @@ class InDepthArticleLink(Orderable, models.Model):
     ]
 
 
-class InDepthPage(Page):
+class InDepthPage(Page, FeatureStyleFields, Sticky):
     subtitle = RichTextField(blank=True, default="")
     body = article_fields.BodyField(blank=True, default="")
     main_image = models.ForeignKey(
@@ -426,6 +432,24 @@ InDepthPage.content_panels = Page.content_panels + [
     StreamFieldPanel('body'),
     ImageChooserPanel('main_image'),
     InlinePanel('related_article_links', label="Articles")
+]
+
+InDepthPage.promote_panels = Page.promote_panels + [
+    MultiFieldPanel(
+        [
+            FieldPanel('sticky'),
+            FieldPanel('feature_style'),
+            MultiFieldPanel(
+                [
+                    FieldPanel('image_overlay_opacity'),
+                    SnippetChooserPanel('image_overlay_color', Colour),
+                    SnippetChooserPanel("font_style", FontStyle),
+                ],
+                heading="Image Overlay Settings"
+            )
+        ],
+        heading="Featuring Settings"
+    )
 ]
 
 
