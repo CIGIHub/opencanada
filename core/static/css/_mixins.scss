@@ -90,13 +90,13 @@
     }
 
   #main-menu{
-
+    z-index: 300;
     &.mobile-menu{
       position: fixed;
-      top: 0;
       transition: 1s;
+      top: 0;
       left: -400px;
-      z-index: 200;
+      z-index: 300;
       height: 100%;
       width: 200px;
       padding: 25px;

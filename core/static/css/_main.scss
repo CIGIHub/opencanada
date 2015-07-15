@@ -49,7 +49,9 @@ header{
       padding: 10px;
     }
   }
+
   button:focus {outline:0;}
+
   .banner{
     padding-top: 20px;
     padding-bottom: 20px;
@@ -57,7 +59,8 @@ header{
 
   .vcenter {
     margin-top: 2.2%;
-}
+  }
+
   .share-links{
     @include inline-list(white, 20px);
     ul li{
@@ -91,9 +94,12 @@ header{
     @include collapsed;
   }
 
-  @media(max-width: $screen-xs){
-    .share-links ul li a{
-      font-size: 16px;
+  @media(max-width: $screen-sm){
+    .share-links{
+      .twitter, .facebook{
+        display: none;
+      }
+
     }
 
   }
@@ -106,20 +112,20 @@ header{
     width: 100%;
     position: fixed;
     overflow-y: hidden;
-	max-height: 0;
+	height: 0;
+    background: $background-grey;
 
-	transition-property: all;
-	transition-duration: .5s;
-	transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+    z-index: 200;
+    opacity: 0.9;
+
+	transition: 0.8s;
 
     &.open{
       overflow-y: visible;
-      max-height: 100px;
       padding: 20px;
-      background: $background-grey;
+      height: 80px;
       border-bottom: $border-red;
-      z-index: 200;
-      opacity: 0.9;
+
   }
 
   button{
@@ -141,7 +147,11 @@ header{
   .input-group{
     width: 60%;
     margin: 0 auto;
+    @media(max-width: $screen-sm){
+      width: 100%;
+    }
   }
+
 }
 
 
