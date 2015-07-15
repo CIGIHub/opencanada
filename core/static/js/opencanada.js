@@ -12,21 +12,21 @@ jQuery(document).ready(function($) {
     //scroll down arrow
     $('a[href*=#]:not([href=#])').click(function () {
         if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
-            var target = $(this.hash);
-            target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
-            var bannerHeight = $('header').height();
-            var scrollDestination = target.offset().top - bannerHeight;
-            if (target.length) {
-                $('html,body').animate({
-                    scrollTop: scrollDestination
-                }, 1000);
-                return false;
+            if($(this).attr('href') == '#features'){
+                var target = $(this.hash);
+                target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+
+                var bannerHeight = $('header').height();
+                var scrollDestination = target.offset().top - bannerHeight;
+                if (target.length) {
+                    $('html,body').animate({
+                        scrollTop: scrollDestination
+                    }, 1000);
+                    return false;
+                }
             }
         }
     });
-
-
-
 
 });
 
@@ -36,42 +36,68 @@ function initForWindow(){
     var windowHeight = $(window).height();
     var windowWidth = $(window).width();
 
-    setBodyPadding(windowWidth);
-
     if($('body').hasClass('template-home-page')){
         setFeatureHeight(windowHeight);
     }
 
     toggleHeading(windowWidth);
+    setBodyPadding();
 
-    //slide out menu
-    if(windowWidth < fullScreen){
-         $('html').on('touchstart click', function (e) {
-            toggleMenu(e);
-        });
-    }
-    else{
-        $('html').off('touchstart click');
-    }
-
+    $('html').on('touchstart click', function (e) {
+        toggleBox(e);
+    });
 
 }
 
 //toggle menu in mobile/small window width view
-function toggleMenu(e){
+function toggleBox(e){
     var selected = $(e.target);
+    var target = null;
     var menu = $('#main-menu');
+    var search = $('#search-box');
 
-    if(selected.parent().data("target") == '#main-menu' ){
-        if(!(menu.is(':visible'))){
-            menu.show().css("left", "-400px").animate({"left":"0px"}).addClass('mobile-menu open');
+    if(selected.closest('button').attr('class') == 'menu'){
+        target = menu;
+    }
+    else if (selected.closest('li').attr('class') == 'search'){
+        target = search;
+    }
+
+    if(target != null){
+        if(target == menu){
+            if(!(menu.hasClass('open'))){
+                if(search.hasClass('open')){
+                    search.removeClass('open');
+                }
+                menu.addClass('open');
+
+            }
+        }
+
+        if(target == search ){
+            if(!(search.hasClass('open'))){
+                if(menu.hasClass('open')){
+                    menu.removeClass('open');
+                }
+               search.addClass('open');
+
+            }
+            else{
+                search.removeClass('open');
+            }
         }
     }
     else{
-        menu.animate({"left":"-400px"}, function() {
-            $(menu).hide().css("left", "").removeClass('open');
-        });
+
+        if((menu.hasClass('open')) && (!(selected.closest('nav').length))){
+            menu.removeClass('open');
+        }
+
+        if((search.hasClass('open')) && (!(selected.closest("#search-box").length))){
+            search.removeClass('open');
+        }
     }
+
 }
 
 //set the Homepage Feature height based on window height
@@ -86,9 +112,11 @@ function setFeatureHeight(windowHeight){
 function setBodyPadding(){
     var bannerHeight = $('header').height();
     $('body').css("padding-top", bannerHeight + "px");
+    $('#search-box').css("top", bannerHeight = "px");
+
 }
 
-//toggle Banner heading based on window width and page type
+//toggle Banner heading based on window width and page type∂
 function toggleHeading(windowWidth){
 
     var offset = $('header').height();
@@ -96,22 +124,17 @@ function toggleHeading(windowWidth){
     function fullHeader(){
         $('header').removeClass('collapsed');
         $('.banner').removeClass('container-fluid').addClass('container');
-        $('.logo').addClass('col-md-5').removeClass('col-md-10');
-        $('nav').addClass('vcenter').removeClass('mobile-menu open').show();
+        $('.logo').addClass('col-md-5').removeClass('col-md-8');
+        $('nav').addClass('vcenter').removeClass('mobile-menu open');
         $('body').removeClass('article-scroll');
     }
 
     function collapsedHeader(){
         $('header').addClass('collapsed');
         $('.banner').addClass('container-fluid').removeClass('container');
-        $('.logo').removeClass('col-md-5').addClass('col-md-10');
+        $('.logo').removeClass('col-md-5').addClass('col-md-8');
         $('nav').removeClass('vcenter').addClass('mobile-menu');
-        if($('nav').hasClass('open')){
-            $('nav').show();
-        }
-        else{
-            $('nav').hide();
-        }
+
         if($('#article-page').length){
             $('body').addClass('article-scroll');
         }
