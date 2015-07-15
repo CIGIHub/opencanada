@@ -1,0 +1,9 @@
+{% load people_tags %}
+<div class="author">{{ self.author.full_name }}</div>
+
+<ul>
+    {% for article in self.author|contributor_articles:self.number_of_articles %}
+    <li>{{ article }}</li>
+{% endfor %}
+</ul>
+

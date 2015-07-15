@@ -6,6 +6,8 @@ register = template.Library()
 
 
 @register.filter(name='contributor_articles')
-def contributor_articles(contributor_page):
+def contributor_articles(contributor_page, number=None):
     articles = ArticlePage.objects.filter(author_links__author=contributor_page)
+    if number:
+        articles = articles[:number]
     return articles
