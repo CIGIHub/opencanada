@@ -171,6 +171,13 @@ header{
 }
 
 
+.search-results{
+  @include gutter();
+  ul li{
+    list-style: none;
+  }
+}
+
 /**************   FOOTER  **************/
 
 footer{

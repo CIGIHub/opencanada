@@ -188,6 +188,7 @@ WAGTAIL_SITE_NAME = "opencanada"
 #     },
 # }
 
+WAGTAILSEARCH_RESULTS_TEMPLATE = 'basic_site/search_results.html'
 
 # Whether to use face/feature detection to improve image cropping - requires OpenCV
 WAGTAILIMAGES_FEATURE_DETECTION_ENABLED = False
