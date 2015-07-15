@@ -11,12 +11,6 @@
                 <h3><a href="{% pageurl result.specific %}">{{ result.specific.title }}</a></h3>
                 {% if result.specific.search_description %}
                   {{ result.specific.search_description|safe }}
-                {% else %}
-                    {% if result.specific.body %}
-                        {{ result.specific.body|safe|truncatechars:350 }}
-                    {% elif result.specific.search_result_text %}
-                        {{ result.specific.search_result_text|safe|truncatechars:350 }}
-                    {% endif %}
                 {% endif %}
               </li>
             {% empty %}
