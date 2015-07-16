@@ -2,7 +2,8 @@
 {% load static core_tags wagtailcore_tags wagtailimages_tags wagtailroutablepage_tags  %}
 
 {% block content %}
-    <div>
+    <div class="container">
+    <h1>{{ topic.name }}</h1>
     {% for article in articles %}
         {% include "articles/includes/article_teaser.html" %}
     {% endfor %}

@@ -14,6 +14,7 @@
         {% for article in self.articles %}
             {% cycle '<div class="row single">' '' %}
             <div class="col-sm-6">
+
                 <h2><a href="{{ article.url }}">{{ article.title }}</a></h2>
                 <div class="contributors">By:
                     {% for author in article.authors %}

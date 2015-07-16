@@ -2,7 +2,7 @@
 {% load static core_tags wagtailcore_tags wagtailimages_tags wagtailroutablepage_tags  %}
 
 {% block content %}
-    <div>
+    <div class="container">
     {% for topic in self.topics %}
         <h2><a href="{% routablepageurl self "topic" topic.slug %}">{{ topic.name }}</a></h2>
     {% endfor %}
