@@ -43,8 +43,9 @@ class HomePage(Page):
 
     @property
     def typed_featured_item(self):
-        featured_item = self.featured_item.content_type.get_object_for_this_type(id=self.featured_item.id)
-        return featured_item
+        if self.featured_item:
+            featured_item = self.featured_item.content_type.get_object_for_this_type(id=self.featured_item.id)
+            return featured_item
 
 
 @receiver(page_published, sender=HomePage)

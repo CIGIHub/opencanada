@@ -9,12 +9,12 @@ def create_colours(apps, schema_editor):
 
     Colour.objects.create(
         name="Black",
-        rgb_value="#000000"
+        hex_value="#000000"
     )
 
     Colour.objects.create(
         name="White",
-        rgb_value="#FFFFFF"
+        hex_value="#FFFFFF"
     )
 
 
