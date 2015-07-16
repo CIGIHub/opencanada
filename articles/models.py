@@ -1,4 +1,4 @@
-from __future__ import absolute_import, unicode_literals
+from __future__ import absolute_import, division, unicode_literals
 
 from operator import attrgetter
 
@@ -25,14 +25,20 @@ from . import fields as article_fields
 @python_2_unicode_compatible
 class Colour(models.Model):
     name = models.CharField(max_length=100)
-    rgb_value = models.CharField(max_length=7)
+    hex_value = models.CharField(max_length=7)
+
+    def rgb(self):
+        split = (self.hex_value[1:3], self.hex_value[3:5], self.hex_value[5:7])
+        rgb_value = [str(int(x, 16)) for x in split]
+        rgb_string = ', '.join(rgb_value)
+        return rgb_string
 
     def __str__(self):
         return self.name
 
     def save(self, *args, **kwargs):
-        if not self.rgb_value.startswith("#"):
-            self.rgb_value = "#{}".format(self.rgb_value)
+        if not self.hex_value.startswith("#"):
+            self.hex_value = "#{}".format(self.hex_value)
 
 
 register_snippet(Colour)
@@ -172,7 +178,7 @@ class FeatureStyleFields(models.Model):
 
     image_overlay_opacity = models.PositiveIntegerField(
         validators=[MinValueValidator(0), MaxValueValidator(100)],
-        default=50,
+        default=30,
         help_text="Set the value from 0 (Solid overlay, original image not visible) to 100 (No overlay, original image completely visible)"
     )
 
@@ -183,6 +189,9 @@ class FeatureStyleFields(models.Model):
         on_delete=models.SET_NULL,
         related_name='+'
     )
+
+    def opacity(self):
+        return self.image_overlay_opacity / 100
 
     class Meta:
         abstract = True

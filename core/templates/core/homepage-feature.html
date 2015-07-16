@@ -1,16 +1,24 @@
-{% load wagtailcore_tags static %}
+{% load static core_tags wagtailcore_tags wagtailimages_tags %}
 
 <div class="jumbotron feature" style="height: 400px;">
 
-    <div class="feature-image" style="background-image: url('{% static 'img/assets/diplomacy-unbound.png' %}')">
-        <div class="feature-image-overlay"></div>
+    {% image self.typed_featured_item.main_image original as background_image %}
+    <div class="feature-image" style="background-image: url(' {{ background_image.url }} ')">
+        <div class="feature-image-overlay" style="background: rgba( {{ self.typed_featured_item.image_overlay_color.rgb }}, {{ self.typed_featured_item.opacity }} )"></div>
     </div>
+
     <div class="feature-text">
         <h1>
-        <a style="color: {{ self.featured_item.font_style.text_colour }}; font-size: {{ self.featured_item.font_style.font_size }}em; line-height: {{ self.featured_item.font_style.line_size }}%; "href="{{ self.featured_item.url }}">{{ self.featured_item.title }}</a></h1>
-        <div class="feature-line" style="color: {{ self.featured_item.font_style.text_colour }};">{{ self.featured_item.articlepage.subtitle|richtext }}</div>
+        <a style="color: {{ self.typed_featured_item.font_style.text_colour.hex_value }}; font-size: {{ self.typed_featured_item.font_style.font_size }}em; line-height: {{ self.typed_featured_item.font_style.line_size }}%; "href="{{ self.typed_featured_item.url }}">{{ self.typed_featured_item.title }}</a></h1>
+
+        {%  if self.typed_featured_item.subtitle %}
+            <div class="feature-line" style="color: {{ self.typed_featured_item.font_style.text_colour.hex_value }};">{{ self.typed_featured_item.subtitle|richtext }}</div>
+        {%  elif self.typed_featured_item.excerpt %}
+            <div class="feature-line" style="color: {{ self.typed_featured_item.font_style.text_colour.hex_value }};">{{ self.typed_featured_item.excerpt|richtext }}</div>
+        {% endif %}
+
         <div class="contributors">By:
-            {% for author in self.featured_item.articlepage.authors %}
+            {% for author in self.typed_featured_item.authors %}
                 <div class="contributor">
                     {% if author.twitter_handle %}
                         <span><a href="{{ author.twitter_handle  }}">@</a></span>
@@ -22,6 +30,6 @@
     </div>
 
     <div class="scroll"><a href="#features"><i class="fa fa-angle-double-down"></i></a></div>
-    <div class="image-caption"><i class="fa fa-camera"></i> Illustration by Abhilasha Dewan</div>
+    <div class="image-caption"><i class="fa fa-camera"></i> {{ self.typed_featured_item.main_image.credit }}</div>
 
 </div>
