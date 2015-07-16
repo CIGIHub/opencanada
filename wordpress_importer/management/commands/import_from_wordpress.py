@@ -158,18 +158,18 @@ class Command(BaseCommand):
                 page.short_bio = meta_value
             elif meta_key == "description":
                 page.long_bio = meta_value
-            elif meta_key == "userphoto_image_file":
-                source = get_setting("USER_PHOTO_URL_PATTERN").format(
-                    meta_value)
-                filename = meta_value
-                try:
-                    self.download_image(source, filename)
-                    page.headshot = AttributedImage.objects.get(title=filename)
-                except DownloadException as e:
-                    if e.response:
-                        ImportDownloadError.objects.create(url=e.url, status_code=e.response.status_code)
-                    else:
-                        ImportDownloadError.objects.create(url=e.url, status_code=404)
+            # elif meta_key == "userphoto_image_file":
+            #     source = get_setting("USER_PHOTO_URL_PATTERN").format(
+            #         meta_value)
+            #     filename = meta_value
+                # try:
+                #     self.download_image(source, filename)
+                #     page.headshot = AttributedImage.objects.get(title=filename)
+                # except DownloadException as e:
+                #     if e.response:
+                #         ImportDownloadError.objects.create(url=e.url, status_code=e.response.status_code)
+                #     else:
+                #         ImportDownloadError.objects.create(url=e.url, status_code=404)
 
             revision = page.save_revision(
                 user=None,
