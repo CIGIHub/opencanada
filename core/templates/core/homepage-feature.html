@@ -23,7 +23,7 @@
                     {% if author.twitter_handle %}
                         <span><a href="{{ author.twitter_handle  }}">@</a></span>
                     {% endif %}
-                    <a href="author.url">{{ author.first_name }} {{ author.last_name }}</a>
+                    <a href="{{ author.url }}">{{ author.first_name }} {{ author.last_name }}</a>
                 </div>
             {% endfor %}
         </div>
