@@ -281,7 +281,7 @@ class Command(BaseCommand):
 
             source, filename = self.get_download_path_and_filename(
                 original_photo_url,
-                get_setting("ARTICLE_PHOTO_URL_PATTERN")
+                unicode(get_setting("ARTICLE_PHOTO_URL_PATTERN"))
             )
             try:
                 self.download_image(source, filename)
