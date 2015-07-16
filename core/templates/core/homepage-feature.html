@@ -9,8 +9,14 @@
 
     <div class="feature-text">
         <h1>
-        <a style="color: {{ self.typed_featured_item.font_style.text_colour.rgb_value }}; font-size: {{ self.typed_featured_item.font_style.font_size }}em; line-height: {{ self.typed_featured_item.font_style.line_size }}%; "href="{{ self.featured_item.articlepage.url }}">{{ self.featured_item.title }}</a></h1>
-        <div class="feature-line" style="color: {{ self.typed_featured_item.font_style.text_colour.rgb_value }};">{{ self.typed_featured_item.articlepage.excerpt|richtext }}</div>
+        <a style="color: {{ self.typed_featured_item.font_style.text_colour.rgb_value }}; font-size: {{ self.typed_featured_item.font_style.font_size }}em; line-height: {{ self.typed_featured_item.font_style.line_size }}%; "href="{{ self.typed_featured_item.url }}">{{ self.typed_featured_item.title }}</a></h1>
+
+        {%  if self.typed_featured_item.subtitle|richtext %}
+            <div class="feature-line" style="color: {{ self.typed_featured_item.font_style.text_colour.rgb_value }};">{{ self.typed_featured_item.subtitle|richtext }}</div>
+        {%  elif self.typed_featured_item.excerpt|richtext %}
+            <div class="feature-line" style="color: {{ self.typed_featured_item.font_style.text_colour.rgb_value }};">{{ self.typed_featured_item.excerpt|richtext }}</div>
+        {% endif %}
+
         <div class="contributors">By:
             {% for author in self.typed_featured_item.authors %}
                 <div class="contributor">
