@@ -166,7 +166,10 @@ class Command(BaseCommand):
                     self.download_image(source, filename)
                     page.headshot = AttributedImage.objects.get(title=filename)
                 except DownloadException as e:
-                    ImportDownloadError.objects.create(url=e.url, status_code=e.response.status_code)
+                    if e.response:
+                        ImportDownloadError.objects.create(url=e.url, status_code=e.response.status_code)
+                    else:
+                        ImportDownloadError.objects.create(url=e.url, status_code=404)
 
             revision = page.save_revision(
                 user=None,
@@ -284,7 +287,10 @@ class Command(BaseCommand):
                 self.download_image(source, filename)
                 post.main_image = AttributedImage.objects.get(title=filename)
             except DownloadException as e:
-                ImportDownloadError.objects.create(url=e.url, status_code=e.response.status_code)
+                if e.response:
+                    ImportDownloadError.objects.create(url=e.url, status_code=e.response.status_code)
+                else:
+                    ImportDownloadError.objects.create(url=e.url, status_code=404)
 
     def load_posts(self):
         for post_type in ["feature", "explainer", "roundtable-blog-post",
@@ -530,44 +536,51 @@ class Command(BaseCommand):
 
                     html = html.replace(source, updated_source_url)
                 except DownloadException as e:
-                    ImportDownloadError.objects.create(url=e.url, status_code=e.response.status_code)
+                    if e.response:
+                        ImportDownloadError.objects.create(url=e.url, status_code=e.response.status_code)
+                    else:
+                        ImportDownloadError.objects.create(url=e.url, status_code=404)
 
         return html
 
     def download_image(self, url, filename, use_image_names=False):
-        image_records = ImageImport.objects.filter(original_url=url)
-        if image_records.count() > 0:
-            images = AttributedImage.objects.filter(title=image_records.first().name)
-            image = images.first()
-        else:
-            response = requests.get(url)
+        try:
 
-            if response.status_code == 200:
-
-                f = BytesIO(response.content)
-
-                dim = get_image_dimensions(f)  # (width, height)
-
-                image = AttributedImage.objects.create(
-                    title=filename,
-                    uploaded_by_user=None,
-                    file=File(f, name=filename),
-                    width=dim[0],
-                    height=dim[1]
-                )
-
-                image_record, created = ImageImport.objects.get_or_create(
-                    original_url=url, name=image.title)
-                image_record.save()
+            image_records = ImageImport.objects.filter(original_url=url)
+            if image_records.count() > 0:
+                images = AttributedImage.objects.filter(title=image_records.first().name)
+                image = images.first()
             else:
-                raise DownloadException(url, response)
+                response = requests.get(url)
 
-        if use_image_names:
-            updated_source_url = image.title
-        else:
-            updated_source_url = image.get_rendition(
-                'width-{}'.format(image.width)).url
-        return updated_source_url
+                if response.status_code == 200:
+
+                    f = BytesIO(response.content)
+
+                    dim = get_image_dimensions(f)  # (width, height)
+
+                    image = AttributedImage.objects.create(
+                        title=filename,
+                        uploaded_by_user=None,
+                        file=File(f, name=filename),
+                        width=dim[0],
+                        height=dim[1]
+                    )
+
+                    image_record, created = ImageImport.objects.get_or_create(
+                        original_url=url, name=image.title)
+                    image_record.save()
+                else:
+                    raise DownloadException(url, response)
+
+            if use_image_names:
+                updated_source_url = image.title
+            else:
+                updated_source_url = image.get_rendition(
+                    'width-{}'.format(image.width)).url
+            return updated_source_url
+        except IOError:
+            raise DownloadException(url, None)
 
     def get_data_for_topics(self, post_id, primary_topic=False):
         taxonomy = 'post_tag'
