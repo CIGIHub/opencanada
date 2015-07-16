@@ -5,27 +5,18 @@
     <div class="container">
         <div class="contributor-profile">
             <h1>{{ self.title }}</h1>
+            <p>
             {% if self.display_twitter_handle %}
-                <div class="twitter"><span>@</span>{{ self.display_twitter_handle }}</div>
+                <div class="twitter"><a href="https://twitter.com/{{ self.display_twitter_handle }}"><i class="fa fa-twitter"></i> {{ self.display_twitter_handle }}</a></div>
             {% endif %}
             {% if self.email %}
                 <div class="email"><a href="mailto:{{ self.email }}">{{ self.email }}</a></div>
             {% endif %}
-            <div class="bio">{{ self.long_bio|richtext }}</div>
-            {% if self.headshot %}
-                <figure>
-                    {% image self.headshot width-300 %}
-                </figure>
-            {% endif %}
+            </p>
+            <p class="bio">{{ self.long_bio|richtext }}</p>
         </div>
-
         {% for article in self|contributor_articles %}
-            <div class="row">
-                <div class="col-xs-12">
-                    <h2><a href="{{ article.url }}">{{ article.title }}</a></h2>
-                </div>
-            </div>
-
+            {% include "articles/includes/article_teaser.html" %}
         {% endfor %}
 
     </div>
