@@ -15,5 +15,5 @@ def topic_url(context, topic):
     request = context['request']
     page = TopicListPage.objects.get(slug='topics')
     base_url = page.relative_url(request.site)
-    routed_url = page.reverse_subpage('topic', topic.slug)
+    routed_url = page.reverse_subpage('topic', [topic.slug])
     return base_url + routed_url
