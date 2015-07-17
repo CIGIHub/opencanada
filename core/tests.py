@@ -94,7 +94,7 @@ class HomePageTestCase(TestCase):
     def test_fill_row_1(self):
         home = HomePage.objects.all().first()
 
-        articles = InDepthPage.objects.all().order_by("-first_published_at")
+        articles = InDepthPage.objects.live().all().order_by("-first_published_at")
 
         expected = [InDepthPage.objects.get(pk=116)]
         actual, height = home._fill_row(1, articles, [], 1)
@@ -105,7 +105,7 @@ class HomePageTestCase(TestCase):
     def test_fill_row_2(self):
         home = HomePage.objects.all().first()
 
-        articles = InDepthPage.objects.all().order_by("-first_published_at")
+        articles = InDepthPage.objects.live().all().order_by("-first_published_at")
 
         expected = [InDepthPage.objects.get(pk=116), InDepthPage.objects.get(pk=110), ]
         actual, height = home._fill_row(2, articles, [], 1)

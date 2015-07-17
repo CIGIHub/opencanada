@@ -83,7 +83,7 @@ class HomePage(Page):
         indepth_content_type = ContentType.objects.get_for_model(
             article_models.InDepthPage)
 
-        articles = Page.objects.filter(
+        articles = Page.objects.live().filter(
             models.Q(content_type=article_content_type) | models.Q(content_type=indepth_content_type)
         ).annotate(
             sticky=models.Case(
