@@ -341,9 +341,12 @@ footer{
 
   }
    .image-caption{
-     font-family: $sans-serif;
-    right: 2%;
-    bottom: 3%;
+      font-family: $sans-serif;
+      right: 2%;
+      bottom: 3%;
+     .fa-camera.highlighted{
+       color: $red;
+     }
   }
 
   @media(max-width: $screen-lg){

@@ -164,5 +164,6 @@ def on_publish(**kwargs):
 
 HomePage.content_panels = Page.content_panels + [
     PageChooserPanel("featured_item", "wagtailcore.Page"),
-    FieldPanel("number_of_articles"),
+    FieldPanel("number_of_rows_of_articles"),
+    FieldPanel("number_of_columns_of_articles"),
 ]
