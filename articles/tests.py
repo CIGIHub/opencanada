@@ -104,7 +104,11 @@ class SeriesPageTestCase(TestCase):
         series = SeriesPage.objects.get(slug="depth-articles-no-topics")
         self.assertEqual(series.topics, [])
 
-#   TODO: verify related articles
+    def test_related_articles_gets_matching_primary_topics(self):
+        indepth = InDepthPage.objects.all().first()
+        related_articles = indepth.related_articles(number=2)
+
+        self.assertEqual(related_articles[0].primary_topic, indepth.primary_topic)
 
     def test_related_articles_returns_the_number_requested(self):
         series = SeriesPage.objects.all().first()

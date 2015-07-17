@@ -266,9 +266,32 @@ class ArticlePage(Page, FeatureStyleFields, Sticky):
         return all_topics
 
     def related_articles(self, number):
-        articles = ArticlePage.objects.live().all().exclude(id=self.id)[:number]
-        # TODO: pick actual related articles based on primary topic, secondary topics, authors
+        included = [self.id]
+        articles = ArticlePage.objects.live().filter(primary_topic=self.primary_topic).exclude(id=self.id).order_by('-first_published_at')[:number]
+        articles = [articles.all()]
+        included.extend([article.id for article in articles])
+
+        current_total = len(articles)
+        if current_total < number:
+            # still don't have enough, so pick using secondary topics
+            additional_articles = ArticlePage.objects.live().filter(primary_topic__in=self.topic_links).exclude(id__in=included).order_by('-first_published_at')[:number - current_total]
+            articles.extend(additional_articles.all())
+            current_total = len(articles)
+            included.extend([article.id for article in additional_articles.all()])
+
+        if current_total < number:
+            additional_articles = ArticlePage.objects.live().filter(articleauthorlink__author__in=self.authors).exclude(id__in=included).order_by('-first_published_at')[:number - current_total]
+            articles.extend(additional_articles.all())
+            current_total = len(articles)
+            included.extend([article.id for article in additional_articles.all()])
+
+        if current_total < number:
+            # still don't have enough, so just pick the most recent
+            additional_articles = ArticlePage.objects.live().exclude(id__in=included).order_by('-first_published_at')[:number - current_total]
+            articles.extend(additional_articles.all())
+
         return articles
+
 
 ArticlePage.content_panels = Page.content_panels + [
     FieldPanel('excerpt'),
@@ -446,8 +469,16 @@ class SeriesPage(Page, FeatureStyleFields, Sticky):
         return all_topics
 
     def related_articles(self, number):
-        articles = ArticlePage.objects.live().all()[:number]
+        articles = list(ArticlePage.objects.live().filter(primary_topic=self.primary_topic).order_by('-first_published_at')[:number])
+
         # TODO: pick actual related articles based on primary topic, secondary topics, authors
+
+        current_total = len(articles)
+        if current_total < number:
+            # still don't have enough, so just pick the most recent
+            # TODO: exclude items already included.
+            articles.extend(list(ArticlePage.objects.live().order_by('-first_published_at')[:number - current_total]))
+
         return articles
 
 SeriesPage.content_panels = Page.content_panels + [
