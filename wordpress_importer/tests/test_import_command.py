@@ -124,25 +124,25 @@ class TestCommandImportFromWordPressLoadContributors(TestCase, ImageCleanUp):
         self.assertEqual('He does stuff.',
                          contributors.first().short_bio)
 
-    @mock.patch('requests.get', local_get_successful)
-    def testLoadContributorsSetsImageFile(self):
-        command = import_from_wordpress.Command()
-        command.load_contributors()
-        contributors = ContributorPage.objects.filter(email='bob@example.com')
-
-        images = AttributedImage.objects.filter(title='testcat.jpg')
-        self.assertEqual(1, images.count())
-        self.assertEqual(images.first(), contributors.first().headshot)
-
-    @mock.patch('requests.get', local_get_404)
-    def testDownloadErrorLoggedWhenErrorGettingImage(self):
-        command = import_from_wordpress.Command()
-        command.load_contributors()
-
-        errors = ImportDownloadError.objects.all()
-        self.assertEqual(1, errors.count())
-        self.assertEqual(404, errors.first().status_code)
-        self.assertEqual(settings.WP_IMPORTER_USER_PHOTO_URL_PATTERN.format("testcat.jpg"), errors.first().url)
+    # @mock.patch('requests.get', local_get_successful)
+    # def testLoadContributorsSetsImageFile(self):
+    #     command = import_from_wordpress.Command()
+    #     command.load_contributors()
+    #     contributors = ContributorPage.objects.filter(email='bob@example.com')
+    #
+    #     images = AttributedImage.objects.filter(title='testcat.jpg')
+    #     self.assertEqual(1, images.count())
+    #     self.assertEqual(images.first(), contributors.first().headshot)
+    #
+    # @mock.patch('requests.get', local_get_404)
+    # def testDownloadErrorLoggedWhenErrorGettingImage(self):
+    #     command = import_from_wordpress.Command()
+    #     command.load_contributors()
+    #
+    #     errors = ImportDownloadError.objects.all()
+    #     self.assertEqual(1, errors.count())
+    #     self.assertEqual(404, errors.first().status_code)
+    #     self.assertEqual(settings.WP_IMPORTER_USER_PHOTO_URL_PATTERN.format("testcat.jpg"), errors.first().url)
 
     def get_test_contributor_data(self):
         data = [

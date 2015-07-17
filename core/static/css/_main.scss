@@ -290,6 +290,7 @@ footer{
 
   .feature-text{
     top: 10%;
+    top: 10%;
     left: 25%;
     max-width: 670px;
     margin-right: 10%;
@@ -473,8 +474,9 @@ article, .related-articles{
   }
 }
 article{
-  border-bottom: $border-grey;
-  margin-bottom: 20px;
+  &.row{
+    @include row-divider;
+  }
 
 
   h1{
@@ -637,4 +639,10 @@ article{
   h3{
     margin-top: 10px;
   }
+}
+
+.contributor-profile{
+  border-bottom: $border-grey;
+  margin-bottom: 40px;
+
 }

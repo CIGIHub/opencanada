@@ -1,6 +1,7 @@
 from __future__ import absolute_import, unicode_literals
 
 from basic_site import models as basic_site_models
+from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.dispatch.dispatcher import receiver
 from django.utils.encoding import python_2_unicode_compatible
@@ -31,20 +32,76 @@ class HomePage(Page):
         related_name='+'
     )
 
-    number_of_articles = models.IntegerField(default=12)
+    number_of_rows_of_articles = models.IntegerField(default=12)
+    number_of_columns_of_articles = models.IntegerField(default=3)
 
     def __str__(self):
         return self.title
 
+    def get_article_set(self, columns, rows, article_list, used):
+        if columns == 0 and rows == 0 or not article_list:
+            return []
+
+        current_set = []
+        while rows > 0:
+            row, height = self._fill_row(columns, article_list, used, rows)
+            current_set.append(row)
+            rows = rows - height
+
+        return current_set
+
+    def _fill_row(self, columns, article_list, used, max_height):
+        if columns == 0 or not article_list:
+            return [], 0
+
+        for article in article_list.all():
+            typed_article = article.content_type.get_object_for_this_type(
+                id=article.id)
+            if typed_article.feature_style.number_of_columns <= columns \
+                    and typed_article.id not in used\
+                    and typed_article.feature_style.number_of_rows <= max_height:
+
+                columns = columns - typed_article.feature_style.number_of_columns
+                used.append(typed_article.id)
+                row = [typed_article]
+                max_height = min(max_height, typed_article.feature_style.number_of_rows)
+
+                if max_height > 1 and columns > 0:
+                    subset = self.get_article_set(columns, max_height, article_list, used)
+                    row.append(subset)
+                else:
+                    recursive_row, height = self._fill_row(columns, article_list, used, max_height)
+                    row.extend(recursive_row)
+                return row, max_height
+
+        return [], 0
+
     @property
     def articles(self):
-        articles = article_models.ArticlePage.objects.live().all().order_by("-first_published_at")[:self.number_of_articles]
-        return articles
+        article_content_type = ContentType.objects.get_for_model(
+            article_models.ArticlePage)
+        indepth_content_type = ContentType.objects.get_for_model(
+            article_models.InDepthPage)
+
+        articles = Page.objects.filter(
+            models.Q(content_type=article_content_type) | models.Q(content_type=indepth_content_type)
+        ).annotate(
+            sticky=models.Case(
+                models.When(
+                    models.Q(indepthpage__sticky=True) | (models.Q(articlepage__sticky=True)),
+                    then=models.Value(1)),
+                default=models.Value(0),
+                output_field=models.IntegerField())).order_by("-sticky", "-first_published_at")
+
+        return self.get_article_set(self.number_of_columns_of_articles,
+                                    self.number_of_rows_of_articles, articles,
+                                    [])
 
     @property
     def typed_featured_item(self):
         if self.featured_item:
-            featured_item = self.featured_item.content_type.get_object_for_this_type(id=self.featured_item.id)
+            featured_item = self.featured_item.content_type.get_object_for_this_type(
+                id=self.featured_item.id)
             return featured_item
 
 
@@ -52,7 +109,8 @@ class HomePage(Page):
 def on_publish(**kwargs):
     instance = kwargs["instance"]
 
-    featured_item = instance.featured_item.content_type.get_object_for_this_type(id=instance.featured_item.id)
+    featured_item = instance.featured_item.content_type.get_object_for_this_type(
+        id=instance.featured_item.id)
 
     if hasattr(featured_item, 'feature_style'):
         style = featured_item.feature_style
@@ -71,7 +129,8 @@ def on_publish(**kwargs):
     else:
         font = None
 
-    headline = article_models.Headline.objects.filter(containing_page=instance).order_by('-start_date')[:1].first()
+    headline = article_models.Headline.objects.filter(
+        containing_page=instance).order_by('-start_date')[:1].first()
 
     if headline:
         if featured_item != headline.featured_item:

@@ -3,12 +3,15 @@
 <article class="row">
     <div class="col-xs-2">
         <figure>
-                <img src="{% static 'img/assets/series-article.png' %}">
-            </figure>
+            {% image article.main_image fill-120x120 %}
+        </figure>
     </div>
     <div class="col-xs-10">
             <h2><a href="{{ article.url }}">{{ article.title }}</a></h2>
-            <div class="contributors">By: {% for author in self.authors %}<a href="#">{{ author.first_name }} {{ author.last_name }}</a></div>{% if not forloop.last %}, {% endif %}{% endfor %}</div>
+            <div class="contributors">By: {% for author in article.authors %}
+                <div class="contributor"><a href="#">{{ author.first_name }} {{ author.last_name }}</a></div>
+                {% if not forloop.last %}, {% endif %}{% endfor %}
+            </div>
             <div class="date"> / {{ article.first_published_at|date:"F j, Y" }}</div>
 
             <div class="teaser">

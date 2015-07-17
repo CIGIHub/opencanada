@@ -158,16 +158,28 @@ class Sticky(models.Model):
         abstract = True
 
 
+@python_2_unicode_compatible
+class FeatureStyle(models.Model):
+    name = models.CharField(max_length=100)
+    number_of_columns = models.IntegerField(default=1)
+    number_of_rows = models.IntegerField(default=1)
+    include_image = models.BooleanField(default=False)
+    overlay_text = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.name
+
+
+register_snippet(FontStyle)
+
+
 class FeatureStyleFields(models.Model):
-    feature_style = models.CharField(
-        max_length=20,
-        choices=[
-            ("simple", "Single Column - Text Only"),
-            ("simpleimage", "Single Column - Text and Image"),
-            ("coverimage", "Full Width - Text overlayed on image"),
-            ("tallcoverimage", "Full Width - Double Height - Text overlayed on image"),
-        ],
-        default="simple")
+    feature_style = models.ForeignKey(
+        FeatureStyle,
+        default=1,
+        null=True,
+        on_delete=models.SET_NULL
+    )
 
     image_overlay_color = models.ForeignKey(
         Colour,
