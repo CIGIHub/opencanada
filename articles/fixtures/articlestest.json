@@ -304,7 +304,7 @@
       "show_in_menus": false,
       "live": true,
       "seo_title": "",
-      "latest_revision_created_at": "2015-06-23T15:03:04.918Z",
+      "latest_revision_created_at": "2013-06-23T15:03:04.918Z",
       "depth": 4,
       "search_description": "",
       "content_type": [
@@ -313,7 +313,7 @@
       ],
       "has_unpublished_changes": false,
       "path": "0001000100020001",
-      "first_published_at": "2015-06-24T15:03:04.936Z",
+      "first_published_at": "2013-06-24T15:03:04.936Z",
       "url_path": "/home/indepth/depth-articles/",
       "expired": false,
       "slug": "depth-articles",
@@ -331,7 +331,7 @@
       "show_in_menus": false,
       "live": true,
       "seo_title": "",
-      "latest_revision_created_at": "2015-06-26T15:03:04.918Z",
+      "latest_revision_created_at": "2015-06-26T16:03:04.918Z",
       "depth": 4,
       "search_description": "",
       "content_type": [
@@ -439,7 +439,8 @@
       "primary_topic": 4,
       "category": [
         "feature"
-      ]
+      ],
+      "feature_style": 4
     },
     "model": "articles.articlepage",
     "pk": 107
@@ -452,7 +453,8 @@
       "primary_topic": 1,
       "category": [
         "feature"
-      ]
+      ],
+      "feature_style": 1
     },
     "model": "articles.articlepage",
     "pk": 108
@@ -465,7 +467,8 @@
       "primary_topic": 2,
       "category": [
         "feature"
-      ]
+      ],
+      "feature_style": 3
     },
     "model": "articles.articlepage",
     "pk": 109
@@ -478,7 +481,8 @@
       "primary_topic": 1,
       "category": [
         "feature"
-      ]
+      ],
+      "feature_style": 3
     },
     "model": "articles.articlepage",
     "pk": 111
@@ -491,7 +495,8 @@
       "primary_topic": null,
       "category": [
         "feature"
-      ]
+      ],
+      "feature_style": 1
     },
     "model": "articles.articlepage",
     "pk": 115
@@ -542,7 +547,8 @@
     "fields": {
       "body": "[{\"type\": \"Paragraph\", \"value\": {\"text\": \"<p>This is about the In Depth.</p>\", \"use_dropcap\": false}}]",
       "main_image": null,
-      "primary_topic": 2
+      "primary_topic": 2,
+      "feature_style": 1
     },
     "model": "articles.indepthpage",
     "pk": 110
@@ -551,7 +557,8 @@
     "fields": {
       "body": "[{\"type\": \"Paragraph\", \"value\": {\"text\": \"<p>This is about the In Depth.</p>\", \"use_dropcap\": false}}]",
       "main_image": null,
-      "primary_topic": null
+      "primary_topic": null,
+      "feature_style": 1
     },
     "model": "articles.indepthpage",
     "pk": 116
