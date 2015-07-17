@@ -584,11 +584,27 @@ article{
     }
   }
   .block-AuthorBlurb{
-    float: right;
-    width: 250px;
-    padding: 15px;
+    float:right;
+    width: 300px;
+    padding: 5px 15px;
     margin-left: 15px;
-    border-left: solid 2px $grey;
+    border-left: solid 2px $mid-grey;
+    .author{
+      @include type(black);
+    }
+    .short-bio{
+      font-size: 0.8em;
+      font-weight: bold;
+      font-family: $serif;
+    }
+    ul{
+      padding: 5px 0 0 0;
+      margin-bottom: 0px;
+      li{
+        list-style: none;
+        font-family: $serif;
+      }
+    }
 
   }
   .home-link{

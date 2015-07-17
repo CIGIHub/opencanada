@@ -5,8 +5,8 @@
 
 <ul>
     {% for article in self.author|contributor_articles:self.number_of_articles %}
-    <li><a href="{{ article.url }}">{{ article.title }}</a></li>
-{% endfor %}
+        <li><a href="{{ article.url }}">{{ article.title }}</a></li>
+    {% endfor %}
 </ul>
 </div>
 
