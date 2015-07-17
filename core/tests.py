@@ -65,6 +65,32 @@ class HomePageTestCase(TestCase):
 
         self.assertSequenceEqual(home.articles, expected)
 
+    def test_articles_returns_in_sub_rows(self):
+        home = HomePage.objects.all().first()
+        home.number_of_rows_of_articles = 3
+        home.number_of_columns_of_articles = 4
+        home.save()
+
+        sticky_page = ArticlePage.objects.get(pk=107)
+        sticky_page.sticky = True
+        sticky_page.save()
+
+        expected = [
+            [
+                ArticlePage.objects.get(pk=107),
+                [
+                    [InDepthPage.objects.get(pk=116), ],
+                    [ArticlePage.objects.get(pk=108), ],
+                ]
+            ],
+            [
+                ArticlePage.objects.get(pk=109),
+                ArticlePage.objects.get(pk=115)
+            ],
+        ]
+
+        self.assertSequenceEqual(home.articles, expected)
+
     def test_fill_row_1(self):
         home = HomePage.objects.all().first()
 

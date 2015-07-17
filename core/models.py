@@ -65,8 +65,13 @@ class HomePage(Page):
                 used.append(typed_article.id)
                 row = [typed_article]
                 max_height = min(max_height, typed_article.feature_style.number_of_rows)
-                recursive_row, height = self._fill_row(columns, article_list, used, max_height)
-                row.extend(recursive_row)
+
+                if max_height > 1 and columns > 0:
+                    subset = self.get_article_set(columns, max_height, article_list, used)
+                    row.append(subset)
+                else:
+                    recursive_row, height = self._fill_row(columns, article_list, used, max_height)
+                    row.extend(recursive_row)
                 return row, max_height
 
         return [], 0
