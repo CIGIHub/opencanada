@@ -11,27 +11,27 @@
 
 {% block content %}
     <div class="container boxes" id="features">
-        {% for article in self.articles %}
-            {% cycle '<div class="row single">' '' %}
-            <div class="col-sm-6">
 
-                <h2><a href="{{ article.url }}">{{ article.title }}</a></h2>
-                <div class="contributors">By:
-                    {% for author in article.authors %}
-                    <div class="contributor">
-                        {% if author.twitter_handle %}
-                            <span><a href="{{ author.twitter_handle }}">@</a></span>
-                        {% endif %}
-                        <a href="author.url">{{ author.first_name }} {{ author.last_name }}</a>
-                    </div>
-                {% endfor %}
-                </div>
-
-                <div class="teaser">{{ article.excerpt|richtext }}</div>
-
-            </div>
-             {% cycle '' '</div>' %}
-        {% endfor %}
+{#        {% for article in self.articles %}#}
+{#            {% cycle '<div class="row single">' '' %}#}
+{#            <div class="col-sm-6">#}
+{#                <h2><a href="{{ article.url }}">{{ article.title }}</a></h2>#}
+{#                <div class="contributors">By:#}
+{#                    {% for author in article.authors %}#}
+{#                    <div class="contributor">#}
+{#                        {% if author.twitter_handle %}#}
+{#                            <span><a href="{{ author.twitter_handle }}">@</a></span>#}
+{#                        {% endif %}#}
+{#                        <a href="author.url">{{ author.first_name }} {{ author.last_name }}</a>#}
+{#                    </div>#}
+{#                {% endfor %}#}
+{#                </div>#}
+{##}
+{#                <div class="teaser">{{ article.excerpt|richtext }}</div>#}
+{##}
+{#            </div>#}
+{#             {% cycle '' '</div>' %}#}
+{#        {% endfor %}#}
     </div>
 
 {% endblock %}
