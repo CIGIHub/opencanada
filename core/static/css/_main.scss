@@ -398,13 +398,6 @@ footer{
   a{
     color: $text_color;
   }
-  span a{
-    color: $twitter_blue;
-  }
-  span a:hover{
-    text-decoration: none;
-    color: $red;
-  }
   .contributor{
     display: inline-block;
   }
@@ -414,6 +407,7 @@ footer{
   .contributor:last-child:after{
     content: '';
   }
+
 }
 
 /**************  Article  **************/
@@ -480,7 +474,6 @@ article{
   &.row{
     @include row-divider;
   }
-
 
   h1{
     margin: 0 0 20px 0;
@@ -664,7 +657,9 @@ article{
 }
 
 .contributor-profile{
-  border-bottom: $border-grey;
   margin-bottom: 40px;
+  .fa-twitter{
+    color: $blue;
+  }
 
 }
