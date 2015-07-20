@@ -8,6 +8,7 @@ from django.utils.encoding import python_2_unicode_compatible
 class PostImport(models.Model):
     post_id = models.IntegerField()
     article_page = models.ForeignKey("wagtailcore.Page", null=True)
+    original_permalink = models.CharField(max_length=2048, default="")
 
     def __str__(self):
         return "{}".format(self.post_id)

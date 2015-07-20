@@ -70,6 +70,8 @@ class Command(BaseCommand):
         super(Command, self).__init__(*args, **kwargs)
         self.connection = None
         self.image_download_domains = get_setting("IMAGE_DOWNLOAD_DOMAINS")
+        self.category_names_to_id = None
+        self.category_id_to_slug = None
 
     def handle(self, **options):
         db_config = {
@@ -90,6 +92,15 @@ class Command(BaseCommand):
 
     def close_connection(self):
         self.connection.close()
+
+    def get_category_slug(self, name):
+        if not self.category_names_to_id:
+            self.category_names_to_id = {}
+            self.category_id_to_slug = {}
+            self.build_category_dictionary()
+
+        category_id = self.category_names_to_id[name]
+        return self.category_id_to_slug[category_id]
 
     def get_contributor_data(self):
         cursor = self.connection.cursor()
@@ -177,6 +188,30 @@ class Command(BaseCommand):
             )
             revision.publish()
 
+    def get_category_data(self):
+        query = 'SELECT wp_terms.name, wp_terms.term_id, wp_terms.slug, parent ' \
+                'FROM wp_term_taxonomy ' \
+                'INNER JOIN wp_terms ON wp_term_taxonomy.term_id = wp_terms.term_id ' \
+                'WHERE taxonomy="category"' \
+                'ORDER BY parent'
+
+        cursor = self.connection.cursor()
+        cursor.execute(query)
+        results = cursor.fetchall()
+        cursor.close()
+        return results
+
+    def build_category_dictionary(self):
+        results = self.get_category_data()
+
+        for name, term_id, slug, parent_id in results:
+            self.category_names_to_id[name] = term_id
+            if parent_id == 0:
+                self.category_id_to_slug[term_id] = slug
+            else:
+                full_slug = "/".join([self.category_id_to_slug[parent_id], slug])
+                self.category_id_to_slug[term_id] = full_slug
+
     def get_post_query(self, post_type):
         query = 'SELECT DISTINCT wp_posts.id, post_content, post_title, ' \
                 'post_excerpt, post_name, user_email, post_date_gmt ' \
@@ -193,27 +228,11 @@ class Command(BaseCommand):
                 'where taxonomy="category" ' \
                 'and post_status = "publish" and wp_terms.name="{}")'
 
-        if post_type == "explainer":
-            return query.format("101s")
-        elif post_type == "roundtable-blog-post":
-            return query.format("Roundtable")
-        elif post_type == "dispatch-blog-post":
-            return query.format("Dispatch")
-        elif post_type == "commentary":
-            return query.format("Comments")
-        elif post_type == "essay":
-            return query.format("Essays")
-        elif post_type == "infographic":
-            return query.format('Graphics" or wp_terms.name="Visualizations')
-        elif post_type == "interview":
-            return query.format("Interviews")
-        elif post_type == "rapid-response":
-            return query.format("Rapid Response Group")
-        elif post_type == "series":
-            return query.format("In Depth")
-        elif post_type == "feature":
-            return "{} {}".format(
-                query.format("Features"),
+        query = query.format(post_type)
+
+        if post_type == "Features":
+            query = "{} {}".format(
+                query,
                 """
                 and wp_posts.ID not in
                 (SELECT wp_posts.ID FROM `wp_term_relationships`
@@ -236,6 +255,8 @@ class Command(BaseCommand):
                 or wp_terms.name = 'Open Watch'
                 or wp_terms.name = 'Visualizations'))"""
             )
+
+        return query
 
     def get_post_data(self, post_type):
         cursor = self.connection.cursor()
@@ -292,15 +313,37 @@ class Command(BaseCommand):
                 else:
                     ImportDownloadError.objects.create(url=e.url, status_code=404)
 
+    def get_category_type(self, name):
+        if name == "101s":
+            return "explainer"
+        elif name == "Roundtable":
+            return "roundtable-blog-post"
+        elif name == "Dispatch":
+            return "dispatch-blog-post"
+        elif name == "Comments":
+            return "commentary"
+        elif name == "Essays":
+            return "essay"
+        elif name == "Graphics" or name == "Visualizations":
+            return "infographic"
+        elif name == "Interviews":
+            return "interview"
+        elif name == "Rapid Response Group":
+            return "rapid-response"
+        elif name == "In Depth":
+            return "series"
+        else:
+            return "feature"
+
     def load_posts(self):
-        for post_type in ["feature", "explainer", "roundtable-blog-post",
-                          "dispatch-blog-post", "commentary", "essay",
-                          "infographic", "interview", "rapid-response"]:
+        for post_type in ["Features", "101s", "Roundtable",
+                          "Dispatch", "Comments", "Essays",
+                          "Graphics", "Visualizations", "Interviews", "Rapid Response Group"]:
 
             results = self.get_post_data(post_type)
 
             features_page = Page.objects.get(slug="features")
-            feature_category = ArticleCategory.objects.get(slug=post_type)
+            feature_category = ArticleCategory.objects.get(slug=self.get_category_type(post_type))
 
             for (post_id, post_content, post_title, post_excerpt, post_name,
                  author_email, post_date) in results:
@@ -350,8 +393,10 @@ class Command(BaseCommand):
                 )
                 revision.publish()
 
+                original_permalink = "/".join([self.get_category_slug(post_type), post_name])
+
                 import_record, created = PostImport.objects.get_or_create(
-                    post_id=post_id, article_page=page)
+                    post_id=post_id, article_page=page, original_permalink=original_permalink)
 
                 self.load_primary_topic(post_id, page)
                 self.load_additional_topics(post_id, page)
@@ -634,7 +679,7 @@ class Command(BaseCommand):
                 ArticleTopicLink.objects.get_or_create(topic=topic, article=post)
 
     def load_indepth_posts(self):
-        for post_type in ["series", ]:
+        for post_type in ["In Depth", ]:
 
             results = self.get_post_data(post_type)
 
@@ -676,8 +721,9 @@ class Command(BaseCommand):
                 )
                 revision.publish()
 
+                original_permalink = "/".join([self.get_category_slug(post_type), post_name])
                 import_record, created = PostImport.objects.get_or_create(
-                    post_id=post_id, article_page=page)
+                    post_id=post_id, article_page=page, original_permalink=original_permalink)
 
                 if post_content:
                     self.process_html_for_series_links(post_content, page)
