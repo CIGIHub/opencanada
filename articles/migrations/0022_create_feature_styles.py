@@ -19,7 +19,7 @@ def create_styles(apps, schema_editor):
         name="Single Column - Text and Image",
         number_of_columns=1,
         number_of_rows=1,
-        include_image=False,
+        include_image=True,
         overlay_text=False
     )
 
