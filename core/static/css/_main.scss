@@ -31,7 +31,7 @@ h4{
 }
 
 h5, h6{
-  font-style: bold;
+  font-weight: bold;
   font-size: 14px;
 }
 
@@ -172,7 +172,6 @@ header{
 
 
 .search-results{
-  @include gutter();
   ul li{
     list-style: none;
   }
@@ -380,13 +379,6 @@ footer{
   a{
     color: $text_color;
   }
-  span a{
-    color: $twitter_blue;
-  }
-  span a:hover{
-    text-decoration: none;
-    color: $red;
-  }
   .contributor{
     display: inline-block;
   }
@@ -396,6 +388,7 @@ footer{
   .contributor:last-child:after{
     content: '';
   }
+
 }
 
 /**************  Article  **************/
@@ -462,7 +455,28 @@ article{
   &.row{
     @include row-divider;
   }
+  margin-top: 40px;
+  margin-bottom: 40px;
 
+  .title,
+  .block-Paragraph,
+  .block-Heading,
+  .block-Image,
+  .block-Sharable,
+  .block-Embed,
+  .topics{
+    margin-left: 10%;
+    margin-right: 10%;
+
+    @media(max-width: $screen-xs){
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+  .title, .topics, .story{
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
 
   h1{
     margin: 0 0 20px 0;
@@ -474,21 +488,16 @@ article{
     margin: 10px 0 5px 0;
   }
 
-  .title, .story{
-    @include gutter(40px, 20px);
-  }
   .main-image img{
     margin: 0 auto;
   }
+
   .topics{
     .tag-icon{
       display:inline-block;
     }
     @include type($text-color);
     @include inline-list-divided($red);
-  }
-  .topics.related{
-    @include gutter(0px, 20px);
   }
 
   .type{
@@ -571,11 +580,12 @@ article{
       text-align: right;
     }
   }
+
   .block-AuthorBlurb{
     float:right;
     width: 300px;
     padding: 5px 15px;
-    margin-left: 15px;
+    margin: 10px 0 10px 15px;
     border-left: solid 2px $mid-grey;
     .author{
       @include type(black);
@@ -606,7 +616,6 @@ article{
 .in-depth-page{
   article{
     .story{
-      @include gutter(0px, 20px);
       border-bottom: $border-grey;
     }
     ul.share-links {
@@ -634,7 +643,6 @@ article{
 
 .in-the-series{
   .intro, .row, .series-teaser{
-    @include gutter(0, 20px);
   }
   border-bottom: $border-grey;
 }
@@ -646,7 +654,9 @@ article{
 }
 
 .contributor-profile{
-  border-bottom: $border-grey;
   margin-bottom: 40px;
+  .fa-twitter{
+    color: $twitter-blue;
+  }
 
 }

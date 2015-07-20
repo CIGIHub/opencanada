@@ -19,9 +19,6 @@
                     {% for author in self.authors %}
                     <div class="contributor">
                         <a href="{{ author.url }}">{{ author.first_name }} {{ author.last_name }}</a>
-                        {% if author.display_twitter_handle %}
-                            (<span>@</span>{{ author.display_twitter_handle }})
-                        {% endif %}
                     </div>{% endfor %}</div>
                 <div class="date"> / {{ self.first_published_at|date:"F j, Y" }}</div>
             </div>
