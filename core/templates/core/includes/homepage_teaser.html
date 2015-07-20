@@ -1,0 +1,16 @@
+{% load static core_tags wagtailcore_tags wagtailimages_tags %}
+
+    <div class="contributors">By:
+        {% for author in article.authors %}
+        <div class="contributor">
+            <a href="author.url">{{ author.first_name }} {{ author.last_name }}</a>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="teaser">
+        {% if article.subtitle %}
+            {{ article.subtitle|richtext }}
+        {% else %}
+            {{ article.excerpt|richtext }}
+        {% endif %}
+    </div>

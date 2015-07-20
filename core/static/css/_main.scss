@@ -256,7 +256,7 @@ footer{
 
 /**************   Homepage Feature  **************/
 
-.feature{
+.main-feature, .features{
   position: relative;
   color: white;
   font-family: $sans-serif;
@@ -372,25 +372,7 @@ footer{
   .row{
     @include row-divider;
   }
-  .quad .col-sm-12{
-    padding-left: 0px;
-    padding-right: 0px;
-  }
-  .row.single .col-sm-6:first-child{
-    border-right: $border-grey;
-  }
-  .teaser{
-    margin: 5% 0;
-  }
 
-  @media(max-width: $screen-sm){
-    .row.single .col-sm-6:first-child{
-      border-right: none;
-      border-bottom: $border-grey;
-      margin-bottom: 20px;
-      padding-bottom: 20px;
-    }
-  }
 }
 
 .contributors{
