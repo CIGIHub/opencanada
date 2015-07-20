@@ -9,6 +9,7 @@ from django.utils.timezone import now
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, PageChooserPanel
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailcore.signals import page_published
+from wagtail.wagtailsnippets.models import register_snippet
 
 from articles import models as article_models
 from people import models as people_models
@@ -167,3 +168,15 @@ HomePage.content_panels = Page.content_panels + [
     FieldPanel("number_of_rows_of_articles"),
     FieldPanel("number_of_columns_of_articles"),
 ]
+
+
+@python_2_unicode_compatible
+class SearchSuggestion(models.Model):
+    phrase = models.CharField(max_length=1024)
+    active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.phrase
+
+
+register_snippet(SearchSuggestion)
