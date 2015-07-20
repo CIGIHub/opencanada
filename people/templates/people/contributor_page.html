@@ -6,12 +6,12 @@
         <div class="contributor-profile">
             <h1>{{ self.title }}</h1>
             <p>
-            {% if self.display_twitter_handle %}
-                <div class="twitter"><a href="https://twitter.com/{{ self.display_twitter_handle }}"><i class="fa fa-twitter"></i> {{ self.display_twitter_handle }}</a></div>
-            {% endif %}
-            {% if self.email %}
-                <div class="email"><a href="mailto:{{ self.email }}">{{ self.email }}</a></div>
-            {% endif %}
+                {% if self.twitter_handle %}
+                    <div class="twitter"><a href="https://twitter.com/{{ self.twitter_handle }}"><i class="fa fa-twitter"></i> {{ self.display_twitter_handle }}</a></div>
+                {% endif %}
+                {% if self.email %}
+                    <div class="email"><a href="mailto:{{ self.email }}">{{ self.email }}</a></div>
+                {% endif %}
             </p>
             <p class="bio">{{ self.long_bio|richtext }}</p>
         </div>
