@@ -12,6 +12,19 @@
   color: $color;
 }
 
+
+@mixin row-divider{
+  border-bottom: $border-grey;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+@mixin no-row-divider{
+  border-bottom: none;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
 @mixin centered{
   margin: 0 auto;
 }
@@ -51,11 +64,6 @@
         content: '';
       }
     }
-}
-
-@mixin row-divider{
-  border-top: $border-grey;
-  padding: 20px 0;
 }
 
 @mixin collapsed{
@@ -117,6 +125,61 @@
     &.mobile-menu.open{
       transition: 1s;
       left: 0;
+    }
+  }
+}
+
+@mixin article-overlay{
+  position: relative;
+
+  .feature-image{
+    position: relative;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .feature-image-overlay{
+    position: absolute;
+    z-index: 2;
+    display: block;
+    content: "";
+    top: 0; right: 0; bottom: 0; left: 0;
+  }
+
+  .image-caption, .feature-text{
+    position: absolute;
+    z-index:10;
+  }
+
+  .feature-text{
+    top: 10%;
+    margin-right: 10%;
+    h1{
+      font-size: 2.4em;
+      a{
+       text-decoration: none;
+      }
+      a:hover{
+        color: $red;
+      }
+    }
+    .feature-line{
+      font-size: 1.4em;
+    }
+    .contributors{
+      margin-top: 5%;
+    }
+  }
+
+  .image-caption{
+    font-family: $sans-serif;
+    right: 3%;
+    bottom: 3%;
+    .fa-camera.highlighted{
+       color: $red;
     }
   }
 }

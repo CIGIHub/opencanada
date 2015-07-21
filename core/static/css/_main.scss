@@ -255,97 +255,47 @@ footer{
 
 /**************   Homepage Feature  **************/
 
-.main-feature, .features{
-  position: relative;
-  color: white;
+.main-feature{
   font-family: $sans-serif;
 
-  .feature-image{
-    position: relative;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: 50% 0;
-    width: 100%;
-    height: 100%;
+  @include article-overlay;
+
+  .feature-text{
+    left: 25%;
+    max-width: 670px;
   }
 
-  #features & .feature-image{
-    padding-top: 66.65%;
-  }
-
-  .feature-image-overlay{
-    position: absolute;
-    z-index: 2;
-    display: block;
-    content: "";
-    top: 0; right: 0; bottom: 0; left: 0;
-    //background: hsla(0, 0%, 0%, 0.3);
-  }
-
-  .feature-text, .image-caption, .scroll{
+  .scroll{
     position: absolute;
     z-index:10;
   }
 
-  .feature-text{
-    top: 10%;
-    top: 10%;
-    left: 25%;
-    max-width: 670px;
-    margin-right: 10%;
-    h1{
-      font-size: 2.4em;
-      a{
-       text-decoration: none;
-      }
-      a:hover{
-        color: $red;
-      }
-    }
-    .feature-line{
-      font-size: 1.4em;
-    }
-    .contributors{
-      margin-top: 5%;
-      @include type(white);
-      a{color: white;}
-    }
-  }
   .scroll{
     font-size: 60px;
     bottom: 15%;
     left: 50%;
 
-    a{color: $red; }
+    a{
+      color: $red;
+      text-decoration: none;
+    }
+    a:hover{
+      -webkit-animation: bounce 2s;
+      -moz-animation:    bounce 2s;
+      -o-animation:     bounce 2s;
+      animation: bounce 2s;
+    }
   }
+
   @keyframes bounce {
 	0%, 20%, 60%, 100% {
-		-webkit-transform: translateY(0);
-		transform: translateY(0);
+      -webkit-transform: translateY(0);
+      transform: translateY(0);
 	}
 	40% {
-		-webkit-transform: translateY(0.2em);
-		transform: translateY(0.2em);
+      -webkit-transform: translateY(0.2em);
+      transform: translateY(0.2em);
 	}
-  }
-
-  .scroll a{
-    text-decoration: none;
-  }
-  .scroll a:hover{
-    -webkit-animation: bounce 2s;
-    -moz-animation:    bounce 2s;
-    -o-animation:     bounce 2s;
-    animation: bounce 2s;
-
-  }
-   .image-caption{
-      font-family: $sans-serif;
-      right: 2%;
-      bottom: 3%;
-     .fa-camera.highlighted{
-       color: $red;
-     }
   }
 
   @media(max-width: $screen-lg){
@@ -353,9 +303,14 @@ footer{
   }
 
   @media(max-width: $screen-sm){
-    .feature-text, .image-caption{font-size: 80%;}
-    .feature-text h1{
-      font-size: 24px;
+    .feature-text{
+      left: 10%;
+      .image-caption{
+        font-size: 80%;
+      }
+      h1{
+        font-size: 24px;
+      }
     }
     .scroll{
       font-size: 36px;
@@ -363,13 +318,46 @@ footer{
   }
 }
 
+
 /**************  Main  **************/
 
-.boxes{
+.features{
+  color: black;
   margin-bottom: 20px;
+
+  .overlay-feature{
+    @include article-overlay;
+    .feature-text{
+      left: 5%;
+    }
+  }
+
+  .image-feature{
+    h2{
+      font-size: 16px;
+    }
+    figure{
+      margin-bottom: 10px;
+    }
+  }
+
+  .image-feature, .simple-feature{
+    .feature-line{
+      margin-top: 10px;
+    }
+  }
 
   .row{
     @include row-divider;
+  }
+
+  @media(max-width: $screen-sm){
+    .row{
+      @include no-row-divider;
+    }
+    .feature-item{
+      @include row-divider;
+    }
   }
 
 }

@@ -23,3 +23,8 @@ def topic_url(context, topic):
 def column_class(row):
     number_of_items = len(row)
     return 12 / number_of_items
+
+
+@register.filter()
+def column_height(article):
+    return article.feature_style.number_of_rows * 280
