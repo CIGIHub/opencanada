@@ -170,7 +170,7 @@ class FeatureStyle(models.Model):
         return self.name
 
 
-register_snippet(FontStyle)
+register_snippet(FeatureStyle)
 
 
 class FeatureStyleFields(models.Model):

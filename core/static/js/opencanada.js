@@ -41,6 +41,7 @@ function initForWindow(){
         setFeatureHeight(windowHeight);
     }
 
+    setOverlayForWindow(windowWidth);
     toggleHeading(windowWidth);
     setBodyPadding();
 
@@ -71,17 +72,14 @@ function toggleBox(e){
                     search.removeClass('open');
                 }
                 menu.addClass('open');
-
             }
         }
-
         if(target == search ){
             if(!(search.hasClass('open'))){
                 if(menu.hasClass('open')){
                     menu.removeClass('open');
                 }
                search.addClass('open');
-
             }
             else{
                 search.removeClass('open');
@@ -93,7 +91,6 @@ function toggleBox(e){
         if((menu.hasClass('open')) && (!(selected.closest('nav').length))){
             menu.removeClass('open');
         }
-
         if((search.hasClass('open')) && (!(selected.closest("#search-box").length))){
             search.removeClass('open');
         }
@@ -106,7 +103,7 @@ function setFeatureHeight(windowHeight){
     var bannerHeight = $('header').height();
     var featureHeight = windowHeight - bannerHeight;
 
-    $('.jumbotron.feature').css("height", featureHeight + "px");
+    $('.jumbotron.main-feature').css("height", featureHeight + "px");
 }
 
 //set the body padding based on banner height
@@ -115,6 +112,26 @@ function setBodyPadding(){
     $('body').css("padding-top", bannerHeight + "px");
     $('#search-box').css("top", bannerHeight = "px");
 
+}
+
+function setOverlayForWindow(windowWidth){
+    if(windowWidth < fullScreen){
+        var overlayFeatures = $('#features').find('.rowheight-2');
+        overlayFeatures.each(function(index){
+            overlayHeight = $(this).css("height");
+            overlayHeight = parseInt(overlayHeight.slice(0, -2));
+            $(this).css("height", "280px");
+        });
+    }
+    if(windowWidth > fullScreen){
+        var overlayFeatures = $('#features').find('.rowheight-2');
+        overlayFeatures.each(function(index){
+            if($(this).css("height") == '280px'){
+                $(this).css("height", "560px");
+            }
+
+        });
+    }
 }
 
 //toggle Banner heading based on window width and page type∂

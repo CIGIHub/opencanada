@@ -1,37 +1,67 @@
 {% extends "base.html" %}
 
-{% load static core_tags wagtailcore_tags %}
+{% load static core_tags wagtailcore_tags article_tags wagtailimages_tags %}
 
 {% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
 
 {% block feature %}
-    {% include 'core/homepage-feature.html' %}
+    {% include 'core/main-feature.html' %}
 {% endblock %}
 
 
 {% block content %}
-    <div class="container boxes" id="features">
+    <div class="container features" id="features">
 
-{#        {% for article in self.articles %}#}
-{#            {% cycle '<div class="row single">' '' %}#}
-{#            <div class="col-sm-6">#}
-{#                <h2><a href="{{ article.url }}">{{ article.title }}</a></h2>#}
-{#                <div class="contributors">By:#}
-{#                    {% for author in article.authors %}#}
-{#                    <div class="contributor">#}
-{#                        {% if author.twitter_handle %}#}
-{#                            <span><a href="{{ author.twitter_handle }}">@</a></span>#}
-{#                        {% endif %}#}
-{#                        <a href="author.url">{{ author.first_name }} {{ author.last_name }}</a>#}
-{#                    </div>#}
-{#                {% endfor %}#}
-{#                </div>#}
-{##}
-{#                <div class="teaser">{{ article.excerpt|richtext }}</div>#}
-{##}
-{#            </div>#}
-{#             {% cycle '' '</div>' %}#}
-{#        {% endfor %}#}
+        {% for row in self.articles %}
+            <div class="row">
+            {%  for article in row %}
+                <div class="col-sm-{{ row|column_class }} feature-item">
+
+                    {% if article.feature_style.include_image and article.feature_style.overlay_text %}
+                        <div class="overlay-feature rowheight-{{ article.feature_style.number_of_rows }}" style="height: {{ article|column_height }}px">
+                            {% image article.main_image original as background_image %}
+                            <div class="feature-image" style="background-image: url(' {{ background_image.url }} ')">
+                                <div class="feature-image-overlay" style="background: rgba( {{ article.image_overlay_color.rgb }}, {{ article.opacity }} )"></div>
+                            </div>
+                            <div class="feature-text" style="color: {{ article.font_style.text_colour.hex_value }}">
+                                <h2><a style="color: {{ article.font_style.text_colour.hex_value }};" href="{{ article.url }}">{{ article.title }}</a></h2>
+
+                                {% if article.subtitle %}
+                                    <div class="feature-line">{{ article.subtitle|richtext }}</div>
+                                {% else %}
+                                    <div class="feature-line">{{ article.excerpt|richtext }}</div>
+                                {% endif %}
+                                <div class="contributors">By:
+                                    {% for author in article.authors %}
+                                    <div class="contributor">
+                                        <a style="color: {{ article.font_style.text_colour.hex_value }}" href="author.url">{{ author.first_name }} {{ author.last_name }}</a>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="image-caption"><i class="fa fa-camera"></i> {{article.main_image.credit }}</div>
+                        </div>
+
+                    {% elif article.feature_style.include_image and not article.feature_style.overlay_text %}
+                        <div class="image-feature">
+                            <figure>{%  image article.main_image width-710 %}</figure>
+                            <h2><a href="{{ article.url }}">{{ article.title }}</a></h2>
+                            {% include "core/includes/homepage_teaser.html" %}
+                        </div>
+
+                    {% else %}
+                        <div class="simple-feature">
+                            <h2><a href="{{ article.url }}">{{ article.title }}</a></h2>
+                            {% include "core/includes/homepage_teaser.html" %}
+                        </div>
+                    {% endif %}
+
+
+                </div>
+
+                {% endfor %}
+            </div>
+        {% endfor %}
     </div>
 
 {% endblock %}

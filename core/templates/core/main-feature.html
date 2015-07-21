@@ -1,26 +1,26 @@
 {% load static core_tags wagtailcore_tags wagtailimages_tags %}
 
-<div class="jumbotron feature" style="height: 400px;">
+<div class="jumbotron main-feature" style="height: 400px;">
 
     {% image self.typed_featured_item.main_image original as background_image %}
     <div class="feature-image" style="background-image: url(' {{ background_image.url }} ')">
         <div class="feature-image-overlay" style="background: rgba( {{ self.typed_featured_item.image_overlay_color.rgb }}, {{ self.typed_featured_item.opacity }} )"></div>
     </div>
 
-    <div class="feature-text">
+    <div class="feature-text" style="color: {{ self.typed_featured_item.font_style.text_colour.hex_value }}">
         <h1>
-        <a style="color: {{ self.typed_featured_item.font_style.text_colour.hex_value }}; font-size: {{ self.typed_featured_item.font_style.font_size }}em; line-height: {{ self.typed_featured_item.font_style.line_size }}%; "href="{{ self.typed_featured_item.url }}">{{ self.typed_featured_item.title }}</a></h1>
+        <a style="color: {{ self.typed_featured_item.font_style.text_colour.hex_value }}; font-size: {{ self.typed_featured_item.font_style.font_size }}em; line-height: {{ self.typed_featured_item.font_style.line_size }}%;" href="{{ self.typed_featured_item.url }}">{{ self.typed_featured_item.title }}</a></h1>
 
         {%  if self.typed_featured_item.subtitle %}
-            <div class="feature-line" style="color: {{ self.typed_featured_item.font_style.text_colour.hex_value }};">{{ self.typed_featured_item.subtitle|richtext }}</div>
+            <div class="feature-line">{{ self.typed_featured_item.subtitle|richtext }}</div>
         {%  elif self.typed_featured_item.excerpt %}
-            <div class="feature-line" style="color: {{ self.typed_featured_item.font_style.text_colour.hex_value }};">{{ self.typed_featured_item.excerpt|richtext }}</div>
+            <div class="feature-line">{{ self.typed_featured_item.excerpt|richtext }}</div>
         {% endif %}
 
         <div class="contributors">By:
             {% for author in self.typed_featured_item.authors %}
                 <div class="contributor">
-                    <a href="{{ author.url }}">{{ author.first_name }} {{ author.last_name }}</a>
+                    <a style="color: {{ self.typed_featured_item.font_style.text_colour.hex_value }}" href="{{ author.url }}">{{ author.first_name }} {{ author.last_name }}</a>
                 </div>
             {% endfor %}
         </div>

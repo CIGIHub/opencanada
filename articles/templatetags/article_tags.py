@@ -17,3 +17,14 @@ def topic_url(context, topic):
     base_url = page.relative_url(request.site)
     routed_url = page.reverse_subpage('topic', [topic.slug])
     return base_url + routed_url
+
+
+@register.filter()
+def column_class(row):
+    number_of_items = len(row)
+    return 12 / number_of_items
+
+
+@register.filter()
+def column_height(article):
+    return article.feature_style.number_of_rows * 280
