@@ -174,9 +174,19 @@ HomePage.content_panels = Page.content_panels + [
 class SearchSuggestion(models.Model):
     phrase = models.CharField(max_length=1024)
     active = models.BooleanField(default=True)
+    sort_order = models.IntegerField(default=0)
+
+    class Meta:
+        ordering = ['sort_order']
 
     def __str__(self):
         return self.phrase
+
+    panels = [
+        FieldPanel('phrase'),
+        FieldPanel('active'),
+        FieldPanel('sort_order'),
+    ]
 
 
 register_snippet(SearchSuggestion)

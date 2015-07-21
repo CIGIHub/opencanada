@@ -1,4 +1,4 @@
-{% load wagtailcore_tags static %}
+{% load wagtailcore_tags static core_tags %}
 
 <header role="banner">
     <div class="banner container">
@@ -43,5 +43,13 @@
                 </div>
             </div>
         </form>
+        <div class="search-suggestions">
+            <ul>
+                {% suggested_searches 3 as search_topics %}
+                {% for topic in search_topics %}
+                    <li>{{ topic }}</li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
 </div>
