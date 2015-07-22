@@ -430,11 +430,27 @@ footer{
 
 }
 
-main{
   .date{
     @include type(#000);
   }
-}
+
+  .title,
+  .block-Paragraph,
+  .block-Heading,
+  .block-Image,
+  .block-Sharable,
+  .block-Embed,
+  .topics,
+  .series-articles,
+  .series-teaser{
+    margin-left: 10%;
+    margin-right: 10%;
+
+    @media(max-width: $screen-xs){
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
 
 #article-page article,
 #in-depth-page article{
@@ -466,22 +482,6 @@ article{
     }
   }
 
-  .title,
-  .block-Paragraph,
-  .block-Heading,
-  .block-Image,
-  .block-Sharable,
-  .block-Embed,
-  .topics,
-  .series-articles{
-    margin-left: 10%;
-    margin-right: 10%;
-
-    @media(max-width: $screen-xs){
-      margin-left: 0;
-      margin-right: 0;
-    }
-  }
   .title, .topics, .story{
     margin-top: 20px;
     margin-bottom: 20px;
@@ -525,7 +525,7 @@ article{
 
   ul.share-links{
     position: absolute;
-    margin-top: 20px;
+    margin-top: 3px;
     padding: 20px;
     span{
       color: $red;
@@ -624,6 +624,11 @@ article{
       display: inline-block;
     }
   }
+  .in-the-series{
+    border-top: $border-grey;
+    border-bottom: none;
+  }
+
 }
 
 .in-depth-page{
@@ -649,13 +654,13 @@ article{
     margin: 0 0 5px 0;
     font-size: 18px;
   }
-  .row{
+  .row, .series-teaser{
     padding-bottom: 20px;
   }
 }
 
 .in-the-series{
-  border-top: $border-grey;
+  border-bottom: $border-grey;
 }
 
 .related-articles{

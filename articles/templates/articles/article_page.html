@@ -54,8 +54,8 @@
             {# TODO: This was added to handle the off chance that an article is in more than one indepth. Change theming as appropriate.  #}
             {% for indepth, articles in self.series_articles %}
                 <div class="series-teaser">
-                    <a href="{{ indepth.url }}">{{ indepth.title }}</a>
-                    {{ indepth.body }}
+                    <h3><a href="{{ indepth.url }}">{{ indepth.title }}</a></h3>
+                    {{ indepth.subtitle|richtext }}
                 </div>
                 {% block in_the_series %}
                     {% include 'articles/includes/in_the_series.html' %}
