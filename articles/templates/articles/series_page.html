@@ -2,7 +2,7 @@
 {% load static core_tags wagtailcore_tags wagtailimages_tags %}
 
 {% block content %}
-    <div id="in-depth-page" class="container">
+    <div id="series-page" class="container">
 
         <article>
             <ul class="share-links">
@@ -12,7 +12,7 @@
                 <li><a HREF="mailto:?subject={{ self }}&body={{ self.url }}"><i class="fa fa-envelope"></i></a></li>
             </ul>
             <div class="title">
-                <div class="type"><a href="/indepth">In Depth</a></div>
+                <div class="type"><a href="{% pageurl self.get_parent %}">{{ self.get_parent.title }}</a></div>
                 <h1>{{ self.title }}</h1>
                 <h2>{{ self.subtitle|richtext }}</h2>
                 <div class="contributors series">
