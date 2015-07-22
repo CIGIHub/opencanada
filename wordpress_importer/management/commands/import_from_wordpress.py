@@ -82,8 +82,8 @@ class Command(BaseCommand):
             'charset': 'utf8'
         }
         self.open_connection(db_config)
-        # self.load_contributors()
-        # self.load_posts()
+        self.load_contributors()
+        self.load_posts()
         self.load_series_posts()
         self.close_connection()
 
