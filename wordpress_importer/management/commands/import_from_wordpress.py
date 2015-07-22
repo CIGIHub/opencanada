@@ -678,7 +678,6 @@ class Command(BaseCommand):
                 TagImport.objects.get_or_create(topic=topic, original_slug=original_slug)
                 ArticleTopicLink.objects.get_or_create(topic=topic, article=post)
 
-
     def load_series_posts(self):
         for post_type in ["In Depth", ]:
             results = self.get_post_data(post_type)
