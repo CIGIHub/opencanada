@@ -82,8 +82,8 @@
 
   .share-links.vcenter {
     margin-top: 0.7%;
-    @media(max-width: $screen-xs){
-      margin-top: 1.5%;
+    @media(max-width: $screen-sm){
+      margin-top: 0;
     }
   }
 

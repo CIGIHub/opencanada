@@ -110,11 +110,11 @@ header{
   }
 
   @media(max-width: $screen-sm){
-    .share-links{
-      .twitter, .facebook{
-        display: none;
-      }
-
+    .logo img{
+      max-height: 30px;
+    }
+    .share-links .fa{
+      font-size: 80%;
     }
 
   }
@@ -410,6 +410,35 @@ footer{
 
   }
   .share-links{
+    margin-top: 0;
+    right: 0;
+    top:0;
+    li{
+      display:inline;
+      span, a{
+        color: white;
+      }
+    }
+    .email{
+      display:none;
+    }
+    .fa{
+      font-size: 16px;
+      margin-right: 5px;
+    }
+  }
+}
+
+.small-article{
+   header{
+    .share-links{
+      display: none;}
+   }
+
+  .share-links{
+
+    position: fixed;
+    z-index: 1100;
     margin-top: 0;
     right: 0;
     top:0;
