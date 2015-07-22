@@ -177,6 +177,9 @@ function toggleHeading(windowWidth){
     }
 
     if(windowWidth > fullScreen){
+        if($('#article-page').length && $('body').hasClass('small-article')){
+            $('body').removeClass('small-article');
+        }
         if($(document).scrollTop() > offset && $('#article-page').length){
             $('body').addClass('article-scroll');
         }
@@ -188,8 +191,11 @@ function toggleHeading(windowWidth){
         $(window).on("scroll touchmove", fullScroll );
     }
     else{
-        if($('#article-page').length  && $('body').hasClass('article-scroll')){
+        if($('#article-page').length && $('body').hasClass('article-scroll')){
             $('body').removeClass('article-scroll');
+        }
+        if($('#article-page').length){
+            $('body').addClass('small-article');
         }
         collapsedHeader();
         $(window).off("scroll touchmove", fullScroll );
