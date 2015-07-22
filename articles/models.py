@@ -92,6 +92,8 @@ class Topic(UniquelySlugable):
     def __str__(self):
         return self.name
 
+    class Meta:
+        ordering = ["name", ]
 
 register_snippet(Topic)
 
