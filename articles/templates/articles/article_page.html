@@ -38,7 +38,7 @@
 
             {% if self.topics %}
                 <div class="topics related">
-                    <div class="tag-icon"><i class="fa fa-tags"></i> Topics:</div>
+                    <div class="topic-label"><i class="fa fa-tags"></i> Topics:</div>
                     <ul class="list-inline">
                         {% for topic in self.topics %}
                             <li><a href="{% topic_url topic %}">{{ topic }}</a></li>

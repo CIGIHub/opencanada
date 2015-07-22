@@ -44,7 +44,6 @@ img{
 }
 
 
-
 /**************   HEADER  **************/
 
 header{
@@ -363,6 +362,12 @@ footer{
 }
 
 .contributors{
+  .contributor-label{
+    float: left;
+  }
+  &.series .contributor-list{
+    margin-left: 135px;
+  }
   @include type($text-color);
   a{
     color: $text_color;
@@ -431,9 +436,11 @@ main{
   }
 }
 
-#article-page article{
-  margin-top: 40px;
-  margin-bottom: 40px;
+#article-page article,
+#in-depth-page article{
+  margin-top: 20px;
+  @include row-divider;
+
 }
 
 article, .related-articles{
@@ -444,6 +451,7 @@ article, .related-articles{
     color: $red;
   }
 }
+
 article{
   &.row{
     @include row-divider;
@@ -464,7 +472,8 @@ article{
   .block-Image,
   .block-Sharable,
   .block-Embed,
-  .topics{
+  .topics,
+  .series-articles{
     margin-left: 10%;
     margin-right: 10%;
 
@@ -493,11 +502,15 @@ article{
   }
 
   .topics{
-    .tag-icon{
-      display:inline-block;
+    .topic-label{
+      float: left;
     }
     @include type($text-color);
     @include inline-list-divided($red);
+    ul.list-inline{
+      margin-left: 80px;
+      display: block;
+    }
   }
 
   .type{
@@ -628,9 +641,9 @@ article{
   margin: 20px 0;
 
   h2{
-    font-family: $sans-serif;
     text-transform: uppercase;
     font-size: 14px;
+    margin: 20px 0;
   }
   h3{
     margin: 0 0 5px 0;
@@ -642,9 +655,7 @@ article{
 }
 
 .in-the-series{
-  .intro, .row, .series-teaser{
-  }
-  border-bottom: $border-grey;
+  border-top: $border-grey;
 }
 
 .related-articles{
@@ -652,6 +663,8 @@ article{
     margin-top: 10px;
   }
 }
+
+/**************  People/Contributor pages  **************/
 
 .contributor-profile{
   margin-bottom: 40px;
