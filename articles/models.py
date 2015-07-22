@@ -452,7 +452,7 @@ InDepthPage.content_panels = Page.content_panels + [
     FieldPanel('subtitle'),
     StreamFieldPanel('body'),
     ImageChooserPanel('main_image'),
-    InlinePanel('related_article_links', label="Articles")
+    InlinePanel('related_article_links', label="Articles"),
 ]
 
 InDepthPage.promote_panels = Page.promote_panels + [

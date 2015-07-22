@@ -1,17 +1,19 @@
 {% load static core_tags wagtailcore_tags wagtailimages_tags %}
 
 {% block in_the_series %}
-    {% for article in articles %}
-        <div class="row">
-            <div class="col-xs-3">
-                <figure>
-                {% if article.override_image %}{% image article.override_image width-175 %}{% else %}{% image article.main_image width-175 %}{% endif %}
-            </figure>
+    <div class="series-articles">
+        {% for article in articles %}
+            <div class="row">
+                <div class="col-xs-2">
+                    <figure>
+                        {% if article.override_image %}{% image article.override_image fill-120x120 %}{% else %}{% image article.main_image fill-120x120 %}{% endif %}
+                    </figure>
+                </div>
+                <div class="col-xs-10">
+                    <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
+                    {% if article.override_text %}{{ article.override_text|richtext }}{% else %}{{ article.excerpt|richtext }}{% endif %}
+                </div>
             </div>
-            <div class="col-xs-9">
-                <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
-                {% if article.override_text %}{{ article.override_text|richtext }}{% else %}{{ article.excerpt|richtext }}{% endif %}
-            </div>
-        </div>
-    {% endfor %}
+        {% endfor %}
+    </div>
 {% endblock %}
