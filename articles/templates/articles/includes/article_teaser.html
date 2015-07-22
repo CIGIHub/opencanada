@@ -1,12 +1,16 @@
 {% load static core_tags wagtailcore_tags wagtailimages_tags %}
 
-<article class="row">
-    <div class="col-xs-2">
-        <figure>
-            {% image article.main_image fill-120x120 %}
-        </figure>
-    </div>
-    <div class="col-xs-10">
+<article class="row teaser">
+    {%  if article.main_image %}
+        <div class="col-xs-2">
+            <figure>
+                {% image article.main_image fill-120x120 %}
+            </figure>
+        </div>
+        <div class="col-xs-10">
+            {% else %}
+        <div class="col-xs-12">
+        {% endif %}
             <h2><a href="{{ article.url }}">{{ article.title }}</a></h2>
             <div class="contributors">By: {% for author in article.authors %}
                 <div class="contributor"><a href="#">{{ author.first_name }} {{ author.last_name }}</a></div>
@@ -14,7 +18,7 @@
             </div>
             <div class="date"> / {{ article.first_published_at|date:"F j, Y" }}</div>
 
-            <div class="teaser">
+            <div class="feature-line">
                 {{ article.excerpt|richtext }}
             </div>
         </div>
