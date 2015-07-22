@@ -1,6 +1,6 @@
 {% load static core_tags wagtailcore_tags wagtailimages_tags %}
 
-<article class="row">
+<article class="row teaser">
     <div class="col-xs-2">
         <figure>
             {% image article.main_image fill-120x120 %}
@@ -14,7 +14,7 @@
             </div>
             <div class="date"> / {{ article.first_published_at|date:"F j, Y" }}</div>
 
-            <div class="teaser">
+            <div class="feature-line">
                 {{ article.excerpt|richtext }}
             </div>
         </div>

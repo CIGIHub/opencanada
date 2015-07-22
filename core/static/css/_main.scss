@@ -431,6 +431,11 @@ main{
   }
 }
 
+#article-page article{
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
 article, .related-articles{
   .contributors, .date{
     display:inline-block;
@@ -443,8 +448,15 @@ article{
   &.row{
     @include row-divider;
   }
-  margin-top: 40px;
-  margin-bottom: 40px;
+
+  &.row.teaser{
+    h2{
+      margin-top: 0px;
+    }
+    .feature-line{
+      margin-top: 10px;
+    }
+  }
 
   .title,
   .block-Paragraph,
