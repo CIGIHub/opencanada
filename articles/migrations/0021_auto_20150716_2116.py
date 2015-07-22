@@ -34,7 +34,7 @@ class Migration(migrations.Migration):
             field=models.PositiveIntegerField(default=30, help_text='Set the value from 0 (Solid overlay, original image not visible) to 100 (No overlay, original image completely visible)', validators=[django.core.validators.MinValueValidator(0), django.core.validators.MaxValueValidator(100)]),
         ),
         migrations.AlterField(
-            model_name='indepthpage',
+            model_name='seriespage',
             name='image_overlay_opacity',
             field=models.PositiveIntegerField(default=30, help_text='Set the value from 0 (Solid overlay, original image not visible) to 100 (No overlay, original image completely visible)', validators=[django.core.validators.MinValueValidator(0), django.core.validators.MaxValueValidator(100)]),
         ),

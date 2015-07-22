@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AddField(
-            model_name='indepthpage',
+            model_name='seriespage',
             name='subtitle',
             field=wagtail.wagtailcore.fields.RichTextField(default='', blank=True),
         ),

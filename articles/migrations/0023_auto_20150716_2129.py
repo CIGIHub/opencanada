@@ -23,7 +23,7 @@ class Migration(migrations.Migration):
             field=models.ForeignKey(on_delete=django.db.models.deletion.SET_NULL, default=1, to='articles.FeatureStyle', null=True),
         ),
         migrations.AlterField(
-            model_name='indepthpage',
+            model_name='seriespage',
             name='feature_style',
             field=models.ForeignKey(on_delete=django.db.models.deletion.SET_NULL, default=1, to='articles.FeatureStyle', null=True),
         ),

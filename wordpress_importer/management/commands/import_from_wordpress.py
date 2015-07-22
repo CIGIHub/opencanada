@@ -16,7 +16,7 @@ from django.utils.text import slugify
 from wagtail.wagtailcore.models import Page
 
 from articles.models import (ArticleAuthorLink, ArticleCategory, ArticlePage,
-                             ArticleTopicLink, InDepthArticleLink, InDepthPage,
+                             ArticleTopicLink, SeriesArticleLink, SeriesPage,
                              Topic)
 from images.models import AttributedImage
 from people.models import ContributorListPage, ContributorPage
@@ -82,9 +82,9 @@ class Command(BaseCommand):
             'charset': 'utf8'
         }
         self.open_connection(db_config)
-        self.load_contributors()
-        self.load_posts()
-        self.load_indepth_posts()
+        # self.load_contributors()
+        # self.load_posts()
+        self.load_series_posts()
         self.close_connection()
 
     def open_connection(self, database_configuration):
@@ -678,9 +678,8 @@ class Command(BaseCommand):
                 TagImport.objects.get_or_create(topic=topic, original_slug=original_slug)
                 ArticleTopicLink.objects.get_or_create(topic=topic, article=post)
 
-    def load_indepth_posts(self):
+    def load_series_posts(self):
         for post_type in ["In Depth", ]:
-
             results = self.get_post_data(post_type)
 
             series_list_page = Page.objects.get(slug="indepth")
@@ -690,11 +689,11 @@ class Command(BaseCommand):
 
                 cleaned_post_name = unquote(post_name).encode('ascii', 'ignore')
 
-                pages = InDepthPage.objects.filter(slug=cleaned_post_name)
+                pages = SeriesPage.objects.filter(slug=cleaned_post_name)
                 if pages.count() > 0:
                     page = pages.first()
                 else:
-                    page = InDepthPage(owner=None)
+                    page = SeriesPage(owner=None)
                     series_list_page.add_child(instance=page)
 
                 if not page.main_image:
@@ -747,7 +746,7 @@ class Command(BaseCommand):
                 potential_article_slug = path_parts[-1]
                 try:
                     article = ArticlePage.objects.get(slug=potential_article_slug)
-                    InDepthArticleLink.objects.get_or_create(article=article, in_depth=series)
+                    SeriesArticleLink.objects.get_or_create(article=article, series=series)
                 except ArticlePage.DoesNotExist:
                     pass  # skip it as it doesn't seem to exist.
 

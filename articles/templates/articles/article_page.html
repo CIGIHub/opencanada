@@ -51,11 +51,10 @@
         {% if self.series_articles %}
         <section class="in-the-series">
             <h2>Also in the series</h2>
-            {# TODO: This was added to handle the off chance that an article is in more than one indepth. Change theming as appropriate.  #}
-            {% for indepth, articles in self.series_articles %}
+            {% for series, articles in self.series_articles %}
                 <div class="series-teaser">
-                    <h3><a href="{{ indepth.url }}">{{ indepth.title }}</a></h3>
-                    {{ indepth.subtitle|richtext }}
+                    <h3><a href="{{ series.url }}">{{ series.title }}</a></h3>
+                    {{ series.subtitle|richtext }}
                 </div>
                 {% block in_the_series %}
                     {% include 'articles/includes/in_the_series.html' %}

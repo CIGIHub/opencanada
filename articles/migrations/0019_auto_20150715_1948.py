@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
             field=models.BooleanField(default=False),
         ),
         migrations.AddField(
-            model_name='indepthpage',
+            model_name='seriespage',
             name='sticky',
             field=models.BooleanField(default=False),
         ),

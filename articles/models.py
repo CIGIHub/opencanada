@@ -245,11 +245,11 @@ class ArticlePage(Page, FeatureStyleFields, Sticky):
     @property
     def series_articles(self):
         related_series_data = []
-        for link in self.in_depth_links.all():
-            indepth_page = link.in_depth
-            indepth_articles = indepth_page.articles
-            indepth_articles.remove(self)
-            related_series_data.append((indepth_page, indepth_articles))
+        for link in self.series_links.all():
+            series_page = link.series
+            series_articles = series_page.articles
+            series_articles.remove(self)
+            related_series_data.append((series_page, series_articles))
         return related_series_data
 
     @property
@@ -342,13 +342,13 @@ class ArticleAuthorLink(Orderable, models.Model):
 
 
 @python_2_unicode_compatible
-class InDepthListPage(Page):
-    subpage_types = ['InDepthPage']
+class SeriesListPage(Page):
+    subpage_types = ['SeriesPage']
 
     @property
     def subpages(self):
         # Get list of live event pages that are descendants of this page
-        subpages = InDepthPage.objects.live().descendant_of(self).order_by('-first_published_at')
+        subpages = SeriesPage.objects.live().descendant_of(self).order_by('-first_published_at')
 
         return subpages
 
@@ -356,7 +356,7 @@ class InDepthListPage(Page):
         return self.title
 
 
-class InDepthArticleLink(Orderable, models.Model):
+class SeriesArticleLink(Orderable, models.Model):
     override_image = models.ForeignKey(
         'images.AttributedImage',
         null=True,
@@ -379,10 +379,10 @@ class InDepthArticleLink(Orderable, models.Model):
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
-        related_name='in_depth_links'
+        related_name='series_links'
     )
-    in_depth = ParentalKey(
-        "InDepthPage",
+    series = ParentalKey(
+        "SeriesPage",
         related_name='related_article_links'
     )
 
@@ -394,7 +394,7 @@ class InDepthArticleLink(Orderable, models.Model):
     ]
 
 
-class InDepthPage(Page, FeatureStyleFields, Sticky):
+class SeriesPage(Page, FeatureStyleFields, Sticky):
     subtitle = RichTextField(blank=True, default="")
     body = article_fields.BodyField(blank=True, default="")
     main_image = models.ForeignKey(
@@ -448,14 +448,14 @@ class InDepthPage(Page, FeatureStyleFields, Sticky):
         # TODO: pick actual related articles based on primary topic, secondary topics, authors
         return articles
 
-InDepthPage.content_panels = Page.content_panels + [
+SeriesPage.content_panels = Page.content_panels + [
     FieldPanel('subtitle'),
     StreamFieldPanel('body'),
     ImageChooserPanel('main_image'),
     InlinePanel('related_article_links', label="Articles"),
 ]
 
-InDepthPage.promote_panels = Page.promote_panels + [
+SeriesPage.promote_panels = Page.promote_panels + [
     MultiFieldPanel(
         [
             FieldPanel('sticky'),

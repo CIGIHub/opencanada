@@ -1,0 +1,24 @@
+{% load static core_tags wagtailcore_tags wagtailimages_tags %}
+
+<article class="row">
+    <div class="col-xs-12">
+        <h2><a href="{{ series.url }}">{{ series.title }}</a></h2>
+        <div class="contributors">By:
+        {% for article in series.articles %}
+            {% for author in article.authors %}
+            <div class="contributor">
+                <a href="{{ author.url  }}">
+                    {{ author.first_name }}
+                    {{ author.last_name }}
+                </a>
+            </div>
+            {% endfor %}
+        {% endfor %}
+        </div>
+        <div class="date"> / {{ series.first_published_at|date:"F j, Y" }}</div>
+        <div class="teaser">
+            {{ series.body }}
+        </div>
+
+    </div>
+</article>

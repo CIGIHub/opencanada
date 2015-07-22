@@ -19,7 +19,7 @@ from people import models as people_models
 class HomePage(Page):
     subpage_types = [
         article_models.ArticleListPage,
-        article_models.InDepthListPage,
+        article_models.SeriesListPage,
         article_models.TopicListPage,
         people_models.ContributorListPage,
         basic_site_models.BasicStreamPage,
@@ -81,15 +81,15 @@ class HomePage(Page):
     def articles(self):
         article_content_type = ContentType.objects.get_for_model(
             article_models.ArticlePage)
-        indepth_content_type = ContentType.objects.get_for_model(
-            article_models.InDepthPage)
+        series_content_type = ContentType.objects.get_for_model(
+            article_models.SeriesPage)
 
         articles = Page.objects.live().filter(
-            models.Q(content_type=article_content_type) | models.Q(content_type=indepth_content_type)
+            models.Q(content_type=article_content_type) | models.Q(content_type=series_content_type)
         ).annotate(
             sticky=models.Case(
                 models.When(
-                    models.Q(indepthpage__sticky=True) | (models.Q(articlepage__sticky=True)),
+                    models.Q(seriespage__sticky=True) | (models.Q(articlepage__sticky=True)),
                     then=models.Value(1)),
                 default=models.Value(0),
                 output_field=models.IntegerField())).order_by("-sticky", "-first_published_at")

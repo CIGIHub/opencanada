@@ -19,12 +19,12 @@ class Migration(migrations.Migration):
             field=models.ForeignKey(related_name='+', on_delete=django.db.models.deletion.SET_NULL, blank=True, to='images.AttributedImage', null=True),
         ),
         migrations.AlterField(
-            model_name='indeptharticlelink',
+            model_name='seriesarticlelink',
             name='override_image',
             field=models.ForeignKey(related_name='+', on_delete=django.db.models.deletion.SET_NULL, blank=True, to='images.AttributedImage', help_text='This field is optional. If not provided, the image will be pulled from the article page automatically. This field allows you to override the automatic image.', null=True),
         ),
         migrations.AlterField(
-            model_name='indepthpage',
+            model_name='seriespage',
             name='image',
             field=models.ForeignKey(related_name='+', on_delete=django.db.models.deletion.SET_NULL, blank=True, to='images.AttributedImage', null=True),
         ),

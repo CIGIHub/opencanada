@@ -129,10 +129,10 @@
       "override_image": null,
       "article": 107,
       "sort_order": 1,
-      "in_depth": 110,
+      "series": 110,
       "override_text": ""
     },
-    "model": "articles.indeptharticlelink",
+    "model": "articles.seriesarticlelink",
     "pk": 1
   },
   {
@@ -155,10 +155,10 @@
       "override_image": 1,
       "article": 108,
       "sort_order": 0,
-      "in_depth": 110,
+      "series": 110,
       "override_text": "<p>This is overridden text.</p>"
     },
-    "model": "articles.indeptharticlelink",
+    "model": "articles.seriesarticlelink",
     "pk": 2
   },
   {
@@ -309,7 +309,7 @@
       "search_description": "",
       "content_type": [
         "articles",
-        "indepthpage"
+        "seriespage"
       ],
       "has_unpublished_changes": false,
       "path": "0001000100020001",
@@ -336,7 +336,7 @@
       "search_description": "",
       "content_type": [
         "articles",
-        "indepthpage"
+        "seriespage"
       ],
       "has_unpublished_changes": false,
       "path": "0001000100020002",
@@ -363,7 +363,7 @@
       "search_description": "",
       "content_type": [
         "articles",
-        "indepthpage"
+        "seriespage"
       ],
       "has_unpublished_changes": false,
       "path": "0001000100020003",
@@ -577,7 +577,7 @@
       "primary_topic": 2,
       "feature_style": 1
     },
-    "model": "articles.indepthpage",
+    "model": "articles.seriespage",
     "pk": 110
   },
    {
@@ -587,7 +587,7 @@
       "primary_topic": null,
       "feature_style": 1
     },
-    "model": "articles.indepthpage",
+    "model": "articles.seriespage",
     "pk": 116
   },
   {
@@ -597,7 +597,7 @@
       "primary_topic": null,
       "feature_style": 1
     },
-    "model": "articles.indepthpage",
+    "model": "articles.seriespage",
     "pk": 117
   }
 ]

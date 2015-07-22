@@ -6,7 +6,7 @@ from django.db import migrations, models
 
 def create_pages(apps, schema_editor):
     Page = apps.get_model("wagtailcore", "Page")
-    InDepthListPage = apps.get_model("articles", "InDepthListPage")
+    SeriesListPage = apps.get_model("articles", "SeriesListPage")
     ArticleListPage = apps.get_model("articles", "ArticleListPage")
     home_page = Page.objects.get(slug="home")
     ContentType = apps.get_model("contenttypes", "ContentType")
@@ -27,16 +27,16 @@ def create_pages(apps, schema_editor):
     )
     home_page.numchild += 1
 
-    indepth_list_page_content_type, created = ContentType.objects.get_or_create(
-        model='indepthlistpage',
+    series_list_page_content_type, created = ContentType.objects.get_or_create(
+        model='serieslistpage',
         app_label='articles'
     )
 
     # Create indepth page
-    indepth_page = InDepthListPage.objects.create(
-        title="InDepth",
+    SeriesListPage.objects.create(
+        title="In Depth",
         slug='indepth',
-        content_type_id=indepth_list_page_content_type.pk,
+        content_type_id=series_list_page_content_type.pk,
         path='000100010002',
         depth=3,
         numchild=0,
