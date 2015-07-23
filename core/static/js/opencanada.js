@@ -71,8 +71,11 @@ function toggleBox(e){
                 if(search.hasClass('open')){
                     search.removeClass('open');
                 }
-                menu.addClass('open');
-                menu.show();
+
+                menu.show( function() {
+                    menu.addClass('open');
+                });
+
             }
         }
         if(target == search ){
