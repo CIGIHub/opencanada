@@ -72,6 +72,7 @@ function toggleBox(e){
                     search.removeClass('open');
                 }
                 menu.addClass('open');
+                menu.show();
             }
         }
         if(target == search ){
@@ -161,12 +162,14 @@ function toggleHeading(windowWidth){
         $('header').toggleClass('collapsed scrolled', $(document).scrollTop() > offset);
 
         if($('header').hasClass('collapsed')){
+            $('#main-menu').hide();
             collapsedHeader();
             if($('#article-page').length){
                 $('body').addClass('article-scroll');
             }
         }
         else{
+            $('#main-menu').show();
             fullHeader();
         }
     }
