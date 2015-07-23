@@ -39,6 +39,7 @@ class Colour(models.Model):
     def save(self, *args, **kwargs):
         if not self.hex_value.startswith("#"):
             self.hex_value = "#{}".format(self.hex_value)
+        super(Colour, self).save(*args, **kwargs)
 
 
 register_snippet(Colour)
