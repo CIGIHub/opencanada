@@ -84,7 +84,7 @@ INSTALLED_APPS = (
     'articles',
     'people',
     'images',
-
+    'newsletter',
     'wordpress_importer',
 
 )

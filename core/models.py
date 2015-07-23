@@ -12,6 +12,7 @@ from wagtail.wagtailcore.signals import page_published
 from wagtail.wagtailsnippets.models import register_snippet
 
 from articles import models as article_models
+from newsletter import models as newsletter_models
 from people import models as people_models
 
 
@@ -23,6 +24,7 @@ class HomePage(Page):
         article_models.TopicListPage,
         people_models.ContributorListPage,
         basic_site_models.BasicStreamPage,
+        newsletter_models.NewsletterPage,
     ]
 
     featured_item = models.ForeignKey(
