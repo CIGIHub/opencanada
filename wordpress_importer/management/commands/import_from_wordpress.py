@@ -411,7 +411,7 @@ class Command(BaseCommand):
         processed_html = []
         html = self.process_for_line_breaks(html)
         html = self.process_html_for_images(html, use_image_names=True)
-        parser = BeautifulSoup(html)
+        parser = BeautifulSoup(html, "html5lib")
 
         # processed_html.extend(self._process_element(parser.body))
         all_children = list(parser.body.children)
@@ -564,7 +564,7 @@ class Command(BaseCommand):
                     }
 
     def process_html_for_images(self, html, use_image_names=False):
-        parser = BeautifulSoup(html)
+        parser = BeautifulSoup(html, "html5lib")
         image_tags = parser.find_all('img')
 
         for image_tag in image_tags:
@@ -736,7 +736,7 @@ class Command(BaseCommand):
                 revision.publish()
 
     def process_html_for_series_links(self, html, series):
-        parser = BeautifulSoup(html)
+        parser = BeautifulSoup(html, "html5lib")
         link_tags = parser.find_all('a')
 
         for link_tag in link_tags:
