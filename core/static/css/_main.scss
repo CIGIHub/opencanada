@@ -129,18 +129,18 @@ header{
     overflow-y: hidden;
 	height: 0;
     background: $background-grey;
-
     z-index: 200;
-    opacity: 0.9;
-
 	transition: 0.8s;
 
     &.open{
       overflow-y: visible;
-      padding: 20px;
-      height: 80px;
+      padding-top: 40px;
+      min-height: 110px;
       border-bottom: $border-red;
 
+  }
+  .container{
+    padding: 0px 200px;
   }
 
   button{
@@ -160,11 +160,15 @@ header{
     padding: 5px;
   }
   .input-group{
-    width: 60%;
+    width: 100%;
     margin: 0 auto;
     @media(max-width: $screen-sm){
       width: 100%;
     }
+  }
+  .search-suggestions{
+    padding-top: 10px;
+    @include inline-list-divided($red);
   }
 
 }

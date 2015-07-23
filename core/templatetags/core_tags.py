@@ -10,3 +10,8 @@ def suggested_searches(number_of_suggestions):
     search_suggestions = SearchSuggestion.objects.filter(active=True)[:number_of_suggestions]
 
     return search_suggestions
+
+
+@register.filter
+def search_string(topic):
+    return topic.phrase.replace(" ", "+")
