@@ -11,7 +11,7 @@ import articles.models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('articles', '0014_auto_20150713_1556'),
+        ('articles', '0012_auto_20150707_2303'),
     ]
 
     operations = [

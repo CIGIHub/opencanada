@@ -32,11 +32,6 @@ class Migration(migrations.Migration):
         ),
         migrations.AddField(
             model_name='headline',
-            name='feature_style',
-            field=models.CharField(default='simple', max_length=20, choices=[('simple', 'Single Column - Text Only'), ('simpleimage', 'Single Column - Text and Image'), ('coverimage', 'Full Width - Text overlayed on image'), ('tallcoverimage', 'Full Width - Double Height - Text overlayed on image')]),
-        ),
-        migrations.AddField(
-            model_name='headline',
             name='image_overlay_opacity',
             field=models.PositiveIntegerField(default=50, help_text='Set the value from 0 (Solid overlay, original image not visible) to 100 (No overlay, original image completely visible)', validators=[django.core.validators.MinValueValidator(0), django.core.validators.MaxValueValidator(100)]),
         ),

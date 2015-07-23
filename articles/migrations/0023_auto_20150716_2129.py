@@ -12,12 +12,12 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AlterField(
-            model_name='articlepage',
+        migrations.AddField(
+            model_name='article_page',
             name='feature_style',
             field=models.ForeignKey(on_delete=django.db.models.deletion.SET_NULL, default=1, to='articles.FeatureStyle', null=True),
         ),
-        migrations.AlterField(
+        migrations.AddField(
             model_name='headline',
             name='feature_style',
             field=models.ForeignKey(on_delete=django.db.models.deletion.SET_NULL, default=1, to='articles.FeatureStyle', null=True),
