@@ -105,7 +105,7 @@ class SeriesPageTestCase(TestCase):
         self.assertEqual(series.topics, [])
 
     def test_related_articles_gets_matching_primary_topics(self):
-        indepth = InDepthPage.objects.all().first()
+        indepth = SeriesPage.objects.all().first()
         related_articles = indepth.related_articles(number=2)
 
         self.assertEqual(related_articles[0].primary_topic, indepth.primary_topic)
