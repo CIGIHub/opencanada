@@ -71,7 +71,11 @@ function toggleBox(e){
                 if(search.hasClass('open')){
                     search.removeClass('open');
                 }
-                menu.addClass('open');
+
+                menu.show( function() {
+                    menu.addClass('open');
+                });
+
             }
         }
         if(target == search ){
@@ -161,12 +165,14 @@ function toggleHeading(windowWidth){
         $('header').toggleClass('collapsed scrolled', $(document).scrollTop() > offset);
 
         if($('header').hasClass('collapsed')){
+            $('#main-menu').hide();
             collapsedHeader();
             if($('#article-page').length){
                 $('body').addClass('article-scroll');
             }
         }
         else{
+            $('#main-menu').show();
             fullHeader();
         }
     }
