@@ -15,11 +15,6 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AddField(
             model_name='seriespage',
-            name='feature_style',
-            field=models.CharField(default='simple', max_length=20, choices=[('simple', 'Single Column - Text Only'), ('simpleimage', 'Single Column - Text and Image'), ('coverimage', 'Full Width - Text overlayed on image'), ('tallcoverimage', 'Full Width - Double Height - Text overlayed on image')]),
-        ),
-        migrations.AddField(
-            model_name='seriespage',
             name='font_style',
             field=models.ForeignKey(related_name='+', on_delete=django.db.models.deletion.SET_NULL, blank=True, to='articles.FontStyle', null=True),
         ),
