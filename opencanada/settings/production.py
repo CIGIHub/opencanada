@@ -44,7 +44,7 @@ DATABASES = {
 }
 
 RAVEN_CONFIG = {
-    'dsn': get_env_variable('RAVEN_DNS'),
+    'dsn': get_env_variable('RAVEN_DSN'),
 }
 
 INSTALLED_APPS = INSTALLED_APPS + (
