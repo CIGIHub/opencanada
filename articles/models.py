@@ -19,6 +19,8 @@ from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 
+from people.models import ContributorPage
+
 from . import fields as article_fields
 
 
@@ -268,19 +270,21 @@ class ArticlePage(Page, FeatureStyleFields, Sticky):
     def related_articles(self, number):
         included = [self.id]
         articles = ArticlePage.objects.live().filter(primary_topic=self.primary_topic).exclude(id=self.id).order_by('-first_published_at')[:number]
-        article_list = articles.all()
+        article_list = list(articles.all())
         included.extend([article.id for article in articles.all()])
 
         current_total = len(article_list)
         if current_total < number:
             # still don't have enough, so pick using secondary topics
-            additional_articles = ArticlePage.objects.live().filter(primary_topic__in=self.topic_links).exclude(id__in=included).order_by('-first_published_at')[:number - current_total]
+            topics = Topic.objects.filter(article_links__article=self)
+            additional_articles = ArticlePage.objects.live().filter(primary_topic__in=topics).exclude(id__in=included).order_by('-first_published_at')[:number - current_total]
             article_list.extend(additional_articles.all())
             current_total = len(article_list)
             included.extend([article.id for article in additional_articles.all()])
 
         if current_total < number:
-            additional_articles = ArticlePage.objects.live().filter(articleauthorlink__author__in=self.authors).exclude(id__in=included).order_by('-first_published_at')[:number - current_total]
+            authors = ContributorPage.objects.live().filter(article_links__article=self)
+            additional_articles = ArticlePage.objects.live().filter(author_links__author__in=authors).exclude(id__in=included).order_by('-first_published_at')[:number - current_total]
             article_list.extend(additional_articles.all())
             current_total = len(article_list)
             included.extend([article.id for article in additional_articles.all()])
