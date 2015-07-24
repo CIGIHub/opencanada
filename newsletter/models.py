@@ -32,7 +32,7 @@ class NewsletterPage(Page):
 
 NewsletterPage.content_panels = Page.content_panels + [
     FieldPanel('issue_date'),
-    InlinePanel('article_links', label="Articles"),
+    InlinePanel('article_links', label="Articles", help_text='The first article will be the newsletter feature story'),
     InlinePanel('external_articles', label="External Articles"),
     InlinePanel('events', label="Events"),
 ]
@@ -45,7 +45,8 @@ class NewsletterArticleLink(Orderable, models.Model):
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
-        related_name='newsletter_links'
+        related_name='newsletter_links',
+        help_text="Link to an internal article"
     )
     article_text = RichTextField(
         blank=True,
@@ -164,7 +165,7 @@ class ExternalSourceLink(models.Model):
 @python_2_unicode_compatible
 class Event(models.Model):
     title = models.CharField(max_length=255)
-    date = models.DateField("Issue Date")
+    date = models.DateTimeField("Event Date")
     location = models.CharField(max_length=255)
     event_link = models.URLField(max_length=255)
     organization = models.ForeignKey(
@@ -190,7 +191,7 @@ class Event(models.Model):
 
 @python_2_unicode_compatible
 class NewsletterEventLink(Orderable, Event):
-    page = ParentalKey(NewsletterPage, related_name='event')
+    page = ParentalKey(NewsletterPage, related_name='events')
 
     def __str__(self):
         return "{}".format(
