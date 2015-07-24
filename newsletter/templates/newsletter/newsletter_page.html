@@ -19,74 +19,129 @@
                             </tr>
                             <tr>
                                 <td align="center" valign="top">
-                                    <!-- BEGIN BODY // -->
-                                    <!-- Feature Story // -->
-
                                     <table border="0" cellpadding="0" cellspacing="0" width="650" id="templateBody">
                                         <tr>
                                             <td valign="top" class="bodyContainer">
-                                                <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnTextBlock">
-                                                    <tbody class="mcnTextBlockOuter">
-                                                        <tr>
-                                                            <td valign="top" class="mcnTextBlockInner">
-
-                                                                <table align="left" border="0" cellpadding="0" cellspacing="0" width="650" class="mcnTextContentContainer">
-                                                                    <tbody>
-                                                                        <tr>
-
-                                                                            <td valign="top" class="mcnTextContent" style="padding-top:9px; padding-right: 18px; padding-bottom: 9px; padding-left: 18px;">
-
-                                                                                <h2>Designing Your Email</h2>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </tbody>
-                                                                </table>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                                <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnImageBlock">
-                                                    <tbody class="mcnImageBlockOuter">
+                                            <!-- BEGIN BODY // -->
+                                            {% for article in self.articles%}
+                                                {% if forloop.first %}
+                                                    <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnTextBlock">
+                                                        <tbody>
                                                             <tr>
-                                                                <td valign="top" style="padding-bottom: 20px; padding-left: 10px; padding-right: 10px; padding-top:10px" class="mcnImageBlockInner">
-                                                                    <table align="center" width="30%" border="0" cellpadding="0" cellspacing="0" class="mcnImageContentContainer">
-                                                                        <tbody>
-                                                                            <tr>
-                                                                                <td align="right" class="mcnImageContent" valign="top" style="padding-right: 9px; padding-left: 9px; padding-top: 0; padding-bottom: 0;">
-                                                                                    <a href="https://twitter.ca/opencanada"><img src="{% static 'img/twitter-25.png' %}" alt="twitter" class="img-responsive" width="20px"></a>
-                                                                                </td>
-                                                                            </tr>
-                                                                        </tbody>
-                                                                    </table>
+                                                                <td valign="top" class="mcnTextContent" style="padding-top:9px; padding-right: 18px; padding-bottom: 9px; padding-left: 18px;">
+                                                                    <h2><a href="{{ article.url }}">{{ article.title }}</a></h2>
                                                                 </td>
                                                             </tr>
-                                                    </tbody>
-                                                </table>
-                                                <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnTextBlock">
-                                                    <tbody class="mcnTextBlockOuter">
-                                                        <tr>
-                                                            <td valign="top" class="mcnTextBlockInner">
+                                                            <tr>
+                                                                <td align="right" class="mcnImageContent" valign="top" style="padding-right: 9px; padding-left: 9px; padding-top: 0; padding-bottom: 0;">
+                                                                    <a href="{{ article.url }}">{% image article.main_image width-450 %}</a>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td valign="top" class="mcnTextContent" style="padding-top:9px; padding-right: 18px; padding-bottom: 9px; padding-left: 18px;">
+                                                                    <p>{{ article.excerpt }}</p>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                {% else %}
 
-                                                                <table align="left" border="0" cellpadding="0" cellspacing="0" width="650" class="mcnTextContentContainer">
-                                                                    <tbody><tr>
+                                            <!-- // END FEATURE -->
+                                                    <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnTextBlock">
+                                                        <tbody class="mcnTextBlockOuter">
+                                                            <tr>
+                                                                <td valign="top" class="mcnTextContent" style="padding-top:9px; padding-right: 18px; padding-bottom: 9px; padding-left: 18px;">
+                                                                    {% image article.main_image width-150 %}
+                                                                </td>
+                                                                <td valign="top" class="mcnTextContent" style="padding-top:9px; padding-right: 18px; padding-bottom: 9px; padding-left: 18px;">
+                                                                    <h3>{{ article.title }}</h3>
+                                                                    <p>{{ article.excerpt }}</p>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                {% endif %}
 
-                                                                        <td valign="top" class="mcnTextContent" style="padding-top:9px; padding-right: 18px; padding-bottom: 9px; padding-left: 18px;">
+                                               {% endfor %}
+                                                <!-- // END ARTICLES -->
 
-                                                                            <h1>Designing Your Email</h1><h3>Creating an elegant email is simple</h3><p>Now that you’ve selected a template to work with, drag in content blocks to define the structure of your message. Don’t worry, you can always delete or rearrange blocks as needed. Then click “Design” to define fonts, colors, and styles.</p><p>Need inspiration for your design? <a href="http://inspiration.mailchimp.com" class="mc-template-link">Here’s what other MailChimp users are doing.</a></p>
-                                                                        </td>
-                                                                    </tr>
-                                                                </tbody></table>
-
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
                                             </td>
                                         </tr>
                                     </table>
                                     <!-- // END BODY -->
                                 </td>
                             </tr>
+                            <tr>
+                                <td>
+                                    <table border="0" cellpadding="0" cellspacing="0" width="650" id="templateBody">
+                                        <tbody>
+                                            <tr>
+                                                <td valign="top" class="bodyContainer"><h2>BEST OF THE WEB</h2></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table border="0" cellpadding="0" cellspacing="0" width="650" id="templateBody">
+                                                        {% for external in self.external_articles.all %}
+
+                                                        <tr>
+                                                            <td>
+                                                                {{ external.title }}
+                                                                {{ external.body }}
+                                                                {{ external.website_link }}
+                                                                {{ external.source.logo }}
+                                                                {{ external.source.website }}
+                                                            </td>
+
+                                                            <td>
+
+                                                            </td>
+                                                        </tr>
+                                                        {% endfor %}
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td>
+                                    <table border="0" cellpadding="0" cellspacing="0" width="650" id="templateBody">
+                                        <tbody>
+                                            <tr>
+                                                <td valign="top" class="bodyContainer"><h2>EVENTS</h2></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table border="0" cellpadding="0" cellspacing="0" width="650" id="templateBody">
+                                                        {% for event in self.events.all %}
+                                                            HERE
+
+                                                        <tr>
+                                                            <td>
+                                                                {{ event.title }}
+                                                                {{ event.date }}
+                                                                {{ event.location }}
+                                                                {{ event.event_link }}
+                                                                {{ event.organization.logo }}
+                                                                {{ event.organization.website }}
+                                                            </td>
+
+                                                            <td>
+
+                                                            </td>
+                                                        </tr>
+                                                        {% endfor %}
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+
                             <tr>
                                 <td align="center" valign="top">
                                     <!-- BEGIN FOOTER // -->
