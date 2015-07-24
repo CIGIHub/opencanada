@@ -19,6 +19,8 @@ from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 
+from people.models import ContributorPage
+
 from . import fields as article_fields
 
 
@@ -270,9 +272,34 @@ class ArticlePage(Page, FeatureStyleFields, Sticky):
         return all_topics
 
     def related_articles(self, number):
-        articles = ArticlePage.objects.live().all().exclude(id=self.id)[:number]
-        # TODO: pick actual related articles based on primary topic, secondary topics, authors
-        return articles
+        included = [self.id]
+        articles = ArticlePage.objects.live().filter(primary_topic=self.primary_topic).exclude(id=self.id).order_by('-first_published_at')[:number]
+        article_list = list(articles.all())
+        included.extend([article.id for article in articles.all()])
+
+        current_total = len(article_list)
+        if current_total < number:
+            # still don't have enough, so pick using secondary topics
+            topics = Topic.objects.filter(article_links__article=self)
+            additional_articles = ArticlePage.objects.live().filter(primary_topic__in=topics).exclude(id__in=included).order_by('-first_published_at')[:number - current_total]
+            article_list.extend(additional_articles.all())
+            current_total = len(article_list)
+            included.extend([article.id for article in additional_articles.all()])
+
+        if current_total < number:
+            authors = ContributorPage.objects.live().filter(article_links__article=self)
+            additional_articles = ArticlePage.objects.live().filter(author_links__author__in=authors).exclude(id__in=included).order_by('-first_published_at')[:number - current_total]
+            article_list.extend(additional_articles.all())
+            current_total = len(article_list)
+            included.extend([article.id for article in additional_articles.all()])
+
+        if current_total < number:
+            # still don't have enough, so just pick the most recent
+            additional_articles = ArticlePage.objects.live().exclude(id__in=included).order_by('-first_published_at')[:number - current_total]
+            article_list.extend(additional_articles.all())
+
+        return article_list
+
 
 ArticlePage.content_panels = Page.content_panels + [
     FieldPanel('excerpt'),
@@ -450,8 +477,16 @@ class SeriesPage(Page, FeatureStyleFields, Sticky):
         return all_topics
 
     def related_articles(self, number):
-        articles = ArticlePage.objects.live().all()[:number]
+        articles = list(ArticlePage.objects.live().filter(primary_topic=self.primary_topic).order_by('-first_published_at')[:number])
+
         # TODO: pick actual related articles based on primary topic, secondary topics, authors
+
+        current_total = len(articles)
+        if current_total < number:
+            # still don't have enough, so just pick the most recent
+            # TODO: exclude items already included.
+            articles.extend(list(ArticlePage.objects.live().order_by('-first_published_at')[:number - current_total]))
+
         return articles
 
 SeriesPage.content_panels = Page.content_panels + [
