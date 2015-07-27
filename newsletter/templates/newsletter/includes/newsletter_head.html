@@ -28,7 +28,7 @@
 			padding:0;
 		}
 		p{
-			margin:1em 0;
+			margin:0;
 			padding:0;
 		}
 		a{
@@ -100,7 +100,7 @@
 			/*@editable*/color:#FFFFFF !important;
 			display:block;
 			/*@editable*/font-family:Oswald, Helvetica;
-			/*@editable*/font-size:40px;
+			/*@editable*/font-size:65px;
 			/*@editable*/font-style:normal;
 			/*@editable*/font-weight:normal;
 			/*@editable*/line-height:125%;
@@ -115,16 +115,16 @@
 	@style heading 2
 	*/
 		h2{
-			/*@editable*/color:#404040 !important;
+			/*@editable*/color:#000000 !important;
 			display:block;
-			/*@editable*/font-family:Helvetica;
-			/*@editable*/font-size:26px;
+			/*@editable*/font-family: 'Droid Sans', Helvetica;
+			/*@editable*/font-size:18px;
 			/*@editable*/font-style:normal;
-			/*@editable*/font-weight:bold;
-			/*@editable*/line-height:125%;
-			/*@editable*/letter-spacing:-.75px;
+			/*@editable*/font-weight:normal;
+			/*@editable*/line-height:100%;
+			/*@editable*/letter-spacing:0px;
 			margin:0;
-			/*@editable*/text-align:left;
+			/*@editable*/text-align:center;
 		}
 	/*
 	@tab Page
@@ -133,32 +133,14 @@
 	@style heading 3
 	*/
 		h3{
-			/*@editable*/color:#606060 !important;
+			/*@editable*/color:#000000 !important;
 			display:block;
-			/*@editable*/font-family:Helvetica;
+			/*@editable*/font-family: 'Droid Serif', Georgia;
 			/*@editable*/font-size:18px;
 			/*@editable*/font-style:normal;
-			/*@editable*/font-weight:bold;
+			/*@editable*/font-weight:normal;
 			/*@editable*/line-height:125%;
-			/*@editable*/letter-spacing:-.5px;
-			margin:0;
-			/*@editable*/text-align:left;
-		}
-	/*
-	@tab Page
-	@section heading 4
-	@tip Set the styling for all fourth-level headings in your emails. These should be the smallest of your headings.
-	@style heading 4
-	*/
-		h4{
-			/*@editable*/color:#808080 !important;
-			display:block;
-			/*@editable*/font-family:Helvetica;
-			/*@editable*/font-size:16px;
-			/*@editable*/font-style:normal;
-			/*@editable*/font-weight:bold;
-			/*@editable*/line-height:125%;
-			/*@editable*/letter-spacing:normal;
+			/*@editable*/letter-spacing:0px;
 			margin:0;
 			/*@editable*/text-align:left;
 		}
@@ -179,10 +161,10 @@
 	@tip Set the styling for your email's header text. Choose a size and color that is easy to read.
 	*/
 		.headerContainer .mcnTextContent,.headerContainer .mcnTextContent p{
-			/*@editable*/color:#606060;
-			/*@editable*/font-family:Helvetica;
-			/*@editable*/font-size:15px;
-			/*@editable*/line-height:150%;
+			/*@editable*/color:#000000;
+			/*@editable*/font-family:'Droid Sans', Helvetica;
+			/*@editable*/font-size:14px;
+			/*@editable*/line-height:125%;
 			/*@editable*/text-align:left;
 		}
 	/*
@@ -191,7 +173,7 @@
 	@tip Set the styling for your email's header links. Choose a color that helps them stand out from your text.
 	*/
 		.headerContainer .mcnTextContent a{
-			/*@editable*/color:#6DC6DD;
+			/*@editable*/color:#BF1E2E;
 			/*@editable*/font-weight:normal;
 			/*@editable*/text-decoration:underline;
 		}
@@ -211,9 +193,9 @@
 	@tip Set the styling for your email's body text. Choose a size and color that is easy to read.
 	*/
 		.bodyContainer .mcnTextContent,.bodyContainer .mcnTextContent p{
-			/*@editable*/color:#606060;
-			/*@editable*/font-family:Helvetica;
-			/*@editable*/font-size:15px;
+			/*@editable*/color:#000000;
+			/*@editable*/font-family:'Droid Serif', Georgia;
+			/*@editable*/font-size:14px;
 			/*@editable*/line-height:150%;
 			/*@editable*/text-align:left;
 		}
@@ -222,11 +204,14 @@
 	@section body link
 	@tip Set the styling for your email's body links. Choose a color that helps them stand out from your text.
 	*/
+
 		.bodyContainer .mcnTextContent a{
-			/*@editable*/color:#6DC6DD;
+			/*@editable*/color:#BF1E2E;
 			/*@editable*/font-weight:normal;
-			/*@editable*/text-decoration:underline;
+			/*@editable*/text-decoration:none;
 		}
+
+
 	/*
 	@tab Footer
 	@section footer style
@@ -259,6 +244,21 @@
 			/*@editable*/font-weight:normal;
 			/*@editable*/text-decoration:underline;
 		}
+
+     /*
+	Custom styles for the OpenCanada template
+	*/
+        .featureArticle h2{
+            /*@editable*/color:#FFFFFF;
+			/*@editable*/font-family:'Droin Sans', Georgia;
+			/*@editable*/font-size:44px;
+			/*@editable*/line-height:100%;
+			/*@editable*/text-align:center;
+        }
+
+        .featureArticle p{
+            font-size: 18px;
+        }
 
         @media only screen and (max-width: 480px){
             body,table,td,p,a,li,blockquote{
@@ -391,7 +391,7 @@
         @section template width
         @tip Make the template fluid for portrait or landscape view adaptability. If a fluid layout doesn't work for you, set the width to 300px instead.
         */
-            table[id=templateContainer],table[id=templatePreheader],table[id=templateHeader],table[id=templateBody],table[id=templateFooter], table[id=templateArticles]{
+            table[id=templateContainer],table[id=templatePreheader],table[id=templateHeader],table[id=templateBody],table[id=templateFooter], table[id=templateArticles], table[id=templateExternalArticles], table[id=templateEvents]{
                 /*@tab Mobile Styles
     @section template width
     @tip Make the template fluid for portrait or landscape view adaptability. If a fluid layout doesn't work for you, set the width to 300px instead.*/max-width:600px !important;
