@@ -1,0 +1,176 @@
+{% load static core_tags wagtailcore_tags wagtailimages_tags %}
+
+<table border="0" cellpadding="0" cellspacing="0" width="650" id="templateFooter">
+    <tr>
+        <td valign="top" class="footerContainer" style="padding-bottom:9px;">
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnTextBlock">
+                <tbody class="mcnTextBlockOuter">
+                    <tr>
+                        <td valign="top" class="mcnTextBlockInner">
+                            <table align="left" border="0" cellpadding="0" cellspacing="0" width="650" class="mcnTextContentContainer">
+                                <tbody>
+                                    <tr>
+                                        <td valign="top" class="mcnTextContent" style="padding-top:9px; padding-right: 18px; padding-bottom: 9px; padding-left: 18px;">
+                                            <p><a href="{{ self.full_url }}">View email in browser</a></p>
+                                            <p>
+                                                <a href="*|LIST:SUBSCRIBE|*">Subscribe</a> /
+                                                <a href="https://twitter.com/opencanada">Follow on Twitter</a> /
+                                                <a href="https://facebook.com/opencanada">Like on Facebook</a> /
+                                                <a href="*|FORWARD|*">Forward this email to a friend</a>
+                                            </p>
+                                            <p>
+                                                To stop receiving any updates from OpenCanada.org : <a href="*|UNSUB|*" class="utilityLink">Click Here</a>
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnDividerBlock">
+                <tbody class="mcnDividerBlockOuter">
+                    <tr>
+                        <td class="mcnDividerBlockInner" style="padding: 18px;">
+                            <table class="mcnDividerContent" border="0" cellpadding="0" cellspacing="0" width="100%" style="border-top-width: 1px;border-top-style: solid;border-top-color: #FFFFFF;">
+                                <tbody><tr>
+                                    <td>
+                                        <span></span>
+                                    </td>
+                                </tr>
+                            </tbody></table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnTextBlock">
+                <tbody class="mcnTextBlockOuter">
+                    <tr>
+                        <td valign="top" class="mcnTextBlockInner">
+                            <table align="center" border="0" cellpadding="0" cellspacing="0" width="450" class="mcnTextContentContainer">
+                                <tbody>
+                                    <tr>
+                                        <td valign="top" align="center" class="mcnTextContent" style="padding-top:9px; padding-right: 18px; padding-bottom: 9px; padding-left: 18px;">
+                                            <em>OpenCanada.org is a publication of the Canadian International Council, the Center for International Governance Innovation and the Bill Graham Center.</em>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnImageBlock">
+                <tbody class="mcnImageBlockOuter">
+                    <tr>
+                        <td valign="top" style="padding:9px" class="mcnImageBlockInner">
+                            <table align="center" width="100%" border="0" cellpadding="0" cellspacing="0" class="mcnImageContentContainer">
+                                <tbody>
+                                    <tr>
+                                        <td class="mcnImageContent" valign="top" align="center" style="padding-right: 0px; padding-left: 0px; padding-top: 0px; padding-bottom: 0px;">
+                                            <img align="center" alt="" src="{% static 'img/CIC-logo-white.png' %}" width="130" style="max-width:130px; padding-bottom: 0; display: inline !important; vertical-align: bottom;" class="mcnImage">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                        <td valign="top" style="padding:9px" class="mcnImageBlockInner">
+                            <table align="center" width="100%" border="0" cellpadding="0" cellspacing="0" class="mcnImageContentContainer">
+                                <tbody>
+                                    <tr>
+                                        <td class="mcnImageContent" valign="top" align="center" style="padding-right: 0px; padding-left: 0px; padding-top: 0px; padding-bottom: 0px;">
+                                            <img align="center" alt="" src="{% static 'img/BGC-logo-white.png' %}" width="140" style="max-width:140px; padding-bottom: 0; display: inline !important; vertical-align: bottom;" class="mcnImage">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                        <td valign="top" style="padding:9px" class="mcnImageBlockInner">
+                            <table align="center" width="100%" border="0" cellpadding="0" cellspacing="0" class="mcnImageContentContainer">
+                                <tbody>
+                                    <tr>
+                                        <td class="mcnImageContent" valign="top" align="center" style="padding-right: 0px; padding-left: 0px; padding-top: 0px; padding-bottom: 0px;">
+                                            <img align="center" alt="" src="{% static 'img/CIGI-logo-white.png' %}" width="150" style="max-width:160px; padding-bottom: 0; display: inline !important; vertical-align: bottom;" class="mcnImage">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnTextBlock">
+                <tbody class="mcnTextBlockOuter">
+                    <tr>
+                        <td valign="top" class="mcnTextBlockInner">
+                            <table align="left" border="0" cellpadding="0" cellspacing="0" width="650" class="mcnTextContentContainer">
+                                <tbody>
+                                    <tr>
+                                        <td valign="top" class="mcnTextContent" style="padding-top:9px; padding-right: 18px; padding-bottom: 9px; padding-left: 18px;">
+                                            <p>COPYRIGHT © *|CURRENT_YEAR|* *|LIST:COMPANY|*, ALL RIGHT RESERVED.</p>
+                                            <p>ANY TRADEMARKS OR LOGOS USED HERIN ARE THE PROPERTY OF THEIR RESPECTIVE OWNERS.</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnDividerBlock">
+                <tbody class="mcnDividerBlockOuter">
+                    <tr>
+                        <td class="mcnDividerBlockInner" style="padding: 18px;">
+                            <table class="mcnDividerContent" border="0" cellpadding="0" cellspacing="0" width="100%" style="border-top-width: 1px;border-top-style: solid;border-top-color: #FFFFFF;">
+                                <tbody><tr>
+                                    <td>
+                                        <span></span>
+                                    </td>
+                                </tr>
+                            </tbody></table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnTextBlock">
+                <tbody class="mcnTextBlockOuter">
+                    <tr>
+                        <td valign="top" class="mcnTextBlockInner">
+                            <table align="left" border="0" cellpadding="0" cellspacing="0" width="650" class="mcnTextContentContainer">
+                                <tbody>
+                                    <tr>
+                                        <td valign="top" class="mcnTextContent" style="padding-top:9px; padding-right: 18px; padding-bottom: 9px; padding-left: 18px;">
+                                            <p>
+                                                *|IFNOT:ARCHIVE_PAGE|*
+                                                *|LIST:DESCRIPTION|*
+                                                <br>
+                                                <br>
+                                                <strong>Our mailing address is:</strong>
+                                                <br>
+                                                *|HTML:LIST_ADDRESS_HTML|* *|END:IF|*
+                                                <br>
+                                                <br>
+
+                                                <a href="*|UPDATE_PROFILE|*" class="utilityLink">update subscription preferences</a>&nbsp;
+                                                <br>
+                                                <br>
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </td>
+    </tr>
+</table>

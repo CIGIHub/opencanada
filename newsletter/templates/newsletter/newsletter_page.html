@@ -9,7 +9,7 @@
                 <tr>
                     <td align="center" valign="top" id="bodyCell">
                         <!-- BEGIN TEMPLATE // -->
-                        <table border="0" cellpadding="0" cellspacing="0" width="650" id="templateContainer">
+                        <table border="0" cellpadding="0" cellspacing="0" width="600" id="templateContainer">
                             <tr>
                                 <td align="center" valign="top">
                                     <!-- BEGIN HEADER // -->
@@ -19,173 +19,85 @@
                             </tr>
                             <tr>
                                 <td align="center" valign="top">
-                                    <table border="0" cellpadding="0" cellspacing="0" width="650" id="templateBody">
-                                        <tr>
-                                            <td valign="top" class="bodyContainer">
-                                            <!-- BEGIN BODY // -->
-                                            {% for article in self.articles%}
-                                                {% if forloop.first %}
-                                                    <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnTextBlock">
-                                                        <tbody>
-                                                            <tr>
-                                                                <td valign="top" class="mcnTextContent" style="padding-top:9px; padding-right: 18px; padding-bottom: 9px; padding-left: 18px;">
-                                                                    <h2><a href="{{ article.url }}">{{ article.title }}</a></h2>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td align="right" class="mcnImageContent" valign="top" style="padding-right: 9px; padding-left: 9px; padding-top: 0; padding-bottom: 0;">
-                                                                    <a href="{{ article.url }}">{% image article.main_image width-450 %}</a>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td valign="top" class="mcnTextContent" style="padding-top:9px; padding-right: 18px; padding-bottom: 9px; padding-left: 18px;">
-                                                                    <p>{{ article.excerpt }}</p>
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                {% else %}
-
-                                            <!-- // END FEATURE -->
-                                                    <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnTextBlock">
-                                                        <tbody class="mcnTextBlockOuter">
-                                                            <tr>
-                                                                <td valign="top" class="mcnTextContent" style="padding-top:9px; padding-right: 18px; padding-bottom: 9px; padding-left: 18px;">
-                                                                    {% image article.main_image width-150 %}
-                                                                </td>
-                                                                <td valign="top" class="mcnTextContent" style="padding-top:9px; padding-right: 18px; padding-bottom: 9px; padding-left: 18px;">
-                                                                    <h3>{{ article.title }}</h3>
-                                                                    <p>{{ article.excerpt }}</p>
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                {% endif %}
-
-                                               {% endfor %}
-                                                <!-- // END ARTICLES -->
-
-                                            </td>
-                                        </tr>
-                                    </table>
-                                    <!-- // END BODY -->
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <table border="0" cellpadding="0" cellspacing="0" width="650" id="templateBody">
-                                        <tbody>
-                                            <tr>
-                                                <td valign="top" class="bodyContainer"><h2>BEST OF THE WEB</h2></td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <table border="0" cellpadding="0" cellspacing="0" width="650" id="templateBody">
-                                                        {% for external in self.external_articles.all %}
-
-                                                        <tr>
-                                                            <td>
-                                                                {{ external.title }}
-                                                                {{ external.body }}
-                                                                {{ external.website_link }}
-                                                                {{ external.source.logo }}
-                                                                {{ external.source.website }}
-                                                            </td>
-
-                                                            <td>
-
-                                                            </td>
-                                                        </tr>
-                                                        {% endfor %}
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </td>
-                            </tr>
-
-
-                            <tr>
-                                <td>
-                                    <table border="0" cellpadding="0" cellspacing="0" width="650" id="templateBody">
-                                        <tbody>
-                                            <tr>
-                                                <td valign="top" class="bodyContainer"><h2>EVENTS</h2></td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <table border="0" cellpadding="0" cellspacing="0" width="650" id="templateBody">
-                                                        {% for event in self.events.all %}
-                                                            HERE
-
-                                                        <tr>
-                                                            <td>
-                                                                {{ event.title }}
-                                                                {{ event.date }}
-                                                                {{ event.location }}
-                                                                {{ event.event_link }}
-                                                                {{ event.organization.logo }}
-                                                                {{ event.organization.website }}
-                                                            </td>
-
-                                                            <td>
-
-                                                            </td>
-                                                        </tr>
-                                                        {% endfor %}
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                    <!-- BEGIN ARTICLES // -->
+                                    {% include "newsletter/includes/newsletter_articles.html" %}
+                                    <!-- // END ARTICLES -->
                                 </td>
                             </tr>
 
                             <tr>
                                 <td align="center" valign="top">
+                                    <!-- BEGIN EXTERNAL ARTICLES // -->
+                                    {% include "newsletter/includes/newsletter_external_articles.html" %}
+                                    <!-- // END ARTICLES -->
+                                </td>
+                            </tr>
+
+{#                            <tr>#}
+{#                                <td>#}
+{#                                    <table border="0" cellpadding="0" cellspacing="0" width="650" id="externalArticles"  class="mcnTextContentContainer">#}
+{#                                        <tbody>#}
+{#                                            <tr>#}
+{#                                                <td valign="top"><h2>BEST OF THE WEB</h2></td>#}
+{#                                            </tr>#}
+{#                                            <tr>#}
+{#                                                <td>#}
+{#                                                    <table border="0" cellpadding="0" cellspacing="0" width="650" class="mcnTextContentContainer">#}
+{#                                                        {% for external in self.external_articles.all %}#}
+{#                                                        <tr>#}
+{#                                                            <td valign="top" class="mcnImageContent" style="padding-top:9px; padding-right: 18px; padding-bottom: 9px; padding-left: 18px;">#}
+{#                                                                <a href="{{ external.website_link }}">{% image external.source.logo width-75 %}</a>#}
+{#                                                            </td>#}
+{##}
+{#                                                            <td valign="top" class="mcnTextContent" style="padding-top:9px; padding-right: 18px; padding-bottom: 9px; padding-left: 18px;">#}
+{#                                                                <h3><a href="{{ external.website_link }}">{{ external.title }}</a></h3>#}
+{#                                                                <p>{{ external.body|richtext }}</p>#}
+{#                                                            </td>#}
+{#                                                        </tr>#}
+{#                                                        {% endfor %}#}
+{#                                                    </table>#}
+{#                                                </td>#}
+{#                                            </tr>#}
+{#                                        </tbody>#}
+{#                                    </table>#}
+{#                                </td>#}
+{#                            </tr>#}
+
+{#                            <tr>#}
+{#                                <td>#}
+{#                                    <table border="0" cellpadding="0" cellspacing="0" width="650" id="Events" class="mcnTextContentContainer">#}
+{#                                        <tbody>#}
+{#                                            <tr>#}
+{#                                                <td valign="top"><h2>EVENTS</h2></td>#}
+{#                                            </tr>#}
+{#                                            <tr>#}
+{#                                                <td>#}
+{#                                                    <table border="0" cellpadding="0" cellspacing="0">#}
+{#                                                        {% for event in self.events.all %}#}
+{#                                                        <tr>#}
+{#                                                            <td valign="top" class="mcnImageContent" style="padding-top:9px; padding-right: 18px; padding-bottom: 9px; padding-left: 18px;">#}
+{#                                                                <a href="{{ event.event_link }}">{% image event.organization.logo width-75 %}</a>#}
+{#                                                            </td>#}
+{##}
+{#                                                            <td valign="top" class="mcnTextContent" style="padding-top:9px; padding-right: 18px; padding-bottom: 9px; padding-left: 18px;">#}
+{#                                                                <h3><a href="{{ event.event_link }}">{{ event.title }}</a></h3>#}
+{#                                                                <p>{{ event.date }},  {{ event.location }}</p>#}
+{#                                                                <p>{{ event.event_text|richtext }}</p>#}
+{#                                                            </td>#}
+{#                                                        </tr>#}
+{#                                                        {% endfor %}#}
+{#                                                    </table>#}
+{#                                                </td>#}
+{#                                            </tr>#}
+{#                                        </tbody>#}
+{#                                    </table>#}
+{#                                </td>#}
+{#                            </tr>#}
+
+                            <tr>
+                                <td align="center" valign="top">
                                     <!-- BEGIN FOOTER // -->
-                                    <table border="0" cellpadding="0" cellspacing="0" width="650" id="templateFooter">
-                                        <tr>
-                                            <td valign="top" class="footerContainer" style="padding-bottom:9px;">
-                                                <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnTextBlock">
-                                                    <tbody class="mcnTextBlockOuter">
-                                                        <tr>
-                                                            <td valign="top" class="mcnTextBlockInner">
-
-                                                                <table align="left" border="0" cellpadding="0" cellspacing="0" width="650" class="mcnTextContentContainer">
-                                                                    <tbody><tr>
-
-                                                                        <td valign="top" class="mcnTextContent" style="padding-top:9px; padding-right: 18px; padding-bottom: 9px; padding-left: 18px;">
-
-                                                                            <em>Copyright © *|CURRENT_YEAR|* *|LIST:COMPANY|*, All rights reserved.</em>
-                                                <br>
-                                                *|IFNOT:ARCHIVE_PAGE|*
-                                                    *|LIST:DESCRIPTION|*
-                                                    <br>
-                                                    <br>
-                                                    <strong>Our mailing address is:</strong>
-                                                    <br>
-                                                    *|HTML:LIST_ADDRESS_HTML|* *|END:IF|*
-                                                    <br>
-                                                    <br>
-                                                    <a href="*|UNSUB|*" class="utilityLink">unsubscribe from this list</a>&nbsp;&nbsp;&nbsp;
-                                                    <a href="*|UPDATE_PROFILE|*" class="utilityLink">update subscription preferences</a>&nbsp;
-                                                    <br>
-                                                    <br>
-                                                    *|IF:REWARDS|* *|HTML:REWARDS|*
-                                                *|END:IF|*
-                                                                        </td>
-                                                                    </tr>
-                                                                </tbody></table>
-
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </td>
-                                        </tr>
-                                    </table>
+                                    {% include "newsletter/includes/newsletter_footer.html" %}
                                     <!-- // END FOOTER -->
                                 </td>
                             </tr>

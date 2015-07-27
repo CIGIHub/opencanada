@@ -11,7 +11,6 @@ from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
 
-
 @python_2_unicode_compatible
 class NewsletterListPage(Page):
     subpage_types = ['NewsletterPage']
@@ -75,7 +74,6 @@ class NewsletterArticleLink(Orderable, models.Model):
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
-
         related_name='newsletter_links',
         help_text="Link to an internal article"
     )
