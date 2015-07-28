@@ -5,7 +5,6 @@ import getpass
 import json
 import re
 
-import MySQLdb
 import requests
 from bs4 import BeautifulSoup, Comment, element
 from django.core.files.images import File, get_image_dimensions
@@ -15,6 +14,7 @@ from django.utils.six import BytesIO, text_type
 from django.utils.text import slugify
 from wagtail.wagtailcore.models import Page
 
+import MySQLdb
 from articles.models import (ArticleAuthorLink, ArticleCategory, ArticlePage,
                              ArticleTopicLink, SeriesArticleLink, SeriesPage,
                              Topic)
