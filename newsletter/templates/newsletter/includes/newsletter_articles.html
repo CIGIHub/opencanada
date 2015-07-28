@@ -1,0 +1,128 @@
+{% load static core_tags wagtailcore_tags wagtailimages_tags %}
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%" id="templateArticles">
+    <tr>
+        <td valign="top" class="bodyContainer" style="padding-bottom:9px;">
+            {% for article in self.articles%}
+                {% if forloop.first %}
+
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnTextBlock featureArticle">
+                        <tbody class="mcnTextBlockOuter">
+                            <tr>
+                                <td valign="top" class="mcnTextBlockInner">
+                                    <table align="left" border="0" cellpadding="0" cellspacing="0" width: 100% class="mcnTextContentContainer">
+                                        <tbody>
+                                            <tr>
+                                                <td valign="top" class="mcnTextContent" style="padding:15px;">
+                                                    <h2 class="null"><a href="{{ article.url }}" target="_blank">{{ article.title }}</a></h2>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnImageBlock">
+                        <tbody class="mcnImageBlockOuter">
+                                <tr>
+                                    <td valign="top" style="padding:15px;" class="mcnImageBlockInner">
+                                        <table align="left" width="100%" border="0" cellpadding="0" cellspacing="0" class="mcnImageContentContainer">
+                                            <tbody><tr>
+                                                <td class="mcnImageContent" valign="top" align="center" style="padding:0px;">
+                                                        {% image article.main_image width-450 as tmp_photo %}
+                                                       <a href="{{ article.url }}" target="_blank"><img src="{{ tmp_photo.url }}" alt="{{ article.main_image.title }}" class="mcnImage" /></a>
+                                                </td>
+                                            </tr>
+                                        </tbody></table>
+                                    </td>
+                                </tr>
+                        </tbody>
+                    </table>
+
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnTextBlock">
+                        <tbody class="mcnTextBlockOuter">
+                            <tr>
+                                <td valign="top" class="mcnTextBlockInner">
+                                    <table align="left" border="0" cellpadding="0" cellspacing="0" width: 100% class="mcnTextContentContainer">
+                                        <tbody>
+                                            <tr>
+                                                <td valign="top" class="mcnTextContent" style="padding-top: 0px; padding-right: 15px; padding-bottom: 15px; padding-left:15px;">
+                                                    <p>{{ article.excerpt }}</p>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnDividerBlock">
+                            <tbody class="mcnDividerBlockOuter">
+                                <tr>
+                                    <td class="mcnDividerBlockInner" style="padding-top: 15px; padding-right: 0px; padding-bottom: 15px; padding-left: 0px;">
+                                        <table class="mcnDividerContent" border="0" cellpadding="0" cellspacing="0" width="100%" style="border-top-width: 1px;border-top-style: solid; border-top-color: #E1E1E1;">
+                                            <tbody><tr>
+                                                <td>
+                                                    <span></span>
+                                                </td>
+                                            </tr>
+                                        </tbody></table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                 {% else %}
+
+                    <table border="0" cellpadding="0" cellspacing="0" class="mcnCaptionRightContentOuter" width="100%">
+                        <tbody>
+                            <tr>
+                                <td valign="middle" class="mcnImageContent" style="padding:15px;" width="80">
+                                    {% if article.override_image %}
+                                        <a href="{{ article.url }}" target="_blank">{% image article.override_image width-80 %}</a>
+                                    {% else %}
+                                        <a href="{{ article.url }}" target="_blank">{% image article.main_image width-80 %}</a>
+                                    {% endif %}
+
+                                </td>
+
+                                <td valign="middle" class="mcnTextContent" style="padding-top: 15px; padding-bottom: 15px;">
+                                    <h3><a href="{{ article.url }}" target="_blank">{{ article.title }}</a></h3>
+                                    {% if article.override_text %}
+                                        <p>{{ article.override_text|richtext }}</p>
+                                    {% else %}
+                                        <p>{{ article.excerpt }}</p>
+                                    {% endif %}
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+                 {% endif %}
+
+            {% endfor %}
+
+
+        </td>
+    </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnDividerBlock">
+    <tbody class="mcnDividerBlockOuter">
+        <tr>
+            <td class="mcnDividerBlockInner" style="padding-top: 15px; padding-right: 0px; padding-bottom: 15px; padding-left: 0px;">
+                <table class="mcnDividerContent" border="0" cellpadding="0" cellspacing="0" width="100%" style="border-top-width: 1px;border-top-style: solid;border-top-color: #E1E1E1;">
+                    <tbody><tr>
+                        <td>
+                            <span></span>
+                        </td>
+                    </tr>
+                </tbody></table>
+            </td>
+        </tr>
+    </tbody>
+</table>

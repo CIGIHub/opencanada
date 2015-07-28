@@ -1,0 +1,64 @@
+{% load static core_tags wagtailcore_tags wagtailimages_tags %}
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%" id="templateExternalArticles">
+    <tr>
+        <td valign="top" class="bodyContainer" style="padding-bottom:9px;">
+
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnTextBlock">
+                <tbody class="mcnTextBlockOuter">
+                    <tr>
+                        <td valign="top" class="mcnTextBlockInner">
+                            <table align="left" border="0" cellpadding="0" cellspacing="0" width="650" class="mcnTextContentContainer">
+                                <tbody>
+                                    <tr>
+                                        <td valign="top" class="mcnTextContent" style="padding:15px;">
+                                            <h2>BEST OF THE WEB</h2>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            {% for external in self.external_articles.all %}
+
+                <table border="0" cellpadding="0" cellspacing="0" class="mcnCaptionRightContentOuter" width="100%">
+                        <tbody>
+                            <tr>
+                                <td valign="middle" class="mcnImageContent" style="padding:15px;" width="80">
+                                     {% image external.source.logo width-80 as tmp_photo %}
+                                       <a href="{{ external.website_link }}" target="_blank"><img src="{{ tmp_photo.url }}" alt="{{ external.source.logo.title }}" class="mcnImage" /></a>
+                                </td>
+
+                                <td valign="middle" class="mcnTextContent" style="padding-top:15px; padding-bottom: 15px;">
+                                    <h3><a href="{{ external.website_link }}" target="_blank">{{ external.title }}</a></h3>
+                                    <p>{{ external.body|richtext }}</p>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+
+            {% endfor %}
+
+
+        </td>
+    </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnDividerBlock">
+                <tbody class="mcnDividerBlockOuter">
+                    <tr>
+                        <td class="mcnDividerBlockInner" style="padding-top: 15px; padding-right: 0px; padding-bottom: 15px; padding-left: 0px;">
+                            <table class="mcnDividerContent" border="0" cellpadding="0" cellspacing="0" width="100%" style="border-top-width: 1px;border-top-style: solid;border-top-color: #E1E1E1;">
+                                <tbody><tr>
+                                    <td>
+                                        <span></span>
+                                    </td>
+                                </tr>
+                            </tbody></table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
