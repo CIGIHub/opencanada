@@ -125,7 +125,10 @@ class TopicListPage(RoutablePageMixin, Page):
     def topic_view(self, request, topic_slug):
         topic = get_object_or_404(Topic, slug=topic_slug)
 
-        articles = ArticlePage.objects.live().filter(primary_topic=topic).order_by('-first_published_at')
+        articles = ArticlePage.objects.live().filter(
+            models.Q(primary_topic=topic) | models.Q(topic_links__topic=topic)
+        ).order_by('-first_published_at')
+
         context = {
             "self": self,
             "topic": topic,
