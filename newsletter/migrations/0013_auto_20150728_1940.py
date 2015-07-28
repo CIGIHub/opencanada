@@ -16,14 +16,4 @@ class Migration(migrations.Migration):
             old_name='article_text',
             new_name='override_text',
         ),
-        migrations.RenameField(
-            model_name='newslettereventlink',
-            old_name='article_text',
-            new_name='override_text',
-        ),
-        migrations.RenameField(
-            model_name='newsletterexternalarticlelink',
-            old_name='article_text',
-            new_name='override_text',
-        ),
     ]

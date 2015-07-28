@@ -25,7 +25,7 @@ class Migration(migrations.Migration):
         ),
         migrations.AddField(
             model_name='newsletterexternalarticlelink',
-            name='article_text',
+            name='override_text',
             field=wagtail.wagtailcore.fields.RichTextField(default='', help_text='Text to describe article.', blank=True),
         ),
         migrations.AddField(
