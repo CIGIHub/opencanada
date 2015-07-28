@@ -13,7 +13,7 @@ django-libsass
 git+https://github.com/CIGIHub/wagtail-basic-site-components.git
 
 # Required for importing data.
-mysqlclient
+# mysqlclient
 
 django-favicon
 django-robots

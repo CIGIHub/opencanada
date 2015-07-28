@@ -42,7 +42,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='newsletterexternalarticlelink',
             name='newsletter',
-            field=modelcluster.fields.ParentalKey(related_name='external_article_links', default=1, to='newsletter.NewsletterPage'),
+            field=modelcluster.fields.ParentalKey(related_name='external_article_links', to='newsletter.NewsletterPage'),
             preserve_default=False,
         ),
     ]
