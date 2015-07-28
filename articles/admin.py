@@ -5,6 +5,9 @@ from . import models
 # Register your models here.
 admin.site.register(models.ArticlePage)
 admin.site.register(models.ArticleListPage)
+admin.site.register(models.ExternalArticlePage)
+admin.site.register(models.ExternalArticleListPage)
+admin.site.register(models.Source)
 admin.site.register(models.Headline)
 admin.site.register(models.Colour)
 admin.site.register(models.ArticleAuthorLink)

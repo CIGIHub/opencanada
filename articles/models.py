@@ -91,6 +91,21 @@ class ArticleListPage(Page):
 
 
 @python_2_unicode_compatible
+class ExternalArticleListPage(Page):
+    subpage_types = ['ExternalArticlePage']
+
+    @property
+    def subpages(self):
+        # Get list of live event pages that are descendants of this page
+        subpages = ExternalArticlePage.objects.live().descendant_of(self).order_by('-first_published_at')
+
+        return subpages
+
+    def __str__(self):
+        return self.title
+
+
+@python_2_unicode_compatible
 class Topic(UniquelySlugable):
     name = models.CharField(max_length=1024)
 
@@ -328,6 +343,63 @@ ArticlePage.promote_panels = Page.promote_panels + [
         heading="Featuring Settings"
     )
 ]
+
+
+@python_2_unicode_compatible
+class Source(models.Model):
+    name = models.CharField(max_length=100)
+    website = models.URLField(max_length=255)
+    logo = models.ForeignKey(
+        'images.AttributedImage',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    def __str__(self):
+        return self.name
+
+
+register_snippet(Source)
+
+Source.panels = [
+    FieldPanel('name'),
+    FieldPanel('website'),
+    ImageChooserPanel('logo'),
+]
+
+
+@python_2_unicode_compatible
+class ExternalArticlePage(Page, FeatureStyleFields, Sticky):
+    body = RichTextField()
+    website_link = models.URLField(max_length=255)
+    main_image = models.ForeignKey(
+        'images.AttributedImage',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+    source = models.ForeignKey(
+        'Source',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    def __str__(self):
+        return "{}".format(
+            self.title
+        )
+
+    content_panels = Page.content_panels + [
+        FieldPanel("body"),
+        FieldPanel("website_link"),
+        SnippetChooserPanel('source', Source),
+        ImageChooserPanel('main_image'),
+    ]
 
 
 @python_2_unicode_compatible

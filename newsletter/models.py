@@ -9,8 +9,21 @@ from wagtail.wagtailadmin.edit_handlers import (FieldPanel, InlinePanel,
 from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
-from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
-from wagtail.wagtailsnippets.models import register_snippet
+
+
+@python_2_unicode_compatible
+class NewsletterListPage(Page):
+    subpage_types = ['NewsletterPage']
+
+    @property
+    def subpages(self):
+        # Get list of live event pages that are descendants of this page
+        subpages = NewsletterPage.objects.live().descendant_of(self).order_by('-issue_date')
+
+        return subpages
+
+    def __str__(self):
+        return self.title
 
 
 @python_2_unicode_compatible
@@ -26,6 +39,22 @@ class NewsletterPage(Page):
             article_list.append(article_link.article)
         return article_list
 
+    @property
+    def external_articles(self):
+        external_article_list = []
+        for article_link in self.external_article_links.all():
+            article_link.external_article.override_text = article_link.override_text
+            external_article_list.append(article_link.external_article)
+        return external_article_list
+
+    @property
+    def events(self):
+        event_list = []
+        for event_link in self.event_links.all():
+            event_link.event.override_text = event_link.override_text
+            event_list.append(event_link.event)
+        return event_list
+
     def __str__(self):
         return self.issue_date.strftime('%Y-%m-%d')
 
@@ -33,8 +62,8 @@ class NewsletterPage(Page):
 NewsletterPage.content_panels = Page.content_panels + [
     FieldPanel('issue_date'),
     InlinePanel('article_links', label="Articles", help_text='The first article will be the newsletter feature story'),
-    InlinePanel('external_articles', label="External Articles"),
-    InlinePanel('events', label="Events"),
+    InlinePanel('external_article_links', label="External Articles"),
+    InlinePanel('event_links', label="Events"),
 ]
 
 
@@ -48,7 +77,7 @@ class NewsletterArticleLink(Orderable, models.Model):
         related_name='newsletter_links',
         help_text="Link to an internal article"
     )
-    article_text = RichTextField(
+    override_text = RichTextField(
         blank=True,
         default="",
         help_text="Text to describe article."
@@ -75,173 +104,68 @@ class NewsletterArticleLink(Orderable, models.Model):
         PageChooserPanel("article", 'articles.ArticlePage'),
         FieldPanel("article_text"),
         ImageChooserPanel("override_image"),
-
     ]
 
 
 @python_2_unicode_compatible
-class ExternalArticle(models.Model):
-    title = models.CharField(max_length=255)
-    body = RichTextField()
-    website_link = models.URLField(max_length=255)
-    source = models.ForeignKey(
-        'newsletter.Source',
+class NewsletterExternalArticleLink(Orderable, models.Model):
+    external_article = models.ForeignKey(
+        "articles.ExternalArticlePage",
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
-        related_name='+'
+        related_name='newsletter_links',
+        help_text="Link to an external article"
+    )
+    override_text = RichTextField(
+        blank=True,
+        default="",
+        help_text="Text to describe article."
     )
 
-    def __str__(self):
-        return "{}".format(
-            self.title
-        )
-
-    content_panels = [
-        FieldPanel("title"),
-        FieldPanel("body"),
-        FieldPanel("website_link")
-    ]
-
-
-@python_2_unicode_compatible
-class NewsletterExternalArticleLink(Orderable, ExternalArticle):
-    page = ParentalKey(NewsletterPage, related_name='external_articles')
+    newsletter = ParentalKey(
+        "NewsletterPage",
+        related_name='external_article_links'
+    )
 
     def __str__(self):
         return "{}".format(
             self.external_article.title
         )
 
-
-@python_2_unicode_compatible
-class Source(models.Model):
-    name = models.CharField(max_length=100)
-    website = models.URLField(max_length=255)
-    logo = models.ForeignKey(
-        'images.AttributedImage',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+'
-    )
-
-    def __str__(self):
-        return self.name
-
-
-register_snippet(Source)
-
-
-Source.panels = [
-    FieldPanel('name'),
-    FieldPanel('website'),
-    ImageChooserPanel('logo'),
-]
-
-
-@python_2_unicode_compatible
-class ExternalSourceLink(models.Model):
-    source = models.ForeignKey(
-        "Source",
-        related_name='external_article_links'
-    )
-    external_article = ParentalKey(
-        "ExternalArticle",
-        related_name='source_link'
-    )
-
-    def __str__(self):
-        return "{} - {}".format(
-            self.external_article.title,
-            self.source.name
-        )
-
     panels = [
-        SnippetChooserPanel('source', Source),
+        PageChooserPanel("external_article", 'articles.ExternalArticlePage'),
+        FieldPanel("article_text"),
     ]
 
 
 @python_2_unicode_compatible
-class Event(models.Model):
-    title = models.CharField(max_length=255)
-    date = models.DateTimeField("Event Date")
-    location = models.CharField(max_length=255)
-    event_link = models.URLField(max_length=255)
-    organization = models.ForeignKey(
-        'newsletter.Organization',
+class NewsletterEventLink(Orderable, models.Model):
+    event = models.ForeignKey(
+        "events.EventPage",
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
-        related_name='+'
+        related_name='newsletter_links',
+        help_text="Link to an event"
+    )
+    override_text = RichTextField(
+        blank=True,
+        default="",
+        help_text="Text to describe this event."
     )
 
-    def __str__(self):
-        return "{}".format(
-            self.title
-        )
-
-    content_panels = [
-        FieldPanel("title"),
-        FieldPanel("date"),
-        FieldPanel("location"),
-        FieldPanel("event_link")
-    ]
-
-
-@python_2_unicode_compatible
-class NewsletterEventLink(Orderable, Event):
-    page = ParentalKey(NewsletterPage, related_name='events')
+    newsletter = ParentalKey(
+        "NewsletterPage",
+        related_name='event_links'
+    )
 
     def __str__(self):
         return "{}".format(
             self.event.title
         )
 
-
-@python_2_unicode_compatible
-class Organization(models.Model):
-    name = models.CharField(max_length=100)
-    website = models.URLField(max_length=255)
-    logo = models.ForeignKey(
-        'images.AttributedImage',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+'
-    )
-
-    def __str__(self):
-        return self.name
-
-
-register_snippet(Organization)
-
-
-Organization.panels = [
-    FieldPanel('name'),
-    FieldPanel('website'),
-    ImageChooserPanel('logo'),
-]
-
-
-@python_2_unicode_compatible
-class EventOrganizationLink(models.Model):
-    organization = models.ForeignKey(
-        "Organization",
-        related_name='event_links'
-    )
-    events = ParentalKey(
-        "Event",
-        related_name='organization_link'
-    )
-
-    def __str__(self):
-        return "{} - {}".format(
-            self.event.title,
-            self.organization.name
-        )
-
     panels = [
-        SnippetChooserPanel('organization', Organization),
+        PageChooserPanel("event", 'events.EventPage'),
+        FieldPanel("article_text"),
     ]

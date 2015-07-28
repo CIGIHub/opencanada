@@ -12,20 +12,14 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('newsletter', '0004_auto_20150723_1914'),
+        ('articles', '0026_auto_20150728_1823'),
     ]
 
     operations = [
-        migrations.AlterModelOptions(
-            name='externalarticle',
-            options={},
-        ),
+
         migrations.AlterModelOptions(
             name='newsletterexternalarticlelink',
             options={'ordering': ['sort_order']},
-        ),
-        migrations.RemoveField(
-            model_name='externalarticle',
-            name='sort_order',
         ),
         migrations.RemoveField(
             model_name='newsletterexternalarticlelink',
@@ -42,7 +36,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='newsletterexternalarticlelink',
             name='externalarticle_ptr',
-            field=models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, default=1, serialize=False, to='newsletter.ExternalArticle'),
+            field=models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, default=1, serialize=False, to='articles.ExternalArticlePage'),
             preserve_default=False,
         ),
         migrations.AddField(
