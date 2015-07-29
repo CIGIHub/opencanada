@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static article_tags core_tags wagtailcore_tags wagtailimages_tags %}
+
+{% block content %}
+    <div id="event-list-page" class="container">
+        <h1>{{ self.title }}</h1>
+       {% for event in self.subpages %}
+        <div class="row">
+            <div class="col-xs-2">
+                <figure>{% image event.organization.logo width-120 %}</figure>
+            </div>
+            <div class="col-xs-10">
+                <h3><a href="{{ event.event_website }}">{{ event.title }}</a></h3>
+                <p>{{ event.date }}</p>
+                <p>{{ event.location }}</p>
+                <p>{{ event.body|richtext }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
