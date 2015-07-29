@@ -22,6 +22,7 @@ h2{
 h3{
   font-size: 18px;
   color: $red;
+  margin-top: 0px;
 }
 
 h4{
@@ -427,33 +428,35 @@ footer{
 
 }
 
-  .date{
-    @include type(#000);
-  }
+.date{
+  @include type(#000);
+}
 
-  .title,
-  .block-Paragraph,
-  .block-Heading,
-  .block-Image,
-  .block-Sharable,
-  .block-Embed,
-  .topics,
-  .series-articles,
-  .series-teaser{
-    margin-left: 10%;
-    margin-right: 10%;
+.title,
+.block-Paragraph,
+.block-Heading,
+.block-Image,
+.block-Sharable,
+.block-Embed,
+.topics,
+.series-articles,
+.series-teaser{
+  margin-left: 10%;
+  margin-right: 10%;
 
-    @media(max-width: $screen-xs){
-      margin-left: 0;
-      margin-right: 0;
-    }
+  @media(max-width: $screen-xs){
+    margin-left: 0;
+    margin-right: 0;
   }
+}
 
 #article-page article,
-#in-depth-page article{
+#in-depth-page article,
+#external-article-list-page .row,
+#event-list-page .row
+{
   margin-top: 20px;
   @include row-divider;
-
 }
 
 article, .related-articles{
