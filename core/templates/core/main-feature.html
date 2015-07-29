@@ -20,7 +20,7 @@
             <div class="feature-line">{{ self.typed_featured_item.excerpt|richtext }}</div>
         {% endif %}
 
-        <div class="contributors">By:
+        <div class="contributors" style="color: {{ self.typed_featured_item.font_style.text_colour.hex_value }}">By:
             {% for author in self.typed_featured_item.authors %}
                 <div class="contributor">
                     <a style="color: {{ self.typed_featured_item.font_style.text_colour.hex_value }}" href="{{ author.url }}">{{ author.first_name }} {{ author.last_name }}</a>
