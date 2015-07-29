@@ -200,39 +200,7 @@ footer{
   }
   .newsletter-form{
     @include centered-fixed-width(600px);
-    font-weight: normal;
-    font-size: 1.0em;
-
-    #mc_embed_signup{
-      font-family: $sans-serif;
-      form{
-        padding: 0px;
-      }
-      .form-control{
-        display: inline-block;
-        width: 60%;
-        height: 33px;
-      }
-      label{
-        font-style: italic;
-        text-align: center;
-        font-weight: normal;
-      }
-      input{
-        display: inline-block;
-      }
-
-      .button{
-        width: 25%;
-        background-color: white;
-        color: $red;
-        text-transform: uppercase;
-      }
-      .email{
-        padding: 6px 12px;
-        font-style: italic;
-      }
-    }
+    @include newsletter-form;
   }
 
   .partner{
@@ -671,12 +639,11 @@ article{
   }
 }
 
-.in-the-series, .related-articles{
+.in-the-series, .related-articles, .newsletter-list{
   margin: 20px 0;
 
   h2{
-    text-transform: uppercase;
-    font-size: 14px;
+    @include type($text-color, 14px);
     margin: 20px 0;
   }
   h3{
@@ -704,6 +671,47 @@ article{
   margin-bottom: 40px;
   .fa-twitter{
     color: $twitter-blue;
+  }
+
+}
+
+
+/**************  Newsletter  **************/
+.newsletter-signup{
+  @include row-divider;
+}
+
+.newsletter-list{
+  @include newsletter-form;
+
+  #mc_embed_signup{
+    .form-control{
+      width: 30%;
+    }
+    label{
+      @include hide;
+    }
+    .button{
+      width: 15%;
+      background-color:  $red;
+      color: white;
+    }
+  }
+
+  @media(max-width: $screen-md) {
+    #mc_embed_signup {
+      .form-control {
+        width: 50%;
+      }
+    }
+  }
+  @media(max-width: $screen-sm) {
+    #mc_embed_signup {
+      .form-control {
+        width: 70%;
+      }
+
+    }
   }
 
 }

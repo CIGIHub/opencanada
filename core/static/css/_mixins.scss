@@ -1,4 +1,4 @@
-@mixin type($color, $font-size:12px){
+@mixin type($color:$text-color, $font-size:12px){
     font-family: $sans-serif;
     font-size: $font-size;
     text-transform: uppercase;
@@ -27,6 +27,12 @@
 
 @mixin centered{
   margin: 0 auto;
+}
+
+@mixin hide{
+  position: absolute !important;
+  top: -9999px !important;
+  left: -9999px !important;
 }
 
 @mixin centered-fixed-width($width){
@@ -188,4 +194,43 @@
        color: $red;
     }
   }
+}
+
+
+@mixin newsletter-form{
+  font-weight: normal;
+    font-size: 1.0em;
+
+    #mc_embed_signup{
+      font-family: $sans-serif;
+      form{
+        padding: 0px;
+      }
+      .form-control{
+        display: inline-block;
+        width: 60%;
+        height: 33px;
+      }
+      label{
+        font-style: italic;
+        text-align: center;
+        font-weight: normal;
+      }
+      input{
+        display: inline-block;
+      }
+
+      .button{
+        width: 25%;
+        background-color: white;
+        color: $red;
+        text-transform: uppercase;
+        display:inline-block;
+      }
+      .email{
+        padding: 6px 12px;
+        font-style: italic;
+        margin-right: 2%;
+      }
+    }
 }
