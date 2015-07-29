@@ -102,7 +102,7 @@ class NewsletterArticleLink(Orderable, models.Model):
 
     panels = [
         PageChooserPanel("article", 'articles.ArticlePage'),
-        FieldPanel("article_text"),
+        FieldPanel("override_text"),
         ImageChooserPanel("override_image"),
     ]
 
@@ -135,7 +135,7 @@ class NewsletterExternalArticleLink(Orderable, models.Model):
 
     panels = [
         PageChooserPanel("external_article", 'articles.ExternalArticlePage'),
-        FieldPanel("article_text"),
+        FieldPanel("override_text"),
     ]
 
 
@@ -167,5 +167,5 @@ class NewsletterEventLink(Orderable, models.Model):
 
     panels = [
         PageChooserPanel("event", 'events.EventPage'),
-        FieldPanel("article_text"),
+        FieldPanel("override_text"),
     ]
