@@ -4,7 +4,10 @@
 
     {% image self.typed_featured_item.main_image original as background_image %}
     <div class="feature-image" style="background-image: url(' {{ background_image.url }} ')">
-        <div class="feature-image-overlay" style="background: rgba( {{ self.typed_featured_item.image_overlay_color.rgb }}, {{ self.typed_featured_item.opacity }} )"></div>
+        <div class="feature-image-overlay"
+             style="background: rgba( {% if self.typed_featured_item.image_overlay_color.rgb %} {{ self.typed_featured_item.image_overlay_color.rgb }} {% endif %},
+                     {% if self.typed_featured_item.opacity %} {{ self.typed_featured_item.opacity }} {% endif %})">
+        </div>
     </div>
 
     <div class="feature-text" style="color: {{ self.typed_featured_item.font_style.text_colour.hex_value }}">

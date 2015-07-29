@@ -131,6 +131,15 @@
 
 @mixin article-overlay{
   position: relative;
+  color: white;
+
+  .contributors, .contributors a, a{
+    color: white;
+    text-decoration:none;
+  }
+   a:hover{
+    color: $red;
+  }
 
   .feature-image{
     position: relative;
@@ -147,6 +156,7 @@
     display: block;
     content: "";
     top: 0; right: 0; bottom: 0; left: 0;
+    background: rgba(0,0,0, 0.5);
   }
 
   .image-caption, .feature-text{
@@ -159,12 +169,6 @@
     margin-right: 10%;
     h1{
       font-size: 2.4em;
-      a{
-       text-decoration: none;
-      }
-      a:hover{
-        color: $red;
-      }
     }
     .feature-line{
       font-size: 1.4em;
@@ -178,7 +182,9 @@
     font-family: $sans-serif;
     right: 3%;
     bottom: 3%;
-    .fa-camera.highlighted{
+    .fa-camera.highlighted,
+    .fa-camera:hover{
+      cursor:pointer;
        color: $red;
     }
   }

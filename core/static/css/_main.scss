@@ -259,8 +259,6 @@ footer{
 /**************   Homepage Feature  **************/
 
 .main-feature{
-  font-family: $sans-serif;
-
   @include article-overlay;
 
   .feature-text{
@@ -271,18 +269,16 @@ footer{
   .scroll{
     position: absolute;
     z-index:10;
-  }
-
-  .scroll{
     font-size: 60px;
     bottom: 15%;
     left: 50%;
 
     a{
-      color: $red;
+      color: white;
       text-decoration: none;
     }
     a:hover{
+      color: $red;
       -webkit-animation: bounce 2s;
       -moz-animation:    bounce 2s;
       -o-animation:     bounce 2s;
