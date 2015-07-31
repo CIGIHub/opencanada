@@ -49,6 +49,7 @@
         display: inline-block;
         list-style: none;
         padding: 0px;
+        margin: 0px;
       }
     }
     ul li a{
@@ -73,11 +74,12 @@
 }
 
 @mixin collapsed{
+  height: 55px;
   .banner{
-      padding-top: 10px;
-      padding-bottom: 10px;
+      padding-top: 12px;
+      padding-bottom: 12px;
     }
-  .logo, .share-links, .toggle-nav{
+  .logo, .share-links{
     text-align: center;
   }
   .logo{
@@ -86,17 +88,6 @@
       display: inline;
     }
   }
-
-  .share-links.vcenter {
-    margin-top: 0.7%;
-    @media(max-width: $screen-sm){
-      margin-top: 0;
-    }
-  }
-
-  .toggle-nav{
-      display:inline;
-    }
 
   #main-menu{
     z-index: 300;
@@ -109,12 +100,26 @@
       height: 100%;
       width: 200px;
       padding: 25px;
+      margin-top: 0px;
       background: $background-grey;
       border-right: $border-red;
       text-align: left;
 
+      ul.social{
+        border-top: $border-white;
+        margin-top: 10px;
+        padding-top: 10px;
+        li a{
+          font-size: 12px;
+        }
+        i{
+          width: 20px;
+        }
+      }
+
       ul{
         margin-top: 0px;
+
         li{
           display: block;
             padding: 5px;
@@ -129,7 +134,7 @@
     }
 
     &.mobile-menu.open{
-      transition: 1s;
+      transition: 0.5s;
       left: 0;
     }
   }
