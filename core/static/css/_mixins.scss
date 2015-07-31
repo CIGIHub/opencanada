@@ -105,8 +105,21 @@
       border-right: $border-red;
       text-align: left;
 
+      ul.social{
+        border-top: $border-white;
+        margin-top: 10px;
+        padding-top: 10px;
+        li a{
+          font-size: 12px;
+        }
+        i{
+          width: 20px;
+        }
+      }
+
       ul{
         margin-top: 0px;
+
         li{
           display: block;
             padding: 5px;
