@@ -1,32 +1,32 @@
 {% load wagtailcore_tags static core_tags %}
 
 <header role="banner">
-    <div class="banner container">
+    <div class="banner container-fluid">
         <div class="row">
-            <div class="col-md-2 col-sm-2 col-xs-3 toggle-nav">
-                <button type="button" class="menu">
+            <div class="col-xs-2 toggle-mobile menu">
+                <button type="button" data-target="main-menu">
                     <i  class="fa fa-list-ul"></i>
                 </button>
             </div>
-
-            <div class="col-md-5 col-sm-8 col-xs-6 logo">
-                    <a href="/"><img src="{% static 'img/opencanada-logo-white.png' %}" alt="OpenCanada Logo" class="img-responsive" ></a>
+            <div class="col-xs-8 logo">
+                <figure>
+                    <a href="/"><img src="{% static 'img/opencanada-logo.png' %}" alt="OpenCanada Logo" class="img-responsive" ></a>
+                </figure>
+                <nav id="main-menu" role="navigation">
+                    <ul>
+                        <li><a href="/about">About</a></li>
+                        <li><a href="/contributors">Contributors</a></li>
+                        <li><a href="/topics">Topics</a></li>
+                        <li class="toggle-full"><i class="fa fa-search"></i></li>
+                        <li class="toggle-mobile"><i class="fa fa-twitter"></i></li>
+                        <li class="toggle-mobile"><i class="fa fa-facebook"></i></li>
+                    </ul>
+                </nav>
             </div>
-
-            <nav class="col-md-5 vcenter" id="main-menu" role="navigation">
-                <ul>
-                  <li><a href="/about">About</a></li>
-                  <li><a href="/contributors">Contributors</a></li>
-                  <li><a href="/topics">Topics</a></li>
-                </ul>
-            </nav>
-
-            <div class="col-md-2 col-sm-2 col-xs-3 share-links vcenter">
-                <ul>
-                  <li class="twitter"><a href="https://twitter.com/TheCIC"><i class="fa fa-twitter-square"></i></a></li>
-                  <li class="facebook"><a href="https://www.facebook.com/CanadianInternationalCouncil"><i class="fa fa-facebook-square"></i></a></li>
-                    <li class="search"><a href="#search"><i class="fa fa-search"></i></a></li>
-                </ul>
+            <div class="col-xs-2 toggle-mobile search">
+                <button type="button" data-target="search-box">
+                    <i class="fa fa-search"></i>
+                </button>
             </div>
         </div>
     </div>

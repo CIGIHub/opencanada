@@ -51,19 +51,20 @@ header{
   position: fixed;
   top: 0;
   width: 100%;
+  height: 100px;
   z-index: 100;
   color: white;
   background: $red;
-  transition: height 2s, background 2s;
+  transition: height 0.3s, background 2s;
+
+  .col-xs-2.search{
+    text-align:right;
+  }
 
   button{
     border:none;
     background: none;
-    padding: 0px;
-
-    .fa-list-ul{
-      padding: 10px;
-    }
+    padding: 6px 12px;
   }
 
   button:focus {outline:0;}
@@ -73,29 +74,15 @@ header{
     padding-bottom: 20px;
   }
 
-  .vcenter {
-    margin-top: 2.2%;
-  }
-
-  .share-links{
-    @include inline-list(white, 20px);
-    ul li{
-      margin-right: 7px;
-    }
-    &.vcenter{
-      margin-top: 2.0%;
-    }
-    text-align:right;
+  .logo img{
+    display:block;
+    margin: 0 auto;
   }
 
   #main-menu{
+    margin-top:1%;
+    text-align: center;
     @include inline-list-divided(white, 16px);
-    text-align:right;
-  }
-
-  .toggle-nav{
-      display:none;
-      font-size: 20px;
   }
 
   &.collapsed.scrolled{
@@ -106,11 +93,8 @@ header{
     @include collapsed;
   }
 
-  @media(max-width: $screen-md){
-    @include collapsed;
-  }
-
   @media(max-width: $screen-sm){
+    @include collapsed;
     .logo img{
       max-height: 30px;
     }
@@ -131,7 +115,7 @@ header{
 	height: 0;
     background: $background-grey;
     z-index: 200;
-	transition: 0.8s;
+	transition: 0.5s;
 
     &.open{
       overflow-y: visible;
@@ -229,6 +213,7 @@ footer{
 
 .main-feature{
   @include article-overlay;
+  min-height: 300px;
 
   .feature-text{
     left: 25%;
@@ -357,73 +342,23 @@ footer{
 
 .article-scroll{
 
-  header{
-    .share-links, .logo{
-      display: none;}
+  header figure{
+      display: none;
   }
 
-  .title{
-    width: 70%;
-    text-align:center;
-  }
-  h1, .share-links{
+  h1{
     position: fixed;
     z-index: 1100;
-  }
-  h1{
+    text-align:center;
     width:inherit;
     top: 18px;
     color: white;
     font-size: 16px;
-    text-align: center;
-
   }
-  .share-links{
-    margin-top: 0;
-    right: 0;
-    top:0;
-    li{
-      display:inline;
-      span, a{
-        color: white;
-      }
-    }
-    .email{
-      display:none;
-    }
-    .fa{
-      font-size: 16px;
-      margin-right: 5px;
-    }
-  }
-}
 
-.small-article{
-   header{
-    .share-links{
-      display: none;}
-   }
-
-  .share-links{
-
+  article ul.share-links.sticky{
     position: fixed;
-    z-index: 1100;
-    margin-top: 0;
-    right: 0;
-    top:0;
-    li{
-      display:inline;
-      span, a{
-        color: white;
-      }
-    }
-    .email{
-      display:none;
-    }
-    .fa{
-      font-size: 16px;
-      margin-right: 5px;
-    }
+    top: 60px;
   }
 
 }
@@ -716,5 +651,4 @@ article{
 
     }
   }
-
 }
