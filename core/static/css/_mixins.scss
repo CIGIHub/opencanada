@@ -204,18 +204,17 @@
 
 @mixin newsletter-form{
   font-weight: normal;
-    font-size: 1.0em;
+  font-size: 1.0em;
 
+  #mc_embed_signup_scroll{
+    text-align: center;
+  }
     #mc_embed_signup{
       font-family: $sans-serif;
       form{
         padding: 0px;
       }
-      .form-control{
-        display: inline-block;
-        width: 60%;
-        height: 33px;
-      }
+
       label{
         font-style: italic;
         text-align: center;
@@ -223,6 +222,9 @@
       }
       input{
         display: inline-block;
+        border-radius: none;
+        border: $border-red;
+        width: 50%;
       }
 
       .button{
@@ -233,7 +235,7 @@
         display:inline-block;
       }
       .email{
-        padding: 6px 12px;
+        padding: 6px;
         font-style: italic;
         margin-right: 2%;
       }
