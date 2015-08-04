@@ -147,6 +147,7 @@ function toggleHeading(windowWidth, articleTitleWidth){
 
     function fullHeader(){
         $('header').removeClass('collapsed');
+        $('#search-box').removeClass('small-header');
         $('.toggle-mobile').hide();
         $('.toggle-full').show();
         $('.logo').addClass('col-sm-12');
@@ -156,6 +157,7 @@ function toggleHeading(windowWidth, articleTitleWidth){
 
     function collapsedHeader(){
         $('header').addClass('collapsed');
+        $('#search-box').addClass('small-header');
         $('.toggle-mobile').show();
         $('.toggle-full').hide();
         $('.logo').removeClass('col-sm-12');

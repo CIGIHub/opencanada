@@ -110,6 +110,7 @@ header{
 
 #search-box{
   width: 100%;
+  top: -100px;
   position: fixed;
   overflow-y: hidden;
   background: $background-grey;
@@ -121,6 +122,7 @@ header{
   -webkit-transition: transform 0.4s ease, opacity 0.4s ease;
 
   &.open{
+    top: 100px;
     overflow-y: visible;
     padding-top: 30px;
     min-height: 110px;
@@ -129,6 +131,11 @@ header{
     -webkit-transform: translate(0, 0%);
     -ms-transform: translate(0, 0);
   }
+
+  &.open.small-header{
+    top: 55px;
+  }
+
   .container{
     padding: 0px 200px;
   }
