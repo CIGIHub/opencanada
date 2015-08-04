@@ -145,9 +145,11 @@ header{
   input{
     width: 75%;
     margin-right: 10px;
-    border-radius: 4px;
     border: $border-red;
     padding: 5px;
+  }
+  input:focus{
+    outline: none;
   }
   .input-group{
     width: 100%;

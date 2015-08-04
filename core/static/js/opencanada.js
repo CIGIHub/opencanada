@@ -85,6 +85,7 @@ function toggleBox(e){
                     menu.removeClass('open');
                 }
                search.addClass('open');
+                $('#search-box input').focus();
             }
             else{
                 search.removeClass('open');
