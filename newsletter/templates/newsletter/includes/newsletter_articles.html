@@ -19,7 +19,7 @@
                                     </tr>
                                     <tr>
                                         <td valign="top" align="center" style="{% base_styles 'img' %} padding:0px;">
-                                            {% image article.main_image width-450 as tmp_photo %}
+                                            {% image article.main_image width-580 as tmp_photo %}
                                             <a href="{{ article.url }}" style="{% base_styles 'a' %} target="_blank">
                                                 <img src="{{ tmp_photo.url }}" alt="{{ article.main_image.title }}" style="{% base_styles 'img' %}" />
                                             </a>
@@ -53,12 +53,12 @@
                             <tr>
                                 <td valign="middle" style="{% base_styles 'td' %} padding-top:15px; padding-right: 15px; padding-bottom: 15px; padding-left: 40px;" width="80">
                                     {% if article.override_image %}
-                                        {% image article.override_image width-450 as tmp_photo %}
+                                        {% image article.override_image width-80 as tmp_photo %}
                                         <a href="{{ article.url }}" target="_blank" style="{% base_styles 'a' %}">
                                             <img src="{{ tmp_photo.url }}" alt="{{ article.main_image.title }}" style="{% base_styles 'img' %}" />
                                         </a>
                                     {% else %}
-                                        {% image article.main_image width-450 as tmp_photo %}
+                                        {% image article.main_image width-80 as tmp_photo %}
                                         <a href="{{ article.url }}" target="_blank" style="{% base_styles 'a' %}">
                                             <img src="{{ tmp_photo.url }}" alt="{{ article.main_image.title }}" style="{% base_styles 'img' %}" />
                                         </a>
