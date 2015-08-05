@@ -9,9 +9,8 @@
                 <tr>
                     <td bgcolor="#bf1e2e"
                         width="100%" align="center" valign="middle"
-                        class="headerLogoImage" id="headerLogoCell"
                         style="{% base_styles 'td' %} padding: 20px 0 0 0;">
-                        <a href="https://www.opencanada.org/{% if tracking %}{{ issue.link_tracking|safe }}{% endif %}"
+                        <a href="https://www.opencanada.org/"
                            target="_blank" style="{% base_styles 'a' %}">
                             <img alt="Open Canada"
                                                 src="{% static 'img/opencanada-logo-white.png' %}"
@@ -30,7 +29,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td valign="top" align="center" bgcolor="#bf1e2e" style="{% base_styles 'td' %}">
+                    <td valign="top" align="center" bgcolor="#bf1e2e" id="newsletterTitle" style="{% base_styles 'td' %}">
                         <h1 style="{% base_styles 'h1' %}
                                 font-family: Oswald, Helvetica, Arial, sans-serif;
                                 font-size: 65px;
