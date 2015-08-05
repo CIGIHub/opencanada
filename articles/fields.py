@@ -51,6 +51,12 @@ class SharableBlock(blocks.CharBlock):
         icon = "openquote"
 
 
+class PullQuoteBlock(blocks.TextBlock):
+    class Meta:
+        template = "articles/blocks/pull_quote.html"
+        icon = "openquote"
+
+
 class ContributorChooser(blocks.ChooserBlock):
     @cached_property
     def target_model(self):
@@ -88,3 +94,51 @@ class ImageBlock(blocks.StructBlock):
     class Meta:
         template = "articles/blocks/image_block.html"
         icon = "image"
+
+
+class BodyField(StreamField):
+    def __init__(self, block_types=None, **kwargs):
+        block_types = [
+            ('Heading', HeadingBlock()),
+            ('Paragraph', ParagraphBlock()),
+            ('Image', ImageBlock()),
+            ('Embed', EmbedBlock(icon="site")),
+            ('List', blocks.ListBlock(
+                blocks.RichTextBlock(label="item"), icon="list-ul")
+             ),
+            ('Sharable', SharableBlock()),
+            ('PullQuote', PullQuoteBlock()),
+        ]
+
+        super(BodyField, self).__init__(block_types, **kwargs)
+
+        #
+        # super(BodyField, self).__init__(BodyBlock(), **kwargs)
+
+
+class ChapterField(StreamField):
+    def __init__(self, block_types=None, **kwargs):
+        block_types = [
+            ('chapter', ChapterBodyBlock()),
+        ]
+
+        super(ChapterField, self).__init__(block_types, **kwargs)
+
+
+class BodyBlock(blocks.StreamBlock):
+        Heading = HeadingBlock()
+        Paragraph = ParagraphBlock()
+        Image = ImageBlock()
+        Embed = EmbedBlock(icon="site")
+        List = blocks.ListBlock(blocks.RichTextBlock(label="item"), icon="list-ul")
+        Sharable = SharableBlock()
+        PullQuote = PullQuoteBlock()
+
+
+class ChapterBodyBlock(blocks.StructBlock):
+    heading = blocks.CharBlock()
+    body = BodyBlock(required=False)
+
+    class Meta:
+        template = "articles/blocks/chapter.html"
+        # icon = "openquote"
