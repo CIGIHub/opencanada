@@ -13,6 +13,9 @@ class PostImport(models.Model):
     def __str__(self):
         return "{}".format(self.post_id)
 
+    class Meta:
+        app_label = 'wordpress_importer'
+
 
 @python_2_unicode_compatible
 class ImageImport(models.Model):
@@ -21,6 +24,9 @@ class ImageImport(models.Model):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        app_label = 'wordpress_importer'
 
 
 @python_2_unicode_compatible
@@ -31,6 +37,9 @@ class TagImport(models.Model):
     def __str__(self):
         return "{} - {}".format(self.original_slug, self.topic.name)
 
+    class Meta:
+        app_label = 'wordpress_importer'
+
 
 @python_2_unicode_compatible
 class ImportDownloadError(models.Model):
@@ -40,3 +49,6 @@ class ImportDownloadError(models.Model):
 
     def __str__(self):
         return "{} - {}".format(self.status_code, self.url)
+
+    class Meta:
+        app_label = 'wordpress_importer'
