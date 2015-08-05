@@ -78,7 +78,8 @@ register_snippet(FontStyle)
 @python_2_unicode_compatible
 class ArticleListPage(Page):
     subpage_types = ['ArticlePage',
-                     'ChapteredArticlePage',]
+                     'ChapteredArticlePage',
+                     ]
 
     @property
     def subpages(self):
