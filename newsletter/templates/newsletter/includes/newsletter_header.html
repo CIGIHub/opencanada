@@ -1,84 +1,65 @@
+{% load paths %}
 {% load static core_tags wagtailcore_tags wagtailimages_tags %}
 
 
-<table border="0" cellpadding="0" cellspacing="0" width="100%" id="templateHeader">
+<table cellpadding="0" cellspacing="0" width="100%" style="{% base_styles 'table' %}">
     <tr>
-        <td valign="top" class="headerContainer">
-            <table border="0" cellpadding="0" cellspacing="0" width="100%" id="templateHeader">
+        <td align="center" valign="top" style="{% base_styles 'td' %}">
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="{% base_styles 'table' %}">
                 <tr>
-                    <td valign="top" class="headerContainer">
-                        <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnImageBlock">
-                            <tbody class="mcnImageBlockOuter">
-                                <tr>
-                                    <td valign="top" style="padding:10px" class="mcnImageBlockInner">
-                                        <table align="center" width="100%" border="0" cellpadding="0" cellspacing="0" class="mcnImageContentContainer">
-                                            <tbody>
-                                                <tr>
-                                                    <td class="mcnImageContent" valign="top" align="center" style="padding-right: 0px; padding-left: 0px; padding-top: 20px; padding-bottom: 0px;">
-                                                        <a href="https://opencanada.org" target="_blank">
-                                                            <img align="center" alt="Open Canada Logo" src="{% static 'img/opencanada-logo-white.png' %}" width="235" style="max-width:235px; padding-bottom: 0; display: inline !important; vertical-align: bottom;" class="mcnImage">
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                     </td>
+                    <td bgcolor="#bf1e2e"
+                        width="100%" align="center" valign="middle"
+                        class="headerLogoImage" id="headerLogoCell"
+                        style="{% base_styles 'td' %} padding: 20px 0 0 0;">
+                        <a href="https://www.opencanada.org/{% if tracking %}{{ issue.link_tracking|safe }}{% endif %}"
+                           target="_blank" style="{% base_styles 'a' %}">
+                            <img alt="Open Canada"
+                                                src="{% static 'img/opencanada-logo-white.png' %}"
+                                                width="235" height="50"
+                                                border="0"
+                                                id="headerLogoImage"
+                                                style="{% base_styles 'img' %}
+                                                        display: block; color: #ffffff;
+                                                        font-family: Helvetica, Arial, sans-serif;
+                                                        font-size: 10px; font-weight: 500;
+                                                        text-decoration: none; text-align: right;
+                                                        max-width: 100%;
+                                                        max-height: 100%;
+                                                        height: auto;">
+                        </a>
+                    </td>
                 </tr>
-            </table>
-            <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnTextBlock">
-                <tbody class="mcnTextBlockOuter">
-                    <tr>
-                        <td valign="top" class="mcnTextBlockInner">
-                            <table align="center" border="0" cellpadding="0" cellspacing="0" width="600" class="mcnTextContentContainer">
-                                <tbody>
-                                    <tr>
-                                        <td valign="top" align="center" class="mcnTextContent" style="padding-top:0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px;">
-                                            <h1>WEEKLY DISPATCH</h1>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
                 <tr>
-                    <td valign="top" class="headerContainer">
-                        <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnImageBlock">
-                            <tbody class="mcnImageBlockOuter">
-                                <tr>
-                                    <td valign="top" style="padding:10px" class="mcnImageBlockInner">
-                                        <table align="center" width="100%" border="0" cellpadding="0" cellspacing="0" class="mcnImageContentContainer">
-                                            <tbody>
-                                                <tr>
-                                                    <td class="mcnImageContent" valign="top" align="right" style="padding-right: 0px; padding-left: 0px; padding-top: 0px; padding-bottom: 10px;">
-                                                        <img align="right" alt="" src="{% static 'img/twitter-25.png' %}" width="20" style="max-width:25px; padding-bottom: 0; display: inline !important; vertical-align: bottom;" class="mcnImage">
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </td>
-                                    <td valign="top" style="padding:10px" class="mcnImageBlockInner">
-                                        <table align="center" width="100%" border="0" cellpadding="0" cellspacing="0" class="mcnImageContentContainer">
-                                            <tbody>
-                                                <tr>
-                                                    <td class="mcnImageContent" valign="top" align="left" style="padding-right: 0px; padding-left: 0px; padding-top: 0px; padding-bottom: 10px;">
-                                                        <img align="left" alt="" src="{% static 'img/facebook-25.png' %}" width="20" style="max-width:25px; padding-bottom: 0; display: inline !important; vertical-align: bottom;" class="mcnImage">
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                     </td>
+                    <td valign="top" align="center" bgcolor="#bf1e2e" style="{% base_styles 'td' %}">
+                        <h1 style="{% base_styles 'h1' %}
+                                font-family: Oswald, Helvetica, Arial, sans-serif;
+                                font-size: 65px;
+                                font-weight: 400;
+                                line-height: 130%;
+                                color: #ffffff;
+                                padding: 10px 0 10px 0;
+                                margin: 0px">WEEKLY DISPATCH</h1>
+                    </td>
                 </tr>
+                <tr>
+                    <td valign="top" bgcolor="#bf1e2e" style="{% base_styles 'td' %}">
+                        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="{% base_styles 'table' %}">
+                            <tr>
+                               <td valign="top" align="right" style="padding-right: 5px; padding-left: 0px; padding-top: 0px; padding-bottom: 20px;">
+                                   <img align="right" alt="twitter" src="{% static 'img/twitter-25.png' %}" width="20" style="{% base_styles 'img' %}
+                                           max-width:25px; padding-bottom: 0; display: inline !important; vertical-align: bottom;">
+                               </td>
+                               <td valign="top" align="left" style="padding-right: 0px; padding-left: 5px; padding-top: 0px; padding-bottom: 20px;">
+                                   <img align="left" alt="facebook" src="{% static 'img/facebook-25.png' %}" width="20" style="{% base_styles 'img' %}
+                                           max-width:25px; padding-bottom: 0; display: inline !important; vertical-align: bottom;">
+                               </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
             </table>
         </td>
     </tr>
 </table>
+

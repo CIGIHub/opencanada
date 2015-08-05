@@ -1,67 +1,53 @@
+{% load paths %}
 {% load static core_tags wagtailcore_tags wagtailimages_tags %}
-
-<table border="0" cellpadding="0" cellspacing="0" width="100%" id="templateEvents">
+<table border="0" cellpadding="0" cellspacing="0" width="100%" style="{% base_styles 'table' %}">
     <tr>
-        <td valign="top" class="bodyContainer" style="padding-bottom:9px;">
-
-            <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnTextBlock">
-                <tbody class="mcnTextBlockOuter">
-                    <tr>
-                        <td valign="top" class="mcnTextBlockInner">
-                            <table align="left" border="0" cellpadding="0" cellspacing="0" width="650" class="mcnTextContentContainer">
-                                <tbody>
-                                    <tr>
-                                        <td valign="top" class="mcnTextContent" style="padding:15px;">
-                                            <h2>EVENTS</h2>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </td>
-                    </tr>
-                </tbody>
+        <td valign="top" style="{% base_styles 'td' %} padding-bottom:9px;">
+            <table border="0" cellpadding="0" cellspacing="0" width="100%"  style="{% base_styles 'table' %}">
+                <tr>
+                    <td valign="top" align="center" style="{% base_styles 'td' %}">
+                        <h2 style="font-family: 'Droid Sans', Helvetica, Arial, sans-serif;
+                        font-size: 18px;
+                        font-weight: 400;
+                        line-height: 18px;
+                        color: #000000;
+                        text-transform: uppercase;">EVENTS</h2>
+                    </td>
+                </tr>
             </table>
 
             {% for event in self.events %}
 
-                <table border="0" cellpadding="0" cellspacing="0" class="mcnCaptionRightContentOuter" width="100%">
-                    <tbody>
-                        <tr>
-                            <td class="mcnCaptionRightImageContent" valign="middle" style="padding:15px;" width="80">
-                                {% image event.organization.logo width-80 as tmp_photo %}
-                                <a href="{{ event.event_link }}" target="_blank"><img src="{{ tmp_photo.url }}" alt="{{ event.organization.logo.title }}" class="mcnImage" /></a>
-                            </td>
-
-                            <td valign="middle" class="mcnTextContent" style="padding-bottom: 15px; padding-top: 15px;">
-                                <h3><a href="{{ event.event_link }}" target="_blank">{{ event.title }}</a></h3>
-                                <p>{{ event.date|date }},  {{ event.location }}</p>
-                                {% if event.override_text %}
-                                    <p>{{ event.override_text|richtext }}</p>
-                                {% else %}
-                                    <p>{{ event.body|richtext }}</p>
-                                {% endif %}
-                            </td>
-
-                        </tr>
-                    </tbody>
-                </table>
-            {% endfor %}
-
-            <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnDividerBlock">
-                <tbody class="mcnDividerBlockOuter">
+                <table border="0" cellpadding="0" cellspacing="0" width="100%"  style="{% base_styles 'table' %}">
                     <tr>
-                        <td class="mcnDividerBlockInner" style="padding: 18px;">
-                            <table class="mcnDividerContent" border="0" cellpadding="0" cellspacing="0" width="100%" style="border-top-width: 1px;border-top-style: solid;border-top-color: #E1E1E1;">
-                                <tbody><tr>
-                                    <td>
-                                        <span></span>
-                                    </td>
-                                </tr>
-                            </tbody></table>
+                        <td valign="middle" style="{% base_styles 'td' %} padding:15px;" width="80">
+                            {% image event.organization.logo width-80 as tmp_photo %}
+                            <a href="{{ event.event_link }}" target="_blank" style="{% base_styles 'a' %}">
+                                <img style="{% base_styles 'img' %}" src="{{ tmp_photo.url }}" alt="{{ event.organization.logo.title }}" />
+                            </a>
+                        </td>
+
+                        <td valign="middle" style="{% base_styles 'td' %} padding-bottom: 15px; padding-top: 15px;">
+                            <h3 style="font-family: 'Droid Serif', Georgia, serif; font-size: 18px; line-height: 18px;">
+                                <a href="{{ event.event_link }}" target="_blank" style="{% base_styles 'a' %} color: #bf1e2e; text-decoration:none;">{{ event.title }}</a>
+                            </h3>
+                            <p style="{% base_styles 'p' %} font-family: 'Droid Serif', Georgia, serif; font-size: 16px; line-height: 135%">{{ event.date|date }},  {{ event.location }}</p>
+                            <p style="{% base_styles 'p' %} font-family: 'Droid Serif', Georgia, serif; font-size: 16px; line-height: 135%">
+                                {% if event.override_text %}
+                                    {{ event.override_text|richtext }}
+                                {% else %}
+                                    {{ event.body|richtext }}
+                                {% endif %}
+                            </p>
                         </td>
                     </tr>
-                </tbody>
-            </table>
+                </table>
+            {% endfor %}
         </td>
+    </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%" class="dividerTable" style="{% base_styles 'table' %}  border-top: 1px solid #e1e1e1;">
+    <tr>
+        <td style="{% base_styles 'td' %} font-size: 0;">&nbsp;</td>
     </tr>
 </table>
