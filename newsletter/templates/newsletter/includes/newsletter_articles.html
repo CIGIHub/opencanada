@@ -27,7 +27,13 @@
                                     </tr>
                                     <tr>
                                         <td valign="top" style="{% base_styles 'td' %} padding: 0px;">
-                                            <p style="{% base_styles 'p' %}> font-family: 'Droid Serif', Georgia, serif; font-size: 16px; line-height: 135%">{{ article.excerpt }}</p>
+                                            {% if article.override_text %}
+                                            {{ article.override_text|paragraph_markup|safe }}
+                                        {% else %}
+                                            <p style="{% base_styles 'p' %} font-family: 'Droid Serif', Georgia, serif; font-size: 16px; line-height: 135%">
+                                            {{ article.excerpt }}
+                                            </p>
+                                        {% endif %}
                                         </td>
                                     </tr>
                                 </table>
@@ -70,13 +76,15 @@
                                     <h3 style="font-family: 'Droid Serif', Helvetica, Arial, sans-serif; font-size: 18px;">
                                         <a href="{{ article.url }}" target="_blank" style="{% base_styles 'a' %} color: #bf1e2e; text-decoration:none;">{{ article.title }}</a>
                                     </h3>
-                                    <p style="{% base_styles 'p' %} font-family: 'Droid Serif', Georgia, serif; font-size: 16px; line-height: 135%">
+
                                         {% if article.override_text %}
-                                            {{ article.override_text|richtext }}
+                                            {{ article.override_text|paragraph_markup|safe }}
                                         {% else %}
+                                            <p style="{% base_styles 'p' %} font-family: 'Droid Serif', Georgia, serif; font-size: 16px; line-height: 135%">
                                             {{ article.excerpt }}
+                                            </p>
                                         {% endif %}
-                                    </p>
+
                                 </td>
 
                             </tr>

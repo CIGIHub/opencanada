@@ -33,13 +33,13 @@
                             font-weight: 400;">
                                 <a style="{% base_styles 'a' %} color: #bf1e2e; text-decoration:none;" href="{{ article.website_link }}" target="_blank">{{ article.title }}</a>
                             </h3>
-                            <p style="{% base_styles 'p' %} font-family: 'Droid Serif', Georgia, serif; font-size: 16px; line-height: 135%">
+
                                 {% if article.override_text %}
-                                    {{ article.override_text|richtext }}
+                                    {{ article.override_text|paragraph_markup|safe }}
                                 {% else %}
-                                    {{ article.body|richtext }}
+                                    {{ article.body|paragraph_markup|safe }}
                                 {% endif %}
-                            </p>
+
                         </td>
                     </tr>
                 </table>
