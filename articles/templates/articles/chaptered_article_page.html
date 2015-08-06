@@ -17,7 +17,10 @@
     }
     .toc ul,
     article h2,
-    .block-ColumnedContent
+    .block-ColumnedContent,
+    .block-end_note,
+    .block-citation,
+    .block-Image
     {
         margin-left: 10%;
         margin-right: 10%
@@ -26,7 +29,8 @@
     .block-Overflow .block-ColumnedContent,
     .block-Overflow .block-Image,
     .block-Overflow .block-Paragraph,
-    .block-Overflow .block-ssharable{
+    .block-Overflow .block-sharable
+    {
         margin-left: 0;
         margin-right: 0;
     }
@@ -116,6 +120,24 @@
     .clickable {
         cursor: pointer;
     }
+
+    .end-notes li {
+        list-style: none;
+        line-height: 1.5em;
+        text-indent: -2em;
+    }
+
+    .end-notes .identifier {
+        float: left;
+        width: 2em;
+    }
+
+    .block-citation,
+    .block-end_note{
+        padding-top: 5px;
+        padding-bottom: 5px;
+        color: #c0c0c0;
+    }
     </style>
     <div id="article-page" class="container">
         <article>
@@ -159,7 +181,20 @@
 
                 </div>
 
+                {% if self.chapters %}
                 {{ self.chapters }}
+                {% endif %}
+
+                {% if self.works_cited %}
+                    <h2>Works Cited</h2>
+                    {{ self.works_cited }}
+                {% endif %}
+
+                {% if self.end_notes %}
+                    <h2>End Notes</h2>
+                    <ul class="end-notes">{{ self.end_notes }}</ul>
+
+                {% endif %}
 
                 <div class="home-link"><a href="/"><img src="{% static 'img/opencanada-mark.png' %}"></a></div>
             </div>

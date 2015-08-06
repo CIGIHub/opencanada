@@ -178,3 +178,18 @@ class ChapterBodyBlock(blocks.StructBlock):
     class Meta:
         template = "articles/blocks/chapter.html"
         # icon = "openquote"
+
+
+class EndNoteBlock(blocks.StructBlock):
+    identifier = blocks.CharBlock()
+    text = blocks.TextBlock()
+
+    class Meta:
+        template = "articles/blocks/endnote.html"
+
+
+class CitationBlock(blocks.StructBlock):
+    text = blocks.TextBlock()
+
+    class Meta:
+        template = "articles/blocks/citation.html"

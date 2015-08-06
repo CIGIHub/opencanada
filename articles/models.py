@@ -13,7 +13,7 @@ from wagtail.wagtailadmin.edit_handlers import (FieldPanel, InlinePanel,
                                                 MultiFieldPanel,
                                                 PageChooserPanel,
                                                 StreamFieldPanel)
-from wagtail.wagtailcore.fields import RichTextField
+from wagtail.wagtailcore.fields import RichTextField, StreamField
 from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
@@ -352,6 +352,19 @@ ArticlePage.promote_panels = Page.promote_panels + [
 
 class ChapteredArticlePage(ArticlePage):
     chapters = article_fields.ChapterField(blank=True, null=True)
+    works_cited = StreamField(
+        block_types=[
+            ('citation', article_fields.CitationBlock()),
+        ],
+        blank=True, null=True
+    )
+
+    end_notes = StreamField(
+        block_types=[
+            ('end_note', article_fields.EndNoteBlock()),
+        ],
+        blank=True, null=True
+    )
 
 
 ChapteredArticlePage.content_panels = Page.content_panels + [
@@ -363,6 +376,8 @@ ChapteredArticlePage.content_panels = Page.content_panels + [
     InlinePanel('topic_links', label="Secondary Topics"),
     SnippetChooserPanel('category', ArticleCategory),
     StreamFieldPanel('chapters'),
+    StreamFieldPanel('works_cited'),
+    StreamFieldPanel('end_notes'),
     # InlinePanel('chapters', label="Chapters"),
 ]
 
