@@ -29,10 +29,10 @@
                         </td>
 
                         <td valign="middle" style="{% base_styles 'td' %} padding-top: 15px; padding-right: 20px; padding-bottom: 15px; padding-left: 20px;">
-                            <h3 style="font-family: 'Droid Serif', Georgia, serif; font-size: 18px; line-height: 135%; margin: 0px;">
+                            <h3 style="font-family: 'Droid Serif', Georgia, serif; font-size: 18px; line-height: 120%; margin: 0px;">
                                 <a href="{{ event.event_link }}" target="_blank" style="{% base_styles 'a' %} color: #bf1e2e; text-decoration:none;">{{ event.title }}</a>
                             </h3>
-                            <p style="{% base_styles 'p' %} font-family: 'Droid Serif', Georgia, serif; font-size: 16px; line-height: 135%; margin: 5px 0;">{{ event.date|date }},  {{ event.location }}</p>
+                            <p style="{% base_styles 'p' %} font-family: 'Droid Serif', Georgia, serif; font-size: 16px; line-height: 120%; margin: 5px 0;">{{ event.date|date }},  {{ event.location }}</p>
 
                                 {% if event.override_text %}
                                     {{ event.override_text|paragraph_markup|safe }}

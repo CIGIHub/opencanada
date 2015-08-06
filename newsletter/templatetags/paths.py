@@ -7,7 +7,7 @@ register = template.Library()
 
 @register.filter
 def paragraph_markup(text):
-    new_text = re.sub(r"<p[^>]*>", "<p style=\"{% base_styles \'p\' %} font-family: \'Droid Serif\', Georgia, serif; font-size: 16px; line-height: 135%; margin-top: 5px;\">", text, 0)
+    new_text = re.sub(r"<p[^>]*>", "<p style=\"{% base_styles \'p\' %} font-family: \'Droid Serif\', Georgia, serif; font-size: 16px; line-height: 120%; margin-top: 5px;\">", text, 0)
 
     return new_text
 
