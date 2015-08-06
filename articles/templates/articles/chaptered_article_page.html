@@ -2,6 +2,100 @@
 {% load static article_tags core_tags wagtailcore_tags wagtailimages_tags %}
 
 {% block content %}
+
+{#<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">#}
+
+{#<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">#}
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <style>
+    .top-link {
+        color: #bf1e2e;
+        text-align: right;
+        display: block;
+        margin-right: 10%;
+    }
+    .toc ul,
+    article h2,
+    .block-ColumnedContent
+    {
+        margin-left: 10%;
+        margin-right: 10%
+    }
+
+    .block-Overflow .block-ColumnedContent{
+        margin-left: 0;
+        margin-right: 0;
+    }
+    article h2 {
+        margin-top: 3%;
+    }
+
+{#    .block-PullQuote {#}
+{#        margin-left: 10%;#}
+{#        margin-right: 10%#}
+{#    }#}
+
+    article .block-Quote,
+    article .block-Sharable {
+        border-left: solid #bf1e2e 5px;
+        color: lightgray;
+        margin-left: 15%;
+        margin-right: 15%
+    }
+
+    article .block-Sharable .quote,
+    article .block-Sharable,
+    article .block-Quote .quote,
+    article .block-Quote {
+{#        display: table-cell;#}
+        vertical-align: middle;
+    }
+
+    article .block-Quote .quote,
+    article .block-Sharable .quote
+    {
+        padding-left: 30px;
+{#        font-size: 26px;#}
+        font-size: 14px;
+        line-height: 120%;
+{#        width: 80%;#}
+
+    }
+    article .block-PullQuote {
+        display: inline-block;
+        width: 33%;
+        float: right;
+        font-size: 28px;
+        padding: 20px;
+        margin: 10px;
+        background-color: #f6f6f6;
+        line-height: 120%;
+    }
+
+    .image {
+        position: relative;
+        border: 4px solid #f6f6f6;
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
+    .image-label{
+        float: right;
+        color: #bf1e2e;
+    }
+
+    .photo-zoom {
+        color: #bf1e2e;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 18px;
+    }
+
+    .clickable {
+        cursor: pointer;
+    }
+    </style>
     <div id="article-page" class="container">
         <article>
             <div class="title">
@@ -35,7 +129,7 @@
                 {{ self.body }}
 
                 <div class="toc">
-                <h2>Table of Contents</h2>
+                <h2 id="toc">Table of Contents</h2>
                 <ul>
                     {% for chapter in self.chapters %}
                         <li>{{ chapter.value.heading }}</li>
