@@ -24,7 +24,7 @@
                         <td valign="middle" class="ImageCell" style="{% base_styles 'td' %} padding-top:15px; padding-right: 0px; padding-bottom: 15px; padding-left: 40px; width:80px;">
                             {% image event.organization.logo width-80 as tmp_photo %}
                             <a href="{{ event.event_link }}" target="_blank" style="{% base_styles 'a' %}">
-                                <img style="{% base_styles 'img' %}" src="{{ tmp_photo.url }}" alt="{{ event.organization.logo.title }}" />
+                                <img style="{% base_styles 'img' %}" src="{{ tmp_photo.url }}" alt="{{ event.organization.logo.title }}" style="{% base_styles 'img' %} font-size: 12px;"/>
                             </a>
                         </td>
 

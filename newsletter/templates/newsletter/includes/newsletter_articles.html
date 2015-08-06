@@ -61,12 +61,12 @@
                                     {% if article.override_image %}
                                         {% image article.override_image width-80 as tmp_photo %}
                                         <a href="{{ article.url }}" target="_blank" style="{% base_styles 'a' %}">
-                                            <img src="{{ tmp_photo.url }}" class="articleImage" alt="{{ article.main_image.title }}" style="{% base_styles 'img' %}" />
+                                            <img src="{{ tmp_photo.url }}" class="articleImage" alt="{{ article.main_image.title }}" style="{% base_styles 'img' %} font-size: 12px;" />
                                         </a>
                                     {% else %}
                                         {% image article.main_image width-80 as tmp_photo %}
                                         <a href="{{ article.url }}" target="_blank" style="{% base_styles 'a' %}">
-                                            <img src="{{ tmp_photo.url }}" alt="{{ article.main_image.title }}" style="{% base_styles 'img' %}" />
+                                            <img src="{{ tmp_photo.url }}" alt="{{ article.main_image.title }}" style="{% base_styles 'img' %} font-size: 12px;" />
                                         </a>
                                     {% endif %}
 
