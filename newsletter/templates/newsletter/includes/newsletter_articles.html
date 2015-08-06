@@ -21,7 +21,7 @@
                                         <td valign="top" align="center" style="{% base_styles 'img' %} padding:0px;">
                                             {% image article.main_image width-580 as tmp_photo %}
                                             <a href="{{ article.url }}" style="{% base_styles 'a' %} target="_blank">
-                                                <img src="{{ tmp_photo.url }}" class="headlineImage" alt="{{ article.main_image.title }}" style="{% base_styles 'img' %}" />
+                                                <img src="{{ tmp_photo.url }}" class="headlineImage" width="580" alt="{{ article.main_image.title }}" style="{% base_styles 'img' %}" />
                                             </a>
                                         </td>
                                     </tr>
