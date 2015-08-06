@@ -28,7 +28,7 @@
                                     <tr>
                                         <td valign="top" style="{% base_styles 'td' %} padding: 0px;">
                                             {% if article.override_text %}
-                                            {{ article.override_text|paragraph_markup|safe }}
+                                            {{ article.override_text|richtext }}
                                         {% else %}
                                             <p style="{% base_styles 'p' %} font-family: 'Droid Serif', Georgia, serif; font-size: 16px; line-height: 135%">
                                             {{ article.excerpt }}
@@ -78,7 +78,7 @@
                                     </h3>
 
                                         {% if article.override_text %}
-                                            {{ article.override_text|paragraph_markup|safe }}
+                                            {{ article.override_text|richtext }}
                                         {% else %}
                                             <p style="{% base_styles 'p' %} font-family: 'Droid Serif', Georgia, serif; font-size: 16px; line-height: 135%">
                                             {{ article.excerpt }}
