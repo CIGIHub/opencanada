@@ -295,7 +295,7 @@ class TestCommandImportFromWordPressLoadPosts(TestCase, ImageCleanUp):
         images = AttributedImage.objects.filter(title='testcat.jpg')
 
         self.assertEqual(
-            [{'type': 'Image', 'value': {'image': images.first().id, 'placement': 'full'}},
+            [{'type': 'Image', 'value': {'image': images.first().id, 'placement': 'full', 'expandable': False, 'label': None}},
              {'type': "Paragraph", 'value': {"text": "<p>a cat</p>", 'use_dropcap': False}},
              ],
             pages.first().body.stream_data)
