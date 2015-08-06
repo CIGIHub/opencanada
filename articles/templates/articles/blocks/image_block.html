@@ -27,7 +27,7 @@
     {% if self.placement == 'left' or self.placement == 'right' %}
         {% image self.image width-350 %}
     {% else %}
-        {% image self.image width-710 %}
+        {% image self.image width-950 %}
     {% endif %}
     {% if self.expandable %}<i class="fa fa-search-plus photo-zoom" data-toggle="modal" data-target="#photoModel{{ self.image.id }}"></i>{% endif %}
     <div class="credit">{{ self.image.credit }}</div>
