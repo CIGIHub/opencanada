@@ -13,7 +13,7 @@
                         font-weight: 400;
                         font-size: 18px;
                         line-height: 18px;
-                        margin-bottom: 0px;">BEST OF THE WEB</h2>
+                        margin: 0px;">BEST OF THE WEB</h2>
                     </td>
                 </tr>
             </table>
@@ -21,13 +21,13 @@
             {% for article in self.external_articles %}
                 <table border="0" cellpadding="0" cellspacing="0" width="100%" style="{% base_styles 'table' %}">
                     <tr>
-                        <td valign="middle" class="ImageCell"  style="{% base_styles 'td' %} padding-top:15px; padding-right: 0px; padding-bottom: 15px; padding-left: 40px; width:80px;">
+                        <td valign="middle" class="ImageCell"  style="{% base_styles 'td' %} padding-top:15px; padding-right: 0px; padding-bottom: 15px; padding-left: 20px;">
                              {% image article.source.logo width-80 as tmp_photo %}
                                <a href="{{ article.website_link }}" target="_blank" style="{% base_styles 'a' %}">
-                                   <img src="{{ tmp_photo.url }}" alt="{{ article.source.logo.title }}"  style="{% base_styles 'img' %} font-size: 12px;" />
+                                   <img class="articleImage" src="{{ tmp_photo.url }}" alt="{{ article.source.logo.title }}"  style="{% base_styles 'img' %} font-size: 12px;" />
                                </a>
                         </td>
-                        <td valign="middle"  style="{% base_styles 'td' %} padding-top: 15px; padding-right: 40px; padding-bottom: 15px; padding-left: 40px;">
+                        <td valign="middle"  style="{% base_styles 'td' %} padding-top: 15px; padding-right: 20px; padding-bottom: 15px; padding-left: 20px;">
                             <h3 style="font-family: 'Droid Serif', Georgia, serif;
                             font-size: 18px;
                             line-height: 18px;
@@ -54,6 +54,6 @@
 </table>
 <table border="0" cellpadding="0" cellspacing="0" width="100%" class="dividerTable" style="{% base_styles 'table' %}  border-top: 1px solid #e1e1e1;">
     <tr>
-        <td style="{% base_styles 'td' %} font-size: 0;">&nbsp;</td>
+        <td style="{% base_styles 'td' %} font-size: 0; padding: 0 0 20px 0;">&nbsp;</td>
     </tr>
 </table>
