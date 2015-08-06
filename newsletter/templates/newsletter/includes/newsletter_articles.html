@@ -30,7 +30,7 @@
                                             {% if article.override_text %}
                                             {{ article.override_text|paragraph_markup|safe }}
                                         {% else %}
-                                            <p style="{% base_styles 'p' %} font-family: 'Droid Serif', Georgia, serif; font-size: 16px; line-height: 135%">
+                                            <p style="{% base_styles 'p' %} font-family: 'Droid Serif', Georgia, serif; font-size: 16px; line-height: 135%; margin: 5px 0;">
                                             {{ article.excerpt }}
                                             </p>
                                         {% endif %}
@@ -73,14 +73,14 @@
                                 </td>
 
                                 <td valign="middle" style="{% base_styles 'td' %} padding-top: 15px; padding-right: 20px; padding-bottom: 15px; padding-left: 20px;">
-                                    <h3 style="font-family: 'Droid Serif', Helvetica, Arial, sans-serif; font-size: 18px; margin: 0px;">
+                                    <h3 style="font-family: 'Droid Serif', Helvetica, Arial, sans-serif; font-size: 18px; line-height: 135%; margin: 0px;">
                                         <a href="{{ article.url }}" target="_blank" style="{% base_styles 'a' %} color: #bf1e2e; text-decoration:none;">{{ article.title }}</a>
                                     </h3>
 
                                         {% if article.override_text %}
                                             {{ article.override_text|paragraph_markup|safe }}
                                         {% else %}
-                                            <p style="{% base_styles 'p' %} font-family: 'Droid Serif', Georgia, serif; font-size: 16px; line-height: 135%">
+                                            <p style="{% base_styles 'p' %} font-family: 'Droid Serif', Georgia, serif; font-size: 16px; margin: 5px 0; line-height: 135%">
                                             {{ article.excerpt }}
                                             </p>
                                         {% endif %}
