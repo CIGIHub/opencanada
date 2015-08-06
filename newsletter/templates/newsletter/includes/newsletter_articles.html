@@ -41,7 +41,7 @@
                         </tr>
 
                         <tr style="height: 1px;">
-                            <td align="right" valign="top" class="divider" style="{% base_styles 'td' %}">
+                            <td align="right" valign="top" class="divider" style="{% base_styles 'td' %} padding: 0">
                                 <table border="0" cellpadding="0" cellspacing="0" width="100%" class="dividerTable" style="{% base_styles 'table' %}  border-top: 1px solid #e1e1e1;">
                                     <tr>
                                         <td style="{% base_styles 'td' %} font-size: 0;">&nbsp;</td>
@@ -57,7 +57,7 @@
                     <table border="0" cellpadding="0" cellspacing="0" width="100%" style="{% base_styles 'table' %}">
 
                             <tr>
-                                <td valign="middle" style="{% base_styles 'td' %} padding-top:15px; padding-right: 15px; padding-bottom: 15px; padding-left: 40px;" width="80">
+                                <td valign="middle" class="ImageCell" style="{% base_styles 'td' %} padding-top:15px; padding-right: 0px; padding-bottom: 15px; padding-left: 40px;">
                                     {% if article.override_image %}
                                         {% image article.override_image width-80 as tmp_photo %}
                                         <a href="{{ article.url }}" target="_blank" style="{% base_styles 'a' %}">
@@ -72,7 +72,7 @@
 
                                 </td>
 
-                                <td valign="middle" style="{% base_styles 'td' %} padding-top: 15px; padding-right: 40px; padding-bottom: 15px; padding-left: 15px;">
+                                <td valign="middle" style="{% base_styles 'td' %} padding-top: 15px; padding-right: 40px; padding-bottom: 15px; padding-left: 40px;">
                                     <h3 style="font-family: 'Droid Serif', Helvetica, Arial, sans-serif; font-size: 18px;">
                                         <a href="{{ article.url }}" target="_blank" style="{% base_styles 'a' %} color: #bf1e2e; text-decoration:none;">{{ article.title }}</a>
                                     </h3>

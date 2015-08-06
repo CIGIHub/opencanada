@@ -20,7 +20,7 @@
             {% for article in self.external_articles %}
                 <table border="0" cellpadding="0" cellspacing="0" width="100%" style="{% base_styles 'table' %}">
                     <tr>
-                        <td valign="middle"  style="{% base_styles 'td' %} padding:15px;" width="80">
+                        <td valign="middle" class="ImageCell"  style="{% base_styles 'td' %} padding:15px;">
                              {% image article.source.logo width-80 as tmp_photo %}
                                <a href="{{ article.website_link }}" target="_blank" style="{% base_styles 'a' %}">
                                    <img src="{{ tmp_photo.url }}" alt="{{ article.source.logo.title }}"  style="{% base_styles 'img' %}" />
