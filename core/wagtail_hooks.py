@@ -13,6 +13,7 @@ def editor_js():
         'hallolists': {},
         // 'hallohr': {},
         'halloreundo': {},
+        'hallolink': {},
         'hallowagtaillink': {},
         'hallorequireparagraphs': {}
         };
