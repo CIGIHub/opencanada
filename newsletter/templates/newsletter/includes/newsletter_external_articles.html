@@ -3,7 +3,7 @@
 
 <table border="0" cellpadding="0" cellspacing="0" width="100%" style="{% base_styles 'table' %}">
     <tr>
-        <td valign="top" class="bodyContainer" style="{% base_styles 'td' %} padding-bottom:9px;">
+        <td valign="top" class="bodyContainer" style="{% base_styles 'td' %} padding-bottom:20px;">
             <table border="0" cellpadding="0" cellspacing="0" width="100%" style="{% base_styles 'table' %}">
                 <tr>
                     <td valign="top" align="center" style="{% base_styles 'td' %} padding-top: 20px;">
@@ -22,18 +22,19 @@
             {% for article in self.external_articles %}
                 <table border="0" cellpadding="0" cellspacing="0" width="100%" style="{% base_styles 'table' %}">
                     <tr>
-                        <td valign="middle" class="ImageCell"  style="{% base_styles 'td' %} padding:20px;">
+                        <td valign="middle" class="ImageCell"  style="{% base_styles 'td' %} padding-top: 20px; padding-left: 20px; padding-bottom: 0; padding-right: 20px;">
                              {% image article.source.logo width-80 as tmp_photo %}
                                <a href="{{ article.website_link }}" target="_blank" style="{% base_styles 'a' %}">
                                    <img class="articleImage" src="{{ tmp_photo.url }}" alt="{{ article.source.logo.title }}"  style="{% base_styles 'img' %} font-size: 12px;" />
                                </a>
                         </td>
-                        <td valign="middle"  style="{% base_styles 'td' %} padding-top: 20px; padding-right: 20px; padding-bottom: 20px; padding-left: 0px;">
+                        <td valign="middle"  style="{% base_styles 'td' %} padding-top: 20px; padding-right: 20px; padding-bottom: 0px; padding-left: 0px;">
                             <h3 style="font-family: 'Droid Serif', Georgia, serif;
                             font-size: 18px;
                             padding: 0px;
                             line-height: 100%;
                             font-weight: 400;
+                            margin-top: 0px;
                             margin-bottom: 5px;">
                                 <a style="{% base_styles 'a' %} color: #bf1e2e; text-decoration:none;" href="{{ article.website_link }}" target="_blank">{{ article.title }}</a>
                             </h3>
