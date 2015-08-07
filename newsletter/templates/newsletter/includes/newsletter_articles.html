@@ -38,16 +38,16 @@
                             </td>
                         </tr>
 
-                        <tr style="height: 1px;">
-                            <td align="right" valign="top" class="divider" style="{% base_styles 'td' %} padding: 0; margin: 0;">
-                                <table border="0" cellpadding="0" cellspacing="0" width="100%" class="dividerTable" style="{% base_styles 'table' %}  border-top: 1px solid #e1e1e1;">
-                                    <tr>
-                                        <td style="{% base_styles 'td' %} font-size: 0; padding: 0; margin: 0;">&nbsp;</td>
-                                    </tr>
-                                </table>
-
-                            </td>
-                        </tr>
+{#                        <tr style="height: 1px;">#}
+{#                            <td align="right" valign="top" class="divider" style="{% base_styles 'td' %} padding: 0; margin: 0;">#}
+{#                                <table border="0" cellpadding="0" cellspacing="0" width="100%" class="dividerTable" style="{% base_styles 'table' %}  border-top: 1px solid #e1e1e1;">#}
+{#                                    <tr>#}
+{#                                        <td style="{% base_styles 'td' %} font-size: 0; padding: 0; margin: 0;">&nbsp;</td>#}
+{#                                    </tr>#}
+{#                                </table>#}
+{##}
+{#                            </td>#}
+{#                        </tr>#}
                     </table>
 
                  {% else %}
@@ -55,20 +55,20 @@
                     <table border="0" cellpadding="0" cellspacing="0" width="100%" style="{% base_styles 'table' %}">
 
                             <tr>
-{#                                <td valign="middle" class="ImageCell" style="{% base_styles 'td' %} padding: 0;">#}
-{#                                    {% if article.override_image %}#}
-{#                                        {% image article.override_image width-80 as tmp_photo %}#}
-{#                                        <a href="{{ article.url }}" target="_blank" style="{% base_styles 'a' %}">#}
-{#                                            <img src="{{ tmp_photo.url }}" class="articleImage" alt="{{ article.main_image.title }}" style="{% base_styles 'img' %} font-size: 12px;" />#}
-{#                                        </a>#}
-{#                                    {% else %}#}
-{#                                        {% image article.main_image width-80 as tmp_photo %}#}
-{#                                        <a href="{{ article.url }}" target="_blank" style="{% base_styles 'a' %}">#}
-{#                                            <img src="{{ tmp_photo.url }}" alt="{{ article.main_image.title }}" style="{% base_styles 'img' %} font-size: 12px;" />#}
-{#                                        </a>#}
-{#                                    {% endif %}#}
-{##}
-{#                                </td>#}
+                                <td valign="middle" class="ImageCell" style="{% base_styles 'td' %} padding: 0;">
+                                    {% if article.override_image %}
+                                        {% image article.override_image width-80 as tmp_photo %}
+                                        <a href="{{ article.url }}" target="_blank" style="{% base_styles 'a' %}">
+                                            <img src="{{ tmp_photo.url }}" class="articleImage" alt="{{ article.main_image.title }}" style="{% base_styles 'img' %} font-size: 12px;" />
+                                        </a>
+                                    {% else %}
+                                        {% image article.main_image width-80 as tmp_photo %}
+                                        <a href="{{ article.url }}" target="_blank" style="{% base_styles 'a' %}">
+                                            <img src="{{ tmp_photo.url }}" alt="{{ article.main_image.title }}" style="{% base_styles 'img' %} font-size: 12px;" />
+                                        </a>
+                                    {% endif %}
+
+                                </td>
 
                                 <td valign="middle" style="{% base_styles 'td' %} padding: 0;">
                                     <h3  style="font-family: 'Droid Serif', Georgia, serif;
