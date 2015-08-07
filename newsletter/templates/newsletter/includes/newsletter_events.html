@@ -30,23 +30,32 @@
                         </td>
 
                         <td valign="middle" style="{% base_styles 'td' %} padding-top: 20px; padding-right: 20px; padding-bottom: 0px; padding-left: 0px;">
-                            <h3  style="font-family: 'Droid Serif', Georgia, serif;
-                                font-size: 18px;
-                                padding: 0px;
-                                line-height: 100%;
-                                font-weight: 400;
-                                margin-top: 0px;
-                                margin-bottom: 5px;">
-                                <a href="{{ event.event_link }}" target="_blank" style="{% base_styles 'a' %} color: #bf1e2e; text-decoration:none;">{{ event.title }}</a>
-                            </h3>
-                            <p style="{% base_styles 'p' %} font-family: 'Droid Serif', Georgia, serif; font-size: 16px; line-height: 120%; margin: 5px 0;">{{ event.date|date }},  {{ event.location }}</p>
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="{% base_styles 'table' %}">
+                                <tr>
+                                    <td style="{% base_styles 'td' %} padding: 0;">
+                                        <h3  style="font-family: 'Droid Serif', Georgia, serif;
+                                            font-size: 18px;
+                                            padding: 0px;
+                                            line-height: 100%;
+                                            font-weight: 400;
+                                            margin-top: 0px;
+                                            margin-bottom: 5px;">
+                                            <a href="{{ event.event_link }}" target="_blank" style="{% base_styles 'a' %} color: #bf1e2e; text-decoration:none;">{{ event.title }}</a>
+                                        </h3>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="{% base_styles 'td' %} padding: 0; font-family: 'Droid Serif', Georgia, serif; font-size: 16px;">
+                                        {{ event.date|date }},  {{ event.location }}<br>
+                                        {% if event.override_text %}
+                                            {{ event.override_text|paragraph_markup|safe }}
+                                        {% else %}
+                                            {{ event.body|paragraph_markup|safe }}
+                                        {% endif %}
 
-                                {% if event.override_text %}
-                                    {{ event.override_text|paragraph_markup|safe }}
-                                {% else %}
-                                    {{ event.body|paragraph_markup|safe }}
-                                {% endif %}
-
+                                    </td>
+                                </tr>
+                            </table>
                         </td>
                     </tr>
                 </table>
