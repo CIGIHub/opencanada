@@ -387,11 +387,6 @@ footer{
     font-size: 16px;
   }
 
-  article ul.share-links.sticky{
-    position: fixed;
-    top: 60px;
-  }
-
 }
 
 .date{
@@ -417,7 +412,7 @@ footer{
 }
 
 #article-page article,
-#in-depth-page article,
+#series-page article,
 #external-article-list-page .row,
 #event-list-page .row
 {
@@ -499,6 +494,12 @@ article{
     li{
       list-style: none;}
   }
+  ul.share-links.sticky{
+    position: fixed;
+    top: 140px;
+    background: white;
+  }
+
 
   .dropcap-start::first-letter{
     color: $red;
@@ -601,9 +602,6 @@ article{
   article{
     .story{
       border-bottom: $border-grey;
-    }
-    ul.share-links {
-      margin-top: 40px;
     }
   }
 }
