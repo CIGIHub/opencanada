@@ -499,9 +499,11 @@ article{
   .small-article & ul.share-links{
     position: relative;
     margin-left: 10%;
+    margin-bottom: 0px;
     padding: 0px;
     li{
       display: inline-block;
+      padding-right: 7px;
     }
     @media(max-width: $screen-xs){
       margin-left: 0px;
