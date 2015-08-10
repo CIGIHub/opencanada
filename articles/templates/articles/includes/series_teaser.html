@@ -3,9 +3,11 @@
 <article class="row">
     <div class="col-xs-12">
         <h2><a href="{{ series.url }}">{{ series.title }}</a></h2>
+
+        {% if series.authors %}
         <div class="contributors">By:
-        {% for article in series.articles %}
-            {% for author in article.authors %}
+
+            {% for author in series.authors %}
             <div class="contributor">
                 <a href="{{ author.url  }}">
                     {{ author.first_name }}
@@ -13,8 +15,8 @@
                 </a>
             </div>
             {% endfor %}
-        {% endfor %}
         </div>
+        {% endif %}
         <div class="date"> / {{ series.first_published_at|date:"F j, Y" }}</div>
         <div class="teaser">
             {{ series.body }}

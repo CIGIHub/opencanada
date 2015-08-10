@@ -19,14 +19,15 @@
         {%  elif self.typed_featured_item.excerpt %}
             <div class="feature-line">{{ self.typed_featured_item.excerpt|richtext }}</div>
         {% endif %}
-
-        <div class="contributors" style="color: {{ self.typed_featured_item.font_style.text_colour.hex_value }}">By:
-            {% for author in self.typed_featured_item.authors %}
-                <div class="contributor">
-                    <a style="color: {{ self.typed_featured_item.font_style.text_colour.hex_value }}" href="{{ author.url }}">{{ author.first_name }} {{ author.last_name }}</a>
-                </div>
-            {% endfor %}
-        </div>
+        {% if self.typed_featured_item.authors %}
+            <div class="contributors" style="color: {{ self.typed_featured_item.font_style.text_colour.hex_value }}">By:
+                {% for author in self.typed_featured_item.authors %}
+                    <div class="contributor">
+                        <a style="color: {{ self.typed_featured_item.font_style.text_colour.hex_value }}" href="{{ author.url }}">{{ author.first_name }} {{ author.last_name }}</a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
     </div>
 
     <div class="scroll"><a href="#features" style="color: {{ self.typed_featured_item.font_style.text_colour.hex_value }};"><i class="fa fa-angle-double-down"></i></a></div>

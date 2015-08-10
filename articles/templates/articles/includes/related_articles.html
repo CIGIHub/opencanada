@@ -11,15 +11,17 @@
                     {% image article.main_image width-400 %}
                 </figure>
                 <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
-                <div class="contributors">By:
-                    {% for author in article.authors %}
-                        <div class="contributor">
-                            <a href="{{ author.url  }}">
-                             {{ author.first_name }} {{ author.last_name }}
-                            </a>
-                        </div>
-                    {% endfor %}
-                </div>
+                {% if article.authors %}
+                    <div class="contributors">By:
+                        {% for author in article.authors %}
+                            <div class="contributor">
+                                <a href="{{ author.url  }}">
+                                 {{ author.first_name }} {{ author.last_name }}
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
             </div>
 
             {% endfor %}
