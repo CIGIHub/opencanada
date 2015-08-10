@@ -187,9 +187,6 @@ header{
   }
 }
 
-
-
-
 .search-results{
   ul li{
     list-style: none;
@@ -366,7 +363,6 @@ footer{
   .contributor:last-child:after{
     content: '';
   }
-
 }
 
 /**************  Article  **************/
@@ -500,6 +496,20 @@ article{
     background: white;
   }
 
+  .small-article & ul.share-links{
+    position: relative;
+    margin-left: 10%;
+    padding: 0px;
+    li{
+      display: inline-block;
+    }
+    @media(max-width: $screen-xs){
+      margin-left: 0px;
+    }
+  }
+  .small-article & .title{
+    margin-top: 10px;
+  }
 
   .dropcap-start::first-letter{
     color: $red;

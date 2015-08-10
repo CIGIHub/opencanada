@@ -183,7 +183,7 @@ function toggleHeading(windowWidth, articleTitleWidth){
                 var sharelinksPosition = $('.share-links').offset().top - $('.share-links').height();
                 var fromBottom = $('footer').outerHeight() + $('.related-articles').outerHeight() + $('.share-links').outerHeight() + 195;
                 var bottom = $(document).height() - fromBottom;
-                
+
                 if($(document).scrollTop() > sharelinksPosition){
                     $('.share-links').addClass('sticky');
                 }
