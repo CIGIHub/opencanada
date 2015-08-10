@@ -626,12 +626,29 @@ article{
 
 .in-the-series{
   border-bottom: $border-grey;
+  .col-xs-2{
+    padding-right: 0px;
+  }
 }
 
 .related-articles{
+  .contributors{
+    margin-bottom: 20px;
+  }
   h3{
     margin-top: 10px;
   }
+  @media(max-width: $screen-sm){
+     figure{
+       margin: 10px 30px;
+     }
+   }
+  @media(max-width: $screen-xs){
+    figure{
+      margin: 0px;
+    }
+  }
+
 }
 
 /**************  People/Contributor pages  **************/
