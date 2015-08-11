@@ -35,7 +35,7 @@
             </figure>
 
             <div class="story">
-
+                {% include 'articles/includes/author_blurb.html' %}
                 {% for block in self.body %}
                     {% if block.block_type == 'Embed' %}
                         <section class="block-Embed">

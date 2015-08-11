@@ -22,7 +22,6 @@ class BodyField(StreamField):
                 blocks.RichTextBlock(label="item"), icon="list-ul")
              ),
             ('Sharable', SharableBlock()),
-            ('AuthorBlurb', AuthorBlurbBlock()),
         ]
 
         super(BodyField, self).__init__(block_types, **kwargs)
@@ -67,15 +66,6 @@ class ContributorChooser(blocks.ChooserBlock):
             return format_html('<a href="{0}">{1}</a>', value.url, value.title)
         else:
             return ''
-
-
-class AuthorBlurbBlock(blocks.StructBlock):
-    author = ContributorChooser()
-    number_of_articles = blocks.CharBlock(default=3)
-
-    class Meta:
-        template = "articles/blocks/author_blurb.html"
-        icon = "user"
 
 
 class ParagraphBlock(blocks.StructBlock):
