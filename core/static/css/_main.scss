@@ -187,9 +187,6 @@ header{
   }
 }
 
-
-
-
 .search-results{
   ul li{
     list-style: none;
@@ -366,7 +363,6 @@ footer{
   .contributor:last-child:after{
     content: '';
   }
-
 }
 
 /**************  Article  **************/
@@ -385,11 +381,6 @@ footer{
     top: 18px;
     color: white;
     font-size: 16px;
-  }
-
-  article ul.share-links.sticky{
-    position: fixed;
-    top: 60px;
   }
 
 }
@@ -417,7 +408,7 @@ footer{
 }
 
 #article-page article,
-#in-depth-page article,
+#series-page article,
 #external-article-list-page .row,
 #event-list-page .row
 {
@@ -474,7 +465,7 @@ article{
     @include type($text-color);
     @include inline-list-divided($red);
     ul.list-inline{
-      margin-left: 80px;
+      margin-left: 68px;
       display: block;
     }
   }
@@ -498,6 +489,28 @@ article{
     }
     li{
       list-style: none;}
+  }
+  ul.share-links.sticky{
+    position: fixed;
+    top: 140px;
+    background: white;
+  }
+
+  .small-article & ul.share-links{
+    position: relative;
+    margin-left: 10%;
+    margin-bottom: 0px;
+    padding: 0px;
+    li{
+      display: inline-block;
+      padding-right: 7px;
+    }
+    @media(max-width: $screen-xs){
+      margin-left: 0px;
+    }
+  }
+  .small-article & .title{
+    margin-top: 10px;
   }
 
   .dropcap-start::first-letter{
@@ -601,9 +614,6 @@ article{
   article{
     .story{
       border-bottom: $border-grey;
-    }
-    ul.share-links {
-      margin-top: 40px;
     }
   }
 }

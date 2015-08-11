@@ -4,6 +4,12 @@
 {% block content %}
     <div id="article-page" class="container">
         <article>
+            <ul class="share-links">
+                <li class="facebook"><span class="facebook-share-link" data-url="{{ self.url }}"><i class="fa fa-facebook"></i></span></li>
+                <li class="twitter"><a href="https://twitter.com/share?text={{ self.title }}"><i class="fa fa-twitter"></i></a></li>
+                <li class="print"><a href="javascript:window.print()"><i class="fa fa-print"></i></a></li>
+                <li class="email"><a HREF="mailto:?subject={{ self }}&body={{ self.url }}"><i class="fa fa-envelope"></i></a></li>
+            </ul>
             <div class="title">
                 {% if self.primary_topic %}
                     <div class="primary-topic">
@@ -25,12 +31,7 @@
             <figure class="main-image">
                 {% image self.main_image width-940 %}
             </figure>
-            <ul class="share-links">
-                <li class="facebook"><span class="facebook-share-link" data-url="{{ self.url }}"><i class="fa fa-facebook"></i></span></li>
-                <li class="twitter"><a href="https://twitter.com/share?text={{ self.title }}"><i class="fa fa-twitter"></i></a></li>
-                <li class="print"><a href="javascript:window.print()"><i class="fa fa-print"></i></a></li>
-                <li class="email"><a HREF="mailto:?subject={{ self }}&body={{ self.url }}"><i class="fa fa-envelope"></i></a></li>
-            </ul>
+
             <div class="story">
                 {{ self.body }}
                 <div class="home-link"><a href="/"><img src="{% static 'img/opencanada-mark.png' %}"></a></div>
