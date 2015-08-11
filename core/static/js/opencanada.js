@@ -107,7 +107,9 @@ function toggleBox(e){
 //set the Homepage Feature height based on window height
 function setFeatureHeight(windowHeight){
     var bannerHeight = $('header').height();
-    var featureHeight = windowHeight - bannerHeight;
+    var gap = 0.05*windowHeight;
+    console.log(gap);
+    var featureHeight = windowHeight - bannerHeight - gap;
 
     $('.jumbotron.main-feature').css("height", featureHeight + "px");
 }

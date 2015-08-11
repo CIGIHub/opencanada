@@ -187,9 +187,6 @@ header{
   }
 }
 
-
-
-
 .search-results{
   ul li{
     list-style: none;
@@ -253,14 +250,23 @@ footer{
 
   .scroll{
     position: absolute;
+    opacity: 0.9;
     z-index:10;
-    font-size: 60px;
-    bottom: 15%;
+    bottom: -20px;
     left: 50%;
+    background-color: $mid-grey;
+    border-radius: 25px;
+    width: 50px;
+    height: 50px;
 
     a{
       color: white;
       text-decoration: none;
+      i{
+        font-size:50px;
+        padding-left: 10px;
+        padding-top:2px;
+      }
     }
     a:hover{
       color: $red;
@@ -277,8 +283,8 @@ footer{
       transform: translateY(0);
 	}
 	40% {
-      -webkit-transform: translateY(0.2em);
-      transform: translateY(0.2em);
+      -webkit-transform: translateY(0.08em);
+      transform: translateY(0.08em);
 	}
   }
 
@@ -297,7 +303,14 @@ footer{
       }
     }
     .scroll{
-      font-size: 36px;
+      width: 40px;
+      height: 40px;
+      border-radius: 20px;
+      a i{
+        font-size: 35px;
+        padding-top:5px;
+      }
+
     }
   }
 }
@@ -308,6 +321,7 @@ footer{
 .features{
   color: black;
   margin-bottom: 20px;
+  margin-top: 20px;
 
   .overlay-feature{
     @include article-overlay;
