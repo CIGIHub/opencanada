@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static article_tags core_tags wagtailcore_tags wagtailimages_tags %}
+{% load static article_tags core_tags wagtailcore_tags wagtailembeds_tags wagtailimages_tags %}
 
 {% block content %}
     <div id="article-page" class="container">
@@ -35,7 +35,18 @@
             </figure>
 
             <div class="story">
-                {{ self.body }}
+
+                {% for block in self.body %}
+                    {% if block.block_type == 'Embed' %}
+                        <section class="block-Embed">
+                            {{ block.value.url|embed:720 }}
+                        </section>
+                    {% else %}
+                        <section class="block-{{ block.block_type }}">
+                            {{ block }}
+                        </section>
+                    {% endif %}
+                {% endfor %}
                 <div class="home-link"><a href="/"><img src="{% static 'img/opencanada-mark.png' %}"></a></div>
             </div>
 
