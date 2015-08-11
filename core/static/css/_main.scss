@@ -592,12 +592,19 @@ article{
     }
   }
 
-  .block-AuthorBlurb{
+  .blurb-content{
     float:right;
     width: 300px;
     padding: 5px 15px;
     margin: 10px 0 10px 15px;
-    border-left: solid 2px $mid-grey;
+
+
+    .individual{
+      border-left: solid 2px $mid-grey;
+      margin-bottom: 20px;
+      padding: 5px 15px;
+    }
+
     .author{
       @include type(black);
     }
@@ -610,6 +617,8 @@ article{
       padding: 5px 0 0 0;
       margin-bottom: 0px;
       li{
+        padding-top: 5px;
+        padding-bottom: 5px;
         list-style: none;
         font-family: $serif;
       }
