@@ -6,9 +6,9 @@
         <h2>Related Articles</h2>
         <div class="row">
             {% for article in self|related_articles:article_count %}
-            <div class="col-xs-4">
+            <div class="col-xs-12 col-sm-4">
                 <figure>
-                    {% image article.main_image width-400 %}
+                    {% image article.main_image width-700 %}
                 </figure>
                 <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
                 <div class="contributors">By:
