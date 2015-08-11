@@ -1,6 +1,16 @@
+# import re
+
 from django import template
 
 register = template.Library()
+
+
+@register.filter
+def paragraph_markup(text):
+    # new_text = re.sub(r'<p[^>]*>', '<p style=\"-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; margin: 5px 0; font-family: \'Droid Serif\', Georgia, serif; font-size: 16px; line-height: 120%;\">', text, 0)
+    new_text = text.replace('<p>', '').replace('</p>', '')
+
+    return new_text
 
 
 @register.simple_tag

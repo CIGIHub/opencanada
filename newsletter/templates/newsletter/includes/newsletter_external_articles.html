@@ -3,16 +3,18 @@
 
 <table border="0" cellpadding="0" cellspacing="0" width="100%" style="{% base_styles 'table' %}">
     <tr>
-        <td valign="top" class="bodyContainer" style="{% base_styles 'td' %} padding-bottom:9px;">
+        <td valign="top" class="bodyContainer" style="{% base_styles 'td' %} padding-bottom:20px;">
             <table border="0" cellpadding="0" cellspacing="0" width="100%" style="{% base_styles 'table' %}">
                 <tr>
-                    <td valign="top" align="center" style="{% base_styles 'td' %}">
+                    <td valign="top" align="center" style="{% base_styles 'td' %} padding-top: 20px;">
                         <h2 style="font-family: 'Droid Sans', Helvetica, Arial, sans-serif;
                         text-transform: uppercase;
                         color: #000000;
                         font-weight: 400;
                         font-size: 18px;
-                        line-height: 18px">BEST OF THE WEB</h2>
+                        line-height: 18px;
+                        padding: 0px;
+                        margin: 0px;">BEST OF THE WEB</h2>
                     </td>
                 </tr>
             </table>
@@ -20,26 +22,38 @@
             {% for article in self.external_articles %}
                 <table border="0" cellpadding="0" cellspacing="0" width="100%" style="{% base_styles 'table' %}">
                     <tr>
-                        <td valign="middle"  style="{% base_styles 'td' %} padding:15px;" width="80">
+                        <td valign="middle" class="ImageCell"  style="{% base_styles 'td' %} padding-top: 20px; padding-left: 20px; padding-bottom: 0; padding-right: 20px;">
                              {% image article.source.logo width-80 as tmp_photo %}
                                <a href="{{ article.website_link }}" target="_blank" style="{% base_styles 'a' %}">
-                                   <img src="{{ tmp_photo.url }}" alt="{{ article.source.logo.title }}"  style="{% base_styles 'img' %}" />
+                                   <img class="articleImage" src="{{ tmp_photo.url }}" alt="{{ article.source.logo.title }}"  style="{% base_styles 'img' %} font-size: 12px;" />
                                </a>
                         </td>
-                        <td valign="middle"  style="{% base_styles 'td' %} padding-top:15px; padding-bottom: 15px;">
-                            <h3 style="font-family: 'Droid Serif', Georgia, serif;
-                            font-size: 18px;
-                            line-height: 18px;
-                            font-weight: 400;">
-                                <a style="{% base_styles 'a' %} color: #bf1e2e; text-decoration:none;" href="{{ article.website_link }}" target="_blank">{{ article.title }}</a>
-                            </h3>
-                            <p style="{% base_styles 'p' %} font-family: 'Droid Serif', Georgia, serif; font-size: 16px; line-height: 135%">
-                                {% if article.override_text %}
-                                    {{ article.override_text|richtext }}
-                                {% else %}
-                                    {{ article.body|richtext }}
-                                {% endif %}
-                            </p>
+                        <td valign="middle"  style="{% base_styles 'td' %} padding-top: 20px; padding-right: 20px; padding-bottom: 0px; padding-left: 0px;">
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="{% base_styles 'table' %}">
+                                <tr>
+                                    <td style="{% base_styles 'td' %} padding: 0;">
+                                        <h3 style="font-family: 'Droid Serif', Georgia, serif;
+                                        font-size: 18px;
+                                        padding: 0px;
+                                        line-height: 100%;
+                                        font-weight: 400;
+                                        margin-top: 0px;
+                                        margin-bottom: 5px;">
+                                            <a style="{% base_styles 'a' %} color: #bf1e2e; text-decoration:none;" href="{{ article.website_link }}" target="_blank">{{ article.title }}</a>
+                                        </h3>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="{% base_styles 'td' %} padding: 0; font-family: 'Droid Serif', Georgia, serif; font-size: 16px;">
+                                        {% if article.override_text %}
+                                            {{ article.override_text|paragraph_markup|safe }}
+                                        {% else %}
+                                            {{ article.body|paragraph_markup|safe }}
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            </table>
+
                         </td>
                     </tr>
                 </table>
@@ -48,9 +62,7 @@
 
         </td>
     </tr>
-</table>
-<table border="0" cellpadding="0" cellspacing="0" width="100%" class="dividerTable" style="{% base_styles 'table' %}  border-top: 1px solid #e1e1e1;">
-    <tr>
-        <td style="{% base_styles 'td' %} font-size: 0;">&nbsp;</td>
+    <tr style="height: 1px;">
+        <td align="right" valign="top" class="divider" style="{% base_styles 'td' %} padding: 0; margin: 0;border-top: 1px solid #e1e1e1;"></td>
     </tr>
 </table>
