@@ -240,23 +240,4 @@ $(window).resize(function(){
 
 });
 
-$(window).load(function(){
-    if($('#features').length){
-        $('#features .row').each(function() {
-            var $row = $(this);
-            var rowHeight = $row.height();
-            $row.children('.feature-item').each(function() {
-                $(this).css('height', rowHeight);
-            });
-            $row.find('.contributors').each(function() {
-                console.log($(this));
-                $(this).css({
-                    "position":"absolute",
-                    "bottom":"0"
-                });
-            });
-        });
-    }
-});
-
 

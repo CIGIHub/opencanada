@@ -45,24 +45,19 @@
                         <div class="image-feature">
                             <figure>{%  image article.main_image width-710 %}</figure>
                             <h2><a href="{{ article.url }}">{{ article.title }}</a></h2>
-                           <div class="contributors">By:
-                                {% for author in article.authors %}
-                                <div class="contributor">
-                                    <a style="color: {{ article.font_style.text_colour.hex_value }}" href="author.url">{{ author.first_name }} {{ author.last_name }}</a>
+                               <div class="contributors">By:
+                                    {% for author in article.authors %}
+                                    <div class="contributor">
+                                        <a style="color: {{ article.font_style.text_colour.hex_value }}" href="author.url">{{ author.first_name }} {{ author.last_name }}</a>
+                                    </div>
+                                    {% endfor %}
                                 </div>
-                                {% endfor %}
-                            </div>
 
                         </div>
 
                     {% else %}
                         <div class="simple-feature">
                             <h2><a href="{{ article.url }}">{{ article.title }}</a></h2>
-                            {% if article.subtitle %}
-                                <div class="feature-line">{{ article.subtitle|richtext }}</div>
-                            {% else %}
-                                <div class="feature-line">{{ article.excerpt|richtext }}</div>
-                            {% endif %}
                             <div class="contributors">By:
                                 {% for author in article.authors %}
                                 <div class="contributor">
@@ -70,6 +65,11 @@
                                 </div>
                                 {% endfor %}
                             </div>
+                            {% if article.subtitle %}
+                                <div class="feature-line">{{ article.subtitle|richtext }}</div>
+                            {% else %}
+                                <div class="feature-line">{{ article.excerpt|richtext }}</div>
+                            {% endif %}
                         </div>
                     {% endif %}
                 </div>
