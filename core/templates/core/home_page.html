@@ -16,7 +16,6 @@
             <div class="row">
             {%  for article in row %}
                 <div class="col-sm-{{ row|column_class }} feature-item">
-
                     {% if article.feature_style.include_image and article.feature_style.overlay_text %}
                         <div class="overlay-feature rowheight-{{ article.feature_style.number_of_rows }}" style="height: {{ article|column_height }}px">
                             {% image article.main_image original as background_image %}
@@ -46,20 +45,37 @@
                         <div class="image-feature">
                             <figure>{%  image article.main_image width-710 %}</figure>
                             <h2><a href="{{ article.url }}">{{ article.title }}</a></h2>
-                            {% include "core/includes/homepage_teaser.html" %}
+                           <div class="contributors">By:
+                                {% for author in article.authors %}
+                                <div class="contributor">
+                                    <a style="color: {{ article.font_style.text_colour.hex_value }}" href="author.url">{{ author.first_name }} {{ author.last_name }}</a>
+                                </div>
+                                {% endfor %}
+                            </div>
+
                         </div>
 
                     {% else %}
                         <div class="simple-feature">
                             <h2><a href="{{ article.url }}">{{ article.title }}</a></h2>
-                            {% include "core/includes/homepage_teaser.html" %}
+                            {% if article.subtitle %}
+                                <div class="feature-line">{{ article.subtitle|richtext }}</div>
+                            {% else %}
+                                <div class="feature-line">{{ article.excerpt|richtext }}</div>
+                            {% endif %}
+                            <div class="contributors">By:
+                                {% for author in article.authors %}
+                                <div class="contributor">
+                                    <a style="color: {{ article.font_style.text_colour.hex_value }}" href="author.url">{{ author.first_name }} {{ author.last_name }}</a>
+                                </div>
+                                {% endfor %}
+                            </div>
                         </div>
                     {% endif %}
-
-
                 </div>
 
                 {% endfor %}
+
             </div>
         {% endfor %}
     </div>

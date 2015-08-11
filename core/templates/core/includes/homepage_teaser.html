@@ -1,5 +1,10 @@
 {% load static core_tags wagtailcore_tags wagtailimages_tags %}
 
+    {% if article.subtitle %}
+        <div class="feature-line">{{ article.subtitle|richtext }}</div>
+    {% else %}
+        <div class="feature-line">{{ article.excerpt|richtext }}</div>
+    {% endif %}
     <div class="contributors">By:
         {% for author in article.authors %}
         <div class="contributor">
@@ -7,9 +12,3 @@
         </div>
         {% endfor %}
     </div>
-
-    {% if article.subtitle %}
-        <div class="feature-line">{{ article.subtitle|richtext }}</div>
-    {% else %}
-        <div class="feature-line">{{ article.excerpt|richtext }}</div>
-    {% endif %}

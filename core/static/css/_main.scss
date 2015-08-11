@@ -316,6 +316,13 @@ footer{
     }
   }
 
+  .feature-item{
+    position: relative;
+    .contributors{
+      margin-top: 5px;
+    }
+  }
+
   .image-feature{
     h2{
       font-size: 16px;
@@ -341,6 +348,7 @@ footer{
     }
     .feature-item{
       @include row-divider;
+
     }
   }
 
