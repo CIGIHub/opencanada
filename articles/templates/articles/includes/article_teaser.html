@@ -12,10 +12,12 @@
         <div class="col-xs-12">
         {% endif %}
             <h2><a href="{{ article.url }}">{{ article.title }}</a></h2>
-            <div class="contributors">By: {% for author in article.authors %}
-                <div class="contributor"><a href="#">{{ author.first_name }} {{ author.last_name }}</a></div>
-                {% if not forloop.last %}, {% endif %}{% endfor %}
-            </div>
+            {% if article.authors %}
+                <div class="contributors">By: {% for author in article.authors %}
+                    <div class="contributor"><a href="#">{{ author.first_name }} {{ author.last_name }}</a></div>
+                    {% if not forloop.last %}, {% endif %}{% endfor %}
+                </div>
+            {% endif %}
             <div class="date"> / {{ article.first_published_at|date:"F j, Y" }}</div>
 
             <div class="feature-line">
