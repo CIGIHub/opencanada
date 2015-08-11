@@ -3,73 +3,105 @@
 
 {% block content %}
 
-{#<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">#}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
-{#<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">#}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
     <style>
-    .top-link {
+
+    .gap-page h1 {
+      font-size: 36px; }
+
+    .gap-page h2 {
+      font-size: 24px;
+      margin-top: 0px; }
+
+    .gap-page h3 {
+      font-size: 18px;
+      color: #bf1e2e;
+      margin-top: 0px; }
+
+    .gap-page h4 {
+      font-size: 14px;
+      font-weight: bold;
+      text-transform: uppercase; }
+
+    .gap-page h5, .gap-page h6 {
+      font-weight: bold;
+      font-size: 14px; }
+
+    .gap-page a, .gap-page a:hover {
+      color: #bf1e2e; }
+
+    .gap-page img {
+      display: block;
+      max-width: 100%;
+      height: auto; }
+
+    .gap-page ul,
+    .gap-page ul li{
+        list-style: none;
+    }
+
+    .gap-page .top-link {
         color: #bf1e2e;
         text-align: right;
         display: block;
         margin-right: 10%;
     }
-    .toc ul,
-    article h2,
-    .block-ColumnedContent,
-    .block-end_note,
-    .block-citation,
-    .block-Image
+    .gap-page .toc ul,
+    .gap-page article h2,
+    .gap-page .block-ColumnedContent,
+    .gap-page .block-end_note,
+    .gap-page .block-citation,
+    .gap-page .block-Image,
+    .gap-page .block-Paragraph,
+    .gap-page .block-Heading,
+    .gap-page .block-Image,
+    .gap-page .block-Sharable,
+    .gap-page .block-Embed,
     {
         margin-left: 10%;
         margin-right: 10%
     }
 
-    .block-Overflow .block-ColumnedContent,
-    .block-Overflow .block-Image,
-    .block-Overflow .block-Paragraph,
-    .block-Overflow .block-sharable
+    .gap-page .block-Overflow .block-ColumnedContent,
+    .gap-page .block-Overflow .block-Image,
+    .gap-page .block-Overflow .block-Paragraph,
+    .gap-page .block-Overflow .block-sharable
     {
         margin-left: 0;
         margin-right: 0;
     }
-    article h2 {
+    .gap-page article h2 {
         margin-top: 3%;
     }
 
-{#    .block-PullQuote {#}
-{#        margin-left: 10%;#}
-{#        margin-right: 10%#}
-{#    }#}
-
-    article .block-Quote,
-    article .block-Sharable {
+    .gap-page article .block-Quote,
+    .gap-page article .block-Sharable {
         border-left: solid #bf1e2e 5px;
         color: lightgray;
         margin-left: 15%;
         margin-right: 15%
     }
 
-    article .block-Sharable .quote,
-    article .block-Sharable,
-    article .block-Quote .quote,
-    article .block-Quote {
-{#        display: table-cell;#}
+    .gap-page article .block-Sharable .quote,
+    .gap-page article .block-Sharable,
+    .gap-page article .block-Quote .quote,
+    .gap-page article .block-Quote {
         vertical-align: middle;
     }
 
-    article .block-Quote .quote,
-    article .block-Sharable .quote
+    .gap-page article .block-Quote .quote,
+    .gap-page article .block-Sharable .quote
     {
         padding-left: 30px;
-{#        font-size: 26px;#}
         font-size: 14px;
         line-height: 120%;
-{#        width: 80%;#}
 
     }
-    article .block-PullQuote {
+    .gap-page article .block-PullQuote {
         display: inline-block;
         width: 33%;
         float: right;
@@ -80,7 +112,7 @@
         line-height: 120%;
     }
 
-    .toc ul{
+    .gap-page .toc ul{
         background-color: #f6f6f6;
         padding-top: 30px;
         padding-bottom: 30px;
@@ -88,28 +120,28 @@
         padding-right: 40px;
     }
 
-    .toc li {
+    .gap-page .toc li {
         margin: 3px;
     }
-    .toc ul li i {
+    .gap-page .toc ul li i {
         color: grey;
         font-size: 0.75em;
         padding-right: 5px;
     }
 
-    .image {
+    .gap-page .image {
         position: relative;
         border: 4px solid #f6f6f6;
         margin-bottom: 10px;
         margin-top: 10px;
     }
 
-    .image-label{
+    .gap-page .image-label{
         float: right;
         color: #bf1e2e;
     }
 
-    .photo-zoom {
+    .gap-page .photo-zoom {
         color: #bf1e2e;
         position: absolute;
         top: 10px;
@@ -117,29 +149,52 @@
         font-size: 18px;
     }
 
-    .clickable {
+    .gap-page .clickable {
         cursor: pointer;
     }
 
-    .end-notes li {
+    .gap-page .end-notes li {
         list-style: none;
         line-height: 1.5em;
         text-indent: -2em;
     }
 
-    .end-notes .identifier {
+    .gap-page .end-notes .identifier {
         float: left;
         width: 2em;
     }
 
-    .block-citation,
-    .block-end_note{
+    .gap-page .block-citation,
+    .gap-page .block-end_note ul li{
         padding-top: 5px;
         padding-bottom: 5px;
         color: #c0c0c0;
     }
+
+    .gap-page article .block-Image .image {
+        margin: 0 0 10px 0; }
+
+    .gap-page article .block-Image .credit {
+          margin-top: 10px;
+          font-size: 0.8em;
+          text-transform: uppercase;
+          color: #666; }
+
+    .gap-page article .block-Image .left-aligned {
+      float: left;
+      margin: 5px 20px 20px 0; }
+
+    .gap-page article .block-Image .right-aligned {
+  float: right;
+  margin: 5px 0px 20px 20px; }
+    .gap-page article .block-Image .full-width img {
+  margin: 0 auto; }
+
+ .gap-page article .block-Image .full-width .credit {
+  text-align: center; }
+
     </style>
-    <div id="article-page" class="container">
+    <div id="article-page" class="container gap-page">
         <article>
             <div class="title">
                 {% if self.primary_topic %}
