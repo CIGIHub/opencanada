@@ -513,6 +513,12 @@ article{
     position: fixed;
     top: 140px;
     background: white;
+
+    &small-article &{
+      positon: relative;
+      top: 0px;
+      background:none;
+    }
   }
 
   .small-article & ul.share-links{
@@ -623,7 +629,9 @@ article{
         font-family: $serif;
       }
     }
-
+    @media(max-width: $screen-sm){
+      display: none;
+    }
   }
   .home-link{
     text-align: center;
