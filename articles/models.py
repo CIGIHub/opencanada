@@ -177,8 +177,9 @@ class ArticleCategory(UniquelySlugable):
 register_snippet(ArticleCategory)
 
 
-class Sticky(models.Model):
+class Promotable(models.Model):
     sticky = models.BooleanField(default=False)
+    editors_pick = models.BooleanField(default=False)
 
     class Meta:
         abstract = True
@@ -236,7 +237,7 @@ class FeatureStyleFields(models.Model):
 
 
 @python_2_unicode_compatible
-class ArticlePage(Page, FeatureStyleFields, Sticky):
+class ArticlePage(Page, FeatureStyleFields, Promotable):
     excerpt = RichTextField(blank=True, default="")
     body = article_fields.BodyField()
     main_image = models.ForeignKey(
@@ -333,6 +334,7 @@ ArticlePage.promote_panels = Page.promote_panels + [
     MultiFieldPanel(
         [
             FieldPanel('sticky'),
+            FieldPanel('editors_pick'),
             FieldPanel('feature_style'),
             MultiFieldPanel(
                 [
@@ -374,7 +376,7 @@ Source.panels = [
 
 
 @python_2_unicode_compatible
-class ExternalArticlePage(Page, FeatureStyleFields, Sticky):
+class ExternalArticlePage(Page, FeatureStyleFields, Promotable):
     body = RichTextField()
     website_link = models.URLField(max_length=255)
     main_image = models.ForeignKey(
@@ -502,7 +504,7 @@ class SeriesArticleLink(Orderable, models.Model):
     ]
 
 
-class SeriesPage(Page, FeatureStyleFields, Sticky):
+class SeriesPage(Page, FeatureStyleFields, Promotable):
     subtitle = RichTextField(blank=True, default="")
     body = article_fields.BodyField(blank=True, default="")
     main_image = models.ForeignKey(
@@ -575,6 +577,7 @@ SeriesPage.promote_panels = Page.promote_panels + [
     MultiFieldPanel(
         [
             FieldPanel('sticky'),
+            FieldPanel('editors_pick'),
             FieldPanel('feature_style'),
             MultiFieldPanel(
                 [

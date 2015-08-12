@@ -18,6 +18,9 @@
                 <div class="col-sm-{{ row|column_class }} feature-item">
                     {% if article.feature_style.include_image and article.feature_style.overlay_text %}
                         <div class="overlay-feature rowheight-{{ article.feature_style.number_of_rows }}" style="height: {{ article|column_height }}px">
+                            {% if article.editors_pick %}
+                                <div class="editors-pick"><div>Editors Pick</div></div>
+                            {% endif %}
                             {% image article.main_image original as background_image %}
                             <div class="feature-image" style="background-image: url(' {{ background_image.url }} ')">
                                 <div class="feature-image-overlay" style="background: rgba( {{ article.image_overlay_color.rgb }}, {{ article.opacity }} )"></div>
@@ -45,6 +48,9 @@
 
                     {% elif article.feature_style.include_image and not article.feature_style.overlay_text %}
                         <div class="image-feature">
+                            {% if article.editors_pick %}
+                                <div class="editors-pick"><div>Editors Pick</div></div>
+                            {% endif %}
                             <figure>{%  image article.main_image width-710 %}</figure>
                             <h2><a href="{{ article.url }}">{{ article.title }}</a></h2>
                                <div class="contributors">By:
@@ -59,6 +65,9 @@
 
                     {% else %}
                         <div class="simple-feature">
+                            {% if article.editors_pick %}
+                                <div class="editors-pick"><div>Editors Pick</div></div>
+                            {% endif %}
                             <h2><a href="{{ article.url }}">{{ article.title }}</a></h2>
                             <div class="contributors">By:
                                 {% for author in article.authors %}
