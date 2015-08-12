@@ -36,6 +36,18 @@ h5, h6{
   font-size: 14px;
 }
 
+@media(max-width: $screen-sm){
+  h1{
+    font-size: 24px;
+  }
+  h2{
+    font-size: 18px;
+  }
+  h3{
+    font-size: 14px;
+  }
+}
+
 a, a:hover{
   color: $red;
 }
@@ -141,6 +153,7 @@ header{
   }
 
   button{
+    font-family: $sans-serif;
     background: $red;
     border-radius: 4px;
     border: none;
@@ -170,6 +183,11 @@ header{
     @include inline-list-divided($red);
   }
 
+  @media(max-width: $screen-md){
+    .container{
+      padding: 0px 100px;
+    }
+  }
   @media(max-width: $screen-sm){
     &.open{
       overflow-y: visible;
@@ -180,8 +198,9 @@ header{
     .container{
       padding: 0px 20px;
     }
-    .search-suggestions{
-      padding-top: 5px;
+  }
+  @media(max-width: $screen-xs) {
+    .search-suggestions ul li a{
       font-size: 10px;
     }
   }
