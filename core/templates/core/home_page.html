@@ -51,7 +51,7 @@
                             {% if article.editors_pick %}
                                 <div class="editors-pick"><div>Editors Pick</div></div>
                             {% endif %}
-                            <figure>{%  image article.main_image width-710 %}</figure>
+                            <figure>{%  image article.main_image fill-710x475 %}</figure>
                             <h2><a href="{{ article.url }}">{{ article.title }}</a></h2>
                                <div class="contributors">By:
                                     {% for author in article.authors %}

@@ -204,7 +204,7 @@ register_snippet(FeatureStyle)
 class FeatureStyleFields(models.Model):
     feature_style = models.ForeignKey(
         FeatureStyle,
-        default=1,
+        default=2,
         null=True,
         on_delete=models.SET_NULL
     )

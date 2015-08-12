@@ -737,17 +737,13 @@ article{
   h3{
     margin-top: 10px;
   }
+
   @media(max-width: $screen-sm){
      figure{
-       margin: 10px 30px;
+       display: table;
+       margin: 0 auto;
      }
    }
-  @media(max-width: $screen-xs){
-    figure{
-      margin: 0px;
-    }
-  }
-
 }
 
 /**************  People/Contributor pages  **************/
