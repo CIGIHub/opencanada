@@ -8,8 +8,9 @@
             {% for article in self|related_articles:article_count %}
             <div class="col-xs-12 col-sm-4">
                 <figure>
-                    {% image article.main_image width-700 %}
+                    {% image article.main_image fill-940x627 %}
                 </figure>
+
                 <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
                 {% if article.authors %}
                     <div class="contributors">By:

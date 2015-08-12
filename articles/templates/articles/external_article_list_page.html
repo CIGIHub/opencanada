@@ -7,7 +7,7 @@
        {% for article in self.subpages %}
         <div class="row">
             <div class="col-xs-2">
-                <figure>{% image article.source.logo width-120 %}</figure>
+                <figure>{% image article.source.logo fill-120x120 %}</figure>
             </div>
             <div class="col-xs-10">
                 <h3><a href="{{ article.website }}">{{ article.title }}</a></h3>
