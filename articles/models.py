@@ -162,6 +162,7 @@ class ArticleCategory(UniquelySlugable):
     objects = ArticleCategoryManager()
 
     name = models.CharField(max_length=1024)
+    include_main_image = models.BooleanField(default=True)
 
     class Meta:
         verbose_name_plural = "Article Categories"
