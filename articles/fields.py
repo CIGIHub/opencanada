@@ -22,6 +22,10 @@ class BodyField(StreamField):
                 blocks.RichTextBlock(label="item"), icon="list-ul")
              ),
             ('Sharable', SharableBlock()),
+            ('PullQuote', PullQuoteBlock()),
+            ('Quote', SimpleQuoteBlock()),
+            ('Overflow', OverflowStreamBlock()),
+            ('ColumnedContent', ColumnarStreamBlock()),
         ]
 
         super(BodyField, self).__init__(block_types, **kwargs)
@@ -104,29 +108,6 @@ class ImageBlock(blocks.StructBlock):
         icon = "image"
 
 
-class BodyField(StreamField):
-    def __init__(self, block_types=None, **kwargs):
-        block_types = [
-            ('Heading', HeadingBlock()),
-            ('Paragraph', ParagraphBlock()),
-            ('Image', ImageBlock()),
-            ('Embed', EmbedBlock(icon="site")),
-            ('List', blocks.ListBlock(
-                blocks.RichTextBlock(label="item"), icon="list-ul")
-             ),
-            ('Sharable', SharableBlock()),
-            ('PullQuote', PullQuoteBlock()),
-            ('Quote', SimpleQuoteBlock()),
-            ('Overflow', OverflowStreamBlock()),
-            ('ColumnedContent', ColumnarStreamBlock()),
-        ]
-
-        super(BodyField, self).__init__(block_types, **kwargs)
-
-        #
-        # super(BodyField, self).__init__(BodyBlock(), **kwargs)
-
-
 class ChapterField(StreamField):
     def __init__(self, block_types=None, **kwargs):
         block_types = [
@@ -134,7 +115,6 @@ class ChapterField(StreamField):
         ]
 
         super(ChapterField, self).__init__(block_types, **kwargs)
-
 
 
 class SimpleBodyBlock(blocks.StreamBlock):

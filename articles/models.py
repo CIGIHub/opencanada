@@ -239,7 +239,6 @@ class FeatureStyleFields(models.Model):
         abstract = True
 
 
-@python_2_unicode_compatible
 class ArticlePage(Page, FeatureStyleFields, Promotable):
     excerpt = RichTextField(blank=True, default="")
     body = article_fields.BodyField()
