@@ -548,12 +548,6 @@ article{
     position: fixed;
     top: 140px;
     background: white;
-
-    &small-article &{
-      positon: relative;
-      top: 0px;
-      background:none;
-    }
   }
 
   .small-article & ul.share-links{
@@ -571,6 +565,11 @@ article{
   }
   .small-article & .title{
     margin-top: 10px;
+  }
+
+  .small-article & ul.share-links.sticky{
+    position: relative;
+    top: 0px;
   }
 
   .dropcap-start::first-letter{
