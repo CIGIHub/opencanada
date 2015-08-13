@@ -4,12 +4,9 @@
 {% block content %}
     <div id="article-page" class="container">
         <article>
-            <ul class="share-links">
-                <li class="facebook"><span class="facebook-share-link" data-url="{{ self.url }}"><i class="fa fa-facebook"></i></span></li>
-                <li class="twitter"><a href="https://twitter.com/share?text={{ self.title }}"><i class="fa fa-twitter"></i></a></li>
-                <li class="print"><a href="javascript:window.print()"><i class="fa fa-print"></i></a></li>
-                <li class="email"><a HREF="mailto:?subject={{ self }}&body={{ self.url }}"><i class="fa fa-envelope"></i></a></li>
-            </ul>
+            {% block share_links %}
+                {% include 'articles/includes/share_links.html' %}
+            {% endblock %}
             <div class="title">
                 {% if self.primary_topic %}
                     <div class="primary-topic">

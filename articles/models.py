@@ -1,11 +1,14 @@
 from __future__ import absolute_import, division, unicode_literals
 
+from datetime import timedelta
 from operator import attrgetter
 
+import requests
 from basic_site.models import UniquelySlugable
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.shortcuts import get_object_or_404, render
+from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
 from modelcluster.fields import ParentalKey
 from wagtail.contrib.wagtailroutablepage.models import RoutablePageMixin, route
@@ -188,6 +191,40 @@ class Promotable(models.Model):
         abstract = True
 
 
+class Sharelinks(models.Model):
+    cached_twitter_count = models.IntegerField(default=0)
+    cached_facebook_count = models.IntegerField(default=0)
+    cached_last_updated = models.DateTimeField(blank=True, null=True)
+
+    def update_cache(self):
+        if not self.cached_last_updated or (timezone.now() - self.cached_last_updated) > timedelta(minutes=10):
+            url = 'https://cdn.api.twitter.com/1/urls/count.json?url=http://opencanada.org' + self.url
+            response = requests.get(url)
+            j = response.json()
+            self.cached_twitter_count = j['count']
+
+            url = 'https://graph.facebook.com/?id=http://opencanada.org' + self.url
+            response = requests.get(url)
+            j = response.json()
+            self.cached_facebook_count = j['shares']
+
+            self.cached_last_updated = timezone.now()
+            self.save()
+
+    @property
+    def twitter_count(self):
+        self.update_cache()
+        return self.cached_twitter_count
+
+    @property
+    def facebook_count(self):
+        self.update_cache()
+        return self.cached_facebook_count
+
+    class Meta:
+        abstract = True
+
+
 @python_2_unicode_compatible
 class FeatureStyle(models.Model):
     name = models.CharField(max_length=100)
@@ -239,9 +276,10 @@ class FeatureStyleFields(models.Model):
         abstract = True
 
 
-class ArticlePage(Page, FeatureStyleFields, Promotable):
+class ArticlePage(Page, FeatureStyleFields, Promotable, Sharelinks):
     excerpt = RichTextField(blank=True, default="")
     body = article_fields.BodyField()
+
     main_image = models.ForeignKey(
         'images.AttributedImage',
         null=True,
@@ -552,9 +590,10 @@ class SeriesArticleLink(Orderable, models.Model):
     ]
 
 
-class SeriesPage(Page, FeatureStyleFields, Promotable):
+class SeriesPage(Page, FeatureStyleFields, Promotable, Sharelinks):
     subtitle = RichTextField(blank=True, default="")
     body = article_fields.BodyField(blank=True, default="")
+
     main_image = models.ForeignKey(
         'images.AttributedImage',
         null=True,

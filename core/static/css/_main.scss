@@ -573,12 +573,22 @@ article {
   ul.share-links {
     position: absolute;
     margin-top: 3px;
+    margin-left: -100px;
     padding: 20px;
-    span {
+
+    div{
+      width: 20px;
+      margin-left: 5px;
+      display:inline-block;
       color: $red;
     }
-    li {
+    .count{
+      color: $count-grey;
+      font-family: $sans-serif;
+    }
+    li{
       list-style: none;
+      text-align:right;
     }
   }
   ul.share-links.sticky {
@@ -595,6 +605,9 @@ article {
     li {
       display: inline-block;
       padding-right: 7px;
+      div{
+        width: auto;
+      }
     }
     @media(max-width: $screen-xs) {
       margin-left: 0px;
