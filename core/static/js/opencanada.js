@@ -181,7 +181,7 @@ function toggleHeading(windowWidth, articleTitleWidth){
                 $('h1').css('width', articleTitleWidth);
 
             }
-            if($('#article-page').length || $('#series-page').length){
+            if($('#article-page').length ){
                 var sharelinksPosition = $('.share-links').offset().top - $('.share-links').height();
                 var fromBottom = $('footer').outerHeight() + $('.related-articles').outerHeight() + $('.share-links').outerHeight() + 195;
                 var bottom = $(document).height() - fromBottom;
@@ -218,6 +218,7 @@ function toggleHeading(windowWidth, articleTitleWidth){
         if($(document).scrollTop() > offset && $('#article-page').length){
             $('body').addClass('article-scroll');
         }
+
         else{
             fullHeader();
         }
