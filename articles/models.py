@@ -1,10 +1,9 @@
 from __future__ import absolute_import, division, unicode_literals
 
-import json
-import urllib2
 from datetime import timedelta
 from operator import attrgetter
 
+import requests
 from basic_site.models import UniquelySlugable
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
@@ -200,15 +199,13 @@ class Sharelinks(models.Model):
     def update_cache(self):
         if not self.cached_last_updated or (timezone.now() - self.cached_last_updated) > timedelta(minutes=10):
             url = 'https://cdn.api.twitter.com/1/urls/count.json?url=http://opencanada.org' + self.url
-            response = urllib2.urlopen(url)
-            html = response.read()
-            j = json.loads(html)
+            response = requests.get(url)
+            j = response.json()
             self.cached_twitter_count = j['count']
 
             url = 'https://graph.facebook.com/?id=http://opencanada.org' + self.url
-            response = urllib2.urlopen(url)
-            html = response.read()
-            j = json.loads(html)
+            response = requests.get(url)
+            j = response.json()
             self.cached_facebook_count = j['shares']
 
             self.cached_last_updated = timezone.now()
