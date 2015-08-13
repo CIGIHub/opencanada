@@ -6,6 +6,7 @@ from django.utils.text import slugify
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, RichTextFieldPanel
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
+from wagtail.wagtailsearch import index
 
 
 @python_2_unicode_compatible
@@ -39,6 +40,14 @@ class ContributorPage(Page):
         blank=True,
         on_delete=models.SET_NULL,
         related_name='+'
+    )
+
+    search_fields = Page.search_fields + (
+        index.SearchField('first_name', partial_match=True),
+        index.SearchField('last_name', partial_match=True),
+        index.SearchField('twitter_handle', partial_match=True),
+        index.SearchField('short_bio', partial_match=True),
+        index.SearchField('long_bio', partial_match=True),
     )
 
     def save(self, *args, **kwargs):
