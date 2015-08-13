@@ -613,17 +613,19 @@ class SeriesPage(Page, FeatureStyleFields, Promotable, Sharelinks):
     def articles(self):
         article_list = []
         for article_link in self.related_article_links.all():
-            article_link.article.override_text = article_link.override_text
-            article_link.article.override_image = article_link.override_image
-            article_list.append(article_link.article)
+            if article_link.article:
+                article_link.article.override_text = article_link.override_text
+                article_link.article.override_image = article_link.override_image
+                article_list.append(article_link.article)
         return article_list
 
     @property
     def authors(self):
         author_list = []
         for article_link in self.related_article_links.all():
-            for author_link in article_link.article.author_links.all():
-                author_list.append(author_link.author)
+            if article_link.article:
+                for author_link in article_link.article.author_links.all():
+                    author_list.append(author_link.author)
         author_list.sort(key=attrgetter('last_name'))
         return author_list
 
