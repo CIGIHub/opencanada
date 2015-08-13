@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% load static article_tags core_tags wagtailcore_tags wagtailimages_tags %}
+
+{% block content %}
+    <div id="chaptered-article-page" class="container">
+        <article>
+            <div class="title">
+                {% if self.primary_topic %}
+                    <div class="primary-topic">
+                        <i class="fa fa-tags"></i>
+                        <a href="{% topic_url self.primary_topic %}">{{ self.primary_topic.name }}</a>
+                    </div>
+                {% endif %}
+
+                <h1>{{ self.title }}</h1>
+                <h2>{{ self.excerpt|richtext }}</h2>
+
+                <div class="contributors">By:
+                    {% for author in self.authors %}
+                    <div class="contributor">
+                        <a href="{{ author.url }}">{{ author.first_name }} {{ author.last_name }}</a>
+                    </div>{% endfor %}</div>
+                <div class="date"> / {{ self.first_published_at|date:"F j, Y" }}</div>
+            </div>
+            <figure class="main-image">
+                {% image self.main_image width-940 %}
+            </figure>
+            <ul class="share-links">
+                <li class="facebook"><span class="facebook-share-link" data-url="{{ self.url }}"><i class="fa fa-facebook"></i></span></li>
+                <li class="twitter"><a href="https://twitter.com/share?text={{ self.title }}"><i class="fa fa-twitter"></i></a></li>
+                <li class="print"><a href="javascript:window.print()"><i class="fa fa-print"></i></a></li>
+                <li class="email"><a HREF="mailto:?subject={{ self }}&body={{ self.url }}"><i class="fa fa-envelope"></i></a></li>
+            </ul>
+            <div class="story">
+                {{ self.body }}
+
+                <div class="toc">
+                <h2 id="toc">Table of Contents</h2>
+                <ul class="fa-ul">
+                    {% for chapter in self.chapters %}
+                        <li><i class="fa fa-li fa-chevron-down"></i><a href="#{{ chapter.value.heading|slugify }}">{{ chapter.value.heading }}</a></li>
+                    {% endfor %}
+                </ul>
+
+                </div>
+
+                {% if self.chapters %}
+                {{ self.chapters }}
+                {% endif %}
+
+                {% if self.works_cited %}
+                    <div class="block-citations">
+                        <h2>Works Cited</h2>
+                        {{ self.works_cited }}
+                    </div>
+
+                {% endif %}
+
+                {% if self.end_notes %}
+                    <div class="block-end-notes">
+                    <h2>End Notes</h2>
+                    <ul class="end-notes">{{ self.end_notes }}</ul>
+                    </div>
+
+                {% endif %}
+
+                <div class="home-link"><a href="/"><img src="{% static 'img/opencanada-mark.png' %}"></a></div>
+            </div>
+
+            {% if self.topics %}
+                <div class="topics related">
+                    <div class="topic-label"><i class="fa fa-tags"></i> Topics:</div>
+                    <ul class="list-inline">
+                        {% for topic in self.topics %}
+                            <li><a href="{% topic_url topic %}">{{ topic }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        </article>
+
+        {% if self.series_articles %}
+        <section class="in-the-series">
+            <h2>Also in the series</h2>
+            {% for series, articles in self.series_articles %}
+                <div class="series-teaser">
+                    <h3><a href="{{ series.url }}">{{ series.title }}</a></h3>
+                    {{ series.subtitle|richtext }}
+                </div>
+                {% block in_the_series %}
+                    {% include 'articles/includes/in_the_series.html' %}
+                {% endblock %}
+            {%  endfor %}
+        </section>
+        {% endif %}
+
+        {% block related_articles %}
+            {% with article_count=3 %}
+                {% include 'articles/includes/related_articles.html' %}
+            {% endwith %}
+        {% endblock %}
+    </div>
+
+
+{% endblock %}

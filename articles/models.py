@@ -13,7 +13,7 @@ from wagtail.wagtailadmin.edit_handlers import (FieldPanel, InlinePanel,
                                                 MultiFieldPanel,
                                                 PageChooserPanel,
                                                 StreamFieldPanel)
-from wagtail.wagtailcore.fields import RichTextField
+from wagtail.wagtailcore.fields import RichTextField, StreamField
 from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
@@ -77,7 +77,9 @@ register_snippet(FontStyle)
 
 @python_2_unicode_compatible
 class ArticleListPage(Page):
-    subpage_types = ['ArticlePage']
+    subpage_types = ['ArticlePage',
+                     'ChapteredArticlePage',
+                     ]
 
     @property
     def subpages(self):
@@ -237,7 +239,6 @@ class FeatureStyleFields(models.Model):
         abstract = True
 
 
-@python_2_unicode_compatible
 class ArticlePage(Page, FeatureStyleFields, Promotable):
     excerpt = RichTextField(blank=True, default="")
     body = article_fields.BodyField()
@@ -258,13 +259,10 @@ class ArticlePage(Page, FeatureStyleFields, Promotable):
 
     category = models.ForeignKey(
         'articles.ArticleCategory',
-        related_name='articles',
+        related_name='%(class)s',
         on_delete=models.SET_NULL,
         null=True
     )
-
-    def __str__(self):
-        return self.title
 
     @property
     def authors(self):
@@ -349,6 +347,55 @@ ArticlePage.promote_panels = Page.promote_panels + [
         heading="Featuring Settings"
     )
 ]
+
+
+class ChapteredArticlePage(ArticlePage):
+    chapters = article_fields.ChapterField(blank=True, null=True)
+    works_cited = StreamField(
+        block_types=[
+            ('citation', article_fields.CitationBlock()),
+        ],
+        blank=True, null=True
+    )
+
+    end_notes = StreamField(
+        block_types=[
+            ('end_note', article_fields.EndNoteBlock()),
+        ],
+        blank=True, null=True
+    )
+
+
+ChapteredArticlePage.content_panels = Page.content_panels + [
+    FieldPanel('excerpt'),
+    InlinePanel('author_links', label="Authors"),
+    StreamFieldPanel('body'),
+    ImageChooserPanel('main_image'),
+    SnippetChooserPanel('primary_topic', Topic),
+    InlinePanel('topic_links', label="Secondary Topics"),
+    SnippetChooserPanel('category', ArticleCategory),
+    StreamFieldPanel('chapters'),
+    StreamFieldPanel('works_cited'),
+    StreamFieldPanel('end_notes'),
+    # InlinePanel('chapters', label="Chapters"),
+]
+
+#
+# class Chapter(models.Model):
+#     heading = models.CharField(max_length=512, blank=True)
+#     body = article_fields.BodyField(blank=True, null=True)
+#
+#     content_panels = [
+#         FieldPanel('heading'),
+#         StreamFieldPanel('body'),
+#     ]
+#
+#     class Meta:
+#         abstract = True
+#
+#
+# class ArticleChapter(Orderable, Chapter):
+#     page = ParentalKey(ChapteredArticlePage, related_name='chapters')
 
 
 @python_2_unicode_compatible

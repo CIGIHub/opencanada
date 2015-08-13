@@ -1,0 +1,9 @@
+{% load wagtailimages_tags %}
+<div class="chapter" id="{{ self.heading|slugify }}">
+   <h2 class="chapter-heading" >{{ self.heading }}</h2>
+
+    {{ self.body }}
+
+    <a href="#toc" class="top-link">Back to top</a>
+</div>
+

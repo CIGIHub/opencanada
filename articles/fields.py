@@ -22,6 +22,10 @@ class BodyField(StreamField):
                 blocks.RichTextBlock(label="item"), icon="list-ul")
              ),
             ('Sharable', SharableBlock()),
+            ('PullQuote', PullQuoteBlock()),
+            ('Quote', SimpleQuoteBlock()),
+            ('Overflow', OverflowStreamBlock()),
+            ('ColumnedContent', ColumnarStreamBlock()),
         ]
 
         super(BodyField, self).__init__(block_types, **kwargs)
@@ -48,6 +52,18 @@ class HeadingBlock(blocks.StructBlock):
 class SharableBlock(blocks.CharBlock):
     class Meta:
         template = "articles/blocks/sharable.html"
+        icon = "openquote"
+
+
+class PullQuoteBlock(blocks.TextBlock):
+    class Meta:
+        template = "articles/blocks/pull_quote.html"
+        icon = "openquote"
+
+
+class SimpleQuoteBlock(blocks.TextBlock):
+    class Meta:
+        template = "articles/blocks/quote.html"
         icon = "openquote"
 
 
@@ -84,7 +100,76 @@ class ImageBlock(blocks.StructBlock):
         ('right', 'Right Aligned'),
         ('full', 'Full Width'),
     ], default='full')
+    expandable = blocks.BooleanBlock(default=False, required=False)
+    label = blocks.CharBlock(required=False, help_text="Additional label to be displayed with the image.")
 
     class Meta:
         template = "articles/blocks/image_block.html"
         icon = "image"
+
+
+class ChapterField(StreamField):
+    def __init__(self, block_types=None, **kwargs):
+        block_types = [
+            ('chapter', ChapterBodyBlock()),
+        ]
+
+        super(ChapterField, self).__init__(block_types, **kwargs)
+
+
+class SimpleBodyBlock(blocks.StreamBlock):
+    Heading = HeadingBlock()
+    Paragraph = ParagraphBlock()
+    Image = ImageBlock()
+    Embed = EmbedBlock(icon="site")
+    List = blocks.ListBlock(blocks.RichTextBlock(label="item"), icon="list-ul")
+    Sharable = SharableBlock()
+    PullQuote = PullQuoteBlock()
+    Quote = SimpleQuoteBlock()
+
+
+class ColumnarStreamBlock(blocks.StructBlock):
+    body = SimpleBodyBlock(required=False)
+
+    class Meta:
+        template = "articles/blocks/columnar.html"
+
+
+class ColumnBodyBlock(SimpleBodyBlock):
+    ColumnedContent = ColumnarStreamBlock()
+
+
+class OverflowStreamBlock(blocks.StructBlock):
+    body = ColumnBodyBlock(required=False)
+
+    class Meta:
+        template = "articles/blocks/overflow.html"
+
+
+class BodyBlock(SimpleBodyBlock):
+    Overflow = OverflowStreamBlock()
+    ColumnedContent = ColumnarStreamBlock()
+
+
+class ChapterBodyBlock(blocks.StructBlock):
+    heading = blocks.CharBlock()
+    body = BodyBlock(required=False)
+
+    class Meta:
+        template = "articles/blocks/chapter.html"
+        # icon = "openquote"
+
+
+class EndNoteBlock(blocks.StructBlock):
+    identifier = blocks.CharBlock()
+    text = blocks.TextBlock()
+
+    class Meta:
+        template = "articles/blocks/endnote.html"
+
+
+class CitationBlock(blocks.StructBlock):
+    text = blocks.TextBlock()
+
+    class Meta:
+        template = "articles/blocks/citation.html"
