@@ -314,7 +314,14 @@ class ArticlePage(Page, FeatureStyleFields, Promotable, Sharelinks):
         index.SearchField('primary_topic', partial_match=True),
         index.SearchField('catefory', partial_match=True),
         index.SearchField('get_topic_names', partial_match=True),
+        index.SearchField('get_author_names', partial_match=True),
     )
+
+    def get_topic_names(self):
+        return '\n'.join(self.topic_links.all().values_list('topic__name', flat=True))
+
+    def get_author_names(self):
+        return '\n'.join([' '.join(name_list) for name_list in self.author_links.all().values_list('author__first_name', 'author__last_name')])
 
     @property
     def authors(self):
@@ -340,9 +347,6 @@ class ArticlePage(Page, FeatureStyleFields, Promotable, Sharelinks):
         if len(all_topics) > 0:
             all_topics.sort(key=attrgetter('name'))
         return all_topics
-
-    def get_topic_names(self):
-        return '\n'.join(self.topic_links.all().values_list('topic__name', flat=True))
 
     def related_articles(self, number):
         included = [self.id]
