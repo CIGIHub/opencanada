@@ -142,7 +142,7 @@ class TopicListPage(RoutablePageMixin, Page):
 
         articles = ArticlePage.objects.live().filter(
             models.Q(primary_topic=topic) | models.Q(topic_links__topic=topic)
-        ).order_by('-first_published_at')
+        ).order_by('-first_published_at').distinct()
 
         context = {
             "self": self,
