@@ -192,6 +192,42 @@ class Promotable(models.Model):
         abstract = True
 
 
+class Sharelinks(models.Model):
+    cached_twitter_count = models.IntegerField(default=0)
+    cached_facebook_count = models.IntegerField(default=0)
+    cached_last_updated = models.DateTimeField(blank=True, null=True)
+
+    def update_cache(self):
+        if not self.cached_last_updated or (timezone.now() - self.cached_last_updated) > timedelta(minutes=10):
+            url = 'https://cdn.api.twitter.com/1/urls/count.json?url=http://opencanada.org' + self.url
+            response = urllib2.urlopen(url)
+            html = response.read()
+            j = json.loads(html)
+            self.cached_twitter_count = j['count']
+
+            url = 'https://graph.facebook.com/?id=http://opencanada.org' + self.url
+            response = urllib2.urlopen(url)
+            html = response.read()
+            j = json.loads(html)
+            self.cached_facebook_count = j['shares']
+
+            self.cached_last_updated = timezone.now()
+            self.save()
+
+    @property
+    def twitter_count(self):
+        self.update_cache()
+        return self.cached_twitter_count
+
+    @property
+    def facebook_count(self):
+        self.update_cache()
+        return self.cached_facebook_count
+
+    class Meta:
+        abstract = True
+
+
 @python_2_unicode_compatible
 class FeatureStyle(models.Model):
     name = models.CharField(max_length=100)
@@ -243,12 +279,9 @@ class FeatureStyleFields(models.Model):
         abstract = True
 
 
-class ArticlePage(Page, FeatureStyleFields, Promotable):
+class ArticlePage(Page, FeatureStyleFields, Promotable, Sharelinks):
     excerpt = RichTextField(blank=True, default="")
     body = article_fields.BodyField()
-    cached_twitter_count = models.IntegerField(default=0)
-    cached_facebook_count = models.IntegerField(default=0)
-    cached_last_updated = models.DateTimeField(blank=True, null=True)
 
     main_image = models.ForeignKey(
         'images.AttributedImage',
@@ -275,33 +308,6 @@ class ArticlePage(Page, FeatureStyleFields, Promotable):
     @property
     def authors(self):
         return [link.author for link in self.author_links.all()]
-
-    def update_cache(self):
-        if not self.cached_last_updated or (timezone.now() - self.cached_last_updated) > timedelta(minutes=10):
-            url = 'https://cdn.api.twitter.com/1/urls/count.json?url=http://opencanada.org' + self.url
-            response = urllib2.urlopen(url)
-            html = response.read()
-            j = json.loads(html)
-            self.cached_twitter_count = j['count']
-
-            url = 'https://graph.facebook.com/?id=http://opencanada.org' + self.url
-            response = urllib2.urlopen(url)
-            html = response.read()
-            j = json.loads(html)
-            self.cached_facebook_count = j['shares']
-
-            self.cached_last_updated = timezone.now()
-            self.save()
-
-    @property
-    def twitter_count(self):
-        self.update_cache()
-        return self.cached_twitter_count
-
-    @property
-    def facebook_count(self):
-        self.update_cache()
-        return self.cached_facebook_count
 
     @property
     def series_articles(self):
@@ -587,12 +593,10 @@ class SeriesArticleLink(Orderable, models.Model):
     ]
 
 
-class SeriesPage(Page, FeatureStyleFields, Promotable):
+class SeriesPage(Page, FeatureStyleFields, Promotable, Sharelinks):
     subtitle = RichTextField(blank=True, default="")
     body = article_fields.BodyField(blank=True, default="")
-    cached_twitter_count = models.IntegerField(default=0)
-    cached_facebook_count = models.IntegerField(default=0)
-    cached_last_updated = models.DateTimeField(blank=True, null=True)
+
     main_image = models.ForeignKey(
         'images.AttributedImage',
         null=True,
@@ -607,33 +611,6 @@ class SeriesPage(Page, FeatureStyleFields, Promotable):
         on_delete=models.SET_NULL,
         related_name='+'
     )
-
-    def update_cache(self):
-        if not self.cached_last_updated or (timezone.now() - self.cached_last_updated) > timedelta(minutes=10):
-            url = 'https://cdn.api.twitter.com/1/urls/count.json?url=http://opencanada.org' + self.url
-            response = urllib2.urlopen(url)
-            html = response.read()
-            j = json.loads(html)
-            self.cached_twitter_count = j['count']
-
-            url = 'https://graph.facebook.com/?id=http://opencanada.org' + self.url
-            response = urllib2.urlopen(url)
-            html = response.read()
-            j = json.loads(html)
-            self.cached_facebook_count = j['shares']
-
-            self.cached_last_updated = timezone.now()
-            self.save()
-
-    @property
-    def twitter_count(self):
-        self.update_cache()
-        return self.cached_twitter_count
-
-    @property
-    def facebook_count(self):
-        self.update_cache()
-        return self.cached_facebook_count
 
     @property
     def articles(self):
