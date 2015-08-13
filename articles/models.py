@@ -293,7 +293,7 @@ class ArticlePage(Page, FeatureStyleFields, Promotable):
 
     def related_articles(self, number):
         included = [self.id]
-        articles = ArticlePage.objects.live().filter(primary_topic=self.primary_topic).exclude(id=self.id).order_by('-first_published_at')[:number]
+        articles = ArticlePage.objects.live().filter(primary_topic=self.primary_topic).exclude(id=self.id).distinct().order_by('-first_published_at')[:number]
         article_list = list(articles.all())
         included.extend([article.id for article in articles.all()])
 
@@ -301,14 +301,14 @@ class ArticlePage(Page, FeatureStyleFields, Promotable):
         if current_total < number:
             # still don't have enough, so pick using secondary topics
             topics = Topic.objects.filter(article_links__article=self)
-            additional_articles = ArticlePage.objects.live().filter(primary_topic__in=topics).exclude(id__in=included).order_by('-first_published_at')[:number - current_total]
+            additional_articles = ArticlePage.objects.live().filter(primary_topic__in=topics).exclude(id__in=included).distinct().order_by('-first_published_at')[:number - current_total]
             article_list.extend(additional_articles.all())
             current_total = len(article_list)
             included.extend([article.id for article in additional_articles.all()])
 
         if current_total < number:
             authors = ContributorPage.objects.live().filter(article_links__article=self)
-            additional_articles = ArticlePage.objects.live().filter(author_links__author__in=authors).exclude(id__in=included).order_by('-first_published_at')[:number - current_total]
+            additional_articles = ArticlePage.objects.live().filter(author_links__author__in=authors).exclude(id__in=included).distinct().order_by('-first_published_at')[:number - current_total]
             article_list.extend(additional_articles.all())
             current_total = len(article_list)
             included.extend([article.id for article in additional_articles.all()])
@@ -555,15 +555,17 @@ class SeriesPage(Page, FeatureStyleFields, Promotable):
         return all_topics
 
     def related_articles(self, number):
-        articles = list(ArticlePage.objects.live().filter(primary_topic=self.primary_topic).order_by('-first_published_at')[:number])
-
-        # TODO: pick actual related articles based on primary topic, secondary topics, authors
+        articles = list(ArticlePage.objects.live().filter(primary_topic=self.primary_topic).distinct().order_by('-first_published_at')[:number])
 
         current_total = len(articles)
-        if current_total < number:
-            # still don't have enough, so just pick the most recent
-            # TODO: exclude items already included.
-            articles.extend(list(ArticlePage.objects.live().order_by('-first_published_at')[:number - current_total]))
+
+        for article in self.articles:
+            if current_total < number:
+                articles.extend(list(article.related_articles(number)))
+                articles = list(set(articles))[:number]
+                current_total = len(articles)
+            else:
+                return articles
 
         return articles
 
