@@ -561,8 +561,9 @@ class SeriesPage(Page, FeatureStyleFields, Promotable):
 
         for article in self.articles:
             if current_total < number:
-                articles.extend(list(article.related_articles))
+                articles.extend(list(article.related_articles(number)))
                 articles = list(set(articles))[:number]
+                current_total = len(articles)
             else:
                 return articles
 
