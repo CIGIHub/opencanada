@@ -466,10 +466,19 @@ footer{
 .block-Heading,
 .block-Image,
 .block-Sharable,
+.block-Quote,
+.block-PullQuote,
 .block-Embed,
+.block-ColumnedContent,
+.block-end_note,
+.block-citation,
+.block-chapter h2,
+.block-end-notes h2,
+.block-citations h2,
 .topics,
 .series-articles,
-.series-teaser
+.series-teaser,
+.toc
 {
   margin-left: 10%;
   margin-right: 10%;
@@ -481,6 +490,7 @@ footer{
 }
 
 #article-page article,
+#chaptered-article-page article,
 #series-page article,
 #external-article-list-page .row,
 #event-list-page .row
@@ -498,100 +508,108 @@ article, .related-articles{
   }
 }
 
-article{
-  &.row{
+article {
+  &.row {
     @include row-divider;
   }
 
-  &.row.teaser{
-    h2{
+  &.row.teaser {
+    h2 {
       margin-top: 0px;
     }
-    .feature-line{
+    .feature-line {
       margin-top: 10px;
     }
   }
 
-  .title, .topics, .story{
+  .title, .topics, .story {
     margin-top: 20px;
     margin-bottom: 20px;
   }
 
-  h1{
+  h1 {
     margin: 0 0 20px 0;
   }
-  h2, h3{
+  h2, h3 {
     margin: 10px 0;
   }
-  h4, h5, h6{
+  h4, h5, h6 {
     margin: 10px 0 5px 0;
   }
 
-  .main-image img{
+  .main-image img {
     margin: 0 auto;
   }
 
-  .topics{
-    .topic-label{
+  .top-link {
+      color: $red;
+      text-align: right;
+      display: block;
+      margin-right: 10%;
+  }
+
+  .topics {
+    .topic-label {
       float: left;
     }
     @include type($text-color);
     @include inline-list-divided($red);
-    ul.list-inline{
+    ul.list-inline {
       margin-left: 68px;
       display: block;
     }
   }
 
-  .type{
+  .type {
     @include type($red);
   }
-  .primary-topic{
+  .primary-topic {
     @include type($red);
-    i{
+    i {
       color: $text-color;
     }
   }
 
-  ul.share-links{
+  ul.share-links {
     position: absolute;
     margin-top: 3px;
     padding: 20px;
-    span{
+    span {
       color: $red;
     }
-    li{
-      list-style: none;}
+    li {
+      list-style: none;
+    }
   }
-  ul.share-links.sticky{
+  ul.share-links.sticky {
     position: fixed;
     top: 140px;
     background: white;
   }
 
-  .small-article & ul.share-links{
+  .small-article & ul.share-links {
     position: relative;
     margin-left: 10%;
     margin-bottom: 0px;
     padding: 0px;
-    li{
+    li {
       display: inline-block;
       padding-right: 7px;
     }
-    @media(max-width: $screen-xs){
+    @media(max-width: $screen-xs) {
       margin-left: 0px;
     }
   }
-  .small-article & .title{
+  .small-article & .title {
     margin-top: 10px;
   }
 
-  .small-article & ul.share-links.sticky{
+  .small-article & ul.share-links.sticky {
     position: relative;
     top: 0px;
   }
 
-  .dropcap-start::first-letter{
+  .dropcap-start::first-letter {
     color: $red;
     font-size: 65px;
     line-height: 55px;
@@ -599,104 +617,198 @@ article{
     float: left;
   }
 
-  .block-Image{
-    .image{
+
+
+
+  .block-Image {
+    .image {
       margin: 0 0 10px 0;
     }
-    .credit{
+
+    .credit {
       margin-top: 10px;
       font-size: 0.8em;
       text-transform: uppercase;
       color: $grey;
     }
-    .left-aligned{
+    .left-aligned {
       float: left;
       margin: 5px 20px 20px 0;
     }
-    .right-aligned{
+    .right-aligned {
       float: right;
       margin: 5px 0px 20px 20px;
     }
-    .full-width{
-      img{
+    .full-width {
+      img {
         margin: 0 auto;
       }
-      .credit{
+      .credit {
         text-align: center;
       }
 
     }
+
   }
 
-  .block-Sharable{
+  .image{
+    position: relative;
+
+    .photo-zoom {
+      color: #bf1e2e;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 18px;
+    }
+  }
+
+  .image-label {
+      float: right;
+      color: #bf1e2e;
+    }
+
+
+    .block-Overflow .block-ColumnedContent,
+    .block-Overflow .block-Image,
+    .block-Overflow .block-Paragraph,
+    .block-Overflow .block-sharable
+    {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+  .block-PullQuote {
+      display: inline-block;
+      width: 33%;
+      float: right;
+      font-size: 28px;
+      padding: 20px;
+      margin: 10px;
+      background-color: #f6f6f6;
+      line-height: 120%;
+  }
+  .block-Quote {
+    border-left: solid $red 5px;
+    color: $light-grey;
+    margin-left: 15%;
+    .quote {
+      padding-left: 10px;
+      line-height: 120%;
+      width: 80%;
+      margin-bottom: 20px;
+    }
+  }
+
+  .block-Sharable {
     display: table;
     margin: 20px;
     padding: 10px;
     border-left: solid $red 5px;
     color: $red;
 
-    .quote, .tweet{
+    .quote, .tweet {
       display: table-cell;
       vertical-align: middle;
     }
-    .quote{
+    .quote {
       padding-left: 10px;
       font-size: 26px;
       line-height: 120%;
       width: 80%;
     }
-    .tweet{
+    .tweet {
       font-size: 20px;
       text-align: right;
     }
   }
 
-  .blurb-content{
-    float:right;
+  .blurb-content {
+    float: right;
     width: 300px;
     padding: 5px 15px;
     margin: 10px 0 10px 15px;
 
-
-    .individual{
+    .individual {
       border-left: solid 2px $mid-grey;
       margin-bottom: 20px;
       padding: 5px 15px;
     }
 
-    .author{
+    .author {
       @include type(black);
     }
-    .short-bio{
+    .short-bio {
       font-size: 0.8em;
       font-weight: bold;
       font-family: $serif;
     }
-    ul{
+    ul {
       padding: 5px 0 0 0;
       margin-bottom: 0px;
-      li{
+      li {
         padding-top: 5px;
         padding-bottom: 5px;
         list-style: none;
         font-family: $serif;
       }
     }
-    @media(max-width: $screen-sm){
+    @media(max-width: $screen-sm) {
       display: none;
     }
   }
-  .home-link{
+  .home-link {
     text-align: center;
-    img{
+    img {
       display: inline-block;
     }
   }
-  .in-the-series{
+  .in-the-series {
     border-top: $border-grey;
     border-bottom: none;
   }
 
+  .clickable {
+    cursor: pointer;
+  }
+
+  .end-notes {
+    color: $light-grey;
+    li {
+      list-style: none;
+      line-height: 1.5em;
+      text-indent: -2em;
+    }
+    .identifier {
+      float: left;
+      width: 2em;
+    }
+  }
+
+  .citation{
+    color: $light-grey;
+    margin-bottom: 10px;
+  }
+
+  .toc {
+    ul {
+      background-color: #f6f6f6;
+      padding-top: 30px;
+      padding-bottom: 30px;
+      padding-left: 40px;
+      padding-right: 40px;
+
+      li {
+        margin: 3px;
+
+        i {
+          color: grey;
+          font-size: 0.75em;
+          padding-right: 5px;
+        }
+      }
+    }
+  }
 }
 
 .in-depth-page{

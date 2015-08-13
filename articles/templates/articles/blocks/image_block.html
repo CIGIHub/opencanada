@@ -5,7 +5,7 @@
     <div class="modal-content">
         <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">{{ self.image.title }}</h4>
+        <h4 class="modal-title">{% if self.label %}{{ self.label }}{% else %}{{ self.image.title }}{% endif %}</h4>
       </div>
       <div class="modal-body">
         {% image self.image original %}
@@ -34,5 +34,5 @@
 
 </div>
 {% if self.label %}
-        <div class="image-label{% if self.expandable %} clickable{% endif %}"{% if self.expandable %} data-toggle="modal" data-target="#photoModel{{ self.image.id }}" {% endif %}>{{ self.label }}{% if self.expandable %} <i class="fa fa-external-link"></i>{% endif %}</div>
+        <div class="image-label{% if self.expandable %} clickable{% endif %}"{% if self.expandable %} data-toggle="modal" data-target="#photoModel{{ self.image.id }}" {% endif %}>{{ self.label }}</div>
     {% endif %}
