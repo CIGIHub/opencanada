@@ -20,6 +20,7 @@ from wagtail.wagtailadmin.edit_handlers import (FieldPanel, InlinePanel,
 from wagtail.wagtailcore.fields import RichTextField, StreamField
 from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
+from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 
@@ -307,6 +308,14 @@ class ArticlePage(Page, FeatureStyleFields, Promotable, Sharelinks):
         default=False
     )
 
+    search_fields = Page.search_fields + (
+        index.SearchField('excerpt', partial_match=True),
+        index.SearchField('body', partial_match=True),
+        index.SearchField('primary_topic', partial_match=True),
+        index.SearchField('catefory', partial_match=True),
+        index.SearchField('get_topic_names', partial_match=True),
+    )
+
     @property
     def authors(self):
         return [link.author for link in self.author_links.all()]
@@ -331,6 +340,9 @@ class ArticlePage(Page, FeatureStyleFields, Promotable, Sharelinks):
         if len(all_topics) > 0:
             all_topics.sort(key=attrgetter('name'))
         return all_topics
+
+    def get_topic_names(self):
+        return '\n'.join(self.topic_links.all().values_list('topic__name', flat=True))
 
     def related_articles(self, number):
         included = [self.id]
