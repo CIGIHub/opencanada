@@ -5,6 +5,7 @@ from operator import attrgetter
 
 import requests
 from basic_site.models import UniquelySlugable
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.db.models import Count
@@ -93,6 +94,23 @@ class ArticleListPage(Page):
         subpages = ArticlePage.objects.live().descendant_of(self).order_by('-first_published_at')
 
         return subpages
+
+    def get_context(self, request):
+        articles = self.subpages
+        # Pagination
+        page = request.GET.get('page')
+        paginator = Paginator(articles, 20)
+        try:
+            articles = paginator.page(page)
+        except PageNotAnInteger:
+            articles = paginator.page(1)
+        except EmptyPage:
+            articles = paginator.page(paginator.num_pages)
+
+        # Update template context
+        context = super(ArticleListPage, self).get_context(request)
+        context['articles'] = articles
+        return context
 
     def __str__(self):
         return self.title

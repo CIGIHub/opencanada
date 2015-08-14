@@ -7,10 +7,25 @@
         <h1>{{  self.title }}</h1>
     {% endif %}
 
-    {% for article in self.subpages %}
+    {% for article in articles %}
         {% include "articles/includes/article_teaser.html" %}
     {% endfor %}
 
+    <div class="row">
+        <div class="col-sm-4 previous">
+            {% if articles.has_previous %}
+                <a href="?page={{ articles.previous_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&amp;{{ key }}={{ value }}{% endifnotequal %}{% endfor %}">Previous</a>
+            {% endif %}
+        </div>
+        <div class="col-sm-4 pages">
+            Page {{ articles.number }} of {{ articles.paginator.num_pages }}
+        </div>
+        <div class="col-sm-4 next">
+            {% if articles.has_next %}
+                <a href="?page={{ articles.next_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&amp;{{ key }}={{ value }}{% endifnotequal %}{% endfor %}">Next</a>
+            {% endif %}
+        </div>
+    </div>
 </div>
 {% endblock %}
 
