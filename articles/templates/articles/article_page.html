@@ -27,13 +27,13 @@
                 {% endif %}
                 <div class="date"> / {{ self.first_published_at|date:"F j, Y" }}</div>
             </div>
-            {% if self.category.include_main_image %}
+            {% if self.include_main_image %}
             <figure class="main-image">
                 {% image self.main_image fill-940x627 %}
             </figure>
             {% endif %}
             <div class="story">
-                {% if not self.hide_author_block %}
+                {% if self.include_author_block %}
                 {% include 'articles/includes/author_blurb.html' %}
                 {% endif %}
                 {% for block in self.body %}
