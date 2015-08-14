@@ -28,6 +28,11 @@ urlpatterns = [
 
 if settings.DEBUG:
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+    from django.views.generic import TemplateView
 
     urlpatterns += staticfiles_urlpatterns()
     urlpatterns += static(settings.MEDIA_URL + 'images/', document_root=os.path.join(settings.MEDIA_ROOT, 'images'))
+    urlpatterns += [
+        url(r'^500/$', 'django.views.defaults.server_error'),
+        url(r'^404/$', TemplateView.as_view(template_name='404.html')),
+    ]
