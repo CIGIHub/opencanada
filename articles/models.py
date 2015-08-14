@@ -13,9 +13,10 @@ from django.utils.encoding import python_2_unicode_compatible
 from modelcluster.fields import ParentalKey
 from wagtail.contrib.wagtailroutablepage.models import RoutablePageMixin, route
 from wagtail.wagtailadmin.edit_handlers import (FieldPanel, InlinePanel,
-                                                MultiFieldPanel,
+                                                MultiFieldPanel, ObjectList,
                                                 PageChooserPanel,
-                                                StreamFieldPanel)
+                                                StreamFieldPanel,
+                                                TabbedInterface)
 from wagtail.wagtailcore.fields import RichTextField, StreamField
 from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
@@ -302,6 +303,10 @@ class ArticlePage(Page, FeatureStyleFields, Promotable, Sharelinks):
         null=True
     )
 
+    hide_author_block = models.BooleanField(
+        default=False
+    )
+
     @property
     def authors(self):
         return [link.author for link in self.author_links.all()]
@@ -356,35 +361,50 @@ class ArticlePage(Page, FeatureStyleFields, Promotable, Sharelinks):
 
         return article_list
 
+    content_panels = Page.content_panels + [
+        FieldPanel('excerpt'),
+        InlinePanel('author_links', label="Authors"),
+        StreamFieldPanel('body'),
+        ImageChooserPanel('main_image'),
+        SnippetChooserPanel('primary_topic', Topic),
+        InlinePanel('topic_links', label="Secondary Topics"),
+        SnippetChooserPanel('category', ArticleCategory),
+    ]
 
-ArticlePage.content_panels = Page.content_panels + [
-    FieldPanel('excerpt'),
-    InlinePanel('author_links', label="Authors"),
-    StreamFieldPanel('body'),
-    ImageChooserPanel('main_image'),
-    SnippetChooserPanel('primary_topic', Topic),
-    InlinePanel('topic_links', label="Secondary Topics"),
-    SnippetChooserPanel('category', ArticleCategory),
-]
+    promote_panels = Page.promote_panels + [
+        MultiFieldPanel(
+            [
+                FieldPanel('sticky'),
+                FieldPanel('editors_pick'),
+                FieldPanel('feature_style'),
+                MultiFieldPanel(
+                    [
+                        FieldPanel('image_overlay_opacity'),
+                        SnippetChooserPanel('image_overlay_color', Colour),
+                        SnippetChooserPanel("font_style", FontStyle),
+                    ],
+                    heading="Image Overlay Settings"
+                )
+            ],
+            heading="Featuring Settings"
+        ),
+    ]
 
-ArticlePage.promote_panels = Page.promote_panels + [
-    MultiFieldPanel(
-        [
-            FieldPanel('sticky'),
-            FieldPanel('editors_pick'),
-            FieldPanel('feature_style'),
-            MultiFieldPanel(
-                [
-                    FieldPanel('image_overlay_opacity'),
-                    SnippetChooserPanel('image_overlay_color', Colour),
-                    SnippetChooserPanel("font_style", FontStyle),
-                ],
-                heading="Image Overlay Settings"
-            )
-        ],
-        heading="Featuring Settings"
-    )
-]
+    style_panels = [
+        MultiFieldPanel(
+            [
+                FieldPanel('hide_author_block'),
+            ],
+            heading="Sections"
+        )
+    ]
+
+    edit_handler = TabbedInterface([
+        ObjectList(content_panels, heading='Content'),
+        ObjectList(style_panels, heading='Page Style Options'),
+        ObjectList(promote_panels, heading='Promote'),
+        ObjectList(Page.settings_panels, heading='Settings', classname="settings"),
+    ])
 
 
 class ChapteredArticlePage(ArticlePage):

@@ -33,7 +33,9 @@
             </figure>
             {% endif %}
             <div class="story">
+                {% if not self.hide_author_block %}
                 {% include 'articles/includes/author_blurb.html' %}
+                {% endif %}
                 {% for block in self.body %}
                     {% if block.block_type == 'Embed' %}
                         <section class="block-Embed">
