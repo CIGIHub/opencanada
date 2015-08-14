@@ -7,6 +7,7 @@ import requests
 from basic_site.models import UniquelySlugable
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
+from django.db.models import Count
 from django.shortcuts import get_object_or_404, render
 from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
@@ -134,7 +135,8 @@ class TopicListPage(RoutablePageMixin, Page):
 
     @property
     def topics(self):
-        return Topic.objects.all().order_by("name")
+        popular_topics = Topic.objects.annotate(num_articles=Count('article_links') + Count('articles') + Count('series')).order_by("-num_articles")[:25]
+        return sorted(popular_topics, key=lambda x: x.name)
 
     @route(r'^$', name="topic_list")
     def topics_list(self, request):
@@ -294,7 +296,7 @@ class ArticlePage(Page, FeatureStyleFields, Promotable, Sharelinks):
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
-        related_name='+'
+        related_name='articles'
     )
 
     category = models.ForeignKey(
@@ -656,7 +658,7 @@ class SeriesPage(Page, FeatureStyleFields, Promotable, Sharelinks):
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
-        related_name='+'
+        related_name='series'
     )
 
     search_fields = Page.search_fields + (
