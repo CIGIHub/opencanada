@@ -736,15 +736,15 @@ article {
     }
   }
 
-  .blurb{
+  .blurb-content{
     float: right;
-  }
-  .blurb-content {
-    width: 300px;
+
+
+    .individual {
+      width: 300px;
     padding: 5px 15px;
     margin: 10px 0 10px 15px;
 
-    .individual {
       border-left: solid 2px $mid-grey;
       margin-bottom: 20px;
       padding: 5px 15px;
