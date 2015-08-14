@@ -19,7 +19,7 @@
         {% endif %}
         <div class="date"> / {{ series.first_published_at|date:"F j, Y" }}</div>
         <div class="teaser">
-            {{ series.body }}
+            {{ series.body|truncatewords_html:80 }}
         </div>
 
     </div>
