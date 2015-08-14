@@ -117,9 +117,10 @@ class ArticleListPage(Page):
     ]
 
 
-@python_2_unicode_compatible
 class ExternalArticleListPage(Page):
     subpage_types = ['ExternalArticlePage']
+
+    articles_per_page = models.IntegerField(default=20)
 
     @property
     def subpages(self):
@@ -128,8 +129,25 @@ class ExternalArticleListPage(Page):
 
         return subpages
 
-    def __str__(self):
-        return self.title
+    def get_context(self, request):
+        articles = self.subpages
+
+        page = request.GET.get('page')
+        paginator = Paginator(articles, self.articles_per_page)
+        try:
+            articles = paginator.page(page)
+        except PageNotAnInteger:
+            articles = paginator.page(1)
+        except EmptyPage:
+            articles = paginator.page(paginator.num_pages)
+
+        context = super(ExternalArticleListPage, self).get_context(request)
+        context['articles'] = articles
+        return context
+
+    content_panels = Page.content_panels + [
+        FieldPanel('articles_per_page')
+    ]
 
 
 @python_2_unicode_compatible
