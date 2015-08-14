@@ -82,11 +82,12 @@ class FontStyle(models.Model):
 register_snippet(FontStyle)
 
 
-@python_2_unicode_compatible
 class ArticleListPage(Page):
     subpage_types = ['ArticlePage',
                      'ChapteredArticlePage',
                      ]
+
+    articles_per_page = models.IntegerField(default=20)
 
     @property
     def subpages(self):
@@ -99,7 +100,7 @@ class ArticleListPage(Page):
         articles = self.subpages
 
         page = request.GET.get('page')
-        paginator = Paginator(articles, 20)
+        paginator = Paginator(articles, self.articles_per_page)
         try:
             articles = paginator.page(page)
         except PageNotAnInteger:
@@ -111,8 +112,9 @@ class ArticleListPage(Page):
         context['articles'] = articles
         return context
 
-    def __str__(self):
-        return self.title
+    content_panels = Page.content_panels + [
+        FieldPanel('articles_per_page')
+    ]
 
 
 @python_2_unicode_compatible
@@ -605,9 +607,10 @@ class ArticleAuthorLink(Orderable, models.Model):
     ]
 
 
-@python_2_unicode_compatible
 class SeriesListPage(Page):
     subpage_types = ['SeriesPage']
+
+    series_per_page = models.IntegerField(default=5)
 
     @property
     def subpages(self):
@@ -619,7 +622,7 @@ class SeriesListPage(Page):
         series = self.subpages
 
         page = request.GET.get('page')
-        paginator = Paginator(series, 5)
+        paginator = Paginator(series, self.series_per_page)
         try:
             series = paginator.page(page)
         except PageNotAnInteger:
@@ -631,8 +634,9 @@ class SeriesListPage(Page):
         context['series_list'] = series
         return context
 
-    def __str__(self):
-        return self.title
+    content_panels = Page.content_panels + [
+        FieldPanel('series_per_page')
+    ]
 
 
 class SeriesArticleLink(Orderable, models.Model):
