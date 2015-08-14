@@ -216,37 +216,136 @@ header{
 
 footer{
   color: white;
+  font-family: $sans-serif;
   a{
     color: white;
   }
-  background: #a5a5a5;
+  background: $light-grey;
   padding-bottom: 40px;
 
+  h3{
+    @include type(white, 14px);
+  }
   .row{
     padding: 20px 0;
   }
 
-  .newsletter{
-    border-bottom: white 1px solid;
-    margin-bottom: 20px;
+  .featured-topics{
+    .label{
+      float:left;
+      margin-right: 20px;
+      @include type(white);
+    }
+    @include inline-list-divided($red);
+
   }
+
+  .row.infobar{
+      display: table;
+  }
+   .row.infobar .col-sm-4 {
+     border-right: $border-white;
+     display: table-cell;
+     float: none;
+   }
+
+   .row.infobar .col-sm-4:last-child {
+     border-right: none;
+   }
+
+  @media(max-width: $screen-sm) {
+    .row.infobar{
+      display: block;
+    }
+    .row.infobar .col-sm-4{
+      display:block;
+      border-top: $border-white;
+      border-right: none;
+      padding-top: 20px;
+    }
+  }
+
   .newsletter-form{
-    @include centered-fixed-width(600px);
-    @include newsletter-form;
+    background: $mid-grey;
+    padding: 5px;
+    margin-bottom: 20px;
+
+    ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color:   $text-color;
+    }
+    :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+       color:$text-color;
+       opacity:  1;
+    }
+    ::-moz-placeholder { /* Mozilla Firefox 19+ */
+       color: $text-color;
+       opacity:  1;
+    }
+    :-ms-input-placeholder { /* Internet Explorer 10-11 */
+       color:$text-color;
+    }
+
+    #mc_embed_signup{
+      font-family: $sans-serif;
+      form{
+        padding: 0px;
+      }
+
+      label{
+        font-style: italic;
+        text-align: center;
+        font-weight: normal;
+      }
+      input{
+        display: inline-block;
+        border-radius: none;
+        width: 60%;
+        color: $text-color;
+        text-transform: uppercase;
+        border: none;
+        background: none;
+
+      }
+
+      .button{
+        width: 25%;
+        background-color: $red;
+        color: white;
+        border: none;
+        text-transform: uppercase;
+        display:inline-block;
+        margin-bottom: 0px;
+      }
+      .email{
+        color: $text-color;
+        padding: 5px;
+        margin-bottom: 0px;
+        margin-top: 3px;
+      }
+    }
+  }
+
+  .social-links{
+    @include inline-list($red, 18px);
+    ul li{
+      margin-right: 30px;
+    }
   }
 
   .partner{
     text-align: center;
-    padding: 20px 0;
+    padding: 0 0 20px 0;
     img{
       display: inline;
     }
   }
 
+  .row.tagline-row{
+    border-top: $border-white;
+  }
   .tagline{
     @include centered-fixed-width(700px);
-    font-family: $serif;
-    font-style: italic;
+    font-family: $sans-serif;
     text-align: center;
   }
   .contact{
@@ -583,7 +682,7 @@ article {
       color: $red;
     }
     .count{
-      color: $count-grey;
+      color: $light-grey;
       font-family: $sans-serif;
     }
     li{
