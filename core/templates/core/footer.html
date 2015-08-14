@@ -1,30 +1,68 @@
-{% load wagtailcore_tags static %}
+{% load wagtailcore_tags static core_tags%}
 
 <footer role="contentinfo">
     <div class="container">
-        <div class="row newsletter">
-            <div class="col-md-12">
-                <div class="newsletter-form centered">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="featured-topics">
+                    <div class="label">Featured Topics: </div>
+                    <ul class="list-inline">
+                        {% suggested_searches 5 as search_topics %}
+                        {% for topic in search_topics %}
+                            <li><a href="{% url 'wagtailsearch_search' %}?q={{ topic|search_string }}">{{ topic }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row infobar">
+            <div class="col-sm-4">
+                <h3>About</h3>
+                <p>Open Canada is a Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. quis nostrud exercitation.</p>
+
+            </div>
+            <div class="col-sm-4">
+                <h3>Masthead</h3>
+                <p><a href="https://twitter.com/taylor_owen">@Taylor Owen</a> / Editor-in-Chief</p>
+                <p><a href="https://twitter.com/eva_sita">@Eva Salinas</a> / Managing Editor</p>
+                <p><a href="https://twitter.com/cattsalikis">@Catherine Tsalikis</a> / Journalist &amp; Editor</p>
+            </div>
+            <div class="col-sm-4">
+                <h3>Weekly OpenCanada Newsletter</h3>
+                <div class="newsletter-form">
                     <!-- Begin MailChimp Signup Form -->
                     <link href="//cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css">
                     <div id="mc_embed_signup">
                     <form action="//opencanada.us11.list-manage.com/subscribe/post?u=3489214029024915bb546afc7&amp;id=f619618f07" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
                         <div id="mc_embed_signup_scroll">
 
-                        <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+                        <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="enter email address" required>
                         <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
                         <div style="position: absolute; left: -5000px;"><input type="text" name="b_3489214029024915bb546afc7_f619618f07" tabindex="-1" value=""></div>
-                        <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+                        <div class="clear"><input type="submit" value="Sign-up" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
                         </div>
                     </form>
                     </div>
 
                     <!--End mc_embed_signup-->
                 </div>
+                <h3>Follow</h3>
+                <div class="social-links">
+                    <ul>
+                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                        <li><a href="#"><i class="fa fa-rss"></i></a></li>
+                    </ul>
+                </div>
             </div>
         </div>
-        <div class="tagline centered">
-            OpenCanada.org is a publication of the Canadian International Council, the Centre for International Governance Innovation and the Bill Graham Centre
+        <div class="row tagline-row">
+            <div class="col-xs-12">
+                <div class="tagline">
+                    OpenCanada.org is a publication of the Canadian International Council, the Centre for International Governance Innovation and the Bill Graham Centre
+               </div>
+            </div>
         </div>
         <div class="row">
             <div class="col-xs-4 ">
@@ -44,8 +82,8 @@
             </div>
         </div>
         <div class="contact">
-            Copyright &copy; 2015 Open Canada, All rights reserved<br>
-            Any trademarks or logos used herein are the property of their respective owners.
+            Copyright &copy; {% now "Y" %} Open Canada, All rights reserved.<br>
+            <a href="mailto:info@opencanada.org">info@opencanada.org</a>
         </div>
 
     </div>
