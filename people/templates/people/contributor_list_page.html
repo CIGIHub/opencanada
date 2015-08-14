@@ -7,7 +7,7 @@
         <h1>{{  self.title }}</h1>
     {% endif %}
 
-    {% for contributor in self.contributors %}
+    {% for contributor in people %}
         {% if contributor.first_name and contributor.last_name %}
         <div class="row">
             <div class="col-xs-12">
@@ -18,6 +18,24 @@
         {% endif %}
 
     {% endfor %}
+
+    <div class="row">
+        <div class="col-sm-4 previous">
+            {% if people.has_previous %}
+                <a href="?page=
+                        {{ people.previous_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&amp;{{ key }}={{ value }}{% endifnotequal %}{% endfor %}">Previous</a>
+            {% endif %}
+        </div>
+        <div class="col-sm-4 pages">
+            Page {{ people.number }} of {{ people.paginator.num_pages }}
+        </div>
+        <div class="col-sm-4 next">
+            {% if people.has_next %}
+                <a href="?page=
+                        {{ people.next_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&amp;{{ key }}={{ value }}{% endifnotequal %}{% endfor %}">Next</a>
+            {% endif %}
+        </div>
+    </div>
 
 </div>
 {% endblock %}
