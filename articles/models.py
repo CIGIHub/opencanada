@@ -171,7 +171,6 @@ class ArticleCategory(UniquelySlugable):
     objects = ArticleCategoryManager()
 
     name = models.CharField(max_length=1024)
-    include_main_image = models.BooleanField(default=True)
 
     class Meta:
         verbose_name_plural = "Article Categories"
@@ -306,9 +305,8 @@ class ArticlePage(Page, FeatureStyleFields, Promotable, Sharelinks):
         null=True
     )
 
-    hide_author_block = models.BooleanField(
-        default=False
-    )
+    include_author_block = models.BooleanField(default=True)
+    include_main_image = models.BooleanField(default=True)
 
     search_fields = Page.search_fields + (
         index.SearchField('excerpt', partial_match=True),
@@ -417,7 +415,8 @@ class ArticlePage(Page, FeatureStyleFields, Promotable, Sharelinks):
     style_panels = [
         MultiFieldPanel(
             [
-                FieldPanel('hide_author_block'),
+                FieldPanel('include_main_image'),
+                FieldPanel('include_author_block'),
             ],
             heading="Sections"
         )
