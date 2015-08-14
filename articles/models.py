@@ -124,7 +124,6 @@ class ExternalArticleListPage(Page):
 
     @property
     def subpages(self):
-        # Get list of live event pages that are descendants of this page
         subpages = ExternalArticlePage.objects.live().descendant_of(self).order_by('-first_published_at')
 
         return subpages

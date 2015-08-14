@@ -1,5 +1,6 @@
 from __future__ import absolute_import, unicode_literals
 
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from wagtail.wagtailadmin.edit_handlers import FieldPanel
@@ -36,9 +37,10 @@ Organization.panels = [
 ]
 
 
-@python_2_unicode_compatible
 class EventListPage(Page):
     subpage_types = ['EventPage']
+
+    events_per_page = models.IntegerField(default=20)
 
     @property
     def subpages(self):
@@ -47,8 +49,25 @@ class EventListPage(Page):
 
         return subpages
 
-    def __str__(self):
-        return self.title
+    def get_context(self, request):
+        events = self.subpages
+
+        page = request.GET.get('page')
+        paginator = Paginator(events, self.events_per_page)
+        try:
+            events = paginator.page(page)
+        except PageNotAnInteger:
+            events = paginator.page(1)
+        except EmptyPage:
+            events = paginator.page(paginator.num_pages)
+
+        context = super(EventListPage, self).get_context(request)
+        context['events'] = events
+        return context
+
+    content_panels = Page.content_panels + [
+        FieldPanel('events_per_page')
+    ]
 
 
 @python_2_unicode_compatible
