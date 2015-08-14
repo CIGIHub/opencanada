@@ -3,16 +3,18 @@
 {% for author in self.authors %}
     {% contributor_articles author self.id 3 as articles %}
     {% if articles %}
-    <div class="individual">
-        <div class="author">By: <a href="{{ author.url }}">{{ author.full_name }}</a></div>
-        <div class="short-bio">{{ author.short_bio }}</div>
-        <ul>
-            {% for article in articles %}
-                <li><a href="{{ article.url }}">{{ article.title }}</a></li>
-            {% endfor %}
-        </ul>
-    </div>
+            <div class="individual">
+                <div class="author">By: <a href="{{ author.url }}">{{ author.full_name }}</a></div>
+                <div class="short-bio">{{ author.short_bio }}</div>
+                <ul>
+                    {% for article in articles %}
+                        <li><a href="{{ article.url }}">{{ article.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        
     {% endif %}
 {% endfor %}
 </div>
+
 
