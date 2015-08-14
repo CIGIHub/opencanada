@@ -21,8 +21,12 @@
                             {% if article.editors_pick %}
                                 <div class="editors-pick"><div>Editors Pick</div></div>
                             {% endif %}
-                            {% image article.main_image original as background_image %}
-                            <div class="feature-image" style="background-image: url(' {{ background_image.url }} ')">
+                            {% if article.feature_style.number_of_rows = 2 %}
+                                {% image article.main_image fill-910x560 as background_image %}
+                            {% else %}
+                                {% image article.main_image fill-910x280 as background_image %}
+                            {% endif %}
+                            <div class="feature-image" style="background-image: url('{{ background_image.url }}')">
                                 <div class="feature-image-overlay" style="background: rgba( {{ article.image_overlay_color.rgb }}, {{ article.opacity }} )"></div>
                             </div>
                             <div class="feature-text" style="color: {{ article.font_style.text_colour.hex_value }}">
