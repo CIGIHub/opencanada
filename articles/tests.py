@@ -131,6 +131,11 @@ class ArticlePageTestCase(TestCase):
         article = ArticlePage.objects.get(slug="test-article-1")
         self.assertEqual(len(article.authors), 1)
 
+    def test_get_author_names_single_author(self):
+        article = ArticlePage.objects.get(slug="test-article-1")
+        names = article.get_author_names()
+        self.assertEqual(names, "Bob Smith")
+
     def test_single_author_has_expected_author(self):
         article = ArticlePage.objects.get(slug="test-article-1")
         bob = ContributorPage.objects.get(email="bobsmith@example.com")
@@ -140,13 +145,18 @@ class ArticlePageTestCase(TestCase):
         article = ArticlePage.objects.get(slug="test-article-4")
         self.assertEqual(len(article.authors), 2)
 
-    def test_single_author_has_expected_author_in_order(self):
+    def test_multiple_author_has_expected_author_in_order(self):
         article = ArticlePage.objects.get(slug="test-article-4")
         mary = ContributorPage.objects.get(email="marysue@example.com")
         joe = ContributorPage.objects.get(email="joesampson@example.com")
 
         self.assertEqual(article.authors[0], mary)
         self.assertEqual(article.authors[1], joe)
+
+    def test_get_author_names_multiple_authors(self):
+        article = ArticlePage.objects.get(slug="test-article-4")
+        names = article.get_author_names()
+        self.assertEqual(names, "Mary Sue\nJoe Sampson")
 
 #   TODO: verify related articles
 

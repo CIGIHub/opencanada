@@ -20,6 +20,7 @@ from wagtail.wagtailadmin.edit_handlers import (FieldPanel, InlinePanel,
 from wagtail.wagtailcore.fields import RichTextField, StreamField
 from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
+from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 
@@ -307,6 +308,27 @@ class ArticlePage(Page, FeatureStyleFields, Promotable, Sharelinks):
         default=False
     )
 
+    search_fields = Page.search_fields + (
+        index.SearchField('excerpt', partial_match=True),
+        index.SearchField('body', partial_match=True),
+        index.SearchField('get_primary_topic_name', partial_match=True),
+        index.SearchField('get_category_name', partial_match=True),
+        index.SearchField('get_topic_names', partial_match=True),
+        index.SearchField('get_author_names', partial_match=True),
+    )
+
+    def get_primary_topic_name(self):
+        return self.primary_topic.name
+
+    def get_category_name(self):
+        return self.category.name
+
+    def get_topic_names(self):
+        return '\n'.join(self.topic_links.all().values_list('topic__name', flat=True))
+
+    def get_author_names(self):
+        return '\n'.join([' '.join(name_list) for name_list in self.author_links.all().values_list('author__first_name', 'author__last_name')])
+
     @property
     def authors(self):
         return [link.author for link in self.author_links.all()]
@@ -505,6 +527,14 @@ class ExternalArticlePage(Page, FeatureStyleFields, Promotable):
             self.title
         )
 
+    search_fields = Page.search_fields + (
+        index.SearchField('body', partial_match=True),
+        index.SearchField('source', partial_match=True),
+    )
+
+    def get_source_name(self):
+        return self.source.name
+
     content_panels = Page.content_panels + [
         FieldPanel("body"),
         FieldPanel("website_link"),
@@ -628,6 +658,22 @@ class SeriesPage(Page, FeatureStyleFields, Promotable, Sharelinks):
         on_delete=models.SET_NULL,
         related_name='+'
     )
+
+    search_fields = Page.search_fields + (
+        index.SearchField('subtitle', partial_match=True),
+        index.SearchField('body', partial_match=True),
+        index.SearchField('get_primary_topic_name', partial_match=True),
+        index.SearchField('get_topic_names', partial_match=True),
+    )
+
+    def get_primary_topic_name(self):
+        return self.primary_topic.name
+
+    def get_topic_names(self):
+        return '\n'.join(self.topic_links.all().values_list('topic__name', flat=True))
+
+    def get_author_names(self):
+        return '\n'.join([' '.join(name_list) for name_list in self.author_links.all().values_list('author__first_name', 'author__last_name')])
 
     @property
     def articles(self):
