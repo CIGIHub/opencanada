@@ -624,8 +624,9 @@ class SeriesPage(Page, FeatureStyleFields, Promotable, Sharelinks):
         author_list = []
         for article_link in self.related_article_links.all():
             if article_link.article:
-                for author_link in article_link.article.author_links.all():
-                    author_list.append(author_link.author)
+                if article_link.article:
+                    for author_link in article_link.article.author_links.all():
+                        author_list.append(author_link.author)
         author_list.sort(key=attrgetter('last_name'))
         return author_list
 
@@ -635,7 +636,8 @@ class SeriesPage(Page, FeatureStyleFields, Promotable, Sharelinks):
         if self.primary_topic:
             all_topics.append(self.primary_topic)
         for article_link in self.related_article_links.all():
-            all_topics.extend(article_link.article.topics)
+            if article_link.article:
+                all_topics.extend(article_link.article.topics)
 
         all_topics = list(set(all_topics))
         if all_topics:
