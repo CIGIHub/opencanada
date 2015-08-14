@@ -15,7 +15,8 @@
             </p>
             <p class="bio">{{ self.long_bio|richtext }}</p>
         </div>
-        {% for article in self|contributor_articles %}
+        {% contributor_articles self as articles %}
+        {% for article in articles %}
             {% include "articles/includes/article_teaser.html" %}
         {% endfor %}
 
