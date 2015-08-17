@@ -30,7 +30,8 @@
         {% image self.image width-950 %}
     {% endif %}
     {% if self.expandable %}<i class="fa fa-search-plus photo-zoom" data-toggle="modal" data-target="#photoModel{{ self.image.id }}"></i>{% endif %}
-    <div class="credit">{{ self.image.credit }}</div>
+    <div class="image-credit">{{ self.image.credit }}</div>
+    <div class="image-source">{{ self.image.source }}</div>
 
 </div>
 {% if self.label %}
