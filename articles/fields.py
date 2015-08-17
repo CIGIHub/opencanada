@@ -61,7 +61,7 @@ class PullQuoteBlock(blocks.TextBlock):
         icon = "openquote"
 
 
-class SimpleQuoteBlock(blocks.TextBlock):
+class SimpleQuoteBlock(blocks.RichTextBlock):
     class Meta:
         template = "articles/blocks/quote.html"
         icon = "openquote"
