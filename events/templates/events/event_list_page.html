@@ -4,7 +4,7 @@
 {% block content %}
     <div id="event-list-page" class="container">
         <h1>{{ self.title }}</h1>
-       {% for event in self.subpages %}
+       {% for event in events %}
         <div class="row">
             <div class="col-xs-2">
                 <figure>{% image event.organization.logo fill-120x120 %}</figure>
@@ -17,6 +17,24 @@
             </div>
         </div>
         {% endfor %}
+
+        <div class="row">
+            <div class="col-sm-4 previous">
+                {% if events.has_previous %}
+                    <a href="?page=
+                            {{ events.previous_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&amp;{{ key }}={{ value }}{% endifnotequal %}{% endfor %}">Previous</a>
+                {% endif %}
+            </div>
+            <div class="col-sm-4 pages">
+                Page {{ events.number }} of {{ events.paginator.num_pages }}
+            </div>
+            <div class="col-sm-4 next">
+                {% if events.has_next %}
+                    <a href="?page=
+                            {{ events.next_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&amp;{{ key }}={{ value }}{% endifnotequal %}{% endfor %}">Next</a>
+                {% endif %}
+            </div>
+        </div>
     </div>
 
 {% endblock %}

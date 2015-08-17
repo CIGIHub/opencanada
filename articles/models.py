@@ -5,6 +5,7 @@ from operator import attrgetter
 
 import requests
 from basic_site.models import UniquelySlugable
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.db.models import Count
@@ -81,11 +82,12 @@ class FontStyle(models.Model):
 register_snippet(FontStyle)
 
 
-@python_2_unicode_compatible
 class ArticleListPage(Page):
     subpage_types = ['ArticlePage',
                      'ChapteredArticlePage',
                      ]
+
+    articles_per_page = models.IntegerField(default=20)
 
     @property
     def subpages(self):
@@ -94,23 +96,57 @@ class ArticleListPage(Page):
 
         return subpages
 
-    def __str__(self):
-        return self.title
+    def get_context(self, request):
+        articles = self.subpages
+
+        page = request.GET.get('page')
+        paginator = Paginator(articles, self.articles_per_page)
+        try:
+            articles = paginator.page(page)
+        except PageNotAnInteger:
+            articles = paginator.page(1)
+        except EmptyPage:
+            articles = paginator.page(paginator.num_pages)
+
+        context = super(ArticleListPage, self).get_context(request)
+        context['articles'] = articles
+        return context
+
+    content_panels = Page.content_panels + [
+        FieldPanel('articles_per_page')
+    ]
 
 
-@python_2_unicode_compatible
 class ExternalArticleListPage(Page):
     subpage_types = ['ExternalArticlePage']
 
+    articles_per_page = models.IntegerField(default=20)
+
     @property
     def subpages(self):
-        # Get list of live event pages that are descendants of this page
         subpages = ExternalArticlePage.objects.live().descendant_of(self).order_by('-first_published_at')
 
         return subpages
 
-    def __str__(self):
-        return self.title
+    def get_context(self, request):
+        articles = self.subpages
+
+        page = request.GET.get('page')
+        paginator = Paginator(articles, self.articles_per_page)
+        try:
+            articles = paginator.page(page)
+        except PageNotAnInteger:
+            articles = paginator.page(1)
+        except EmptyPage:
+            articles = paginator.page(paginator.num_pages)
+
+        context = super(ExternalArticleListPage, self).get_context(request)
+        context['articles'] = articles
+        return context
+
+    content_panels = Page.content_panels + [
+        FieldPanel('articles_per_page')
+    ]
 
 
 @python_2_unicode_compatible
@@ -595,19 +631,36 @@ class ArticleAuthorLink(Orderable, models.Model):
     ]
 
 
-@python_2_unicode_compatible
 class SeriesListPage(Page):
     subpage_types = ['SeriesPage']
 
+    series_per_page = models.IntegerField(default=5)
+
     @property
     def subpages(self):
-        # Get list of live event pages that are descendants of this page
         subpages = SeriesPage.objects.live().descendant_of(self).order_by('-first_published_at')
 
         return subpages
 
-    def __str__(self):
-        return self.title
+    def get_context(self, request):
+        series = self.subpages
+
+        page = request.GET.get('page')
+        paginator = Paginator(series, self.series_per_page)
+        try:
+            series = paginator.page(page)
+        except PageNotAnInteger:
+            series = paginator.page(1)
+        except EmptyPage:
+            series = paginator.page(paginator.num_pages)
+
+        context = super(SeriesListPage, self).get_context(request)
+        context['series_list'] = series
+        return context
+
+    content_panels = Page.content_panels + [
+        FieldPanel('series_per_page')
+    ]
 
 
 class SeriesArticleLink(Orderable, models.Model):
