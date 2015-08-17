@@ -676,6 +676,18 @@ article {
     margin: 0 auto;
   }
 
+  .image-credit {
+    margin-top: 5px;
+    font-size: 12px;
+    font-family: $sans-serif;
+    color: $grey;
+  }
+
+  .image-source{
+    margin-top: 3px;
+    @include type($light-grey, 11px)
+  }
+
   .top-link {
       color: $red;
       text-align: right;
@@ -773,10 +785,7 @@ article {
       margin: 0 0 10px 0;
     }
     .credit {
-      margin-top: 10px;
-      font-size: 0.8em;
-      text-transform: uppercase;
-      color: $grey;
+
     }
     .left-aligned {
       float: left;
