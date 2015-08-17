@@ -234,6 +234,7 @@ footer{
     .label{
       float:left;
       margin-right: 20px;
+      padding: 3px 0px;
       @include type(white);
     }
     @include inline-list-divided($red);
@@ -332,6 +333,13 @@ footer{
     }
   }
 
+  @media(max-width: $screen-sm) {
+  .follow h3{
+      float: left;
+      margin: 5px 10px 0 0;
+    }
+  }
+
   .partner{
     text-align: center;
     padding: 0 0 20px 0;
@@ -371,7 +379,7 @@ footer{
     opacity: 0.9;
     z-index:10;
     bottom: -20px;
-    left: 50%;
+    left: 45%;
     background-color: $mid-grey;
     border-radius: 25px;
     width: 50px;
@@ -380,9 +388,10 @@ footer{
     a{
       color: white;
       text-decoration: none;
+      display: block;
+      text-align: center;
       i{
         font-size:50px;
-        padding-left: 10px;
         padding-top:2px;
       }
     }
@@ -708,6 +717,9 @@ article {
         width: auto;
       }
     }
+    li.print{
+      display: none;
+    }
     @media(max-width: $screen-xs) {
       margin-left: 0px;
     }
@@ -729,14 +741,10 @@ article {
     float: left;
   }
 
-
-
-
   .block-Image {
     .image {
       margin: 0 0 10px 0;
     }
-
     .credit {
       margin-top: 10px;
       font-size: 0.8em;
@@ -837,7 +845,6 @@ article {
 
   .blurb-content{
     float: right;
-
 
     .individual {
       width: 300px;
@@ -1012,12 +1019,11 @@ article {
       }
     }
   }
-  @media(max-width: $screen-sm) {
+  @media(max-width: $screen-xs) {
     #mc_embed_signup {
       .form-control {
         width: 70%;
       }
-
     }
   }
 }

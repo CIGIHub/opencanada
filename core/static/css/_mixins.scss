@@ -177,7 +177,7 @@
 
   .feature-text{
     top: 10%;
-    margin-right: 10%;
+    margin-right: 70px;
     h1{
       font-size: 2.4em;
     }
@@ -199,6 +199,13 @@
       cursor:pointer;
        color: $red;
     }
+  }
+  @media(max-width: $screen-xs){
+     .feature-text{
+       .feature-line{
+         font-size: 1.0em;
+       }
+     }
   }
 }
 
