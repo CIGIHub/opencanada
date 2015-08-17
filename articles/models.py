@@ -426,8 +426,8 @@ class ArticlePage(Page, FeatureStyleFields, Promotable, Sharelinks):
     content_panels = Page.content_panels + [
         FieldPanel('excerpt'),
         InlinePanel('author_links', label="Authors"),
-        StreamFieldPanel('body'),
         ImageChooserPanel('main_image'),
+        StreamFieldPanel('body'),
         SnippetChooserPanel('primary_topic', Topic),
         InlinePanel('topic_links', label="Secondary Topics"),
         SnippetChooserPanel('category', ArticleCategory),
@@ -490,8 +490,8 @@ class ChapteredArticlePage(ArticlePage):
 ChapteredArticlePage.content_panels = Page.content_panels + [
     FieldPanel('excerpt'),
     InlinePanel('author_links', label="Authors"),
-    StreamFieldPanel('body'),
     ImageChooserPanel('main_image'),
+    StreamFieldPanel('body'),
     SnippetChooserPanel('primary_topic', Topic),
     InlinePanel('topic_links', label="Secondary Topics"),
     SnippetChooserPanel('category', ArticleCategory),
@@ -788,8 +788,8 @@ class SeriesPage(Page, FeatureStyleFields, Promotable, Sharelinks):
 
 SeriesPage.content_panels = Page.content_panels + [
     FieldPanel('subtitle'),
-    StreamFieldPanel('body'),
     ImageChooserPanel('main_image'),
+    StreamFieldPanel('body'),
     InlinePanel('related_article_links', label="Articles"),
 ]
 
