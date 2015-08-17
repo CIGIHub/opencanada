@@ -364,7 +364,7 @@ class ArticlePage(Page, FeatureStyleFields, Promotable, Sharelinks):
         return ""
 
     def get_topic_names(self):
-        return '\n'.join(self.topic_links.all().values_list('topic__name', flat=True))
+        return '\n'.join([link.topic.name if link.topic else "" for link in self.topic_links.all()])
 
     def get_author_names(self):
         return '\n'.join([author_link.author.full_name if author_link.author else "" for author_link in self.author_links.all()])
@@ -731,10 +731,10 @@ class SeriesPage(Page, FeatureStyleFields, Promotable, Sharelinks):
         return self.primary_topic.name
 
     def get_topic_names(self):
-        return '\n'.join(self.topic_links.all().values_list('topic__name', flat=True))
+        return '\n'.join([topic.name if topic else "" for topic in self.topics])
 
     def get_author_names(self):
-        return '\n'.join([' '.join(name_list) for name_list in self.author_links.all().values_list('author__first_name', 'author__last_name')])
+        return '\n'.join([author.full_name if author else "" for author in self.authors])
 
     @property
     def articles(self):
