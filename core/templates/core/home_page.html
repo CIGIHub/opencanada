@@ -17,7 +17,7 @@
             {%  for article in row %}
                 <div class="col-sm-{{ row|column_class }} feature-item">
                     {% if article.feature_style.include_image and article.feature_style.overlay_text %}
-                        <div class="overlay-feature rowheight-{{ article.feature_style.number_of_rows }}" style="height: {{ article|column_height }}px">
+                        <div class="overlay-feature rowheight-{{ article.feature_style.number_of_rows }}" style="height: {{ article|column_height }}px;">
                             {% if article.editors_pick %}
                                 <div class="editors-pick"><div>Editors Pick</div></div>
                             {% endif %}
@@ -29,7 +29,7 @@
                             <div class="feature-image" style="background-image: url('{{ background_image.url }}')">
                                 <div class="feature-image-overlay" style="background: rgba( {{ article.image_overlay_color.rgb }}, {{ article.opacity }} )"></div>
                             </div>
-                            <div class="feature-text" style="color: {{ article.font_style.text_colour.hex_value }}">
+                            <div class="feature-text" style="color: {{ article.font_style.text_colour.hex_value }}; {% if article.editors_pick %}margin-right: 70px; {% endif %}">
                                 <h2><a style="color: {{ article.font_style.text_colour.hex_value }};" href="{{ article.url }}">{{ article.title }}</a></h2>
 
                                 {% if article.subtitle %}

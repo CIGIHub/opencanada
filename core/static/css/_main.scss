@@ -95,6 +95,7 @@ header{
     margin-top:1%;
     text-align: center;
     @include inline-list-divided(white, 16px);
+    text-transform: uppercase;
   }
 
   &.collapsed.scrolled{
@@ -263,6 +264,7 @@ footer{
       border-top: $border-white;
       border-right: none;
       padding-top: 20px;
+      margin-bottom: 20px;
     }
   }
 
@@ -299,30 +301,53 @@ footer{
       }
       input{
         display: inline-block;
-        border-radius: none;
-        width: 60%;
-        color: $text-color;
         text-transform: uppercase;
-        border: none;
-        background: none;
+
+        &.email{
+          color: $text-color;
+          border-radius: none;
+          border: none;
+          background: none;
+          min-width: 120px;
+          padding: 5px;
+          margin: 3px 10px 0 5px;
+        }
+        &.button{
+          min-width:75px;
+          background-color: $red;
+          color: white;
+          border: none;
+          text-transform: uppercase;
+          display:inline-block;
+          margin-bottom: 0px;
+          font-weight: 300;
+          font-family: FontAwesome, 'Droid Sans', Helvetica, Arial, sans-serif;
+        }
 
       }
 
-      .button{
-        width: 25%;
-        background-color: $red;
-        color: white;
-        border: none;
-        text-transform: uppercase;
-        display:inline-block;
-        margin-bottom: 0px;
-      }
-      .email{
-        color: $text-color;
-        padding: 5px;
-        margin-bottom: 0px;
-        margin-top: 3px;
-      }
+       @media(max-width: $screen-md) {
+         input{
+           font-size: 10px;
+           &.email{
+              margin: 3px 5px 0 2px;
+           }
+           &.button{
+
+           }
+         }
+       }
+      @media(max-width: $screen-sm) {
+         input{
+           font-size: 14px;
+           &.email{
+             width: 75%;
+           }
+           &.button{
+             max-width: 20%;
+           }
+         }
+       }
     }
   }
 
@@ -333,8 +358,10 @@ footer{
     }
   }
 
+
   @media(max-width: $screen-sm) {
-  .follow h3{
+
+    .follow h3{
       float: left;
       margin: 5px 10px 0 0;
     }
