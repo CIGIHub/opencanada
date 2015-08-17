@@ -318,16 +318,20 @@ class ArticlePage(Page, FeatureStyleFields, Promotable, Sharelinks):
     )
 
     def get_primary_topic_name(self):
-        return self.primary_topic.name
+        if self.primary_topic:
+            return self.primary_topic.name
+        return ""
 
     def get_category_name(self):
-        return self.category.name
+        if self.category:
+            return self.category.name
+        return ""
 
     def get_topic_names(self):
         return '\n'.join(self.topic_links.all().values_list('topic__name', flat=True))
 
     def get_author_names(self):
-        return '\n'.join([' '.join(name_list) for name_list in self.author_links.all().values_list('author__first_name', 'author__last_name')])
+        return '\n'.join([' '.join(author_link.author.full_name) for author_link in self.author_links.all()])
 
     @property
     def authors(self):
@@ -534,7 +538,10 @@ class ExternalArticlePage(Page, FeatureStyleFields, Promotable):
     )
 
     def get_source_name(self):
-        return self.source.name
+        if self.source:
+            return self.source.name
+        else:
+            return ""
 
     content_panels = Page.content_panels + [
         FieldPanel("body"),
