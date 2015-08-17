@@ -331,7 +331,7 @@ class ArticlePage(Page, FeatureStyleFields, Promotable, Sharelinks):
         return '\n'.join(self.topic_links.all().values_list('topic__name', flat=True))
 
     def get_author_names(self):
-        return '\n'.join([' '.join(author_link.author.full_name if author_link.author else "") for author_link in self.author_links.all()])
+        return '\n'.join([author_link.author.full_name if author_link.author else "" for author_link in self.author_links.all()])
 
     @property
     def authors(self):
