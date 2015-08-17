@@ -95,7 +95,9 @@ header{
     margin-top:1%;
     text-align: center;
     @include inline-list-divided(white, 16px);
-    text-transform: uppercase;
+    button{
+      text-transform: uppercase;
+    }
   }
 
   &.collapsed.scrolled{
@@ -472,6 +474,10 @@ footer{
 
 /**************  Main  **************/
 
+main{
+  margin-bottom: 30px;
+}
+
 .features{
   color: black;
   margin-bottom: 20px;
@@ -570,6 +576,22 @@ footer{
   float: right;
   right: 0;
   top: 0;
+}
+
+.pager{
+  li{
+    @include type($grey);
+  }
+  li > a, li > span{
+    background: $red;
+    color: white;
+    border-radius: 3px;
+    border: none;
+  }
+  li > a:hover, li > span:hover{
+    color: white;
+    background: $red;
+  }
 }
 
 /**************  Article  **************/

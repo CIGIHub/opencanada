@@ -12,21 +12,23 @@
            {% include "articles/includes/series_teaser.html" %}
     {% endfor %}
 
-    <div class="row">
-        <div class="col-sm-4 previous">
-            {% if series_list.has_previous %}
-                <a href="?page={{ series_list.previous_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&amp;{{ key }}={{ value }}{% endifnotequal %}{% endfor %}">Previous</a>
-            {% endif %}
-        </div>
-        <div class="col-sm-4 pages">
-            Page {{ series_list.number }} of {{ series_list.paginator.num_pages }}
-        </div>
-        <div class="col-sm-4 next">
-            {% if series_list.has_next %}
-                <a href="?page={{ series_list.next_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&amp;{{ key }}={{ value }}{% endifnotequal %}{% endfor %}">Next</a>
-            {% endif %}
-        </div>
-    </div>
+    {% if series_list.paginator.num_pages > 1 %}
+        <ul class="pager">
+            <li class="previous">
+                {% if series_list.has_previous %}
+                    <a href="?page={{ series_list.previous_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&amp;{{ key }}={{ value }}{% endifnotequal %}{% endfor %}">Previous</a>
+                {% endif %}
+            </li>
+            <li class="pages">
+                Page {{ series_list.number }} of {{ series_list.paginator.num_pages }}
+            </li>
+            <li class="next">
+                {% if series_list.has_next %}
+                    <a href="?page={{ series_list.next_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&amp;{{ key }}={{ value }}{% endifnotequal %}{% endfor %}">Next</a>
+                {% endif %}
+            </li>
+        </ul>
+    {% endif %}
     </div>
 
 

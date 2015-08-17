@@ -17,24 +17,23 @@
             </div>
         </div>
         {% endfor %}
-
-        <div class="row">
-            <div class="col-sm-4 previous">
-                {% if events.has_previous %}
-                    <a href="?page=
-                            {{ events.previous_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&amp;{{ key }}={{ value }}{% endifnotequal %}{% endfor %}">Previous</a>
-                {% endif %}
-            </div>
-            <div class="col-sm-4 pages">
-                Page {{ events.number }} of {{ events.paginator.num_pages }}
-            </div>
-            <div class="col-sm-4 next">
-                {% if events.has_next %}
-                    <a href="?page=
-                            {{ events.next_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&amp;{{ key }}={{ value }}{% endifnotequal %}{% endfor %}">Next</a>
-                {% endif %}
-            </div>
-        </div>
+        {% if events.paginator.num_pages > 1 %}
+            <ul class="pager">
+                <li class="previous">
+                    {% if events.has_previous %}
+                        <a href="?page={{ events.previous_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&amp;{{ key }}={{ value }}{% endifnotequal %}{% endfor %}">Previous</a>
+                    {% endif %}
+                </li>
+                <li class="pages">
+                    Page {{ events.number }} of {{ events.paginator.num_pages }}
+                </li>
+                <li class="next">
+                    {% if events.has_next %}
+                        <a href="?page={{ events.next_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&amp;{{ key }}={{ value }}{% endifnotequal %}{% endfor %}">Next</a>
+                    {% endif %}
+                </li>
+            </ul>
+        {% endif %}
     </div>
 
 {% endblock %}

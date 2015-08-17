@@ -643,19 +643,19 @@ class SeriesListPage(Page):
         return subpages
 
     def get_context(self, request):
-        series = self.subpages
+        series_list = self.subpages
 
         page = request.GET.get('page')
-        paginator = Paginator(series, self.series_per_page)
+        paginator = Paginator(series_list, self.series_per_page)
         try:
-            series = paginator.page(page)
+            series_list = paginator.page(page)
         except PageNotAnInteger:
-            series = paginator.page(1)
+            series_list = paginator.page(1)
         except EmptyPage:
-            series = paginator.page(paginator.num_pages)
+            series_list = paginator.page(paginator.num_pages)
 
         context = super(SeriesListPage, self).get_context(request)
-        context['series_list'] = series
+        context['series_list'] = series_list
         return context
 
     content_panels = Page.content_panels + [

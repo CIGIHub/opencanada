@@ -73,6 +73,11 @@
     }
 }
 
+@mixin button{
+  background: $red;
+
+}
+
 @mixin collapsed{
   height: 55px;
   .banner{
