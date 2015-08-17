@@ -10,11 +10,12 @@
 
 
 {% block content %}
-    <div class="container features" id="features">
+    <section class="container features" id="features">
+        <h2>Most Recent</h2>
 
         {% for row in self.articles %}
-            <div class="row">
-            {%  for article in row %}
+            <div class="row {% if forloop.last %}last{% endif %}">
+            {% for article in row %}
                 <div class="col-sm-{{ row|column_class }} feature-item">
                     {% if article.feature_style.include_image and article.feature_style.overlay_text %}
                         <div class="overlay-feature rowheight-{{ article.feature_style.number_of_rows }}" style="height: {{ article|column_height }}px;">
@@ -30,7 +31,7 @@
                                 <div class="feature-image-overlay" style="background: rgba( {{ article.image_overlay_color.rgb }}, {{ article.opacity }} )"></div>
                             </div>
                             <div class="feature-text" style="color: {{ article.font_style.text_colour.hex_value }}; {% if article.editors_pick %}margin-right: 70px; {% endif %}">
-                                <h2><a style="color: {{ article.font_style.text_colour.hex_value }};" href="{{ article.url }}">{{ article.title }}</a></h2>
+                                <h3><a style="color: {{ article.font_style.text_colour.hex_value }};" href="{{ article.url }}">{{ article.title }}</a></h3>
 
                                 {% if article.subtitle %}
                                     <div class="feature-line">{{ article.subtitle|richtext }}</div>
@@ -56,7 +57,7 @@
                                 <div class="editors-pick"><div>Editors Pick</div></div>
                             {% endif %}
                             <figure>{%  image article.main_image fill-710x475 %}</figure>
-                            <h2><a href="{{ article.url }}">{{ article.title }}</a></h2>
+                            <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
                                <div class="contributors">By:
                                     {% for author in article.authors %}
                                     <div class="contributor">
@@ -72,7 +73,7 @@
                             {% if article.editors_pick %}
                                 <div class="editors-pick"><div>Editors Pick</div></div>
                             {% endif %}
-                            <h2><a href="{{ article.url }}">{{ article.title }}</a></h2>
+                            <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
                             <div class="contributors">By:
                                 {% for author in article.authors %}
                                 <div class="contributor">
@@ -93,6 +94,22 @@
 
             </div>
         {% endfor %}
-    </div>
+        <div class="read-more">
+            <button><a href="/features">All Features <i class="fa fa-chevron-right"></i></a></button>
+        </div>
+    </section>
 
+    <section class="container readings">
+        <h2>Best of the Web</h2>
+        <div class="read-more">
+            <button><a href="/readings">More from the Web <i class="fa fa-chevron-right"></i></a></button>
+        </div>
+    </section>
+
+    <section class="container readings">
+        <h2>Graphics</h2>
+        <div class="read-more">
+            <button><a href="/features">More Graphics <i class="fa fa-chevron-right"></i></a></button>
+        </div>
+    </section>
 {% endblock %}
