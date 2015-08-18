@@ -146,6 +146,7 @@ function setOverlayForWindow(windowWidth){
 function toggleHeading(windowWidth, articleTitleWidth){
 
     var offset = $('header').height();
+    console.log(offset);
 
     function fullHeader(){
         $('header').removeClass('collapsed');
@@ -245,9 +246,5 @@ $(window).resize(function(){
     initForWindow();
 
 });
-
-$(window).reload(function(){
-    initForWindow();
-})
 
 
