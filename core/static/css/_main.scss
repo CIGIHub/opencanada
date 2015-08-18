@@ -727,8 +727,9 @@ article {
   .image-credit {
     margin-top: 5px;
     font-size: 12px;
+    line-height: 125%;
     font-family: $sans-serif;
-    color: $grey;
+    color: $caption-grey;
   }
 
   .image-source{
