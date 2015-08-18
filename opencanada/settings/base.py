@@ -63,6 +63,8 @@ INSTALLED_APPS = (
     'taggit',
     'modelcluster',
 
+    'core',
+
     'wagtail.wagtailcore',
     'wagtail.wagtailadmin',
     'wagtail.wagtaildocs',
@@ -79,7 +81,6 @@ INSTALLED_APPS = (
 
     'favicon',
 
-    'core',
     'basic_site',
     'articles',
     'people',
