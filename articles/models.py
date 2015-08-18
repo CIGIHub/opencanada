@@ -88,11 +88,15 @@ class ArticleListPage(Page):
                      ]
 
     articles_per_page = models.IntegerField(default=20)
+    filter_for_visualizations = models.BooleanField(default=False)
 
     @property
     def subpages(self):
-        # Get list of live event pages that are descendants of this page
-        subpages = ArticlePage.objects.live().descendant_of(self).order_by('-first_published_at')
+
+        if self.filter_for_visualizations:
+            subpages = ArticlePage.objects.live().filter(visualization=True).order_by('-first_published_at')
+        else:
+            subpages = ArticlePage.objects.live().order_by('-first_published_at')
 
         return subpages
 
@@ -113,7 +117,8 @@ class ArticleListPage(Page):
         return context
 
     content_panels = Page.content_panels + [
-        FieldPanel('articles_per_page')
+        FieldPanel('articles_per_page'),
+        FieldPanel('filter_for_visualizations'),
     ]
 
 
@@ -145,7 +150,7 @@ class ExternalArticleListPage(Page):
         return context
 
     content_panels = Page.content_panels + [
-        FieldPanel('articles_per_page')
+        FieldPanel('articles_per_page'),
     ]
 
 
@@ -338,11 +343,13 @@ class ArticlePage(Page, FeatureStyleFields, Promotable, Sharelinks):
         'articles.ArticleCategory',
         related_name='%(class)s',
         on_delete=models.SET_NULL,
-        null=True
+        null=True,
+        default=1
     )
 
     include_author_block = models.BooleanField(default=True)
     include_main_image = models.BooleanField(default=True)
+    visualization = models.BooleanField(default=False)
 
     search_fields = Page.search_fields + (
         index.SearchField('excerpt', partial_match=True),
@@ -431,6 +438,7 @@ class ArticlePage(Page, FeatureStyleFields, Promotable, Sharelinks):
         SnippetChooserPanel('primary_topic', Topic),
         InlinePanel('topic_links', label="Secondary Topics"),
         SnippetChooserPanel('category', ArticleCategory),
+        FieldPanel('visualization'),
     ]
 
     promote_panels = Page.promote_panels + [
