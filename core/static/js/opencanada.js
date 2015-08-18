@@ -246,4 +246,8 @@ $(window).resize(function(){
 
 });
 
+$(window).reload(function(){
+    initForWindow();
+})
+
 
