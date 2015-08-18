@@ -486,6 +486,7 @@ main{
     .row {
       @include row-divider;
     }
+
     .row.last{
       border-bottom: none;
     }
@@ -494,11 +495,13 @@ main{
       .row{
         @include no-row-divider;
       }
-      .col-sm-6{
+      .col-sm-6, .feature-item{
         @include row-divider;
       }
-      .col-sm-6.last{
+      .row.last .col-sm-6.last, .row.last .feature-item.last{
         @include no-row-divider;
+        padding-top: 20px;
+        padding-bottom: 20px;
       }
     }
 
@@ -523,22 +526,12 @@ main{
   }
 
   .readings .col-sm-6{
-    h3{
-       margin-left: 100px;
-    }
-    .external-article{
-      display: table;
       figure{
-        vertical-align: top;
-        display: table-cell;
-        width: 100px;
+        float:left;
       }
-      .rich-text{
-        vertical-align: top;
-        display: table-cell;
-      }
+      .reading{
+        margin-left: 100px;
     }
-
   }
 }
 
@@ -560,6 +553,9 @@ main{
   .simple-feature{
     h3{
       font-size: 36px;
+      @media(max-width: $screen-sm){
+        font-size: 22px;
+      }
     }
   }
 
@@ -568,19 +564,6 @@ main{
   }
   h3{
     margin-bottom: 5px;
-  }
-
-  @media(max-width: $screen-sm){
-    .row{
-      @include no-row-divider;
-    }
-    .feature-item {
-      @include row-divider;
-    }
-    .feature-item.last{
-      @include no-row-divider;
-    }
-
   }
 }
 
