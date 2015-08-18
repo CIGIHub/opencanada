@@ -95,6 +95,9 @@ header{
     margin-top:1%;
     text-align: center;
     @include inline-list-divided(white, 16px);
+    ul li a{
+      font-family: $sans-proxima;
+    }
     button{
       text-transform: uppercase;
     }
@@ -404,7 +407,8 @@ footer{
     opacity: 0.9;
     z-index:10;
     bottom: -20px;
-    left: 45%;
+    left: 50%;
+    margin-left: -25px;
     background-color: $mid-grey;
     border-radius: 25px;
     width: 50px;
@@ -489,7 +493,7 @@ main{
     h2 {
       border-bottom: $border-grey;
       text-transform: uppercase;
-      font-family: $sans-serif;
+      font-family: $sans-proxima;
       font-size: 28px;
       font-weight: 900;
     }

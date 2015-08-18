@@ -3,8 +3,8 @@ $screen-md-min: 992px;
 $grid-float-breakpoint: $screen-md-min;
 
 $serif:'Droid Serif', Georgia, serif;
-//$sans-serif: 'Droid Sans', Arial, sans-serif;
-$sans-serif: proxima-nova;
+$sans-serif: 'Droid Sans', Arial, sans-serif;
+$sans-proxima: proxima-nova, Arial, sans-serif;
 
 $text-color: #333;
 $red: #bf1e2e;
@@ -12,6 +12,7 @@ $grey: #666;
 $light-grey: #a5a5a5;
 $mid-grey: #ccc;
 $background-grey: #f3f0f0;
+$caption-grey: #929191;
 
 $white: #fff;
 $black: #000;
