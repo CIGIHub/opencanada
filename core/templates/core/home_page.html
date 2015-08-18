@@ -16,7 +16,7 @@
         {% for row in self.articles %}
             <div class="row {% if forloop.last %}last{% endif %}">
             {% for article in row %}
-                <div class="col-sm-{{ row|column_class }} feature-item">
+                <div class="col-sm-{{ row|column_class }} feature-item {% if forloop.last %}last{% endif %}">
                     {% if article.feature_style.include_image and article.feature_style.overlay_text %}
                         <div class="overlay-feature rowheight-{{ article.feature_style.number_of_rows }}" style="height: {{ article|column_height }}px;">
                             {% if article.editors_pick %}
@@ -101,6 +101,24 @@
 
     <section class="container readings">
         <h2>Best of the Web</h2>
+        {% for external_article in self.external_articles %}
+            {% if forloop.last %}
+                {% cycle '<div class="row last">' '' %}
+            {% else %}
+                {% cycle '<div class="row">' '' %}
+            {% endif %}
+                <div class="col-sm-6 {% if forloop.last %}last{% endif %}">
+                 <h3><a href="{{ external_article.website_link }}">{{ external_article.title }}</a></h3>
+                    <div class="external-article">
+                         <figure>
+                            {% image external_article.source.logo circle-80x80%}
+                        </figure>
+                       {{ external_article.body|richtext }}
+                    </div>
+
+                </div>
+            {% cycle '' '</div>' %}
+        {% endfor %}
         <div class="read-more">
             <button><a href="/readings">More from the Web <i class="fa fa-chevron-right"></i></a></button>
         </div>

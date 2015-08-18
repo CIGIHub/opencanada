@@ -490,6 +490,18 @@ main{
       border-bottom: none;
     }
 
+    @media(max-width: $screen-sm){
+      .row{
+        @include no-row-divider;
+      }
+      .col-sm-6{
+        @include row-divider;
+      }
+      .col-sm-6.last{
+        @include no-row-divider;
+      }
+    }
+
     h2 {
       border-bottom: $border-grey;
       text-transform: uppercase;
@@ -508,6 +520,25 @@ main{
         padding: 5px 14px;
       }
     }
+  }
+
+  .readings .col-sm-6{
+    h3{
+       margin-left: 100px;
+    }
+    .external-article{
+      display: table;
+      figure{
+        vertical-align: top;
+        display: table-cell;
+        width: 100px;
+      }
+      .rich-text{
+        vertical-align: top;
+        display: table-cell;
+      }
+    }
+
   }
 }
 
@@ -543,10 +574,13 @@ main{
     .row{
       @include no-row-divider;
     }
-    .feature-item{
+    .feature-item {
       @include row-divider;
-
     }
+    .feature-item.last{
+      @include no-row-divider;
+    }
+
   }
 }
 
