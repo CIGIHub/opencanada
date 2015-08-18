@@ -486,8 +486,23 @@ main{
     .row {
       @include row-divider;
     }
+
     .row.last{
       border-bottom: none;
+    }
+
+    @media(max-width: $screen-sm){
+      .row{
+        @include no-row-divider;
+      }
+      .col-sm-6, .feature-item{
+        @include row-divider;
+      }
+      .row.last .col-sm-6.last, .row.last .feature-item.last{
+        @include no-row-divider;
+        padding-top: 20px;
+        padding-bottom: 20px;
+      }
     }
 
     h2 {
@@ -507,6 +522,15 @@ main{
         font-size: 12px;
         padding: 5px 14px;
       }
+    }
+  }
+
+  .readings .col-sm-6{
+      figure{
+        float:left;
+      }
+      .reading{
+        margin-left: 100px;
     }
   }
 }
@@ -529,6 +553,9 @@ main{
   .simple-feature{
     h3{
       font-size: 36px;
+      @media(max-width: $screen-sm){
+        font-size: 22px;
+      }
     }
   }
 
@@ -537,16 +564,6 @@ main{
   }
   h3{
     margin-bottom: 5px;
-  }
-
-  @media(max-width: $screen-sm){
-    .row{
-      @include no-row-divider;
-    }
-    .feature-item{
-      @include row-divider;
-
-    }
   }
 }
 

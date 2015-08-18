@@ -109,6 +109,13 @@ class HomePage(Page):
                 id=self.featured_item.id)
             return featured_item
 
+    @property
+    def external_articles(self):
+        external_article_list = article_models.ExternalArticlePage.objects.live().order_by("-first_published_at")[:4]
+        external_article_list = [external_article_list[:2], external_article_list[2:4]]
+
+        return external_article_list
+
 
 @receiver(page_published, sender=HomePage)
 def on_publish(**kwargs):
