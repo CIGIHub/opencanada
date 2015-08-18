@@ -39,6 +39,8 @@ class HomePage(Page):
 
     number_of_rows_of_articles = models.IntegerField(default=12)
     number_of_columns_of_articles = models.IntegerField(default=3)
+    number_of_rows_of_external_articles = models.IntegerField(default=2)
+    number_of_rows_of_visualizations = models.IntegerField(default=2)
 
     def __str__(self):
         return self.title
@@ -109,12 +111,29 @@ class HomePage(Page):
                 id=self.featured_item.id)
             return featured_item
 
+    def get_rows(self, number_of_rows, items):
+        number_of_columns = 2
+        rows = []
+
+        for row_index in range(0, number_of_rows):
+            row = items[(row_index * number_of_columns):(row_index * number_of_columns) + number_of_columns]
+            rows.append(row)
+
+        return rows
+
     @property
     def external_articles(self):
-        external_article_list = article_models.ExternalArticlePage.objects.live().order_by("-first_published_at")[:4]
-        external_article_list = [external_article_list[:2], external_article_list[2:4]]
+        number_of_external_articles = self.number_of_rows_of_external_articles * 2
+        external_article_list = article_models.ExternalArticlePage.objects.live().order_by("-first_published_at")[:number_of_external_articles]
 
-        return external_article_list
+        return self.get_rows(self.number_of_rows_of_external_articles, external_article_list)
+
+    @property
+    def graphics(self):
+        number_of_graphics = self.number_of_rows_of_visualizations * 2
+        graphics_list = article_models.ArticlePage.objects.live().filter(visualization=True).order_by("-first_published_at")[:number_of_graphics]
+
+        return self.get_rows(self.number_of_rows_of_visualizations, graphics_list)
 
 
 @receiver(page_published, sender=HomePage)
@@ -178,4 +197,6 @@ HomePage.content_panels = Page.content_panels + [
     PageChooserPanel("featured_item", "wagtailcore.Page"),
     FieldPanel("number_of_rows_of_articles"),
     FieldPanel("number_of_columns_of_articles"),
+    FieldPanel("number_of_rows_of_external_articles"),
+    FieldPanel("number_of_rows_of_visualizations"),
 ]

@@ -121,8 +121,18 @@
         </div>
     </section>
 
-    <section class="container readings">
+    <section class="container graphics">
         <h2>Graphics</h2>
+        {% for graphics_row in self.graphics %}
+            <div class="row {% if forloop.last %}last{% endif %}">
+                {% for graphic in graphics_row %}
+                    <div class="col-sm-6 {% if forloop.last %}last{% endif %}">
+                    {% image graphic.main_image fill-440x293%}
+                    <h3><a href="{{ graphic.url }}">{{ graphic.title }}</a></h3>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
         <div class="read-more">
             <button><a href="/features">More Graphics <i class="fa fa-chevron-right"></i></a></button>
         </div>
