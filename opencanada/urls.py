@@ -20,8 +20,6 @@ urlpatterns = [
     url(r'^admin/', include(wagtailadmin_urls)),
     url(r'^search/', include(wagtailsearch_urls)),
     url(r'^documents/', include(wagtaildocs_urls)),
-
-    url(r'', include(wagtail_urls)),
     url(r'^', include('favicon.urls')),
 ]
 
@@ -35,4 +33,9 @@ if settings.DEBUG:
     urlpatterns += [
         url(r'^500/$', 'django.views.defaults.server_error'),
         url(r'^404/$', TemplateView.as_view(template_name='404.html')),
+        url(r'^403/$', TemplateView.as_view(template_name='403.html')),
     ]
+
+urlpatterns += [
+    url(r'', include(wagtail_urls)),
+]
