@@ -15,3 +15,8 @@ def suggested_searches(number_of_suggestions):
 @register.filter
 def search_string(topic):
     return topic.name.replace(" ", "+")
+
+
+@register.assignment_tag(takes_context=True)
+def get_site_defaults(context):
+    return context['request'].site.default_settings
