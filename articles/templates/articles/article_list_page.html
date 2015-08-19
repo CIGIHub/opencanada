@@ -8,7 +8,7 @@
     {% endif %}
 
     {% for article in articles %}
-        {% include "articles/includes/article_teaser.html" %}
+        {% include "articles/includes/article_teaser.html"  with heading='h2'%}
     {% endfor %}
 
     {% if articles.paginator.num_pages > 1 %}

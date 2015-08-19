@@ -15,7 +15,7 @@ h1{
 }
 
 h2{
-  font-size: 24px;
+  font-size: 22px;
   margin-top: 0px;
 }
 
@@ -682,7 +682,6 @@ main{
 .block-citations h2,
 .topics,
 .series-articles,
-.series-teaser,
 .toc
 {
   margin-left: 10%;
@@ -692,6 +691,11 @@ main{
     margin-left: 0;
     margin-right: 0;
   }
+}
+
+.series-teaser .block-Paragraph{
+  margin-left: 0;
+  margin-right: 0;
 }
 
 #article-page article,
@@ -1064,6 +1068,12 @@ article {
 }
 
 .in-the-series{
+  .series-title{
+    display:inline-block;
+    .rich-text{
+      display:inline-block;
+    }
+  }
   border-bottom: $border-grey;
   .col-xs-2{
     padding-right: 0px;
@@ -1088,12 +1098,32 @@ article {
 
 /**************  People/Contributor pages  **************/
 
-.contributor-profile{
-  margin-bottom: 40px;
-  .fa-twitter{
-    color: $twitter-blue;
-  }
+#contributor-profile{
+  h1, .short-bio{
+    text-align:center;
+    font-family: $sans-proxima;
+    a{
+      color: black;
+    }
 
+  }
+  h1{
+    font-weight: 900;
+  }
+  .bio{
+    margin: 40px 0;
+    @media(max-width: $screen-sm){
+      margin: 10px 0;
+    }
+  }
+  h2{
+    font-family: $sans-proxima;
+    font-weight: 900;
+    border-bottom: $border_black;
+  }
+  h3{
+    font-size: 30px;
+  }
 }
 
 
