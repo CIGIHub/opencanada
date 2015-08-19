@@ -736,7 +736,10 @@ class SeriesPage(Page, FeatureStyleFields, Promotable, Sharelinks):
     )
 
     def get_primary_topic_name(self):
-        return self.primary_topic.name
+        if self.primary_topic:
+            return self.primary_topic.name
+        else:
+            ""
 
     def get_topic_names(self):
         return '\n'.join([topic.name if topic else "" for topic in self.topics])
