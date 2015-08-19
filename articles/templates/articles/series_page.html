@@ -47,7 +47,7 @@
 
         {% block related_articles %}
             {% with article_count=6 %}
-                {% include 'articles/includes/related_articles.html' %}
+                {% include 'articles/includes/related_articles.html'  with heading='h3'%}
             {% endwith %}
         {% endblock %}
     </div>

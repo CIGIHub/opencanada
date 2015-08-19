@@ -77,8 +77,9 @@
             <h2>Also in the series</h2>
             {% for series, articles in self.series_articles %}
                 <div class="series-teaser">
-                    <h3><a href="{{ series.url }}">{{ series.title }}</a></h3>
-                    {{ series.subtitle|richtext }}
+                    <div class="series-title"><a href="{{ series.url }}">{{ series.title }}</a>:
+                    {% if series.subtitle %}{{ series.subtitle|richtext }}{% endif %}</div>
+                    {{ series.body|truncatewords_html:80 }}
                 </div>
                 {% block in_the_series %}
                     {% include 'articles/includes/in_the_series.html' %}
@@ -89,7 +90,7 @@
 
         {% block related_articles %}
             {% with article_count=3 %}
-                {% include 'articles/includes/related_articles.html' %}
+                {% include 'articles/includes/related_articles.html' with heading='h3'%}
             {% endwith %}
         {% endblock %}
     </div>
