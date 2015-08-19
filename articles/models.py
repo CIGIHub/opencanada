@@ -802,6 +802,7 @@ SeriesPage.content_panels = Page.content_panels + [
     ImageChooserPanel('main_image'),
     StreamFieldPanel('body'),
     InlinePanel('related_article_links', label="Articles"),
+    SnippetChooserPanel('primary_topic', Topic),
 ]
 
 SeriesPage.promote_panels = Page.promote_panels + [
