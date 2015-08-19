@@ -108,7 +108,6 @@ function toggleBox(e){
 function setFeatureHeight(windowHeight){
     var bannerHeight = $('header').height();
     var gap = 0.05*windowHeight;
-    console.log(gap);
     var featureHeight = windowHeight - bannerHeight - gap;
 
     $('.jumbotron.main-feature').css("height", featureHeight + "px");
@@ -158,6 +157,7 @@ function toggleHeading(windowWidth, articleTitleWidth){
     }
 
     function collapsedHeader(){
+
         $('header').addClass('collapsed');
         $('#search-box').addClass('small-header');
         $('.toggle-mobile').show();
@@ -211,14 +211,16 @@ function toggleHeading(windowWidth, articleTitleWidth){
     }
 
     if(windowWidth >= breakpoint){
-
-        if($('#article-page').length && $('body').hasClass('small-article')){
+        
+        if($('body').hasClass('small-article')){
             $('body').removeClass('small-article');
         }
-        if($(document).scrollTop() > offset && $('#article-page').length){
-            $('body').addClass('article-scroll');
+        if($(document).scrollTop() > offset){
+           if($('#article-page').length){
+                $('body').addClass('article-scroll');
+            }
+            collapsedHeader();
         }
-
         else{
             fullHeader();
         }
@@ -235,6 +237,7 @@ function toggleHeading(windowWidth, articleTitleWidth){
             $('body').addClass('small-article');
         }
         collapsedHeader();
+
         $(window).off("scroll touchmove", fullScroll );
         $(window).on("scroll touchmove", collapsedScroll );
 
@@ -243,7 +246,7 @@ function toggleHeading(windowWidth, articleTitleWidth){
 
 $(window).resize(function(){
     initForWindow();
-
 });
+
 
 
