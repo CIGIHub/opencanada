@@ -7,7 +7,16 @@
        {% for article in articles %}
         <div class="row">
             <div class="col-xs-2">
-                <figure>{% image article.source.logo fill-120x120 %}</figure>
+            {% spaceless %}
+                <figure>
+                    {% if article.source and article.source.logo %}
+                        {% image article.source.logo circle-120x120 %}
+                    {% else %}
+                        {% get_site_defaults as defaults %}
+                        {% image defaults.default_external_article_source_logo circle-120x120 %}
+                    {% endif %}
+                </figure>
+            {% endspaceless %}
             </div>
             <div class="col-xs-10">
                 <h3><a href="{{ article.website }}">{{ article.title }}</a></h3>

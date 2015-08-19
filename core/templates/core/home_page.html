@@ -105,9 +105,16 @@
             <div class="row {% if forloop.last %}last{% endif %}">
                 {% for external_article in external_article_row %}
                     <div class="col-sm-6 {% if forloop.last %}last{% endif %}">
+                    {% spaceless %}
                         <figure>
-                            {% image external_article.source.logo circle-80x80%}
+                            {% if external_article.source and external_article.source.logo %}
+                                {% image external_article.source.logo circle-80x80 %}
+                            {% else %}
+                                {% get_site_defaults as defaults %}
+                                {% image defaults.default_external_article_source_logo circle-80x80 %}
+                            {% endif %}
                         </figure>
+                    {% endspaceless %}
                         <div class="reading">
                              <h3><a href="{{ external_article.website_link }}">{{ external_article.title }}</a></h3>
                             {{ external_article.body|richtext }}

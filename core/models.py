@@ -9,6 +9,7 @@ from django.utils.timezone import now
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, PageChooserPanel
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailcore.signals import page_published
+from wagtail.wagtailsnippets.models import register_snippet
 
 from articles import models as article_models
 from events import models as event_models
@@ -200,3 +201,21 @@ HomePage.content_panels = Page.content_panels + [
     FieldPanel("number_of_rows_of_external_articles"),
     FieldPanel("number_of_rows_of_visualizations"),
 ]
+
+
+@python_2_unicode_compatible
+class SiteDefaults(models.Model):
+    site = models.OneToOneField('wagtailcore.Site',
+                                related_name='default_settings', unique=True)
+    default_external_article_source_logo = models.ForeignKey(
+        'images.AttributedImage',
+        related_name='+'
+    )
+
+    def __str__(self):
+        return "{}".format(self.site)
+
+    class Meta:
+        verbose_name_plural = "Site Defaults"
+
+register_snippet(SiteDefaults)
