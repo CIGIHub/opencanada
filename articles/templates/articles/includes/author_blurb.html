@@ -1,9 +1,12 @@
-{% load people_tags %}
+{% load people_tags core_tags wagtailcore_tags wagtailimages_tags %}
 <div class="blurb-content">
 {% for author in self.authors %}
     {% contributor_articles author self.id 3 as articles %}
     {% if articles %}
             <div class="individual">
+                {% if author.headshot %}
+                    <figure class="headshot">{% image author.headshot circle-100x100 %}</figure>
+                {% endif %}
                 <div class="author">By: <a href="{{ author.url }}">{{ author.full_name }}</a></div>
                 <div class="short-bio">{{ author.short_bio }}</div>
                 <ul>
