@@ -404,12 +404,10 @@ footer{
 
   .scroll{
     position: absolute;
-    opacity: 0.9;
     z-index:10;
-    bottom: -20px;
+    bottom: -5px;
     left: 50%;
     margin-left: -25px;
-    background-color: $mid-grey;
     border-radius: 25px;
     width: 50px;
     height: 50px;
@@ -421,16 +419,18 @@ footer{
       text-align: center;
       i{
         font-size:50px;
-        padding-top:2px;
       }
     }
     a:hover{
-      color: $red;
+      color: white;
       -webkit-animation: bounce 2s;
       -moz-animation:    bounce 2s;
       -o-animation:     bounce 2s;
       animation: bounce 2s;
     }
+  }
+  .image-caption{
+    bottom: 7%;
   }
 
   @keyframes bounce {
@@ -439,8 +439,8 @@ footer{
       transform: translateY(0);
 	}
 	40% {
-      -webkit-transform: translateY(0.08em);
-      transform: translateY(0.08em);
+      -webkit-transform: translateY(0.3em);
+      transform: translateY(0.3em);
 	}
   }
 
