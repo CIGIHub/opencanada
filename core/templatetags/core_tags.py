@@ -1,4 +1,5 @@
 from django import template
+from django.db.models import ObjectDoesNotExist
 
 from articles.models import Topic
 
@@ -19,4 +20,7 @@ def search_string(topic):
 
 @register.assignment_tag(takes_context=True)
 def get_site_defaults(context):
-    return context['request'].site.default_settings
+    try:
+        return context['request'].site.default_settings
+    except ObjectDoesNotExist:
+        return None
