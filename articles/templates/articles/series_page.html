@@ -22,6 +22,22 @@
                     </div>
                {% endif %}
             </div>
+            {% if self.include_main_image %}
+                <figure class="main-image">
+                    {% image self.main_image fill-940x627 %}
+                </figure>
+                {% if self.main_image.credit %}
+                    <div class="image-credit">
+                        {{ self.main_image.credit }}
+                    </div>
+                {% endif %}
+                {% if self.main_image.source %}
+                    <div class="image-source">
+                        {{ self.main_image.source }}
+                    </div>
+                {% endif %}
+            {% endif %}
+
             <div class="story">{{ self.body }}</div>
 
             <div class="in-the-series">
