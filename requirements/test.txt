@@ -1,8 +1,8 @@
 -r base.txt
 
-isort
-flake8
-coveralls
+isort==4.0.0
+flake8==2.4.1
+coveralls==0.5
 mock>=1.0.0
-mysqlclient
+mysqlclient==1.3.6
 

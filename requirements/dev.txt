@@ -7,4 +7,4 @@ flake8>=2.2.0
 # Required for running the tests
 mock>=1.0.0
 
-isort
+isort==4.0.0
