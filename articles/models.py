@@ -735,6 +735,8 @@ class SeriesPage(Page, FeatureStyleFields, Promotable, Sharelinks):
         index.SearchField('get_topic_names', partial_match=True),
     )
 
+    include_main_image = models.BooleanField(default=True)
+
     def get_primary_topic_name(self):
         if self.primary_topic:
             return self.primary_topic.name
@@ -797,32 +799,48 @@ class SeriesPage(Page, FeatureStyleFields, Promotable, Sharelinks):
 
         return articles
 
-SeriesPage.content_panels = Page.content_panels + [
-    FieldPanel('subtitle'),
-    ImageChooserPanel('main_image'),
-    StreamFieldPanel('body'),
-    InlinePanel('related_article_links', label="Articles"),
-    SnippetChooserPanel('primary_topic', Topic),
-]
+    content_panels = Page.content_panels + [
+        FieldPanel('subtitle'),
+        ImageChooserPanel('main_image'),
+        StreamFieldPanel('body'),
+        InlinePanel('related_article_links', label="Articles"),
+        SnippetChooserPanel('primary_topic', Topic),
+    ]
 
-SeriesPage.promote_panels = Page.promote_panels + [
-    MultiFieldPanel(
-        [
-            FieldPanel('sticky'),
-            FieldPanel('editors_pick'),
-            FieldPanel('feature_style'),
-            MultiFieldPanel(
-                [
-                    FieldPanel('image_overlay_opacity'),
-                    SnippetChooserPanel('image_overlay_color', Colour),
-                    SnippetChooserPanel("font_style", FontStyle),
-                ],
-                heading="Image Overlay Settings"
-            )
-        ],
-        heading="Featuring Settings"
-    )
-]
+    promote_panels = Page.promote_panels + [
+        MultiFieldPanel(
+            [
+                FieldPanel('sticky'),
+                FieldPanel('editors_pick'),
+                FieldPanel('feature_style'),
+                MultiFieldPanel(
+                    [
+                        FieldPanel('image_overlay_opacity'),
+                        SnippetChooserPanel('image_overlay_color', Colour),
+                        SnippetChooserPanel("font_style", FontStyle),
+                    ],
+                    heading="Image Overlay Settings"
+                )
+            ],
+            heading="Featuring Settings"
+        )
+    ]
+
+    style_panels = [
+        MultiFieldPanel(
+            [
+                FieldPanel('include_main_image'),
+            ],
+            heading="Sections"
+        )
+    ]
+
+    edit_handler = TabbedInterface([
+        ObjectList(content_panels, heading='Content'),
+        ObjectList(style_panels, heading='Page Style Options'),
+        ObjectList(promote_panels, heading='Promote'),
+        ObjectList(Page.settings_panels, heading='Settings', classname="settings"),
+    ])
 
 
 @python_2_unicode_compatible
