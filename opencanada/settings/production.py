@@ -15,7 +15,7 @@ WAGTAILSEARCH_BACKENDS = {
         'BACKEND': 'wagtail.wagtailsearch.backends.elasticsearch.ElasticSearch',
         'URLS': [get_env_variable('ELASTICSEARCH_URL')],
         'INDEX': get_env_variable('ELASTICSEARCH_INDEX'),
-        'TIMEOUT': 5,
+        'TIMEOUT': 5000,
     },
 }
 
