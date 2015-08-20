@@ -1,4 +1,5 @@
-var breakpoint = 753;
+var breakpoint = 1000;
+
 
 jQuery(document).ready(function($) {
 
@@ -27,6 +28,17 @@ jQuery(document).ready(function($) {
                 }
             }
         }
+    });
+
+    $('.search-form input[type=text]').keydown(function() {
+        if($(this).val() != ''){
+            $('.clear-button').show();
+        }
+    });
+    $('.clear-button').click(function(){
+        $('.search-form input[type=text]').val('');
+        $('.clear-button').hide();
+        $('#search-box input').focus();
     });
 
 });
@@ -139,6 +151,7 @@ function setOverlayForWindow(windowWidth){
 
         });
     }
+
 }
 
 //toggle Banner heading based on window width and page type∂
@@ -151,7 +164,6 @@ function toggleHeading(windowWidth, articleTitleWidth){
         $('#search-box').removeClass('small-header');
         $('.toggle-mobile').hide();
         $('.toggle-full').show();
-        $('.logo').addClass('col-sm-12');
         $('nav').removeClass('mobile-menu open');
         $('body').removeClass('article-scroll');
     }
@@ -162,7 +174,6 @@ function toggleHeading(windowWidth, articleTitleWidth){
         $('#search-box').addClass('small-header');
         $('.toggle-mobile').show();
         $('.toggle-full').hide();
-        $('.logo').removeClass('col-sm-12');
         $('nav').addClass('mobile-menu');
         if($('#article-page').length  && $('body').hasClass('article-scroll')  && windowWidth <= breakpoint){
             $('body').removeClass('article-scroll');

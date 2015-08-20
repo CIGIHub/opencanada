@@ -56,6 +56,11 @@ img{
   @include img-responsive;
 }
 
+button{
+  border:none;
+  background: none;
+}
+button:focus {outline:0;}
 
 /**************   HEADER  **************/
 
@@ -69,37 +74,32 @@ header{
   background: $red;
   transition: height 0.3s, background 2s;
 
-  .col-xs-2.search{
+  .search, .menu{
     text-align:right;
+    font-size: 20px;
   }
-
-  button{
-    border:none;
-    background: none;
-    padding: 6px 12px;
+  .menu{
+    font-size: 20px;
+    text-align:left;
   }
-
-  button:focus {outline:0;}
-
-  .banner{
-    padding-top: 20px;
-    padding-bottom: 20px;
-  }
-
   .logo img{
     display:block;
     margin: 0 auto;
   }
 
-  #main-menu{
-    margin-top:1%;
+  .banner{
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  .tagline{
     text-align: center;
+  }
+
+  #main-menu{
     @include inline-list-divided(white, 16px);
     ul li a{
       font-family: $sans-proxima;
-    }
-    button{
-      text-transform: uppercase;
+      font-weight: 900;
     }
   }
 
@@ -116,10 +116,6 @@ header{
     .logo img{
       max-height: 30px;
     }
-    .share-links .fa{
-      font-size: 80%;
-    }
-
   }
 
 }
@@ -127,11 +123,13 @@ header{
 /**************  Search  **************/
 
 #search-box{
+  font-family: $sans-proxima;
   width: 100%;
   top: -100px;
   position: fixed;
   overflow-y: hidden;
-  background: $background-grey;
+  background: black;
+  opacity: 0.9;
   z-index: 200;
   transform: translate(0, -100%);
   -webkit-transform: translate(0, -100%);
@@ -144,7 +142,6 @@ header{
     overflow-y: visible;
     padding-top: 30px;
     min-height: 110px;
-    border-bottom: $border-red;
     transform: translate(0, 0%);
     -webkit-transform: translate(0, 0%);
     -ms-transform: translate(0, 0);
@@ -159,15 +156,16 @@ header{
   }
 
   button{
-    @include button;
+    @include button($sans-proxima);
     padding: 6px;
     width: 20%;
   }
   input{
     width: 75%;
     margin-right: 10px;
-    border: $border-red;
+    border: $border-black;
     padding: 5px;
+    color: black;
   }
   input:focus{
     outline: none;
@@ -179,9 +177,21 @@ header{
       width: 100%;
     }
   }
+  .clear-button{
+    background: none;
+    border: none;
+    position: absolute;
+    left: 69%;
+    top: 6px;
+    font-size:20px;
+    z-index: 500;
+    color: black;
+    display:none;
+  }
+
   .search-suggestions{
     padding-top: 10px;
-    @include inline-list-divided($red);
+    @include inline-list-divided(white);
   }
 
   @media(max-width: $screen-md){
