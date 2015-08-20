@@ -2,26 +2,27 @@
 {% load static core_tags wagtailcore_tags wagtailimages_tags people_tags%}
 
 {% block content %}
-    <div id="contributor-profile" class="container">
-        {% if self.headshot %}
-            <figure class="headshot">{% image self.headshot circle-140x140 %}</figure>
-        {% endif %}
-        <h1>{{ self.title }}
-            {% if self.twitter_handle %}
-                 / <a href="https://twitter.com/{{ self.twitter_handle }}">{{ self.twitter_handle }}</a>
+    <div class="container">
+        <div class="contributor-profile">
+            {% if self.headshot %}
+                <figure class="headshot">{% image self.headshot circle-140x140 %}</figure>
             {% endif %}
-        </h1>
-        <div class="short-bio">{{ self.short_bio }}</div>
+            <h1>{{ self.title }}
+                {% if self.twitter_handle %}
+                     / <a href="https://twitter.com/{{ self.twitter_handle }}">{{ self.twitter_handle }}</a>
+                {% endif %}
+            </h1>
+            <div class="short-bio">{{ self.short_bio }}</div>
 
-        <div class="bio">{{ self.long_bio|richtext }}</div>
+            <div class="bio">{{ self.long_bio|richtext }}</div>
 
-        {% contributor_articles self as articles %}
-        {% if articles %}
-            <h2>Most Recent Posts</h2>
-            {% for article in articles %}
-                {% include "articles/includes/article_teaser.html" with heading='h3'%}
-            {% endfor %}
-        {% endif %}
-
+            {% contributor_articles self as articles %}
+            {% if articles %}
+                <h2>Most Recent Posts</h2>
+                {% for article in articles %}
+                    {% include "articles/includes/article_teaser.html" with heading='h3' image='false' %}
+                {% endfor %}
+            {% endif %}
+        </div>
     </div>
 {% endblock %}

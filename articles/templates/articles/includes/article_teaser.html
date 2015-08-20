@@ -1,7 +1,7 @@
 {% load static core_tags wagtailcore_tags wagtailimages_tags %}
 
 <article class="row teaser">
-    {% if article.main_image %}
+    {% if article.main_image and image != 'false' %}
         <div class="col-xs-2">
             <figure>
                 {% image article.main_image fill-120x120 %}
