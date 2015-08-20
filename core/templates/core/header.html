@@ -3,22 +3,15 @@
 <header role="banner">
     <div class="banner container-fluid">
         <div class="row">
-            <div class="col-xs-2 toggle-mobile menu">
-                <button type="button" data-target="main-menu">
+            <div class="col-xs-4 menu">
+                <button class="toggle-mobile" type="button" data-target="main-menu">
                     <i  class="fa fa-list-ul"></i>
                 </button>
-            </div>
-            <div class="col-xs-8 logo">
-                <figure>
-                    <a href="/"><img src="{% static 'img/opencanada-logo.png' %}" alt="OpenCanada Logo" class="img-responsive" ></a>
-                </figure>
                 <nav id="main-menu" role="navigation">
                     <ul>
+                        <li><a href="/about">About</a></li>
                         <li><a href="/contributors">Contributors</a></li>
                         <li><a href="/topics">Topics</a></li>
-                        <li class="toggle-full"><a href="#">
-                            <button type="button" data-target="search-box">Search <i class="fa fa-search"></i></button></a>
-                        </li>
                     </ul>
                     <ul class="toggle-mobile social">
                         <li><a href="#"><i class="fa fa-twitter"></i> Twitter</a></li>
@@ -26,10 +19,18 @@
                     </ul>
                 </nav>
             </div>
-            <div class="col-xs-2 toggle-mobile search">
-                <button type="button" data-target="search-box">
-                    <i class="fa fa-search"></i>
-                </button>
+            <div class="col-xs-4 logo">
+                <figure>
+                    <a href="/"><img src="{% static 'img/opencanada-logo.png' %}" alt="OpenCanada Logo" class="img-responsive" ></a>
+                </figure>
+            </div>
+            <div class="col-xs-4 search">
+                <button type="button" data-target="search-box"><i class="fa fa-search"></i></button>
+            </div>
+        </div>
+        <div class="row toggle-full">
+            <div class="col-xs-12">
+                <div class="tagline">Canada's Hub for International Affairs</div>
             </div>
         </div>
     </div>
@@ -40,9 +41,10 @@
             <div class="row">
                 <div class="col-xs-12 search-form">
                     <div class="input-group">
-                        <input type="text" name="q" />
-                        <button type="submit" class="search-button">Search</button>
+                        <input type="text" name="q" value=""/>
+                        <button type="submit" class="search-button">Search <i class="fa fa-chevron-right"></i></button>
                     </div>
+                    <i class="fa fa-times-circle clear-button"></i>
                 </div>
             </div>
         </form>

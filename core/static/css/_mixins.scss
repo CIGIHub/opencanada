@@ -73,8 +73,8 @@
     }
 }
 
-@mixin button{
-    font-family: $sans-serif;
+@mixin button($font-family:$sans-serif){
+    font-family: $font-family;
     background: $red;
     border-radius: 3px;
     border: none;
