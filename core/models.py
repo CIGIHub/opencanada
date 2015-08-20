@@ -9,6 +9,7 @@ from django.utils.timezone import now
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, PageChooserPanel
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailcore.signals import page_published
+from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 
 from articles import models as article_models
@@ -218,4 +219,8 @@ class SiteDefaults(models.Model):
     class Meta:
         verbose_name_plural = "Site Defaults"
 
+    panels = [
+        FieldPanel('site'),
+        ImageChooserPanel('default_external_article_source_logo')
+    ]
 register_snippet(SiteDefaults)
