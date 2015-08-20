@@ -1,11 +1,11 @@
 # Minimal requirements
 Django>=1.8,<1.9
-wagtail==1.0rc1
+wagtail==1.0
 
 # Recommended components (require additional setup):
 # psycopg2==2.5.2
 elasticsearch==1.1.1
-django-libsass
+django-libsass==0.3
 
 # Recommended components to improve performance in production:
 # django-redis==3.8.2
@@ -13,7 +13,7 @@ django-libsass
 git+https://github.com/CIGIHub/wagtail-basic-site-components.git
 
 # Required for importing data.
-# mysqlclient
+# mysqlclient==1.3.6
 
-django-favicon
-django-robots
+django-favicon==0.1.1
+django-robots==1.1
