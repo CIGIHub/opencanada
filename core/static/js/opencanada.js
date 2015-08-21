@@ -11,8 +11,6 @@ jQuery(document).ready(function($) {
         selected.toggleClass('highlighted');
         target = selected.closest($('.overlay'));
 
-        console.log(target);
-
         target.find($('.feature-text')).fadeToggle();
         target.find($('.feature-image-overlay')).fadeToggle();
         target.find($('.image-caption .text')).fadeToggle();
