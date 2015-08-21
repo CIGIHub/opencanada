@@ -692,7 +692,8 @@ main{
 .block-citations h2,
 .topics,
 .series-articles,
-.toc
+.toc,
+.contributor-profile
 {
   margin-left: 10%;
   margin-right: 10%;
@@ -1115,7 +1116,7 @@ article {
 
 /**************  People/Contributor pages  **************/
 
-#contributor-profile{
+.contributor-profile{
   h1, .short-bio{
     text-align:center;
     font-family: $sans-proxima;
@@ -1139,6 +1140,7 @@ article {
   h2{
     font-family: $sans-proxima;
     font-weight: 900;
+    text-transform: uppercase;
     border-bottom: $border_black;
   }
   h3{
