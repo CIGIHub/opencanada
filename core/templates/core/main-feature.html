@@ -1,6 +1,6 @@
 {% load static core_tags wagtailcore_tags wagtailimages_tags %}
 
-<div class="jumbotron main-feature" style="height: 400px;">
+<div class="jumbotron main-feature overlay" style="height: 400px;">
     {% image self.typed_featured_item.main_image fill-2048x1365 as background_image %}
     <div class="feature-image" style="background-image: url(' {{ background_image.url }} ')">
         <div class="feature-image-overlay"
@@ -30,6 +30,7 @@
     </div>
 
     <div class="scroll"><a href="#features" style="color: {{ self.typed_featured_item.font_style.text_colour.hex_value }};"><i class="fa fa-angle-down"></i></a></div>
-    <div class="image-caption" style="color: {{ self.typed_featured_item.font_style.text_colour.hex_value }};"><i class="fa fa-camera"></i> {{ self.typed_featured_item.main_image.credit }}</div>
+    <div class="camera" style="color: {{ self.typed_featured_item.font_style.text_colour.hex_value }};"><i class="fa fa-camera"></i></div>
+    <div class="image-caption" style="color: {{ self.typed_featured_item.font_style.text_colour.hex_value }};"><div class="text" >{{ self.typed_featured_item.main_image.credit }}</div></div>
 
 </div>

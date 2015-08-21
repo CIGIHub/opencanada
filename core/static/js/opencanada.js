@@ -5,10 +5,17 @@ jQuery(document).ready(function($) {
 
     initForWindow();
 
-    $('.fa-camera').click(function () {
-        $('.feature-text').fadeToggle();
-        $('.feature-image-overlay').fadeToggle();
-        $('.fa-camera').toggleClass('highlighted');
+    $('.camera').click(function () {
+        var target = null;
+        var selected = $(this);
+
+        selected.toggleClass('highlighted');
+        target = selected.closest($('.overlay'));
+
+        target.find($('.feature-text')).fadeToggle();
+        target.find($('.feature-image-overlay')).fadeToggle();
+        target.find($('.image-caption .text')).fadeToggle();
+
     });
 
     //scroll down arrow
