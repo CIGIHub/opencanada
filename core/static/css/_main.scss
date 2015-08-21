@@ -128,9 +128,8 @@ header{
   top: -100px;
   position: fixed;
   overflow-y: hidden;
-  background: black;
-  opacity: 0.9;
   z-index: 200;
+  background-color: rgba(0, 0, 0, 0.8);
   transform: translate(0, -100%);
   -webkit-transform: translate(0, -100%);
   -ms-transform: translate(0, -100%);
@@ -140,7 +139,6 @@ header{
   &.open{
     top: 100px;
     overflow-y: visible;
-    padding-top: 30px;
     min-height: 110px;
     transform: translate(0, 0%);
     -webkit-transform: translate(0, 0%);
@@ -152,7 +150,7 @@ header{
   }
 
   .container{
-    padding: 0px 200px;
+    padding: 30px 200px;
   }
 
   button{
