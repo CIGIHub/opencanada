@@ -20,7 +20,7 @@
             {% if articles %}
                 <h2>Most Recent Posts</h2>
                 {% for article in articles %}
-                    {% include "articles/includes/article_teaser.html" with heading='h3' image='false' %}
+                    {% include "articles/includes/article_teaser.html" with heading='h3' image=False %}
                 {% endfor %}
             {% endif %}
         </div>
