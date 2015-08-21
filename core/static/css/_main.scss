@@ -122,10 +122,6 @@ header{
 
 /**************  Search  **************/
 
-.search-wrap{
-  background-color: rgba(0, 0, 0, 0.8);
-}
-
 #search-box{
   font-family: $sans-proxima;
   width: 100%;
@@ -133,6 +129,7 @@ header{
   position: fixed;
   overflow-y: hidden;
   z-index: 200;
+  background-color: rgba(0, 0, 0, 0.8);
   transform: translate(0, -100%);
   -webkit-transform: translate(0, -100%);
   -ms-transform: translate(0, -100%);

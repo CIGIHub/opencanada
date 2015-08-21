@@ -36,27 +36,25 @@
     </div>
 </header>
 <div id="search-box">
-    <div class="search-wrap">
-        <div class="container">
-            <form action="{% url 'wagtailsearch_search' %}"  method="get">
-                <div class="row">
-                    <div class="col-xs-12 search-form">
-                        <div class="input-group">
-                            <input type="text" name="q" value=""/>
-                            <button type="submit" class="search-button">Search <i class="fa fa-chevron-right"></i></button>
-                        </div>
-                        <i class="fa fa-times-circle clear-button"></i>
+    <div class="container">
+        <form action="{% url 'wagtailsearch_search' %}"  method="get">
+            <div class="row">
+                <div class="col-xs-12 search-form">
+                    <div class="input-group">
+                        <input type="text" name="q" value=""/>
+                        <button type="submit" class="search-button">Search <i class="fa fa-chevron-right"></i></button>
                     </div>
+                    <i class="fa fa-times-circle clear-button"></i>
                 </div>
-            </form>
-            <div class="search-suggestions">
-                <ul>
-                    {% suggested_searches 3 as search_topics %}
-                    {% for topic in search_topics %}
-                        <li><a href="{% url 'wagtailsearch_search' %}?q={{ topic|search_string }}">{{ topic }}</a></li>
-                    {% endfor %}
-                </ul>
             </div>
+        </form>
+        <div class="search-suggestions">
+            <ul>
+                {% suggested_searches 3 as search_topics %}
+                {% for topic in search_topics %}
+                    <li><a href="{% url 'wagtailsearch_search' %}?q={{ topic|search_string }}">{{ topic }}</a></li>
+                {% endfor %}
+            </ul>
         </div>
     </div>
 </div>
