@@ -16,7 +16,7 @@
         {% for row in self.articles %}
             <div class="row {% if forloop.last %}last{% endif %}">
             {% for article in row %}
-                <div class="col-sm-{{ row|column_class }} feature-item {% if forloop.last %}last{% endif %}">
+                <div class="col-sm-{{ row|column_class }} feature-item overlay {% if forloop.last %}last{% endif %}">
                     {% if article.feature_style.include_image and article.feature_style.overlay_text %}
                         <div class="overlay-feature rowheight-{{ article.feature_style.number_of_rows }}" style="height: {{ article|column_height }}px;">
                             {% if article.editors_pick %}
@@ -42,13 +42,14 @@
                                     <div class="contributors">By:
                                         {% for author in article.authors %}
                                         <div class="contributor">
-                                            <a style="color: {{ article.font_style.text_colour.hex_value }}" href="author.url">{{ author.first_name }} {{ author.last_name }}</a>
+                                            <a style="color: {{ article.font_style.text_colour.hex_value }}" href="{{ author.url }}">{{ author.first_name }} {{ author.last_name }}</a>
                                         </div>
                                         {% endfor %}
                                     </div>
                                 {% endif %}
                             </div>
-                            <div class="image-caption"><i class="fa fa-camera"></i> {{article.main_image.credit }}</div>
+                            <div class="camera"><i class="fa fa-camera"></i></div>
+                            <div class="image-caption"><div class="text" > {{article.main_image.credit }}</div></div>
                         </div>
 
                     {% elif article.feature_style.include_image and not article.feature_style.overlay_text %}
@@ -58,14 +59,13 @@
                             {% endif %}
                             <figure>{%  image article.main_image fill-710x475 %}</figure>
                             <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
-                               <div class="contributors">By:
-                                    {% for author in article.authors %}
-                                    <div class="contributor">
-                                        <a href="author.url">{{ author.first_name }} {{ author.last_name }}</a>
-                                    </div>
-                                    {% endfor %}
+                           <div class="contributors">By:
+                                {% for author in article.authors %}
+                                <div class="contributor">
+                                    <a href="{{ author.url }}">{{ author.first_name }} {{ author.last_name }}</a>
                                 </div>
-
+                                {% endfor %}
+                            </div>
                         </div>
 
                     {% else %}
@@ -77,7 +77,7 @@
                             <div class="contributors">By:
                                 {% for author in article.authors %}
                                 <div class="contributor">
-                                    <a href="author.url">{{ author.first_name }} {{ author.last_name }}</a>
+                                    <a href="{{ author.url }}">{{ author.first_name }} {{ author.last_name }}</a>
                                 </div>
                                 {% endfor %}
                             </div>

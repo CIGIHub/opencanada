@@ -183,7 +183,7 @@
     background: rgba(0,0,0, 0.5);
   }
 
-  .image-caption, .feature-text{
+  .camera, .image-caption, .feature-text{
     position: absolute;
     z-index:10;
   }
@@ -199,15 +199,29 @@
     }
   }
 
+  .camera{
+    right: 0;
+    bottom: 0;
+    padding: 10px 15px;
+    font-size: 16px;
+    &.highlighted,
+    &:hover{
+      cursor: pointer;
+      color: $red;
+    }
+  }
   .image-caption{
-    font-family: $sans-serif;
-    right: 3%;
     left: 3%;
+    right: 8%;
     bottom: 3%;
-    .fa-camera.highlighted,
-    .fa-camera:hover{
-      cursor:pointer;
-       color: $red;
+    .text{
+      display:none;
+      background: $background-grey;
+      padding: 3px 5px;
+      border-radius: 2px;
+      color: black;
+      font-family: $sans-serif;
+    font-size: 11px;
     }
   }
   @media(max-width: $screen-xs){
