@@ -19,9 +19,9 @@ class ContributorListPage(Page):
     def get_rows(self, contributors):
         rows = []
         number_of_items = len(contributors)
-        number_of_rows = number_of_items / 3
         number_of_columns = 3
-        row_remainder = number_of_items % 3
+        number_of_rows = number_of_items / number_of_columns
+        row_remainder = number_of_items % number_of_columns
 
         if row_remainder > number_of_rows:
             number_of_rows += 1
