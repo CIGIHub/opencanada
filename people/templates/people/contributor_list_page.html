@@ -13,13 +13,16 @@
             {% for row in self.featured_contributors %}
                 <div class="row">
                     {% for contributor in row %}
-                        <div class="col-sm-{{ row|column_class }}">
+                        <div class="col-sm-{{ row|column_class }} col-xs-6">
                         {% if contributor.first_name and contributor.last_name %}
                             {% image contributor.headshot circle-95x95 %}
                             <div class="name"><a href="{{ contributor.url }}">{{ contributor.first_name }} {{ contributor.last_name }}</a></div>
                             <div class="title">{{ contributor.short_bio|richtext }}</div>
                         {% endif %}
                         </div>
+                        {% if forloop.counter == 2 %}
+                            <div class="clearfix visible-xs-block"></div>
+                        {% endif %}
                     {% endfor %}
                 </div>
             {% endfor %}
@@ -32,7 +35,7 @@
             {% for row in self.nonfeatured_contributors %}
                 <div class="row">
                     {% for contributor in row %}
-                        <div class="col-sm-{{ row|column_class }}">
+                        <div class="col-sm-{{ row|column_class }} col-xs-6">
                         {% if contributor.first_name and contributor.last_name %}
                             <div class="name"><a href="{{ contributor.url }}">{{ contributor.first_name }} {{ contributor.last_name }}</a></div>
                         {% endif %}
