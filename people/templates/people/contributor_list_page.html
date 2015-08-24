@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static core_tags wagtailcore_tags wagtailimages_tags people_tags %}
+{% load static core_tags wagtailcore_tags wagtailimages_tags people_tags article_tags %}
 
 {% block content %}
 <div class="container contributor-list">
@@ -13,11 +13,13 @@
             {% for row in self.featured_contributors %}
                 <div class="row">
                     {% for contributor in row %}
-                        <div class="col-sm-{{ row|column_class }} col-xs-6">
+                        <div class="col-sm-{{ row|column_class }}">
                         {% if contributor.first_name and contributor.last_name %}
-                            {% image contributor.headshot circle-95x95 %}
-                            <div class="name"><a href="{{ contributor.url }}">{{ contributor.first_name }} {{ contributor.last_name }}</a></div>
-                            <div class="title">{{ contributor.short_bio|richtext }}</div>
+                            <div class="contributor">
+                                <a href="{{ contributor.url }}">{% image contributor.headshot circle-95x95 %}</a>
+                                <div class="name"><a href="{{ contributor.url }}">{{ contributor.first_name }} {{ contributor.last_name }}</a></div>
+                                <div class="title">{{ contributor.short_bio|richtext }}</div>
+                            </div>
                         {% endif %}
                         </div>
                         {% if forloop.counter == 2 %}
@@ -29,7 +31,7 @@
         </div>
     {% endif %}
 
-    {% if self.nonfeatured_contributors %}
+    {% if self.recent_contributors %}
         <div class="nonfeatured-contributors">
             <h2>Recent Contributors</h2>
             {% for row in self.recent_contributors %}

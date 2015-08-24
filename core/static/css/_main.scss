@@ -1163,6 +1163,7 @@ article {
     margin-top: 20px;
     margin-bottom: 20px;
   }
+
   img{
     margin: 0 auto;
   }
@@ -1177,7 +1178,14 @@ article {
   .title{
     font-size: 11px;
   }
-
+  @media(max-width: $screen-sm){
+    .contributor{
+      max-width: 250px;
+      margin: 0 auto 20px;
+      padding-bottom: 20px;
+      border-bottom: $border-grey;
+    }
+  }
 }
 .nonfeatured-contributors{
   font-family: $sans-serif;
