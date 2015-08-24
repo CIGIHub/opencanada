@@ -1,4 +1,4 @@
-from __future__ import absolute_import, unicode_literals
+from __future__ import absolute_import, division, unicode_literals
 
 import datetime
 
@@ -20,7 +20,7 @@ class ContributorListPage(Page):
         rows = []
         number_of_items = len(contributors)
         number_of_columns = 3
-        number_of_rows = number_of_items / number_of_columns
+        number_of_rows = number_of_items // number_of_columns
         row_remainder = number_of_items % number_of_columns
 
         if row_remainder > number_of_rows:

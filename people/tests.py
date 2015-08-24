@@ -107,4 +107,4 @@ class ContributorListPageTestCase(TestCase):
         bob = models.ContributorPage.objects.get(slug="bob-smith")
         mary = models.ContributorPage.objects.get(slug="mary-sue")
 
-        self.assertSequenceEqual(contributors, [joe, beth, bob, mary])
+        self.assertSequenceEqual(contributors, [[joe, beth, bob, mary]])
