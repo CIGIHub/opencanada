@@ -85,6 +85,14 @@
     }
 }
 
+@mixin subheading(){
+    font-family: $sans-proxima;
+    font-weight: 900;
+    text-transform: uppercase;
+    border-bottom: $border_black;
+    margin-top: 20px;
+}
+
 
 @mixin collapsed{
   height: 55px;

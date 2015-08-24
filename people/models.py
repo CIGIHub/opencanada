@@ -1,10 +1,10 @@
 from __future__ import absolute_import, unicode_literals
 
-from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.text import slugify
-from wagtail.wagtailadmin.edit_handlers import FieldPanel, RichTextFieldPanel
+from wagtail.wagtailadmin.edit_handlers import (FieldPanel, MultiFieldPanel,
+                                                RichTextFieldPanel)
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
@@ -13,32 +13,31 @@ from wagtail.wagtailsearch import index
 class ContributorListPage(Page):
     subpage_types = ['ContributorPage']
 
-    people_per_page = models.IntegerField(default=20)
+    def get_rows(self, contributors):
+        rows = []
+        number_of_items = len(contributors)
+        number_of_rows = number_of_items / 3
+        number_of_columns = 3
+        row_remainder = number_of_items % 3
+
+        if row_remainder > number_of_rows:
+            number_of_rows += 1
+        elif row_remainder < number_of_rows and row_remainder != 0:
+            number_of_columns = 4
+
+        for row_index in range(0, number_of_rows):
+            row = contributors[(row_index * number_of_columns):(row_index * number_of_columns) + number_of_columns]
+            rows.append(row)
+        return rows
 
     @property
-    def contributors(self):
-        contributors = ContributorPage.objects.live().descendant_of(self).order_by('last_name', 'first_name')
-        return contributors
+    def nonfeatured_contributors(self):
+        contributors = ContributorPage.objects.live().filter(featured=False).order_by('last_name', 'first_name')
+        return self.get_rows(contributors)
 
-    def get_context(self, request):
-        people = self.contributors
-
-        page = request.GET.get('page')
-        paginator = Paginator(people, self.people_per_page)
-        try:
-            people = paginator.page(page)
-        except PageNotAnInteger:
-            people = paginator.page(1)
-        except EmptyPage:
-            people = paginator.page(paginator.num_pages)
-
-        context = super(ContributorListPage, self).get_context(request)
-        context['people'] = people
-        return context
-
-    content_panels = Page.content_panels + [
-        FieldPanel('people_per_page')
-    ]
+    def featured_contributors(self):
+        contributors = ContributorPage.objects.live().filter(featured=True).order_by('last_name', 'first_name')
+        return self.get_rows(contributors)
 
 
 @python_2_unicode_compatible
@@ -68,6 +67,8 @@ class ContributorPage(Page):
         index.SearchField('short_bio', partial_match=True),
         index.SearchField('long_bio', partial_match=True),
     )
+
+    featured = models.BooleanField(default=False)
 
     def save(self, *args, **kwargs):
         if self.first_name and self.last_name:
@@ -108,13 +109,21 @@ class ContributorPage(Page):
     def __str__(self):
         return "{} {} - {}".format(self.first_name, self.last_name, self.email)
 
+    content_panels = Page.content_panels + [
+        FieldPanel('first_name'),
+        FieldPanel('last_name'),
+        FieldPanel('email'),
+        FieldPanel('twitter_handle'),
+        RichTextFieldPanel('short_bio'),
+        RichTextFieldPanel('long_bio'),
+        ImageChooserPanel('headshot'),
+    ]
 
-ContributorPage.content_panels = [
-    FieldPanel('first_name'),
-    FieldPanel('last_name'),
-    FieldPanel('email'),
-    FieldPanel('twitter_handle'),
-    RichTextFieldPanel('short_bio'),
-    RichTextFieldPanel('long_bio'),
-    ImageChooserPanel('headshot'),
-]
+    promote_panels = Page.promote_panels + [
+        MultiFieldPanel(
+            [
+                FieldPanel('featured'),
+            ],
+            heading="Featuring Settings"
+        )
+    ]

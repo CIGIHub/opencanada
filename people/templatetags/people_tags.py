@@ -14,3 +14,9 @@ def contributor_articles(contributor_page, article_page_id=None, number=None):
     if number:
         articles = articles[:number]
     return articles
+
+
+@register.filter()
+def column_class(row):
+    number_of_items = len(row)
+    return 12 / number_of_items

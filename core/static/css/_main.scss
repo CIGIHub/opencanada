@@ -1139,16 +1139,54 @@ article {
     }
   }
   h2{
-    font-family: $sans-proxima;
-    font-weight: 900;
-    text-transform: uppercase;
-    border-bottom: $border_black;
+    @include subheading;
   }
   h3{
     font-size: 30px;
   }
 }
 
+.contributor-list{
+  padding-top: 40px;
+  h1{
+    @include hide;
+  }
+  h2{
+    @include subheading;
+  }
+}
+
+.featured-contributors{
+  margin-bottom: 20px;
+  font-family: $sans-serif;
+  & .row{
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  img{
+    margin: 0 auto;
+  }
+  .name{
+    padding-top: 10px;
+    font-weight: 900;
+    text-align: center;
+    a{
+      color: black;
+    }
+  }
+  .title{
+    font-size: 11px;
+  }
+
+}
+.nonfeatured-contributors{
+  font-family: $sans-serif;
+  a{
+    color: black;
+    padding: 5px 0;
+    display: block;
+  }
+}
 
 /**************  Newsletter  **************/
 .newsletter-signup{
