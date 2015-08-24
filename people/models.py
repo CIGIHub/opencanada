@@ -1,6 +1,9 @@
 from __future__ import absolute_import, unicode_literals
 
+import datetime
+
 from django.db import models
+from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.text import slugify
 from wagtail.wagtailadmin.edit_handlers import (FieldPanel, MultiFieldPanel,
@@ -31,10 +34,22 @@ class ContributorListPage(Page):
         return rows
 
     @property
+    def recent_contributors(self):
+        endtime = timezone.now()
+        starttime = endtime - datetime.timedelta(days=365)
+        contributors = ContributorPage.objects.live().filter(featured=False,
+                                                             article_links__article__isnull=False,
+                                                             article_links__isnull=False,
+                                                             article_links__article__first_published_at__range=[starttime, endtime]
+                                                             ).order_by('last_name', 'first_name').distinct()
+        return self.get_rows(contributors)
+
+    @property
     def nonfeatured_contributors(self):
         contributors = ContributorPage.objects.live().filter(featured=False).order_by('last_name', 'first_name')
         return self.get_rows(contributors)
 
+    @property
     def featured_contributors(self):
         contributors = ContributorPage.objects.live().filter(featured=True).order_by('last_name', 'first_name')
         return self.get_rows(contributors)

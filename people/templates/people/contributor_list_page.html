@@ -32,7 +32,7 @@
     {% if self.nonfeatured_contributors %}
         <div class="nonfeatured-contributors">
             <h2>Recent Contributors</h2>
-            {% for row in self.nonfeatured_contributors %}
+            {% for row in self.recent_contributors %}
                 <div class="row">
                     {% for contributor in row %}
                         <div class="col-sm-{{ row|column_class }} col-xs-6">
