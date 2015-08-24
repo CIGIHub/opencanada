@@ -25,7 +25,7 @@ class ContributorListPage(Page):
 
         if row_remainder > number_of_rows:
             number_of_rows += 1
-        elif row_remainder < number_of_rows and row_remainder != 0:
+        elif row_remainder <= number_of_rows and row_remainder != 0:
             number_of_columns = 4
 
         for row_index in range(0, number_of_rows):

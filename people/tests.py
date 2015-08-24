@@ -95,7 +95,7 @@ class ContributorListPageTestCase(TestCase):
         six.assertCountEqual(
             self,
             all_live_contributors,
-            contributor_list.nonfeatured_contributors
+            contributor_list.nonfeatured_contributors[0]
         )
 
     def test_list_of_contributors_sorted_by_last_name(self):
