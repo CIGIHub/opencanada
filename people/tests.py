@@ -95,16 +95,16 @@ class ContributorListPageTestCase(TestCase):
         six.assertCountEqual(
             self,
             all_live_contributors,
-            contributor_list.contributors
+            contributor_list.nonfeatured_contributors[0]
         )
 
     def test_list_of_contributors_sorted_by_last_name(self):
         contributor_list = models.ContributorListPage.objects.all().first()
-        contributors = contributor_list.contributors
+        contributors = contributor_list.nonfeatured_contributors
 
         joe = models.ContributorPage.objects.get(slug="joe-sampson")
         beth = models.ContributorPage.objects.get(slug="beth-smith")
         bob = models.ContributorPage.objects.get(slug="bob-smith")
         mary = models.ContributorPage.objects.get(slug="mary-sue")
 
-        self.assertSequenceEqual(contributors, [joe, beth, bob, mary])
+        self.assertSequenceEqual(contributors, [[joe, beth, bob, mary]])
