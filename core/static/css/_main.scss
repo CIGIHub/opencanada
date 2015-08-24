@@ -98,7 +98,7 @@ header{
   #main-menu{
     @include inline-list-divided(white, 16px);
     ul li a{
-      font-family: $sans-proxima;
+      font-family: $sans-serif;
       font-weight: 900;
     }
   }
@@ -123,7 +123,7 @@ header{
 /**************  Search  **************/
 
 #search-box{
-  font-family: $sans-proxima;
+  font-family: $sans-serif;
   width: 100%;
   top: -100px;
   position: fixed;
@@ -154,7 +154,7 @@ header{
   }
 
   button{
-    @include button($sans-proxima);
+    @include button($sans-serif);
     padding: 6px;
     width: 20%;
   }
@@ -513,7 +513,7 @@ main{
     h2 {
       border-bottom: $border-grey;
       text-transform: uppercase;
-      font-family: $sans-proxima;
+      font-family: $sans-serif;
       font-size: 28px;
       font-weight: 900;
     }
@@ -581,8 +581,11 @@ main{
   .contributor-label{
     float: left;
   }
+  .contributor-list{
+    margin-left: 20px;
+  }
   &.series .contributor-list{
-    margin-left: 135px;
+    margin-left: 145px;
   }
   @include type($text-color);
   a{
@@ -707,16 +710,16 @@ main{
 .block-Embed iframe{
   margin: 10px auto !important;
 }
-
-#article-page article,
-#chaptered-article-page article,
-#series-page article,
-#external-article-list-page .row,
-#event-list-page .row
-{
-  margin-top: 20px;
-  @include row-divider;
-}
+//
+//
+//#chaptered-article-page article,
+//#series-page article,
+//#external-article-list-page .row,
+//#event-list-page .row
+//{
+//  margin-top: 20px;
+//  @include row-divider;
+//}
 
 article, .related-articles{
   .contributors, .date{
@@ -887,9 +890,7 @@ article {
       .credit {
         text-align: center;
       }
-
     }
-
   }
 
   .image{
@@ -908,7 +909,6 @@ article {
       float: right;
       color: #bf1e2e;
     }
-
 
     .block-Overflow .block-ColumnedContent,
     .block-Overflow .block-Image,
@@ -1008,10 +1008,6 @@ article {
       display: inline-block;
     }
   }
-  .in-the-series {
-    border-top: $border-grey;
-    border-bottom: none;
-  }
 
   .clickable {
     cursor: pointer;
@@ -1072,8 +1068,7 @@ article {
   margin: 20px 0;
 
   h2{
-    @include type($text-color, 14px);
-    margin: 20px 0;
+    @include subheading
   }
   h3{
     margin: 0 0 5px 0;
@@ -1091,7 +1086,6 @@ article {
       display:inline-block;
     }
   }
-  border-bottom: $border-grey;
   .col-xs-2{
     padding-right: 0px;
   }
@@ -1118,7 +1112,7 @@ article {
 .contributor-profile{
   h1, .short-bio{
     text-align:center;
-    font-family: $sans-proxima;
+    font-family: $sans-serif;
     a{
       color: black;
     }
@@ -1137,6 +1131,7 @@ article {
     }
   }
   h2{
+
     @include subheading;
   }
   h3{
@@ -1144,7 +1139,7 @@ article {
   }
 }
 
-.contributor-list{
+.contributor-listing{
   padding-top: 40px;
   h1{
     @include hide;
