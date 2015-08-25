@@ -31,13 +31,17 @@
                                 <div class="feature-image-overlay" style="background: rgba( {{ article.image_overlay_color.rgb }}, {{ article.opacity }} )"></div>
                             </div>
                             <div class="feature-text" style="color: {{ article.font_style.text_colour.hex_value }}; {% if article.editors_pick %}margin-right: 70px; {% endif %}">
-                                <h3><a style="color: {{ article.font_style.text_colour.hex_value }};" href="{{ article.url }}">{{ article.title }}</a></h3>
-
-                                {% if article.subtitle %}
-                                    <div class="feature-line">{{ article.subtitle|richtext }}</div>
-                                {% else %}
-                                    <div class="feature-line">{{ article.excerpt|richtext }}</div>
+                                {% if article.feature_style.number_of_rows = 1 %}
+                                    <h3><a style="color: {{ article.font_style.text_colour.hex_value }};" href="{{ article.url }}">{{ article.title }}</a></h3>
+                                    {% if article.subtitle %}
+                                        <div class="feature-line">{{ article.subtitle|richtext }}</div>
+                                    {% else %}
+                                        <div class="feature-line">{{ article.excerpt|richtext }}</div>
+                                    {% endif %}
+                                {%  else %}
+                                    <h3 class="double-height"><a style="color: {{ article.font_style.text_colour.hex_value }};" href="{{ article.url }}">{{ article.title }}</a></h3>
                                 {% endif %}
+
                                 {% if article.authors %}
                                     <div class="contributors">By:
                                         {% for author in article.authors %}
@@ -57,7 +61,7 @@
                             {% if article.editors_pick %}
                                 <div class="editors-pick"><div>Editors Pick</div></div>
                             {% endif %}
-                            <figure>{%  image article.main_image fill-710x475 %}</figure>
+                            <a href="{{ author.url }}"><figure>{%  image article.main_image fill-710x475 %}</figure></a>
                             <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
                            <div class="contributors">By:
                                 {% for author in article.authors %}
@@ -106,7 +110,7 @@
                 {% for external_article in external_article_row %}
                     <div class="col-sm-6 {% if forloop.last %}last{% endif %}">
                     {% spaceless %}
-                        <figure>
+                        <a href="{{ external_article.website_link }}"><figure>
                             {% if external_article.source and external_article.source.logo %}
                                 {% image external_article.source.logo circle-80x80 %}
                             {% else %}
@@ -115,7 +119,7 @@
                                 {% image defaults.default_external_article_source_logo circle-80x80 %}
                                 {% endif %}
                             {% endif %}
-                        </figure>
+                        </figure></a>
                     {% endspaceless %}
                         <div class="reading">
                              <h3><a href="{{ external_article.website_link }}">{{ external_article.title }}</a></h3>
@@ -136,7 +140,7 @@
             <div class="row {% if forloop.last %}last{% endif %}">
                 {% for graphic in graphics_row %}
                     <div class="col-sm-6 {% if forloop.last %}last{% endif %}">
-                    {% image graphic.main_image fill-440x293%}
+                    <a href="{{ graphic.url }}">{% image graphic.main_image fill-440x293%}</a>
                     <h3><a href="{{ graphic.url }}">{{ graphic.title }}</a></h3>
                     </div>
                 {% endfor %}
