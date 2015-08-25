@@ -172,6 +172,7 @@ COMPRESS_PRECOMPILERS = (
 
 TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
     'django.core.context_processors.request',
+    'core.context_processors.settings_context'
 )
 
 
@@ -202,3 +203,10 @@ WAGTAILIMAGES_IMAGE_MODEL = 'images.AttributedImage'
 
 SERVER_EMAIL = "no-reply@opencanada.org"
 DEFAULT_FROM_EMAIL = "no-reply@opencanada.org"
+
+try:
+    GOOGLE_ANALYTICS_PROPERTY_ID = get_env_variable("GOOGLE_ANALYTICS_PROPERTY_ID")
+except ImproperlyConfigured:
+    GOOGLE_ANALYTICS_PROPERTY_ID = ''
+
+IS_PRODUCTION = False

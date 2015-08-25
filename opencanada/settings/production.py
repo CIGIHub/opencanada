@@ -52,3 +52,5 @@ INSTALLED_APPS = INSTALLED_APPS + (
 )
 
 FAVICON_PATH = STATIC_URL + 'img/favicon.png'
+
+IS_PRODUCTION = True
