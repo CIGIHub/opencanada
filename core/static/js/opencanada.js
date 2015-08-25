@@ -48,7 +48,11 @@ jQuery(document).ready(function($) {
         $('#search-box input').focus();
     });
 
-    social_setup();
+
+    if ($(".facebook-share-link").length > 0){
+        social_setup();
+    }
+
 
 });
 
