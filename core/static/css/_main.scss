@@ -8,6 +8,8 @@ body{
   min-height: 100%;
   color: $text-color;
   font-family: $serif;
+  font-size: 15px;
+  line-height: normal;
 }
 
 h1{
@@ -68,7 +70,6 @@ header{
   position: fixed;
   top: 0;
   width: 100%;
-  height: 100px;
   z-index: 500;
   color: white;
   background: $red;
@@ -79,27 +80,55 @@ header{
     font-size: 20px;
   }
   .menu{
-    font-size: 20px;
     text-align:left;
   }
-  .logo img{
-    display:block;
-    margin: 0 auto;
+  .template-home-page &{
+    .search, .menu{
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
   }
 
   .banner{
     padding-top: 20px;
     padding-bottom: 20px;
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+  .wordmark, .tagline{
+    text-align: center;
+    font-family: $sans-serif;
+    line-height: 110%;
+  }
+  .wordmark{
+    font-size: 27px;
+    font-weight: 700;
+    text-transform: uppercase;
+    a{
+      color: white;
+    }
+    a:hover{
+      text-decoration: none;
+    }
   }
   .tagline{
-    text-align: center;
+    display: none;
+  }
+  .template-home-page & .tagline{
+    display: block;
+    font-size: 16px;
+    font-weight: 100;
+    .menu, .search{
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
   }
 
   #main-menu{
-    @include inline-list-divided(white, 16px);
+    @include inline-list-divided(white, 12px);
     ul li a{
       font-family: $sans-serif;
-      font-weight: 900;
+      font-weight: 700;
     }
   }
 
@@ -116,6 +145,10 @@ header{
     .logo img{
       max-height: 30px;
     }
+    .banner{
+       margin-left: 0;
+      margin-right: 0;
+    }
   }
 
 }
@@ -123,7 +156,8 @@ header{
 /**************  Search  **************/
 
 #search-box{
-  font-family: $sans-serif;
+  @include search-form;
+
   width: 100%;
   top: -100px;
   position: fixed;
@@ -151,40 +185,6 @@ header{
 
   .container{
     padding: 30px 200px;
-  }
-
-  button{
-    @include button($sans-serif);
-    padding: 6px;
-    width: 20%;
-  }
-  input{
-    width: 75%;
-    margin-right: 10px;
-    border: $border-black;
-    padding: 5px;
-    color: black;
-  }
-  input:focus{
-    outline: none;
-  }
-  .input-group{
-    width: 100%;
-    margin: 0 auto;
-    @media(max-width: $screen-sm){
-      width: 100%;
-    }
-  }
-  .clear-button{
-    background: none;
-    border: none;
-    position: absolute;
-    left: 69%;
-    top: 6px;
-    font-size:20px;
-    z-index: 500;
-    color: black;
-    display:none;
   }
 
   .search-suggestions{
@@ -215,10 +215,23 @@ header{
   }
 }
 
-.search-results{
+.search-results-page{
   ul li{
     list-style: none;
   }
+  .searchbox{
+    @include search-form;
+    padding: 40px 0;
+  }
+
+  h1{
+    @include subheading;
+  }
+  h2{
+    @include type(black, 16px);
+    border-bottom: $border-grey;
+  }
+
 }
 
 /**************   FOOTER  **************/
@@ -233,7 +246,9 @@ footer{
   padding-bottom: 40px;
 
   h3{
-    @include type(white, 14px);
+    @include type(white, 12px);
+    font-weight: 700;
+    letter-spacing: 0.06em;
   }
   .row{
     padding: 20px 0;
@@ -252,6 +267,9 @@ footer{
 
   .row.infobar{
       display: table;
+    p{
+      font-weight: 200;
+    }
   }
    .row.infobar .col-sm-4 {
      border-right: $border-white;
@@ -317,8 +335,9 @@ footer{
           border: none;
           background: none;
           min-width: 120px;
-          padding: 5px;
+          padding: 5px 0;
           margin: 3px 10px 0 5px;
+          font-size: 14px;
         }
         &.button{
           min-width:75px;
@@ -407,7 +426,7 @@ footer{
   }
 
   h1{
-    font-size: 36px;
+    font-size: 46px;
   }
 
   .scroll{
@@ -425,16 +444,13 @@ footer{
       text-decoration: none;
       display: block;
       text-align: center;
-      i{
-        font-size:50px;
-      }
-    }
-    a:hover{
-      color: white;
       -webkit-animation: bounce 2s;
       -moz-animation:    bounce 2s;
       -o-animation:     bounce 2s;
       animation: bounce 2s;
+      i{
+        font-size:50px;
+      }
     }
   }
 
@@ -464,14 +480,7 @@ footer{
       }
     }
     .scroll{
-      width: 40px;
-      height: 40px;
-      border-radius: 20px;
-      a i{
-        font-size: 35px;
-        padding-top:5px;
-      }
-
+      display:none;
     }
   }
 }
@@ -654,7 +663,7 @@ main{
 
 .article-scroll{
 
-  header figure{
+  header .wordmark{
       display: none;
   }
 
@@ -691,7 +700,8 @@ main{
 .topics,
 .series-articles,
 .toc,
-.contributor-profile
+.contributor-profile,
+.search-results-page
 {
   margin-left: 10%;
   margin-right: 10%;

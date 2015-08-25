@@ -2,21 +2,48 @@
 {% load static core_tags wagtailcore_tags %}
 
 {% block content %}
-    <div class="container search-results">
+    <div class="container">
+    <div class="search-results-page">
         <h1>Search Results</h1>
-        <h2>Search Results{% if request.GET.q %} for {{ request.GET.q }}{% endif %}</h2>
-        <ul class="search-results">
+        <div class="searchbox">
+            <form action="{% url 'wagtailsearch_search' %}" method="get">
+            <div class="row">
+                <div class="col-xs-12 search-form">
+                    <div class="input-group">
+                        <input type="text" name="q" value=""/>
+                        <button type="submit" class="search-button">Search <i class="fa fa-chevron-right"></i></button>
+                    </div>
+                    <i class="fa fa-times-circle clear-button"></i>
+                </div>
+            </div>
+        </form>
+        </div>
+
+        <h2>{{ search_results|length }} Search Results{% if request.GET.q %} for {{ request.GET.q }}{% endif %}</h2>
+        <div class="search-results">
             {% for result in search_results %}
-              <li>
-                <h3><a href="{% pageurl result.specific %}">{{ result.specific.title }}</a></h3>
-                {% if result.specific.search_description %}
-                  {{ result.specific.search_description|safe }}
-                {% endif %}
-              </li>
-            {% empty %}
-              <li>No results found</li>
+              <article class="row">
+                <div class="col-xs-12">
+                    <h3><a href="{% pageurl result.specific %}">{{ result.specific.title }}</a></h3>
+                    {% if result.specific.authors %}
+                        <div class="contributors">
+                            {% for author in result.specific.authors %}
+                                <div class="contributor"><a href="{{ author.url  }}">{{ author.first_name }} {{ author.last_name }}</a></div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    <div class="date"> / {{ result.specific.first_published_at|date:"F j, Y" }}</div>
+                    {% if result.specific.search_description %}
+                      {{ result.specific.search_description|safe }}
+                    {% endif %}
+                </div>
+              </article>
+                {% empty %}
+                No results found
             {% endfor %}
-        </ul>
+
+        </div>
+    </div>
     </div>
 {% endblock %}
 
