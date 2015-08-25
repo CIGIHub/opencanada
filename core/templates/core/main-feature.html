@@ -13,11 +13,6 @@
         <h1>
         <a style="color: {{ self.typed_featured_item.font_style.text_colour.hex_value }}; font-size: {{ self.typed_featured_item.font_style.font_size }}em; line-height: {{ self.typed_featured_item.font_style.line_size }}%;" href="{{ self.typed_featured_item.url }}">{{ self.typed_featured_item.title }}</a></h1>
 
-        {%  if self.typed_featured_item.subtitle %}
-            <div class="feature-line">{{ self.typed_featured_item.subtitle|richtext }}</div>
-        {%  elif self.typed_featured_item.excerpt %}
-            <div class="feature-line">{{ self.typed_featured_item.excerpt|richtext }}</div>
-        {% endif %}
         {% if self.typed_featured_item.authors %}
             <div class="contributors" style="color: {{ self.typed_featured_item.font_style.text_colour.hex_value }}">By:
                 {% for author in self.typed_featured_item.authors %}

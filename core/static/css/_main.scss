@@ -8,8 +8,8 @@ body{
   min-height: 100%;
   color: $text-color;
   font-family: $serif;
-  font-size: 15px;
-  line-height: normal;
+  font-size: 16px;
+  line-height: 120%;
 }
 
 h1{
@@ -382,7 +382,6 @@ footer{
     }
   }
 
-
   @media(max-width: $screen-sm) {
 
     .follow h3{
@@ -524,7 +523,7 @@ main{
       text-transform: uppercase;
       font-family: $sans-serif;
       font-size: 28px;
-      font-weight: 900;
+      font-weight: 700;
     }
     h3 {
       font-size: 22px;
@@ -577,9 +576,19 @@ main{
       }
     }
   }
+  .overlay-feature{
+    h3{
+      font-size: 36px;
+    }
+    h3.double-height{
+      font-size: 46px;
+    }
+
+  }
 
   .feature-line{
       margin-top: 10px;
+      line-height: 120%;
   }
   h3{
     margin-bottom: 5px;
@@ -720,16 +729,6 @@ main{
 .block-Embed iframe{
   margin: 10px auto !important;
 }
-//
-//
-//#chaptered-article-page article,
-//#series-page article,
-//#external-article-list-page .row,
-//#event-list-page .row
-//{
-//  margin-top: 20px;
-//  @include row-divider;
-//}
 
 article, .related-articles{
   .contributors, .date{
@@ -758,7 +757,9 @@ article {
     margin-top: 20px;
     margin-bottom: 20px;
   }
-
+  .story section{
+    line-height: 150%;
+  }
   h1 {
     margin: 0 0 20px 0;
   }
@@ -979,9 +980,8 @@ article {
 
     .individual {
       width: 300px;
-    padding: 5px 15px;
-    margin: 10px 0 10px 15px;
-
+      padding: 5px 15px;
+      margin: 10px 0 10px 15px;
       border-left: solid 2px $mid-grey;
       margin-bottom: 20px;
       padding: 5px 15px;
@@ -994,9 +994,11 @@ article {
       @include type(black);
     }
     .short-bio {
-      font-size: 0.8em;
+      font-size: 12px;
+      line-height: 120%;
       font-weight: bold;
-      font-family: $serif;
+      color: $grey;
+      font-family: $sans-serif;
     }
     ul {
       padding: 5px 0 0 0;
