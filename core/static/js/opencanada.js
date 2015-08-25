@@ -95,7 +95,6 @@ function toggleBox(e){
                 menu.show( function() {
                     menu.addClass('open');
                 });
-
             }
         }
         if(target == search ){

@@ -12,7 +12,6 @@
   color: $color;
 }
 
-
 @mixin row-divider{
   border-bottom: $border-grey;
   padding-top: 20px;
@@ -85,14 +84,52 @@
     }
 }
 
-@mixin subheading(){
+@mixin subheading($font-size: 22px){
     font-family: $sans-serif;
     font-weight: 900;
+    font-size: $font-size;
     text-transform: uppercase;
     border-bottom: $border_black;
     margin-top: 40px;
 }
 
+
+@mixin search-form{
+  font-family: $sans-serif;
+  button{
+    @include button($sans-serif);
+    padding: 6px;
+    width: 20%;
+  }
+  input{
+    width: 75%;
+    margin-right: 10px;
+    border: $border-grey;
+    padding: 5px;
+    color: black;
+  }
+  input:focus{
+    outline: none;
+  }
+  .input-group{
+    width: 100%;
+    margin: 0 auto;
+    @media(max-width: $screen-sm){
+      width: 100%;
+    }
+  }
+  .clear-button{
+    background: none;
+    border: none;
+    position: absolute;
+    left: 69%;
+    top: 6px;
+    font-size:20px;
+    z-index: 500;
+    color: black;
+    display:none;
+  }
+}
 
 @mixin collapsed{
   height: 55px;
