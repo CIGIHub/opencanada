@@ -134,16 +134,11 @@
 @mixin collapsed{
   height: 55px;
   .banner{
-      padding-top: 12px;
-      padding-bottom: 12px;
-    }
-  .logo, .share-links{
-    text-align: center;
-  }
-  .logo{
-    img{
-      max-height: 40px;
-      display: inline;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    .search, .menu{
+      padding-top: 0px;
+      padding-bottom: 0px;
     }
   }
 

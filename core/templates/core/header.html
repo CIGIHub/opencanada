@@ -1,7 +1,7 @@
 {% load wagtailcore_tags static core_tags %}
 
 <header role="banner">
-    <div class="banner container">
+    <div class="banner container-fluid">
         <div class="row">
             <div class="col-xs-4 menu">
                 <button class="toggle-mobile" type="button" data-target="main-menu">
@@ -20,17 +20,13 @@
                 </nav>
             </div>
             <div class="col-xs-4 logo">
-                <figure>
-                    <a href="/"><img src="{% static 'img/opencanada-logo.png' %}" alt="OpenCanada Logo" class="img-responsive" ></a>
-                </figure>
+                <div class="wordmark">
+                    <a href="/">OpenCanada.org</a>
+                </div>
+                <div class="tagline">Canada's Hub for International Affairs</div>
             </div>
             <div class="col-xs-4 search">
                 <button type="button" data-target="search-box"><i class="fa fa-search"></i></button>
-            </div>
-        </div>
-        <div class="row toggle-full">
-            <div class="col-xs-12">
-                <div class="tagline">Canada's Hub for International Affairs</div>
             </div>
         </div>
     </div>

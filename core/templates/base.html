@@ -33,7 +33,7 @@
     <body class="{% block body_class %}{% endblock %}">
         {% wagtailuserbar %}
         {% block header %}
-            {% include 'core/header.html' %}
+            {% include 'core/header.html' with tagline=true %}
         {% endblock %}
 
         {% block feature %}{% endblock %}
