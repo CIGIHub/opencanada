@@ -48,6 +48,8 @@ jQuery(document).ready(function($) {
         $('#search-box input').focus();
     });
 
+    social_setup();
+
 });
 
 //initialize window based on width and height
@@ -267,4 +269,29 @@ $(window).resize(function(){
 });
 
 
+function social_setup(){
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1209700165722055',
+      xfbml      : true,
+      version    : 'v2.4'
+    });
+  };
 
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+
+  $(".facebook-share-link").click(function(){
+    var href = $(this).data('url');
+    FB.ui(
+      {
+      method: 'share',
+      href: href
+    }, function(response){});
+    });
+}
