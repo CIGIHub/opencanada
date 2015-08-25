@@ -7,6 +7,7 @@ from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
 from wagtail.wagtailadmin.edit_handlers import (FieldPanel, MultiFieldPanel,
                                                 RichTextFieldPanel)
+from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
@@ -64,7 +65,7 @@ class ContributorPage(Page):
     twitter_handle = models.CharField(max_length=16, blank=True, default="")
 
     short_bio = models.TextField(blank=True, default="")
-    long_bio = models.TextField(blank=True, default="")
+    long_bio = RichTextField(blank=True, default="")
 
     headshot = models.ForeignKey(
         'images.AttributedImage',
