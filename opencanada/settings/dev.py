@@ -12,3 +12,5 @@ WP_IMPORTER_IMAGE_DOWNLOAD_DOMAINS = ('opencanada.centos', 'opencanada.org',
 WP_IMPORTER_USER_PHOTO_URL_PATTERN = "http://opencanada.centos/wp-content/uploads/userphoto/{}"
 
 WP_IMPORTER_ARTICLE_PHOTO_URL_PATTERN = "http://opencanada.centos/wp-content/uploads/{}"
+
+IS_PRODUCTION = False
