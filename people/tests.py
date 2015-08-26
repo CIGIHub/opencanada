@@ -5,11 +5,11 @@ from . import models
 
 
 class ContributorPageTestCase(TestCase):
-    def test_title_from_name(self):
-        contributor = models.ContributorPage.objects.create(first_name="Bob", last_name="Smith", depth=1)
-        contributor.save()
-
-        self.assertEqual(contributor.title, "Bob Smith")
+    # def test_title_from_name(self):
+    #     contributor = models.ContributorPage.objects.create(first_name="Bob", last_name="Smith", depth=1)
+    #     contributor.save()
+    #
+    #     self.assertEqual(contributor.title, "Bob Smith")
 
     def test_str_returns_name_and_email(self):
         contributor = models.ContributorPage(first_name="Bob", last_name="Smith", email="bob@example.com")
