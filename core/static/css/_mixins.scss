@@ -193,16 +193,9 @@
 }
 
 @mixin article-overlay{
+  min-height: 400px;
   position: relative;
   color: white;
-
-  .contributors, .contributors a, a{
-    color: white;
-    text-decoration:none;
-  }
-   a:hover{
-    color: $red;
-  }
 
   .feature-image{
     position: relative;
@@ -221,41 +214,52 @@
     top: 0; right: 0; bottom: 0; left: 0;
     background: rgba(0,0,0, 0.5);
   }
-
-  .camera, .image-caption, .feature-text{
+  .feature-wrapper{
     position: absolute;
-    z-index:10;
+    z-index: 10;
+    left: 50%;
+    top: 10%;
   }
 
   .feature-text{
-    top: 10%;
-    margin-right: 5%;
+    position: relative;
+    left: -50%;
+  }
+
+  .contributors, .contributors a, a{
+    color: white;
+    text-decoration:none;
+  }
+   a:hover{
+    color: $red;
+  }
+
+  .feature-text{
     .feature-line{
       font-size: 1.4em;
     }
     .contributors{
       margin-top: 5%;
+      font-size: 14px;
+      .contributor-list{
+        margin-left: 25px;
+      }
     }
   }
 
-  .camera{
-    right: 0;
-    bottom: 0;
-    padding: 10px 15px;
-    font-size: 16px;
-    &.highlighted,
-    &:hover{
-      cursor: pointer;
-      color: $red;
+  @media(max-width: $screen-sm){
+     h1{
+        font-size: 32px;
+      }
+    .feature-wrapper{
+      left: 5%;
+      right: 5%;
+      top: 5%;
+      bottom: 5%;
     }
-  }
-
-  @media(max-width: $screen-xs){
-     .feature-text{
-       .feature-line{
-         font-size: 1.0em;
-       }
-     }
+    .feature-text{
+      left: 0;
+    }
   }
 }
 

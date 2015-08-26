@@ -8,20 +8,21 @@
                      {% if self.typed_featured_item.opacity %} {{ self.typed_featured_item.opacity }} {% endif %})">
         </div>
     </div>
+    <div class="feature-wrapper">
+        <div class="feature-text" style="color: {{ self.typed_featured_item.font_style.text_colour.hex_value }}">
+            <h1>
+            <a style="color: {{ self.typed_featured_item.font_style.text_colour.hex_value }}; font-size: {{ self.typed_featured_item.font_style.font_size }}em; line-height: {{ self.typed_featured_item.font_style.line_size }}%;" href="{{ self.typed_featured_item.url }}">{{ self.typed_featured_item.title }}</a></h1>
 
-    <div class="feature-text" style="color: {{ self.typed_featured_item.font_style.text_colour.hex_value }}">
-        <h1>
-        <a style="color: {{ self.typed_featured_item.font_style.text_colour.hex_value }}; font-size: {{ self.typed_featured_item.font_style.font_size }}em; line-height: {{ self.typed_featured_item.font_style.line_size }}%;" href="{{ self.typed_featured_item.url }}">{{ self.typed_featured_item.title }}</a></h1>
-
-        {% if self.typed_featured_item.authors %}
-            <div class="contributors" style="color: {{ self.typed_featured_item.font_style.text_colour.hex_value }}">By:
-                {% for author in self.typed_featured_item.authors %}
-                    <div class="contributor">
-                        <a style="color: {{ self.typed_featured_item.font_style.text_colour.hex_value }}" href="{{ author.url }}">{{ author.first_name }} {{ author.last_name }}</a>
-                    </div>
-                {% endfor %}
-            </div>
-        {% endif %}
+            {% if self.typed_featured_item.authors %}
+                <div class="contributors" style="color: {{ self.typed_featured_item.font_style.text_colour.hex_value }}">By:
+                    {% for author in self.typed_featured_item.authors %}
+                        <div class="contributor">
+                            <a style="color: {{ self.typed_featured_item.font_style.text_colour.hex_value }}" href="{{ author.url }}">{{ author.first_name }} {{ author.last_name }}</a>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
     </div>
 
     <div class="scroll"><a href="#features" style="color: {{ self.typed_featured_item.font_style.text_colour.hex_value }};"><i class="fa fa-angle-down"></i></a></div>

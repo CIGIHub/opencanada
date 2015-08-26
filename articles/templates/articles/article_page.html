@@ -1,35 +1,21 @@
 {% extends "base.html" %}
 {% load static article_tags core_tags wagtailcore_tags wagtailembeds_tags wagtailimages_tags %}
 
+{% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
+
 {% block content %}
+    {% if self.main_image and self.include_main_image_overlay %}
+        {% include 'articles/includes/article-feature.html' %}
+    {% endif %}
+
     <div id="article-page" class="container">
         <article>
             {% block share_links %}
                 {% include 'articles/includes/share_links.html' %}
             {% endblock %}
-            <div class="title">
-                {% if self.primary_topic %}
-                    <div class="primary-topic">
-                        <i class="fa fa-tags"></i>
-                        <a href="{% topic_url self.primary_topic %}">{{ self.primary_topic.name }}</a>
-                    </div>
-                {% endif %}
 
-                <h1>{{ self.title}}</h1>
-                <h2>{{ self.excerpt|richtext }}</h2>
-                {% if self.authors %}
-                    <div class="contributors">
-                        <div class="contributor-label">By: </div>
-                        <div class="contributor-list">
-                            {% for author in self.authors %}
-                                <div class="contributor"><a href="{{ author.url  }}">{{ author.first_name }} {{ author.last_name }}</a></div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                {% endif %}
-                <div class="date"> / {{ self.first_published_at|date:"F j, Y" }}</div>
-            </div>
-            {% if self.include_main_image %}
+            {% if self.include_main_image and not self.include_main_image_overlay %}
+                {% include 'articles/includes/article-metadata.html' %}
                 <figure class="main-image">
                     {% image self.main_image fill-940x627 %}
                 </figure>
@@ -44,6 +30,7 @@
                     </div>
                 {% endif %}
             {% endif %}
+
             <div class="story">
                 {% if self.include_author_block %}
                 {% include 'articles/includes/author_blurb.html' %}

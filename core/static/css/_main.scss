@@ -418,19 +418,33 @@ footer{
   }
 }
 
-/**************   Homepage Feature  **************/
+/**************   Main  **************/
 
-.main-feature{
+main{
+  margin-bottom: 30px;
+}
+
+/**************   Homepage  **************/
+
+
+.template-home-page .main-feature{
   @include article-overlay;
-  min-height: 300px;
-
-  .feature-text{
-    left: 25%;
-    max-width: 670px;
-  }
-
   h1{
     font-size: 46px;
+  }
+
+  .camera{
+    position: absolute;
+    z-index: 10;
+    right: 0;
+    bottom: 0;
+    padding: 10px 15px;
+    font-size: 16px;
+    &.highlighted,
+    &:hover{
+      cursor: pointer;
+      color: $red;
+    }
   }
 
   .scroll{
@@ -448,10 +462,17 @@ footer{
       text-decoration: none;
       display: block;
       text-align: center;
+
       -webkit-animation: bounce 2s;
       -moz-animation:    bounce 2s;
       -o-animation:     bounce 2s;
       animation: bounce 2s;
+
+      -webkit-animation-iteration-count: infinite;
+      -moz-animation-iteration-count: infinite;
+      -o-animation-iteration-count: infinite;
+      animation-iteration-count: infinite;
+
       i{
         font-size:50px;
       }
@@ -459,42 +480,23 @@ footer{
   }
 
   @keyframes bounce {
-	0%, 20%, 60%, 100% {
+	0%, 25%, 75%, 100% {
       -webkit-transform: translateY(0);
       transform: translateY(0);
 	}
-	40% {
-      -webkit-transform: translateY(0.3em);
-      transform: translateY(0.3em);
+	50% {
+      -webkit-transform: translateY(0.4em);
+      transform: translateY(0.4em);
 	}
   }
 
-  @media(max-width: $screen-lg){
-    background: white;
-  }
-
   @media(max-width: $screen-sm){
-    .feature-text{
-      left: 10%;
-      .image-caption{
-        font-size: 80%;
-      }
-      h1{
-        font-size: 24px;
-      }
-    }
     .scroll{
       display:none;
     }
   }
 }
 
-
-/**************  Main  **************/
-
-main{
-  margin-bottom: 30px;
-}
 
 .template-home-page {
   section {
@@ -600,6 +602,19 @@ main{
   }
 }
 
+.image-credit {
+    margin-top: 5px;
+    font-size: 12px;
+    line-height: 125%;
+    font-family: $sans-serif;
+    color: $caption-grey;
+  }
+
+  .image-source{
+    margin-top: 3px;
+    @include type($light-grey, 11px)
+  }
+
 .contributors{
   .contributor-label{
     float: left;
@@ -674,6 +689,40 @@ main{
 }
 
 /**************  Article  **************/
+.template-article-page{
+  .main-feature {
+    @include article-overlay;
+    .feature-wrapper{
+      top: 20%;
+    }
+    h1{
+      font-size: 38px;
+      margin-top: 10px;
+    }
+    .date{
+      color: white;
+    }
+    .camera{
+
+    }
+    .primary-topic {
+      @include type(white);
+      font-weight: 700;
+      padding-bottom: 10px;
+      border-bottom: $border-white;
+    }
+  }
+  .feature-caption{
+    font-family: $sans-serif;
+    font-size: 12px;
+    float: right;
+    margin: 10px;
+    .camera{
+
+    }
+  }
+}
+
 
 .article-scroll{
 
@@ -697,7 +746,7 @@ main{
   @include type(#000);
 }
 
-.title,
+article .title,
 .block-Paragraph,
 .block-Heading,
 .block-Image,
@@ -735,7 +784,7 @@ main{
   margin: 10px auto !important;
 }
 
-article, .related-articles{
+article, .related-articles, .main-feature{
   .contributors, .date{
     display:inline-block;
   }
@@ -777,19 +826,6 @@ article {
 
   .main-image img {
     margin: 0 auto;
-  }
-
-  .image-credit {
-    margin-top: 5px;
-    font-size: 12px;
-    line-height: 125%;
-    font-family: $sans-serif;
-    color: $caption-grey;
-  }
-
-  .image-source{
-    margin-top: 3px;
-    @include type($light-grey, 11px)
   }
 
   .top-link {
