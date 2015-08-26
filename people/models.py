@@ -74,6 +74,7 @@ class ContributorPage(Page):
         on_delete=models.SET_NULL,
         related_name='+'
     )
+    featured = models.BooleanField(default=False)
 
     search_fields = Page.search_fields + (
         index.SearchField('first_name', partial_match=True),
@@ -83,7 +84,10 @@ class ContributorPage(Page):
         index.SearchField('long_bio', partial_match=True),
     )
 
-    featured = models.BooleanField(default=False)
+    def save(self, *args, **kwargs):
+        if self.twitter_handle and not self.twitter_handle.startswith("@"):
+            self.twitter_handle = "@{}".format(self.twitter_handle)
+        super(ContributorPage, self).save(*args, **kwargs)
 
     @property
     def full_name(self):
