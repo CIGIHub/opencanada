@@ -403,25 +403,30 @@ class ArticlePage(Page, FeatureStyleFields, Promotable, Sharelinks):
 
     def related_articles(self, number):
         included = [self.id]
-        articles = ArticlePage.objects.live().filter(primary_topic=self.primary_topic).exclude(id=self.id).distinct().order_by('-first_published_at')[:number]
-        article_list = list(articles.all())
-        included.extend([article.id for article in articles.all()])
+        article_list = []
+        if self.primary_topic:
+            articles = ArticlePage.objects.live().filter(primary_topic=self.primary_topic).exclude(id=self.id).distinct().order_by('-first_published_at')[:number]
+            article_list.extend(articles.all())
+            included.extend([article.id for article in articles.all()])
 
         current_total = len(article_list)
+
         if current_total < number:
             # still don't have enough, so pick using secondary topics
             topics = Topic.objects.filter(article_links__article=self)
-            additional_articles = ArticlePage.objects.live().filter(primary_topic__in=topics).exclude(id__in=included).distinct().order_by('-first_published_at')[:number - current_total]
-            article_list.extend(additional_articles.all())
-            current_total = len(article_list)
-            included.extend([article.id for article in additional_articles.all()])
+            if topics:
+                additional_articles = ArticlePage.objects.live().filter(primary_topic__in=topics).exclude(id__in=included).distinct().order_by('-first_published_at')[:number - current_total]
+                article_list.extend(additional_articles.all())
+                current_total = len(article_list)
+                included.extend([article.id for article in additional_articles.all()])
 
         if current_total < number:
             authors = ContributorPage.objects.live().filter(article_links__article=self)
-            additional_articles = ArticlePage.objects.live().filter(author_links__author__in=authors).exclude(id__in=included).distinct().order_by('-first_published_at')[:number - current_total]
-            article_list.extend(additional_articles.all())
-            current_total = len(article_list)
-            included.extend([article.id for article in additional_articles.all()])
+            if authors:
+                additional_articles = ArticlePage.objects.live().filter(author_links__author__in=authors).exclude(id__in=included).distinct().order_by('-first_published_at')[:number - current_total]
+                article_list.extend(additional_articles.all())
+                current_total = len(article_list)
+                included.extend([article.id for article in additional_articles.all()])
 
         if current_total < number:
             # still don't have enough, so just pick the most recent
@@ -514,23 +519,6 @@ class ChapteredArticlePage(ArticlePage):
         ObjectList(ArticlePage.promote_panels, heading='Promote'),
         ObjectList(Page.settings_panels, heading='Settings', classname="settings"),
     ])
-
-#
-# class Chapter(models.Model):
-#     heading = models.CharField(max_length=512, blank=True)
-#     body = article_fields.BodyField(blank=True, null=True)
-#
-#     content_panels = [
-#         FieldPanel('heading'),
-#         StreamFieldPanel('body'),
-#     ]
-#
-#     class Meta:
-#         abstract = True
-#
-#
-# class ArticleChapter(Orderable, Chapter):
-#     page = ParentalKey(ChapteredArticlePage, related_name='chapters')
 
 
 @python_2_unicode_compatible
@@ -791,17 +779,19 @@ class SeriesPage(Page, FeatureStyleFields, Promotable, Sharelinks):
         return all_topics
 
     def related_articles(self, number):
-        articles = list(ArticlePage.objects.live().filter(primary_topic=self.primary_topic).distinct().order_by('-first_published_at')[:number])
+        articles = []
+        if self.primary_topic:
+            articles = list(ArticlePage.objects.live().filter(primary_topic=self.primary_topic).distinct().order_by('-first_published_at')[:number])
 
         current_total = len(articles)
-
-        for article in self.articles:
-            if current_total < number:
+        if current_total < number:
+            for article in self.articles:
                 articles.extend(list(article.related_articles(number)))
                 articles = list(set(articles))[:number]
                 current_total = len(articles)
-            else:
-                return articles
+
+                if current_total >= number:
+                    return articles
 
         return articles
 
