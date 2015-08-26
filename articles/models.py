@@ -494,20 +494,26 @@ class ChapteredArticlePage(ArticlePage):
         blank=True, null=True
     )
 
+    content_panels = Page.content_panels + [
+        FieldPanel('excerpt'),
+        InlinePanel('author_links', label="Authors"),
+        ImageChooserPanel('main_image'),
+        StreamFieldPanel('body'),
+        SnippetChooserPanel('primary_topic', Topic),
+        InlinePanel('topic_links', label="Secondary Topics"),
+        SnippetChooserPanel('category', ArticleCategory),
+        StreamFieldPanel('chapters'),
+        StreamFieldPanel('works_cited'),
+        StreamFieldPanel('end_notes'),
+        # InlinePanel('chapters', label="Chapters"),
+    ]
 
-ChapteredArticlePage.content_panels = Page.content_panels + [
-    FieldPanel('excerpt'),
-    InlinePanel('author_links', label="Authors"),
-    ImageChooserPanel('main_image'),
-    StreamFieldPanel('body'),
-    SnippetChooserPanel('primary_topic', Topic),
-    InlinePanel('topic_links', label="Secondary Topics"),
-    SnippetChooserPanel('category', ArticleCategory),
-    StreamFieldPanel('chapters'),
-    StreamFieldPanel('works_cited'),
-    StreamFieldPanel('end_notes'),
-    # InlinePanel('chapters', label="Chapters"),
-]
+    edit_handler = TabbedInterface([
+        ObjectList(content_panels, heading='Content'),
+        ObjectList(ArticlePage.style_panels, heading='Page Style Options'),
+        ObjectList(ArticlePage.promote_panels, heading='Promote'),
+        ObjectList(Page.settings_panels, heading='Settings', classname="settings"),
+    ])
 
 #
 # class Chapter(models.Model):
