@@ -5,7 +5,7 @@ jQuery(document).ready(function($) {
 
     initForWindow();
 
-    $('.camera').click(function () {
+    $('.camera').hover(function () {
         var target = null;
         var selected = $(this);
 

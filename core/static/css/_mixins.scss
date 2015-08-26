@@ -132,7 +132,6 @@
 }
 
 @mixin collapsed{
-  height: 55px;
   .banner{
     padding-top: 12px;
     padding-bottom: 12px;
@@ -250,20 +249,7 @@
       color: $red;
     }
   }
-  .image-caption{
-    left: 3%;
-    right: 8%;
-    bottom: 3%;
-    .text{
-      display:none;
-      background: $background-grey;
-      padding: 3px 5px;
-      border-radius: 2px;
-      color: black;
-      font-family: $sans-serif;
-    font-size: 11px;
-    }
-  }
+
   @media(max-width: $screen-xs){
      .feature-text{
        .feature-line{

@@ -111,6 +111,7 @@ header{
       text-decoration: none;
     }
   }
+
   .tagline{
     display: none;
   }
@@ -140,14 +141,19 @@ header{
     @include collapsed;
   }
 
-  @media(max-width: $screen-sm){
-    @include collapsed;
-    .logo img{
-      max-height: 30px;
-    }
+  @media(max-width: $screen-lg){
     .banner{
        margin-left: 0;
       margin-right: 0;
+    }
+  }
+  @media(max-width: $screen-md){
+    @include collapsed;
+
+  }
+  @media(max-width: $screen-xs){
+    .wordmark{
+      font-size: 20px;
     }
   }
 
@@ -347,7 +353,6 @@ footer{
           font-weight: 300;
           font-family: FontAwesome, 'Droid Sans', Helvetica, Arial, sans-serif;
         }
-
       }
 
        @media(max-width: $screen-md) {
