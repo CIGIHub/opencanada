@@ -11,7 +11,7 @@
                     </div><div class="row">
                 {% endif %}
                     <div class="col-xs-12 col-sm-4">
-                        {% if article.feature_style.include_image %}
+                        {% if article.feature_style.include_image and article.main_image %}
                             <div class="image-feature">
                                 <figure>
                                     {% image article.main_image fill-940x627 %}

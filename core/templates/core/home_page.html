@@ -30,27 +30,29 @@
                             <div class="feature-image" style="background-image: url('{{ background_image.url }}')">
                                 <div class="feature-image-overlay" style="background: rgba( {{ article.image_overlay_color.rgb }}, {{ article.opacity }} )"></div>
                             </div>
-                            <div class="feature-text" style="color: {{ article.font_style.text_colour.hex_value }}; {% if article.editors_pick %}margin-right: 70px; {% endif %}">
-                                {% if article.feature_style.number_of_rows = 1 %}
-                                    <h3><a style="color: {{ article.font_style.text_colour.hex_value }};" href="{{ article.url }}">{{ article.title }}</a></h3>
-                                    {% if article.subtitle %}
-                                        <div class="feature-line">{{ article.subtitle|richtext }}</div>
-                                    {% else %}
-                                        <div class="feature-line">{{ article.excerpt|richtext }}</div>
+                            <div class="feature-wrapper">
+                                <div class="feature-text" style="color: {{ article.font_style.text_colour.hex_value }}; {% if article.editors_pick %} {% endif %}">
+                                    {% if article.feature_style.number_of_rows = 1 %}
+                                        <h3><a style="color: {{ article.font_style.text_colour.hex_value }};" href="{{ article.url }}">{{ article.title }}</a></h3>
+                                        {% if article.subtitle %}
+                                            <div class="feature-line">{{ article.subtitle|richtext }}</div>
+                                        {% else %}
+                                            <div class="feature-line">{{ article.excerpt|richtext }}</div>
+                                        {% endif %}
+                                    {%  else %}
+                                        <h3 class="double-height"><a style="color: {{ article.font_style.text_colour.hex_value }};" href="{{ article.url }}">{{ article.title }}</a></h3>
                                     {% endif %}
-                                {%  else %}
-                                    <h3 class="double-height"><a style="color: {{ article.font_style.text_colour.hex_value }};" href="{{ article.url }}">{{ article.title }}</a></h3>
-                                {% endif %}
 
-                                {% if article.authors %}
-                                    <div class="contributors">By:
-                                        {% for author in article.authors %}
-                                        <div class="contributor">
-                                            <a style="color: {{ article.font_style.text_colour.hex_value }}" href="{{ author.url }}">{{ author.first_name }} {{ author.last_name }}</a>
+                                    {% if article.authors %}
+                                        <div class="contributors">By:
+                                            {% for author in article.authors %}
+                                            <div class="contributor">
+                                                <a style="color: {{ article.font_style.text_colour.hex_value }}" href="{{ author.url }}">{{ author.first_name }} {{ author.last_name }}</a>
+                                            </div>
+                                            {% endfor %}
                                         </div>
-                                        {% endfor %}
-                                    </div>
-                                {% endif %}
+                                    {% endif %}
+                                </div>
                             </div>
                             <div class="camera"><i class="fa fa-camera"></i></div>
                         </div>
