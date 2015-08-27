@@ -1179,7 +1179,7 @@ article {
   }
   .name{
     padding-top: 10px;
-    font-weight: 900;
+    font-weight: 700;
     text-align: center;
     a{
       color: black;
@@ -1187,6 +1187,7 @@ article {
   }
   .title{
     font-size: 11px;
+    line-height: 130%;
   }
   @media(max-width: $screen-sm){
     .contributor{
