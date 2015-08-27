@@ -9,7 +9,6 @@ body{
   color: $text-color;
   font-family: $serif;
   font-size: 14px;
-  line-height: 120%;
 }
 
 h1{
@@ -590,12 +589,10 @@ main{
     h3.double-height{
       font-size: 46px;
     }
-
   }
 
   .feature-line{
       margin-top: 10px;
-      line-height: 120%;
   }
   h3{
     margin-bottom: 5px;
@@ -735,6 +732,7 @@ main{
   .article-title{
     display: block;
     text-align: center;
+    line-height: 30px;
   }
 }
 

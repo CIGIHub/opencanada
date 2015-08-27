@@ -1,4 +1,4 @@
-@mixin type($color:$text-color, $font-size:14px){
+@mixin type($color:$text-color, $font-size:12px){
     font-family: $sans-serif;
     font-size: $font-size;
     text-transform: uppercase;
