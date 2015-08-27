@@ -31,7 +31,7 @@
                                 <div class="feature-image-overlay" style="background: rgba( {{ article.image_overlay_color.rgb }}, {{ article.opacity }} )"></div>
                             </div>
                             <div class="feature-wrapper">
-                                <div class="feature-text" style="color: {{ article.font_style.text_colour.hex_value }}; {% if article.editors_pick %} {% endif %}">
+                                <div class="feature-text" style="color: {{ article.font_style.text_colour.hex_value }};">
                                     {% if article.feature_style.number_of_rows = 1 %}
                                         <h3><a style="color: {{ article.font_style.text_colour.hex_value }};" href="{{ article.url }}">{{ article.title }}</a></h3>
                                         {% if article.subtitle %}
