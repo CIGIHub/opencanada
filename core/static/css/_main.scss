@@ -8,7 +8,7 @@ body{
   min-height: 100%;
   color: $text-color;
   font-family: $serif;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 120%;
 }
 
@@ -23,7 +23,6 @@ h2{
 
 h3{
   font-size: 18px;
-  color: $red;
   margin-top: 0px;
 }
 
@@ -561,7 +560,7 @@ main{
   }
 }
 
-.features{
+.features, .related-articles{
   color: black;
 
   .overlay-feature{
@@ -641,6 +640,10 @@ main{
   }
 }
 
+.contributors, .date{
+  display: inline-block;
+}
+
 .editors-pick{
   display: table;
   background: #0098FD;
@@ -690,6 +693,7 @@ main{
 }
 
 /**************  Article  **************/
+
 .template-article-page{
   .main-feature {
     @include article-overlay;
@@ -724,9 +728,7 @@ main{
   }
 }
 
-
 .article-scroll{
-
   header .wordmark{
       display: none;
   }
@@ -734,7 +736,6 @@ main{
     display: block;
     text-align: center;
   }
-
 }
 
 .date{
@@ -777,15 +778,6 @@ article .title,
 
 .block-Embed iframe{
   margin: 10px auto !important;
-}
-
-article, .related-articles, .main-feature{
-  .contributors, .date{
-    display:inline-block;
-  }
-  .contributors a{
-    color: $red;
-  }
 }
 
 article {
@@ -1145,6 +1137,7 @@ article {
   h3{
     margin-top: 10px;
   }
+
 
   @media(max-width: $screen-sm){
      figure{
