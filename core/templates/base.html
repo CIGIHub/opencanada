@@ -41,6 +41,7 @@
 
         </script>
     {% endif %}
+
     </head>
 
     <body class="{% block body_class %}{% endblock %}">
@@ -58,6 +59,8 @@
         {% block footer %}
             {% include 'core/footer.html' %}
         {% endblock %}
+
+
 
         {% compress js %}
             <script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>

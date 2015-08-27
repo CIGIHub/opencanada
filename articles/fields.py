@@ -1,13 +1,16 @@
 from __future__ import absolute_import, unicode_literals
 
 from django.contrib.contenttypes.models import ContentType
+from django.template.loader import render_to_string
 from django.utils.functional import cached_property
 from django.utils.html import format_html
 from wagtail.wagtailcore import blocks
 from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtailembeds.blocks import EmbedBlock
 from wagtail.wagtailimages.blocks import ImageChooserBlock
+from wagtail.wagtailsnippets.blocks import SnippetChooserBlock
 
+from interactives.models import Interactive
 from people.models import ContributorPage
 
 
@@ -26,6 +29,7 @@ class BodyField(StreamField):
             ('Quote', SimpleQuoteBlock()),
             ('Overflow', OverflowStreamBlock()),
             ('ColumnedContent', ColumnarStreamBlock()),
+            ('Interactive', InteractiveBlock(Interactive, icon="cogs"))
         ]
 
         super(BodyField, self).__init__(block_types, **kwargs)
@@ -117,6 +121,20 @@ class ChapterField(StreamField):
         super(ChapterField, self).__init__(block_types, **kwargs)
 
 
+class InteractiveBlock(SnippetChooserBlock):
+    def render(self, value):
+        """
+        Return a text rendering of 'value', suitable for display on templates. By default, this will
+        use a template if a 'template' property is specified on the block, and fall back on render_basic
+        otherwise.
+        """
+        template = value.template
+        if template:
+            return render_to_string(template, {'self': value})
+        else:
+            return self.render_basic(value)
+
+
 class SimpleBodyBlock(blocks.StreamBlock):
     Heading = HeadingBlock()
     Paragraph = ParagraphBlock()
@@ -126,6 +144,7 @@ class SimpleBodyBlock(blocks.StreamBlock):
     Sharable = SharableBlock()
     PullQuote = PullQuoteBlock()
     Quote = SimpleQuoteBlock()
+    Interactive = InteractiveBlock(Interactive)
 
 
 class ColumnarStreamBlock(blocks.StructBlock):
