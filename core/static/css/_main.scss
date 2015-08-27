@@ -11,12 +11,15 @@ body{
   font-size: 14px;
 }
 
-h1{
-  font-size: 36px;
+h1, .jumbotron h1{
+  margin-top: 10px;
+  font-size: 60px;
+  font-weight: bold;
 }
 
 h2{
-  font-size: 22px;
+  font-size: 18px;
+  line-height: 130%;
   margin-top: 0px;
 }
 
@@ -678,13 +681,11 @@ main{
 .template-article-page{
   .main-feature {
     @include article-overlay;
+    @include fullbleed-overlay;
     .feature-wrapper{
       top: 20%;
     }
-    h1{
-      font-size: 38px;
-      margin-top: 10px;
-    }
+
     .date{
       color: white;
       font-size: 14px;
@@ -792,9 +793,6 @@ article {
   .story section{
     line-height: 150%;
   }
-  h1 {
-    margin: 0 0 20px 0;
-  }
   h2, h3 {
     margin: 10px 0;
   }
@@ -829,6 +827,8 @@ article {
     @include type($red);
   }
   .primary-topic {
+    @include subheading(14px);
+    padding-bottom: 10px;
     @include type($red);
     i {
       color: $text-color;
@@ -890,7 +890,6 @@ article {
   }
 
   .dropcap-start::first-letter {
-    color: $red;
     font-size: 65px;
     line-height: 55px;
     margin-right: 10px;
@@ -1147,7 +1146,7 @@ article {
     margin: 40px auto 0 auto;
   }
   h1{
-    font-weight: 900;
+    font-weight: 700;
   }
   .bio{
     margin: 40px 0;
