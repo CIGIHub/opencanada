@@ -112,7 +112,7 @@ header{
     }
   }
 
-  .tagline{
+  .tagline, .article-title{
     display: none;
   }
   .template-home-page & .tagline{
@@ -729,15 +729,9 @@ main{
   header .wordmark{
       display: none;
   }
-
-  h1{
-    position: fixed;
-    z-index: 1100;
-    text-align:center;
-    width:inherit;
-    top: 18px;
-    color: white;
-    font-size: 16px;
+  .article-title{
+    display: block;
+    text-align: center;
   }
 
 }
@@ -859,7 +853,6 @@ article {
 
   ul.share-links {
     position: absolute;
-    margin-top: 3px;
     margin-left: -100px;
     padding: 20px;
 
@@ -880,7 +873,7 @@ article {
   }
   ul.share-links.sticky {
     position: fixed;
-    top: 140px;
+    top: 40px;
     background: white;
   }
 

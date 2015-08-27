@@ -216,17 +216,35 @@ function toggleHeading(windowWidth, articleTitleWidth){
             if($('#article-page').length ){
                 var sharelinksPosition = $('.share-links').offset().top - $('.share-links').height();
                 var fromBottom = $('footer').outerHeight() + $('.related-articles').outerHeight() + $('.share-links').outerHeight() + 195;
+                //var fromTop = $('.banner').outerHeight() + $('.jumbotron').outerHeight() + $('.share-links').height();
                 var bottom = $(document).height() - fromBottom;
 
-                if($(document).scrollTop() > sharelinksPosition){
-                    $('.share-links').addClass('sticky');
-                }
-                if($(document).scrollTop() > bottom){
-                    $('.share-links').removeClass('sticky').css('bottom', fromBottom);
+                //console.log('scroll : ' + $(document).scrollTop() + 'fromtop: ' + fromTop + 'story: ' + $('.story').offset().top);
+                if($('.jumbotron').length){
+                    if($(document).scrollTop() > $('.story').offset().top){
+                        $('.share-links').addClass('sticky');
+                    }
+                    if($(document).scrollTop() > bottom){
+                        $('.share-links').removeClass('sticky').css('bottom', fromBottom);
+                    }
+                    if($(document).scrollTop() <  $('.story').offset().top){
+                        console.log('here');
+                        $('.share-links').removeClass('sticky').css('bottom', '').css('top', '40');
+                    }
                 }
                 else{
-                    $('.share-links').css('bottom', '');
+                    if($(document).scrollTop() > $('.title').offset().top){
+                        $('.share-links').addClass('sticky');
+                    }
+                    if($(document).scrollTop() > bottom){
+                        $('.share-links').removeClass('sticky').css('bottom', fromBottom);
+                    }
+                    if($(document).scrollTop() <  $('.title').offset().top){
+                        console.log('here');
+                        $('.share-links').removeClass('sticky').css('bottom', '').css('top', '40');
+                    }
                 }
+
             }
 
         }
