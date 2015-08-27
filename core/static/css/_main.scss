@@ -275,6 +275,8 @@ footer{
       display: table;
     p{
       font-weight: 200;
+      font-size: 14px;
+      line-height: 120%;
     }
   }
    .row.infobar .col-sm-4 {
@@ -343,7 +345,8 @@ footer{
           min-width: 120px;
           padding: 5px 0;
           margin: 3px 10px 0 5px;
-          font-size: 14px;
+          font-size: 12px;
+          width: 57%;
         }
         &.button{
           min-width:75px;
@@ -351,7 +354,7 @@ footer{
           display:inline-block;
           margin-bottom: 0px;
           font-weight: 300;
-          font-family: FontAwesome, 'Droid Sans', Helvetica, Arial, sans-serif;
+          font-size: 12px;
         }
       }
 
@@ -403,18 +406,16 @@ footer{
     }
   }
 
-  .row.tagline-row{
+  .row.partner-row{
     border-top: $border-white;
   }
-  .tagline{
-    @include centered-fixed-width(700px);
+  .partners, .contact{
+    @include centered-fixed-width(550px);
     font-family: $sans-serif;
+    font-weight: 200;
+    font-size: 12px;
+    line-height: 125%;
     text-align: center;
-  }
-  .contact{
-    @include  centered-fixed-width(600px);
-    text-align: center;
-    @include type(white);
   }
 }
 
