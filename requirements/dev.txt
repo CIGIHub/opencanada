@@ -8,3 +8,5 @@ flake8>=2.2.0
 mock>=1.0.0
 
 isort==4.0.0
+
+git+ssh://github.com/OpenCanada/wagtail-interactives-content.git
