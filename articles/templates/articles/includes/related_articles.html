@@ -11,22 +11,47 @@
                     </div><div class="row">
                 {% endif %}
                     <div class="col-xs-12 col-sm-4">
-                        <figure>
-                            {% image article.main_image fill-940x627 %}
-                        </figure>
+                        {% if article.feature_style.include_image %}
+                            <div class="image-feature">
+                                <figure>
+                                    {% image article.main_image fill-940x627 %}
+                                </figure>
 
-                        <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
-                        {% if article.authors %}
-                            <div class="contributors">By:
-                                {% for author in article.authors %}
-                                    <div class="contributor">
-                                        <a href="{{ author.url  }}">
-                                         {{ author.first_name }} {{ author.last_name }}
-                                        </a>
+                                <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
+                                {% if article.authors %}
+                                    <div class="contributors">By:
+                                        {% for author in article.authors %}
+                                            <div class="contributor">
+                                                <a href="{{ author.url  }}">
+                                                 {{ author.first_name }} {{ author.last_name }}
+                                                </a>
+                                            </div>
+                                        {% endfor %}
                                     </div>
-                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        {% else %}
+                            <div class="simple-feature">
+                                <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
+                                {% if article.authors %}
+                                    <div class="contributors">By:
+                                        {% for author in article.authors %}
+                                            <div class="contributor">
+                                                <a href="{{ author.url  }}">
+                                                 {{ author.first_name }} {{ author.last_name }}
+                                                </a>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                                {% if article.subtitle %}
+                                    <div class="feature-line">{{ article.subtitle|richtext }}</div>
+                                {% else %}
+                                    <div class="feature-line">{{ article.excerpt|richtext }}</div>
+                                {% endif %}
                             </div>
                         {% endif %}
+
                     </div>
                 {% if forloop.last %}</div>{% endif %}
             {% endfor %}

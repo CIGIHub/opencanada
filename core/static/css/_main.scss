@@ -8,8 +8,7 @@ body{
   min-height: 100%;
   color: $text-color;
   font-family: $serif;
-  font-size: 16px;
-  line-height: 120%;
+  font-size: 14px;
 }
 
 h1{
@@ -23,7 +22,6 @@ h2{
 
 h3{
   font-size: 18px;
-  color: $red;
   margin-top: 0px;
 }
 
@@ -561,7 +559,7 @@ main{
   }
 }
 
-.features{
+.features, .related-articles{
   color: black;
 
   .overlay-feature{
@@ -591,12 +589,10 @@ main{
     h3.double-height{
       font-size: 46px;
     }
-
   }
 
   .feature-line{
       margin-top: 10px;
-      line-height: 120%;
   }
   h3{
     margin-bottom: 5px;
@@ -639,6 +635,10 @@ main{
   .contributor:last-child:after{
     content: '';
   }
+}
+
+.contributors, .date{
+  display: inline-block;
 }
 
 .editors-pick{
@@ -690,6 +690,7 @@ main{
 }
 
 /**************  Article  **************/
+
 .template-article-page{
   .main-feature {
     @include article-overlay;
@@ -724,17 +725,15 @@ main{
   }
 }
 
-
 .article-scroll{
-
   header .wordmark{
       display: none;
   }
   .article-title{
     display: block;
     text-align: center;
+    line-height: 30px;
   }
-
 }
 
 .date{
@@ -777,15 +776,6 @@ article .title,
 
 .block-Embed iframe{
   margin: 10px auto !important;
-}
-
-article, .related-articles, .main-feature{
-  .contributors, .date{
-    display:inline-block;
-  }
-  .contributors a{
-    color: $red;
-  }
 }
 
 article {
@@ -1145,6 +1135,7 @@ article {
   h3{
     margin-top: 10px;
   }
+
 
   @media(max-width: $screen-sm){
      figure{
