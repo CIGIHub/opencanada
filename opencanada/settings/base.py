@@ -81,7 +81,6 @@ INSTALLED_APPS = (
 
     'favicon',
 
-    'interactives_content',
     'interactives',
     'basic_site',
     'articles',
