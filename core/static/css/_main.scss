@@ -994,12 +994,13 @@ article {
 
   .blurb-content{
     float: right;
+    font-family: $sans-serif;
 
     .individual {
-      width: 300px;
+      width: 250px;
       padding: 5px 15px;
       margin: 10px 0 10px 15px;
-      border-left: solid 2px $mid-grey;
+      border-left: solid 1px $mid-grey;
       margin-bottom: 20px;
       padding: 5px 15px;
       img{
@@ -1007,15 +1008,13 @@ article {
       }
     }
 
-    .author {
+    .author a, .author{
       @include type(black);
     }
     .short-bio {
       font-size: 12px;
       line-height: 120%;
-      font-weight: bold;
       color: $grey;
-      font-family: $sans-serif;
     }
     ul {
       padding: 5px 0 0 0;
@@ -1024,7 +1023,10 @@ article {
         padding-top: 5px;
         padding-bottom: 5px;
         list-style: none;
-        font-family: $serif;
+        line-height: 120%;
+        a{
+          color: black;
+        }
       }
     }
     @media(max-width: $screen-sm) {
