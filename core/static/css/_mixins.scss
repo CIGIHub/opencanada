@@ -222,36 +222,45 @@
     top: 0; right: 0; bottom: 0; left: 0;
     background: rgba(0,0,0, 0.5);
   }
+
   .feature-wrapper{
     position: absolute;
     z-index: 10;
-    left: 50%;
     top: 10%;
+    left: 50%;
+    margin-left: -450px;
+    max-width: 940px;
+
   }
 
   .feature-text{
     position: relative;
-    left: -50%;
   }
 
   .contributors, .contributors a, a{
     color: white;
     text-decoration:none;
   }
-   a:hover{
-    color: $red;
+
+  .contributors{
+    margin-top: 5%;
+    font-size: 14px;
+    .contributor-list{
+        margin-left: 25px;
+    }
   }
 
-  .feature-text{
-    .feature-line{
-      font-size: 1.4em;
-    }
-    .contributors{
-      margin-top: 5%;
-      font-size: 14px;
-      .contributor-list{
-        margin-left: 25px;
-      }
+  .camera{
+    position: absolute;
+    z-index: 10;
+    right: 0;
+    bottom: 0;
+    padding: 10px 15px;
+    font-size: 16px;
+    &.highlighted,
+    &:hover{
+      cursor: pointer;
+      color: $red;
     }
   }
 
@@ -269,6 +278,18 @@
       left: 0;
     }
   }
+}
+
+@mixin fullbleed-overlay{
+  h1{
+    font-size: 60px;
+    font-weight: bold;
+  }
+  .feature-line, h2{
+    font-size: 18px;
+    line-height: 130%;
+  }
+
 }
 
 

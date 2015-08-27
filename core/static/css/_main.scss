@@ -62,6 +62,10 @@ button{
 }
 button:focus {outline:0;}
 
+.clear{
+  clear:both;
+}
+
 /**************   HEADER  **************/
 
 header{
@@ -428,23 +432,7 @@ main{
 
 .template-home-page .main-feature{
   @include article-overlay;
-  h1{
-    font-size: 46px;
-  }
-
-  .camera{
-    position: absolute;
-    z-index: 10;
-    right: 0;
-    bottom: 0;
-    padding: 10px 15px;
-    font-size: 16px;
-    &.highlighted,
-    &:hover{
-      cursor: pointer;
-      color: $red;
-    }
-  }
+  @include fullbleed-overlay;
 
   .scroll{
     position: absolute;
@@ -525,11 +513,7 @@ main{
     }
 
     h2 {
-      border-bottom: $border-grey;
-      text-transform: uppercase;
-      font-family: $sans-serif;
-      font-size: 28px;
-      font-weight: 700;
+      @include subheading(28px);
     }
     h3 {
       font-size: 22px;
@@ -565,7 +549,7 @@ main{
   .overlay-feature{
     @include article-overlay;
     .feature-text{
-      left: 5%;
+      padding: 0 40px;
     }
   }
 
@@ -703,9 +687,7 @@ main{
     }
     .date{
       color: white;
-    }
-    .camera{
-
+      font-size: 14px;
     }
     .primary-topic {
       @include type(white);
@@ -717,11 +699,9 @@ main{
   .feature-caption{
     font-family: $sans-serif;
     font-size: 12px;
+    color: $caption-grey;
     float: right;
     margin: 10px;
-    .camera{
-
-    }
   }
 }
 
@@ -744,7 +724,6 @@ article .title,
 .block-Paragraph,
 .block-Heading,
 .block-Image,
-.block-Sharable,
 .block-Quote,
 .block-PullQuote,
 .block-Embed,
@@ -768,6 +747,20 @@ article .title,
     margin-right: 0;
   }
 }
+
+
+.block-Sharable{
+  margin-left: 15%;
+  margin-right: 15%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+  @media(max-width: $screen-xs){
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
 
 .series-teaser .block-Paragraph{
   margin-left: 0;
@@ -949,7 +942,7 @@ article {
     .block-Overflow .block-ColumnedContent,
     .block-Overflow .block-Image,
     .block-Overflow .block-Paragraph,
-    .block-Overflow .block-sharable
+    .block-Overflow .block-Sharable
     {
         margin-left: 0;
         margin-right: 0;
@@ -979,7 +972,6 @@ article {
 
   .block-Sharable {
     display: table;
-    margin: 20px;
     padding: 10px;
     border-left: solid $red 5px;
     color: $red;
@@ -1002,12 +994,13 @@ article {
 
   .blurb-content{
     float: right;
+    font-family: $sans-serif;
 
     .individual {
-      width: 300px;
+      width: 250px;
       padding: 5px 15px;
       margin: 10px 0 10px 15px;
-      border-left: solid 2px $mid-grey;
+      border-left: solid 1px $mid-grey;
       margin-bottom: 20px;
       padding: 5px 15px;
       img{
@@ -1015,15 +1008,13 @@ article {
       }
     }
 
-    .author {
+    .author a, .author{
       @include type(black);
     }
     .short-bio {
       font-size: 12px;
       line-height: 120%;
-      font-weight: bold;
       color: $grey;
-      font-family: $sans-serif;
     }
     ul {
       padding: 5px 0 0 0;
@@ -1032,7 +1023,10 @@ article {
         padding-top: 5px;
         padding-bottom: 5px;
         list-style: none;
-        font-family: $serif;
+        line-height: 120%;
+        a{
+          color: black;
+        }
       }
     }
     @media(max-width: $screen-sm) {
@@ -1129,13 +1123,6 @@ article {
 }
 
 .related-articles{
-  .contributors{
-    margin-bottom: 20px;
-  }
-  h3{
-    margin-top: 10px;
-  }
-
 
   @media(max-width: $screen-sm){
      figure{
@@ -1227,6 +1214,15 @@ article {
     display: block;
   }
 }
+
+/**************  Topics pages  **************/
+
+.template-topic-list-page{
+  h1{
+    @include subheading;
+  }
+}
+
 
 /**************  Newsletter  **************/
 .newsletter-signup{
