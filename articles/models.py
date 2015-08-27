@@ -349,6 +349,7 @@ class ArticlePage(Page, FeatureStyleFields, Promotable, Sharelinks):
 
     include_author_block = models.BooleanField(default=True)
     include_main_image = models.BooleanField(default=True)
+    include_main_image_overlay = models.BooleanField(default=False)
     visualization = models.BooleanField(default=False)
 
     search_fields = Page.search_fields + (
@@ -469,6 +470,7 @@ class ArticlePage(Page, FeatureStyleFields, Promotable, Sharelinks):
         MultiFieldPanel(
             [
                 FieldPanel('include_main_image'),
+                FieldPanel('include_main_image_overlay'),
                 FieldPanel('include_author_block'),
             ],
             heading="Sections"
