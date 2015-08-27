@@ -14,6 +14,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='articlepage',
             name='include_main_image_overlay',
-            field=models.BooleanField(default=True),
+            field=models.BooleanField(default=False),
         ),
     ]
