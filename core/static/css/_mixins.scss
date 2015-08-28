@@ -227,14 +227,13 @@
     position: absolute;
     z-index: 10;
     top: 10%;
-    left: 50%;
-    margin-left: -450px;
-    max-width: 940px;
-
+    width:100%;
   }
 
   .feature-text{
     position: relative;
+    max-width: 940px;
+    margin: 0 auto;
   }
 
   .contributors, .contributors a, a{
@@ -267,18 +266,15 @@
     }
   }
 
-  @media(max-width: $screen-sm){
-     h1{
-        font-size: 32px;
-      }
+  @media(max-width: $screen-md){
     .feature-wrapper{
-      left: 5%;
-      right: 5%;
-      top: 5%;
-      bottom: 5%;
+        padding: 0 40px;
     }
-    .feature-text{
-      left: 0;
+  }
+
+  @media(max-width: $screen-sm){
+    .feature-wrapper{
+        padding: 0 20px;
     }
   }
 }
@@ -291,6 +287,17 @@
   .feature-line, h2{
     font-size: 18px;
     line-height: 130%;
+  }
+  @media(max-width: $screen-md){
+    h1{
+      font-size: 46px;
+    }
+  }
+
+  @media(max-width: $screen-sm){
+    h1{
+      font-size: 32px;
+    }
   }
 
 }
