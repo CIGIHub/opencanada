@@ -564,7 +564,7 @@ main{
 
   .overlay-feature{
     @include article-overlay;
-    .feature-text{
+    .feature-wrapper{
       padding: 0 40px;
     }
   }
@@ -630,12 +630,6 @@ main{
   .contributor{
     display: inline-block;
   }
-  //.contributor:after{
-  //  content: ', ';
-  //}
-  //.contributor:last-child:after{
-  //  content: '';
-  //}
 }
 
 .contributors, .date{

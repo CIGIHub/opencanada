@@ -69,6 +69,7 @@ function initForWindow(){
     if(($('body').hasClass('template-home-page')) || ($('body').hasClass('template-article-page') && $('.jumbotron').length)){
         setFeatureHeight(windowHeight);
     }
+
     if($('.template-article-page').length && $('.jumbotron').length) {
         if(windowWidth > breakpoint) {
             var height = $('.jumbotron').height() + 100;
