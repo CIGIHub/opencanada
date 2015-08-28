@@ -854,6 +854,7 @@ article {
     position: absolute;
     margin-left: -100px;
     padding: 20px;
+    top: 80px;
 
     div{
       width: 20px;
@@ -870,17 +871,13 @@ article {
       text-align:right;
     }
   }
-  ul.share-links.sticky {
-    position: fixed;
-    top: 40px;
-    background: white;
-  }
 
   .small-article & ul.share-links {
     position: relative;
     margin-left: 10%;
     margin-bottom: 0px;
     padding: 0px;
+    top: 20px;
     li {
       display: inline-block;
       padding-right: 7px;
@@ -897,11 +894,6 @@ article {
   }
   .small-article & .title {
     margin-top: 10px;
-  }
-
-  .small-article & ul.share-links.sticky {
-    position: relative;
-    top: 0px;
   }
 
   .dropcap-start::first-letter {
