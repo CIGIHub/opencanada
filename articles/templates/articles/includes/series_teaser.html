@@ -5,20 +5,26 @@
         <h2><a href="{{ series.url }}">{{ series.title }}</a></h2>
 
         {% if series.authors %}
-        <div class="contributors">By:
-
-            {% for author in series.authors %}
-            <div class="contributor">
-                <a href="{{ author.url }}">
-                    {{ author.first_name }}
-                    {{ author.last_name }}
-                </a>
+            <div class="contributors">
+                <div class="contributor-label">By: </div>
+                <div class="contributor-list">
+                    {% for author in series.authors %}
+                        <div class="contributor">
+                            <a href="{{ author.url }}">
+                                {{ author.first_name }}
+                                {{ author.last_name }}
+                            </a>
+                            {% if not forloop.last %}, {% endif %}
+                        </div>
+                    {% endfor %}
+                    <div class="date"> / {{ series.first_published_at|date:"F j, Y" }}</div>
+                </div>
             </div>
-            {% endfor %}
-        </div>
+        {% else %}
+            <div class="date">{{ series.first_published_at|date:"F j, Y" }}</div>
         {% endif %}
-        <div class="date"> / {{ series.first_published_at|date:"F j, Y" }}</div>
-        <div class="teaser">
+
+        <div class="series-teaser">
             {{ series.body|truncatewords_html:80 }}
         </div>
 

@@ -1,11 +1,16 @@
 {% extends "base.html" %}
 {% load static article_tags core_tags wagtailcore_tags wagtailimages_tags %}
 
+{% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
+
 {% block content %}
     <div class="container">
-    {% for topic in self.topics %}
-        <h2><a href="{% topic_url topic %}">{{ topic.name }}</a></h2>
-    {% endfor %}
+        <div class="narrow-page">
+        <h1 class="subheading">{{ self.title }}</h1>
+            {% for topic in self.topics %}
+                <h2><a href="{% topic_url topic %}">{{ topic.name }}</a></h2>
+            {% endfor %}
+        </div>
     </div>
 
 {% endblock %}

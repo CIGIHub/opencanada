@@ -2,29 +2,31 @@
 {% load static article_tags core_tags wagtailcore_tags wagtailimages_tags %}
 
 {% block content %}
-    <div id="external-article-list-page" class="container">
+<div id="external-article-list-page" class="container">
+
+    <div class="narrow-page">
         <h1>{{ self.title }}</h1>
        {% for article in articles %}
-        <div class="row">
-            <div class="col-xs-2">
-            {% spaceless %}
-                <figure>
-                    {% if article.source and article.source.logo %}
-                        {% image article.source.logo circle-120x120 %}
-                    {% else %}
-                        {% get_site_defaults as defaults %}
-                        {% if defaults %}
-                        {% image defaults.default_external_article_source_logo circle-120x120 %}
-                        {% endif %}
-                    {% endif %}
-                </figure>
-            {% endspaceless %}
-            </div>
-            <div class="col-xs-10">
-                <h2><a href="{{ article.website }}">{{ article.title }}</a></h2>
-                <p>{{ article.body|richtext }}</p>
-            </div>
-        </div>
+            <article class="row teaser">
+                <div class="col-xs-2">
+                {% spaceless %}
+                    <figure>
+                       {% if article.source and article.source.logo %}
+                                {% image article.source.logo ringed_circle-120x120-rgba_204_204_204_1-w_1 %}
+                            {% else %}
+                                {% get_site_defaults as defaults %}
+                                {% if defaults %}
+                                {% image defaults.default_external_article_source_logo ringed_circle-120x120-rgba_204_204_204_1-w_1 %}
+                                {% endif %}
+                            {% endif %}
+                    </figure>
+                {% endspaceless %}
+                </div>
+                <div class="col-xs-10">
+                    <h2><a href="{{ article.website_link }}">{{ article.title }}</a></h2>
+                    <p>{{ article.body|richtext }}</p>
+                </div>
+            </article>
         {% endfor %}
 
         {% if articles.paginator.num_pages > 1 %}
@@ -44,7 +46,9 @@
                 </li>
             </ul>
         {% endif %}
+
     </div>
+</div>
 
 
 

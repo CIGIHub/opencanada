@@ -7,4 +7,4 @@ psycopg2==2.5.2
 
 raven==5.5.0
 
-git+ssh://github.com/OpenCanada/wagtail-interactives-content.git
+git+ssh://git@github.com/OpenCanada/wagtail-interactives-content.git

@@ -13,12 +13,24 @@
         {% endif %}
             <{{ heading }}><a href="{{ article.url }}">{{ article.title }}</a></{{ heading }}>
             {% if article.authors %}
-                <div class="contributors">By: {% for author in article.authors %}
-                    <div class="contributor"><a href="{{ author.url }}">{{ author.first_name }} {{ author.last_name }}</a></div>
-                   {% endfor %}
+                <div class="contributors">
+                    <div class="contributor-label">By: </div>
+                    <div class="contributor-list">
+                        {% for author in article.authors %}
+                            <div class="contributor">
+                                <a href="{{ author.url }}">
+                                    {{ author.first_name }}
+                                    {{ author.last_name }}
+                                </a>
+                                {% if not forloop.last %}, {% endif %}
+                            </div>
+                        {% endfor %}
+                        <div class="date">/  {{ article.first_published_at|date:"F j, Y" }}</div>
+                    </div>
                 </div>
+             {% else %}
+                <div class="date">{{ article.first_published_at|date:"F j, Y" }}</div>
             {% endif %}
-            <div class="date"> / {{ article.first_published_at|date:"F j, Y" }}</div>
 
             <div class="feature-line">
                 {{ article.excerpt|richtext }}

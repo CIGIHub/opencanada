@@ -31,8 +31,8 @@
 
 @mixin row-divider{
   border-bottom: $border-grey;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
 
 @mixin no-row-divider{
@@ -240,6 +240,9 @@
   .contributors, .contributors a, a{
     color: white;
     text-decoration:none;
+  }
+  .contributors a:hover, a:hover{
+    color: $mid-grey;
   }
 
   .contributors{
