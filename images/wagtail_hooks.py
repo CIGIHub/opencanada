@@ -11,7 +11,7 @@ from . import image_operations
 def register_image_operations():
     return [
         ('circle', image_operations.CircleOperation),
-        ('ringed_circle', image_operations.CircleWithRingOperation),
+        ('rcircle', image_operations.CircleWithRingOperation),
     ]
 
 

@@ -12,11 +12,11 @@
                 {% spaceless %}
                     <figure>
                        {% if article.source and article.source.logo %}
-                                {% image article.source.logo ringed_circle-120x120-rgba_204_204_204_1-w_1 %}
+                                {% image article.source.logo rcircle-120x120-rgba_204-w_1 %}
                             {% else %}
                                 {% get_site_defaults as defaults %}
                                 {% if defaults %}
-                                {% image defaults.default_external_article_source_logo ringed_circle-120x120-rgba_204_204_204_1-w_1 %}
+                                {% image defaults.default_external_article_source_logo rcircle-120x120-rgba_204-w_1 %}
                                 {% endif %}
                             {% endif %}
                     </figure>

@@ -113,11 +113,11 @@
                     {% spaceless %}
                         <a href="{{ external_article.website_link }}"><figure>
                             {% if external_article.source and external_article.source.logo %}
-                                {% image external_article.source.logo ringed_circle-80x80-rgba_204_204_204_1-w_1 %}
+                                {% image external_article.source.logo rcircle-80x80-rgba_204-w_1 %}
                             {% else %}
                                 {% get_site_defaults as defaults %}
                                 {% if defaults %}
-                                {% image defaults.default_external_article_source_logo ringed_circle-80x80-rgba_204_204_204_1-w_1 %}
+                                {% image defaults.default_external_article_source_logo rcircle-80x80-rgba_204-w_1 %}
                                 {% endif %}
                             {% endif %}
                         </figure></a>

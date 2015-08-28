@@ -27,7 +27,19 @@ class CircleWithRingOperation(FillOperation):
         for extra_part in extra:
             if extra_part.startswith('rgba_'):
                 color_parts = extra_part.split('_')
-                self.circle_color = tuple(int(color) for color in color_parts[1:])
+                num_parts = len(color_parts)
+                if num_parts == 2:
+                    color = int(color_parts[1])
+                    self.circle_color = (color, color, color, 1)
+                elif num_parts >= 4:
+                    if num_parts == 4:
+                        alpha = 1
+                    else:
+                        alpha = int(color_parts[4])
+                    red = int(color_parts[1])
+                    green = int(color_parts[2])
+                    blue = int(color_parts[3])
+                    self.circle_color = (red, green, blue, alpha)
             elif extra_part.startswith('w_'):
                 self.ring_width = int(extra_part[2:])
             else:
