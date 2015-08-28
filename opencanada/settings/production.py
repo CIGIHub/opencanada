@@ -49,6 +49,7 @@ RAVEN_CONFIG = {
 
 INSTALLED_APPS = INSTALLED_APPS + (
     'raven.contrib.django.raven_compat',
+    'interactives_content',
 )
 
 FAVICON_PATH = STATIC_URL + 'img/favicon.png'

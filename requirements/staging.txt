@@ -1,1 +1,3 @@
 -r production.txt
+
+git+ssh://github.com/OpenCanada/wagtail-interactives-content.git

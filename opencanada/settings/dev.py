@@ -14,3 +14,7 @@ WP_IMPORTER_USER_PHOTO_URL_PATTERN = "http://opencanada.centos/wp-content/upload
 WP_IMPORTER_ARTICLE_PHOTO_URL_PATTERN = "http://opencanada.centos/wp-content/uploads/{}"
 
 IS_PRODUCTION = False
+
+INSTALLED_APPS = INSTALLED_APPS + (
+    'interactives_content',
+)
