@@ -17,6 +17,10 @@ h1, .jumbotron h1{
   font-weight: bold;
 }
 
+h1.subheading, .narrow-page h1{
+  @include subheading;
+}
+
 h2{
   font-size: 18px;
   line-height: 130%;
@@ -84,6 +88,10 @@ header{
     text-align:right;
     font-size: 20px;
   }
+  .search button:hover,
+  .menu button:hover{
+    color: $mid-grey;
+  }
   .menu{
     text-align:left;
   }
@@ -136,6 +144,9 @@ header{
       font-family: $sans-serif;
       font-weight: 700;
     }
+    ul li a:hover{
+      color: $mid-grey;
+    }
   }
 
   &.collapsed.scrolled{
@@ -182,7 +193,7 @@ header{
   -webkit-transition: transform 0.4s ease, opacity 0.4s ease;
 
   &.open{
-    top: 100px;
+    top: 73px;
     overflow-y: visible;
     min-height: 110px;
     transform: translate(0, 0%);
@@ -273,7 +284,9 @@ footer{
       @include type(white);
     }
     @include inline-list-divided($red);
-
+    ul li a:hover{
+      text-decoration: underline;
+    }
   }
 
   .row.infobar{
@@ -416,11 +429,11 @@ footer{
   }
   .partners, .contact{
     @include centered-fixed-width(550px);
-    font-family: $sans-serif;
-    font-weight: 200;
-    font-size: 12px;
-    line-height: 125%;
+    @include small-type;
     text-align: center;
+  }
+  .contact{
+    text-transform: uppercase;
   }
 }
 
@@ -600,6 +613,7 @@ main{
   }
 
 .contributors{
+  margin-bottom: 5px;
   .contributor-label{
     float: left;
   }
@@ -616,12 +630,12 @@ main{
   .contributor{
     display: inline-block;
   }
-  .contributor:after{
-    content: ', ';
-  }
-  .contributor:last-child:after{
-    content: '';
-  }
+  //.contributor:after{
+  //  content: ', ';
+  //}
+  //.contributor:last-child:after{
+  //  content: '';
+  //}
 }
 
 .contributors, .date{
@@ -738,7 +752,9 @@ article .title,
 .series-articles,
 .toc,
 .contributor-profile,
-.search-results-page
+.search-results-page,
+.narrow-page
+
 {
   margin-left: 10%;
   margin-right: 10%;
@@ -748,7 +764,6 @@ article .title,
     margin-right: 0;
   }
 }
-
 
 .block-Sharable{
   margin-left: 15%;
@@ -761,7 +776,6 @@ article .title,
     margin-right: 0;
   }
 }
-
 
 .series-teaser .block-Paragraph{
   margin-left: 0;
@@ -825,6 +839,7 @@ article {
 
   .type {
     @include type($red);
+    @include subheading(14px);
   }
   .primary-topic {
     @include subheading(14px);
@@ -1151,6 +1166,7 @@ article {
   }
   .bio{
     margin: 40px 0;
+    line-height: 150%;
     @media(max-width: $screen-sm){
       margin: 10px 0;
     }
@@ -1218,9 +1234,7 @@ article {
 /**************  Topics pages  **************/
 
 .template-topic-list-page{
-  h1{
-    @include subheading;
-  }
+
 }
 
 

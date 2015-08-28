@@ -16,11 +16,13 @@
             <div class="contributor-list">
                 {% for author in self.authors %}
                     <div class="contributor"><a href="{{ author.url  }}">{{ author.first_name }} {{ author.last_name }}</a></div>
+                    {% if not forloop.last %}, {% endif %}
                 {% endfor %}
+                <div class="date"> / {{ self.first_published_at|date:"F j, Y" }}</div>
             </div>
         </div>
     {% endif %}
-    <div class="date"> / {{ self.first_published_at|date:"F j, Y" }}</div>
+
 
 </div>
 

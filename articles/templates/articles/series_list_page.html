@@ -3,32 +3,33 @@
 
 {% block content %}
     <div class="container series-list">
+        <div class="narrow-page">
+        {% if self.title %}
+            <h1 class="subheading">{{  self.title }}</h1>
+        {% endif %}
 
-    {% if self.title %}
-        <h1>{{  self.title }}</h1>
-    {% endif %}
+        {% for series in series_list %}
+               {% include "articles/includes/series_teaser.html" %}
+        {% endfor %}
 
-    {% for series in series_list %}
-           {% include "articles/includes/series_teaser.html" %}
-    {% endfor %}
-
-    {% if series_list.paginator.num_pages > 1 %}
-        <ul class="pager">
-            <li class="previous">
-                {% if series_list.has_previous %}
-                    <a href="?page={{ series_list.previous_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&amp;{{ key }}={{ value }}{% endifnotequal %}{% endfor %}">Previous</a>
-                {% endif %}
-            </li>
-            <li class="pages">
-                Page {{ series_list.number }} of {{ series_list.paginator.num_pages }}
-            </li>
-            <li class="next">
-                {% if series_list.has_next %}
-                    <a href="?page={{ series_list.next_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&amp;{{ key }}={{ value }}{% endifnotequal %}{% endfor %}">Next</a>
-                {% endif %}
-            </li>
-        </ul>
-    {% endif %}
+        {% if series_list.paginator.num_pages > 1 %}
+            <ul class="pager">
+                <li class="previous">
+                    {% if series_list.has_previous %}
+                        <a href="?page={{ series_list.previous_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&amp;{{ key }}={{ value }}{% endifnotequal %}{% endfor %}">Previous</a>
+                    {% endif %}
+                </li>
+                <li class="pages">
+                    Page {{ series_list.number }} of {{ series_list.paginator.num_pages }}
+                </li>
+                <li class="next">
+                    {% if series_list.has_next %}
+                        <a href="?page={{ series_list.next_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&amp;{{ key }}={{ value }}{% endifnotequal %}{% endfor %}">Next</a>
+                    {% endif %}
+                </li>
+            </ul>
+        {% endif %}
+        </div>
     </div>
 
 
