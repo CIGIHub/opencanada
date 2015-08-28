@@ -215,17 +215,21 @@ function toggleHeading(windowWidth, articleTitleWidth){
         $('header').toggleClass('collapsed scrolled', $(document).scrollTop() > offset);
 
         if($('header').hasClass('collapsed')){
-
             $('#main-menu').hide();
             collapsedHeader();
 
             if($('#article-page').length ){
                 $('body').addClass('article-scroll');
+                $('header .header-row').removeClass('col-md-4');
             }
         }
         else{
             $('#main-menu').show();
+            if(!($('header .header-row').hasClass('col-md-4'))){
+                $('header .header-row').addClass('col-md-4');
+            }
             fullHeader();
+
         }
     }
 
