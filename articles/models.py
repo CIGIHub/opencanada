@@ -89,12 +89,18 @@ class ArticleListPage(Page):
 
     articles_per_page = models.IntegerField(default=20)
     filter_for_visualizations = models.BooleanField(default=False)
+    filter_for_interviews = models.BooleanField(default=False)
 
     @property
     def subpages(self):
 
-        if self.filter_for_visualizations:
+        if self.filter_for_visualizations and not self.filter_for_interviews:
             subpages = ArticlePage.objects.live().filter(visualization=True).order_by('-first_published_at')
+        elif self.filter_for_interviews and not self.filter_for_visualizations:
+            subpages = ArticlePage.objects.live().filter(interview=True).order_by('-first_published_at')
+        elif self.filter_for_interviews and self.filter_for_visualizations:
+            subpages = ArticlePage.objects.live().filter(
+                models.Q(visualization=True) | models.Q(interview=True)).order_by('-first_published_at')
         else:
             subpages = ArticlePage.objects.live().order_by('-first_published_at')
 
@@ -119,6 +125,7 @@ class ArticleListPage(Page):
     content_panels = Page.content_panels + [
         FieldPanel('articles_per_page'),
         FieldPanel('filter_for_visualizations'),
+        FieldPanel('filter_for_interviews'),
     ]
 
 
@@ -366,6 +373,7 @@ class ArticlePage(Page, FeatureStyleFields, Promotable, Sharelinks):
     include_main_image = models.BooleanField(default=True)
     include_main_image_overlay = models.BooleanField(default=False)
     visualization = models.BooleanField(default=False)
+    interview = models.BooleanField(default=False)
 
     search_fields = Page.search_fields + (
         index.SearchField('excerpt', partial_match=True),
@@ -491,6 +499,7 @@ class ArticlePage(Page, FeatureStyleFields, Promotable, Sharelinks):
         MultiFieldPanel(
             [
                 FieldPanel('visualization'),
+                FieldPanel('interview'),
             ],
             heading="Categorization"
         )
