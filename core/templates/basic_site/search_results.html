@@ -10,7 +10,7 @@
             <div class="row">
                 <div class="col-xs-12 search-form">
                     <div class="input-group">
-                        <input type="text" name="q" value=""/>
+                        <input type="text" name="q" value="{{ query }}"/>
                         <button type="submit" class="search-button">Search <i class="fa fa-chevron-right"></i></button>
                     </div>
                     <i class="fa fa-times-circle clear-button"></i>
@@ -19,7 +19,7 @@
         </form>
         </div>
 
-        <h2>{{ search_results|length }} Search Results{% if request.GET.q %} for {{ request.GET.q }}{% endif %}</h2>
+        <h2>{{ search_results.paginator.count }} Search Results{% if query %} for {{ query }}{% endif %}</h2>
         <div class="search-results">
             {% for result in search_results %}
               <article class="row">
@@ -33,9 +33,14 @@
                         </div>
                     {% endif %}
                     <div class="date"> / {{ result.specific.first_published_at|date:"F j, Y" }}</div>
+                    <div>
                     {% if result.specific.search_description %}
                       {{ result.specific.search_description|safe }}
+                    {% elif result.specific.body %}
+
+                        {{ result.specific.body|safe|truncatewords_html:80|striptags }}
                     {% endif %}
+                    </div>
                 </div>
               </article>
                 {% empty %}
@@ -43,6 +48,24 @@
             {% endfor %}
 
         </div>
+
+    {% if search_results.paginator.num_pages > 1 %}
+            <ul class="pager">
+                <li class="previous">
+                    {% if search_results.has_previous %}
+                        <a href="?page={{ search_results.previous_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&amp;{{ key }}={{ value }}{% endifnotequal %}{% endfor %}">Previous</a>
+                    {% endif %}
+                </li>
+                <li class="pages">
+                    Page {{ search_results.number }} of {{ search_results.paginator.num_pages }}
+                </li>
+                <li class="next">
+                    {% if search_results.has_next %}
+                        <a href="?page={{ search_results.next_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&amp;{{ key }}={{ value }}{% endifnotequal %}{% endfor %}">Next</a>
+                    {% endif %}
+                </li>
+            </ul>
+        {% endif %}
     </div>
     </div>
 {% endblock %}
