@@ -91,9 +91,13 @@ class HomePage(Page):
             article_models.ArticlePage)
         series_content_type = ContentType.objects.get_for_model(
             article_models.SeriesPage)
+        chaptered_content_type = ContentType.objects.get_for_model(
+            article_models.ChapteredArticlePage)
 
         articles = Page.objects.live().filter(
-            models.Q(content_type=article_content_type) | models.Q(content_type=series_content_type)
+            models.Q(content_type=article_content_type)
+            | models.Q(content_type=series_content_type)
+            | models.Q(content_type=chaptered_content_type)
         ).annotate(
             sticky=models.Case(
                 models.When(
