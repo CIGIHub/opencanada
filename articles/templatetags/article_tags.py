@@ -1,6 +1,7 @@
 from django import template
 
-from articles.models import TopicListPage
+from articles.models import (ArticlePage, ExternalArticlePage, SeriesPage,
+                             TopicListPage)
 
 register = template.Library()
 
@@ -28,3 +29,23 @@ def column_class(row):
 @register.filter()
 def column_height(article):
     return article.feature_style.number_of_rows * 280
+
+
+@register.assignment_tag()
+def typed_article(page):
+    try:
+        return page.articlepage
+    except ArticlePage.DoesNotExist:
+        pass
+
+    try:
+        return page.seriespage
+    except SeriesPage.DoesNotExist:
+        pass
+
+    try:
+        return page.externalarticlepage
+    except ExternalArticlePage.DoesNotExist:
+        pass
+
+    return page

@@ -1,0 +1,27 @@
+{% load article_tags %}
+<div class="heading">{{ self.heading }}</div>
+<ul class="item_list">
+    {% for page in self.items %}
+        {% typed_article page as typed_page %}
+    <li><div class="item_content"><a href="{{ typed_page.url }}">{{ typed_page.title }}</a>
+     {% if typed_page.authors %}
+                <div class="contributors">
+                    <div class="contributor-label">By: </div>
+                    <div class="contributor-list">
+                        {% for author in typed_page.authors %}
+                            <div class="contributor">
+                                <a href="{{ author.url }}">
+                                    {{ author.first_name }}
+                                    {{ author.last_name }}
+                                </a>
+                                {% if not forloop.last %}, {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+    </div>
+    </li>
+    {% endfor %}
+
+</ul>

@@ -29,7 +29,8 @@ class BodyField(StreamField):
             ('Quote', SimpleQuoteBlock()),
             ('Overflow', OverflowStreamBlock()),
             ('ColumnedContent', ColumnarStreamBlock()),
-            ('Interactive', InteractiveBlock(Interactive, icon="cogs"))
+            ('Interactive', InteractiveBlock(Interactive, icon="cogs")),
+            ('RelatedItems', RelatedItemsBlock()),
         ]
 
         super(BodyField, self).__init__(block_types, **kwargs)
@@ -135,6 +136,17 @@ class InteractiveBlock(SnippetChooserBlock):
             return self.render_basic(value)
 
 
+class RelatedItemsBlock(blocks.StructBlock):
+    heading = blocks.CharBlock(default="Related")
+    items = blocks.ListBlock(blocks.PageChooserBlock(label="item"))
+
+    def __init__(self, **kwargs):
+        super(RelatedItemsBlock, self).__init__(icon="list-ul", **kwargs)
+
+    class Meta:
+        template = "articles/blocks/related_items_block.html"
+
+
 class SimpleBodyBlock(blocks.StreamBlock):
     Heading = HeadingBlock()
     Paragraph = ParagraphBlock()
@@ -145,6 +157,7 @@ class SimpleBodyBlock(blocks.StreamBlock):
     PullQuote = PullQuoteBlock()
     Quote = SimpleQuoteBlock()
     Interactive = InteractiveBlock(Interactive)
+    RelatedItems = RelatedItemsBlock()
 
 
 class ColumnarStreamBlock(blocks.StructBlock):
