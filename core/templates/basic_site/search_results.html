@@ -19,7 +19,7 @@
         </form>
         </div>
 
-        <h2>{{ search_results|length }} Search Results{% if request.GET.q %} for {{ request.GET.q }}{% endif %}</h2>
+        <h2>{{ search_results.paginator.count }} Search Results{% if request.GET.q %} for {{ request.GET.q }}{% endif %}</h2>
         <div class="search-results">
             {% for result in search_results %}
               <article class="row">
@@ -43,6 +43,24 @@
             {% endfor %}
 
         </div>
+
+    {% if search_results.paginator.num_pages > 1 %}
+            <ul class="pager">
+                <li class="previous">
+                    {% if search_results.has_previous %}
+                        <a href="?page={{ search_results.previous_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&amp;{{ key }}={{ value }}{% endifnotequal %}{% endfor %}">Previous</a>
+                    {% endif %}
+                </li>
+                <li class="pages">
+                    Page {{ search_results.number }} of {{ search_results.paginator.num_pages }}
+                </li>
+                <li class="next">
+                    {% if search_results.has_next %}
+                        <a href="?page={{ search_results.next_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&amp;{{ key }}={{ value }}{% endifnotequal %}{% endfor %}">Next</a>
+                    {% endif %}
+                </li>
+            </ul>
+        {% endif %}
     </div>
     </div>
 {% endblock %}
