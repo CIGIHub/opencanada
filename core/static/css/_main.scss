@@ -737,6 +737,7 @@ article .title,
 .block-PullQuote,
 .block-Embed,
 .block-ColumnedContent,
+.block-RelatedItems,
 .block-end_note,
 .block-citation,
 .block-chapter h2,
@@ -778,6 +779,44 @@ article .title,
 
 .block-Embed iframe{
   margin: 10px auto !important;
+}
+
+
+.block-RelatedItems{
+  margin-left: 15%;
+  margin-right: 15%;
+
+  .heading{
+    //margin: 10px 20px;
+    text-transform: uppercase;
+    font-family: $font-family-sans-serif;
+    font-weight: bold;
+    font-size: 12px;
+  }
+  .item_list{
+    border-top: $border-grey;
+    border-bottom: $border-grey;
+    list-style: none;
+
+
+    li{
+      .item_content{
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+        .contributors{
+          display: block;
+          color: $light-grey;
+
+          a {
+            color: $light-grey;
+          }
+        }
+      }
+
+
+    }
+  }
 }
 
 article {
