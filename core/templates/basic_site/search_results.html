@@ -10,7 +10,7 @@
             <div class="row">
                 <div class="col-xs-12 search-form">
                     <div class="input-group">
-                        <input type="text" name="q" value=""/>
+                        <input type="text" name="q" value="{{ query }}"/>
                         <button type="submit" class="search-button">Search <i class="fa fa-chevron-right"></i></button>
                     </div>
                     <i class="fa fa-times-circle clear-button"></i>
@@ -19,7 +19,7 @@
         </form>
         </div>
 
-        <h2>{{ search_results.paginator.count }} Search Results{% if request.GET.q %} for {{ request.GET.q }}{% endif %}</h2>
+        <h2>{{ search_results.paginator.count }} Search Results{% if query %} for {{ query }}{% endif %}</h2>
         <div class="search-results">
             {% for result in search_results %}
               <article class="row">
