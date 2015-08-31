@@ -738,6 +738,7 @@ article .title,
 .block-Embed,
 .block-ColumnedContent,
 .block-RelatedItems,
+.block-Interactive,
 .block-end_note,
 .block-citation,
 .block-chapter h2,
@@ -781,6 +782,10 @@ article .title,
   margin: 10px auto !important;
 }
 
+.block-Interactive {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
 
 .block-RelatedItems{
   margin-left: 15%;
