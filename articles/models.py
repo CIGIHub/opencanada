@@ -458,8 +458,6 @@ class ArticlePage(Page, FeatureStyleFields, Promotable, Sharelinks):
         StreamFieldPanel('body'),
         SnippetChooserPanel('primary_topic', Topic),
         InlinePanel('topic_links', label="Secondary Topics"),
-        SnippetChooserPanel('category', ArticleCategory),
-        FieldPanel('visualization'),
     ]
 
     promote_panels = Page.promote_panels + [
@@ -489,6 +487,12 @@ class ArticlePage(Page, FeatureStyleFields, Promotable, Sharelinks):
                 FieldPanel('include_author_block'),
             ],
             heading="Sections"
+        ),
+        MultiFieldPanel(
+            [
+                FieldPanel('visualization'),
+            ],
+            heading="Categorization"
         )
     ]
 
@@ -523,11 +527,9 @@ class ChapteredArticlePage(ArticlePage):
         StreamFieldPanel('body'),
         SnippetChooserPanel('primary_topic', Topic),
         InlinePanel('topic_links', label="Secondary Topics"),
-        SnippetChooserPanel('category', ArticleCategory),
         StreamFieldPanel('chapters'),
         StreamFieldPanel('works_cited'),
         StreamFieldPanel('end_notes'),
-        # InlinePanel('chapters', label="Chapters"),
     ]
 
     edit_handler = TabbedInterface([
