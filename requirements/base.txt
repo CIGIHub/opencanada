@@ -3,7 +3,6 @@ Django>=1.8,<1.9
 wagtail==1.0
 
 # Recommended components (require additional setup):
-# psycopg2==2.5.2
 elasticsearch==1.1.1
 django-libsass==0.3
 
