@@ -18,3 +18,11 @@ IS_PRODUCTION = False
 INSTALLED_APPS = INSTALLED_APPS + (
     'interactives_content',
 )
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'opencanada',
+        'CONN_MAX_AGE': 600,
+    }
+}
