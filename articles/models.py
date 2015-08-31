@@ -173,6 +173,7 @@ Topic.panels = [
 
 
 class TopicListPage(RoutablePageMixin, Page):
+    articles_per_page = models.IntegerField(default=20)
 
     @property
     def topics(self):
@@ -194,12 +195,26 @@ class TopicListPage(RoutablePageMixin, Page):
             models.Q(primary_topic=topic) | models.Q(topic_links__topic=topic)
         ).order_by('-first_published_at').distinct()
 
+        paginator = Paginator(articles, self.articles_per_page)
+        page = request.GET.get('page')
+
+        try:
+            articles = paginator.page(page)
+        except PageNotAnInteger:
+            articles = paginator.page(1)
+        except EmptyPage:
+            articles = paginator.page(paginator.num_pages)
+
         context = {
             "self": self,
             "topic": topic,
             "articles": articles,
         }
         return render(request, "articles/topic_page.html", context)
+
+    content_panels = Page.content_panels + [
+        FieldPanel('articles_per_page'),
+    ]
 
 
 class ArticleCategoryManager(models.Manager):
