@@ -781,6 +781,8 @@ article .title,
 }
 
 article {
+  position: relative;
+
   &.row {
     @include row-divider;
   }
@@ -847,8 +849,13 @@ article {
   ul.share-links {
     position: absolute;
     margin-left: -100px;
-    padding: 20px;
-    top: 80px;
+    padding: 0 0 20px 0;
+    top: 0.15em;
+    left:0;
+
+    &.below-topic {
+      padding-top:42px;
+    }
 
     div{
       width: 20px;
@@ -870,7 +877,6 @@ article {
     position: relative;
     margin-left: 10%;
     margin-bottom: 0px;
-    padding: 0px;
     top: 20px;
     li {
       display: inline-block;

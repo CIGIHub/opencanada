@@ -70,13 +70,13 @@ function initForWindow(){
         setFeatureHeight(windowHeight);
     }
 
-    if($('.template-article-page').length && $('.jumbotron').length) {
+    if ($("article > .title").children().hasClass("primary-topic")) {
+
         if(windowWidth > breakpoint) {
-            var height = $('.jumbotron').height() + 100;
-            $('ul.share-links').css('top', height + 'px');
+            $('ul.share-links').addClass("below-topic");
         }
-        else{
-            $('ul.share-links').css('top', '10px');
+        else {
+            $('ul.share-links').removeClass("below-topic");
         }
     }
 
