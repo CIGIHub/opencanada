@@ -323,7 +323,7 @@ class FeatureStyleFields(models.Model):
 
     image_overlay_opacity = models.PositiveIntegerField(
         validators=[MinValueValidator(0), MaxValueValidator(100)],
-        default=30,
+        default=45,
         help_text="Set the value from 0 (Solid overlay, original image not visible) to 100 (No overlay, original image completely visible)"
     )
 
