@@ -366,7 +366,7 @@ main{
 
 /**************  Article  **************/
 
-.template-article-page{
+.template-article-page, .template-chaptered-article-page {
   .main-feature {
     @include article-overlay;
     @include fullbleed-overlay;
@@ -988,6 +988,25 @@ article {
       .form-control {
         width: 70%;
       }
+    }
+  }
+}
+
+#features {
+  .rowheight-1 {
+    @media(max-width: 1000px) {
+      height: 140px;
+    }
+    @media(min-width: 1001px) {
+      height: 280px;
+    }
+  }
+  .rowheight-2 {
+    @media(max-width: 1000px) {
+      height: 280px;
+    }
+    @media(min-width: 1001px) {
+      height: 560px;
     }
   }
 }
