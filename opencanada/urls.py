@@ -12,6 +12,8 @@ from wagtail.wagtaildocs import urls as wagtaildocs_urls
 from wagtail.wagtailsearch import urls as wagtailsearch_urls
 from wagtail.wagtailsearch.signal_handlers import register_signal_handlers
 
+from core.feeds import MainFeed
+
 register_signal_handlers()
 
 urlpatterns = [
@@ -21,6 +23,7 @@ urlpatterns = [
     url(r'^search/', include(wagtailsearch_urls)),
     url(r'^documents/', include(wagtaildocs_urls)),
     url(r'^', include('favicon.urls')),
+    url(r'^feed/', MainFeed(), name='main_feed'),
 ]
 
 

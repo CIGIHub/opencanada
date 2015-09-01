@@ -1,6 +1,6 @@
 from __future__ import absolute_import, unicode_literals
 
-from django.test import TestCase
+from django.test import Client, TestCase
 
 from articles.models import ArticlePage, SeriesPage
 
@@ -112,3 +112,10 @@ class HomePageTestCase(TestCase):
 
         self.assertSequenceEqual(actual, expected)
         self.assertEqual(height, 1)
+
+    def test_feed(self):
+        client = Client()
+        resp = client.get('/feed/')
+
+        self.assertEqual(resp.status_code, 200)
+        self.assertIn('<title>In Depth Articles - No Topic - Not Live</title>', resp.content)

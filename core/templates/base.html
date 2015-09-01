@@ -12,6 +12,8 @@
         <meta name="description" content="{% if self.search_description %}{{ self.search_description }}{% endif %}" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+        {% block feedlink %}<link rel="home" type="application/rss+xml" href="/feed/" />{% endblock feedlink %}
+
         <link href='https://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
         <script src="//use.typekit.net/nat2qtz.js"></script>
@@ -26,7 +28,7 @@
         {% endcompress %}
 
         {% block extra_css %}
-            
+
         {% endblock %}
     {% if GOOGLE_ANALYTICS_PROPERTY_ID %}
         <script>
@@ -68,7 +70,7 @@
         {% endcompress %}
 
         {% block extra_js %}
-            
+
         {% endblock %}
     </body>
 </html>
