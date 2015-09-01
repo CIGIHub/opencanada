@@ -1,6 +1,7 @@
 $container-large-desktop: 940px;
 $screen-md-min: 992px;
 $grid-float-breakpoint: $screen-md-min;
+$breakpoint: 1000px; //to match the javascript breakpoint variable.
 
 $serif:'Droid Serif', Georgia, serif;
 $sans-serif: proxima-nova, Helvetica, sans-serif;

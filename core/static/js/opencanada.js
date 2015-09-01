@@ -152,9 +152,12 @@ function setFeatureHeight(windowHeight){
 
 //set the body padding based on banner height
 function setBodyPadding(){
+    //TODO: CSS needs to be in css files, not JS files!
+    
     var bannerHeight = $('header').height();
     $('body').css("padding-top", bannerHeight + "px");
-    $('#search-box').css("top", bannerHeight = "px");
+
+    $('#search-box').css("top", bannerHeight + "px");
 
 }
 
@@ -186,7 +189,7 @@ function toggleHeading(windowWidth, articleTitleWidth){
 
     function fullHeader(){
         $('header').removeClass('collapsed');
-        $('#search-box').removeClass('small-header');
+        //$('#search-box').removeClass('small-header');
         $('.toggle-mobile').hide();
         $('nav').removeClass('mobile-menu open');
         $('body').removeClass('article-scroll');
@@ -199,7 +202,7 @@ function toggleHeading(windowWidth, articleTitleWidth){
     function collapsedHeader(){
 
         $('header').addClass('collapsed');
-        $('#search-box').addClass('small-header');
+        //$('#search-box').addClass('small-header');
         $('.toggle-mobile').show();
 
         $('nav').addClass('mobile-menu');
@@ -212,7 +215,7 @@ function toggleHeading(windowWidth, articleTitleWidth){
     }
 
     function fullScroll(){
-        $('header').toggleClass('collapsed scrolled', $(document).scrollTop() > offset);
+        $('header, #search-box').toggleClass('collapsed scrolled', $(document).scrollTop() > offset);
 
         if($('header').hasClass('collapsed')){
             $('#main-menu').hide();
