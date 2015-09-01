@@ -17,7 +17,7 @@
 
   input {
     width:71%;
-    margin-right:3%;
+    margin-right:2%;
   }
 
   button {
@@ -88,6 +88,22 @@
 
     button {
       width: 20%;
+    }
+  }
+}
+
+@media (max-width: 375px) {
+  #search-box{
+
+    input {
+      width:100%;
+      margin-right:0%;
+      margin-bottom: 10px;
+    }
+
+    button {
+      width: auto;
+      float:right;
     }
   }
 }
