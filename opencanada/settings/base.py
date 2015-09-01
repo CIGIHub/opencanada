@@ -90,7 +90,7 @@ INSTALLED_APPS = (
     'events',
     'jobs',
     'wordpress_importer',
-
+    'analytics',
 )
 
 MIDDLEWARE_CLASSES = (

@@ -9,5 +9,8 @@ class Analytics(models.Model):
     page = models.OneToOneField('wagtailcore.Page')
     last_week_views = models.PositiveIntegerField(default=0)
 
+    class Meta:
+        verbose_name_plural = 'analytics'
+
     def __str__(self):
         return "Analytics for {}".format(self.page.title)
