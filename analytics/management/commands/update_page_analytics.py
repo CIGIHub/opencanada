@@ -1,108 +1,78 @@
-"""A simple example of how to access the Google Analytics API."""
+import os
 
-import argparse
+from django.conf import settings
+from django.core.exceptions import ImproperlyConfigured
+from django.core.management.base import BaseCommand
 
-import httplib2
-from apiclient.discovery import build
-from oauth2client import client, file, tools
-from oauth2client.client import SignedJwtAssertionCredentials
-
-
-def get_service(api_name, api_version, scope, key_file_location,
-                service_account_email):
-  """Get a service that communicates to a Google API.
-
-  Args:
-    api_name: The name of the api to connect to.
-    api_version: The api version to connect to.
-    scope: A list auth scopes to authorize for the application.
-    key_file_location: The path to a valid service account p12 key file.
-    service_account_email: The service account email address.
-
-  Returns:
-    A service that is connected to the specified API.
-  """
-
-  f = open(key_file_location, 'rb')
-  key = f.read()
-  f.close()
-
-  credentials = SignedJwtAssertionCredentials(service_account_email, key,
-    scope=scope)
-
-  http = credentials.authorize(httplib2.Http())
-
-  # Build the service object.
-  service = build(api_name, api_version, http=http)
-
-  return service
+from analytics.utils import get_first_profile_id, get_service
 
 
-def get_first_profile_id(service):
-  # Use the Analytics service object to get the first profile id.
+def get_creds_path():
+    message = 'Setting ANALYTICS_CREDS_PATH must be defined, exist and be a directory.'
+    try:
+        path = getattr(settings, 'ANALYTICS_CREDS_PATH')
+    except AttributeError:
+        raise ImproperlyConfigured(message)
 
-  # Get a list of all Google Analytics accounts for this user
-  accounts = service.management().accounts().list().execute()
+    if not os.path.isdir(path):
+        raise ImproperlyConfigured(message)
 
-  if accounts.get('items'):
-    # Get the first Google Analytics account.
-    account = accounts.get('items')[0].get('id')
-
-    # Get a list of all the properties for the first account.
-    properties = service.management().webproperties().list(
-        accountId=account).execute()
-
-    if properties.get('items'):
-      # Get the first property id.
-      property = properties.get('items')[0].get('id')
-
-      # Get a list of all views (profiles) for the first property.
-      profiles = service.management().profiles().list(
-          accountId=account,
-          webPropertyId=property).execute()
-
-      if profiles.get('items'):
-        # return the first view (profile) id.
-        return profiles.get('items')[0].get('id')
-
-  return None
+    return path
 
 
-def get_results(service, profile_id):
-  # Use the Analytics Service Object to query the Core Reporting API
-  # for the number of sessions within the past seven days.
-  return service.data().ga().get(
-      ids='ga:' + profile_id,
-      start_date='7daysAgo',
-      end_date='today',
-      metrics='ga:sessions').execute()
+def get_service_account_email():
+    message = 'Setting ANALYTICS_SERVICE_ACCOUNT_EMAIL must be defined and non empty'
+    try:
+        email = getattr(settings, 'ANALYTICS_SERVICE_ACCOUNT_EMAIL')
+    except AttributeError:
+        raise ImproperlyConfigured(message)
+
+    if email is None or email == '':
+        raise ImproperlyConfigured(message)
+
+    return email
 
 
-def print_results(results):
-  # Print data nicely for the user.
-  if results:
-    print 'View (Profile): %s' % results.get('profileInfo').get('profileName')
-    print 'Total Sessions: %s' % results.get('rows')[0][0]
+class Command(BaseCommand):
+    help = 'Get the analytics data over the last week and update the articles in te system'
 
-  else:
-    print 'No results found'
+    def add_arguments(self, parser):
+        parser.add_argument(
+            '--dry-run',
+            action='store_true',
+            dest='dry_run',
+            default=False,
+            help='Output the analytics but do not update the database'
+        )
 
+    def handle(self, *args, **options):
+        creds_path = get_creds_path()
 
-def main():
-  # Define the auth scopes to request.
-  scope = ['https://www.googleapis.com/auth/analytics.readonly']
+        key_file_location = os.path.join(creds_path, 'open-canada-analytics.p12')
 
-  # Use the developer console and replace the values with your
-  # service account email and relative location of your key file.
-  service_account_email = '979557916746-85rt8kinn3jntg0svcrqgshcvs1lmcgd@developer.gserviceaccount.com'
-  key_file_location = '/Users/albert/Development/github/cigi/opencanda/website/secret/analytics_keys.p12'
+        if not os.path.isfile(key_file_location):
+            raise ImproperlyConfigured(
+                '{} must be a file which contains your api key.'.format(key_file_location)
+            )
 
-  # Authenticate and construct service.
-  service = get_service('analytics', 'v3', scope, key_file_location,
-    service_account_email)
-  profile = get_first_profile_id(service)
-  print_results(get_results(service, profile))
+        scope = ['https://www.googleapis.com/auth/analytics.readonly']
+        service_account_email = get_service_account_email()
 
+        service = get_service(
+            'analytics',
+            'v3',
+            scope,
+            key_file_location,
+            service_account_email
+        )
 
-if __name__ == '__main__':
-  main()
+        profile = get_first_profile_id(service)
+
+        data = service.data().ga().get(
+            ids='ga:' + profile,
+            start_date='7daysAgo',
+            end_date='today',
+            metrics='ga:sessions'
+        ).execute()
+
+        print(data)
