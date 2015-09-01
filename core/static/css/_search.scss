@@ -17,7 +17,8 @@
 
   input {
     width:71%;
-    margin-right:2%;
+    margin-right:2%; //ff issues with 3%
+
   }
 
   button {
@@ -94,17 +95,19 @@
 
 @media (max-width: 375px) {
   #search-box{
-
     input {
-      width:100%;
-      margin-right:0%;
+      width: 100%;
       margin-bottom: 10px;
+      margin-right:0%;
     }
 
     button {
       width: auto;
+
       float:right;
+
     }
   }
 }
+
 
