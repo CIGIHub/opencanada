@@ -16,25 +16,6 @@ var FeatureStyles = FeatureStyles || {
                     $('.jumbotron.main-feature').css("height", featureHeight + "px");
 
                 }
-            },
-            setOverlayForWindow: function (windowWidth) {
-                var overlayFeatures = $('#features').find('.rowheight-2');
-                if (windowWidth <= breakpoint) {
-                    overlayFeatures.each(function () {
-                        //var overlayHeight = $(this).css("height");
-                        //overlayHeight = parseInt(overlayHeight.slice(0, -2));
-                        $(this).css("height", "280px");
-                    });
-                }
-                if (windowWidth > breakpoint) {
-                    overlayFeatures.each(function () {
-                        if ($(this).css("height") == '280px') {
-                            $(this).css("height", "560px");
-                        }
-
-                    });
-                }
-
             }
         },
         Camera: {

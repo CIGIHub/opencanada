@@ -23,10 +23,8 @@ function initForWindow(){
 
     var windowHeight = $(window).height();
     var windowWidth = $(window).width();
-    //var articleTitleWidth = $('article').width() - 0.2*($('article').width());
 
     features.MainFeatures.initializeForWindow(windowHeight);
-    features.MainFeatures.setOverlayForWindow(windowWidth);
     sharing.Links.initializeForWindow(windowWidth);
     header.Structure.toggleHeading(windowWidth);
 
