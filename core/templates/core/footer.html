@@ -2,19 +2,6 @@
 
 <footer role="contentinfo">
     <div class="container">
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="featured-topics">
-                    <div class="label">Featured Topics: </div>
-                    <ul class="list-inline">
-                        {% suggested_searches 5 as search_topics %}
-                        {% for topic in search_topics %}
-                            <li><a href="{% topic_url topic %}">{{ topic.name }}</a></li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
-        </div>
         <div class="row infobar">
             <div class="col-sm-4">
                 <h3>About</h3>
