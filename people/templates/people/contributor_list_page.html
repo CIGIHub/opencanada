@@ -37,7 +37,7 @@
             {% for row in self.recent_contributors %}
                 <div class="row">
                     {% for contributor in row %}
-                        <div class="col-sm-{{ row|column_class }} col-xs-6">
+                        <div class="col-sm-3 col-xs-6">
                         {% if contributor.first_name and contributor.last_name %}
                             <div class="name"><a href="{{ contributor.url }}">{{ contributor.first_name }} {{ contributor.last_name }}</a></div>
                         {% endif %}

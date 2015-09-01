@@ -16,17 +16,19 @@ from wagtail.wagtailsearch import index
 class ContributorListPage(Page):
     subpage_types = ['ContributorPage']
 
-    def get_rows(self, contributors):
+    def get_rows(self, contributors, number_of_columns=3, max_columns=4):
         rows = []
         number_of_items = len(contributors)
-        number_of_columns = 3
         number_of_rows = number_of_items // number_of_columns
         row_remainder = number_of_items % number_of_columns
 
         if row_remainder > number_of_rows:
             number_of_rows += 1
         elif row_remainder <= number_of_rows and row_remainder != 0:
-            number_of_columns = 4
+            if number_of_columns < max_columns:
+                number_of_columns += 1
+            else:
+                number_of_rows += 1
 
         for row_index in range(0, number_of_rows):
             row = contributors[(row_index * number_of_columns):(row_index * number_of_columns) + number_of_columns]
@@ -42,7 +44,7 @@ class ContributorListPage(Page):
                                                              article_links__isnull=False,
                                                              article_links__article__first_published_at__range=[starttime, endtime]
                                                              ).order_by('last_name', 'first_name').distinct()
-        return self.get_rows(contributors)
+        return self.get_rows(contributors, number_of_columns=4)
 
     @property
     def nonfeatured_contributors(self):
