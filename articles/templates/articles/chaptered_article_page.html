@@ -32,27 +32,7 @@
                     {% endif %}
                 {% endif %}
             {% endif %}
-
-{#            <div class="title">#}
-{#                {% if self.primary_topic %}#}
-{#                    <div class="primary-topic">#}
-{#                        <i class="fa fa-tags"></i>#}
-{#                        <a href="{% topic_url self.primary_topic %}">{{ self.primary_topic.name }}</a>#}
-{#                    </div>#}
-{#                {% endif %}#}
-{##}
-{#                <h1>{{ self.title }}</h1>#}
-{#                <h2>{{ self.excerpt|richtext }}</h2>#}
-{##}
-{#                <div class="contributors">By:#}
-{#                    {% for author in self.authors %}#}
-{#                    <div class="contributor">#}
-{#                        <a href="{{ author.url }}">{{ author.first_name }} {{ author.last_name }}</a>#}
-{#                    </div>{% endfor %}</div>#}
-{#                <div class="date"> / {{ self.first_published_at|date:"F j, Y" }}</div>#}
-{#            </div>#}
-
-
+        
             <div class="story">
                 {{ self.body }}
 
