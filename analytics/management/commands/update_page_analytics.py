@@ -1,5 +1,6 @@
 from __future__ import absolute_import, division, unicode_literals
 
+import datetime
 import os
 import sys
 
@@ -7,6 +8,7 @@ from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 from django.core.management.base import BaseCommand
 from django.db import transaction
+from django.utils.timezone import now
 from wagtail.wagtailcore.models import Page
 
 from analytics import utils
@@ -39,9 +41,18 @@ def get_service_account_email():
 
 
 class Command(BaseCommand):
-    help = 'Get the analytics data over the last week and update the articles in te system'
+    help = 'Get the analytics data over the last week and update the articles in the system'
 
     def add_arguments(self, parser):
+        parser.add_argument(
+            '-d',
+            '--days',
+            action='store',
+            type=int,
+            dest='days',
+            default=7,
+            help='The number of days to look back to determine popularity'
+        )
         parser.add_argument(
             '--dry-run',
             action='store_true',
@@ -74,9 +85,13 @@ class Command(BaseCommand):
 
         profile = utils.get_first_profile_id(service)
 
+        days = options['days']
+        start_time = now() - datetime.timedelta(days)
+        start_date = start_time.strftime('%Y-%m-%d')
+
         data = service.data().ga().get(
             ids='ga:' + profile,
-            start_date='7daysAgo',
+            start_date=start_date,
             end_date='today',
             dimensions='ga:pagePath',
             metrics='ga:sessions',
@@ -91,7 +106,6 @@ class Command(BaseCommand):
             sys.exit(0)
 
         with transaction.atomic():
-            # TODO should I filter on liveness?
             pages = dict([(page.url, page) for page in Page.objects.live()])
             utils.reset_analytics(pages)
             for row in data['rows']:
@@ -102,7 +116,7 @@ class Command(BaseCommand):
                 page = pages[url]
 
                 analytics = utils.get_analytics(page)
-                analytics.last_week_views = sessions
+                analytics.last_period_views = sessions
                 analytics.save()
 
         # TODO Cache: we need to invalid the cache for any page which is effected

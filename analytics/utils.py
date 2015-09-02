@@ -75,23 +75,13 @@ def get_first_profile_id(service):
     return profiles.get('items')[0].get('id')
 
 
-def get_results(service, profile_id):
-    # Use the Analytics Service Object to query the Core Reporting API
-    # for the number of sessions within the past seven days.
-    return service.data().ga().get(
-        ids='ga:' + profile_id,
-        start_date='7daysAgo',
-        end_date='today',
-        metrics='ga:sessions').execute()
-
-
 def reset_analytics(pages):
     '''
     Set existing analytics to 0.
     '''
     for url, page in six.iteritems(pages):
         analytics = get_analytics(page)
-        analytics.last_week_views = 0
+        analytics.last_period_views = 0
         analytics.save()
 
 
@@ -99,9 +89,5 @@ def get_analytics(page):
     '''
     Ensure the analytics row exists for a given page
     '''
-    if not Analytics.objects.filter(page=page).exists():
-        Analytics.objects.create(
-            page=page
-        )
-
-    return page.analytics
+    analytics, _ = Analytics.objects.get_or_create(page=page)
+    return analytics

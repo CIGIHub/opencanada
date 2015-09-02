@@ -15,8 +15,11 @@ class Migration(migrations.Migration):
             name='Analytics',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('last_week_views', models.PositiveIntegerField(default=0)),
+                ('last_period_views', models.PositiveIntegerField(default=0)),
                 ('page', models.OneToOneField(to='wagtailcore.Page')),
             ],
+            options={
+                'verbose_name_plural': 'analytics',
+            },
         ),
     ]

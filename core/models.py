@@ -135,9 +135,12 @@ class HomePage(Page):
 
         # flatten the list of lists with generator
         articles = itertools.chain.from_iterable(self.articles)
-        articles_by_popularity = sorted([(page.analytics.last_week_views, page) for page in articles])
+        articles_by_popularity = sorted(
+            articles,
+            key=lambda x: x.analytics.last_period_views
+        )
 
-        rank, self._most_popular_article = articles_by_popularity[-1]
+        self._most_popular_article = articles_by_popularity[-1]
         return self._most_popular_article
 
     @property
