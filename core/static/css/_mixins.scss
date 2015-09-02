@@ -161,8 +161,7 @@
       width: 200px;
       padding: 25px;
       margin-top: 0px;
-      background: $background-grey;
-      border-right: $border-red;
+      background: #000;
       text-align: left;
 
       ul.social{
@@ -182,9 +181,9 @@
 
         li{
           display: block;
-            padding: 5px;
+            padding: 3px 5px;
           a{
-            color: $red;
+            color: #fff;
           }
           a:after{
             content: '';
