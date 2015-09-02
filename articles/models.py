@@ -1,5 +1,6 @@
 from __future__ import absolute_import, division, unicode_literals
 
+import logging
 from datetime import timedelta
 from operator import attrgetter
 
@@ -29,6 +30,8 @@ from wagtail.wagtailsnippets.models import register_snippet
 from people.models import ContributorPage
 
 from . import fields as article_fields
+
+logger = logging.getLogger('OpenCanada.ArticleModels')
 
 
 @python_2_unicode_compatible
@@ -262,17 +265,35 @@ class Sharelinks(models.Model):
     cached_facebook_count = models.IntegerField(default=0)
     cached_last_updated = models.DateTimeField(blank=True, null=True)
 
-    def update_cache(self):
-        if not self.cached_last_updated or (timezone.now() - self.cached_last_updated) > timedelta(minutes=10):
+    def _get_twitter_count(self):
+        try:
             url = 'https://cdn.api.twitter.com/1/urls/count.json?url=http://opencanada.org' + self.url
             response = requests.get(url)
             j = response.json()
-            self.cached_twitter_count = j['count']
+            return j.get('count', 0)
+        except requests.exceptions.RequestException:
+            logger.error('There was an error getting the Twitter share count.', exc_info=True, extra={"page": self})
+            return 0
 
+    def _get_facebook_count(self):
+        try:
             url = 'https://graph.facebook.com/?id=http://opencanada.org' + self.url
             response = requests.get(url)
             j = response.json()
-            self.cached_facebook_count = j['shares']
+            return j.get('shares', 0)
+        except requests.exceptions.RequestException:
+            logger.error('There was an error getting the Facebook share count.', exc_info=True, extra={"page": self})
+            return 0
+
+    def update_cache(self):
+        if not self.cached_last_updated or (timezone.now() - self.cached_last_updated) > timedelta(minutes=10):
+            tweet_count = self._get_twitter_count()
+            if tweet_count > 0:
+                self.cached_twitter_count = tweet_count
+
+            facebook_count = self._get_facebook_count()
+            if facebook_count > 0:
+                self.cached_facebook_count = facebook_count
 
             self.cached_last_updated = timezone.now()
             self.save()
