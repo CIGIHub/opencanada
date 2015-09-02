@@ -65,13 +65,14 @@ var FeatureStyles = FeatureStyles || {
                 $(window).scroll( function(){
                 
                     /* Check the location of each desired element */
-                    $('.related-articles .row > div').each( function(i){
+                    $('.related-articles .row > div, #features .row > div').each( function(i){
                         
-                        var bottom_of_object = $(this).offset().top + $(this).outerHeight();
+                        var middle_of_object = $(this).offset().top + $(this).outerHeight() /2;
                         var bottom_of_window = $(window).scrollTop() + $(window).height();
+                        var top_of_object = $(this).offset().top;
                         
-                        /* If the object is completely visible in the window, fade it it */
-                        if( bottom_of_window > bottom_of_object ){  
+                        /* If the object is scrolling to visible in the window, fade it it */
+                        if( bottom_of_window > middle_of_object  || bottom_of_window > top_of_object + 200){  
                             $(this).animate({'opacity':'1'},400);        
                         }   
                     }); 
