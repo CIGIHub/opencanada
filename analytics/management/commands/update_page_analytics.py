@@ -1,10 +1,15 @@
+from __future__ import absolute_import, division, unicode_literals
+
 import os
+import sys
 
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 from django.core.management.base import BaseCommand
+from django.db import transaction
+from wagtail.wagtailcore.models import Page
 
-from analytics.utils import get_first_profile_id, get_service
+from analytics import utils
 
 
 def get_creds_path():
@@ -46,6 +51,7 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **options):
+        dry_run = options['dry_run']
         creds_path = get_creds_path()
 
         key_file_location = os.path.join(creds_path, 'open-canada-analytics.p12')
@@ -58,7 +64,7 @@ class Command(BaseCommand):
         scope = ['https://www.googleapis.com/auth/analytics.readonly']
         service_account_email = get_service_account_email()
 
-        service = get_service(
+        service = utils.get_service(
             'analytics',
             'v3',
             scope,
@@ -66,13 +72,39 @@ class Command(BaseCommand):
             service_account_email
         )
 
-        profile = get_first_profile_id(service)
+        profile = utils.get_first_profile_id(service)
 
         data = service.data().ga().get(
             ids='ga:' + profile,
             start_date='7daysAgo',
             end_date='today',
-            metrics='ga:sessions'
+            dimensions='ga:pagePath',
+            metrics='ga:sessions',
+            sort='-ga:sessions',
+            filters='ga:sessions>=1',
         ).execute()
 
-        print(data)
+        if dry_run:
+            for row in data['rows']:
+                url, session = row
+                print('{}: {}'.format(url, session))
+            sys.exit(0)
+
+        with transaction.atomic():
+            # TODO should I filter on liveness?
+            pages = dict([(page.url, page) for page in Page.objects.live()])
+            utils.reset_analytics(pages)
+            for row in data['rows']:
+                url, sessions = row
+                if url not in pages:
+                    continue
+
+                page = pages[url]
+
+                analytics = utils.get_analytics(page)
+                analytics.last_week_views = sessions
+                analytics.save()
+
+        # TODO Cache: we need to invalid the cache for any page which is effected
+        # by the analytics such as the home page
+        # http://docs.wagtail.io/en/v1.0/reference/contrib/frontendcache.html#invalidating-index-pages

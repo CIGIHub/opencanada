@@ -1,7 +1,11 @@
+from __future__ import absolute_import, division, unicode_literals
 
 import httplib2
+import six
 from apiclient.discovery import build
 from oauth2client.client import SignedJwtAssertionCredentials
+
+from analytics.models import Analytics
 
 
 def get_service(api_name, api_version, scope, key_file_location, service_account_email):
@@ -79,3 +83,25 @@ def get_results(service, profile_id):
         start_date='7daysAgo',
         end_date='today',
         metrics='ga:sessions').execute()
+
+
+def reset_analytics(pages):
+    '''
+    Set existing analytics to 0.
+    '''
+    for url, page in six.iteritems(pages):
+        analytics = get_analytics(page)
+        analytics.last_week_views = 0
+        analytics.save()
+
+
+def get_analytics(page):
+    '''
+    Ensure the analytics row exists for a given page
+    '''
+    if not Analytics.objects.filter(page=page).exists():
+        Analytics.objects.create(
+            page=page
+        )
+
+    return page.analytics
