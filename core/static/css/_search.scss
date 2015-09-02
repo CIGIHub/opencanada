@@ -17,11 +17,14 @@
 
   input {
     width:71%;
-    margin-right:2%; //ff issues with 3%
+    margin-right:3%;
+    float:left;
+
   }
 
   button {
     width: 26%;
+    float:left;
   }
 
   &.open{
@@ -31,7 +34,6 @@
     transform: translate(0, 0%);
     -webkit-transform: translate(0, 0%);
     -ms-transform: translate(0, 0);
-    border-bottom: $border-red;
     padding: 15px 0 10px;
   }
 
@@ -76,6 +78,7 @@
   #search-box{
     &.open{
       top: 93px;
+      padding:40px 0;
 
       &.scrolled {
         top:57px !important;
@@ -94,10 +97,11 @@
 
 @media (max-width: 375px) {
   #search-box{
+
     input {
-      width: 100%;
-      margin-bottom: 10px;
+      width:100%;
       margin-right:0%;
+      margin-bottom: 10px;
     }
 
     button {
@@ -106,5 +110,4 @@
     }
   }
 }
-
 
