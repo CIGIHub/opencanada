@@ -12,11 +12,12 @@ jQuery(document).ready(function() {
     features.Camera.initialize();
     features.Arrow.initialize();
     features.FeatureImages.initialize();
+    features.RelatedArticles.initialize();
 
     search.Structure.initialize();
 
     sharing.Links.initialize();
-
+    
 });
 
 //initialize window based on width and height

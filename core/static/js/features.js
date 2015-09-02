@@ -69,6 +69,28 @@ var FeatureStyles = FeatureStyles || {
                     }
                 });
             }
-        }
+        },
+        RelatedArticles: {
+            initialize: function () {
+                
+                /* Every time the window is scrolled ... */
+                $(window).scroll( function(){
+                
+                    /* Check the location of each desired element */
+                    $('.related-articles .row > div, #features .row > div').each( function(i){
+                        
+                        var middle_of_object = $(this).offset().top + $(this).outerHeight() /2;
+                        var bottom_of_window = $(window).scrollTop() + $(window).height();
+                        var top_of_object = $(this).offset().top;
+                        
+                        /* If the object is scrolling to visible in the window, fade it it */
+                        if( bottom_of_window > middle_of_object  || bottom_of_window > top_of_object + 200){  
+                            $(this).animate({'opacity':'1'},400);        
+                        }   
+                    }); 
+                });
+
+            }
+        },
 
     };
