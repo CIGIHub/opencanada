@@ -36,6 +36,18 @@ var FeatureStyles = FeatureStyles || {
                 });
             }
         },
+        FeatureImages: {
+            initialize: function () {
+                $('.feature-wrapper').hover(function () {
+                    $('.feature-image').addClass("hover");
+                },
+                function () {
+                    $('.feature-image').removeClass("hover");
+                });
+
+                
+            }
+        },
         Arrow: {
             initialize: function(){
                 //scroll down arrow
