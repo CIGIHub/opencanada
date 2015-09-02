@@ -892,18 +892,18 @@ article {
 
 #features {
   .rowheight-1 {
-    @media(max-width: 1000px) {
+    @media(max-width: $breakpoint) {
       height: 140px;
     }
-    @media(min-width: 1001px) {
+    @media(min-width: $breakpoint + 1px) {
       height: 280px;
     }
   }
   .rowheight-2 {
-    @media(max-width: 1000px) {
+    @media(max-width: $breakpoint) {
       height: 280px;
     }
-    @media(min-width: 1001px) {
+    @media(min-width: $breakpoint + 1px) {
       height: 560px;
     }
   }
