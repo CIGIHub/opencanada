@@ -127,8 +127,62 @@
   .image-feature{
     figure{
       margin-bottom: 10px;
+      position: relative;
+      
+      a {
+        width:100%;
+        height:100%;
+        display:block;
+
+        &:hover:before {
+          width:100%;
+          height:100%;
+          background:rgba(0,0,0,0.25);
+          display: block;
+          position: absolute;
+          top:0;
+          left:0;
+          z-index: 1;
+          content:"";
+        }
+      }
+    }
+
+  }
+
+  .feature-image {
+    position: absolute !important;
+    z-index: 1;
+
+    &:before {
+      opacity: 0;
+      width:100%;
+      height:100%;
+      background:rgba(0,0,0,0.25);
+      display: block;
+      position: absolute;
+      top:0;
+      left:0;
+      z-index: 1;
+      content:"";
+    }
+
+
+    &:hover:before, &.hover:before {
+      opacity: 1;
+    }
+
+    > a {
+      width:100%;
+      height:100%;
+      display:inline; 
     }
   }
+
+  .feature-wrapper {
+    z-index: 2;
+  }
+
   .simple-feature{
     h3{
       font-size: 36px;
