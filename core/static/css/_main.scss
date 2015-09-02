@@ -485,6 +485,9 @@ article {
       display:inline-block;
       color: $red;
     }
+    i {
+      cursor: pointer;
+    }
     .count{
       color: $light-grey;
       font-family: $sans-serif;
@@ -493,6 +496,7 @@ article {
       list-style: none;
       text-align:right;
     }
+
   }
 
   .small-article & ul.share-links {
