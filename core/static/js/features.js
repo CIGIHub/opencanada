@@ -10,7 +10,7 @@ var FeatureStyles = FeatureStyles || {
 
                     //set the Homepage Feature height based on window height
                     var bannerHeight = $('header').height();
-                    var gap = 0.05 * windowHeight;
+                    var gap = 0.20 * windowHeight;
                     var featureHeight = windowHeight - bannerHeight - gap;
 
                     $('.jumbotron.main-feature').css("height", featureHeight + "px");
