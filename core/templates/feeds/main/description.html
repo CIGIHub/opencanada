@@ -1,1 +1,1 @@
-{{ obj.body|safe|truncatewords_html:80|striptags }}
+{% load wagtailimages_tags %}{% image obj.main_image width-650 class="webfeedsFeaturedVisual" %}{{ obj.body|safe|truncatewords_html:80 }}
