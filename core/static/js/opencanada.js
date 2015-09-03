@@ -1,6 +1,6 @@
 var breakpoint = 1000;
 
-var features = FeatureStyles;
+//var features = FeatureStyles;
 var sharing = Sharing;
 var header = Header;
 var search = Search;
@@ -9,10 +9,10 @@ jQuery(document).ready(function() {
 
     initForWindow();
 
-    features.Camera.initialize();
-    features.Arrow.initialize();
-    features.FeatureImages.initialize();
-    features.RelatedArticles.initialize();
+    FeatureStyles.Camera.initialize();
+    FeatureStyles.Arrow.initialize();
+    FeatureStyles.FeatureImages.initialize();
+    FeatureStyles.RelatedArticles.initialize();
 
     search.Structure.initialize();
 
@@ -26,7 +26,7 @@ function initForWindow(){
     var windowHeight = $(window).height();
     var windowWidth = $(window).width();
 
-    features.MainFeatures.initializeForWindow(windowHeight);
+    FeatureStyles.MainFeatures.initializeForWindow(windowHeight);
     sharing.Links.initializeForWindow(windowWidth);
     header.Structure.toggleHeading(windowWidth);
 

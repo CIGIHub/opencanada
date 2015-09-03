@@ -40,14 +40,15 @@ class HomePage(Page):
         related_name='+'
     )
 
-    number_of_rows_of_articles = models.IntegerField(default=12)
-    number_of_columns_of_articles = models.IntegerField(default=3)
-    number_of_rows_of_series = models.IntegerField(default=1)
-    number_of_columns_of_series = models.IntegerField(default=4)
-    number_of_rows_of_external_articles = models.IntegerField(default=2)
-    number_of_columns_of_external_articles = models.IntegerField(default=2)
-    number_of_rows_of_visualizations = models.IntegerField(default=2)
-    number_of_columns_of_visualizations = models.IntegerField(default=2)
+    number_of_rows_of_articles = models.IntegerField(default=12, verbose_name="Rows")
+    number_of_columns_of_articles = models.IntegerField(default=3, verbose_name="Columns")
+    number_of_rows_of_series = models.IntegerField(default=1, verbose_name="Rows")
+    number_of_columns_of_series = models.IntegerField(default=4, verbose_name="Columns")
+    number_of_rows_of_external_articles = models.IntegerField(default=2, verbose_name="Rows")
+    number_of_columns_of_external_articles = models.IntegerField(default=2, verbose_name="Columns")
+    number_of_rows_of_visualizations = models.IntegerField(default=2, verbose_name="Rows")
+    number_of_columns_of_visualizations = models.IntegerField(default=2, verbose_name="Columns")
+    full_bleed_image_size = models.PositiveSmallIntegerField(default=90, help_text="Enter a value from 0 - 100, indicating the percentage of the screen to use for the featured image layout.")
 
     def __str__(self):
         return self.title
@@ -163,7 +164,13 @@ class HomePage(Page):
         return self.get_rows(self.number_of_rows_of_series, self.number_of_columns_of_series, series_list)
 
     content_panels = Page.content_panels + [
-        PageChooserPanel("featured_item", "wagtailcore.Page"),
+        MultiFieldPanel(
+            [
+                PageChooserPanel("featured_item", "wagtailcore.Page"),
+                FieldPanel("full_bleed_image_size"),
+            ],
+            heading="Main Feature"
+        ),
         MultiFieldPanel(
             [
                 FieldPanel("number_of_rows_of_articles"),
@@ -175,12 +182,22 @@ class HomePage(Page):
             [
                 FieldPanel("number_of_rows_of_series"),
                 FieldPanel("number_of_columns_of_series"),
+            ],
+            heading="Series Section Settings"
+        ),
+        MultiFieldPanel(
+            [
                 FieldPanel("number_of_rows_of_external_articles"),
                 FieldPanel("number_of_columns_of_external_articles"),
+            ],
+            heading="External Articles Section Settings"
+        ),
+        MultiFieldPanel(
+            [
                 FieldPanel("number_of_rows_of_visualizations"),
                 FieldPanel("number_of_columns_of_visualizations"),
             ],
-            heading="Subsection Settings"
+            heading="Visualization Section Settings"
         ),
     ]
 

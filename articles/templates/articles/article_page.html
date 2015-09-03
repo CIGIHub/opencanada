@@ -3,6 +3,12 @@
 
 {% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
 
+{% block extra_js %}
+<script>
+    FeatureStyles.MainFeatures.setSize({{ self.full_bleed_image_size }});
+</script>
+{% endblock %}
+
 {% block content %}
 
     {% if self.main_image and self.include_main_image_overlay %}
