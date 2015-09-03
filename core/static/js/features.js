@@ -108,12 +108,12 @@ var FeatureStyles = FeatureStyles || {
                         if (!$(this).hasClass("fadedIn")) {
                             $(this).css('opacity', 0); 
                         }
-                        var third_of_object = $(this).offset().top + $(this).outerHeight() /3;
+                        var fifth_of_object = $(this).offset().top + $(this).outerHeight() /5;
                         var bottom_of_window = $(window).scrollTop() + $(window).height();
                         var top_of_object = $(this).offset().top;
                         
                         /* If the object is scrolling to visible in the window, fade it it */
-                        if( bottom_of_window > third_of_object  || bottom_of_window > top_of_object + 200){  
+                        if( bottom_of_window > fifth_of_object  || bottom_of_window > top_of_object + 100){  
                             $(this).animate({'opacity':'1'},400); 
                             $(this).addClass("fadedIn");        
                         }   
