@@ -272,6 +272,17 @@ main{
       top: 20%;
     }
 
+    .feature-text{
+      padding:0 20px;
+    }
+
+    @media(min-width: $screen-sm){
+      .feature-text{
+        padding-left:40px;
+        padding-right:40px;
+      }
+    }
+
     .date{
       color: white;
       font-size: 14px;

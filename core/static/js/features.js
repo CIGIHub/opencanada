@@ -66,10 +66,11 @@ var FeatureStyles = FeatureStyles || {
         FeatureImages: {
             initialize: function () {
                 $('.feature-wrapper').hover(function () {
-                    $(this).prev().addClass("hover");
-                },
-                function () {
-                    $(this).prev().removeClass("hover");
+                    $(this).prev().toggleClass("hover");
+                     $(this).toggleClass("hover");
+                });
+                $('.feature-image').hover(function () {
+                    $(this).next().toggleClass("hover");
                 });
 
                 
@@ -126,7 +127,11 @@ var FeatureStyles = FeatureStyles || {
 
                 //if you refesh, you could be down the page, and the featured articles would be hidden. 
                 //Do a check and display any articles that the user can see.
-                jQuery(window).load(function () {
+                $(window).load(function () {
+                    fadeInContent();
+                });
+
+                $(window).resize(function () {
                     fadeInContent();
                 });
 

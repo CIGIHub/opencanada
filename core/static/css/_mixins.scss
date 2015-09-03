@@ -205,7 +205,7 @@
   color: white;
 
   .feature-image{
-    position: relative;
+    position: absolute;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: bottom center;
@@ -225,14 +225,23 @@
   .feature-wrapper{
     position: absolute;
     z-index: 10;
-    top: 10%;
+    top: 5%;
     width:100%;
+
+    a {
+      padding-left:20px;
+      padding-right:20px;
+    }
   }
 
   .feature-text{
     position: relative;
     max-width: 940px;
     margin: 0 auto;
+
+    .contributors{
+      left:20px;     
+    }
   }
 
   .contributors, .contributors a, a{
@@ -258,6 +267,8 @@
     bottom: 0;
     padding: 10px 15px;
     font-size: 16px;
+    color:$white;
+
     &.highlighted,
     &:hover{
       cursor: pointer;
@@ -265,15 +276,18 @@
     }
   }
 
-  @media(max-width: $screen-md){
+  @media(min-width: $screen-sm){
     .feature-wrapper{
-        padding: 0 40px;
-    }
-  }
+      top:10%;
 
-  @media(max-width: $screen-sm){
-    .feature-wrapper{
-        padding: 0 20px;
+        a {
+          padding-left:40px;
+          padding-right:40px;
+        }
+    }
+
+    .feature-text .contributors{
+      left:40px;     
     }
   }
 }
