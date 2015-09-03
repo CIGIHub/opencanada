@@ -20,29 +20,48 @@ var FeatureStyles = FeatureStyles || {
         },
         Camera: {
             initialize: function () {
-                $('.camera').hover(function () {
-                    var selected = $(this);
+                
+                function toggleImage(element){
+                    var selected = element;
 
                     selected.toggleClass('highlighted');
                     var target = selected.closest($('.overlay'));
 
                     target.find($('.feature-text')).fadeToggle();
                     target.find($('.feature-image-overlay')).fadeToggle();
+                }
+
+                $('.camera').hover(function () {
+                    toggleImage($(this));
+                },
+                function () {
+                    //user could click, which would flip the toggle. So only toggle back on if its off.
+                    if ($(this).hasClass("highlighted")) {
+                        toggleImage($(this));
+                    }
                 });
 
                 $('.template-article-page .fa-camera').hover(function(){
                     $('.feature-text').fadeToggle();
                     $('.feature-image-overlay').fadeToggle();
                 });
+
+                $('.camera').click(function () {
+                        toggleImage($(this));         
+                });
+
+                $('.template-article-page .fa-camera').click(function(){
+                    toggleImage($(this));
+                });
             }
         },
         FeatureImages: {
             initialize: function () {
                 $('.feature-wrapper').hover(function () {
-                    $('.feature-image').addClass("hover");
+                    $(this).prev().addClass("hover");
                 },
                 function () {
-                    $('.feature-image').removeClass("hover");
+                    $(this).prev().removeClass("hover");
                 });
 
                 
@@ -73,10 +92,9 @@ var FeatureStyles = FeatureStyles || {
         RelatedArticles: {
             initialize: function () {
                 
-                /* Every time the window is scrolled ... */
-                $(window).scroll( function(){
-                
-                    /* Check the location of each desired element */
+
+                function fadeInArticles() {
+                   /* Check the location of each desired element */
                     $('.related-articles .row > div, #features .row > div').each( function(i){
                         
                         var middle_of_object = $(this).offset().top + $(this).outerHeight() /2;
@@ -87,7 +105,17 @@ var FeatureStyles = FeatureStyles || {
                         if( bottom_of_window > middle_of_object  || bottom_of_window > top_of_object + 200){  
                             $(this).animate({'opacity':'1'},400);        
                         }   
-                    }); 
+                    });  
+                }
+                /* Every time the window is scrolled ... */
+                $(window).scroll( function(){
+                    fadeInArticles();
+                });
+
+                //if you refesh, you could be down the page, and the featured articles would be hidden. 
+                //Do a check and display any articles that the user can see.
+                jQuery(window).load(function () {
+                    fadeInArticles();
                 });
 
             }
