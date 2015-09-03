@@ -764,6 +764,7 @@ class SeriesArticleLink(Orderable, models.Model):
 
 class SeriesPage(Page, FeatureStyleFields, Promotable, Sharelinks):
     subtitle = RichTextField(blank=True, default="")
+    short_description = RichTextField(blank=True, default="")
     body = article_fields.BodyField(blank=True, default="")
 
     main_image = models.ForeignKey(
@@ -856,6 +857,7 @@ class SeriesPage(Page, FeatureStyleFields, Promotable, Sharelinks):
 
     content_panels = Page.content_panels + [
         FieldPanel('subtitle'),
+        FieldPanel('short_description'),
         ImageChooserPanel('main_image'),
         StreamFieldPanel('body'),
         InlinePanel('related_article_links', label="Articles"),
