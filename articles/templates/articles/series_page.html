@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static core_tags wagtailcore_tags wagtailimages_tags %}
+{% load static article_tags core_tags wagtailcore_tags wagtailimages_tags %}
 
 {% block content %}
     <div id="article-page" class="container">
@@ -54,7 +54,7 @@
                     <div class="topic-label"><i class="fa fa-tags"></i> Topics:</div>
                     <ul class="list-inline">
                         {% for topic in self.topics %}
-                            <li><a href="{{ topic.url }}">{{ topic }}</a></li>
+                            <li><a href="{% topic_url topic %}">{{ topic }}</a></li>
                         {% endfor %}
                     </ul>
                 </div>
