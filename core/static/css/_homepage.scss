@@ -5,6 +5,15 @@
   @include article-overlay;
   @include fullbleed-overlay;
 
+  h1 {
+    margin-bottom: 0;
+    margin-top:0;
+
+    a {
+      padding-bottom: 10px;
+      display: inline-block;
+    }
+  }
   .scroll{
     position: absolute;
     z-index:10;
@@ -118,31 +127,32 @@
   }
 }
 
-.features, .related-articles{
+.features, .related-articles, .template-home-page .main-feature{
   color: black;
 
   .overlay-feature{
     @include article-overlay;
+  }
 
-    .feature-text {
-      position: relative;
-   
-      .contributors {
-        position: absolute;
-        left:40px;
-        bottom:0;
-        margin-top: 0;
+  .feature-text {
+    position: relative;
+ 
+    .contributors {
+      position: absolute;
+      bottom:0;
+      margin-top: 0;
 
-        a {
-          display: inline-block;
-        }
+      a {
+        display: inline-block;
+        padding:0;
       }
     }
-
-    .feature-wrapper{
-      padding:0px;
-    }
   }
+
+  .feature-wrapper{
+    padding:0px;
+  }
+  
 
   .image-feature{
     figure{
@@ -201,6 +211,12 @@
 
   .feature-wrapper {
     z-index: 2;
+
+    &.hover {
+      h1 a, h3 a {
+        color:$mid-grey;
+      }
+    }
   }
 
   .simple-feature{
@@ -221,14 +237,11 @@
       margin-bottom: 0;
 
       a {
-        padding: 0 40px 7%;
+        padding-bottom: 7%;
         display: inline-block;
         width: 100%;
         @include box-sizing(border-box);
 
-        &:hover {
-          color:#fff;
-        }
       }
 
       @media(max-width: $screen-sm){
@@ -238,7 +251,17 @@
   }
 
   .feature-line{
-      margin-top: 10px;
+      
+      a {
+        color:#fff;
+        padding-top: 10px;
+        display: inline-block;
+        padding-bottom: 7%;
+
+        &:hover {
+          color:#fff;
+        }
+      }
   }
   h3{
     margin-bottom: 5px;
