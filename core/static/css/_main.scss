@@ -289,6 +289,13 @@ main{
     color: $caption-grey;
     float: right;
     margin: 10px;
+
+    .fa-camera {
+      &:hover, &.highlighted {
+        color:$red;
+        cursor: pointer;
+      }
+    }
   }
 }
 

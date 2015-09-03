@@ -27,31 +27,30 @@ var FeatureStyles = FeatureStyles || {
                     selected.toggleClass('highlighted');
                     var target = selected.closest($('.overlay'));
 
+                    if ( !target.length ) {
+                        //not found, so we might be on an template-article-page. Try again.
+                        target = selected.closest($('main')).find(".overlay");
+                    }
+                    
                     target.find($('.feature-text')).fadeToggle();
                     target.find($('.feature-image-overlay')).fadeToggle();
                 }
 
-                $('.camera').hover(function () {
-                    toggleImage($(this));
-                },
-                function () {
-                    //user could click, which would flip the toggle. So only toggle back on if its off.
+                $('.fa-camera').mouseover(function () {
+                    if (!$(this).hasClass("highlighted")) {
+                        toggleImage($(this));
+                    }
+                });
+
+                $('.fa-camera').mouseout(function () {
                     if ($(this).hasClass("highlighted")) {
                         toggleImage($(this));
                     }
                 });
 
-                $('.template-article-page .fa-camera').hover(function(){
-                    $('.feature-text').fadeToggle();
-                    $('.feature-image-overlay').fadeToggle();
-                });
-
-                $('.camera').click(function () {
-                        toggleImage($(this));         
-                });
-
-                $('.template-article-page .fa-camera').click(function(){
-                    toggleImage($(this));
+                //mobile toggling
+                $('.fa-camera').on('touchstart', function (e) {
+                        toggleImage($(this));       
                 });
             }
         },
