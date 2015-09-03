@@ -6,7 +6,8 @@ from django.db import models
 from django.dispatch.dispatcher import receiver
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.timezone import now
-from wagtail.wagtailadmin.edit_handlers import FieldPanel, PageChooserPanel
+from wagtail.wagtailadmin.edit_handlers import (FieldPanel, MultiFieldPanel,
+                                                PageChooserPanel)
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailcore.signals import page_published
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
@@ -41,8 +42,12 @@ class HomePage(Page):
 
     number_of_rows_of_articles = models.IntegerField(default=12)
     number_of_columns_of_articles = models.IntegerField(default=3)
+    number_of_rows_of_series = models.IntegerField(default=1)
+    number_of_columns_of_series = models.IntegerField(default=4)
     number_of_rows_of_external_articles = models.IntegerField(default=2)
+    number_of_columns_of_external_articles = models.IntegerField(default=2)
     number_of_rows_of_visualizations = models.IntegerField(default=2)
+    number_of_columns_of_visualizations = models.IntegerField(default=2)
 
     def __str__(self):
         return self.title
@@ -117,8 +122,7 @@ class HomePage(Page):
                 id=self.featured_item.id)
             return featured_item
 
-    def get_rows(self, number_of_rows, items):
-        number_of_columns = 2
+    def get_rows(self, number_of_rows, number_of_columns, items):
         rows = []
 
         for row_index in range(0, number_of_rows):
@@ -129,17 +133,56 @@ class HomePage(Page):
 
     @property
     def external_articles(self):
-        number_of_external_articles = self.number_of_rows_of_external_articles * 2
+        number_of_external_articles = self.number_of_rows_of_external_articles * self.number_of_columns_of_external_articles
         external_article_list = article_models.ExternalArticlePage.objects.live().order_by("-first_published_at")[:number_of_external_articles]
 
-        return self.get_rows(self.number_of_rows_of_external_articles, external_article_list)
+        return self.get_rows(self.number_of_rows_of_external_articles,
+                             self.number_of_columns_of_external_articles,
+                             external_article_list)
 
     @property
     def graphics(self):
-        number_of_graphics = self.number_of_rows_of_visualizations * 2
-        graphics_list = article_models.ArticlePage.objects.live().filter(visualization=True).order_by("-first_published_at")[:number_of_graphics]
+        number_of_graphics = self.number_of_rows_of_visualizations * self.number_of_columns_of_visualizations
+        graphics_list = article_models.ArticlePage.objects.live().filter(
+            visualization=True).annotate(
+            sticky_value=models.Case(
+                models.When(models.Q(sticky_for_type_section=True),
+                            then=models.Value(1)), default=models.Value(0),
+                output_field=models.IntegerField())).order_by("-sticky_value", "-first_published_at")[:number_of_graphics]
 
-        return self.get_rows(self.number_of_rows_of_visualizations, graphics_list)
+        return self.get_rows(self.number_of_rows_of_visualizations, self.number_of_columns_of_visualizations, graphics_list)
+
+    @property
+    def series(self):
+        number_of_series = self.number_of_rows_of_series * self.number_of_columns_of_series
+        series_list = article_models.SeriesPage.objects.live().annotate(
+            sticky_value=models.Case(
+                models.When(models.Q(sticky_for_type_section=True), then=models.Value(1)), default=models.Value(0),
+                output_field=models.IntegerField())).order_by("-sticky_value", "-first_published_at")[:number_of_series]
+
+        return self.get_rows(self.number_of_rows_of_series, self.number_of_columns_of_series, series_list)
+
+    content_panels = Page.content_panels + [
+        PageChooserPanel("featured_item", "wagtailcore.Page"),
+        MultiFieldPanel(
+            [
+                FieldPanel("number_of_rows_of_articles"),
+                FieldPanel("number_of_columns_of_articles"),
+            ],
+            heading="Main Feed Settings"
+        ),
+        MultiFieldPanel(
+            [
+                FieldPanel("number_of_rows_of_series"),
+                FieldPanel("number_of_columns_of_series"),
+                FieldPanel("number_of_rows_of_external_articles"),
+                FieldPanel("number_of_columns_of_external_articles"),
+                FieldPanel("number_of_rows_of_visualizations"),
+                FieldPanel("number_of_columns_of_visualizations"),
+            ],
+            heading="Subsection Settings"
+        ),
+    ]
 
 
 @receiver(page_published, sender=HomePage)
@@ -197,15 +240,6 @@ def on_publish(**kwargs):
                 image_overlay_opacity=opacity,
                 font_style=font
             )
-
-
-HomePage.content_panels = Page.content_panels + [
-    PageChooserPanel("featured_item", "wagtailcore.Page"),
-    FieldPanel("number_of_rows_of_articles"),
-    FieldPanel("number_of_columns_of_articles"),
-    FieldPanel("number_of_rows_of_external_articles"),
-    FieldPanel("number_of_rows_of_visualizations"),
-]
 
 
 @python_2_unicode_compatible

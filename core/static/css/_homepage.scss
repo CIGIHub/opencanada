@@ -88,6 +88,10 @@
     }
     h3 {
       font-size: 22px;
+
+      &.columns-3 {
+        font-size: 14px;
+      }
     }
     .read-more {
       text-align: center;

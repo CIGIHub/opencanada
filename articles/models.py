@@ -254,6 +254,7 @@ register_snippet(ArticleCategory)
 
 class Promotable(models.Model):
     sticky = models.BooleanField(default=False)
+    sticky_for_type_section = models.BooleanField(default=False)
     editors_pick = models.BooleanField(default=False)
 
     class Meta:
@@ -493,6 +494,7 @@ class ArticlePage(Page, FeatureStyleFields, Promotable, Sharelinks):
         MultiFieldPanel(
             [
                 FieldPanel('sticky'),
+                FieldPanel('sticky_for_type_section'),
                 FieldPanel('editors_pick'),
                 FieldPanel('feature_style'),
                 MultiFieldPanel(
@@ -856,6 +858,7 @@ class SeriesPage(Page, FeatureStyleFields, Promotable, Sharelinks):
         MultiFieldPanel(
             [
                 FieldPanel('sticky'),
+                FieldPanel('sticky_for_type_section'),
                 FieldPanel('editors_pick'),
                 FieldPanel('feature_style'),
                 MultiFieldPanel(
