@@ -393,7 +393,9 @@ class ArticlePage(Page, FeatureStyleFields, Promotable, Sharelinks):
 
     include_author_block = models.BooleanField(default=True)
     include_main_image = models.BooleanField(default=True)
-    include_main_image_overlay = models.BooleanField(default=False)
+    include_main_image_overlay = models.BooleanField(default=False, help_text="Check to use a full-bleed image layout.", verbose_name="Use Main Image Full-Bleed Layout")
+    full_bleed_image_size = models.PositiveSmallIntegerField(default=75,
+                                                             help_text="Enter a value from 0 - 100, indicating the percentage of the screen to use for the full-bleed image layout. This value is only used if 'Use Main Image Full-Bleed Layout' is checked.")
     visualization = models.BooleanField(default=False)
     interview = models.BooleanField(default=False)
 
@@ -515,6 +517,12 @@ class ArticlePage(Page, FeatureStyleFields, Promotable, Sharelinks):
             [
                 FieldPanel('include_main_image'),
                 FieldPanel('include_main_image_overlay'),
+                FieldPanel('full_bleed_image_size'),
+            ],
+            heading="Main Image"
+        ),
+        MultiFieldPanel(
+            [
                 FieldPanel('include_author_block'),
             ],
             heading="Sections"

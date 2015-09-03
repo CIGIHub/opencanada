@@ -1,5 +1,13 @@
 var FeatureStyles = FeatureStyles || {
         MainFeatures: {
+            gap_size: {"value": 0.15},
+            setSize: function(percentage){
+                if (percentage > 0) {
+                    FeatureStyles.MainFeatures.gap_size.value = (100 - percentage) / 100.0;
+                } else {
+                    return 0;
+                }
+            },
             initializeForWindow: function (windowHeight) {
                 var bodyTag = $('body');
                 if ((bodyTag.hasClass('template-home-page'))
@@ -10,7 +18,7 @@ var FeatureStyles = FeatureStyles || {
 
                     //set the Homepage Feature height based on window height
                     var bannerHeight = $('header').height();
-                    var gap = 0.15 * windowHeight;
+                    var gap = FeatureStyles.MainFeatures.gap_size.value * windowHeight;
                     var featureHeight = windowHeight - bannerHeight - gap;
 
                     $('.jumbotron.main-feature').css("height", featureHeight + "px");
