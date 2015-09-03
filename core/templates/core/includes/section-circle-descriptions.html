@@ -1,0 +1,36 @@
+{% load  core_tags wagtailcore_tags article_tags wagtailimages_tags %}
+
+<section class="container items side-image">
+        <h2>{{ heading_text }}</h2>
+        {% for item_row in item_collection %}
+            <div class="row {% if forloop.last %}last{% endif %}">
+                {% for item in item_row %}
+                    <div class="col-sm-{{ item_row|column_class }}{% if forloop.last %} last{% endif %}">
+                    {% spaceless %}
+                        <a href="{{ item.url }}"><figure>
+                            {% section_image item as image %}
+                            {% if image %}
+                                {% if use_ring %}
+                                    {% image image rcircle-80x80-rgba_204-w_1 %}
+                                {% else %}
+                                    {% image image circle-80x80 %}
+                                {% endif %}
+                            {% endif %}
+                        </figure></a>
+                    {% endspaceless %}
+                        <div class="reading">
+                             <h3 class="columns-{{ item_row|column_class }}"><a href="{{ item.url }}">{{ item.title }}</a></h3>
+                            {% if item.short_description %}
+                            {{ item.short_description|richtext }}
+                            {% else %}
+                            {{ item.body|truncatewords_html:80|richtext }}
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+        <div class="read-more">
+            <button><a href="{% slugurl more_link_slug %}">{{ more_link_text }} <i class="fa fa-chevron-right"></i></a></button>
+        </div>
+    </section>

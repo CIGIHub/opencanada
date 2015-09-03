@@ -103,7 +103,7 @@ var FeatureStyles = FeatureStyles || {
 
                 function fadeInContent() {
                    /* Check the location of each desired element */
-                    $('.related-articles .row > div, #features .row > div, .readings .row > div, .graphics .row > div').each( function(i){
+                    $('.related-articles .row > div, #features .row > div, .items .row > div, .graphics .row > div').each( function(i){
                         
                         if (!$(this).hasClass("fadedIn")) {
                             $(this).css('opacity', 0); 

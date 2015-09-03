@@ -24,3 +24,17 @@ def get_site_defaults(context):
         return context['request'].site.default_settings
     except ObjectDoesNotExist:
         return None
+
+
+@register.assignment_tag(takes_context=True)
+def section_image(context, item):
+    if hasattr(item, "source"):
+        if item.source and item.source.logo:
+            return item.source.logo
+        else:
+            try:
+                default_settings = context['request'].site.default_settings
+                return default_settings.default_external_article_source_logo
+            except ObjectDoesNotExist:
+                pass
+    return item.main_image
