@@ -398,6 +398,7 @@ class ArticlePage(Page, FeatureStyleFields, Promotable, Sharelinks):
                                                              help_text="Enter a value from 0 - 100, indicating the percentage of the screen to use for the full-bleed image layout. This value is only used if 'Use Main Image Full-Bleed Layout' is checked.")
     visualization = models.BooleanField(default=False)
     interview = models.BooleanField(default=False)
+    number_of_related_articles = models.PositiveSmallIntegerField(default=6, verbose_name="Number of Related Articles to Show")
 
     search_fields = Page.search_fields + (
         index.SearchField('excerpt', partial_match=True),
@@ -524,6 +525,7 @@ class ArticlePage(Page, FeatureStyleFields, Promotable, Sharelinks):
         MultiFieldPanel(
             [
                 FieldPanel('include_author_block'),
+                FieldPanel('number_of_related_articles')
             ],
             heading="Sections"
         ),
@@ -790,6 +792,7 @@ class SeriesPage(Page, FeatureStyleFields, Promotable, Sharelinks):
     )
 
     include_main_image = models.BooleanField(default=True)
+    number_of_related_articles = models.PositiveSmallIntegerField(default=6, verbose_name="Number of Related Articles to Show")
 
     def get_primary_topic_name(self):
         if self.primary_topic:
@@ -888,6 +891,7 @@ class SeriesPage(Page, FeatureStyleFields, Promotable, Sharelinks):
         MultiFieldPanel(
             [
                 FieldPanel('include_main_image'),
+                FieldPanel('number_of_related_articles'),
             ],
             heading="Sections"
         )
