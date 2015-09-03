@@ -123,8 +123,24 @@
 
   .overlay-feature{
     @include article-overlay;
+
+    .feature-text {
+      position: relative;
+   
+      .contributors {
+        position: absolute;
+        left:40px;
+        bottom:0;
+        margin-top: 0;
+
+        a {
+          display: inline-block;
+        }
+      }
+    }
+
     .feature-wrapper{
-      padding: 0 40px;
+      padding:0px;
     }
   }
 
@@ -202,6 +218,22 @@
     h3.double-height{
       font-size: 46px;
       font-weight: bold;
+      margin-bottom: 0;
+
+      a {
+        padding: 0 40px 7%;
+        display: inline-block;
+        width: 100%;
+        @include box-sizing(border-box);
+
+        &:hover {
+          color:#fff;
+        }
+      }
+
+      @media(max-width: $screen-sm){
+        font-size: 36px;
+      }
     }
   }
 

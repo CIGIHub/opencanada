@@ -20,29 +20,48 @@ var FeatureStyles = FeatureStyles || {
         },
         Camera: {
             initialize: function () {
-                $('.camera').hover(function () {
-                    var selected = $(this);
+                
+                function toggleImage(element){
+                    var selected = element;
 
                     selected.toggleClass('highlighted');
                     var target = selected.closest($('.overlay'));
 
                     target.find($('.feature-text')).fadeToggle();
                     target.find($('.feature-image-overlay')).fadeToggle();
+                }
+
+                $('.camera').hover(function () {
+                    toggleImage($(this));
+                },
+                function () {
+                    //user could click, which would flip the toggle. So only toggle back on if its off.
+                    if ($(this).hasClass("highlighted")) {
+                        toggleImage($(this));
+                    }
                 });
 
                 $('.template-article-page .fa-camera').hover(function(){
                     $('.feature-text').fadeToggle();
                     $('.feature-image-overlay').fadeToggle();
                 });
+
+                $('.camera').click(function () {
+                        toggleImage($(this));         
+                });
+
+                $('.template-article-page .fa-camera').click(function(){
+                    toggleImage($(this));
+                });
             }
         },
         FeatureImages: {
             initialize: function () {
                 $('.feature-wrapper').hover(function () {
-                    $('.feature-image').addClass("hover");
+                    $(this).prev().addClass("hover");
                 },
                 function () {
-                    $('.feature-image').removeClass("hover");
+                    $(this).prev().removeClass("hover");
                 });
 
                 
@@ -73,21 +92,34 @@ var FeatureStyles = FeatureStyles || {
         RelatedArticles: {
             initialize: function () {
                 
-                /* Every time the window is scrolled ... */
-                $(window).scroll( function(){
-                
-                    /* Check the location of each desired element */
-                    $('.related-articles .row > div, #features .row > div').each( function(i){
+
+                function fadeInContent() {
+                   /* Check the location of each desired element */
+                    $('.related-articles .row > div, #features .row > div, .readings .row > div, .graphics .row > div').each( function(i){
                         
-                        var middle_of_object = $(this).offset().top + $(this).outerHeight() /2;
+                        if (!$(this).hasClass("fadedIn")) {
+                            $(this).css('opacity', 0); 
+                        }
+                        var third_of_object = $(this).offset().top + $(this).outerHeight() /3;
                         var bottom_of_window = $(window).scrollTop() + $(window).height();
                         var top_of_object = $(this).offset().top;
                         
                         /* If the object is scrolling to visible in the window, fade it it */
-                        if( bottom_of_window > middle_of_object  || bottom_of_window > top_of_object + 200){  
-                            $(this).animate({'opacity':'1'},400);        
+                        if( bottom_of_window > third_of_object  || bottom_of_window > top_of_object + 200){  
+                            $(this).animate({'opacity':'1'},400); 
+                            $(this).addClass("fadedIn");        
                         }   
-                    }); 
+                    });  
+                }
+                /* Every time the window is scrolled ... */
+                $(window).scroll( function(){
+                    fadeInContent();
+                });
+
+                //if you refesh, you could be down the page, and the featured articles would be hidden. 
+                //Do a check and display any articles that the user can see.
+                jQuery(window).load(function () {
+                    fadeInContent();
                 });
 
             }

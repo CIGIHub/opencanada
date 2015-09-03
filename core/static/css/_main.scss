@@ -756,11 +756,6 @@ article {
 }
 
 .related-articles{
-
-  .row > div {
-    opacity: 0; //fades in on scroll
-  }
-
   @media(max-width: $screen-sm){
      figure{
        display: table;
@@ -899,11 +894,6 @@ article {
 }
 
 #features {
-
-  .row > div {
-    opacity: 0; //fades in on scroll
-  }
-
   .rowheight-1 {
     @media(max-width: $breakpoint) {
       height: 140px;
