@@ -1,8 +1,8 @@
 {% load static core_tags wagtailcore_tags wagtailimages_tags %}
 
 <div class="jumbotron main-feature overlay" style="height: 400px;">
-    {% image self.typed_featured_item.main_image fill-2048x1365 as background_image %}
-    <div class="feature-image" style="background-image: url(' {{ background_image.url }} ')">
+    {% image self.typed_featured_item.main_image fill-2048x1200-c100 as background_image %}
+    <div class="feature-image" style="background-image: url('{{ background_image.url }}')">
         <div class="feature-image-overlay"
              style="background: rgba( {% if self.typed_featured_item.image_overlay_color.rgb %} {{ self.typed_featured_item.image_overlay_color.rgb }} {% endif %},
                      {% if self.typed_featured_item.opacity %} {{ self.typed_featured_item.opacity }} {% endif %})">
