@@ -93,7 +93,8 @@
     }
 
     h2 {
-      @include subheading(28px);
+      @include subheading(22px);
+      font-weight: 800;
     }
     h3 {
       font-size: 22px;
