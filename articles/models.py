@@ -6,6 +6,7 @@ from operator import attrgetter
 
 import requests
 from basic_site.models import UniquelySlugable
+from django import forms
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
@@ -91,19 +92,23 @@ class ArticleListPage(Page):
                      ]
 
     articles_per_page = models.IntegerField(default=20)
-    filter_for_visualizations = models.BooleanField(default=False)
-    filter_for_interviews = models.BooleanField(default=False)
+
+    filter_choices = [
+        ('visualizations', 'Visualizations'),
+        ('interviews', 'Interviews'),
+        ('editors_pick', "Editor's Pick"),
+    ]
+    filter = models.TextField(choices=filter_choices, null=True, blank=True)
 
     @property
     def subpages(self):
 
-        if self.filter_for_visualizations and not self.filter_for_interviews:
+        if self.filter == "visualizations":
             subpages = ArticlePage.objects.live().filter(visualization=True).order_by('-first_published_at')
-        elif self.filter_for_interviews and not self.filter_for_visualizations:
+        elif self.filter == "interviews":
             subpages = ArticlePage.objects.live().filter(interview=True).order_by('-first_published_at')
-        elif self.filter_for_interviews and self.filter_for_visualizations:
-            subpages = ArticlePage.objects.live().filter(
-                models.Q(visualization=True) | models.Q(interview=True)).order_by('-first_published_at')
+        elif self.filter == "editors_pick":
+            subpages = ArticlePage.objects.live().filter(editors_pick=True).order_by('-first_published_at')
         else:
             subpages = ArticlePage.objects.live().order_by('-first_published_at')
 
@@ -127,8 +132,7 @@ class ArticleListPage(Page):
 
     content_panels = Page.content_panels + [
         FieldPanel('articles_per_page'),
-        FieldPanel('filter_for_visualizations'),
-        FieldPanel('filter_for_interviews'),
+        FieldPanel('filter', widget=forms.Select),
     ]
 
 
