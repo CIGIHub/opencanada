@@ -99,8 +99,10 @@
       font-size: 22px;
 
       &.columns-3 {
-        font-size: 18px;
+        font-size: 14px;
         padding-top: 10px;
+        font-weight: 600;
+        line-height: 125%;
       }
     }
     .read-more {
