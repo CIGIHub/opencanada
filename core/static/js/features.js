@@ -114,7 +114,7 @@ var FeatureStyles = FeatureStyles || {
                         var top_of_object = $(this).offset().top;
                         
                         /* If the object is scrolling to visible in the window, fade it it */
-                        if( bottom_of_window > fifth_of_object  || bottom_of_window > top_of_object + 100){  
+                        if( bottom_of_window > fifth_of_object  || bottom_of_window > top_of_object + 40){  
                             $(this).animate({'opacity':'1'},400); 
                             $(this).addClass("fadedIn");        
                         }   
