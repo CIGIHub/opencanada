@@ -66,7 +66,7 @@ class ContributorPage(Page):
     email = models.EmailField(blank=True, default="")
     twitter_handle = models.CharField(max_length=16, blank=True, default="")
 
-    short_bio = models.TextField(blank=True, default="")
+    short_bio = RichTextField(blank=True, default="")
     long_bio = RichTextField(blank=True, default="")
 
     headshot = models.ForeignKey(
