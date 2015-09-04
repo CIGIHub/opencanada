@@ -7,7 +7,7 @@
                     {% if not forloop.last %}, {% endif %}
                 {% endfor %}
             {% if date %}
-                <div class="date"> / {{ date|date:"F j, Y" }}</div>
+                / <div class="date">{{ date|date:"F j, Y" }}</div>
             {% endif %}
             </div>
         </div>
