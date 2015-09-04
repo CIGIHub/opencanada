@@ -30,5 +30,8 @@ var Menu = Menu || {
             else {
                 Menu.open();
             }
-        }
+        },
+        setOffset: function (offset) {
+            $('#main-menu').css("top", offset + "px");
+        },
     };

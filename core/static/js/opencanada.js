@@ -36,6 +36,7 @@ function initForWindow(){
     var bannerHeight = $('header').height();
     $('body').css("padding-top", bannerHeight + "px");
     search.Structure.setOffset(bannerHeight);
+    Menu.setOffset(bannerHeight);
 
     $("main").click(function () {
         Menu.close();

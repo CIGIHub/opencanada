@@ -9,7 +9,6 @@ var Header = Header || {
 
                 function fullHeader() {
                     $('header').removeClass('collapsed');
-                    //$('#search-box').removeClass('small-header');
                     $('.toggle-mobile').hide();
                     $('nav').removeClass('mobile-menu open');
                     bodyTag.removeClass('article-scroll');
@@ -22,7 +21,6 @@ var Header = Header || {
                 function collapsedHeader() {
 
                     $('header').addClass('collapsed');
-                    //$('#search-box').addClass('small-header');
                     $('.toggle-mobile').show();
 
                     $('nav').addClass('mobile-menu');
@@ -40,7 +38,6 @@ var Header = Header || {
 
                     var headerRow = $('header .header-row');
                     if ($('header').hasClass('collapsed')) {
-                        //$('#main-menu').hide();
                         collapsedHeader();
 
                         if ($('#article-page').length) {
@@ -49,8 +46,6 @@ var Header = Header || {
                         }
                     }
                     else {
-                        //$('#main-menu').show();
-
                         if (!(headerRow.hasClass('col-md-4'))) {
                             headerRow.addClass('col-md-4');
                         }
