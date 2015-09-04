@@ -39,24 +39,6 @@ function initForWindow(){
         Search.Structure.closeBox();
         FeatureStyles.MainFeatures.removeNavigationLock();
     });
-
-    /*$('html').on('touchstart click', function (e) {
-        var selected = $(e.target);
-
-        if (selected.closest('button').data('target') == 'main-menu') {
-            Menu.toggle();
-        }
-        else if (selected.closest('button').data('target') == 'search-box') {
-            Search.Structure.toggleBox();
-        }
-        else {
-            Menu.close();
-            Search.Structure.closeBox();
-        }
-
-    });
-*/
-
 }
 
 $(window).resize(function(){
