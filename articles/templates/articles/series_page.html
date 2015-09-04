@@ -1,40 +1,43 @@
 {% extends "base.html" %}
 {% load static article_tags core_tags wagtailcore_tags wagtailimages_tags %}
 
+{% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
+
+{% block extra_js %}
+<script>
+    FeatureStyles.MainFeatures.setSize({{ self.full_bleed_image_size }});
+</script>
+{% endblock %}
+
 {% block content %}
+
+    {% if self.main_image and self.include_main_image_overlay %}
+        {% include 'articles/includes/article-feature.html' with metadata='articles/includes/series-metadata.html' %}
+    {% endif %}
+
     <div id="article-page" class="container">
         <article>
             {% block share_links %}
                 {% include 'articles/includes/share_links.html' %}
             {% endblock %}
-            <div class="title">
-                <div class="type"><a href="{% pageurl self.get_parent %}">{{ self.get_parent.title }}</a></div>
-                <h1>{{ self.title }}</h1>
-                <h2>{{ self.subtitle|richtext }}</h2>
-                {% if self.authors %}
-                    <div class="contributors series">
-                        <div class="contributor-label">Series Contributors: </div>
-                        <div class="contributor-list">
-                            {% for author in self.authors %}
-                                <div class="contributor"><a href="{{ author.url  }}">{{ author.first_name }} {{ author.last_name }}</a></div>
-                            {% endfor %}
+
+
+            {% if not self.include_main_image_overlay or self.include_main_image_overlay and not self.main_image %}
+                {% include 'articles/includes/series-metadata.html' %}
+                {% if self.include_main_image and self.main_image %}
+                    <figure class="main-image">
+                        {% image self.main_image fill-940x627 %}
+                    </figure>
+                    {% if self.main_image.credit %}
+                        <div class="image-credit">
+                            {{ self.main_image.credit }}
                         </div>
-                    </div>
-               {% endif %}
-            </div>
-            {% if self.include_main_image %}
-                <figure class="main-image">
-                    {% image self.main_image fill-940x627 %}
-                </figure>
-                {% if self.main_image.credit %}
-                    <div class="image-credit">
-                        {{ self.main_image.credit }}
-                    </div>
-                {% endif %}
-                {% if self.main_image.source %}
-                    <div class="image-source">
-                        {{ self.main_image.source }}
-                    </div>
+                    {% endif %}
+                    {% if self.main_image.source %}
+                        <div class="image-source">
+                            {{ self.main_image.source }}
+                        </div>
+                    {% endif %}
                 {% endif %}
             {% endif %}
 

@@ -5,21 +5,7 @@
         <h2><a href="{{ series.url }}">{{ series.title }}</a></h2>
 
         {% if series.authors %}
-            <div class="contributors">
-                <div class="contributor-label">By: </div>
-                <div class="contributor-list">
-                    {% for author in series.authors %}
-                        <div class="contributor">
-                            <a href="{{ author.url }}">
-                                {{ author.first_name }}
-                                {{ author.last_name }}
-                            </a>
-                            {% if not forloop.last %}, {% endif %}
-                        </div>
-                    {% endfor %}
-                    <div class="date"> / {{ series.first_published_at|date:"F j, Y" }}</div>
-                </div>
-            </div>
+            {% include 'articles/includes/article-contributors.html' with authors=series.authors date=series.first_published_at %}
         {% else %}
             <div class="date">{{ series.first_published_at|date:"F j, Y" }}</div>
         {% endif %}

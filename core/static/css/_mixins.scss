@@ -258,6 +258,12 @@
     .contributor-list{
         margin-left: 25px;
     }
+
+    &.series {
+      .contributor-list{
+        margin-left: 160px;
+    }
+    }
   }
 
   .fa-camera{

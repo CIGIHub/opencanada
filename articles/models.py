@@ -364,7 +364,17 @@ class FeatureStyleFields(models.Model):
         abstract = True
 
 
-class ArticlePage(Page, FeatureStyleFields, Promotable, Sharelinks):
+class PageLayoutOptions(models.Model):
+    include_main_image = models.BooleanField(default=True)
+    include_main_image_overlay = models.BooleanField(default=False, help_text="Check to use a full-bleed image layout.", verbose_name="Use Main Image Full-Bleed Layout")
+    full_bleed_image_size = models.PositiveSmallIntegerField(default=75,
+                                                             help_text="Enter a value from 0 - 100, indicating the percentage of the screen to use for the full-bleed image layout. This value is only used if 'Use Main Image Full-Bleed Layout' is checked.")
+
+    class Meta:
+        abstract = True
+
+
+class ArticlePage(Page, FeatureStyleFields, Promotable, Sharelinks, PageLayoutOptions):
     excerpt = RichTextField(blank=True, default="")
     body = article_fields.BodyField()
 
@@ -392,10 +402,7 @@ class ArticlePage(Page, FeatureStyleFields, Promotable, Sharelinks):
     )
 
     include_author_block = models.BooleanField(default=True)
-    include_main_image = models.BooleanField(default=True)
-    include_main_image_overlay = models.BooleanField(default=False, help_text="Check to use a full-bleed image layout.", verbose_name="Use Main Image Full-Bleed Layout")
-    full_bleed_image_size = models.PositiveSmallIntegerField(default=75,
-                                                             help_text="Enter a value from 0 - 100, indicating the percentage of the screen to use for the full-bleed image layout. This value is only used if 'Use Main Image Full-Bleed Layout' is checked.")
+
     visualization = models.BooleanField(default=False)
     interview = models.BooleanField(default=False)
     number_of_related_articles = models.PositiveSmallIntegerField(default=6, verbose_name="Number of Related Articles to Show")
@@ -764,7 +771,7 @@ class SeriesArticleLink(Orderable, models.Model):
     ]
 
 
-class SeriesPage(Page, FeatureStyleFields, Promotable, Sharelinks):
+class SeriesPage(Page, FeatureStyleFields, Promotable, Sharelinks, PageLayoutOptions):
     subtitle = RichTextField(blank=True, default="")
     short_description = RichTextField(blank=True, default="")
     body = article_fields.BodyField(blank=True, default="")
@@ -791,7 +798,6 @@ class SeriesPage(Page, FeatureStyleFields, Promotable, Sharelinks):
         index.SearchField('get_topic_names', partial_match=True),
     )
 
-    include_main_image = models.BooleanField(default=True)
     number_of_related_articles = models.PositiveSmallIntegerField(default=6, verbose_name="Number of Related Articles to Show")
 
     def get_primary_topic_name(self):
@@ -891,6 +897,13 @@ class SeriesPage(Page, FeatureStyleFields, Promotable, Sharelinks):
         MultiFieldPanel(
             [
                 FieldPanel('include_main_image'),
+                FieldPanel('include_main_image_overlay'),
+                FieldPanel('full_bleed_image_size'),
+            ],
+            heading="Main Image"
+        ),
+        MultiFieldPanel(
+            [
                 FieldPanel('number_of_related_articles'),
             ],
             heading="Sections"

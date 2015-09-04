@@ -52,13 +52,18 @@
                                     {% endif %}
 
                                     {% if article.authors %}
+                                        {% spaceless %}
                                         <div class="contributors">By:
                                             {% for author in article.authors %}
-                                            <div class="contributor">
-                                                <a style="color: {{ article.font_style.text_colour.hex_value }}" href="{{ author.url }}">{{ author.first_name }} {{ author.last_name }}</a>
-                                            </div>
+                                                <div class="contributor">
+                                                    <a href="{{ author.url }}" style="color: {{ article.font_style.text_colour.hex_value }};">
+                                                     {{ author.full_name }}
+                                                    </a>
+                                                </div>
+                                                {% if not forloop.last %}, {% endif %}
                                             {% endfor %}
                                         </div>
+                                    {% endspaceless %}
                                     {% endif %}
                                 </div>
                             </div>
@@ -72,13 +77,18 @@
                             {% endif %}
                             <figure><a href="{{ article.url }}">{%  image article.main_image fill-710x475 %}</a></figure>
                             <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
-                           <div class="contributors">By:
-                                {% for author in article.authors %}
-                                <div class="contributor">
-                                    <a href="{{ author.url }}">{{ author.first_name }} {{ author.last_name }}</a>
-                                </div>
-                                {% endfor %}
-                            </div>
+                           {% spaceless %}
+                                    <div class="contributors">By:
+                                        {% for author in article.authors %}
+                                            <div class="contributor">
+                                                <a href="{{ author.url }}">
+                                                 {{ author.full_name }}
+                                                </a>
+                                            </div>
+                                            {% if not forloop.last %}, {% endif %}
+                                        {% endfor %}
+                                    </div>
+                           {% endspaceless %}
                         </div>
 
                     {% else %}
@@ -87,13 +97,19 @@
                                 <div class="editors-pick"><div>Editors Pick</div></div>
                             {% endif %}
                             <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
-                            <div class="contributors">By:
-                                {% for author in article.authors %}
-                                <div class="contributor">
-                                    <a href="{{ author.url }}">{{ author.first_name }} {{ author.last_name }}</a>
-                                </div>
-                                {% endfor %}
-                            </div>
+                            {% spaceless %}
+                                    <div class="contributors">By:
+                                        {% for author in article.authors %}
+                                            <div class="contributor">
+                                                <a href="{{ author.url }}">
+                                                 {{ author.full_name }}
+                                                </a>
+                                            </div>
+                                            {% if not forloop.last %}, {% endif %}
+                                        {% endfor %}
+                                    </div>
+                        {% endspaceless %}
+
                             {% if article.subtitle %}
                                 <div class="feature-line">{{ article.subtitle|richtext }}</div>
                             {% else %}
