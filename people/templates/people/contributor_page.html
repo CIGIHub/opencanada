@@ -12,7 +12,7 @@
                      / <a href="https://twitter.com/{{ self.twitter_handle }}">{{ self.twitter_handle }}</a>
                 {% endif %}
             </h1>
-            <div class="short-bio">{{ self.short_bio }}</div>
+            <div class="short-bio">{{ self.short_bio|richtext }}</div>
 
             <div class="bio">{{ self.long_bio|richtext }}</div>
 

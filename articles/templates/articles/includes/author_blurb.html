@@ -8,7 +8,7 @@
                     <figure class="headshot">{% image author.headshot circle-80x80 %}</figure>
                 {% endif %}
                 <div class="author">By: <a href="{{ author.url }}">{{ author.full_name }}</a></div>
-                <div class="short-bio">{{ author.short_bio }}</div>
+                <div class="short-bio">{{ author.short_bio|richtext }}</div>
                 <ul>
                     {% for article in articles %}
                         <li><a href="{{ article.url }}">{{ article.title }}</a></li>
