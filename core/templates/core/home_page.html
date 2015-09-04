@@ -2,7 +2,7 @@
 
 {% load static core_tags wagtailcore_tags article_tags wagtailimages_tags %}
 
-{% block feedlink %}<link rel="alternate" type="application/rss+xml" href="/feed/" />{% endblock feedlink %}
+{% block feedlink %}<link rel="alternate" type="application/rss+xml" href="feed/" />{% endblock feedlink %}
 
 {% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
 
@@ -28,7 +28,7 @@
                     {% if article.feature_style.include_image and article.feature_style.overlay_text %}
                         <div class="overlay-feature rowheight-{{ article.feature_style.number_of_rows }}">
                             {% if article.editors_pick %}
-                                <div class="editors-pick"><div>Editors Pick</div></div>
+                                <a href="{% slugurl 'editors-picks' %}"><div class="editors-pick"><div>Editor's Pick</div></div></a>
                             {% endif %}
                             {% if article.feature_style.number_of_rows == 2 %}
                                 {% image article.main_image fill-910x560 as background_image %}
@@ -73,7 +73,7 @@
                     {% elif article.feature_style.include_image and not article.feature_style.overlay_text %}
                         <div class="image-feature">
                             {% if article.editors_pick %}
-                                <div class="editors-pick"><div>Editors Pick</div></div>
+                                <a href="{% slugurl 'editors-picks' %}"><div class="editors-pick"><div>Editor's Pick</div></div></a>
                             {% endif %}
                             <figure><a href="{{ article.url }}">{%  image article.main_image fill-710x475 %}</a></figure>
                             <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
@@ -94,7 +94,7 @@
                     {% else %}
                         <div class="simple-feature">
                             {% if article.editors_pick %}
-                                <div class="editors-pick"><div>Editors Pick</div></div>
+                                <a href="{% slugurl 'editors-picks' %}"><div class="editors-pick"><div>Editor's Pick</div></div></a>
                             {% endif %}
                             <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
                             {% spaceless %}
@@ -124,7 +124,7 @@
             </div>
         {% endfor %}
         <div class="read-more">
-            <button><a href="/features">All Features <i class="fa fa-chevron-right"></i></a></button>
+            <button><a href="{% slugurl 'features' %}">All Features <i class="fa fa-chevron-right"></i></a></button>
         </div>
     </section>
 
