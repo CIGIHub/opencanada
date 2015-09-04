@@ -32,11 +32,7 @@ function initForWindow(){
     sharing.Links.initializeForWindow(windowWidth);
     header.Structure.toggleHeading(windowWidth);
 
-    //set the body padding based on banner height
-    var bannerHeight = $('header').height();
-    $('body').css("padding-top", bannerHeight + "px");
-    search.Structure.setOffset(bannerHeight);
-    Menu.setOffset(bannerHeight);
+    header.Positioning.updateHeaderPositioning();
 
     $("main").click(function () {
         Menu.close();
@@ -65,6 +61,10 @@ function initForWindow(){
 
 $(window).resize(function(){
     initForWindow();
+});
+
+$(window).scroll(function(){
+    header.Positioning.updateHeaderPositioning();
 });
 
 

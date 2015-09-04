@@ -93,7 +93,15 @@ var Header = Header || {
 
                 }
             }
+        }, 
+        Positioning: {
+            updateHeaderPositioning: function(){
+                //set the body padding based on banner height
+                var bannerHeight = $('header').height();
+                $('body').css("padding-top", bannerHeight + "px");
+                search.Structure.setOffset(bannerHeight);
+                Menu.setOffset(bannerHeight);
+            }
         }
-
 
     };
