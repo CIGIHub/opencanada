@@ -17,6 +17,8 @@ jQuery(document).ready(function() {
     search.Structure.initialize();
 
     sharing.Links.initialize();
+
+    Menu.initialize();
     
 });
 
@@ -30,31 +32,21 @@ function initForWindow(){
     sharing.Links.initializeForWindow(windowWidth);
     header.Structure.toggleHeading(windowWidth);
 
-    //set the body padding based on banner height
-    var bannerHeight = $('header').height();
-    $('body').css("padding-top", bannerHeight + "px");
-    search.Structure.setOffset(bannerHeight);
+    header.Positioning.updateHeaderPositioning();
 
-    $('html').on('touchstart click', function (e) {
-        var selected = $(e.target);
-
-        if (selected.closest('button').data('target') == 'main-menu') {
-            Menu.toggle();
-        }
-        else if (selected.closest('button').data('target') == 'search-box') {
-            Search.Structure.toggleBox();
-        }
-        else {
-            Menu.close();
-            Search.Structure.closeBox();
-        }
-
+    $("main").click(function () {
+        Menu.close();
+        Search.Structure.closeBox();
+        FeatureStyles.MainFeatures.removeNavigationLock();
     });
-
 }
 
 $(window).resize(function(){
     initForWindow();
+});
+
+$(window).scroll(function(){
+    header.Positioning.updateHeaderPositioning();
 });
 
 
