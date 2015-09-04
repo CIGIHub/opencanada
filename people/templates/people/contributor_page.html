@@ -7,11 +7,10 @@
             {% if self.headshot %}
                 <figure class="headshot">{% image self.headshot circle-140x140 %}</figure>
             {% endif %}
-            <h1>{{ self.title }}
-                {% if self.twitter_handle %}
-                     / <a href="https://twitter.com/{{ self.twitter_handle }}">{{ self.twitter_handle }}</a>
-                {% endif %}
+        {% spaceless %}
+            <h1>{{ self.title }}{% if self.twitter_handle %} / <a href="https://twitter.com/{{ self.twitter_handle }}">{{ self.twitter_handle }}</a>{% endif %}
             </h1>
+        {% endspaceless %}
             <div class="short-bio">{{ self.short_bio|richtext }}</div>
 
             <div class="bio">{{ self.long_bio|richtext }}</div>
