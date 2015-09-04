@@ -10,11 +10,12 @@ var FeatureStyles = FeatureStyles || {
             },
             initializeForWindow: function (windowHeight) {
                 var bodyTag = $('body');
-                if ((bodyTag.hasClass('template-home-page'))
-                    || (bodyTag.hasClass('template-article-page')
-                    || (bodyTag.hasClass('template-chaptered-article-page')
+                if ((bodyTag.hasClass('template-home-page')
+                    || bodyTag.hasClass('template-article-page')
+                    || bodyTag.hasClass('template-chaptered-article-page')
+                    || bodyTag.hasClass('template-series-page')
                     )
-                    && $('.jumbotron').length)) {
+                    && $('.jumbotron').length) {
 
                     //set the Homepage Feature height based on window height
                     var bannerHeight = $('header').height();

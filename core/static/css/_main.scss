@@ -264,7 +264,7 @@ main{
 
 /**************  Article  **************/
 
-.template-article-page, .template-chaptered-article-page {
+.template-article-page, .template-chaptered-article-page, .template-series-page {
   .main-feature {
     @include article-overlay;
     @include fullbleed-overlay;
@@ -292,6 +292,28 @@ main{
       font-weight: 700;
       padding-bottom: 10px;
       border-bottom: $border-white;
+      a {
+        padding-left: 10px;
+        padding-right: 0px;
+      }
+    }
+
+    .type {
+      @include type(white);
+      font-weight: 700;
+      padding-bottom: 10px;
+      border-bottom: $border-white;
+      a {
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+
+    .contributor{
+      a {
+        padding-left: 0px;
+        padding-right: 0px;
+      }
     }
   }
   .feature-caption{

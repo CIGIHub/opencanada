@@ -5,7 +5,7 @@
 
 {% block content %}
     {% if self.main_image and self.include_main_image_overlay %}
-        {% include 'articles/includes/article-feature.html' %}
+        {% include 'articles/includes/article-feature.html' with metadata='articles/includes/article-metadata.html' %}
     {% endif %}
 
     <div id="chaptered-article-page" class="container">
