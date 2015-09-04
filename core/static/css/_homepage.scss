@@ -73,6 +73,10 @@
     margin-bottom: 20px;
     margin-top: 20px;
 
+    &.features {
+      margin-top:0;
+    }
+
     .row {
       @include row-divider;
     }
@@ -96,7 +100,9 @@
     }
 
     h2 {
-      @include subheading(28px);
+      @include subheading(22px);
+      font-weight: 800;
+      margin-top: 20px;
     }
     h3 {
       font-size: 22px;
