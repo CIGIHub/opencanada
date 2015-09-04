@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static article_tags core_tags wagtailcore_tags wagtailembeds_tags wagtailimages_tags %}
+
+{% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
+
+{% block content %}
+
+    <div id="article-page" class="container">
+        <article>
+        {% block share_links %}
+            {% include 'articles/includes/share_links.html' %}
+        {% endblock %}
+            <h1>{{ self.title}}</h1>
+            <div class="story">
+                 {{ self.body|richtext }}
+                <div class="home-link"><a href="/"><img src="{% static 'img/opencanada-mark.png' %}"></a></div>
+            </div>
+        </article>
+    </div>
+
+
+{% endblock %}

@@ -1,4 +1,5 @@
-{% load wagtailcore_tags static core_tags %}
+{% load wagtailcore_tags static core_tags jobs_tags %}
+{% get_active_posting_page as active_jobs_page %}
 
 <header role="banner">
     <div class="banner container-fluid">
@@ -12,6 +13,7 @@
                         <li><a href="/about">About</a></li>
                         <li><a href="/contributors">Contributors</a></li>
                         <li><a href="/topics">Topics</a></li>
+                        {% if active_jobs_page %}<li><a href="{% pageurl active_jobs_page %}">Jobs</a></li>{% endif %}
                     </ul>
                     <ul class="toggle-mobile social">
                         <li><a href="#"><i class="fa fa-twitter"></i> Twitter</a></li>
