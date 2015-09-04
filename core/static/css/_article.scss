@@ -343,7 +343,7 @@ article {
     clear: both;
     float:left;
     max-width: 100%;
-    
+
   }
 
   .image{
@@ -388,6 +388,28 @@ article {
     {
         margin-left: 0;
         margin-right: 0;
+    }
+
+    .block-ColumnedContent {
+      .col-lg-6 {
+        width: 50%;
+        float:left;
+      }
+
+      @media(max-width: $screen-xs) {
+        .col-lg-4 {
+          max-width: 350px;
+          margin:0 auto;
+          float:none;
+        }
+      }
+
+      @media(min-width: $screen-xs +1) {
+        .col-lg-4 {
+          width:33.3333%;
+          float:left;
+        }
+      }
     }
 
   .block-PullQuote {
