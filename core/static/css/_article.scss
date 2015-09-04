@@ -217,6 +217,15 @@ article {
       text-align: right;
       display: block;
       margin-right: 10%;
+      font-family: $sans-serif;
+      text-transform: uppercase;
+      font-size: 0.8em;
+
+      &:after {
+        content:"\f106";
+        font-family: "FontAwesome";
+        padding-left: 0.25em;
+      }
   }
 
   .topics {
@@ -306,6 +315,7 @@ article {
   }
 
   .block-Image {
+
     .image {
       margin: 0 0 10px 0;
     }
@@ -332,6 +342,8 @@ article {
 
   .image{
     position: relative;
+    border:solid 3px #e0e0e0;
+    margin-bottom: 10px;
 
     .photo-zoom {
       color: #bf1e2e;
@@ -345,6 +357,17 @@ article {
   .image-label {
       float: right;
       color: #bf1e2e;
+      font-family: $sans-serif;
+      text-transform: uppercase;
+      font-size: 0.9em;
+
+      &.clickable {
+        &:after {
+          content:"\f08e";
+          font-family: "FontAwesome";
+          padding-left: 0.4em;
+        }
+      }
     }
 
     .block-Overflow .block-ColumnedContent,
@@ -362,18 +385,21 @@ article {
       width: 33%;
       float: right;
       font-size: 28px;
+      line-height: 120%;
       padding: 20px;
       margin: 10px;
       background-color: #f6f6f6;
-      line-height: 120%;
+      
   }
   .block-Quote {
     border-left: solid $red 5px;
     color: $light-grey;
     margin-left: 15%;
+    margin-top:20px;
+    margin-bottom:20px;
+    
     .quote {
       padding-left: 10px;
-      line-height: 120%;
       width: 80%;
       margin-bottom: 20px;
     }
@@ -455,6 +481,7 @@ article {
 
   .end-notes {
     color: $light-grey;
+
     li {
       list-style: none;
       line-height: 1.5em;
@@ -472,12 +499,14 @@ article {
   }
 
   .toc {
+    font-family: $sans-serif;
     ul {
       background-color: #f6f6f6;
       padding-top: 30px;
       padding-bottom: 30px;
       padding-left: 40px;
       padding-right: 40px;
+      margin-left: 0;
 
       li {
         margin: 3px;
@@ -489,6 +518,11 @@ article {
         }
       }
     }
+  }
+
+  .toc h2, h2.chapter-heading {
+    margin-top: 2em;
+    font-family: $sans-serif;
   }
 
   .modal-link {
