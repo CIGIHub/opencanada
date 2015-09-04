@@ -339,11 +339,18 @@ article {
       }
     }
   }
+  .image-wrapper {
+    clear: both;
+    float:left;
+  }
 
   .image{
     position: relative;
-    border:solid 3px #e0e0e0;
-    margin-bottom: 10px;
+    
+    img {
+      border:solid 3px #e0e0e0;
+      margin-bottom: 10px;
+    }
 
     .photo-zoom {
       color: #bf1e2e;
@@ -356,6 +363,7 @@ article {
 
   .image-label {
       float: right;
+      margin-bottom: 20px;
       color: #bf1e2e;
       font-family: $sans-serif;
       text-transform: uppercase;
@@ -388,9 +396,18 @@ article {
       line-height: 120%;
       padding: 20px;
       margin: 10px;
-      background-color: #f6f6f6;
-      
+      background-color: #f6f6f6; 
   }
+
+  @media(max-width: $screen-sm) {
+    .block-PullQuote {
+      width: 100%;
+      float:none;
+      margin-left:0;
+      margin-right:0;
+    }
+  }
+
   .block-Quote {
     border-left: solid $red 5px;
     color: $light-grey;
@@ -402,6 +419,10 @@ article {
       padding-left: 10px;
       width: 80%;
       margin-bottom: 20px;
+    }
+
+    @media(max-width: $screen-xs) {
+      margin-left: 8%;
     }
   }
 
