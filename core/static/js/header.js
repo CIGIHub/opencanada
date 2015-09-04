@@ -40,7 +40,7 @@ var Header = Header || {
 
                     var headerRow = $('header .header-row');
                     if ($('header').hasClass('collapsed')) {
-                        $('#main-menu').hide();
+                        //$('#main-menu').hide();
                         collapsedHeader();
 
                         if ($('#article-page').length) {
@@ -49,7 +49,7 @@ var Header = Header || {
                         }
                     }
                     else {
-                        $('#main-menu').show();
+                        //$('#main-menu').show();
 
                         if (!(headerRow.hasClass('col-md-4'))) {
                             headerRow.addClass('col-md-4');

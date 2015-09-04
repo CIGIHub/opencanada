@@ -17,6 +17,8 @@ jQuery(document).ready(function() {
     search.Structure.initialize();
 
     sharing.Links.initialize();
+
+    Menu.initialize();
     
 });
 
