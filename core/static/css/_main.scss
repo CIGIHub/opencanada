@@ -80,11 +80,12 @@ button:focus {outline:0;}
 footer{
   color: white;
   font-family: $sans-serif;
+  background: $light-grey;
+  padding-bottom: 40px;
+
   a{
     color: white;
   }
-  background: $light-grey;
-  padding-bottom: 40px;
 
   h3{
     @include type(white, 12px);
@@ -136,7 +137,16 @@ footer{
       border-right: none;
       padding-top: 20px;
       margin-bottom: 20px;
+
+      &:first-child {
+        border-top:0;
+      }
     }
+  }
+
+  @media(min-width: $screen-sm) {
+    padding-bottom: 80px;
+    padding-top:40px;
   }
 
   .newsletter-form{
