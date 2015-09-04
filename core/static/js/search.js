@@ -11,6 +11,11 @@ var Search = Search || {
                     $('.clear-button').hide();
                     Search.Structure.focusInput();
                 });
+
+                $("#search-box-toggle").click(function () {
+                    Search.Structure.toggleBox();
+                });
+
             },
             setOffset: function (offset) {
                 $('#search-box').css("top", offset + "px");
@@ -18,16 +23,19 @@ var Search = Search || {
             //toggle menu in mobile/small window width view
             closeBox: function(){
                 var search = $('#search-box');
+                
                 if (search.hasClass('open')) {
                     search.removeClass('open');
+                    FeatureStyles.MainFeatures.removeNavigationLock();
                 }
             },
             openBox: function() {
                 var search = $('#search-box');
-
+                
                 if (!(search.hasClass('open'))) {
                     Menu.close();
                     search.addClass('open');
+                    FeatureStyles.MainFeatures.addNavigationLock();
                 }
             },
             isOpen: function(){

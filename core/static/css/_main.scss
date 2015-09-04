@@ -5,10 +5,10 @@ html {
 }
 
 body{
-  min-height: 100%;
   color: $text-color;
   font-family: $serif;
   font-size: 14px;
+  height: auto;
 }
 
 h1, .jumbotron h1{
@@ -260,6 +260,21 @@ footer{
 
 main{
   margin-bottom: 30px;
+}
+
+.navigation-lock {
+    overflow: hidden !important;
+
+    main:before {
+      content:"";
+      top:0;
+      left:0;
+      bottom:0;
+      right:0;
+      background: rgba(255,255,255,0.75);
+      z-index: 12;
+      position: fixed;
+    }
 }
 
 /**************  Article  **************/

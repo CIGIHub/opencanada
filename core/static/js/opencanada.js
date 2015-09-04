@@ -35,7 +35,13 @@ function initForWindow(){
     $('body').css("padding-top", bannerHeight + "px");
     search.Structure.setOffset(bannerHeight);
 
-    $('html').on('touchstart click', function (e) {
+    $("main").click(function () {
+        Menu.close();
+        Search.Structure.closeBox();
+        FeatureStyles.MainFeatures.removeNavigationLock();
+    });
+
+    /*$('html').on('touchstart click', function (e) {
         var selected = $(e.target);
 
         if (selected.closest('button').data('target') == 'main-menu') {
@@ -50,6 +56,7 @@ function initForWindow(){
         }
 
     });
+*/
 
 }
 

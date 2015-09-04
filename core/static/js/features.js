@@ -25,6 +25,14 @@ var FeatureStyles = FeatureStyles || {
                     $('.jumbotron.main-feature').css("height", featureHeight + "px");
 
                 }
+            },
+            addNavigationLock: function() {
+                $("body").addClass("navigation-lock");
+                $("html").addClass("navigation-lock");
+            },
+            removeNavigationLock: function() {
+                $("body").removeClass("navigation-lock");
+                $("html").removeClass("navigation-lock");
             }
         },
         Camera: {
