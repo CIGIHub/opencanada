@@ -70,6 +70,10 @@
     margin-bottom: 20px;
     margin-top: 20px;
 
+    &.features {
+      margin-top:0;
+    }
+
     .row {
       @include row-divider;
     }
