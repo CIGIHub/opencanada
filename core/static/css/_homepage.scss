@@ -30,15 +30,10 @@
       display: block;
       text-align: center;
 
-      -webkit-animation: bounce 2s;
-      -moz-animation:    bounce 2s;
-      -o-animation:     bounce 2s;
-      animation: bounce 2s;
-
-      -webkit-animation-iteration-count: infinite;
-      -moz-animation-iteration-count: infinite;
-      -o-animation-iteration-count: infinite;
-      animation-iteration-count: infinite;
+      -webkit-animation: bounce 2s infinite;
+      -moz-animation:    bounce 2s infinite;
+      -o-animation:     bounce 2s infinite;
+      animation: bounce 2s infinite;
 
       i{
         font-size:50px;
@@ -47,15 +42,23 @@
   }
 
   @keyframes bounce {
-	0%, 25%, 75%, 100% {
-      -webkit-transform: translateY(0);
-      transform: translateY(0);
-	}
-	50% {
-      -webkit-transform: translateY(0.4em);
-      transform: translateY(0.4em);
-	}
+  	0%, 25%, 75%, 100% {
+        transform: translateY(0);
+  	}
+  	50% {
+        transform: translateY(0.4em);
+  	}
   }
+
+  /* Chrome, Safari, Opera */
+  @-webkit-keyframes bounce {
+    0%, 25%, 75%, 100% {
+        -webkit-transform: translateY(0); 
+    }
+    50% {
+        -webkit-transform: translateY(0.4em);
+    }
+ }
 
   @media(max-width: $screen-sm){
     .scroll{
