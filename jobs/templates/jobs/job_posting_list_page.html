@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags %}
+
+{% block content %}
+<div class="container">
+    <div class="narrow-page">
+        {% if self.title %}
+            <h1 class="subheading">{{ self.title }}</h1>
+        {% endif %}
+
+        {% for job in jobs %}
+            <article class="row teaser">
+                    <div class="col-xs-12">
+                        <h2><a href="{{ job.url }}">{{ job.title }}</a></h2>
+
+                            <div class="date">{{ job.first_published_at|date:"F j, Y" }}</div>
+
+                        <div class="feature-line">
+                            {{ job.body|truncatewords_html:80|richtext }}
+                        </div>
+                    </div>
+            </article>
+        {% endfor %}
+
+        {% if jobs.paginator.num_pages > 1 %}
+            <ul class="pager">
+                <li class="previous">
+                    {% if jobs.has_previous %}
+                        <a href="?page={{ jobs.previous_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&amp;{{ key }}={{ value }}{% endifnotequal %}{% endfor %}">Previous</a>
+                    {% endif %}
+                </li>
+                <li class="pages">
+                    Page {{ jobs.number }} of {{ jobs.paginator.num_pages }}
+                </li>
+                <li class="next">
+                    {% if jobs.has_next %}
+                        <a href="?page={{ jobs.next_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&amp;{{ key }}={{ value }}{% endifnotequal %}{% endfor %}">Next</a>
+                    {% endif %}
+                </li>
+            </ul>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

@@ -15,6 +15,7 @@ from wagtail.wagtailsnippets.models import register_snippet
 
 from articles import models as article_models
 from events import models as event_models
+from jobs import models as jobs_models
 from newsletter import models as newsletter_models
 from people import models as people_models
 
@@ -30,6 +31,7 @@ class HomePage(Page):
         newsletter_models.NewsletterListPage,
         event_models.EventListPage,
         article_models.ExternalArticleListPage,
+        jobs_models.JobPostingListPage,
     ]
 
     featured_item = models.ForeignKey(
