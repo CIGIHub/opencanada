@@ -15,6 +15,7 @@
       display: inline-block;
     }
   }
+
   .scroll{
     position: absolute;
     z-index:10;
@@ -112,6 +113,10 @@
       @include subheading(22px);
       font-weight: 800;
       margin-top: 20px;
+
+      @media(max-width: $screen-tiny-max){
+          text-align: center;
+      }//end media query
     }
     h3 {
       font-size: 22px;
@@ -140,6 +145,23 @@
       .reading{
         margin-left: 100px;
     }
+    @media(max-width: $screen-tiny-max){
+      figure {
+        float:none;
+        text-align: center;
+          img {
+            float:none;
+            display: inline-block;
+            padding-bottom: 15px;
+          }
+      }
+
+      .reading {
+        margin-left:0;
+        text-align: center;
+      }
+    } //end media query
+
   }
   .graphics{
     h3{
