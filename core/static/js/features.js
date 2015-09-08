@@ -8,8 +8,10 @@ var FeatureStyles = FeatureStyles || {
                     return 0;
                 }
             },
-            initializeForWindow: function (windowHeight) {
+            initializeForWindow: function () {
                 var bodyTag = $('body');
+                var windowHeight = $(window).height();
+                
                 if ((bodyTag.hasClass('template-home-page')
                     || bodyTag.hasClass('template-article-page')
                     || bodyTag.hasClass('template-chaptered-article-page')
@@ -114,10 +116,11 @@ var FeatureStyles = FeatureStyles || {
                     /* Check the location of each desired element */
                     $('.related-articles .row > div, #features .row > div, .items .row > div, .graphics .row > div').each( function(i){
                         
-                        if (windowWidth > breakpoint && !$(this).hasClass("fadedIn")) {
+                        var windowWidth = $(window).width();
+                        if (windowWidth >= breakpoint && !$(this).hasClass("fadedIn")) {
                             $(this).css('opacity', 0); 
 
-                        }else if (windowWidth <= breakpoint) {
+                        }else if (windowWidth < breakpoint) {
                             $(this).css('opacity', 1); 
                         }
                         var fifth_of_object = $(this).offset().top + $(this).outerHeight() /5;

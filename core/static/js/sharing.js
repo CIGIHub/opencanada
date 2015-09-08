@@ -40,7 +40,7 @@ var Sharing = Sharing || {
             initializeForWindow: function () {
                 if ($("article > .title").children().hasClass("primary-topic")) {
 
-                    if (windowWidth > breakpoint) {
+                    if ($(window).width() >= breakpoint) {
                         $('ul.share-links').addClass("below-topic");
                     }
                     else {

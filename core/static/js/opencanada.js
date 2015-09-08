@@ -1,13 +1,5 @@
 var breakpoint = 1000;
 
-var windowHeight = $(window).height();
-var windowWidth = $(window).width();
-
-//var features = FeatureStyles;
-var sharing = Sharing;
-var header = Header;
-var search = Search;
-
 jQuery(document).ready(function() {
 
     initForWindow();
@@ -17,9 +9,9 @@ jQuery(document).ready(function() {
     FeatureStyles.FeatureImages.initialize();
     FeatureStyles.RelatedArticles.initialize();
 
-    search.Structure.initialize();
+    Search.Structure.initialize();
 
-    sharing.Links.initialize();
+    Sharing.Links.initialize();
 
     Menu.initialize();
     
@@ -28,11 +20,10 @@ jQuery(document).ready(function() {
 //initialize window based on width and height
 function initForWindow(){
 
-    FeatureStyles.MainFeatures.initializeForWindow(windowHeight);
-    sharing.Links.initializeForWindow();
-    header.Structure.toggleHeading();
-
-    header.Positioning.updateHeaderPositioning();
+    FeatureStyles.MainFeatures.initializeForWindow();
+    Sharing.Links.initializeForWindow();
+    Header.Structure.toggleHeading();
+    Header.Positioning.updateHeaderPositioning();
 
     $("main").click(function () {
         Menu.close();
@@ -43,13 +34,10 @@ function initForWindow(){
 
 $(window).resize(function(){
     initForWindow();
-    windowHeight = $(window).height();
-    windowWidth = $(window).width();
-    
 });
 
 $(window).scroll(function(){
-    header.Positioning.updateHeaderPositioning();
+    Header.Positioning.updateHeaderPositioning();
 });
 
 
