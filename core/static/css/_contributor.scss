@@ -1,0 +1,86 @@
+/**************  People/Contributor pages  **************/
+
+.contributor-profile{
+  h1, .short-bio{
+    text-align:center;
+    font-family: $sans-serif;
+    a{
+      color: black;
+    }
+  }
+
+  .headshot img{
+    margin: 40px auto 0 auto;
+  }
+
+  h1{
+    font-weight: 700;
+    font-size: 30px;
+  }
+
+  .bio{
+    margin: 40px 0;
+    line-height: 150%;
+    @media(max-width: $screen-sm){
+      margin: 10px 0;
+    }
+  }
+  h2{
+
+    @include subheading;
+  }
+  h3{
+    font-size: 30px;
+  }
+}
+
+.contributor-listing{
+  padding-top: 40px;
+  h1{
+    @include hide;
+  }
+  h2{
+    @include subheading;
+  }
+}
+
+.featured-contributors{
+  margin-bottom: 20px;
+  font-family: $sans-serif;
+  & .row{
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  img{
+    margin: 0 auto;
+  }
+  .name{
+    padding-top: 10px;
+    font-weight: 700;
+    text-align: center;
+    a{
+      color: black;
+    }
+  }
+  .title{
+    font-size: 11px;
+    line-height: 130%;
+  }
+  @media(max-width: $screen-sm){
+    .contributor{
+      max-width: 250px;
+      margin: 0 auto 20px;
+      padding-bottom: 20px;
+      border-bottom: $border-grey;
+    }
+  }
+}
+.nonfeatured-contributors{
+  font-family: $sans-serif;
+  a{
+    color: black;
+    padding: 5px 0;
+    display: block;
+  }
+}
