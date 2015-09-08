@@ -81,6 +81,7 @@ INSTALLED_APPS = (
     'wagtail.wagtailforms',
     'wagtail.contrib.wagtailstyleguide',
     'wagtail.contrib.wagtailroutablepage',
+    'wagtail.contrib.wagtailfrontendcache',
 
     'favicon',
 
@@ -205,6 +206,14 @@ FAVICON_PATH = STATIC_URL + 'img/favicon.png'
 WP_IMPORTER_IMAGE_DOWNLOAD_DOMAINS = ('opencanada.org', 'www.opencanada.org')
 
 WAGTAILIMAGES_IMAGE_MODEL = 'images.AttributedImage'
+
+WAGTAILFRONTENDCACHE = {
+    'cloudflare': {
+        'BACKEND': 'wagtail.contrib.wagtailfrontendcache.backends.CloudflareBackend',
+        'EMAIL': get_env_variable('CLOUDFLARE_EMAIL'),
+        'TOKEN': get_env_variable('CLOUDFLARE_TOKEN'),
+    },
+}
 
 SERVER_EMAIL = "no-reply@opencanada.org"
 DEFAULT_FROM_EMAIL = "no-reply@opencanada.org"
