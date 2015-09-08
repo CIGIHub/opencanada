@@ -1,5 +1,8 @@
 var breakpoint = 1000;
 
+var windowHeight = $(window).height();
+var windowWidth = $(window).width();
+
 //var features = FeatureStyles;
 var sharing = Sharing;
 var header = Header;
@@ -25,12 +28,9 @@ jQuery(document).ready(function() {
 //initialize window based on width and height
 function initForWindow(){
 
-    var windowHeight = $(window).height();
-    var windowWidth = $(window).width();
-
     FeatureStyles.MainFeatures.initializeForWindow(windowHeight);
-    sharing.Links.initializeForWindow(windowWidth);
-    header.Structure.toggleHeading(windowWidth);
+    sharing.Links.initializeForWindow();
+    header.Structure.toggleHeading();
 
     header.Positioning.updateHeaderPositioning();
 
@@ -43,6 +43,9 @@ function initForWindow(){
 
 $(window).resize(function(){
     initForWindow();
+    windowHeight = $(window).height();
+    windowWidth = $(window).width();
+    
 });
 
 $(window).scroll(function(){

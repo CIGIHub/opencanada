@@ -111,11 +111,14 @@ var FeatureStyles = FeatureStyles || {
                 
 
                 function fadeInContent() {
-                   /* Check the location of each desired element */
+                    /* Check the location of each desired element */
                     $('.related-articles .row > div, #features .row > div, .items .row > div, .graphics .row > div').each( function(i){
                         
-                        if (!$(this).hasClass("fadedIn")) {
+                        if (windowWidth > breakpoint && !$(this).hasClass("fadedIn")) {
                             $(this).css('opacity', 0); 
+
+                        }else if (windowWidth <= breakpoint) {
+                            $(this).css('opacity', 1); 
                         }
                         var fifth_of_object = $(this).offset().top + $(this).outerHeight() /5;
                         var bottom_of_window = $(window).scrollTop() + $(window).height();
@@ -127,7 +130,9 @@ var FeatureStyles = FeatureStyles || {
                             $(this).addClass("fadedIn");        
                         }   
                     });  
+                    
                 }
+
                 /* Every time the window is scrolled ... */
                 $(window).scroll( function(){
                     fadeInContent();

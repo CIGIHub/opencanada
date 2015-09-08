@@ -1,7 +1,7 @@
 var Header = Header || {
         Structure: {
             //toggle Banner heading based on window width and page types
-            toggleHeading: function (windowWidth) {
+            toggleHeading: function () {
 
                 var offset = $('header').height();
 
