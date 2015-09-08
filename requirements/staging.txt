@@ -1,3 +1,5 @@
 -r production.txt
 
 git+ssh://git@github.com/OpenCanada/wagtail-interactives-content.git
+
+pyOpenSSL==0.15.1
