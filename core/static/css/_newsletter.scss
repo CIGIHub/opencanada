@@ -1,0 +1,56 @@
+/**************  Newsletter  **************/
+.newsletter-signup{
+  @include row-divider;
+}
+
+.newsletter-list{
+  @include newsletter-form;
+
+  #mc_embed_signup{
+    .form-control{
+      width: 30%;
+    }
+    label{
+      @include hide;
+    }
+    .button{
+      width: 15%;
+      background-color:  $red;
+      color: white;
+    }
+  }
+
+  @media(max-width: $screen-md) {
+    #mc_embed_signup {
+      .form-control {
+        width: 50%;
+      }
+    }
+  }
+  @media(max-width: $screen-xs) {
+    #mc_embed_signup {
+      .form-control {
+        width: 70%;
+      }
+    }
+  }
+}
+
+#features {
+  .rowheight-1 {
+    @media(max-width: $breakpoint) {
+      height: 140px;
+    }
+    @media(min-width: $breakpoint + 1px) {
+      height: 280px;
+    }
+  }
+  .rowheight-2 {
+    @media(max-width: $breakpoint) {
+      height: 280px;
+    }
+    @media(min-width: $breakpoint + 1px) {
+      height: 560px;
+    }
+  }
+}
