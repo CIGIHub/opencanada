@@ -43,7 +43,7 @@
                             </div>
                             <div class="feature-wrapper">
                                 <div class="feature-text" style="color: {{ article.font_style.text_colour.hex_value }};">
-                                    {% if article.feature_style.number_of_rows = 1 %}
+                                    {% if article.feature_style.number_of_rows == 1 %}
                                         <h3><a style="color: {{ article.font_style.text_colour.hex_value }};" href="{{ article.url }}">{{ article.title }}</a></h3>
                                         {% if article.subtitle %}
                                             <div class="feature-line">{{ article.subtitle|richtext }}</div>
@@ -82,7 +82,6 @@
                                 <div class="article-feature most-popular"><div>Most Popular</div></div>
                             {% endif %}
                             <figure><a href="{{ article.url }}">{%  image article.main_image fill-710x475 %}</a></figure>
-                            <a href="{{ author.url }}"><figure>{%  image article.main_image fill-710x475 %}</figure></a>
                             <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
                            {% spaceless %}
                                     <div class="contributors">By:
