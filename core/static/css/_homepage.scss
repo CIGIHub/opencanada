@@ -326,9 +326,9 @@
   display: inline-block;
 }
 
-.editors-pick{
+.article-feature{
   display: table;
-  background: #0098FD;
+  background: $blue;
   width: 60px;
   height: 60px;
   border-radius: 30px;
@@ -350,16 +350,23 @@
     top: 10%;
   }
 }
-.overlay-feature .editors-pick{
+.overlay-feature .article-feature{
   right: 10px;
   z-index: 10;
 }
 
-.simple-feature .editors-pick{
+.simple-feature .article-feature{
   position: relative;
   float: right;
   right: 0;
   top: 0;
+}
+
+.editors-pick{
+}
+
+.most-popular{
+  background: $red;
 }
 
 .pager{

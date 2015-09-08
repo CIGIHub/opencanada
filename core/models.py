@@ -1,5 +1,7 @@
 from __future__ import absolute_import, unicode_literals
 
+import itertools
+
 from basic_site import models as basic_site_models
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
@@ -52,6 +54,9 @@ class HomePage(Page):
     number_of_columns_of_visualizations = models.IntegerField(default=2, verbose_name="Columns")
     full_bleed_image_size = models.PositiveSmallIntegerField(default=90, help_text="Enter a value from 0 - 100, indicating the percentage of the screen to use for the featured image layout.")
 
+    _articles = None
+    _most_popular_article = None
+
     def __str__(self):
         return self.title
 
@@ -95,6 +100,9 @@ class HomePage(Page):
 
     @property
     def articles(self):
+        if self._articles is not None:
+            return self._articles
+
         article_content_type = ContentType.objects.get_for_model(
             article_models.ArticlePage)
         series_content_type = ContentType.objects.get_for_model(
@@ -114,9 +122,26 @@ class HomePage(Page):
                 default=models.Value(0),
                 output_field=models.IntegerField())).order_by("-sticky", "-first_published_at")
 
-        return self.get_article_set(self.number_of_columns_of_articles,
-                                    self.number_of_rows_of_articles, articles,
-                                    [])
+        self._articles = self.get_article_set(self.number_of_columns_of_articles,
+                                              self.number_of_rows_of_articles, articles,
+                                              [])
+
+        return self._articles
+
+    @property
+    def most_popular_article(self):
+        if self._most_popular_article is not None:
+            return self._most_popular_article
+
+        # flatten the list of lists with generator
+        articles = itertools.chain.from_iterable(self.articles)
+        articles_by_popularity = sorted(
+            articles,
+            key=lambda x: x.analytics.last_period_views
+        )
+
+        self._most_popular_article = articles_by_popularity[-1]
+        return self._most_popular_article
 
     @property
     def typed_featured_item(self):

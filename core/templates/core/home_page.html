@@ -28,7 +28,10 @@
                     {% if article.feature_style.include_image and article.feature_style.overlay_text %}
                         <div class="overlay-feature rowheight-{{ article.feature_style.number_of_rows }}">
                             {% if article.editors_pick %}
-                                <a href="{% slugurl 'editors-picks' %}"><div class="editors-pick"><div>Editor's Pick</div></div></a>
+                                <a href="{% slugurl 'editors-picks' %}"><div class="article-feature editors-pick"><div>Editor's Pick</div></div></a>
+                            {% endif %}
+                            {% if article == self.most_popular_article %}
+                                <div class="article-feature most-popular"><div>Most Popular</div></div>
                             {% endif %}
                             {% if article.feature_style.number_of_rows == 2 %}
                                 {% image article.main_image fill-910x560 as background_image %}
@@ -73,9 +76,13 @@
                     {% elif article.feature_style.include_image and not article.feature_style.overlay_text %}
                         <div class="image-feature">
                             {% if article.editors_pick %}
-                                <a href="{% slugurl 'editors-picks' %}"><div class="editors-pick"><div>Editor's Pick</div></div></a>
+                                <a href="{% slugurl 'editors-picks' %}"><div class="article-feature editors-pick"><div>Editor's Pick</div></div></a>
+                            {% endif %}
+                            {% if article == self.most_popular_article %}
+                                <div class="article-feature most-popular"><div>Most Popular</div></div>
                             {% endif %}
                             <figure><a href="{{ article.url }}">{%  image article.main_image fill-710x475 %}</a></figure>
+                            <a href="{{ author.url }}"><figure>{%  image article.main_image fill-710x475 %}</figure></a>
                             <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
                            {% spaceless %}
                                     <div class="contributors">By:
@@ -94,7 +101,10 @@
                     {% else %}
                         <div class="simple-feature">
                             {% if article.editors_pick %}
-                                <a href="{% slugurl 'editors-picks' %}"><div class="editors-pick"><div>Editor's Pick</div></div></a>
+                                <a href="{% slugurl 'editors-picks' %}"><div class="article-feature editors-pick"><div>Editor's Pick</div></div></a>
+                            {% endif %}
+                            {% if article == self.most_popular_article %}
+                                <div class="article-feature most-popular"><div>Most Popular</div></div>
                             {% endif %}
                             <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
                             {% spaceless %}

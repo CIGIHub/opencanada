@@ -19,12 +19,15 @@ from django.core.exceptions import ImproperlyConfigured
 _variable_prefix = "OPEN_CANADA_"
 
 
-def get_env_variable(var_name):
+def get_env_variable(var_name, default='', required=True):
     try:
         return environ[_variable_prefix + var_name]
     except KeyError:
-        error_msg = "Set the {} environment variable.".format(_variable_prefix + var_name)
-        raise ImproperlyConfigured(error_msg)
+        if required:
+            error_msg = "Set the {} environment variable.".format(_variable_prefix + var_name)
+            raise ImproperlyConfigured(error_msg)
+        else:
+            return default
 
 # Absolute filesystem path to the Django project directory:
 PROJECT_ROOT = dirname(dirname(dirname(abspath(__file__))))
@@ -90,7 +93,7 @@ INSTALLED_APPS = (
     'events',
     'jobs',
     'wordpress_importer',
-
+    'analytics',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -210,6 +213,10 @@ try:
     GOOGLE_ANALYTICS_PROPERTY_ID = get_env_variable("GOOGLE_ANALYTICS_PROPERTY_ID")
 except ImproperlyConfigured:
     GOOGLE_ANALYTICS_PROPERTY_ID = ''
+
+ANALYTICS_CREDS_PATH = join(PROJECT_ROOT, 'secret')
+ANALYTICS_SERVICE_ACCOUNT_EMAIL = get_env_variable("ANALYTICS_SERVICE_ACCOUNT_EMAIL", required=False)
+
 
 IS_PRODUCTION = False
 
