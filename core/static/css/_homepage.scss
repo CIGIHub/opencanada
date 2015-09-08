@@ -133,6 +133,20 @@
     }
   }
 
+  @media(min-width:$screen-xs-min) and (max-width: $screen-sm-min) {
+    .simple{
+      .col-sm-3 {
+        width: 50%;
+        float:left;
+        margin-bottom: 1em;
+
+        &:nth-child(odd) {
+          clear: both;
+        }
+      }
+    }
+  }
+
   .items.side-image .col-sm-6{
       figure{
         float:left;
@@ -248,6 +262,7 @@
       }
     }
   }
+
   .overlay-feature{
     h3{
       font-size: 36px;
