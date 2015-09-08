@@ -4,7 +4,6 @@
             <div class="contributor-list">
                 {% for author in authors %}
                     <div class="contributor"><a href="{{ author.url }}">{{ author.full_name }}</a></div>
-                    {% if not forloop.last %}, {% endif %}
                 {% endfor %}
             {% if date %}
                 / <div class="date">{{ date|date:"F j, Y" }}</div>
