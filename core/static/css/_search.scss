@@ -15,18 +15,6 @@
   transition: transform 0.4s ease, opacity 0.4s ease;
   -webkit-transition: -webkit-transform 0.4s ease, opacity 0.4s ease;
 
-  input {
-    width:71%;
-    margin-right:3%;
-    float:left;
-
-  }
-
-  button {
-    width: 26%;
-    float:left;
-  }
-
   &.open{
     opacity: 1;
     top: 57px;
@@ -47,30 +35,7 @@
     padding-top: 10px;
     @include inline-list-divided(white);
   }
- 
-  @media(max-width: $screen-xs) {
-    .search-suggestions ul li a{
-      font-size: 10px;
-    }
-  }
-}
 
-.search-results-page{
-  ul li{
-    list-style: none;
-  }
-  .searchbox{
-    @include search-form;
-    padding: 40px 0;
-  }
-
-  h1{
-    @include subheading;
-  }
-  h2{
-    @include type(black, 16px);
-    border-bottom: $border-grey;
-  }
 }
 
 //do a mobile-first responsive approach. override as the screen gets larger
@@ -93,17 +58,37 @@
 
 @media (max-width: 375px) {
   #search-box{
-
     input {
-      width:100%;
+      width:70%;
       margin-right:0%;
       margin-bottom: 10px;
     }
-
     button {
       width: auto;
       float:right;
     }
+    .search-suggestions{
+      display:none;
+    }
+  }
+}
+
+
+.search-results-page{
+  ul li{
+    list-style: none;
+  }
+  .searchbox{
+    @include search-form;
+    padding: 40px 0;
+  }
+
+  h1{
+    @include subheading;
+  }
+  h2{
+    @include type(black, 16px);
+    border-bottom: $border-grey;
   }
 }
 
