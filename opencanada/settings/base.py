@@ -206,14 +206,6 @@ WP_IMPORTER_IMAGE_DOWNLOAD_DOMAINS = ('opencanada.org', 'www.opencanada.org')
 
 WAGTAILIMAGES_IMAGE_MODEL = 'images.AttributedImage'
 
-WAGTAILFRONTENDCACHE = {
-    'cloudflare': {
-        'BACKEND': 'wagtail.contrib.wagtailfrontendcache.backends.CloudflareBackend',
-        'EMAIL': get_env_variable('CLOUDFLARE_EMAIL'),
-        'TOKEN': get_env_variable('CLOUDFLARE_TOKEN'),
-    },
-}
-
 SERVER_EMAIL = "no-reply@opencanada.org"
 DEFAULT_FROM_EMAIL = "no-reply@opencanada.org"
 
@@ -227,42 +219,3 @@ ANALYTICS_SERVICE_ACCOUNT_EMAIL = get_env_variable("ANALYTICS_SERVICE_ACCOUNT_EM
 
 
 IS_PRODUCTION = False
-
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': True,
-    'root': {
-        'level': 'WARNING',
-        'handlers': ['console'],
-    },
-    'formatters': {
-        'verbose': {
-            'format': '%(levelname)s %(asctime)s %(module)s '
-                      '%(process)d %(thread)d %(message)s'
-        },
-    },
-    'handlers': {
-        'console': {
-            'level': 'DEBUG',
-            'class': 'logging.StreamHandler',
-            'formatter': 'verbose'
-        }
-    },
-    'loggers': {
-        'django.db.backends': {
-            'level': 'ERROR',
-            'handlers': ['console'],
-            'propagate': False,
-        },
-        'raven': {
-            'level': 'DEBUG',
-            'handlers': ['console'],
-            'propagate': False,
-        },
-        'sentry.errors': {
-            'level': 'DEBUG',
-            'handlers': ['console'],
-            'propagate': False,
-        },
-    },
-}

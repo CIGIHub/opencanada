@@ -53,6 +53,14 @@ INSTALLED_APPS = INSTALLED_APPS + (
     'interactives_content',
 )
 
+WAGTAILFRONTENDCACHE = {
+    'cloudflare': {
+        'BACKEND': 'wagtail.contrib.wagtailfrontendcache.backends.CloudflareBackend',
+        'EMAIL': get_env_variable('CLOUDFLARE_EMAIL'),
+        'TOKEN': get_env_variable('CLOUDFLARE_TOKEN'),
+    },
+}
+
 FAVICON_PATH = STATIC_URL + 'img/favicon.png'
 
 IS_PRODUCTION = True
