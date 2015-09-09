@@ -1,10 +1,13 @@
 #!/usr/bin/env python
 import os
 import sys
+import warnings
 
 import dotenv
 
-dotenv.read_dotenv()
+with warnings.catch_warnings():
+    warnings.simplefilter("ignore")
+    dotenv.read_dotenv()
 
 if __name__ == "__main__":
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "opencanada.settings")
