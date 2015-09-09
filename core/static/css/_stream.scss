@@ -1,0 +1,18 @@
+/**************  About us Page / Steam Pages  **************/
+
+.template-basic-stream-page {
+	.block-Paragraph, .block-Image, .block-Heading {
+		margin-left:0;
+		margin-right:0;
+	}
+
+	.block-Image{
+		margin-bottom: 10px;
+	}
+
+	.block-Heading {
+		@include subheading;
+		margin-bottom: 10px;
+	}
+
+}
