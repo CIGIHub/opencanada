@@ -227,14 +227,22 @@ article {
   }
 
   .topics {
+    display: block;
+    
     .topic-label {
-      float: left;
+      display:block;
+      float:left;
     }
     @include type($text-color);
     @include inline-list-divided($red);
     ul.list-inline {
-      margin-left: 68px;
+      padding-left: 68px;
       display: block;
+      width: 100%;
+      
+      li {
+        display: inline;
+      }
     }
   }
 
