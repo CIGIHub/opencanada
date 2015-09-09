@@ -97,18 +97,20 @@ class ArticleListPage(Page):
         ('visualizations', 'Visualizations'),
         ('interviews', 'Interviews'),
         ('editors_pick', "Editor's Pick"),
+        ('most_popular', "Most Popular"),
     ]
     filter = models.TextField(choices=filter_choices, null=True, blank=True)
 
     @property
     def subpages(self):
-
         if self.filter == "visualizations":
             subpages = ArticlePage.objects.live().filter(visualization=True).order_by('-first_published_at')
         elif self.filter == "interviews":
             subpages = ArticlePage.objects.live().filter(interview=True).order_by('-first_published_at')
         elif self.filter == "editors_pick":
             subpages = ArticlePage.objects.live().filter(editors_pick=True).order_by('-first_published_at')
+        elif self.filter == "most_popular":
+            subpages = ArticlePage.objects.live().order_by('analytics__last_period_views', '-first_published_at')[:self.articles_per_page]
         else:
             subpages = ArticlePage.objects.live().order_by('-first_published_at')
 
