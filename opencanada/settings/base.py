@@ -229,13 +229,12 @@ ANALYTICS_SERVICE_ACCOUNT_EMAIL = get_env_variable("ANALYTICS_SERVICE_ACCOUNT_EM
 
 IS_PRODUCTION = False
 
-
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,
     'root': {
         'level': 'WARNING',
-        'handlers': ['sentry'],
+        'handlers': ['console'],
     },
     'formatters': {
         'verbose': {
@@ -244,10 +243,6 @@ LOGGING = {
         },
     },
     'handlers': {
-        'sentry': {
-            'level': 'ERROR',
-            'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
-        },
         'console': {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',

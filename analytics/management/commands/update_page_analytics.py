@@ -9,6 +9,7 @@ from django.core.exceptions import ImproperlyConfigured
 from django.core.management.base import BaseCommand
 from django.db import transaction
 from django.utils.timezone import now
+from wagtail.contrib.wagtailfrontendcache.utils import purge_url_from_cache
 from wagtail.wagtailcore.models import Page
 
 from analytics import utils
@@ -119,6 +120,5 @@ class Command(BaseCommand):
                 analytics.last_period_views = sessions
                 analytics.save()
 
-        # TODO Cache: we need to invalid the cache for any page which is effected
-        # by the analytics such as the home page
-        # http://docs.wagtail.io/en/v1.0/reference/contrib/frontendcache.html#invalidating-index-pages
+        purge_url_from_cache('/')
+        # TODO Cache: invalid the page that list the 20 most popular pages
