@@ -147,8 +147,13 @@
       figure{
         float:left;
       }
-      .reading{
+      .teaser{
         margin-left: 100px;
+
+        .block-Paragraph {
+          margin-left:0;
+          margin-right:0;
+        }
     }
   }
   .graphics{
