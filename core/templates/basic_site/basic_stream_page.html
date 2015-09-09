@@ -7,14 +7,16 @@
 
 {% block content %}
     <div class="container">
-        {% if self.title %}
-            <h1>{{  self.title }}</h1>
-        {% endif %}
-        {% if self.body %}
-        <article>
-                {{ self.body }}
-        </article>
-        {% endif %}
+        <div class='narrow-page'>
+            {% if self.title %}
+                <h1>{{  self.title }}</h1>
+            {% endif %}
+            {% if self.body %}
+            <article>
+                    {{ self.body }}
+            </article>
+            {% endif %}
+        </div>
     </div>
 {% endblock %}
 
