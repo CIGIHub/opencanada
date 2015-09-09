@@ -91,17 +91,17 @@
       .row{
         @include no-row-divider;
       }
-      .col-sm-6, .feature-item{
+      .feature-item{
         @include row-divider;
       }
-      .row.last .col-sm-6.last, .row.last .feature-item.last{
+      .row.last .feature-item.last{
         @include no-row-divider;
         padding-top: 20px;
         padding-bottom: 20px;
       }
 
       .col-sm-12.feature-item {
-        padding: 0;
+        padding: 20px 0;
       }
     }
 
