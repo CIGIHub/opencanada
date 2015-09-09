@@ -122,9 +122,7 @@
   .input-group{
     width: 100%;
     margin: 0 auto;
-    @media(max-width: $screen-sm){
-      width: 100%;
-    }
+
   }
   .clear-button{
     background: none;
@@ -137,6 +135,12 @@
     color: black;
     display:none;
   }
+  @media(max-width: $screen-sm){
+    input {
+      font-size: 16px;
+    }
+  }
+
 }
 
 @mixin collapsed{
