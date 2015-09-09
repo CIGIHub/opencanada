@@ -128,7 +128,7 @@ footer{
      border-right: none;
    }
 
-  @media(max-width: $screen-sm) {
+  @media(max-width: $screen-xs-max) {
     .row.infobar{
       display: block;
     }
@@ -194,7 +194,6 @@ footer{
           padding: 5px 0;
           margin: 3px 10px 0 5px;
           font-size: 12px;
-          width: 57%;
         }
         &.button{
           min-width:75px;
@@ -208,23 +207,28 @@ footer{
 
        @media(max-width: $screen-md) {
          input{
-           font-size: 10px;
            &.email{
-              margin: 3px 5px 0 2px;
+             margin: 3px 5px 0 2px;
+             font-size: 10px;
+             width: 130px;
+             min-width: 130px;
            }
            &.button{
-
+             font-size: 10px;
+             min-width: 65px;
+             width:65px;
            }
          }
        }
-      @media(max-width: $screen-sm) {
+      @media(max-width: $screen-xs-max) {
          input{
-           font-size: 14px;
            &.email{
-             width: 75%;
+             min-width: 82%;
+             font-size: 14px;
            }
            &.button{
-             max-width: 20%;
+             min-width: 15%;
+             font-size: 14px;
            }
          }
        }
@@ -234,7 +238,7 @@ footer{
   .social-links{
     @include inline-list($red, 18px);
     ul li{
-      margin-right: 30px;
+      margin-right: 20px;
     }
   }
 
