@@ -44,6 +44,54 @@
   }
 }
 
+
+
+.contributors{
+  margin-bottom: 5px;
+
+  .contributor-label{
+    float: left;
+    padding-right:0.5em;
+  }
+
+  .contributor-list {
+    margin-left: 20px;
+
+    .contributor {
+      &:after{
+        content:',';
+        padding-right:0.5em;
+      }
+
+      &:last-child:after {
+        content:"";
+        padding-right: 0;
+      }
+    }
+  }
+
+  &.series .contributor-list{
+    margin-left: 155px;
+
+    @media(max-width: $screen-xs) {
+      margin-left:0;
+    }
+  }
+
+  @include type($text-color);
+  a{
+    color: $text_color;
+  }
+
+  .contributor{
+    display: inline-block;
+  }
+}
+
+.contributors, .date{
+  display: inline-block;
+}
+
 .featured-contributors{
   margin-bottom: 20px;
   font-family: $sans-serif;
