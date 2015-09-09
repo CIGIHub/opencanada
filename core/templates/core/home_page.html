@@ -58,12 +58,9 @@
                                         {% spaceless %}
                                         <div class="contributors">By:
                                             {% for author in article.authors %}
-                                                <div class="contributor">
-                                                    <a href="{{ author.url }}" style="color: {{ article.font_style.text_colour.hex_value }};">
-                                                     {{ author.full_name }}
-                                                    </a>
-                                                </div>
-                                                {% if not forloop.last %}, {% endif %}
+                                                <a href="{{ author.url }}" style="color: {{ article.font_style.text_colour.hex_value }};">
+                                                    {{ author.full_name }}
+                                                </a><span>{% if not forloop.last %}, {% endif %}</span>
                                             {% endfor %}
                                         </div>
                                     {% endspaceless %}
@@ -84,16 +81,11 @@
                             <figure><a href="{{ article.url }}">{%  image article.main_image fill-710x475 %}</a></figure>
                             <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
                            {% spaceless %}
-                                    <div class="contributors">By:
-                                        {% for author in article.authors %}
-                                            <div class="contributor">
-                                                <a href="{{ author.url }}">
-                                                 {{ author.full_name }}
-                                                </a>
-                                            </div>
-                                            {% if not forloop.last %}, {% endif %}
-                                        {% endfor %}
-                                    </div>
+                                <div class="contributors">By:
+                                    {% for author in article.authors %}
+                                        <a href="{{ author.url }}">{{ author.full_name }}</a><span>{% if not forloop.last %}, {% endif %}</span>
+                                    {% endfor %}
+                                </div>
                            {% endspaceless %}
                         </div>
 
@@ -107,16 +99,11 @@
                             {% endif %}
                             <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
                             {% spaceless %}
-                                    <div class="contributors">By:
-                                        {% for author in article.authors %}
-                                            <div class="contributor">
-                                                <a href="{{ author.url }}">
-                                                 {{ author.full_name }}
-                                                </a>
-                                            </div>
-                                            {% if not forloop.last %}, {% endif %}
-                                        {% endfor %}
-                                    </div>
+                                <div class="contributors">By:
+                                    {% for author in article.authors %}
+                                        <a href="{{ author.url }}">{{ author.full_name }}</a><span>{% if not forloop.last %}, {% endif %}</span>
+                                    {% endfor %}
+                                </div>
                         {% endspaceless %}
 
                             {% if article.subtitle %}

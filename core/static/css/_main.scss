@@ -74,7 +74,38 @@ button:focus {outline:0;}
   clear:both;
 }
 
+.image-credit {
+    margin-top: 5px;
+    font-size: 12px;
+    line-height: 125%;
+    font-family: $sans-serif;
+    color: $caption-grey;
+  }
 
+  .image-source{
+    margin-top: 3px;
+    @include type($light-grey, 11px)
+  }
+
+.contributors{
+  margin-bottom: 5px;
+  .contributor-label{
+    color: $caption-grey;
+    margin-right: 3px;
+  }
+
+  @include type($text-color);
+  a{
+    color: $text_color;
+  }
+  .contributor{
+    display: inline-block;
+  }
+}
+
+.contributors, .date{
+  display: inline-block;
+}
 
 /**************   FOOTER  **************/
 
