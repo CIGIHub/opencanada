@@ -51,6 +51,7 @@ var FeatureStyles = FeatureStyles || {
                         target = selected.closest($('main')).find(".overlay");
                     }
                     
+                    target.find($('.editors-pick-link')).fadeToggle();
                     target.find($('.feature-text')).fadeToggle();
                     target.find($('.feature-image-overlay')).fadeToggle();
                 }
