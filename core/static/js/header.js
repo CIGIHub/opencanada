@@ -1,7 +1,7 @@
 var Header = Header || {
         Structure: {
             //toggle Banner heading based on window width and page types
-            toggleHeading: function (windowWidth) {
+            toggleHeading: function () {
 
                 var offset = $('header').height();
 
@@ -25,7 +25,7 @@ var Header = Header || {
 
                     $('nav').addClass('mobile-menu');
 
-                    if ($('#article-page').length && bodyTag.hasClass('article-scroll') && windowWidth <= breakpoint) {
+                    if ($('#article-page').length && bodyTag.hasClass('article-scroll') && $(window).width() <= breakpoint) {
                         bodyTag.removeClass('article-scroll');
                     }
                     if ($('.template-home-page').length) {
@@ -59,7 +59,7 @@ var Header = Header || {
                     $('header').toggleClass('scrolled', $(document).scrollTop() > offset);
                 }
 
-                if (windowWidth >= breakpoint) {
+                if ($(window).width() >= breakpoint) {
 
                     if (bodyTag.hasClass('small-article')) {
                         bodyTag.removeClass('small-article');
@@ -99,7 +99,7 @@ var Header = Header || {
                 //set the body padding based on banner height
                 var bannerHeight = $('header').height();
                 $('body').css("padding-top", bannerHeight + "px");
-                search.Structure.setOffset(bannerHeight);
+                Search.Structure.setOffset(bannerHeight);
                 Menu.setOffset(bannerHeight);
             }
         }

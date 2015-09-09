@@ -1,10 +1,5 @@
 var breakpoint = 1000;
 
-//var features = FeatureStyles;
-var sharing = Sharing;
-var header = Header;
-var search = Search;
-
 jQuery(document).ready(function() {
 
     initForWindow();
@@ -14,9 +9,9 @@ jQuery(document).ready(function() {
     FeatureStyles.FeatureImages.initialize();
     FeatureStyles.RelatedArticles.initialize();
 
-    search.Structure.initialize();
+    Search.Structure.initialize();
 
-    sharing.Links.initialize();
+    Sharing.Links.initialize();
 
     Menu.initialize();
     
@@ -25,14 +20,10 @@ jQuery(document).ready(function() {
 //initialize window based on width and height
 function initForWindow(){
 
-    var windowHeight = $(window).height();
-    var windowWidth = $(window).width();
-
-    FeatureStyles.MainFeatures.initializeForWindow(windowHeight);
-    sharing.Links.initializeForWindow(windowWidth);
-    header.Structure.toggleHeading(windowWidth);
-
-    header.Positioning.updateHeaderPositioning();
+    FeatureStyles.MainFeatures.initializeForWindow();
+    Sharing.Links.initializeForWindow();
+    Header.Structure.toggleHeading();
+    Header.Positioning.updateHeaderPositioning();
 
     $("main").click(function () {
         Menu.close();
@@ -46,7 +37,7 @@ $(window).resize(function(){
 });
 
 $(window).scroll(function(){
-    header.Positioning.updateHeaderPositioning();
+    Header.Positioning.updateHeaderPositioning();
 });
 
 
