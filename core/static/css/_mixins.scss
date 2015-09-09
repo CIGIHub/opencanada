@@ -236,17 +236,30 @@
       padding-left:20px;
       padding-right:20px;
     }
-  }
 
-  .feature-text{
-    position: relative;
-    max-width: 940px;
-    margin: 0 auto;
+    .feature-text{
+      position: relative;
+      max-width: 940px;
+      margin: 0 auto;
 
-    .contributors{
-      left:20px;     
+      &.editors-pick {
+          a {
+            padding-right: 85px;
+        }
+      }
+
+      .contributors{
+        left:20px;  
+
+        @media(min-width: $screen-sm){
+          left:40px;  
+        }   
+      }
     }
+
   }
+
+  
 
   .contributors, .contributors a, a{
     color: white;
@@ -292,7 +305,6 @@
 
         a {
           padding-left:40px;
-          padding-right:40px;
         }
     }
 
