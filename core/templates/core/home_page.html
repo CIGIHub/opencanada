@@ -31,7 +31,7 @@
                                 <a href="{% slugurl 'editors-picks' %}"><div class="article-feature editors-pick"><div>Editor's Pick</div></div></a>
                             {% endif %}
                             {% if article == self.most_popular_article %}
-                                <div class="article-feature most-popular"><div>Most Popular</div></div>
+                                <a href="{% slugurl 'most-popular' %}"><div class="article-feature most-popular"><div>Most Popular</div></div></a>
                             {% endif %}
                             {% if article.feature_style.number_of_rows == 2 %}
                                 {% image article.main_image fill-910x560 as background_image %}
@@ -76,7 +76,7 @@
                                 <a href="{% slugurl 'editors-picks' %}"><div class="article-feature editors-pick"><div>Editor's Pick</div></div></a>
                             {% endif %}
                             {% if article == self.most_popular_article %}
-                                <div class="article-feature most-popular"><div>Most Popular</div></div>
+                                <a href="{% slugurl 'most-popular' %}"><div class="article-feature most-popular"><div>Most Popular</div></div></a>
                             {% endif %}
                             <figure><a href="{{ article.url }}">{%  image article.main_image fill-710x475 %}</a></figure>
                             <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
@@ -95,7 +95,7 @@
                                 <a href="{% slugurl 'editors-picks' %}"><div class="article-feature editors-pick"><div>Editor's Pick</div></div></a>
                             {% endif %}
                             {% if article == self.most_popular_article %}
-                                <div class="article-feature most-popular"><div>Most Popular</div></div>
+                                <a href="{% slugurl 'most-popular' %}"><div class="article-feature most-popular"><div>Most Popular</div></div></a>
                             {% endif %}
                             <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
                             {% spaceless %}
