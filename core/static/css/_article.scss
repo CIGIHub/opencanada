@@ -172,8 +172,6 @@ article .title,
           }
         }
       }
-
-
     }
   }
 }
@@ -593,8 +591,16 @@ article {
     margin: 0 0 5px 0;
     font-size: 18px;
   }
-  .row, .series-teaser{
+  .series-teaser{
     padding-bottom: 20px;
+  }
+  .row{
+    padding: 20px 0;
+  }
+  @media(max-width: $screen-sm){
+    .row{
+    padding: 10px 0;
+  }
   }
 }
 
@@ -611,10 +617,20 @@ article {
 }
 
 .related-articles{
-  @media(max-width: $screen-sm){
+  .row{
+    @include row-divider;
+  }
+
+ @media(max-width: $screen-xs-max){
      figure{
        display: table;
        margin: 0 auto;
      }
+    .row {
+      @include no-row-divider;
+    }
+    .col-xs-12 {
+      @include row-divider;
+    }
    }
 }
