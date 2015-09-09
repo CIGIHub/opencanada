@@ -3,14 +3,16 @@
 
 {% block content %}
     <div id="external-article-page" class="container">
-        <h1>{{ self.title }}</h1>
-        <div class="col-xs-2">
-            <figure>{% image self.source.logo fill-120x120 %}</figure>
-        </div>
+        <div class="narrow-page">
+            <h1 class="subheading">{{ self.title }}</h1>
+            <div class="source">
+                <figure>{% image self.source.logo fill-120x120 %}</figure>
+            </div>
 
-        <div class="col-xs-10">
-            <p>{{ self.body|richtext }}</p>
-            <p><a href="{{ self.website_link }}">Read the article</a></p>
+            <div class="content">
+                <p>{{ self.body|richtext }}</p>
+                <p><a href="{{ self.website_link }}" target="_blank" >Read the article <i class="fa fa-external-link"></i></a></p>
+            </div>
         </div>
     </div>
 
