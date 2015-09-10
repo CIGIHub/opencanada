@@ -106,6 +106,25 @@ button:focus {outline:0;}
   display: inline-block;
 }
 
+#features {
+  .rowheight-1 {
+    @media(max-width: $breakpoint) {
+      height: 140px;
+    }
+    @media(min-width: $breakpoint + 1px) {
+      height: 280px;
+    }
+  }
+  .rowheight-2 {
+    @media(max-width: $breakpoint) {
+      height: 280px;
+    }
+    @media(min-width: $breakpoint + 1px) {
+      height: 560px;
+    }
+  }
+}
+
 /**************   FOOTER  **************/
 
 footer{
@@ -180,90 +199,6 @@ footer{
     padding-top:40px;
   }
 
-  .newsletter-form{
-    background: $mid-grey;
-    padding: 5px;
-    margin-bottom: 20px;
-
-    ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
-    color:   $text-color;
-    }
-    :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-       color:$text-color;
-       opacity:  1;
-    }
-    ::-moz-placeholder { /* Mozilla Firefox 19+ */
-       color: $text-color;
-       opacity:  1;
-    }
-    :-ms-input-placeholder { /* Internet Explorer 10-11 */
-       color:$text-color;
-    }
-
-    #mc_embed_signup{
-      font-family: $sans-serif;
-      form{
-        padding: 0px;
-      }
-
-      label{
-        font-style: italic;
-        text-align: center;
-        font-weight: normal;
-      }
-      input{
-        display: inline-block;
-        text-transform: uppercase;
-
-        &.email{
-          color: $text-color;
-          border-radius: none;
-          border: none;
-          background: none;
-          min-width: 120px;
-          padding: 5px 0;
-          margin: 3px 10px 0 5px;
-          font-size: 12px;
-        }
-        &.button{
-          min-width:75px;
-          @include button;
-          display:inline-block;
-          margin-bottom: 0px;
-          font-weight: 300;
-          font-size: 12px;
-        }
-      }
-
-       @media(max-width: $screen-md) {
-         input{
-           &.email{
-             margin: 3px 5px 0 2px;
-             font-size: 10px;
-             width: 130px;
-             min-width: 130px;
-           }
-           &.button{
-             font-size: 10px;
-             min-width: 65px;
-             width:65px;
-           }
-         }
-       }
-      @media(max-width: $screen-xs-max) {
-         input{
-           &.email{
-             min-width: 82%;
-             font-size: 14px;
-           }
-           &.button{
-             min-width: 15%;
-             font-size: 14px;
-           }
-         }
-       }
-    }
-  }
 
   .social-links{
     @include inline-list($red, 18px);

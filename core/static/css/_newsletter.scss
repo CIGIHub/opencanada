@@ -1,56 +1,65 @@
 /**************  Newsletter  **************/
-.newsletter-signup{
-  @include row-divider;
-}
+.newsletter-form{
+  background: $mid-grey;
+  padding: 5px;
+  margin-bottom: 20px;
 
-.newsletter-list{
-  @include newsletter-form;
+  ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+  color:   $text-color;
+  }
+  :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+     color:$text-color;
+     opacity:  1;
+  }
+  ::-moz-placeholder { /* Mozilla Firefox 19+ */
+     color: $text-color;
+     opacity:  1;
+  }
+  :-ms-input-placeholder { /* Internet Explorer 10-11 */
+     color:$text-color;
+  }
 
   #mc_embed_signup{
-    .form-control{
-      width: 30%;
+    font-family: $sans-serif;
+    form{
+      padding: 0px;
     }
+
     label{
-      @include hide;
+      font-style: italic;
+      text-align: center;
+      font-weight: normal;
     }
-    .button{
-      width: 15%;
-      background-color:  $red;
-      color: white;
-    }
-  }
 
-  @media(max-width: $screen-md) {
-    #mc_embed_signup {
-      .form-control {
-        width: 50%;
+    input{
+      display: inline-block;
+      text-transform: uppercase;
+
+      &.email{
+        color: $text-color;
+        border-radius: none;
+        border: none;
+        background: none;
+        width:75%;
+        padding: 5px 5px 0 0;
+        box-sizing:border-box;
+        margin: 3px 0px 0 0px;
+        font-size: 12px;
+        outline: none;
+        float:left;
       }
-    }
-  }
-  @media(max-width: $screen-xs) {
-    #mc_embed_signup {
-      .form-control {
-        width: 70%;
+
+      &.button{
+        
+        @include button;
+        width:25%;
+        min-width: 0;
+        display:inline-block;
+        margin: 0px;
+        font-weight: 300;
+        font-size: 12px;
       }
     }
   }
 }
 
-#features {
-  .rowheight-1 {
-    @media(max-width: $breakpoint) {
-      height: 140px;
-    }
-    @media(min-width: $breakpoint + 1px) {
-      height: 280px;
-    }
-  }
-  .rowheight-2 {
-    @media(max-width: $breakpoint) {
-      height: 280px;
-    }
-    @media(min-width: $breakpoint + 1px) {
-      height: 560px;
-    }
-  }
-}
