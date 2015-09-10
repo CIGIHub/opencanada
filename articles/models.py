@@ -430,6 +430,13 @@ class ArticlePage(Page, FeatureStyleFields, Promotable, Sharelinks, PageLayoutOp
         index.SearchField('get_author_names', partial_match=True),
     )
 
+    def __init__(self, *args, **kwargs):
+        super(ArticlePage, self).__init__(*args, **kwargs)
+        for field in self._meta.fields:
+            if field.name == 'first_published_at':
+                field.editable = True
+                field.blank = True
+
     def get_primary_topic_name(self):
         if self.primary_topic:
             return self.primary_topic.name
@@ -559,11 +566,15 @@ class ArticlePage(Page, FeatureStyleFields, Promotable, Sharelinks, PageLayoutOp
         )
     ]
 
+    settings_panels = [
+        FieldPanel('first_published_at'),
+    ] + Page.settings_panels
+
     edit_handler = TabbedInterface([
         ObjectList(content_panels, heading='Content'),
         ObjectList(style_panels, heading='Page Style Options'),
         ObjectList(promote_panels, heading='Promote'),
-        ObjectList(Page.settings_panels, heading='Settings', classname="settings"),
+        ObjectList(settings_panels, heading='Settings', classname="settings"),
     ])
 
 
@@ -599,7 +610,7 @@ class ChapteredArticlePage(ArticlePage):
         ObjectList(content_panels, heading='Content'),
         ObjectList(ArticlePage.style_panels, heading='Page Style Options'),
         ObjectList(ArticlePage.promote_panels, heading='Promote'),
-        ObjectList(Page.settings_panels, heading='Settings', classname="settings"),
+        ObjectList(ArticlePage.settings_panels, heading='Settings', classname="settings"),
     ])
 
 
@@ -814,6 +825,13 @@ class SeriesPage(Page, FeatureStyleFields, Promotable, Sharelinks, PageLayoutOpt
 
     number_of_related_articles = models.PositiveSmallIntegerField(default=6, verbose_name="Number of Related Articles to Show")
 
+    def __init__(self, *args, **kwargs):
+        super(SeriesPage, self).__init__(*args, **kwargs)
+        for field in self._meta.fields:
+            if field.name == 'first_published_at':
+                field.editable = True
+                field.blank = True
+
     def get_primary_topic_name(self):
         if self.primary_topic:
             return self.primary_topic.name
@@ -924,11 +942,15 @@ class SeriesPage(Page, FeatureStyleFields, Promotable, Sharelinks, PageLayoutOpt
         )
     ]
 
+    settings_panels = [
+        FieldPanel('first_published_at'),
+    ] + Page.settings_panels
+
     edit_handler = TabbedInterface([
         ObjectList(content_panels, heading='Content'),
         ObjectList(style_panels, heading='Page Style Options'),
         ObjectList(promote_panels, heading='Promote'),
-        ObjectList(Page.settings_panels, heading='Settings', classname="settings"),
+        ObjectList(settings_panels, heading='Settings', classname="settings"),
     ])
 
 
