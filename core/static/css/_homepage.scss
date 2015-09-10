@@ -260,7 +260,7 @@
       }
     }
 
-    .editors-pick-link {
+    .editors-pick-link, .most-popular {
       top:35px;
       right:22px;
 
@@ -324,7 +324,7 @@
       }
     }
 
-    .editors-pick-link {
+    .editors-pick-link, .most-popular {
       top:5%;
       right:0;
       position: relative;
@@ -379,7 +379,7 @@
   }
 }
 
-.editors-pick-link {
+.editors-pick-link, .most-popular {
   display: block;
   position: absolute;
   top: 5%;
@@ -420,6 +420,10 @@
   }
 }
 
+.most-popular{
+  background: $red;
+}
+
 .overlay-feature .article-feature{
   right: 10px;
   z-index: 10;
@@ -430,10 +434,6 @@
   float: right;
   right: 0;
   top: 0;
-}
-
-.most-popular{
-  background: $red;
 }
 
 .pager{

@@ -31,7 +31,7 @@
                                 <div class="editors-pick-link"><div class="table"><div class="table-cell"><a href="{% slugurl 'editors-picks' %}" class="article-feature editors-pick">Editor's Pick</a></div></div></div>
                             {% endif %}
                             {% if article == self.most_popular_article %}
-                                <a href="{% slugurl 'most-popular' %}"><div class="article-feature most-popular"><div>Most Popular</div></div></a>
+                                <div class="most-popular"><div class="table"><div class="table-cell"><a href="{% slugurl 'most-popular' %}" class="article-feature ">Most Popular</a></div></div></div>
                             {% endif %}
                             {% if article.feature_style.number_of_rows == 2 %}
                                 {% image article.main_image fill-910x560 as background_image %}
@@ -76,7 +76,7 @@
                                 <div class="editors-pick-link"><div class="table"><div class="table-cell"><a href="{% slugurl 'editors-picks' %}" class="article-feature editors-pick">Editor's Pick</a></div></div></div>
                             {% endif %}
                             {% if article == self.most_popular_article %}
-                                <a href="{% slugurl 'most-popular' %}"><div class="article-feature most-popular"><div>Most Popular</div></div></a>
+                                <div class="most-popular"><div class="table"><div class="table-cell"><a href="{% slugurl 'most-popular' %}" class="article-feature ">Most Popular</a></div></div></div>
                             {% endif %}
                             <figure><a href="{{ article.url }}">{%  image article.main_image fill-710x475 %}</a></figure>
                             <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
@@ -95,7 +95,7 @@
                                 <div class="editors-pick-link"><div class="table"><div class="table-cell"><a href="{% slugurl 'editors-picks' %}" class="article-feature editors-pick">Editor's Pick</a></div></div></div>
                             {% endif %}
                             {% if article == self.most_popular_article %}
-                                <a href="{% slugurl 'most-popular' %}"><div class="article-feature most-popular"><div>Most Popular</div></div></a>
+                                <div class="most-popular"><div class="table"><div class="table-cell"><a href="{% slugurl 'most-popular' %}" class="article-feature ">Most Popular</a></div></div></div>
                             {% endif %}
                             <h3 class="{% if article.editors_pick %} editors-pick{% endif %}"><a href="{{ article.url }}">{{ article.title }}</a></h3>
                             {% spaceless %}
