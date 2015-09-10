@@ -134,10 +134,18 @@
     }
     .read-more {
       text-align: center;
-      button {
+      a.button {
         @include button;
         font-size: 12px;
         padding: 5px 14px;
+        display: inline-block;
+        text-decoration: none;
+        transition:background 0.4s ease;
+
+        &:hover {
+          background: $black;
+          transition:background 0.4s ease;
+        }
       }
     }
   }
