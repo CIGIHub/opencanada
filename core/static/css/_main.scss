@@ -86,23 +86,7 @@ button:focus {outline:0;}
     @include type($light-grey, 11px)
   }
 
-.contributors{
-  margin-bottom: 5px;
-  .contributor-label{
-    color: $caption-grey;
-    margin-right: 3px;
-  }
-
-  @include type($text-color);
-  a{
-    color: $text_color;
-  }
-  .contributor{
-    display: inline-block;
-  }
-}
-
-.contributors, .date{
+.date{
   display: inline-block;
 }
 

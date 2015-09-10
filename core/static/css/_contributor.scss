@@ -1,4 +1,22 @@
 /**************  People/Contributor pages  **************/
+.contributors{
+  margin-bottom: 5px;
+  display: inline-block;
+
+  .contributor-label{
+    color: $caption-grey;
+    margin-right: 3px;
+  }
+
+  @include type($text-color);
+  a{
+    color: $text_color;
+  }
+  .contributor{
+    display: inline-block;
+  }
+}
+
 
 .contributor-profile{
   h1, .short-bio{
@@ -66,14 +84,28 @@
     font-size: 11px;
     line-height: 130%;
   }
-  @media(max-width: $screen-sm){
-    .contributor{
-      max-width: 250px;
-      margin: 0 auto 20px;
-      padding-bottom: 20px;
-      border-bottom: $border-grey;
+  
+  .contributor{
+    max-width: 250px;
+    margin: 0 auto 20px;
+    padding-bottom: 20px;
+    border-bottom: $border-grey;
+
+    @media(min-width: $screen-xs) {
+      border-bottom:0;
+      padding-bottom: 10px;
     }
   }
+
+  @media(min-width: $screen-xs) and (max-width: $screen-sm) {
+    .col-sm-3 {
+      display: block;
+      float:left;
+      width:50%;
+    }
+  }
+  
+
 }
 .nonfeatured-contributors{
   font-family: $sans-serif;
