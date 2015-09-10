@@ -1,6 +1,10 @@
 {% load static core_tags wagtailcore_tags wagtailimages_tags %}
 
 <article class="row teaser">
+    {% if article.editors_pick %}
+        <div class="editors-pick-link"><div class="table"><div class="table-cell"><a href="{% slugurl 'editors-picks' %}" class="article-feature editors-pick">Editor's Pick</a></div></div></div>
+    {% endif %}
+
     {% if article.main_image and image %}
         <div class="col-xs-2">
             <figure>
@@ -11,7 +15,7 @@
             {% else %}
         <div class="col-xs-12">
         {% endif %}
-            <{{ heading }}><a href="{{ article.url }}">{{ article.title }}</a></{{ heading }}>
+            <{{ heading }} class="{% if article.editors_pick %} editors-pick{% endif %}"><a href="{{ article.url }}">{{ article.title }}</a></{{ heading }}>
             {% if article.authors %}
                 {% spaceless %}
                     {% include 'articles/includes/article-contributors.html' with authors=article.authors date=article.first_published_at %}
