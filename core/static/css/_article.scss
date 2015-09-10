@@ -330,11 +330,13 @@ article {
     }
     .left-aligned {
       float: left;
-      margin: 5px 20px 20px 0;
+      margin: 5px 20px 0px 0;
+      width:350px;
     }
     .right-aligned {
       float: right;
-      margin: 5px 0px 20px 20px;
+      margin: 5px 0px 0px 20px;
+      width:350px;
     }
     .full-width {
       img {
@@ -347,7 +349,6 @@ article {
   }
   .image-wrapper {
     clear: both;
-    float:left;
     max-width: 100%;
 
   }
