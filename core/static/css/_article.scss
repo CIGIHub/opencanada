@@ -208,9 +208,15 @@ article {
     margin-top: 20px;
     margin-bottom: 20px;
   }
-  .story section{
-    line-height: 150%;
+  
+  .story {
+    overflow-x:hidden;
+
+    section{
+      line-height: 150%;
+    }
   }
+
   h2, h3 {
     margin: 10px 0;
   }
