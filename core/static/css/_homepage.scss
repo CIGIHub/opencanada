@@ -71,7 +71,7 @@
 
 
 .template-home-page {
-  section {
+  section{
     margin-bottom: 20px;
     margin-top: 20px;
 
@@ -81,28 +81,37 @@
 
     .row {
       @include row-divider;
+      margin-left: 0px;
+      margin-right: 0px;
     }
 
     .row.last{
       border-bottom: none;
     }
 
+    .feature-item.first, &.items .col-sm-6:first-child{
+      padding-left: 0px;
+    }
+    .feature-item.last, &.items .col-sm-6:last-child{
+      padding-right: 0px;
+
+    }
+
     @media(max-width: $screen-xs-max){
       .row{
         @include no-row-divider;
       }
-      .feature-item{
+      .feature-item, &.items .col-sm-6{
         @include row-divider;
+        padding-left: 0px;
+        padding-right: 0px;
       }
-      .row.last .feature-item.last{
+      .row.last .feature-item.last, &.items .row.last .col-sm-6:last-child{
         @include no-row-divider;
         padding-top: 20px;
         padding-bottom: 20px;
       }
 
-      .col-sm-12.feature-item {
-        padding: 20px 0;
-      }
     }
 
     h2 {
@@ -171,7 +180,7 @@
           }
       }
 
-      .reading {
+      .teaser {
         margin-left:0;
         text-align: center;
       }

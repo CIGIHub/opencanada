@@ -5,7 +5,7 @@
         {% for item_row in item_collection %}
             <div class="row {% if forloop.last %}last{% endif %}">
                 {% for item in item_row %}
-                    <div class="col-sm-{{ item_row|column_class }}{% if forloop.last %} last{% endif %}">
+                    <div class="col-sm-{{ item_row|column_class }}">
                     {% spaceless %}
                         <a href="{{ item.url }}"><figure>
                             {% section_image item as image %}

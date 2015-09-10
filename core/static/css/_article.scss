@@ -184,11 +184,23 @@ article {
   }
 
   &.row.teaser {
+    margin-left: 0px;
+    margin-right: 0px;
     h2 {
       margin-top: 0px;
     }
     .feature-line {
       margin-top: 10px;
+    }
+    .col-xs-12{
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+    .col-xs-2{
+      padding-left: 0px;
+    }
+    .col-xs-10{
+      padding-right: 0px;
     }
   }
 
@@ -608,8 +620,9 @@ article {
   }
   @media(max-width: $screen-sm){
     .row{
-    padding: 10px 0;
-  }
+      padding: 10px 0;
+      
+    }
   }
 }
 
@@ -627,7 +640,17 @@ article {
 
 .related-articles{
   .row{
+    margin-left: 0px;
+    margin-right: 0px;
     @include row-divider;
+
+  }
+
+  .row .col-xs-12:first-child{
+    padding-left: 0px;
+  }
+  .row .col-xs-12:last-child{
+    padding-right: 0px;
   }
 
  @media(max-width: $screen-xs-max){
@@ -640,6 +663,8 @@ article {
     }
     .col-xs-12 {
       @include row-divider;
+      padding-left: 0px;
+      padding-right: 0px;
     }
    }
 }
