@@ -73,7 +73,7 @@
                     {% elif article.feature_style.include_image and not article.feature_style.overlay_text %}
                         <div class="image-feature">
                             {% if article.editors_pick %}
-                                <a href="{% slugurl 'editors-picks' %}"><div class="article-feature editors-pick"><div>Editor's Pick</div></div></a>
+                                <div class="editors-pick-link"><div class="table"><div class="table-cell"><a href="{% slugurl 'editors-picks' %}" class="article-feature editors-pick">Editor's Pick</a></div></div></div>
                             {% endif %}
                             {% if article == self.most_popular_article %}
                                 <a href="{% slugurl 'most-popular' %}"><div class="article-feature most-popular"><div>Most Popular</div></div></a>
@@ -92,12 +92,12 @@
                     {% else %}
                         <div class="simple-feature">
                             {% if article.editors_pick %}
-                                <a href="{% slugurl 'editors-picks' %}"><div class="article-feature editors-pick"><div>Editor's Pick</div></div></a>
+                                <div class="editors-pick-link"><div class="table"><div class="table-cell"><a href="{% slugurl 'editors-picks' %}" class="article-feature editors-pick">Editor's Pick</a></div></div></div>
                             {% endif %}
                             {% if article == self.most_popular_article %}
                                 <a href="{% slugurl 'most-popular' %}"><div class="article-feature most-popular"><div>Most Popular</div></div></a>
                             {% endif %}
-                            <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
+                            <h3 class="{% if article.editors_pick %} editors-pick{% endif %}"><a href="{{ article.url }}">{{ article.title }}</a></h3>
                             {% spaceless %}
                                 <div class="contributors">By:
                                     {% for author in article.authors %}
