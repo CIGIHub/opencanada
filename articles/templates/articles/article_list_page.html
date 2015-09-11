@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 {% load static core_tags wagtailcore_tags wagtailimages_tags %}
-    <div class="editors-pick"><div>Editors Pick</div></div>
+
 {% block content %}
 <div class="container">
     <div class="narrow-page">
         {% if self.title %}
-            <h1 class="subheading">{{  self.title }}</h1>
+            <h1 class="subheading">{{ self.title }}</h1>
         {% endif %}
 
         {% for article in articles %}
-            {% include "articles/includes/article_teaser.html"  with heading='h2'%}
+            {% include "articles/includes/article_teaser.html" with heading='h2'%}
         {% endfor %}
 
         {% if articles.paginator.num_pages > 1 %}

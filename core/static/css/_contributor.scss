@@ -43,12 +43,22 @@
       margin: 10px 0;
     }
   }
+
   h2{
 
     @include subheading;
   }
+
   h3{
     font-size: 30px;
+
+    &.editors-pick {
+      padding-right: 65px;
+    }
+  }
+
+  .editors-pick-link {
+    right:0;
   }
 }
 
