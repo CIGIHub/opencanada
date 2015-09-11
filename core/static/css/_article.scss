@@ -339,11 +339,12 @@ article {
     margin-top: 10px;
   }
 
-  .dropcap-start::first-letter {
+  .dropcap-start p:first-child:first-letter {
     font-size: 65px;
     line-height: 55px;
     margin-right: 10px;
     float: left;
+    text-transform: uppercase;
   }
 
   .block-Image {
