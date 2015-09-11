@@ -8,6 +8,8 @@
   position: fixed;
   overflow-y: hidden;
   z-index: 200;
+  padding: 20px 0;
+
   background-color:rgba(0, 0, 0, 0.8);
   transform: translate(0, -100%);
   -webkit-transform: translate(0, -100%);
@@ -22,7 +24,7 @@
     transform: translate(0, 0%);
     -webkit-transform: translate(0, 0%);
     -ms-transform: translate(0, 0);
-    padding: 15px 0 10px;
+    
   }
 
   .container{
@@ -32,46 +34,19 @@
   }
 
   .search-suggestions{
-    padding-top: 10px;
-    @include inline-list-divided(white);
+    display: none;
+    //padding-top: 10px;
+    //@include inline-list-divided(white);
+  }
+
+  @media (min-width: $screen-sm) {
+    padding:40px 0;
   }
 
 }
 
-//do a mobile-first responsive approach. override as the screen gets larger
-@media(min-width: $breakpoint) {
-  #search-box{
-    &.open{
-      //top: 93px;
-      padding:40px 0;
-    }
 
-    input {
-      width:77%;
-    }
 
-    button {
-      width: 20%;
-    }
-  }
-}
-
-@media (max-width: 375px) {
-  #search-box{
-    input {
-      width:70%;
-      margin-right:0%;
-      margin-bottom: 10px;
-    }
-    button {
-      width: auto;
-      float:right;
-    }
-    .search-suggestions{
-      display:none;
-    }
-  }
-}
 
 
 .search-results-page{
@@ -81,6 +56,20 @@
   .searchbox{
     @include search-form;
     padding: 40px 0;
+
+    @media (min-width: $screen-md) {
+      input {
+        width:80%;
+      }
+
+      button {
+        width:17%;
+      }
+
+      .clear-button {
+        right:21%;
+      }
+    }
   }
 
   h1{
