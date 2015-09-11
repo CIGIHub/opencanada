@@ -108,19 +108,19 @@
   button{
     @include button($sans-serif);
     padding: 6px;
-    width: auto;
-    float:right;
+    width: 26%;
+    float:left;
   }
 
   input{
     margin-right: 3%;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
     border: $border-grey;
     float: left;
     padding:3px 5px;
     height: 33px;
     color: black;
-    width:100%;
+    width:71%;
     
   }
 
@@ -138,7 +138,7 @@
     background: none;
     border: none;
     position: absolute;
-    right: 2%;
+    right: 31%;
     top: 6px;
     font-size:20px;
     z-index: 500;
@@ -147,21 +147,20 @@
   }
 
 
-  @media (min-width: $screen-tiny-max) {
+  @media (max-width: $screen-tiny-max) {
     input {
-      width:71%;
-      margin-right:3%;
-      float:left;
-      margin-bottom:0px;
+      width:65%;
+      margin-bottom:10px;
     }
 
     button {
-      width: 26%;
-      float:left;
+      
+      width: 32%;
+      float:right;
     }
 
     .clear-button{
-      right: 30%;
+      right: 37%;
     }
   }
 
