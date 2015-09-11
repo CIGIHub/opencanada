@@ -138,7 +138,7 @@
     background: none;
     border: none;
     position: absolute;
-    left: 69%;
+    right: 2%;
     top: 6px;
     font-size:20px;
     z-index: 500;
@@ -158,6 +158,10 @@
     button {
       width: 26%;
       float:left;
+    }
+
+    .clear-button{
+      right: 30%;
     }
   }
 
