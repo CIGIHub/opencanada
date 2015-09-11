@@ -9,17 +9,32 @@ header{
   background: $red;
   transition: height 0.3s, background 2s;
 
-  .search, .menu{
+  .search{
     text-align:right;
     font-size: 20px;
+    
+    #search-box-toggle {
+      width: 25px;
+      float:right;
+      cursor: pointer;
+    }
   }
+
   .search button:hover,
   .menu button:hover{
     color: $mid-grey;
   }
+
   .menu{
     text-align:left;
+    font-size: 20px;
+
+    #toggle-mobile {
+      width: 25px;
+      cursor: pointer;
+    }
   }
+
   .template-home-page &{
     .search, .menu{
       padding-top: 10px;
@@ -33,11 +48,13 @@ header{
     margin-left: 10%;
     margin-right: 10%;
   }
+
   .wordmark, .tagline{
     text-align: center;
     font-family: $sans-serif;
     line-height: 110%;
   }
+
   .wordmark{
     font-size: 27px;
     font-weight: 700;
@@ -53,10 +70,12 @@ header{
   .tagline, .article-title{
     display: none;
   }
+
   .template-home-page & .tagline{
     display: block;
     font-size: 16px;
     font-weight: 100;
+
     .menu, .search{
       padding-top: 10px;
       padding-bottom: 10px;
@@ -65,10 +84,12 @@ header{
 
   #main-menu{
     @include inline-list-divided(white, 12px);
+
     ul li a{
       font-family: $sans-serif;
       font-weight: 700;
     }
+
     ul li a:hover{
       color: $mid-grey;
     }
@@ -88,10 +109,12 @@ header{
       margin-right: 0;
     }
   }
+
   @media(max-width: $screen-md){
     @include collapsed;
 
   }
+
   @media(max-width: $screen-xs){
     .wordmark{
       font-size: 20px;
@@ -99,5 +122,4 @@ header{
       line-height: 20px;
     }
   }
-
 }
