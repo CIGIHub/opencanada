@@ -6,8 +6,8 @@
     <li><div class="item_content"><a href="{{ typed_page.url }}">{{ typed_page.title }}</a>
      {% if typed_page.authors %}
                 <div class="contributors">
-                    <div class="contributor-label">By: </div>
-                    <div class="contributor-list">
+                    <span class="contributor-label">By: </span>
+                    <span class="contributor-list">
                         {% for author in typed_page.authors %}
                             <div class="contributor">
                                 <a href="{{ author.url }}">
@@ -17,7 +17,7 @@
                                 {% if not forloop.last %}, {% endif %}
                             </div>
                         {% endfor %}
-                    </div>
+                    </span>
                 </div>
             {% endif %}
     </div>
