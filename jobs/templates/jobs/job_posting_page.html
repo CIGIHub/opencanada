@@ -6,16 +6,18 @@
 {% block content %}
 
     <div id="article-page" class="container">
-        <article>
-        {% block share_links %}
-            {% include 'articles/includes/share_links.html' %}
-        {% endblock %}
-            <h1>{{ self.title}}</h1>
-            <div class="story">
-                 {{ self.body|richtext }}
-                <div class="home-link"><a href="/"><img src="{% static 'img/opencanada-mark.png' %}"></a></div>
-            </div>
-        </article>
+        <div class="narrow-page">
+            <article>
+            {% block share_links %}
+                {% include 'articles/includes/share_links.html' %}
+            {% endblock %}
+                <h1>{{ self.title}}</h1>
+                <div class="story">
+                     {{ self.body|richtext }}
+                    <div class="home-link"><a href="/"><img src="{% static 'img/opencanada-mark.png' %}"></a></div>
+                </div>
+            </article>
+        </div>
     </div>
 
 
