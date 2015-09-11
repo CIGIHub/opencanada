@@ -142,9 +142,8 @@ article .title,
 }
 
 .block-RelatedItems{
-  margin-left: 15%;
-  margin-right: 15%;
-
+  margin:20px 15%;
+ 
   .heading{
     //margin: 10px 20px;
     text-transform: uppercase;
@@ -152,20 +151,29 @@ article .title,
     font-weight: bold;
     font-size: 12px;
   }
-  .item_list{
+
+  ul.item_list{
     border-top: $border-grey;
     border-bottom: $border-grey;
     list-style: none;
+    padding:10px 0;
 
 
     li{
       .item_content{
         margin-left: auto;
         margin-right: auto;
-        width: 50%;
+        width: 75%;
+        padding:5px 0;
+
+        @media(max-width: $screen-sm) {
+          width:100%;
+        }
+
         .contributors{
           display: block;
           color: $light-grey;
+          margin-bottom: 0;
 
           a {
             color: $light-grey;
@@ -661,7 +669,7 @@ article {
 
  @media(max-width: $screen-xs-max){
      figure{
-       display: table;
+       display: block;
        margin: 0 auto;
      }
     .row {
