@@ -42,7 +42,7 @@
                                 <a href="{{ article.url }}"><div class="feature-image-overlay" style="background: rgba( {{ article.image_overlay_color.rgb }}, {{ article.opacity }} )"></div></a>
                             </div>
                             <div class="feature-wrapper">
-                                <div class="feature-text {% if article.editors_pick %} editors-pick{% endif %}" style="color: {{ article.font_style.text_colour.hex_value }};">
+                                <div class="feature-text {% if article.editors_pick or article == self.most_popular_article  %} article-feature{% endif %}" style="color: {{ article.font_style.text_colour.hex_value }};">
                                     {% if article.feature_style.number_of_rows == 1 %}
                                         <h3><a style="color: {{ article.font_style.text_colour.hex_value }};" href="{{ article.url }}">{{ article.title }}</a></h3>
                                         {% if article.subtitle %}
@@ -97,7 +97,7 @@
                             {% if article == self.most_popular_article %}
                                 <div class="most-popular"><div class="table"><div class="table-cell"><a href="{% slugurl 'most-popular' %}" class="article-feature ">Most Popular</a></div></div></div>
                             {% endif %}
-                            <h3 class="{% if article.editors_pick %} editors-pick{% endif %}"><a href="{{ article.url }}">{{ article.title }}</a></h3>
+                            <h3 class="{% if article.editors_pick or article == self.most_popular_article %} article-feature{% endif %}"><a href="{{ article.url }}">{{ article.title }}</a></h3>
                             {% spaceless %}
                                 <div class="contributors">By:
                                     {% for author in article.authors %}
