@@ -130,8 +130,8 @@
       @include subheading(22px);
       font-weight: 800;
       margin-top: 20px;
-
     }
+    
     h3 {
       font-size: 22px;
 
@@ -178,6 +178,7 @@
       figure{
         float:left;
       }
+
       .teaser{
         margin-left: 100px;
 
@@ -185,7 +186,7 @@
           margin-left:0;
           margin-right:0;
         }
-    }
+      }
     
     @media(max-width: $screen-tiny-max){
       figure {
@@ -196,8 +197,8 @@
         margin-left:0;
       }
     } //end media query
-
   }
+
   .graphics{
     h3{
       margin-top: 10px;
@@ -215,7 +216,6 @@
       margin-left:-15px;
       margin-right:-15px;
       border-bottom: 0;
-      
     }
   }
 
@@ -237,7 +237,6 @@
     padding:0px;
     max-width: 100%;
   }
-  
 
   .image-feature{
     figure{
@@ -270,7 +269,6 @@
       }
     }
 
-
     .editors-pick-link, .most-popular {
       top:35px;
       right:22px;
@@ -284,7 +282,6 @@
         right:10px;
       }
     }
-
   }
 
   .feature-image {
@@ -303,7 +300,6 @@
       z-index: 1;
       content:"";
     }
-
 
     &:hover:before, &.hover:before {
       opacity: 1;
@@ -329,23 +325,15 @@
   .simple-feature{
     h3{
       font-size: 36px;
-      
-      &.editors-pick {
-        //padding-right:85px;
-      }
 
       @media(max-width: $screen-sm){
         font-size: 22px;
       }
     }
 
-
     .editors-pick-link, .most-popular {
       top:5%;
       right:0;
-      //position: relative;
-      //float:right;
-      //margin-left: 10px;
 
       @media(min-width: $screen-sm) {
         top:10px;
@@ -359,6 +347,7 @@
     h3{
       font-size: 36px;
     }
+
     h3.double-height{
       font-size: 32px;
       font-weight: bold;
@@ -371,7 +360,6 @@
         display: inline;
         width: 100%;
         @include box-sizing(border-box);
-
       }
 
       @media(max-width: $screen-sm){
@@ -385,13 +373,10 @@
 
     .contributors {
       margin-top:20px;
-
     }
-
   }
 
-  .feature-line{
-      
+  .feature-line
       a {
         color:#fff;
         padding-top: 10px;
@@ -403,6 +388,7 @@
         }
       }
   }
+
   h3{
     margin-bottom: 5px;
   }
@@ -458,9 +444,6 @@
 .most-popular{
   background: $red;
 }
-
-
-
 
 .pager{
   li{
