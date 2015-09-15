@@ -272,6 +272,10 @@ article {
       
       li {
         display: inline;
+
+        a {
+          outline: none;
+        }
       }
     }
   }
