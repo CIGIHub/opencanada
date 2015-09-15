@@ -83,13 +83,16 @@ var FeatureStyles = FeatureStyles || {
                 $('.feature-image').hover(function () {
                     $(this).next().toggleClass("hover");
                 });
+                $('.overlay-feature .editors-pick-link, .overlay-feature .most-popular').hover(function () {
+                    $(this).next().toggleClass("hover");
+                    $(this).next().next().toggleClass("hover");
+                });
 
-                
             }
         },
         ImageFeature: {
             initialize: function () {
-                $('.image-feature figure a, .image-feature h3 a').hover(function () {
+                $('.image-feature figure a, .image-feature h3 a, .image-feature .editors-pick-link, .image-feature .most-popular').hover(function () {
                     $(this).closest(".image-feature").find("figure a").toggleClass("hover");
                     $(this).closest(".image-feature").find("h3 a").toggleClass("hover");
                 });  
