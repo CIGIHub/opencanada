@@ -256,7 +256,7 @@
     background: rgba(0,0,0, 0.5);
   }
 
-  .feature-wrapper{
+ .feature-wrapper{
     position: absolute;
     z-index: 10;
     top: 5%;
@@ -274,15 +274,22 @@
 
       &.article-feature {
           a {
-            padding-right: 85px;
+            //padding-right: 85px;
         }
       }
 
       .contributors{
-        left:20px;  
+        //padding-left:20px; 
+        padding-right: 20px;
+        left:0;
+        display: block;
+
+
 
         @media(min-width: $screen-sm){
-          left:40px;  
+          //padding-left:40px;  
+          //margin-top: 0;
+          left:0;
         }   
       }
     }
@@ -301,7 +308,7 @@
 
   .contributors{
     margin-top: 5%;
-    font-size: 14px;
+    font-size: 12px;
     .contributor-list{
         margin-left: 25px;
     }

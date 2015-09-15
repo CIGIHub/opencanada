@@ -6,6 +6,19 @@
   @include article-overlay;
   @include fullbleed-overlay;
 
+  .feature-wrapper {
+    .feature-text {
+      .contributors {
+        padding-left:20px;
+        margin-top:0;
+
+        @media(min-width: $screen-sm){
+          padding-left:40px;  
+        }   
+      }
+    }
+  }
+
   h1 {
     margin-bottom: 0;
     margin-top:0;
@@ -210,12 +223,11 @@
     position: relative;
  
     .contributors {
-      position: absolute;
-      bottom:0;
-      margin-top: 0;
+      max-width: 100%;
+      box-sizing: border-box;
 
       a {
-        display: inline-block;
+        display: inline;
         padding:0;
       }
     }
@@ -223,6 +235,7 @@
 
   .feature-wrapper{
     padding:0px;
+    max-width: 100%;
   }
   
 
@@ -330,9 +343,9 @@
     .editors-pick-link, .most-popular {
       top:5%;
       right:0;
-      position: relative;
-      float:right;
-      margin-left: 10px;
+      //position: relative;
+      //float:right;
+      //margin-left: 10px;
 
       @media(min-width: $screen-sm) {
         top:10px;
@@ -342,26 +355,45 @@
   }
 
   .overlay-feature{
+
     h3{
       font-size: 36px;
     }
     h3.double-height{
-      font-size: 46px;
+      font-size: 32px;
       font-weight: bold;
       margin-bottom: 0;
+      padding:0;
+      display: inline;
 
       a {
-        padding-bottom: 7%;
-        display: inline-block;
+        padding:0 0 7% 0;
+        display: inline;
         width: 100%;
         @include box-sizing(border-box);
 
       }
 
       @media(max-width: $screen-sm){
-        font-size: 36px;
+        font-size: 32px;
       }
     }
+
+    .feature-text  {
+      padding:0 20px;
+    }
+
+    .editors-pick-link, .most-popular {
+      //position: relative;
+      //float:right;
+      //right:0;
+    }
+
+    .contributors {
+      margin-top:20px;
+
+    }
+
   }
 
   .feature-line{
@@ -370,7 +402,7 @@
         color:#fff;
         padding-top: 10px;
         display: inline-block;
-        padding-bottom: 7%;
+        padding-bottom: 5%;
 
         &:hover {
           color:#fff;
@@ -385,16 +417,16 @@
 .editors-pick-link, .most-popular {
   display: block;
   position: absolute;
-  top: 5%;
-  right: 25px;
+  top: 0%;
+  right: 20px;
   z-index: 11;
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   border-radius: 30px;
   background: $blue;
     
   @media(min-width: $screen-sm){
-    top: 10%;
+    top: 0%;
   }
 
   .table {
@@ -411,10 +443,12 @@
 
       a {
         text-decoration: none;
-        display: block;
+        display: inherit;
         height: 100%;
         width: 100%;
-        padding:15px 10px;
+        padding:15px 0px;
+        line-height: 1em;
+        outline:none;
       }
     }
   }
@@ -431,10 +465,6 @@
   background: $red;
 }
 
-.overlay-feature .article-feature{
-  right: 10px;
-  z-index: 10;
-}
 
 
 
