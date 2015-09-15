@@ -272,25 +272,11 @@
       max-width: 940px;
       margin: 0 auto;
 
-      &.article-feature {
-          a {
-            //padding-right: 85px;
-        }
-      }
-
       .contributors{
         //padding-left:20px; 
         padding-right: 20px;
         left:0;
-        display: block;
-
-
-
-        @media(min-width: $screen-sm){
-          //padding-left:40px;  
-          //margin-top: 0;
-          left:0;
-        }   
+        display: block;   
       }
     }
 
