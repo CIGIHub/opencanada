@@ -87,6 +87,14 @@ var FeatureStyles = FeatureStyles || {
                 
             }
         },
+        ImageFeature: {
+            initialize: function () {
+                $('.image-feature figure a, .image-feature h3 a').hover(function () {
+                    $(this).closest(".image-feature").find("figure a").toggleClass("hover");
+                    $(this).closest(".image-feature").find("h3 a").toggleClass("hover");
+                });  
+            }
+        },
         Arrow: {
             initialize: function(){
                 //scroll down arrow
