@@ -7,14 +7,7 @@
             <table border="0" cellpadding="0" cellspacing="0" width="100%" style="{% base_styles 'table' %}">
                 <tr>
                     <td valign="top" align="center" style="{% base_styles 'td' %} padding-top: 20px;">
-                        <h2 style="font-family: 'Droid Sans', Helvetica, Arial, sans-serif;
-                        text-transform: uppercase;
-                        color: #000000;
-                        font-weight: 400;
-                        font-size: 18px;
-                        line-height: 18px;
-                        padding: 0px;
-                        margin: 0px;">BEST OF THE WEB</h2>
+                        <h2 style="{% base_styles 'h2' %}">BEST OF THE WEB</h2>
                     </td>
                 </tr>
             </table>
@@ -51,7 +44,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="{% base_styles 'td' %} padding: 0; font-family: 'Droid Serif', Georgia, serif; font-size: 16px;">
+                                    <td style="{% base_styles 'td' %} padding: 0; font-family: 'Droid Serif', Georgia, serif; font-size: 14px;">
                                         {% if article.override_text %}
                                             {{ article.override_text|paragraph_markup|safe }}
                                         {% else %}

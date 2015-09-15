@@ -17,15 +17,18 @@
             <!--[if (gte mso 9)|(IE)]>
             <table><tr><td width="640">
             <![endif]-->
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" >
+                <tr>
+                    <td align="center" valign="top" style="{% base_styles 'td' %} padding:0;" id="headerContainer">
+                        {% include 'newsletter/includes/newsletter_header.html' %}
+                    </td>
+                </tr>
+            </table>
             <table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%"  style="{% base_styles 'table' %} {% base_styles '#bodyTable' %} max-width: 640px; width:100%;" id="bodyTable">
               <tr>
-                <td align="center" valign="top" id="bodyCell" style="{% base_styles 'td' %} padding: 20px 0 20px 0;">
+                <td align="center" valign="top" id="bodyCell" style="{% base_styles 'td' %} padding: 0;">
                     <table border="0" cellpadding="0" cellspacing="0" width="100%" style="{% base_styles 'table' %}  background-color: #ffffff; width:100%;" id="emailContainer">
-                        <tr>
-                            <td align="center" valign="top" style="{% base_styles 'td' %} padding:0;" id="headerContainer">
-                                {% include 'newsletter/includes/newsletter_header.html' %}
-                            </td>
-                        </tr>
+                        
                         <tr>
                             <td align="center" valign="top" style="{% base_styles 'td' %} padding:0;" class="articleContainer">
                                 {% include 'newsletter/includes/newsletter_articles.html' %}
