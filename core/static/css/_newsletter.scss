@@ -35,6 +35,10 @@
       display: inline-block;
       text-transform: uppercase;
 
+      &::-ms-clear {
+        display: none;
+      }
+
       &.email{
         color: $text-color;
         border-radius: none;

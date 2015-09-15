@@ -121,6 +121,10 @@
     height: 33px;
     color: black;
     width:71%;
+
+    &::-ms-clear {
+      display: none;
+    }
     
   }
 
