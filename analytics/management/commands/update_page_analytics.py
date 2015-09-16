@@ -9,10 +9,12 @@ from django.core.exceptions import ImproperlyConfigured
 from django.core.management.base import BaseCommand
 from django.db import transaction
 from django.utils.timezone import now
-from wagtail.contrib.wagtailfrontendcache.utils import purge_url_from_cache
+from wagtail.contrib.wagtailfrontendcache.utils import (purge_page_from_cache,
+                                                        purge_url_from_cache)
 from wagtail.wagtailcore.models import Page
 
 from analytics import utils
+from core.models import HomePage
 
 
 def get_creds_path():
@@ -120,5 +122,6 @@ class Command(BaseCommand):
                 analytics.last_period_views = sessions
                 analytics.save()
 
-        purge_url_from_cache('/')
-        # TODO Cache: invalid the page that list the 20 most popular pages
+        purge_url_from_cache(settings.BASE_URL + 'most-popular/')
+        for page in HomePage.objects.live():
+            purge_page_from_cache(page)
