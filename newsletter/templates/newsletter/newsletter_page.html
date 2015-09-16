@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html lang="en">
     {% include "newsletter/includes/newsletter_head.html" %}
-    <body style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; height: 100% !important; margin: 0; padding: 0; width: 100% !important; background-color: #FFFFFF;">
+    <body style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; height: 100% !important; margin: 0; padding: 0; width: 100% !important; background-color: #efefef;">
         <div style="font-size: 0; line-height: 0; width: 0; height: 0; display: none; overflow: hidden;">
             {% for article in self.articles%}
                 {% if forloop.first %}
@@ -24,10 +24,9 @@
                     </td>
                 </tr>
             </table>
-            <table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%"  style="{% base_styles 'table' %} {% base_styles '#bodyTable' %} max-width: 640px; width:100%;" id="bodyTable">
-              <tr>
-                <td align="center" valign="top" id="bodyCell" style="{% base_styles 'td' %} padding: 0;">
-                    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="{% base_styles 'table' %}  background-color: #ffffff; width:100%;" id="emailContainer">
+    
+            <table border="0" cellpadding="0" cellspacing="0" width="600" style="max-width:600px;" bgcolor="#ffffff" id="bodyTable">
+              
                         
                         <tr>
                             <td align="center" valign="top" style="{% base_styles 'td' %} padding:0;" class="articleContainer">
@@ -45,10 +44,10 @@
                             </td>
                         </tr>
                         
-                    </table>
-                </td>
-                </tr>
-            </table>
+                   
+            </table> 
+                    
+          
             <table border="0" cellpadding="0" cellspacing="0" width="100%" >
                 <tr>
                     <td align="center" valign="top" style="{% base_styles 'td' %}" id="footerContainer">
