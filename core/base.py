@@ -1,7 +1,7 @@
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
 
-class ListPageMixin(object):
+class PaginatedListPageMixin(object):
     '''
     To use this mixing you need to define counter_field_name as the name of the field with
     the items per page and counter_context_name for the template. See jobs/models.py for an example
@@ -22,7 +22,7 @@ class ListPageMixin(object):
         except EmptyPage:
             objects = paginator.page(paginator.num_pages)
 
-        context = super(ListPageMixin, self).get_context(request)
+        context = super(PaginatedListPageMixin, self).get_context(request)
         context[self.counter_context_name] = objects
         return context
 
@@ -30,5 +30,5 @@ class ListPageMixin(object):
         yield '/'
 
         # Yield one URL per page in the paginator to make sure all pages are purged
-        for page_number in range(1, self.get_paginator().num_pages):
+        for page_number in range(2, self.get_paginator().num_pages + 1):
             yield '/?page=' + str(page_number)

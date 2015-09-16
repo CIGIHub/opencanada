@@ -1,6 +1,5 @@
 from __future__ import absolute_import, unicode_literals
 
-from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from wagtail.wagtailadmin.edit_handlers import FieldPanel
@@ -9,6 +8,8 @@ from wagtail.wagtailcore.models import Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
+
+from core.base import PaginatedListPageMixin
 
 
 @python_2_unicode_compatible
@@ -37,10 +38,12 @@ Organization.panels = [
 ]
 
 
-class EventListPage(Page):
+class EventListPage(PaginatedListPageMixin, Page):
     subpage_types = ['EventPage']
 
     events_per_page = models.IntegerField(default=20)
+    counter_field_name = 'events_per_page'
+    counter_context_name = 'events'
 
     @property
     def subpages(self):
@@ -48,22 +51,6 @@ class EventListPage(Page):
         subpages = EventPage.objects.live().descendant_of(self).order_by('-date')
 
         return subpages
-
-    def get_context(self, request):
-        events = self.subpages
-
-        page = request.GET.get('page')
-        paginator = Paginator(events, self.events_per_page)
-        try:
-            events = paginator.page(page)
-        except PageNotAnInteger:
-            events = paginator.page(1)
-        except EmptyPage:
-            events = paginator.page(paginator.num_pages)
-
-        context = super(EventListPage, self).get_context(request)
-        context['events'] = events
-        return context
 
     content_panels = Page.content_panels + [
         FieldPanel('events_per_page')

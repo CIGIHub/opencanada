@@ -28,6 +28,7 @@ from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 
+from core.base import PaginatedListPageMixin
 from people.models import ContributorPage
 
 from . import fields as article_fields
@@ -86,12 +87,14 @@ class FontStyle(models.Model):
 register_snippet(FontStyle)
 
 
-class ArticleListPage(Page):
+class ArticleListPage(PaginatedListPageMixin, Page):
     subpage_types = ['ArticlePage',
                      'ChapteredArticlePage',
                      ]
 
     articles_per_page = models.IntegerField(default=20)
+    counter_field_name = 'articles_per_page'
+    counter_context_name = 'articles'
 
     filter_choices = [
         ('visualizations', 'Visualizations'),
@@ -116,54 +119,23 @@ class ArticleListPage(Page):
 
         return subpages
 
-    def get_context(self, request):
-        articles = self.subpages
-
-        page = request.GET.get('page')
-        paginator = Paginator(articles, self.articles_per_page)
-        try:
-            articles = paginator.page(page)
-        except PageNotAnInteger:
-            articles = paginator.page(1)
-        except EmptyPage:
-            articles = paginator.page(paginator.num_pages)
-
-        context = super(ArticleListPage, self).get_context(request)
-        context['articles'] = articles
-        return context
-
     content_panels = Page.content_panels + [
         FieldPanel('articles_per_page'),
         FieldPanel('filter', widget=forms.Select),
     ]
 
 
-class ExternalArticleListPage(Page):
+class ExternalArticleListPage(PaginatedListPageMixin, Page):
     subpage_types = ['ExternalArticlePage']
 
     articles_per_page = models.IntegerField(default=20)
+    counter_field_name = 'articles_per_page'
+    counter_context_name = 'articles'
 
     @property
     def subpages(self):
         subpages = ExternalArticlePage.objects.live().descendant_of(self).order_by('-first_published_at')
-
         return subpages
-
-    def get_context(self, request):
-        articles = self.subpages
-
-        page = request.GET.get('page')
-        paginator = Paginator(articles, self.articles_per_page)
-        try:
-            articles = paginator.page(page)
-        except PageNotAnInteger:
-            articles = paginator.page(1)
-        except EmptyPage:
-            articles = paginator.page(paginator.num_pages)
-
-        context = super(ExternalArticleListPage, self).get_context(request)
-        context['articles'] = articles
-        return context
 
     content_panels = Page.content_panels + [
         FieldPanel('articles_per_page'),
@@ -227,6 +199,21 @@ class TopicListPage(RoutablePageMixin, Page):
             "articles": articles,
         }
         return render(request, "articles/topic_page.html", context)
+
+    def get_cached_paths(self):
+        yield '/'
+
+        for topic in Topic.objects.all():
+            articles = ArticlePage.objects.live().filter(
+                models.Q(primary_topic=topic) | models.Q(topic_links__topic=topic)
+            ).order_by('-first_published_at').distinct()
+            paginator = Paginator(articles, self.articles_per_page)
+
+            topic_url = '/{}/'.format(topic.slug)
+            yield topic_url
+
+            for page_number in range(2, paginator.num_pages + 1):
+                yield topic_url + '?page=' + str(page_number)
 
     content_panels = Page.content_panels + [
         FieldPanel('articles_per_page'),
@@ -726,32 +713,18 @@ class ArticleAuthorLink(Orderable, models.Model):
     ]
 
 
-class SeriesListPage(Page):
+class SeriesListPage(PaginatedListPageMixin, Page):
     subpage_types = ['SeriesPage']
 
     series_per_page = models.IntegerField(default=5)
+    counter_field_name = 'series_per_page'
+    counter_context_name = 'series_list'
 
     @property
     def subpages(self):
         subpages = SeriesPage.objects.live().descendant_of(self).order_by('-first_published_at')
 
         return subpages
-
-    def get_context(self, request):
-        series_list = self.subpages
-
-        page = request.GET.get('page')
-        paginator = Paginator(series_list, self.series_per_page)
-        try:
-            series_list = paginator.page(page)
-        except PageNotAnInteger:
-            series_list = paginator.page(1)
-        except EmptyPage:
-            series_list = paginator.page(paginator.num_pages)
-
-        context = super(SeriesListPage, self).get_context(request)
-        context['series_list'] = series_list
-        return context
 
     content_panels = Page.content_panels + [
         FieldPanel('series_per_page')

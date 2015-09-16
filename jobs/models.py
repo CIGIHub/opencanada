@@ -3,7 +3,7 @@ from wagtail.wagtailadmin.edit_handlers import FieldPanel, RichTextFieldPanel
 from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailcore.models import Page
 
-from core.base import ListPageMixin
+from core.base import PaginatedListPageMixin
 
 
 class JobPostingPage(Page):
@@ -14,7 +14,7 @@ class JobPostingPage(Page):
     ]
 
 
-class JobPostingListPage(ListPageMixin, Page):
+class JobPostingListPage(PaginatedListPageMixin, Page):
     subpage_types = [
         'JobPostingPage',
     ]
