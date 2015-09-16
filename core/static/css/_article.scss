@@ -58,7 +58,7 @@
   }
   .feature-caption{
     font-family: $sans-serif;
-    font-size: 12px;
+    font-size: 10px;
     color: $caption-grey;
     float: right;
     margin: 10px;
@@ -378,9 +378,30 @@ article {
       }
     }
   }
+
   .image-wrapper {
     clear: both;
     max-width: 100%;
+
+    &.full-width-editorial {
+      margin-bottom: 10px;
+      .image {
+          margin-bottom: 0;
+
+          img {
+          width: 100%;
+          border:0;
+          margin-bottom: 0;
+        }
+      }
+
+      .image-label {
+        color:$caption-grey;
+        text-transform: none;
+        font-size:10px;
+        margin-bottom: 0;
+      }
+    }
 
   }
 
