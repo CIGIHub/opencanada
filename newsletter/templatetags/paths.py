@@ -28,7 +28,7 @@ def base_styles(tag):
                'mso-table-rspace: 0pt;'
     elif tag == 'td':
         return '-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; ' \
-               'mso-table-lspace: 0pt; mso-table-rspace: 0pt;'
+               'mso-table-lspace: 0pt; mso-table-rspace: 0pt; text-align:left;'
     elif tag == 'a':
         return '-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;'
     elif tag == 'img':
@@ -51,7 +51,8 @@ def base_styles(tag):
                "color: #000000;" \
                "text-transform: uppercase;" \
                "padding: 0px;" \
-               "margin: 0px;"
+               "margin: 0px;" \
+               "text-align: center"
     elif tag == 'wordmark':
         return 'font-family:proxima-nova,Helvetica,sans-serif;' \
                'text-transform:uppercase;' \
