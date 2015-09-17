@@ -38,6 +38,7 @@ $(window).resize(function(){
 });
 
 $(window).scroll(function(){
+    Header.Structure.toggleHeading();
     Header.Positioning.updateHeaderPositioning();
 });
 
