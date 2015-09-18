@@ -28,18 +28,36 @@ def base_styles(tag):
                'mso-table-rspace: 0pt;'
     elif tag == 'td':
         return '-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; ' \
-               'mso-table-lspace: 0pt; mso-table-rspace: 0pt;'
+               'mso-table-lspace: 0pt; mso-table-rspace: 0pt; text-align:left;'
     elif tag == 'a':
         return '-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;'
     elif tag == 'img':
         return 'border: 0; outline: none; text-decoration: none; ' \
                '-ms-interpolation-mode: bicubic;'
     elif tag == 'p':
-        return '-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;'
+        return 'font-family: \'Droid Serif\', Helvetica, Arial, sans-serif; ' \
+               '-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;'
     elif tag == 'li':
         return '-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;'
     elif tag == 'blockquote':
         return '-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;'
     elif tag == 'h1':
         return '-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;'
+    elif tag == 'h2':
+        return "font-family: 'Droid Sans', Helvetica, Arial, sans-serif; " \
+               "font-size: 18px;" \
+               "font-weight: 700;" \
+               "line-height: 18px;" \
+               "color: #000000;" \
+               "text-transform: uppercase;" \
+               "padding: 0px;" \
+               "margin: 0px;" \
+               "text-align: center"
+    elif tag == 'wordmark':
+        return 'font-family:proxima-nova,Helvetica,sans-serif;' \
+               'text-transform:uppercase;' \
+               'color: white;' \
+               'text-decoration: none;' \
+               'font-weight:400;' \
+               'font-size:20px;'
     return ""

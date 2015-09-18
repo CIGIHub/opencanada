@@ -11,7 +11,7 @@
                             <td valign="top" style="{% base_styles 'td' %} padding: 0 20px">
                                 <table border="0" cellpadding="0" cellspacing="0" width="100%" style="{% base_styles 'table' %}">
                                     <tr>
-                                        <td valign="top" align="center" style="{% base_styles 'td' %} padding-top: 20px; padding-left: 0; padding-bottom: 10px; padding-right: 0">
+                                        <td valign="top" align="center" style="{% base_styles 'td' %} padding-top: 20px; padding-left: 0; padding-bottom: 10px; padding-right: 0; text-align:center;">
                                             <h2 style="font-size: 44px; font-family: 'Droid Serif', Georgia, serif; line-height: 100%; margin: 0px; padding: 0px; font-weight: 400;">
                                                 <a href="{{ article.url }}" target="_blank" style="{% base_styles 'a' %} color: #bf1e2e; text-decoration:none;">{{ article.title }}</a>
                                             </h2>
@@ -20,13 +20,13 @@
                                     <tr>
                                         <td valign="top" align="center" style="{% base_styles 'img' %} padding:0;">
                                             {% image article.main_image width-580 as tmp_photo %}
-                                            <a href="{{ article.url }}" style="{% base_styles 'a' %} target="_blank">
-                                                <img src="{{ tmp_photo.url }}" class="headlineImage" width="580" alt="{{ article.main_image.title }}" style="{% base_styles 'img' %}" />
+                                            <a href="{{ article.url }}" style="{% base_styles 'a' %} text-align:center;" target="_blank">
+                                                <img src="{{ tmp_photo.url }}" class="headlineImage" alt="{{ article.main_image.title }}" style="{% base_styles 'img' %}" />
                                             </a>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td valign="top" style="{% base_styles 'td' %} font-family: 'Droid Serif', Georgia, serif; font-size: 16px; line-height: 120%; padding: 10px 0;">
+                                        <td valign="top" style="{% base_styles 'td' %} font-family: 'Droid Serif', Georgia, serif; font-size: 14px; line-height: 120%; padding: 10px 0;">
                                             {% if article.override_text %}
                                                 {{ article.override_text|paragraph_markup }}
                                             {% else %}
@@ -49,16 +49,16 @@
                     <table border="0" cellpadding="0" cellspacing="0" width="100%" style="{% base_styles 'table' %}">
 
                             <tr>
-                                <td valign="middle" class="ImageCell" style="{% base_styles 'td' %} padding: 20px">
+                                <td valign="top" class="ImageCell" style="{% base_styles 'td' %} padding: 20px">
                                     {% if article.override_image %}
                                         {% image article.override_image circle-80x80 as tmp_photo %}
                                         <a href="{{ article.url }}" target="_blank" style="{% base_styles 'a' %}">
-                                            <img src="{{ tmp_photo.url }}" class="articleImage" alt="{{ article.main_image.title }}" style="{% base_styles 'img' %} font-size: 12px;" />
+                                            <img src="{{ tmp_photo.url }}" class="articleImage" width="80" height="80" alt="{{ article.main_image.title }}" style="{% base_styles 'img' %} font-size: 12px;" />
                                         </a>
                                     {% else %}
                                         {% image article.main_image circle-80x80 as tmp_photo %}
                                         <a href="{{ article.url }}" target="_blank" style="{% base_styles 'a' %}">
-                                            <img src="{{ tmp_photo.url }}" alt="{{ article.main_image.title }}" style="{% base_styles 'img' %} font-size: 12px;" />
+                                            <img src="{{ tmp_photo.url }}" width="80" height="80" alt="{{ article.main_image.title }}" style="{% base_styles 'img' %} font-size: 12px;" />
                                         </a>
                                     {% endif %}
 
@@ -80,7 +80,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style="{% base_styles 'td' %} padding: 0;  font-family: 'Droid Serif', Georgia, serif; font-size: 16px;">
+                                            <td style="{% base_styles 'td' %} padding: 0;  font-family: 'Droid Serif', Georgia, serif; font-size: 14px;">
                                                 {% if article.override_text %}
                                                 {{ article.override_text|paragraph_markup}}
                                             {% else %}
@@ -93,17 +93,12 @@
 
 
                                 </td>
-
                             </tr>
-
-                    </table>
+                    </table> 
 
                  {% endif %}
             {% endfor %}
 
         </td>
-    </tr>
-    <tr style="height: 1px;">
-        <td align="right" valign="top" class="divider" style="{% base_styles 'td' %} padding: 0; margin: 0;border-top: 1px solid #e1e1e1;"></td>
     </tr>
 </table>
