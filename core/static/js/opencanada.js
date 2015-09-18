@@ -21,10 +21,11 @@ jQuery(document).ready(function() {
 //initialize window based on width and height
 function initForWindow(){
 
-    FeatureStyles.MainFeatures.initializeForWindow();
-    Sharing.Links.initializeForWindow();
     Header.Structure.toggleHeading();
     Header.Positioning.updateHeaderPositioning();
+    FeatureStyles.MainFeatures.initializeForWindow();
+    Sharing.Links.initializeForWindow();
+    
 
     $("main").click(function () {
         Menu.close();

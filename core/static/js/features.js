@@ -22,9 +22,23 @@ var FeatureStyles = FeatureStyles || {
                     //set the Homepage Feature height based on window height
                     var bannerHeight = $('header').height();
                     var gap = FeatureStyles.MainFeatures.gap_size.value * windowHeight;
-                    var featureHeight = windowHeight - bannerHeight - gap;
+                    var featureHeight = windowHeight - gap;
 
                     $('.jumbotron.main-feature').css("height", featureHeight + "px");
+                    
+                    
+                    $('.jumbotron.main-feature').css("margin-top", -1 * $('header').height());
+                    
+                    if (!bodyTag.hasClass('template-home-page')) {
+                        Header.Positioning.transparencyOn();
+                    } else {
+                        
+                        featureHeight = windowHeight - bannerHeight - gap;
+
+                        $('.jumbotron.main-feature').css("height", featureHeight + "px");
+                        $('.jumbotron.main-feature').css("margin-top", 0 + "px");
+                    
+                    }
 
                 }
             },
