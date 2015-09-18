@@ -7,7 +7,17 @@ header{
   z-index: 500;
   color: white;
   background: $red;
-  transition: height 0.3s, background 2s;
+  transition: height 0.3s, background 1s;
+
+  &.transparency {
+    background: transparent;
+    position: absolute;
+
+    .wordmark a {
+      color:rgba(255,255,255,0.5);
+      transition: color 1s;
+    }
+  }
 
   .search{
     text-align:right;
