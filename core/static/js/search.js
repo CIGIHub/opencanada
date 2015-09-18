@@ -2,9 +2,13 @@ var Search = Search || {
         Structure: {
             initialize: function () {
                 $('.search-form input[type=text]').keydown(function () {
-                    if ($(this).val() != '') {
-                        $('.clear-button').show();
-                    }
+                    setTimeout(function() {
+                        if ($('.search-form input[type=text]').val() == '') {
+                            $('.clear-button').hide();
+                        }else {
+                            $('.clear-button').show();
+                        }
+                    }, 100);
                 });
                 $('.clear-button').click(function () {
                     $('.search-form input[type=text]').val('');
