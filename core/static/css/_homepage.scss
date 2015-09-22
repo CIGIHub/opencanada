@@ -6,6 +6,19 @@
   @include article-overlay;
   @include fullbleed-overlay;
 
+  .feature-wrapper {
+    .feature-text {
+      .contributors {
+        padding-left:20px;
+        margin-top:0;
+
+        @media(min-width: $screen-sm){
+          padding-left:40px;  
+        }   
+      }
+    }
+  }
+
   h1 {
     margin-bottom: 0;
     margin-top:0;
@@ -117,8 +130,8 @@
       @include subheading(22px);
       font-weight: 800;
       margin-top: 20px;
-
     }
+
     h3 {
       font-size: 22px;
 
@@ -165,6 +178,7 @@
       figure{
         float:left;
       }
+
       .teaser{
         margin-left: 100px;
 
@@ -172,7 +186,7 @@
           margin-left:0;
           margin-right:0;
         }
-    }
+      }
     
     @media(max-width: $screen-tiny-max){
       figure {
@@ -183,8 +197,8 @@
         margin-left:0;
       }
     } //end media query
-
   }
+
   .graphics{
     h3{
       margin-top: 10px;
@@ -202,7 +216,6 @@
       margin-left:-15px;
       margin-right:-15px;
       border-bottom: 0;
-      
     }
   }
 
@@ -210,12 +223,11 @@
     position: relative;
  
     .contributors {
-      position: absolute;
-      bottom:0;
-      margin-top: 0;
+      max-width: 100%;
+      box-sizing: border-box;
 
       a {
-        display: inline-block;
+        display: inline;
         padding:0;
       }
     }
@@ -223,8 +235,8 @@
 
   .feature-wrapper{
     padding:0px;
+    max-width: 100%;
   }
-  
 
   .image-feature{
     figure{
@@ -257,7 +269,6 @@
       }
     }
 
-
     .editors-pick-link, .most-popular {
       top:35px;
       right:22px;
@@ -271,7 +282,6 @@
         right:10px;
       }
     }
-
   }
 
   .feature-image {
@@ -290,7 +300,6 @@
       z-index: 1;
       content:"";
     }
-
 
     &:hover:before, &.hover:before {
       opacity: 1;
@@ -316,23 +325,15 @@
   .simple-feature{
     h3{
       font-size: 36px;
-      
-      &.editors-pick {
-        //padding-right:85px;
-      }
 
       @media(max-width: $screen-sm){
         font-size: 22px;
       }
     }
 
-
     .editors-pick-link, .most-popular {
       top:5%;
       right:0;
-      position: relative;
-      float:right;
-      margin-left: 10px;
 
       @media(min-width: $screen-sm) {
         top:10px;
@@ -342,41 +343,52 @@
   }
 
   .overlay-feature{
+
     h3{
       font-size: 36px;
     }
+
     h3.double-height{
-      font-size: 46px;
+      font-size: 32px;
       font-weight: bold;
       margin-bottom: 0;
+      padding:0;
+      display: inline;
 
       a {
-        padding-bottom: 7%;
-        display: inline-block;
+        padding:0 0 7% 0;
+        display: inline;
         width: 100%;
         @include box-sizing(border-box);
-
       }
 
       @media(max-width: $screen-sm){
-        font-size: 36px;
+        font-size: 32px;
       }
+    }
+
+    .feature-text  {
+      padding:0 20px;
+    }
+
+    .contributors {
+      margin-top:20px;
     }
   }
 
-  .feature-line{
-      
+  .feature-line {
       a {
         color:#fff;
         padding-top: 10px;
         display: inline-block;
-        padding-bottom: 7%;
+        padding-bottom: 5%;
 
         &:hover {
           color:#fff;
         }
       }
   }
+
   h3{
     margin-bottom: 5px;
   }
@@ -385,16 +397,16 @@
 .editors-pick-link, .most-popular {
   display: block;
   position: absolute;
-  top: 5%;
-  right: 25px;
+  top: 0%;
+  right: 20px;
   z-index: 11;
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   border-radius: 30px;
   background: $blue;
     
   @media(min-width: $screen-sm){
-    top: 10%;
+    top: 0%;
   }
 
   .table {
@@ -411,10 +423,12 @@
 
       a {
         text-decoration: none;
-        display: block;
+        display: inherit;
         height: 100%;
         width: 100%;
-        padding:15px 10px;
+        padding:15px 0px;
+        line-height: 1em;
+        outline:none;
       }
     }
   }
@@ -430,13 +444,6 @@
 .most-popular{
   background: $red;
 }
-
-.overlay-feature .article-feature{
-  right: 10px;
-  z-index: 10;
-}
-
-
 
 .pager{
   li{
