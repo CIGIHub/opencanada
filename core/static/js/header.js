@@ -34,7 +34,7 @@ var Header = Header || {
                 }
 
                 function fullScroll() {
-                    $('header, #search-box').toggleClass('collapsed scrolled', $(document).scrollTop() > offset);
+                    $('header, #search-box').toggleClass('collapsed scrolled', $(document).scrollTop() >= offset);
 
                     var headerRow = $('header .header-row');
                     if ($('header').hasClass('collapsed')) {
@@ -56,7 +56,7 @@ var Header = Header || {
 
                 function collapsedScroll() {
                     collapsedHeader();
-                    $('header').toggleClass('scrolled', $(document).scrollTop() > offset);
+                    $('header').toggleClass('scrolled', $(document).scrollTop() >= offset);
                 }
 
                 if ($(window).width() >= breakpoint) {
@@ -65,7 +65,7 @@ var Header = Header || {
                         bodyTag.removeClass('small-article');
                     }
 
-                    if ($(document).scrollTop() > offset) {
+                    if ($(document).scrollTop() >= offset) {
                         if ($('#article-page').length) {
                             bodyTag.addClass('article-scroll');
                         }
