@@ -104,6 +104,7 @@ class ImageBlock(blocks.StructBlock):
         ('left', 'Left Aligned'),
         ('right', 'Right Aligned'),
         ('full', 'Full Width'),
+        ('editorial', 'Full Width Editorial'),
     ], default='full')
     expandable = blocks.BooleanBlock(default=False, required=False)
     label = blocks.CharBlock(required=False, help_text="Additional label to be displayed with the image.")

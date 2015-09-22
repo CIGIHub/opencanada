@@ -75,7 +75,7 @@ button:focus {outline:0;}
 
 .image-credit {
     margin-top: 5px;
-    font-size: 12px;
+    font-size: 10px;
     line-height: 125%;
     font-family: $sans-serif;
     color: $caption-grey;
@@ -83,7 +83,7 @@ button:focus {outline:0;}
 
   .image-source{
     margin-top: 3px;
-    @include type($light-grey, 11px)
+    @include type($light-grey, 10px)
   }
 
 .date{

@@ -20,7 +20,7 @@
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 {% endif %}
-<div class="image-wrapper {% if self.placement == 'left' %} left-aligned{% elif self.placement == 'right' %} right-aligned{% elif self.placement == 'full' %}full-width{% endif %}">
+<div class="image-wrapper {% if self.placement == 'left' %} left-aligned{% elif self.placement == 'right' %} right-aligned{% elif self.placement == 'full' %}full-width {% elif self.placement == 'editorial' %} full-width-editorial{% endif %}">
   <div
           class="image"
           {% if self.expandable %}data-toggle="modal" data-target="#photoModel{{ self.image.id }}"{% endif %}
@@ -34,8 +34,10 @@
       <div class="image-credit">{{ self.image.credit }}</div>
       <div class="image-source">{{ self.image.source }}</div>
 
+
   </div>
   {% if self.label %}
           <div class="image-label{% if self.expandable %} clickable{% endif %}"{% if self.expandable %} data-toggle="modal" data-target="#photoModel{{ self.image.id }}" {% endif %}>{{ self.label }}</div>
+          <div class="clear"></div>
       {% endif %}
 </div>
