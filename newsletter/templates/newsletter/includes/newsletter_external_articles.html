@@ -1,20 +1,17 @@
 {% load paths %}
 {% load static core_tags wagtailcore_tags wagtailimages_tags %}
 
+{% if self.external_articles %}
 <table border="0" cellpadding="0" cellspacing="0" width="100%" style="{% base_styles 'table' %}">
+    <tr style="height: 1px;">
+        <td align="right" valign="top" class="divider" style="{% base_styles 'td' %} padding: 0; margin: 0;border-top: 1px solid #e1e1e1;"></td>
+    </tr>
     <tr>
         <td valign="top" class="bodyContainer" style="{% base_styles 'td' %} padding-bottom:20px;">
             <table border="0" cellpadding="0" cellspacing="0" width="100%" style="{% base_styles 'table' %}">
                 <tr>
                     <td valign="top" align="center" style="{% base_styles 'td' %} padding-top: 20px;">
-                        <h2 style="font-family: 'Droid Sans', Helvetica, Arial, sans-serif;
-                        text-transform: uppercase;
-                        color: #000000;
-                        font-weight: 400;
-                        font-size: 18px;
-                        line-height: 18px;
-                        padding: 0px;
-                        margin: 0px;">BEST OF THE WEB</h2>
+                        <h2 style="{% base_styles 'h2' %}">BEST OF THE WEB</h2>
                     </td>
                 </tr>
             </table>
@@ -22,7 +19,7 @@
             {% for article in self.external_articles %}
                 <table border="0" cellpadding="0" cellspacing="0" width="100%" style="{% base_styles 'table' %}">
                     <tr>
-                        <td valign="middle" class="ImageCell"  style="{% base_styles 'td' %} padding-top: 20px; padding-left: 20px; padding-bottom: 0; padding-right: 20px;">
+                        <td valign="top" class="ImageCell"  style="{% base_styles 'td' %} padding-top: 20px; padding-left: 20px; padding-bottom: 0; padding-right: 20px;">
                             {% if article.source and article.source.logo %}
                                 {% image article.source.logo rcircle-80x80-rgba_204-w_1 as tmp_photo %}
                             {% else %}
@@ -32,7 +29,7 @@
                                 {% endif %}
                             {% endif %}
                                <a href="{{ article.website_link }}" target="_blank" style="{% base_styles 'a' %}">
-                                   <img class="articleImage" src="{{ tmp_photo.url }}" alt="{{ article.source.logo.title }}"  style="{% base_styles 'img' %} font-size: 12px;" />
+                                   <img class="articleImage" src="{{ tmp_photo.url }}" width="80" height="80" alt="{{ article.source.logo.title }}"  style="{% base_styles 'img' %} font-size: 12px;" />
                                </a>
                         </td>
                         <td valign="middle"  style="{% base_styles 'td' %} padding-top: 20px; padding-right: 20px; padding-bottom: 0px; padding-left: 0px;">
@@ -51,7 +48,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="{% base_styles 'td' %} padding: 0; font-family: 'Droid Serif', Georgia, serif; font-size: 16px;">
+                                    <td style="{% base_styles 'td' %} padding: 0; font-family: 'Droid Serif', Georgia, serif; font-size: 14px;">
                                         {% if article.override_text %}
                                             {{ article.override_text|paragraph_markup|safe }}
                                         {% else %}
@@ -65,11 +62,7 @@
                     </tr>
                 </table>
             {% endfor %}
-
-
         </td>
     </tr>
-    <tr style="height: 1px;">
-        <td align="right" valign="top" class="divider" style="{% base_styles 'td' %} padding: 0; margin: 0;border-top: 1px solid #e1e1e1;"></td>
-    </tr>
 </table>
+{% endif %}

@@ -3,19 +3,20 @@
 
 <table border="0" cellpadding="0" cellspacing="0" width="100%" style="{% base_styles 'table' %}">
     <tr>
-        <td valign="top" align="center" style="{% base_styles 'td' %} padding-bottom:10px;" bgcolor="#bf1e2e">
+        <td valign="top" align="center" style="{% base_styles 'td' %} padding:20px; 0" bgcolor="#bf1e2e">
 
-            <p style="{% base_styles 'p' %} padding-bottom: 10px; font-family: 'Droid Sans', Helvetica, Arial, sans-serif; font-size: 14px;">
+            <p style="{% base_styles 'p' %} padding-bottom: 10px; font-family: 'Droid Sans', Helvetica, Arial, sans-serif; font-size: 12px; text-align:center;">
                 <a style="{% base_styles 'a' %} color: #ffffff;" href="{{ self.full_url }}">View email in browser</a>
             </p>
-            <p style="{% base_styles 'p' %} padding-bottom: 10px; font-family:'Droid Sans', Helvetica, Arial, sans-serif; font-size: 14px; color: #ffffff; ">
+            <p style="{% base_styles 'p' %} padding-bottom: 10px; font-family:'Droid Sans', Helvetica, Arial, sans-serif; font-size: 12px; color: #ffffff; text-align:center; ">
                 <a style="{% base_styles 'a' %} color: #ffffff; " href="*|LIST:SUBSCRIBE|*">Subscribe</a> /
                 <a style="{% base_styles 'a' %} color: #ffffff;" href="https://twitter.com/opencanada">Follow on Twitter</a> /
                 <a style="{% base_styles 'a' %} color: #ffffff;" href="https://facebook.com/opencanada">Like on Facebook</a> /
                 <a style="{% base_styles 'a' %} color: #ffffff;" href="*|FORWARD|*">Forward this email to a friend</a>
             </p>
-            <p style="{% base_styles 'p' %} font-family:'Droid Sans', Helvetica, Arial, sans-serif; font-size: 14px; color: #ffffff">
-                To stop receiving any updates from OpenCanada.org: <a style="{% base_styles 'a' %} color: #ffffff;" href="*|UNSUB|*" class="utilityLink">Click Here</a>
+            <p style="{% base_styles 'p' %} font-family:'Droid Sans', Helvetica, Arial, sans-serif; font-size: 12px; color: #ffffff; text-align:center;">
+                To stop receiving any updates from <a style="{% base_styles 'a' %} color: #ffffff; text-decoration:none;" href="https://www.opencanada.org/"
+                           target="_blank">OpenCanada.org</a>: <a style="{% base_styles 'a' %} color: #ffffff;" href="*|UNSUB|*" class="utilityLink">Click Here</a>
             </p>
 
         </td>
@@ -33,67 +34,14 @@
     </tr>
 
     <tr>
-        <td valign="top" align="center" style="{% base_styles 'td' %} padding: 0 60px;" bgcolor="#bf1e2e">
-            <p style="{% base_styles 'p' %} color: #ffffff;">
-                <em>OpenCanada.org is a publication of the Canadian International Council, the Center for International Governance Innovation and the Bill Graham Center.</em>
+        <td valign="top" align="center" style="{% base_styles 'td' %} padding: 20px 60px;" bgcolor="#bf1e2e">
+            <p style="{% base_styles 'p' %} font-family: 'Droid Sans', Helvetica, Arial, sans-serif; color: #ffffff; font-size:12px; padding-bottom: 10px; text-align:center;">
+                <em><a style="{% base_styles 'a' %} color: #ffffff; text-decoration:none;" href="https://www.opencanada.org/"
+                           target="_blank">OpenCanada.org</a> is a publication of the Canadian International Council, the Center for International Governance Innovation and the Bill Graham Center.</em>
             </p>
-        </td>
-    </tr>
-
-    <tr>
-        <td valign="top" align="center" style="{% base_styles 'td' %} padding:15px" bgcolor="#bf1e2e">
-            <table align="center" width="100%" border="0" cellpadding="0" cellspacing="0" style="{% base_styles 'table' %}">
-                <tr>
-                    <td valign="top" align="center" style="{% base_styles 'td' %} padding:10px 10px 0 10px; width: 33%">
-                        <img align="center" alt="CIC Logo" class="footerImage" src="{% static 'img/CIC-logo-white.png' %}" style="max-width:130px; height: auto; padding-bottom: 0; display: inline !important; vertical-align: bottom; color: #ffffff; font-size: 14px;">
-                    </td>
-
-                    <td valign="top" align="center" style="{% base_styles 'td' %} padding: 15px 0px 0px 10px; width: 33%">
-                        <img align="center" alt="Bill Graham Centre Logo" class="footerImage" src="{% static 'img/BGC-logo-white.png' %}" style="max-width:140px; height: auto; padding-bottom: 0; display: inline !important; vertical-align: bottom; color: #ffffff; font-size: 14px;">
-                    </td>
-
-                    <td valign="top" align="center" style="{% base_styles 'td' %} padding: 0px 10px; width: 33%">
-                        <img align="center" alt="CIGI Logo" class="footerImage" src="{% static 'img/CIGI-logo-white.png' %}" style="max-width:160px; height: auto; padding-bottom: 0; display: inline !important; vertical-align: bottom; color: #ffffff; font-size: 14px;">
-                    </td>
-                </tr>
-            </table>
-        </td>
-    </tr>
-
-    <tr>
-        <td valign="top" align="center" style="{% base_styles 'td' %}" bgcolor="#bf1e2e">
-            <p style="{% base_styles 'p' %} font-family: 'Droid Sans', Helvetica, Arial, sans-serif; font-size: 14px; color: #ffffff" >COPYRIGHT © *|CURRENT_YEAR|* *|LIST:COMPANY|*, ALL RIGHT RESERVED.</p>
-            <p style="{% base_styles 'p' %} font-family: 'Droid Sans', Helvetica, Arial, sans-serif; font-size: 14px; color: #ffffff" >ANY TRADEMARKS OR LOGOS USED HERIN ARE THE PROPERTY OF THEIR RESPECTIVE OWNERS.</p>
-        </td>
-    </tr>
-
-    <tr style="height: 1px;">
-        <td align="center" valign="top" class="divider" style="{% base_styles 'td' %}" bgcolor="#bf1e2e">
-            <table border="0" cellpadding="0" cellspacing="0" width="100%" class="dividerTable" style="{% base_styles 'table' %}  border-top: 1px solid #e1e1e1;">
-                <tr>
-                    <td style="{% base_styles 'td' %} font-size: 0;">&nbsp;</td>
-                </tr>
-            </table>
-        </td>
-    </tr>
-
-    <tr>
-        <td valign="top" align="center" style="{% base_styles 'td' %}" bgcolor="#bf1e2e">
-            <p style="{% base_styles 'p' %} font-family: 'Droid Sans', Helvetica, Arial, sans-serif; font-size: 14px; color: #ffffff">
-                *|IFNOT:ARCHIVE_PAGE|*
-                *|LIST:DESCRIPTION|*
-                <br>
-                <br>
-                <strong>Our mailing address is:</strong>
-                <br>
-                *|HTML:LIST_ADDRESS_HTML|* *|END:IF|*
-                <br>
-                <br>
-
-                <a style="{% base_styles 'a' %} color: #ffffff;" href="*|UPDATE_PROFILE|*">update subscription preferences</a>&nbsp;
-                <br>
-                <br>
-            </p>
+            <p style="{% base_styles 'p' %} font-family: 'Droid Sans', Helvetica, Arial, sans-serif; font-size: 12px; color: #ffffff; text-align:center;" >COPYRIGHT &copy; *|CURRENT_YEAR|* *|LIST:COMPANY|*, ALL RIGHT RESERVED.</p>
+            <br>
+            <br>
         </td>
     </tr>
 </table>
