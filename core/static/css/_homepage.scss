@@ -236,7 +236,7 @@
         height:100%;
         display:block;
 
-        &:hover:before {
+        &:hover:before, &.hover:before {
           width:100%;
           height:100%;
           background:rgba(0,0,0,0.25);
@@ -250,10 +250,21 @@
       }
     }
 
+    h3 {
+      a:hover, a.hover{
+        color:$grey;
+        text-decoration: underline;
+      }
+    }
+
 
     .editors-pick-link, .most-popular {
       top:35px;
       right:22px;
+
+      a:hover {
+        color:$mid-grey;
+      }
 
       @media(min-width: $screen-sm) {
         top:10px;
@@ -376,7 +387,7 @@
   position: absolute;
   top: 5%;
   right: 25px;
-  z-index: 9;
+  z-index: 11;
   width: 60px;
   height: 60px;
   border-radius: 30px;
@@ -396,10 +407,14 @@
       vertical-align: middle;
       height: 100%;
       text-align: center;
-      padding:0 10px;
+      padding:0px;
 
       a {
         text-decoration: none;
+        display: block;
+        height: 100%;
+        width: 100%;
+        padding:15px 10px;
       }
     }
   }
@@ -421,12 +436,7 @@
   z-index: 10;
 }
 
-.simple-feature .article-feature{
-  position: relative;
-  float: right;
-  right: 0;
-  top: 0;
-}
+
 
 .pager{
   li{

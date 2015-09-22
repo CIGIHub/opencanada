@@ -6,6 +6,10 @@
     @include fullbleed-overlay;
     .feature-wrapper{
       top: 20%;
+
+      a {
+        padding:0;
+      }
     }
 
     .feature-text{

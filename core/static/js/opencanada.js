@@ -7,6 +7,7 @@ jQuery(document).ready(function() {
     FeatureStyles.Camera.initialize();
     FeatureStyles.Arrow.initialize();
     FeatureStyles.FeatureImages.initialize();
+    FeatureStyles.ImageFeature.initialize();
     FeatureStyles.RelatedArticles.initialize();
 
     Search.Structure.initialize();
