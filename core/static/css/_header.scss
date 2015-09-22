@@ -20,6 +20,10 @@ header{
     }
   }
 
+  .social {
+    display: none;
+  }
+
   .search button:hover,
   .menu button:hover{
     color: $mid-grey;
