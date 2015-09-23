@@ -30,10 +30,6 @@ header{
     }
   }
 
-  .social {
-    display: none;
-  }
-
   .search button:hover,
   .menu button:hover{
     color: $mid-grey;
@@ -57,10 +53,8 @@ header{
   }
 
   .banner{
-    padding-top: 20px;
-    padding-bottom: 20px;
-    margin-left: 10%;
-    margin-right: 10%;
+    margin-left: 0;
+    margin-right: 0;
   }
 
   .wordmark, .tagline{
@@ -69,15 +63,19 @@ header{
     line-height: 110%;
   }
 
-  .wordmark{
-    font-size: 27px;
+  .wordmark {
     font-weight: 700;
+    font-size: 20px;
+    padding-top:16px;
+    line-height: 20px;
     text-transform: uppercase;
-    a{
+
+    a {
       color: white;
-    }
-    a:hover{
-      text-decoration: none;
+      
+      &:hover{
+        text-decoration: none;
+      }
     }
   }
 
@@ -86,7 +84,6 @@ header{
   }
 
   .template-home-page & .tagline{
-    display: block;
     font-size: 16px;
     font-weight: 100;
 
@@ -97,25 +94,65 @@ header{
   }
 
   #main-menu{
-    @include inline-list-divided(white, 12px);
-
-    ul li a{
-      font-family: $sans-serif;
-      font-weight: 700;
-    }
-
-    ul li a:hover{
-      color: $mid-grey;
-    }
-  }
-
-  &.collapsed.scrolled{
+    z-index: 300;   
+    position: fixed;
+    transition:left 1s;
+    top: 55px;
+    left: -400px;
+    z-index: 300;
+    height: 100%;
+    width: 200px;
+    padding: 25px;
+    margin-top: 0px;
     background: #000;
+    text-align: left;
+
+    ul.social{
+      border-top: $border-white;
+      margin-top: 10px;
+      padding-top: 10px;
+      li a{
+        font-size: 12px;
+      }
+      i{
+        width: 20px;
+      }
+    }
+
+    ul{
+      margin:0;
+      padding:0;
+
+      li{
+        display: block;
+        padding: 3px 5px;
+
+        a {
+          color: #fff;
+          font-family: $sans-serif;
+          font-weight: 700;
+          font-size: 12px;
+          text-transform: uppercase;
+        }
+      }
+    }
+  
+
+    &.open{
+      transition:left 0.5s;
+      left: 0;
+    }
+
+
+
+    &.collapsed.scrolled{
+      background: #000;
+    }
   }
 
-  &.collapsed {
-    @include collapsed;
-  }
+  //&.collapsed {
+  //  @include collapsed;
+  //}
 
   @media(max-width: $screen-lg){
     .banner{
@@ -125,15 +162,62 @@ header{
   }
 
   @media(max-width: $screen-md){
-    @include collapsed;
+    //@include collapsed;
 
   }
 
   @media(max-width: $screen-xs){
     .wordmark{
       font-size: 20px;
-      padding-top:7px;
+      padding-top:16px;
       line-height: 20px;
     }
+  }
+
+  @media(min-width: $breakpoint){
+
+    .tagline {
+      display: block;
+    }
+
+    #main-menu{ 
+      @include inline-list-divided(white, 12px);
+      display: block;
+      position: relative;
+      top: 0 !important;
+      left: 0;
+      width: auto;
+      padding: 0px;
+      background: transparent;
+      transition:left 0s;
+      
+      &.open{
+        transition:left 0s;
+       
+      }
+      
+    }
+
+    #toggle-mobile {
+      display: none;
+    }
+
+    .wordmark {
+      font-size: 27px;
+      padding-top:9px;
+    }
+
+    .banner{
+      padding-top: 20px;
+      padding-bottom: 20px;
+      margin-left: 10%;
+      margin-right: 10%;
+    }
+
+    .social {
+      display: none;
+    }
+    
+
   }
 }

@@ -1,16 +1,29 @@
 var Header = Header || {
         Structure: {
-            //toggle Banner heading based on window width and page types
+            //toggle Banner heading based on window width and page types. This function should only get called when the user scrolls the page.
             toggleHeading: function () {
 
+                /* There are many ways the header needs to be altered after loading
+                 *  1.  Start the header loaded for mobile, and use CSS to show/hide depending on screen size
+                 *  2.  When the user scrolls down past the big image (or page title if no big image), collapse the header
+                 *  3.  On the homepage, there is a tagline which needs to hidden once the header is collapsed 
+                 *  4.  Full bleed articles need to hide the header altogether, and just show a transparent OpenCanda.org. When the user
+                        scrolls down past the big image, the header needs to reappear in a collapsed state.
+                 *  5.  Scrolling down on article pages (on large screens only) need to replace the OpenCanada.org with the article title  
+                 *  6.  Change the background from red to black when user scrolls down.
+                */
                 var offset = Math.max($('header').height(), $('.jumbotron.main-feature').height());
 
                 var bodyTag = $('body');
 
-                function fullHeader() {
+                if ($(window).width() > breakpoint) {
+
+                }
+
+                /*function fullHeader() {
                     $('header').removeClass('collapsed');
                     $('.toggle-mobile').hide();
-                    $('nav').removeClass('mobile-menu open');
+                    //$('nav').removeClass('mobile-menu open');
                     bodyTag.removeClass('article-scroll');
 
                     if ($('.template-home-page').length) {
@@ -25,7 +38,7 @@ var Header = Header || {
                         $('.toggle-mobile').show();
                     }
 
-                    $('nav').addClass('mobile-menu');
+                    //$('nav').addClass('mobile-menu');
 
                     if ($('#article-page').length && bodyTag.hasClass('article-scroll') && $(window).width() <= breakpoint) {
                         bodyTag.removeClass('article-scroll');
@@ -107,7 +120,7 @@ var Header = Header || {
                     $(window).off("scroll touchmove", fullScroll);
                     $(window).on("scroll touchmove", collapsedScroll);
 
-                }
+                }*/
             }
         }, 
         Positioning: {
@@ -116,12 +129,7 @@ var Header = Header || {
                 var bannerHeight = $('header').height();
                 Search.Structure.setOffset(bannerHeight);
                 Menu.setOffset(bannerHeight);
-
-                //if (!$('header').hasClass("transparency")) {
-                    $('body').css("padding-top", bannerHeight + "px");
-                
-                //}
-
+                $('body').css("padding-top", bannerHeight + "px");
             },
 
             transparencyOn: function() {
