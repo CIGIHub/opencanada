@@ -37,7 +37,7 @@ class ThemeablePage(Page):
 
     def get_template(self, request, *args, **kwargs):
         original_template = super(ThemeablePage, self).get_template(request, *args, **kwargs)
-        if self.theme is None:
+        if self.theme:
             return "{}/{}".format(self.theme.folder, original_template)
         else:
             return original_template
