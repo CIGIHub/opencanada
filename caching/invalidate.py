@@ -15,6 +15,7 @@ from events.models import EventListPage, EventPage
 from jobs.models import JobPostingListPage, JobPostingPage
 from newsletter.models import NewsletterListPage, NewsletterPage
 from people.models import ContributorListPage, ContributorPage
+from six.moves import xrange
 
 logger = logging.getLogger(__name__)
 
@@ -149,12 +150,12 @@ def purge_related(instance):
 
 
 @receiver(page_published)
-def blog_published_handler(instance, **kwargs):
+def page_published_handler(instance, **kwargs):
     cloudflare_purge_all()
     # purge_related(instance)
 
 
 @receiver(pre_delete)
-def blog_deleted_handler(instance, **kwargs):
+def page_deleted_handler(instance, **kwargs):
     cloudflare_purge_all()
     # purge_related(instance)
