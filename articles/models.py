@@ -30,6 +30,7 @@ from wagtail.wagtailsnippets.models import register_snippet
 
 from core.base import PaginatedListPageMixin
 from people.models import ContributorPage
+from themes.models import ThemeablePage
 
 from . import fields as article_fields
 
@@ -375,7 +376,7 @@ class PageLayoutOptions(models.Model):
         abstract = True
 
 
-class ArticlePage(Page, FeatureStyleFields, Promotable, Sharelinks, PageLayoutOptions):
+class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, Sharelinks, PageLayoutOptions):
     excerpt = RichTextField(blank=True, default="")
     body = article_fields.BodyField()
 
@@ -528,7 +529,8 @@ class ArticlePage(Page, FeatureStyleFields, Promotable, Sharelinks, PageLayoutOp
         ),
     ]
 
-    style_panels = [
+    style_panels = ThemeablePage.style_panels + [
+
         MultiFieldPanel(
             [
                 FieldPanel('include_main_image'),
@@ -769,7 +771,7 @@ class SeriesArticleLink(Orderable, models.Model):
     ]
 
 
-class SeriesPage(Page, FeatureStyleFields, Promotable, Sharelinks, PageLayoutOptions):
+class SeriesPage(ThemeablePage, FeatureStyleFields, Promotable, Sharelinks, PageLayoutOptions):
     subtitle = RichTextField(blank=True, default="")
     short_description = RichTextField(blank=True, default="")
     body = article_fields.BodyField(blank=True, default="")
@@ -898,7 +900,7 @@ class SeriesPage(Page, FeatureStyleFields, Promotable, Sharelinks, PageLayoutOpt
         )
     ]
 
-    style_panels = [
+    style_panels = ThemeablePage.style_panels + [
         MultiFieldPanel(
             [
                 FieldPanel('include_main_image'),
