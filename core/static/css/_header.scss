@@ -19,6 +19,35 @@ header{
     }
   }
 
+  &.collapsed{
+    background: #000;
+    transition: background 1s;
+
+    /*.banner {
+      padding-top: 12px;
+      padding-bottom: 12px;
+    }*/
+
+    #toggle-mobile {
+      display: block;
+    }
+
+    #main-menu {
+      z-index: 300;   
+      position: fixed;
+      transition:left 1s;
+      top: 55px ;
+      left: -400px;
+      z-index: 300;
+      height: 100%;
+      width: 200px;
+      padding: 25px;
+      margin-top: 0px;
+      background: #000;
+      text-align: left;
+    }
+  }
+
   .search{
     text-align:right;
     font-size: 20px;
@@ -45,14 +74,16 @@ header{
     }
   }
 
-  .template-home-page &{
+  /*.template-home-page &{
     .search, .menu{
       padding-top: 10px;
       padding-bottom: 10px;
     }
-  }
+  }*/
 
   .banner{
+    padding-top:12px;
+    padding-bottom: 12px;
     margin-left: 0;
     margin-right: 0;
   }
@@ -66,7 +97,7 @@ header{
   .wordmark {
     font-weight: 700;
     font-size: 20px;
-    padding-top:16px;
+    padding-top:7px;
     line-height: 20px;
     text-transform: uppercase;
 
@@ -142,17 +173,7 @@ header{
       transition:left 0.5s;
       left: 0;
     }
-
-
-
-    &.collapsed.scrolled{
-      background: #000;
-    }
   }
-
-  //&.collapsed {
-  //  @include collapsed;
-  //}
 
   @media(max-width: $screen-lg){
     .banner{
@@ -161,38 +182,29 @@ header{
     }
   }
 
-  @media(max-width: $screen-md){
-    //@include collapsed;
-
-  }
-
-  @media(max-width: $screen-xs){
+  /*@media(max-width: $screen-xs){
     .wordmark{
       font-size: 20px;
       padding-top:16px;
       line-height: 20px;
     }
-  }
+  }*/
 
   @media(min-width: $breakpoint){
-
-    .tagline {
-      display: block;
-    }
 
     #main-menu{ 
       @include inline-list-divided(white, 12px);
       display: block;
       position: relative;
-      top: 0 !important;
+      top:0;
       left: 0;
       width: auto;
       padding: 0px;
       background: transparent;
-      transition:left 0s;
+      //transition:left 0s;
       
       &.open{
-        transition:left 0s;
+       // transition:left 0s;
        
       }
       
@@ -204,7 +216,7 @@ header{
 
     .wordmark {
       font-size: 27px;
-      padding-top:9px;
+      padding-top:4px;
     }
 
     .banner{
@@ -217,7 +229,68 @@ header{
     .social {
       display: none;
     }
-    
 
+    //user scrolled, so now header is collapsed and smaller.
+    &.collapsed {
+      .banner{
+        padding-top: 12px;
+        padding-bottom: 12px;
+       
+      }
+
+      .wordmark {
+        font-size: 20px;
+      }
+
+      .social {
+        display: block;
+      }
+
+      #main-menu{ 
+        visibility: hidden;
+
+        &.open{
+          visibility: visible;
+        }
+
+        ul li a:after {
+          content:"";
+        }
+      }
+
+      .article-title {
+        display: block;
+      }
+
+      .wordmark {
+        display: none;
+      }
+    }
+  }
+}
+
+.template-home-page {
+  .tagline{
+    display: none;
+  }
+
+  @media(min-width: $breakpoint){
+    .tagline {
+      display: block;
+    }
+
+    header.collapsed {
+      .tagline {
+        display: none;
+      }
+
+      .article-title {
+        display: none;
+      }
+
+      .wordmark {
+        display: block;
+      }
+    }
   }
 }

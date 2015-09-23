@@ -16,8 +16,33 @@ var Header = Header || {
 
                 var bodyTag = $('body');
 
-                if ($(window).width() > breakpoint) {
+                //$('header, #search-box').toggleClass('collapsed scrolled', $(document).scrollTop() >= offset);
 
+                if ($(document).scrollTop() >= offset) {
+                    collapseHeaderOn();
+                } else {
+                    collapseHeaderOff();
+                }
+
+                
+
+                function collapseHeaderOn() {
+                    if ($('#article-page').length) {
+                        bodyTag.addClass('article-scroll');
+                    }
+
+                    $('header').addClass('collapsed');
+                    $('header').addClass('scrolled');
+                }
+
+                function collapseHeaderOff() {
+                    
+                    if ($('#article-page').length) {
+                        bodyTag.removeClass('article-scroll');
+                    }
+
+                    $('header').removeClass('collapsed');
+                    $('header').removeClass('scrolled');
                 }
 
                 /*function fullHeader() {
@@ -128,7 +153,12 @@ var Header = Header || {
                 //set the body padding based on banner height
                 var bannerHeight = $('header').height();
                 Search.Structure.setOffset(bannerHeight);
-                Menu.setOffset(bannerHeight);
+                
+                if ($('header').hasClass("collapsed") || $(window).width() < breakpoint) {
+                    Menu.setOffset(bannerHeight);
+                } else {
+                    Menu.setOffset(0);
+                }
                 $('body').css("padding-top", bannerHeight + "px");
             },
 
