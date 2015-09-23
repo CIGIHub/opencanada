@@ -23,11 +23,6 @@ header{
     background: #000;
     transition: background 1s;
 
-    /*.banner {
-      padding-top: 12px;
-      padding-bottom: 12px;
-    }*/
-
     #toggle-mobile {
       display: block;
     }
@@ -73,13 +68,6 @@ header{
       cursor: pointer;
     }
   }
-
-  /*.template-home-page &{
-    .search, .menu{
-      padding-top: 10px;
-      padding-bottom: 10px;
-    }
-  }*/
 
   .banner{
     padding-top:12px;
@@ -181,14 +169,6 @@ header{
       margin-right: 0;
     }
   }
-
-  /*@media(max-width: $screen-xs){
-    .wordmark{
-      font-size: 20px;
-      padding-top:16px;
-      line-height: 20px;
-    }
-  }*/
 
   @media(min-width: $breakpoint){
 
