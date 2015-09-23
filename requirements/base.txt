@@ -1,6 +1,8 @@
 # Minimal requirements
 Django>=1.8,<1.9
 wagtail==1.0
+requests==2.7.0
+
 
 # Recommended components (require additional setup):
 elasticsearch==1.1.1
