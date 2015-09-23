@@ -22,6 +22,12 @@ var Header = Header || {
                     collapseHeaderOff();
                 }
 
+                if ($('header').hasClass('collapsed')) {
+                    Header.Positioning.transparencyOff();
+                }else if ($('.jumbotron').length && !$("body").hasClass("template-home-page")) {
+                     Header.Positioning.transparencyOn();
+                }
+
                 
 
                 function collapseHeaderOn() {
@@ -32,7 +38,6 @@ var Header = Header || {
                     }
 
                     $('header').addClass('collapsed');
-                    //$('header').addClass('scrolled');
                 }
 
                 function collapseHeaderOff() {
@@ -44,7 +49,6 @@ var Header = Header || {
                     }
 
                     $('header').removeClass('collapsed');
-                    //$('header').removeClass('scrolled');
                 }
 
                 /*function fullHeader() {
