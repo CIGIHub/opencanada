@@ -144,7 +144,7 @@ class ExternalArticleListPage(PaginatedListPageMixin, Page):
 
 
 @python_2_unicode_compatible
-class Topic(UniquelySlugable):
+class Topic(UniquelySlugable, index.Indexed):
     name = models.CharField(max_length=1024)
 
     def __str__(self):
@@ -152,6 +152,10 @@ class Topic(UniquelySlugable):
 
     class Meta:
         ordering = ["name", ]
+
+    search_fields = [
+        index.SearchField('name', partial_match=True),
+    ]
 
 register_snippet(Topic)
 

@@ -25,7 +25,7 @@ register_snippet(Theme)
 
 
 class ThemeablePage(Page):
-    is_abstract = True
+    is_creatable = False
 
     class Meta:
         abstract = True
