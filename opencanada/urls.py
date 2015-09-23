@@ -16,14 +16,12 @@ from core.feeds import MainFeed
 
 register_signal_handlers()
 
-urlpatterns = [
-    url(r'^django-admin/', include(admin.site.urls)),
-
-    url(r'^admin/', include(wagtailadmin_urls)),
+base_urlpatterns = [
     url(r'^search/', include(wagtailsearch_urls)),
     url(r'^documents/', include(wagtaildocs_urls)),
     url(r'^', include('favicon.urls')),
     url(r'^feed/', MainFeed(), name='main_feed'),
+    url(r'^error/', lambda r: 1 / 0),
 ]
 
 
@@ -31,14 +29,16 @@ if settings.DEBUG:
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
     from django.views.generic import TemplateView
 
-    urlpatterns += staticfiles_urlpatterns()
-    urlpatterns += static(settings.MEDIA_URL + 'images/', document_root=os.path.join(settings.MEDIA_ROOT, 'images'))
-    urlpatterns += [
+    base_urlpatterns += staticfiles_urlpatterns()
+    base_urlpatterns += static(settings.MEDIA_URL + 'images/', document_root=os.path.join(settings.MEDIA_ROOT, 'images'))
+    base_urlpatterns += [
+        url(r'^django-admin/', include(admin.site.urls)),
+        url(r'^admin/', include(wagtailadmin_urls)),
         url(r'^500/$', 'django.views.defaults.server_error'),
         url(r'^404/$', TemplateView.as_view(template_name='404.html')),
         url(r'^403/$', TemplateView.as_view(template_name='403.html')),
     ]
 
-urlpatterns += [
+urlpatterns = base_urlpatterns + [
     url(r'', include(wagtail_urls)),
 ]
