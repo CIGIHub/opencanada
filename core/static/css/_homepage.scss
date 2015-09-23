@@ -279,7 +279,17 @@
 
       @media(min-width: $screen-sm) {
         top:10px;
-        right:10px;
+        right:25px;
+      }
+    }
+  }
+
+  @media(min-width: $screen-sm) {
+    .col-sm-4.last {
+      .image-feature {
+        .editors-pick-link, .most-popular {
+          right:10px;
+        }
       }
     }
   }

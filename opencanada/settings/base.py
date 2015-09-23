@@ -67,6 +67,7 @@ INSTALLED_APPS = (
     'modelcluster',
 
     'core',
+    'themes',
 
     'wagtail.wagtailcore',
     'wagtail.wagtailadmin',

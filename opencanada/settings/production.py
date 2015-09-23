@@ -51,6 +51,7 @@ INSTALLED_APPS = INSTALLED_APPS + (
     'wagtail.contrib.wagtailfrontendcache',
     'raven.contrib.django.raven_compat',
     'interactives_content',
+    'caching',
 )
 
 WAGTAILFRONTENDCACHE = {
@@ -58,6 +59,7 @@ WAGTAILFRONTENDCACHE = {
         'BACKEND': 'wagtail.contrib.wagtailfrontendcache.backends.CloudflareBackend',
         'EMAIL': get_env_variable('CLOUDFLARE_EMAIL'),
         'TOKEN': get_env_variable('CLOUDFLARE_TOKEN'),
+        'ZONE_ID': get_env_variable('CLOUDFLARE_ZONE_ID'),
     },
 }
 

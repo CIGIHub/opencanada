@@ -306,6 +306,3 @@ class SiteDefaults(models.Model):
         ImageChooserPanel('default_external_article_source_logo')
     ]
 register_snippet(SiteDefaults)
-
-
-from .invalidate import *  # isort:skip

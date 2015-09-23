@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% load static article_tags core_tags wagtailcore_tags wagtailembeds_tags wagtailimages_tags %}
+
+{% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
+
+{% block extra_js %}
+<script>
+    FeatureStyles.MainFeatures.setSize({{ self.full_bleed_image_size }});
+</script>
+{% endblock %}
+
+{% block content %}
+    <style>
+    body{
+        background-color: black;
+    }
+
+    </style>
+    {% if self.main_image and self.include_main_image_overlay %}
+        {% include 'articles/includes/article-feature.html' with metadata='articles/includes/article-metadata.html' %}
+    {% endif %}
+
+    <div id="article-page" class="container">
+        <article>
+        {% block share_links %}
+            {% include 'articles/includes/share_links.html' %}
+        {% endblock %}
+
+            {% if not self.include_main_image_overlay or self.include_main_image_overlay and not self.main_image %}
+                {% include 'articles/includes/article-metadata.html' %}
+                {% if self.include_main_image and self.main_image %}
+                    <figure class="main-image">
+                        {% image self.main_image fill-940x627 %}
+                    </figure>
+                    {% if self.main_image.credit %}
+                        <div class="image-credit">
+                            {{ self.main_image.credit }}
+                        </div>
+                    {% endif %}
+                    {% if self.main_image.source %}
+                        <div class="image-source">
+                            {{ self.main_image.source }}
+                        </div>
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+
+            <div class="story">
+                {% if self.include_author_block %}
+                {% include 'articles/includes/author_blurb.html' %}
+                {% endif %}
+                {% for block in self.body %}
+                    {% if block.block_type == 'Embed' %}
+                        <section class="block-Embed">
+                            {{ block.value.url|embed:720 }}
+                        </section>
+                    {% else %}
+                        <section class="block-{{ block.block_type }}">
+                            {{ block }}
+                        </section>
+                    {% endif %}
+                {% endfor %}
+                <div class="home-link"><a href="/"><img src="{% static 'img/opencanada-mark.png' %}"></a></div>
+            </div>
+
+            {% if self.topics %}
+                <div class="topics related">
+                    <div class="topic-label"><i class="fa fa-tags"></i> Topics:</div>
+                    <ul class="list-inline">
+                        {% for topic in self.topics %}
+                            <li><a href="{% topic_url topic %}">{{ topic }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        </article>
+
+        {% if self.series_articles %}
+        <section class="in-the-series">
+            <h2>Also in the series</h2>
+            {% for series, articles in self.series_articles %}
+                <div class="series-teaser">
+                    <div class="series-title"><a href="{{ series.url }}">{{ series.title }}</a>:
+                    {% if series.subtitle %}{{ series.subtitle|richtext }}{% endif %}</div>
+                    {{ series.body|truncatewords_html:80 }}
+                </div>
+                {% block in_the_series %}
+                    {% include 'articles/includes/in_the_series.html' %}
+                {% endblock %}
+            {%  endfor %}
+        </section>
+        {% endif %}
+
+        {% block related_articles %}
+            {% with article_count=self.number_of_related_articles %}
+                {% include 'articles/includes/related_articles.html' with heading='h3' image=True%}
+            {% endwith %}
+        {% endblock %}
+    </div>
+
+
+{% endblock %}
+
