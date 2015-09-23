@@ -14,9 +14,7 @@ var Header = Header || {
                 */
                 var offset = Math.max($('header').height(), $('.jumbotron.main-feature').height());
 
-                var bodyTag = $('body');
-
-                //$('header, #search-box').toggleClass('collapsed scrolled', $(document).scrollTop() >= offset);
+                //var bodyTag = $('body');
 
                 if ($(document).scrollTop() >= offset) {
                     collapseHeaderOn();
@@ -28,21 +26,25 @@ var Header = Header || {
 
                 function collapseHeaderOn() {
                     if ($('#article-page').length) {
-                        bodyTag.addClass('article-scroll');
+                        $('header').addClass('article-scroll');
+                    } else {
+                       $('header').addClass('keep-wordmark');
                     }
 
                     $('header').addClass('collapsed');
-                    $('header').addClass('scrolled');
+                    //$('header').addClass('scrolled');
                 }
 
                 function collapseHeaderOff() {
                     
                     if ($('#article-page').length) {
-                        bodyTag.removeClass('article-scroll');
+                        $('header').removeClass('article-scroll');
+                    } else {
+                         $('header').removeClass('keep-wordmark');
                     }
 
                     $('header').removeClass('collapsed');
-                    $('header').removeClass('scrolled');
+                    //$('header').removeClass('scrolled');
                 }
 
                 /*function fullHeader() {
