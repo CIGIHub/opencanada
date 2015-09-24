@@ -9,6 +9,13 @@ body {
 
 header {
 	background: $bgcolor;
+
+	&.transparency {
+		.wordmark a:hover {
+			color:$textcolor;
+			transition:color 1s;
+		}
+	}
 }
 
 footer {
@@ -22,6 +29,20 @@ footer {
 	}
 }
 
+a {
+	color:$textalternate;
+
+	&:hover {
+		color:$textalternate;
+	}
+}
+
+.template-article-page .feature-caption {
+	.fa-camera:hover, .fa-camera.highlighted {
+		color:$textcolor;
+	}
+}
+
 article {
 	.blurb-content {
 
@@ -32,7 +53,7 @@ article {
 			color:$textalternate;
 
 			a {
-				color:$textalternate;
+				color:$textcolor;
 			}
 		}
 
@@ -58,7 +79,28 @@ article {
 		}
 	}
 
+	.primary-topic {
+		color:$textalternate;
+
+		a {
+			color:$textalternate;
+		}
+	}
+
+	.contributors {
+		color:$textalternate;
+
+		a {
+			color:$textalternate;
+		}
+	}
+
+	.date {
+		color:$textalternate;
+	}
+
 	.home-link img {
 		filter: grayscale(1) brightness(10);
+		-webkit-filter: grayscale(1) brightness(10);
 	}
 }
