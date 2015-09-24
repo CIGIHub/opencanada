@@ -17,8 +17,7 @@ var Header = Header || {
                 if ($(document).scrollTop() >= offset) {
 
                     //transition from large header to smaller header
-                    $('#main-menu').addClass("quickclose");
-                    setTimeout(function(){$('#main-menu').removeClass("quickclose") }, 500);
+                    quickClose();
                     collapseHeaderOn();
 
                 } else {
@@ -31,6 +30,11 @@ var Header = Header || {
                      Header.Positioning.transparencyOn();
                 }
 
+                //on window resize, if going from large to small screen, then quickly hide the menu
+                if (!$('#main-menu').hasClass("open") && $(window).width() < breakpoint  ) {
+                    quickClose();
+                }
+
                 function collapseHeaderOn() {
                     if ($('#article-page').length) {
                         $('header').addClass('article-scroll');
@@ -39,7 +43,6 @@ var Header = Header || {
                     }
 
                     $('header').addClass('collapsed');
-                   
                 }
 
                 function collapseHeaderOff() {
@@ -50,7 +53,12 @@ var Header = Header || {
                     }
 
                     $('header').removeClass('collapsed');
-                    $('#main-menu').removeClass("quickclose");
+                    //$('#main-menu').removeClass("quickclose");
+                }
+
+                function quickClose() {
+                    $('#main-menu').addClass("quickclose");
+                    setTimeout(function(){$('#main-menu').removeClass("quickclose") }, 500);
                 }
             }
         }, 
@@ -60,7 +68,7 @@ var Header = Header || {
                 var bannerHeight = $('header').height();
                 Search.Structure.setOffset(bannerHeight);
                 
-                if ($('header').hasClass("collapsed") || $(window).width() < breakpoint) {
+                if ($('header').hasClass("collapsed") || $(window).width() < breakpoint  ) {
                     Menu.setOffset(bannerHeight);
                 } else {
                     Menu.setOffset(0);

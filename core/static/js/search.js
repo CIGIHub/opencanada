@@ -30,7 +30,7 @@ var Search = Search || {
                 
                 if (search.hasClass('open')) {
                     search.removeClass('open');
-                    FeatureStyles.MainFeatures.removeNavigationLock();
+                    //FeatureStyles.MainFeatures.removeNavigationLock();
                 }
             },
             openBox: function() {
@@ -39,7 +39,7 @@ var Search = Search || {
                 if (!(search.hasClass('open'))) {
                     Menu.close();
                     search.addClass('open');
-                    FeatureStyles.MainFeatures.addNavigationLock();
+                    //FeatureStyles.MainFeatures.addNavigationLock();
                 }
             },
             isOpen: function(){

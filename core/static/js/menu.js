@@ -8,7 +8,7 @@ var Menu = Menu || {
             var menu = $('#main-menu');
             if (menu.hasClass('open')) {
                 menu.removeClass('open');
-                FeatureStyles.MainFeatures.removeNavigationLock();
+                //FeatureStyles.MainFeatures.removeNavigationLock();
             }
         },
         open: function() {
@@ -17,7 +17,7 @@ var Menu = Menu || {
             if (!(menu.hasClass('open'))) {
                 Search.Structure.closeBox();
                 menu.addClass('open');
-                FeatureStyles.MainFeatures.addNavigationLock();
+                //FeatureStyles.MainFeatures.addNavigationLock();
             }
         },
         isOpen: function(){
@@ -32,6 +32,10 @@ var Menu = Menu || {
             }
         },
         setOffset: function (offset) {
-            $('#main-menu').css("top", offset + "px");
+            if (offset == 0) {
+                $('#main-menu').css("top", "");
+            } else {
+                $('#main-menu').css("top", offset + "px");
+            }
         },
     };

@@ -31,7 +31,7 @@ header{
       z-index: 300;   
       position: fixed;
       //transition:left 1s;
-      top: 55px ;
+      top: 54px ;
       left: -400px;
       z-index: 300;
       height: 100%;
@@ -115,7 +115,7 @@ header{
   #main-menu{
     z-index: 300;   
     position: fixed;
-    top: 55px;
+    top: 54px;
     left: -400px;
     z-index: 300;
     height: 100%;
@@ -125,6 +125,10 @@ header{
     background: #000;
     text-align: left;
     transition:left 0.5s;
+
+    &.quickclose {
+        display: none !important;
+      }
 
     ul.social{
       border-top: $border-white;

@@ -1,9 +1,9 @@
-var breakpoint = 1000;
+var breakpoint = 985;
 
 jQuery(document).ready(function() {
 
     initForWindow();
-
+    
     FeatureStyles.Camera.initialize();
     FeatureStyles.Arrow.initialize();
     FeatureStyles.FeatureImages.initialize();
