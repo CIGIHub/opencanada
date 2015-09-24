@@ -17,16 +17,10 @@ var Header = Header || {
                 if ($(document).scrollTop() >= offset) {
 
                     //transition from large header to smaller header
-                    /* if ($(document).scrollTop() == offset){
-                         $('#main-menu').addClass("quickclose");
-                     }else {
-                         $('#main-menu').removeClass("quickclose");
-                     }
-                    */
                     $('#main-menu').addClass("quickclose");
                     setTimeout(function(){$('#main-menu').removeClass("quickclose") }, 500);
-
                     collapseHeaderOn();
+
                 } else {
                     collapseHeaderOff();
                 }

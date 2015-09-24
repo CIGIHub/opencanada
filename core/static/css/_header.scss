@@ -124,6 +124,7 @@ header{
     margin-top: 0px;
     background: #000;
     text-align: left;
+    transition:left 0.5s;
 
     ul.social{
       border-top: $border-white;
@@ -180,6 +181,7 @@ header{
       width: auto;
       padding: 0px;
       background: transparent;  
+      transition:left 0s;
     }
 
     #toggle-mobile {
