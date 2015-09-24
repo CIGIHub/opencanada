@@ -6,29 +6,6 @@
   @include article-overlay;
   @include fullbleed-overlay;
 
-  .feature-wrapper {
-    .feature-text {
-      .contributors {
-        padding-left:20px;
-        margin-top:0;
-
-        @media(min-width: $screen-sm){
-          padding-left:40px;  
-        }   
-      }
-    }
-  }
-
-  h1 {
-    margin-bottom: 0;
-    margin-top:0;
-
-    a {
-      padding-bottom: 10px;
-      display: inline-block;
-    }
-  }
-
   .scroll{
     position: absolute;
     z-index:10;
@@ -82,6 +59,24 @@
   }
 }
 
+#features {
+  .rowheight-1 {
+    @media(max-width: $breakpoint) {
+      height: 140px;
+    }
+    @media(min-width: $breakpoint + 1px) {
+      height: 280px;
+    }
+  }
+  .rowheight-2 {
+    @media(max-width: $breakpoint) {
+      height: 280px;
+    }
+    @media(min-width: $breakpoint + 1px) {
+      height: 560px;
+    }
+  }
+}
 
 .template-home-page {
   section{
@@ -89,41 +84,10 @@
     margin-top: 20px;
 
     &.features {
-      margin-top:0;
+      margin-top: 0;
     }
-
-    .row {
-      @include row-divider;
-      margin-left: 0px;
-      margin-right: 0px;
-    }
-
-    .row.last{
-      border-bottom: none;
-    }
-
-    .feature-item.first, &.items .col-sm-6:first-child{
-      padding-left: 0px;
-    }
-    .feature-item.last, &.items .col-sm-6:last-child{
-      padding-right: 0px;
-
-    }
-
-    @media(max-width: $screen-xs-max){
-      .row{
-        @include no-row-divider;
-      }
-      .feature-item, &.items .col-sm-6{
-        @include row-divider;
-        padding-left: 0px;
-        padding-right: 0px;
-      }
-      .row.last .feature-item.last, &.items .row.last .col-sm-6:last-child{
-        @include no-row-divider;
-        padding-top: 20px;
-        padding-bottom: 20px;
-      }
+    a{
+      color: $black;
     }
 
     h2 {
@@ -133,7 +97,6 @@
     }
 
     h3 {
-      font-size: 22px;
 
       &.columns-3 {
         font-size: 16px;
@@ -208,6 +171,75 @@
 
 .features, .related-articles, .template-home-page .main-feature{
   color: black;
+  a{
+    color: black;
+  }
+
+  h3{
+    font-size: 21px;
+    font-weight: 900;
+  }
+
+  .row{
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-bottom: 15px;
+
+    & > [class*='col-'] {
+        padding-right:0;
+        padding-left:0;
+    }
+
+    .col-sm-4{
+      padding-left: 5px;
+      padding-right: 5px;
+      .image-feature, .simple-feature{
+        height: 320px;
+        padding: 10px;
+        border: $border-grey;
+      }
+    }
+    .col-sm-4:first-child{
+      padding-left: 0px;
+      padding-right: 10px;
+    }
+    .col-sm-4:last-child{
+      padding-left: 10px;
+      padding-right: 0px;
+    }
+  }
+
+  .row.full-width + .row.full-width{
+    padding-top: 15px;
+    border-top: $border-grey;
+  }
+
+  @media(max-width: $screen-sm){
+    .row{
+      margin-bottom: 0px;
+      & > [class*='col-'] {
+        @include row-divider;
+      }
+      .col-sm-4{
+        padding-left: 0px;
+        padding-right: 0px;
+        .image-feature, .simple-feature{
+          border: none;
+          height: auto;
+          padding: 0px;
+        }
+      }
+      .col-sm-4:last-child, .col-sm-4:first-child{
+        padding-left: 0px;
+        padding-right: 0px;
+      }
+    }
+
+    .row.full-width + .row.full-width{
+      padding-top: 0px;
+      border-top: none;
+    }
+  }
 
   .overlay-feature{
     @include article-overlay;
@@ -216,6 +248,31 @@
       margin-left:-15px;
       margin-right:-15px;
       border-bottom: 0;
+    }
+
+    h3.double-height{
+      font-size: 44px;
+      font-weight: bold;
+      margin-bottom: 0;
+      padding:0;
+
+      a {
+        padding:0 0 7% 0;
+        width: 100%;
+        @include box-sizing(border-box);
+      }
+
+      @media(max-width: $screen-sm){
+        font-size: 32px;
+      }
+    }
+
+    .feature-text  {
+      padding:0 20px;
+    }
+
+    .contributors {
+      margin-top:20px;
     }
   }
 
@@ -227,7 +284,6 @@
       box-sizing: border-box;
 
       a {
-        display: inline;
         padding:0;
       }
     }
@@ -318,7 +374,6 @@
     > a {
       width:100%;
       height:100%;
-      display:inline; 
     }
   }
 
@@ -334,7 +389,7 @@
 
   .simple-feature{
     h3{
-      font-size: 36px;
+      font-size: 35px;
 
       @media(max-width: $screen-sm){
         font-size: 22px;
@@ -352,45 +407,10 @@
     }
   }
 
-  .overlay-feature{
-
-    h3{
-      font-size: 36px;
-    }
-
-    h3.double-height{
-      font-size: 32px;
-      font-weight: bold;
-      margin-bottom: 0;
-      padding:0;
-      display: inline;
-
-      a {
-        padding:0 0 7% 0;
-        display: inline;
-        width: 100%;
-        @include box-sizing(border-box);
-      }
-
-      @media(max-width: $screen-sm){
-        font-size: 32px;
-      }
-    }
-
-    .feature-text  {
-      padding:0 20px;
-    }
-
-    .contributors {
-      margin-top:20px;
-    }
-  }
-
   .feature-line {
       a {
         color:#fff;
         padding-top: 10px;
-        display: inline-block;
         padding-bottom: 5%;
 
         &:hover {
@@ -444,7 +464,6 @@
   }
 
   a.article-feature{
-    display:inline-block;
     color: white;
     font-family: $sans-serif;
     font-size: 10px;
