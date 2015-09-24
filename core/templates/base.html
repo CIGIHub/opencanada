@@ -58,7 +58,9 @@
     </head>
 
     <body class="{% block body_class %}{% endblock %}">
+    {% if ADMIN_ENABLED %}
         {% wagtailuserbar %}
+    {% endif %}
         {% block header %}
             {% include 'core/header.html' with tagline=true %}
         {% endblock %}
