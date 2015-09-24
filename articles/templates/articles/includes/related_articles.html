@@ -19,6 +19,7 @@
                         {% else %}
                             <div class="simple-feature">
                         {% endif %}
+                                <div class="feature-content">
                                 <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
                                 {% if article.authors %}
                                     {% spaceless %}
@@ -40,7 +41,7 @@
                                 {% endif %}
                             </div>
                         {% endif %}
-
+                        </div>
                     </div>
                 {% if forloop.last %}</div>{% endif %}
             {% endfor %}

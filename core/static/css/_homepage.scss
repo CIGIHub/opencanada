@@ -225,9 +225,11 @@
       .image-feature, .simple-feature{
         position: relative;
         height: 320px;
-        padding: 10px;
         border: $border-grey;
       }
+      .feature-content{
+          padding: 10px;
+        }
       .contributors{
         position: absolute;
         bottom: 0;
@@ -305,7 +307,7 @@
     }
 
     h3.double-height{
-      font-size: 44px;
+      font-size: 55px;
       font-weight: bold;
       margin-bottom: 0;
       padding:0;
@@ -345,7 +347,6 @@
 
   .image-feature{
     figure{
-      margin-bottom: 10px;
       position: relative;
       
       a {
