@@ -7,14 +7,18 @@ html {
 body{
   color: $text-color;
   font-family: $serif;
-  font-size: 14px;
+  font-size: 15px;
   height: auto;
   line-height: 1.5;
 }
 
+h1, h2, h3{
+  font-family: $sans-serif;
+}
+
 h1, .jumbotron h1{
   margin-top: 10px;
-  font-size: 56px;
+  font-size: 67px;
   font-weight: bold;
 }
 
@@ -88,25 +92,6 @@ button:focus {outline:0;}
 
 .date{
   display: inline-block;
-}
-
-#features {
-  .rowheight-1 {
-    @media(max-width: $breakpoint) {
-      height: 140px;
-    }
-    @media(min-width: $breakpoint + 1px) {
-      height: 280px;
-    }
-  }
-  .rowheight-2 {
-    @media(max-width: $breakpoint) {
-      height: 280px;
-    }
-    @media(min-width: $breakpoint + 1px) {
-      height: 560px;
-    }
-  }
 }
 
 /**************   FOOTER  **************/

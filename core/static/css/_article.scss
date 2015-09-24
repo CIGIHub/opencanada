@@ -4,24 +4,17 @@
   .main-feature {
     @include article-overlay;
     @include fullbleed-overlay;
-    .feature-wrapper{
-      top: 20%;
-
-      a {
-        padding:0;
-      }
-    }
 
     .feature-text{
       padding:0 20px;
     }
 
-    @media(min-width: $screen-sm){
-      .feature-text{
-        padding-left:40px;
-        padding-right:40px;
-      }
-    }
+    //@media(min-width: $screen-sm){
+    //  .feature-text{
+    //    padding-left:40px;
+    //    padding-right:40px;
+    //  }
+    //}
 
     .date{
       color: white;

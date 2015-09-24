@@ -4,8 +4,9 @@ $screen-tiny-max: 360px;
 $grid-float-breakpoint: $screen-md-min;
 $breakpoint: 1000px; //to match the javascript breakpoint variable.
 
-$serif:'Droid Serif', Georgia, serif;
+$serif: 'Libre Baskerville', Georgia, serif;
 $sans-serif: proxima-nova, Helvetica, sans-serif;
+//over-ride bootstrap font settings
 $font-family-sans-serif:  $sans-serif;
 $font-family-serif: $serif;
 
@@ -17,6 +18,7 @@ $light-grey: #a5a5a5;
 $mid-grey: #ccc;
 $background-grey: #f3f0f0;
 $caption-grey: #929191;
+$heading-grey: #999999;
 
 $white: #fff;
 $black: #000;
