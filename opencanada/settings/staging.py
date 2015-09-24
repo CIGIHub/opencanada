@@ -11,3 +11,4 @@ CACHES = {
 }
 
 IS_PRODUCTION = False
+ADMIN_ENABLED = True
