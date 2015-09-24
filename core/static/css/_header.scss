@@ -130,6 +130,10 @@ header{
         display: none !important;
       }
 
+    ul li a{
+      font-family: $sans-serif;
+    }
+
     ul.social{
       border-top: $border-white;
       margin-top: 10px;
