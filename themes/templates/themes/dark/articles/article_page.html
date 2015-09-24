@@ -1,7 +1,13 @@
 {% extends "base.html" %}
-{% load static article_tags core_tags wagtailcore_tags wagtailembeds_tags wagtailimages_tags %}
+{% load static article_tags compress core_tags wagtailcore_tags wagtailembeds_tags wagtailimages_tags %}
 
 {% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
+{% block extra_css %}
+    {% compress css %}
+        <link rel="stylesheet" type="text/x-scss" href="{% static 'themes/dark/css/style.scss' %}">
+    {% endcompress %}
+
+{% endblock %}
 
 {% block extra_js %}
 <script>
@@ -10,12 +16,7 @@
 {% endblock %}
 
 {% block content %}
-    <style>
-    body{
-        background-color: black;
-    }
 
-    </style>
     {% if self.main_image and self.include_main_image_overlay %}
         {% include 'articles/includes/article-feature.html' with metadata='articles/includes/article-metadata.html' %}
     {% endif %}
@@ -23,7 +24,7 @@
     <div id="article-page" class="container">
         <article>
         {% block share_links %}
-            {% include 'articles/includes/share_links.html' %}
+            {#{% include 'articles/includes/share_links.html' %} #}
         {% endblock %}
 
             {% if not self.include_main_image_overlay or self.include_main_image_overlay and not self.main_image %}
@@ -75,29 +76,15 @@
             {% endif %}
         </article>
 
-        {% if self.series_articles %}
-        <section class="in-the-series">
-            <h2>Also in the series</h2>
-            {% for series, articles in self.series_articles %}
-                <div class="series-teaser">
-                    <div class="series-title"><a href="{{ series.url }}">{{ series.title }}</a>:
-                    {% if series.subtitle %}{{ series.subtitle|richtext }}{% endif %}</div>
-                    {{ series.body|truncatewords_html:80 }}
-                </div>
-                {% block in_the_series %}
-                    {% include 'articles/includes/in_the_series.html' %}
-                {% endblock %}
-            {%  endfor %}
-        </section>
-        {% endif %}
+        
 
-        {% block related_articles %}
-            {% with article_count=self.number_of_related_articles %}
-                {% include 'articles/includes/related_articles.html' with heading='h3' image=True%}
-            {% endwith %}
-        {% endblock %}
     </div>
 
 
 {% endblock %}
+
+{% block footer %}
+   {% include 'themes/dark/footer.html' %}
+{% endblock %}
+
 

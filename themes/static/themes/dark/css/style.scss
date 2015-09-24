@@ -1,0 +1,64 @@
+$bgcolor: #000;
+$textcolor: #fff;
+$textalternate :#929191;
+
+body {
+	background: $bgcolor;
+	color:$textcolor;
+}
+
+header {
+	background: $bgcolor;
+}
+
+footer {
+	background: $bgcolor;
+	color:$textcolor;
+	padding-top:20px;
+
+	.container {
+		padding-top:20px;
+		border-top:1px solid $textcolor;
+	}
+}
+
+article {
+	.blurb-content {
+
+		.individual {
+			border-left-color: $textalternate;
+		}
+		.author {
+			color:$textalternate;
+
+			a {
+				color:$textalternate;
+			}
+		}
+
+		.short-bio {
+			color:$textalternate;
+		}
+
+		ul li a {
+			color:$textalternate;
+		}
+	}
+
+	.topics {
+		color:$textalternate;
+
+		ul li a {
+			color:$textalternate;
+
+			&:after {
+				color:$textalternate;
+
+			}
+		}
+	}
+
+	.home-link img {
+		filter: grayscale(1) brightness(10);
+	}
+}
