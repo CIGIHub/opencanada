@@ -78,18 +78,20 @@
                                 <div class="most-popular"><div class="table"><div class="table-cell"><a href="{% slugurl 'most-popular' %}" class="article-feature ">Most Popular</a></div></div></div>
                             {% endif %}
                             <figure><a href="{{ article.url }}">{%  image article.main_image fill-710x475 %}</a></figure>
-                            <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
-                           {% spaceless %}
-                                <div class="contributors">By:
-                                    {% for author in article.authors %}
-                                        <a href="{{ author.url }}">{{ author.full_name }}</a><span>{% if not forloop.last %}, {% endif %}</span>
-                                    {% endfor %}
-                                </div>
-                           {% endspaceless %}
+                            <div class="feature-content">
+                                <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
+                               {% spaceless %}
+                                    <div class="contributors">By:
+                                        {% for author in article.authors %}
+                                            <a href="{{ author.url }}">{{ author.full_name }}</a><span>{% if not forloop.last %}, {% endif %}</span>
+                                        {% endfor %}
+                                    </div>
+                               {% endspaceless %}
+                            </div>
                         </div>
 
                     {% else %}
-                        <div class="simple-feature">
+                        <div class="simple-feature feature-content">
                             {% if article.editors_pick %}
                                 <div class="editors-pick-link"><div class="table"><div class="table-cell"><a href="{% slugurl 'editors-picks' %}" class="article-feature editors-pick">Editor's Pick</a></div></div></div>
                             {% endif %}

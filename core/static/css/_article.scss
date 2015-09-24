@@ -672,6 +672,10 @@ article {
   h3{
     margin: 0 0 5px 0;
     font-size: 18px;
+    font-weight: 900;
+    a{
+      color: black;
+    }
   }
   .series-teaser{
     padding-bottom: 20px;
@@ -686,6 +690,9 @@ article {
 }
 
 .in-the-series{
+  .row{
+    padding: 20px 0;
+  }
   .series-title{
     display:inline-block;
     .rich-text{
