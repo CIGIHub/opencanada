@@ -152,7 +152,9 @@
   }
 
   .items.side-image{
+
     .row{
+      padding-top: 15px;
       @include row-divider;
     }
     .row.last{

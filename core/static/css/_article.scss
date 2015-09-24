@@ -666,12 +666,20 @@ article {
 .in-the-series, .related-articles, .newsletter-list{
   margin: 20px 0;
 
+  .row{
+    padding: 20px 0;
+  }
+
   h2{
     @include subheading
   }
   h3{
     margin: 0 0 5px 0;
     font-size: 18px;
+    font-weight: 900;
+    a{
+      color: black;
+    }
   }
   .series-teaser{
     padding-bottom: 20px;
