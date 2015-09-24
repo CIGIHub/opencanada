@@ -15,6 +15,17 @@ var Header = Header || {
                 var offset = Math.max($('header').height(), $('.jumbotron.main-feature').height());
 
                 if ($(document).scrollTop() >= offset) {
+
+                    //transition from large header to smaller header
+                    /* if ($(document).scrollTop() == offset){
+                         $('#main-menu').addClass("quickclose");
+                     }else {
+                         $('#main-menu').removeClass("quickclose");
+                     }
+                    */
+                    $('#main-menu').addClass("quickclose");
+                    setTimeout(function(){$('#main-menu').removeClass("quickclose") }, 500);
+
                     collapseHeaderOn();
                 } else {
                     collapseHeaderOff();
@@ -34,6 +45,7 @@ var Header = Header || {
                     }
 
                     $('header').addClass('collapsed');
+                   
                 }
 
                 function collapseHeaderOff() {
@@ -44,6 +56,7 @@ var Header = Header || {
                     }
 
                     $('header').removeClass('collapsed');
+                    $('#main-menu').removeClass("quickclose");
                 }
             }
         }, 

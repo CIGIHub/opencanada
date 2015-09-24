@@ -30,7 +30,7 @@ header{
     #main-menu {
       z-index: 300;   
       position: fixed;
-      transition:left 1s;
+      //transition:left 1s;
       top: 55px ;
       left: -400px;
       z-index: 300;
@@ -115,7 +115,6 @@ header{
   #main-menu{
     z-index: 300;   
     position: fixed;
-    transition:left 1s;
     top: 55px;
     left: -400px;
     z-index: 300;
@@ -180,14 +179,7 @@ header{
       left: 0;
       width: auto;
       padding: 0px;
-      background: transparent;
-      //transition:left 0s;
-      
-      &.open{
-       // transition:left 0s;
-       
-      }
-      
+      background: transparent;  
     }
 
     #toggle-mobile {
@@ -227,10 +219,14 @@ header{
       }
 
       #main-menu{ 
-        visibility: hidden;
+        transition:left 0.5s;
 
         &.open{
-          visibility: visible;
+          transition:left 0.5s;
+        }
+
+        &.quickclose {
+          transition:left 0s;
         }
 
         ul li a:after {
