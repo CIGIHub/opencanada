@@ -32,14 +32,14 @@
 
 @mixin row-divider{
   border-bottom: $border-grey;
-  padding-top: 15px;
   padding-bottom: 15px;
+  margin-bottom: 15px;
 }
 
 @mixin no-row-divider{
   border-bottom: none;
-  padding-top: 0px;
   padding-bottom: 0px;
+  margin-bottom: 0px;
 }
 
 @mixin centered{
