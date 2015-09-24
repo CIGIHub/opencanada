@@ -25,7 +25,7 @@
             <div class="row {% if forloop.last %}last{% endif %} {% if row|column_class == 12 %}full-width{% endif %}">
 
             {% for article in row %}
-                <div class="col-sm-{{ row|column_class }} feature-item overlay col-{{ forloop.counter }} ">
+                <div class="col-sm-{{ row|column_class }} feature-item overlay">
                     {% if article.feature_style.include_image and article.feature_style.overlay_text %}
                         <div class="overlay-feature rowheight-{{ article.feature_style.number_of_rows }}">
                             {% image article.main_image fill-910x560 as background_image %}
@@ -97,19 +97,20 @@
                                 <div class="most-popular"><div class="table"><div class="table-cell"><a href="{% slugurl 'most-popular' %}" class="article-feature ">Most Popular</a></div></div></div>
                             {% endif %}
                             <h3 class="{% if article.editors_pick or article == self.most_popular_article %} article-feature{% endif %}"><a href="{{ article.url }}">{{ article.title }}</a></h3>
-                            {% spaceless %}
-                                <div class="contributors">By:
-                                    {% for author in article.authors %}
-                                        <a href="{{ author.url }}">{{ author.full_name }}</a><span>{% if not forloop.last %}, {% endif %}</span>
-                                    {% endfor %}
-                                </div>
-                        {% endspaceless %}
 
                             {% if article.subtitle %}
                                 <div class="feature-line">{{ article.subtitle|richtext }}</div>
                             {% else %}
                                 <div class="feature-line">{{ article.excerpt|richtext }}</div>
                             {% endif %}
+
+                            {% spaceless %}
+                                <div class="contributors">By:
+                                    {% for author in article.authors %}
+                                        <a href="{{ author.url }}">{{ author.full_name }}</a><span>{% if not forloop.last %}, {% endif %}</span>
+                                    {% endfor %}
+                                </div>
+                            {% endspaceless %}
                         </div>
                     {% endif %}
                 </div>
