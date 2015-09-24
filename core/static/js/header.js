@@ -1,112 +1,64 @@
 var Header = Header || {
         Structure: {
-            //toggle Banner heading based on window width and page types
+            //toggle Banner heading based on window width and page types. This function should only get called when the user scrolls the page and on page load.
             toggleHeading: function () {
 
+                /* There are many ways the header needs to be altered after loading
+                 *  1.  Start the header loaded for mobile, and use CSS to show/hide depending on screen size
+                 *  2.  When the user scrolls down past the big image (or page title if no big image), collapse the header
+                 *  3.  On the homepage, there is a tagline which needs to hidden once the header is collapsed 
+                 *  4.  Full bleed articles need to hide the header altogether, and just show a transparent OpenCanda.org. When the user
+                        scrolls down past the big image, the header needs to reappear in a collapsed state.
+                 *  5.  Scrolling down on article pages (on large screens only) need to replace the OpenCanada.org with the article title  
+                 *  6.  Change the background from red to black when user scrolls down.
+                */
                 var offset = Math.max($('header').height(), $('.jumbotron.main-feature').height());
 
-                var bodyTag = $('body');
+                if ($(document).scrollTop() >= offset) {
 
-                function fullHeader() {
-                    $('header').removeClass('collapsed');
-                    $('.toggle-mobile').hide();
-                    $('nav').removeClass('mobile-menu open');
-                    bodyTag.removeClass('article-scroll');
+                    //transition from large header to smaller header
+                    quickClose();
+                    collapseHeaderOn();
 
-                    if ($('.template-home-page').length) {
-                        $('.tagline').show();
-                    }
+                } else {
+                    collapseHeaderOff();
                 }
 
-                function collapsedHeader() {
+                if ($('header').hasClass('collapsed')) {
+                    Header.Positioning.transparencyOff();
+                } else if ($('.jumbotron').length && !$("body").hasClass("template-home-page")) {
+                     Header.Positioning.transparencyOn();
+                }
+
+                //on window resize, if going from large to small screen, then quickly hide the menu
+                if (!$('#main-menu').hasClass("open") && $(window).width() < breakpoint  ) {
+                    quickClose();
+                }
+
+                function collapseHeaderOn() {
+                    if ($('#article-page').length) {
+                        $('header').addClass('article-scroll');
+                    } else {
+                       $('header').addClass('keep-wordmark');
+                    }
 
                     $('header').addClass('collapsed');
-                    if (!$('header').hasClass("transparency")) {
-                        $('.toggle-mobile').show();
-                    }
-
-                    $('nav').addClass('mobile-menu');
-
-                    if ($('#article-page').length && bodyTag.hasClass('article-scroll') && $(window).width() <= breakpoint) {
-                        bodyTag.removeClass('article-scroll');
-                    }
-                    if ($('.template-home-page').length) {
-                        $('.tagline').hide();
-                    }
                 }
 
-                function fullScroll() {
-                    $('header, #search-box').toggleClass('collapsed scrolled', $(document).scrollTop() >= offset);
-
-                    if ($('header').hasClass('scrolled')) {
-                        Header.Positioning.transparencyOff();
-                    }else if ($('.jumbotron').length && !$("body").hasClass("template-home-page")) {
-                         Header.Positioning.transparencyOn();
+                function collapseHeaderOff() {
+                    if ($('#article-page').length) {
+                        $('header').removeClass('article-scroll');
+                    } else {
+                         $('header').removeClass('keep-wordmark');
                     }
 
-                    var headerRow = $('header .header-row');
-                    if ($('header').hasClass('collapsed')) {
-                        collapsedHeader();
-
-                        if ($('#article-page').length) {
-                            bodyTag.addClass('article-scroll');
-                            headerRow.removeClass('col-md-4');
-                        }
-                    }
-                    else {
-                        if (!(headerRow.hasClass('col-md-4'))) {
-                            headerRow.addClass('col-md-4');
-                        }
-                        fullHeader();
-
-                    }
+                    $('header').removeClass('collapsed');
+                    //$('#main-menu').removeClass("quickclose");
                 }
 
-                function collapsedScroll() {
-                    collapsedHeader();
-
-                    $('header').toggleClass('scrolled', $(document).scrollTop() >= offset);
-                    if ($('header').hasClass('scrolled')) {
-                        Header.Positioning.transparencyOff();
-                    }else if ($('.jumbotron').length && !$("body").hasClass("template-home-page")) {
-                         Header.Positioning.transparencyOn();
-                    }
-
-                }
-
-                if ($(window).width() >= breakpoint) {
-
-                    if (bodyTag.hasClass('small-article')) {
-                        bodyTag.removeClass('small-article');
-                    }
-
-                    if ($(document).scrollTop() >= offset) {
-                        if ($('#article-page').length) {
-                            bodyTag.addClass('article-scroll');
-                        }
-                        collapsedHeader();
-                    }
-                    else {
-                        fullHeader();
-                    }
-
-                    $(window).off("scroll touchmove", collapsedScroll);
-                    $(window).on("scroll touchmove", fullScroll);
-
-                }
-                else {
-                    var articlePage = $('#article-page');
-                    if (articlePage.length && bodyTag.hasClass('article-scroll')) {
-                        bodyTag.removeClass('article-scroll');
-                    }
-                    if (articlePage.length) {
-                        bodyTag.addClass('small-article');
-                    }
-                    collapsedHeader();
-
-                    $(window).off("scroll touchmove", fullScroll);
-                    $(window).on("scroll touchmove", collapsedScroll);
-
+                function quickClose() {
+                    $('#main-menu').addClass("quickclose");
+                    setTimeout(function(){$('#main-menu').removeClass("quickclose") }, 500);
                 }
             }
         }, 
@@ -115,13 +67,13 @@ var Header = Header || {
                 //set the body padding based on banner height
                 var bannerHeight = $('header').height();
                 Search.Structure.setOffset(bannerHeight);
-                Menu.setOffset(bannerHeight);
-
-                //if (!$('header').hasClass("transparency")) {
-                    $('body').css("padding-top", bannerHeight + "px");
                 
-                //}
-
+                if ($('header').hasClass("collapsed") || $(window).width() < breakpoint  ) {
+                    Menu.setOffset(bannerHeight);
+                } else {
+                    Menu.setOffset(0);
+                }
+                $('body').css("padding-top", bannerHeight + "px");
             },
 
             transparencyOn: function() {

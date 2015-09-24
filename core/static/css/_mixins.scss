@@ -177,66 +177,6 @@
 
 }
 
-@mixin collapsed{
-  .banner{
-    padding-top: 12px;
-    padding-bottom: 12px;
-    .search, .menu{
-      padding-top: 0px;
-      padding-bottom: 0px;
-    }
-  }
-
-  #main-menu{
-    z-index: 300;
-    &.mobile-menu{
-      position: fixed;
-      transition: 1s;
-      top: 55px;
-      left: -400px;
-      z-index: 300;
-      height: 100%;
-      width: 200px;
-      padding: 25px;
-      margin-top: 0px;
-      background: #000;
-      text-align: left;
-
-      ul.social{
-        border-top: $border-white;
-        margin-top: 10px;
-        padding-top: 10px;
-        li a{
-          font-size: 12px;
-        }
-        i{
-          width: 20px;
-        }
-      }
-
-      ul{
-        margin-top: 0px;
-
-        li{
-          display: block;
-            padding: 3px 5px;
-          a{
-            color: #fff;
-          }
-          a:after{
-            content: '';
-          }
-        }
-      }
-    }
-
-    &.mobile-menu.open{
-      transition: 0.5s;
-      left: 0;
-    }
-  }
-}
-
 @mixin article-overlay{
   min-height: 400px;
   position: relative;
