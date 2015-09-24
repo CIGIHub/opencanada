@@ -1,12 +1,19 @@
 {% extends "base.html" %}
-{% load static article_tags core_tags wagtailcore_tags wagtailimages_tags %}
+{% load static article_tags compress core_tags wagtailcore_tags wagtailimages_tags %}
 
 {% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
+
+{% block extra_css %}
+    {% compress css %}
+        <link rel="stylesheet" type="text/x-scss" href="{% static 'themes/dark/css/style.scss' %}">
+    {% endcompress %}
+{% endblock %}
 
 {% block extra_js %}
 <script>
     FeatureStyles.MainFeatures.setSize({{ self.full_bleed_image_size }});
 </script>
+<script type="text/javascript" src="{% static 'themes/dark/js/script.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -63,13 +70,12 @@
                 </div>
             {% endif %}
         </article>
-
-        {% block related_articles %}
-            {% with article_count=self.number_of_related_articles %}
-                {% include 'articles/includes/related_articles.html'  with heading='h3' image=True%}
-            {% endwith %}
-        {% endblock %}
     </div>
 
 
 {% endblock %}
+
+{% block footer %}
+   {% include 'themes/dark/footer.html' %}
+{% endblock %}
+
