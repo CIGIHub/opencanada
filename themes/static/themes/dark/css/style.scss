@@ -103,4 +103,37 @@ article {
 		filter: grayscale(1) brightness(10);
 		-webkit-filter: grayscale(1) brightness(10);
 	}
+
+	ul.share-links div {
+		color:$textcolor;
+	}
+
+	.block-PullQuote {
+		background:$textalternate;
+	}
+
+	.block-Quote {
+		border-left-color: $textalternate;
+	}
+
+	.toc ul {
+		background-color: $textalternate;
+
+		li {
+			a, i {
+				color:$textcolor;
+			}
+		}
+	}
+
+	.top-link {
+		color:$textalternate;
+	}
+
+	.modal-link  {
+		color:$textalternate;
+	}
+	.image-label  {
+		color:$textalternate;
+	}
 }
