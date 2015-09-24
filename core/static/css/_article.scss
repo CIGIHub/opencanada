@@ -247,6 +247,7 @@ article {
       font-family: $sans-serif;
       text-transform: uppercase;
       font-size: 0.8em;
+      outline:none;
 
       &:after {
         content:"\f106";

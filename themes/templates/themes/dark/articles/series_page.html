@@ -1,12 +1,12 @@
 {% extends "base.html" %}
-{% load static article_tags compress core_tags wagtailcore_tags wagtailembeds_tags wagtailimages_tags %}
+{% load static article_tags compress core_tags wagtailcore_tags wagtailimages_tags %}
 
 {% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
+
 {% block extra_css %}
     {% compress css %}
         <link rel="stylesheet" type="text/x-scss" href="{% static 'themes/dark/css/style.scss' %}">
     {% endcompress %}
-
 {% endblock %}
 
 {% block extra_js %}
@@ -19,17 +19,18 @@
 {% block content %}
 
     {% if self.main_image and self.include_main_image_overlay %}
-        {% include 'articles/includes/article-feature.html' with metadata='articles/includes/article-metadata.html' %}
+        {% include 'articles/includes/article-feature.html' with metadata='articles/includes/series-metadata.html' %}
     {% endif %}
 
     <div id="article-page" class="container">
         <article>
-        {% block share_links %}
-            {#{% include 'articles/includes/share_links.html' %} #}
-        {% endblock %}
+            {% block share_links %}
+                {% include 'articles/includes/share_links.html' %}
+            {% endblock %}
+
 
             {% if not self.include_main_image_overlay or self.include_main_image_overlay and not self.main_image %}
-                {% include 'articles/includes/article-metadata.html' %}
+                {% include 'articles/includes/series-metadata.html' %}
                 {% if self.include_main_image and self.main_image %}
                     <figure class="main-image">
                         {% image self.main_image fill-940x627 %}
@@ -47,22 +48,15 @@
                 {% endif %}
             {% endif %}
 
-            <div class="story">
-                {% if self.include_author_block %}
-                {% include 'articles/includes/author_blurb.html' %}
-                {% endif %}
-                {% for block in self.body %}
-                    {% if block.block_type == 'Embed' %}
-                        <section class="block-Embed">
-                            {{ block.value.url|embed:720 }}
-                        </section>
-                    {% else %}
-                        <section class="block-{{ block.block_type }}">
-                            {{ block }}
-                        </section>
-                    {% endif %}
-                {% endfor %}
-                <div class="home-link"><a href="/"><img src="{% static 'img/opencanada-mark.png' %}"></a></div>
+            <div class="story">{{ self.body }}</div>
+
+            <div class="in-the-series">
+                 <h2>In the series</h2>
+                {% with articles=self.articles %}
+                    {% block in_the_series %}
+                        {% include 'articles/includes/in_the_series.html' %}
+                    {% endblock %}
+                {% endwith %}
             </div>
 
             {% if self.topics %}
@@ -76,9 +70,6 @@
                 </div>
             {% endif %}
         </article>
-
-        
-
     </div>
 
 
@@ -87,5 +78,4 @@
 {% block footer %}
    {% include 'themes/dark/footer.html' %}
 {% endblock %}
-
 

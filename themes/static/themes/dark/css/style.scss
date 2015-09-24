@@ -1,0 +1,172 @@
+$bgcolor: #000;
+$textcolor: #fff;
+$textalternate :#929191;
+
+body {
+	background: $bgcolor;
+	color:$textcolor;
+}
+
+header {
+	background: $bgcolor;
+
+	&.transparency {
+		.wordmark a:hover {
+			color:$textcolor;
+			transition:color 1s;
+		}
+	}
+}
+
+footer {
+	background: $bgcolor;
+	color:$textcolor;
+	padding-top:20px;
+
+	.container {
+		padding-top:20px;
+		border-top:1px solid $textcolor;
+	}
+
+	a:hover {
+		color:$textcolor;
+	}
+}
+
+a {
+	color:$textalternate;
+
+	&:hover {
+		color:$textalternate;
+	}
+}
+
+.template-article-page, .template-series-page, .template-chaptered-article-page {
+	.feature-caption {
+		.fa-camera:hover, .fa-camera.highlighted {
+			color:$textcolor;
+		}
+	}
+}
+
+article {
+	.blurb-content {
+
+		.individual {
+			border-left-color: $textalternate;
+		}
+		.author {
+			color:$textalternate;
+
+			a {
+				color:$textcolor;
+			}
+		}
+
+		.short-bio {
+			color:$textalternate;
+		}
+
+		ul li a {
+			color:$textalternate;
+		}
+	}
+
+	.topics {
+		color:$textalternate;
+
+		ul li a {
+			color:$textalternate;
+
+			&:after {
+				color:$textalternate;
+
+			}
+		}
+	}
+
+	.primary-topic {
+		color:$textalternate;
+
+		a {
+			color:$textalternate;
+		}
+	}
+
+	.contributors {
+		color:$textalternate;
+
+		a {
+			color:$textalternate;
+		}
+	}
+
+	.date {
+		color:$textalternate;
+	}
+
+	.home-link img {
+		filter: grayscale(1) brightness(10);
+		-webkit-filter: grayscale(1) brightness(10);
+	}
+
+	ul.share-links div {
+		color:$textcolor;
+
+		a {
+			color:$textcolor;
+		}
+	}
+
+	.block-PullQuote {
+		background:$textalternate;
+	}
+
+	.block-Quote {
+		border-left-color: $textalternate;
+	}
+
+	.toc ul {
+		background-color: $textalternate;
+
+		li {
+			a, i {
+				color:$textcolor;
+			}
+		}
+	}
+
+	.top-link {
+		color:$textalternate;
+	}
+
+	.modal-link  {
+		color:$textalternate;
+	}
+	.image-label  {
+		color:$textalternate;
+	}
+
+	/*------- series page styling --------*/
+	.in-the-series {
+		h2 {
+			color:$textcolor;
+		}
+
+		h3 a {
+			color: $textcolor;
+		}
+
+		.rich-text {
+			color:$textalternate;
+		}
+	}
+}
+
+
+
+
+
+
+
+

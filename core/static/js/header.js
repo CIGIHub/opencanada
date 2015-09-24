@@ -24,12 +24,6 @@ var Header = Header || {
                     collapseHeaderOff();
                 }
 
-                if ($('header').hasClass('collapsed')) {
-                    Header.Positioning.transparencyOff();
-                } else if ($('.jumbotron').length && !$("body").hasClass("template-home-page")) {
-                     Header.Positioning.transparencyOn();
-                }
-
                 //on window resize, if going from large to small screen, then quickly hide the menu
                 if (!$('#main-menu').hasClass("open") && $(window).width() < breakpoint  ) {
                     quickClose();
@@ -53,7 +47,6 @@ var Header = Header || {
                     }
 
                     $('header').removeClass('collapsed');
-                    //$('#main-menu').removeClass("quickclose");
                 }
 
                 function quickClose() {
@@ -74,20 +67,6 @@ var Header = Header || {
                     Menu.setOffset(0);
                 }
                 $('body').css("padding-top", bannerHeight + "px");
-            },
-
-            transparencyOn: function() {
-                $('header').addClass("transparency");
-                $('#toggle-mobile').hide();
-                $('#search-box-toggle').hide();
-                $('#main-menu').hide();
-            },
-
-            transparencyOff: function() {
-                $('header').removeClass("transparency");
-                $('#toggle-mobile').show();
-                $('#search-box-toggle').show();
-                $('#main-menu').show();
             }
         }
 

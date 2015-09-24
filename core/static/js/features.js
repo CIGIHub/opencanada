@@ -26,18 +26,12 @@ var FeatureStyles = FeatureStyles || {
 
                     $('.jumbotron.main-feature').css("height", featureHeight + "px");
                     
-                    
                     $('.jumbotron.main-feature').css("margin-top", -1 * $('header').height());
                     
-                    if (!bodyTag.hasClass('template-home-page')) {
-                        Header.Positioning.transparencyOn();
-                    } else {
-                        
+                    if (bodyTag.hasClass('template-home-page')) { 
                         featureHeight = windowHeight - bannerHeight - gap;
-
                         $('.jumbotron.main-feature').css("height", featureHeight + "px");
                         $('.jumbotron.main-feature').css("margin-top", 0 + "px");
-                    
                     }
 
                 }
