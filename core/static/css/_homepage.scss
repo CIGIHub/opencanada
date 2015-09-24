@@ -90,16 +90,6 @@
       color: $black;
     }
 
-    .row {
-      margin-left: 0px;
-      margin-right: 0px;
-
-      & > [class*='col-'] {
-          padding-right:0;
-          padding-left:0;
-      }
-    }
-
     h2 {
       @include subheading(22px);
       font-weight: 800;
@@ -107,8 +97,6 @@
     }
 
     h3 {
-      font-size: 21px;
-      font-weight: 900;
 
       &.columns-3 {
         font-size: 16px;
@@ -183,58 +171,75 @@
 
 .features, .related-articles, .template-home-page .main-feature{
   color: black;
+  a{
+    color: black;
+  }
+
+  h3{
+    font-size: 21px;
+    font-weight: 900;
+  }
+
   .row{
+    margin-left: 0px;
+    margin-right: 0px;
     margin-bottom: 15px;
 
+    & > [class*='col-'] {
+        padding-right:0;
+        padding-left:0;
+    }
+
     .col-sm-4{
+      padding-left: 5px;
+      padding-right: 5px;
       .image-feature, .simple-feature{
         height: 320px;
         padding: 10px;
         border: $border-grey;
       }
-      &.col-1{
-        padding-right: 10px;
-      }
-      &.col-2{
-        padding-left: 5px;
-        padding-right: 5px;
-      }
-      &.col-3{
-        padding-left: 10px;
-      }
+    }
+    .col-sm-4:first-child{
+      padding-left: 0px;
+      padding-right: 10px;
+    }
+    .col-sm-4:last-child{
+      padding-left: 10px;
+      padding-right: 0px;
     }
   }
 
   .row.full-width + .row.full-width{
     padding-top: 15px;
     border-top: $border-grey;
-    @media(max-width: $screen-sm){
-      padding: none;
-      margin: none;
-      border: none;
-    }
-
   }
 
   @media(max-width: $screen-sm){
-
     .row{
       margin-bottom: 0px;
       & > [class*='col-'] {
         @include row-divider;
       }
       .col-sm-4{
-        .col-1, .col-2, .col-3{
-          padding: 0px;
-        }
+        padding-left: 0px;
+        padding-right: 0px;
         .image-feature, .simple-feature{
           border: none;
           height: auto;
+          padding: 0px;
         }
       }
+      .col-sm-4:last-child, .col-sm-4:first-child{
+        padding-left: 0px;
+        padding-right: 0px;
+      }
+    }
+
+    .row.full-width + .row.full-width{
+      padding-top: 0px;
+      border-top: none;
     }
   }
-
 
   .overlay-feature{
     @include article-overlay;
