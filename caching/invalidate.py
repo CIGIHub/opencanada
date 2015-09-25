@@ -36,12 +36,12 @@ invalidation_map = {
         HomePage
     ],
 
-    articles_models.ChapteredArticlePage: [
-        articles_models.ArticleListPage,
-        articles_models.TopicListPage,
-        articles_models.SeriesListPage,
-        HomePage,
-    ],
+    # articles_models.ChapteredArticlePage: [
+    #     articles_models.ArticleListPage,
+    #     articles_models.TopicListPage,
+    #     articles_models.SeriesListPage,
+    #     HomePage,
+    # ],
 
     articles_models.SeriesPage: [
         articles_models.ArticleListPage,

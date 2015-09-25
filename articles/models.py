@@ -19,6 +19,7 @@ from wagtail.contrib.wagtailroutablepage.models import RoutablePageMixin, route
 from wagtail.wagtailadmin.edit_handlers import (FieldPanel, InlinePanel,
                                                 MultiFieldPanel, ObjectList,
                                                 PageChooserPanel,
+                                                RichTextFieldPanel,
                                                 StreamFieldPanel,
                                                 TabbedInterface)
 from wagtail.wagtailcore.fields import RichTextField, StreamField
@@ -59,6 +60,7 @@ class Colour(models.Model):
     class Meta:
         ordering = ['name', ]
 
+
 register_snippet(Colour)
 
 
@@ -90,7 +92,7 @@ register_snippet(FontStyle)
 
 class ArticleListPage(PaginatedListPageMixin, Page):
     subpage_types = ['ArticlePage',
-                     'ChapteredArticlePage',
+                     # 'ChapteredArticlePage',
                      ]
 
     articles_per_page = models.IntegerField(default=20)
@@ -157,8 +159,8 @@ class Topic(UniquelySlugable, index.Indexed):
         index.SearchField('name', partial_match=True),
     ]
 
-register_snippet(Topic)
 
+register_snippet(Topic)
 
 Topic.panels = [
     FieldPanel("name"),
@@ -170,7 +172,8 @@ class TopicListPage(RoutablePageMixin, Page):
 
     @property
     def topics(self):
-        popular_topics = Topic.objects.annotate(num_articles=Count('article_links') + Count('articles') + Count('series')).order_by("-num_articles")[:25]
+        popular_topics = Topic.objects.annotate(
+            num_articles=Count('article_links') + Count('articles') + Count('series')).order_by("-num_articles")[:25]
         return sorted(popular_topics, key=lambda x: x.name)
 
     @route(r'^$', name="topic_list")
@@ -241,7 +244,7 @@ class ArticleCategory(UniquelySlugable):
         ordering = ['name', ]
 
     def natural_key(self):
-        return (self.slug, )
+        return (self.slug,)
 
     def __str__(self):
         return self.name
@@ -372,7 +375,8 @@ class FeatureStyleFields(models.Model):
 
 class PageLayoutOptions(models.Model):
     include_main_image = models.BooleanField(default=True)
-    include_main_image_overlay = models.BooleanField(default=False, help_text="Check to use a full-bleed image layout.", verbose_name="Use Main Image Full-Bleed Layout")
+    include_main_image_overlay = models.BooleanField(default=False, help_text="Check to use a full-bleed image layout.",
+                                                     verbose_name="Use Main Image Full-Bleed Layout")
     full_bleed_image_size = models.PositiveSmallIntegerField(default=75,
                                                              help_text="Enter a value from 0 - 100, indicating the percentage of the screen to use for the full-bleed image layout. This value is only used if 'Use Main Image Full-Bleed Layout' is checked.")
 
@@ -383,6 +387,19 @@ class PageLayoutOptions(models.Model):
 class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, Sharelinks, PageLayoutOptions):
     excerpt = RichTextField(blank=True, default="")
     body = article_fields.BodyField()
+    chapters = article_fields.ChapterField(blank=True, null=True)
+    table_of_contents_heading = models.TextField(blank=True, default="Table of Contents")
+    citations_heading = models.TextField(blank=True, default="Works Cited")
+    endnotes_heading = models.TextField(blank=True, default="End Notes")
+    endnote_identifier_style = models.CharField(
+        max_length=20,
+        default="roman-lower",
+        choices=(
+            ('roman-lower', 'Roman Numerals - Lowercase'),
+            ('roman-upper', 'Roman Numerals - Uppercase'),
+            ('numbers', 'Numbers')
+        )
+    )
 
     main_image = models.ForeignKey(
         'images.AttributedImage',
@@ -411,11 +428,13 @@ class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, Sharelinks, Pag
 
     visualization = models.BooleanField(default=False)
     interview = models.BooleanField(default=False)
-    number_of_related_articles = models.PositiveSmallIntegerField(default=6, verbose_name="Number of Related Articles to Show")
+    number_of_related_articles = models.PositiveSmallIntegerField(default=6,
+                                                                  verbose_name="Number of Related Articles to Show")
 
     search_fields = Page.search_fields + (
         index.SearchField('excerpt', partial_match=True),
         index.SearchField('body', partial_match=True),
+        index.SearchField('chapters', partial_match=True),
         index.SearchField('get_primary_topic_name', partial_match=True),
         index.SearchField('get_category_name', partial_match=True),
         index.SearchField('get_topic_names', partial_match=True),
@@ -443,7 +462,8 @@ class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, Sharelinks, Pag
         return '\n'.join([link.topic.name if link.topic else "" for link in self.topic_links.all()])
 
     def get_author_names(self):
-        return '\n'.join([author_link.author.full_name if author_link.author else "" for author_link in self.author_links.all()])
+        return '\n'.join(
+            [author_link.author.full_name if author_link.author else "" for author_link in self.author_links.all()])
 
     @property
     def authors(self):
@@ -474,7 +494,8 @@ class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, Sharelinks, Pag
         included = [self.id]
         article_list = []
         if self.primary_topic:
-            articles = ArticlePage.objects.live().filter(primary_topic=self.primary_topic).exclude(id=self.id).distinct().order_by('-first_published_at')[:number]
+            articles = ArticlePage.objects.live().filter(primary_topic=self.primary_topic).exclude(
+                id=self.id).distinct().order_by('-first_published_at')[:number]
             article_list.extend(articles.all())
             included.extend([article.id for article in articles.all()])
 
@@ -484,7 +505,8 @@ class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, Sharelinks, Pag
             # still don't have enough, so pick using secondary topics
             topics = Topic.objects.filter(article_links__article=self)
             if topics:
-                additional_articles = ArticlePage.objects.live().filter(primary_topic__in=topics).exclude(id__in=included).distinct().order_by('-first_published_at')[:number - current_total]
+                additional_articles = ArticlePage.objects.live().filter(primary_topic__in=topics).exclude(
+                    id__in=included).distinct().order_by('-first_published_at')[:number - current_total]
                 article_list.extend(additional_articles.all())
                 current_total = len(article_list)
                 included.extend([article.id for article in additional_articles.all()])
@@ -492,7 +514,8 @@ class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, Sharelinks, Pag
         if current_total < number:
             authors = ContributorPage.objects.live().filter(article_links__article=self)
             if authors:
-                additional_articles = ArticlePage.objects.live().filter(author_links__author__in=authors).exclude(id__in=included).distinct().order_by('-first_published_at')[:number - current_total]
+                additional_articles = ArticlePage.objects.live().filter(author_links__author__in=authors).exclude(
+                    id__in=included).distinct().order_by('-first_published_at')[:number - current_total]
                 article_list.extend(additional_articles.all())
                 current_total = len(article_list)
                 included.extend([article.id for article in additional_articles.all()])
@@ -511,6 +534,31 @@ class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, Sharelinks, Pag
         StreamFieldPanel('body'),
         SnippetChooserPanel('primary_topic', Topic),
         InlinePanel('topic_links', label="Secondary Topics"),
+    ]
+
+    advanced_content_panels = [
+        MultiFieldPanel(
+            [
+                FieldPanel('table_of_contents_heading'),
+                StreamFieldPanel('chapters'),
+            ],
+            heading="Chapters Section"
+        ),
+        MultiFieldPanel(
+            [
+                FieldPanel('endnotes_heading'),
+                FieldPanel('endnote_identifier_style'),
+                InlinePanel('endnote_links', label="End Notes"),
+            ],
+            heading="End Notes Section"
+        ),
+        MultiFieldPanel(
+            [
+                FieldPanel('citations_heading'),
+                InlinePanel('citation_links', label="Citations"),
+            ],
+            heading="Citations Section"
+        ),
     ]
 
     promote_panels = Page.promote_panels + [
@@ -559,27 +607,50 @@ class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, Sharelinks, Pag
         )
     ]
 
-    settings_panels = [
-        FieldPanel('first_published_at'),
-    ] + Page.settings_panels
+    settings_panels = [FieldPanel('first_published_at'), ] + Page.settings_panels
 
     edit_handler = TabbedInterface([
         ObjectList(content_panels, heading='Content'),
+        ObjectList(advanced_content_panels, heading='Advanced Content'),
         ObjectList(style_panels, heading='Page Style Options'),
         ObjectList(promote_panels, heading='Promote'),
         ObjectList(settings_panels, heading='Settings', classname="settings"),
     ])
 
 
+class EndNote(Orderable):
+    text = RichTextField()
+    article = ParentalKey(
+        "ArticlePage",
+        related_name='endnote_links'
+    )
+
+    panels = [
+        RichTextFieldPanel('text'),
+    ]
+
+
+class Citation(Orderable):
+    text = RichTextField()
+    article = ParentalKey(
+        "ArticlePage",
+        related_name='citation_links'
+    )
+
+    panels = [
+        RichTextFieldPanel('text'),
+    ]
+
+
+# TODO: remove once content is migrated to ArticlePages.
 class ChapteredArticlePage(ArticlePage):
-    chapters = article_fields.ChapterField(blank=True, null=True)
+    # chapters = article_fields.ChapterField(blank=True, null=True)
     works_cited = StreamField(
         block_types=[
             ('citation', article_fields.CitationBlock()),
         ],
         blank=True, null=True
     )
-
     end_notes = StreamField(
         block_types=[
             ('end_note', article_fields.EndNoteBlock()),
@@ -597,6 +668,7 @@ class ChapteredArticlePage(ArticlePage):
         StreamFieldPanel('chapters'),
         StreamFieldPanel('works_cited'),
         StreamFieldPanel('end_notes'),
+        InlinePanel('endnote_links', label="End Notes"),
     ]
 
     edit_handler = TabbedInterface([
@@ -802,7 +874,8 @@ class SeriesPage(ThemeablePage, FeatureStyleFields, Promotable, Sharelinks, Page
         index.SearchField('get_topic_names', partial_match=True),
     )
 
-    number_of_related_articles = models.PositiveSmallIntegerField(default=6, verbose_name="Number of Related Articles to Show")
+    number_of_related_articles = models.PositiveSmallIntegerField(default=6,
+                                                                  verbose_name="Number of Related Articles to Show")
 
     def __init__(self, *args, **kwargs):
         super(SeriesPage, self).__init__(*args, **kwargs)
@@ -861,7 +934,8 @@ class SeriesPage(ThemeablePage, FeatureStyleFields, Promotable, Sharelinks, Page
     def related_articles(self, number):
         articles = []
         if self.primary_topic:
-            articles = list(ArticlePage.objects.live().filter(primary_topic=self.primary_topic).distinct().order_by('-first_published_at')[:number])
+            articles = list(ArticlePage.objects.live().filter(primary_topic=self.primary_topic).distinct().order_by(
+                '-first_published_at')[:number])
 
         current_total = len(articles)
         if current_total < number:
@@ -921,9 +995,7 @@ class SeriesPage(ThemeablePage, FeatureStyleFields, Promotable, Sharelinks, Page
         )
     ]
 
-    settings_panels = [
-        FieldPanel('first_published_at'),
-    ] + Page.settings_panels
+    settings_panels = [FieldPanel('first_published_at'), ] + Page.settings_panels
 
     edit_handler = TabbedInterface([
         ObjectList(content_panels, heading='Content'),

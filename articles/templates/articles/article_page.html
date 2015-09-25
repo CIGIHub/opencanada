@@ -4,9 +4,9 @@
 {% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
 
 {% block extra_js %}
-<script>
-    FeatureStyles.MainFeatures.setSize({{ self.full_bleed_image_size }});
-</script>
+    <script>
+        FeatureStyles.MainFeatures.setSize({{ self.full_bleed_image_size }});
+    </script>
 {% endblock %}
 
 {% block content %}
@@ -17,9 +17,9 @@
 
     <div id="article-page" class="container">
         <article>
-        {% block share_links %}
-{#            {% include 'articles/includes/share_links.html' %}#}
-        {% endblock %}
+            {% block share_links %}
+                {% include 'articles/includes/share_links.html' %}
+            {% endblock %}
 
             {% if not self.include_main_image_overlay or self.include_main_image_overlay and not self.main_image %}
                 {% include 'articles/includes/article-metadata.html' %}
@@ -42,7 +42,7 @@
 
             <div class="story">
                 {% if self.include_author_block %}
-                {% include 'articles/includes/author_blurb.html' %}
+                    {% include 'articles/includes/author_blurb.html' %}
                 {% endif %}
                 {% for block in self.body %}
                     {% if block.block_type == 'Embed' %}
@@ -55,6 +55,52 @@
                         </section>
                     {% endif %}
                 {% endfor %}
+
+                {% if self.chapters %}
+                    <div class="toc">
+                        {% if self.table_of_contents_heading %}
+                        <h2 id="toc">{{ self.table_of_contents_heading }}</h2>
+                        {% endif %}
+                        <ul class="fa-ul">
+                            {% for chapter in self.chapters %}
+                                <li><i class="fa fa-li fa-chevron-down"></i><a
+                                        href="#{{ chapter.value.heading|slugify }}">{{ chapter.value.heading }}</a></li>
+                            {% endfor %}
+                        </ul>
+
+                    </div>
+
+                    {{ self.chapters }}
+                {% endif %}
+
+                {% if self.citation_links.all %}
+                    <div class="block-citations">
+                        {% if self.citations_heading %}
+                        <h2>{{ self.citations_heading }}</h2>
+                        {% endif %}
+                        {{ self.works_cited }}
+                            {% for endnote in self.endnote_links.all %}
+                                <div class="citation">{{ endnote.text|richtext }}</div>
+                            {% endfor %}
+                    </div>
+
+                {% endif %}
+
+                {% if self.endnote_links.all %}
+                    <div class="block-end-notes">
+                        {% if self.endnotes_heading %}
+                        <h2>{{ self.endnotes_heading }}</h2>
+                        {% endif %}
+                        <ul class="end-notes">
+                            {% for endnote in self.endnote_links.all %}
+                                <li class="end-note"><span id="end-note-{{ endnote.id }}" class="identifier">{% if self.endnote_identifier_style == "roman-lower" %}{{ forloop.counter|romanize }}{% elif self.endnote_identifier_style == "roman-upper" %}{{ forloop.counter|romanize|upper }}{% else %}{{ forloop.counter }}{% endif %}</span><span
+                                        class="note">{{ endnote.text|richtext }}</span></li>
+
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+
                 <div class="home-link"><a href="/"><img src="{% static 'img/opencanada-mark.png' %}"></a></div>
             </div>
 
@@ -71,24 +117,24 @@
         </article>
 
         {% if self.series_articles %}
-        <section class="in-the-series">
-            <h2>Also in the series</h2>
-            {% for series, articles in self.series_articles %}
-                <div class="series-teaser">
-                    <div class="series-title"><a href="{{ series.url }}">{{ series.title }}</a>:
-                    {% if series.subtitle %}{{ series.subtitle|richtext }}{% endif %}</div>
-                    {{ series.body|truncatewords_html:80 }}
-                </div>
-                {% block in_the_series %}
-                    {% include 'articles/includes/in_the_series.html' %}
-                {% endblock %}
-            {%  endfor %}
-        </section>
+            <section class="in-the-series">
+                <h2>Also in the series</h2>
+                {% for series, articles in self.series_articles %}
+                    <div class="series-teaser">
+                        <div class="series-title"><a href="{{ series.url }}">{{ series.title }}</a>:
+                            {% if series.subtitle %}{{ series.subtitle|richtext }}{% endif %}</div>
+                        {{ series.body|truncatewords_html:80 }}
+                    </div>
+                    {% block in_the_series %}
+                        {% include 'articles/includes/in_the_series.html' %}
+                    {% endblock %}
+                {% endfor %}
+            </section>
         {% endif %}
 
         {% block related_articles %}
             {% with article_count=self.number_of_related_articles %}
-                {% include 'articles/includes/related_articles.html' with heading='h3' image=True%}
+                {% include 'articles/includes/related_articles.html' with heading='h3' image=True %}
             {% endwith %}
         {% endblock %}
     </div>
