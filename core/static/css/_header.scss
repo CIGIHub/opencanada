@@ -19,28 +19,9 @@ header{
     }
   }
 
-  &.collapsed{
+  &.scrolled {
     background: #000;
     transition: background 1s;
-
-    #toggle-mobile {
-      display: block;
-    }
-
-    #main-menu {
-      z-index: 300;   
-      position: fixed;
-      //transition:left 1s;
-      top: 54px ;
-      left: -400px;
-      z-index: 300;
-      height: 100%;
-      width: 200px;
-      padding: 25px;
-      margin-top: 0px;
-      background: #000;
-      text-align: left;
-    }
   }
 
   .search{
@@ -112,6 +93,7 @@ header{
     }
   }
 
+  //for mobile displays
   #main-menu{
     z-index: 300;   
     position: fixed;
@@ -124,11 +106,18 @@ header{
     margin-top: 0px;
     background: #000;
     text-align: left;
-    transition:left 0.5s;
+    transition:left 0.5s, visibility 0.5s;
+      visibility: hidden;
 
     &.quickclose {
-        display: none !important;
-      }
+      display: none !important;
+    }
+
+    &.open{
+      left: 0;
+      visibility: visible;
+      transition:left 0.5s, visibility 0.5s;
+    }
 
     ul li a{
       font-family: $sans-serif;
@@ -163,12 +152,6 @@ header{
         }
       }
     }
-  
-
-    &.open{
-      transition:left 0.5s;
-      left: 0;
-    }
   }
 
   @media(max-width: $screen-lg){
@@ -189,7 +172,36 @@ header{
       width: auto;
       padding: 0px;
       background: transparent;  
-      transition:left 0s;
+      transition:left 0s, visibility 0s;
+      visibility: visible;
+    }
+
+        //for large displays
+    &.collapsed{
+      
+      #toggle-mobile {
+        display: block;
+      }
+
+      #main-menu {
+        position: fixed;
+        top: 54px ;
+        left: -400px;
+        height: 100%;
+        width: 200px;
+        padding: 25px;
+        background: #000;
+        visibility: hidden;
+        //transition:left 0.5s, visibility 0.5s;
+        
+
+        &.open{
+          left: 0;
+          visibility: visible;
+          //transition:left 0.5s, visibility 0.5s;
+          
+        }
+      }
     }
 
     #toggle-mobile {
@@ -212,7 +224,7 @@ header{
       display: none;
     }
 
-    //user scrolled, so now header is collapsed and smaller.
+    //header is collapsed and smaller.
     &.collapsed {
       .banner{
         padding-top: 12px;
@@ -229,16 +241,7 @@ header{
       }
 
       #main-menu{ 
-        transition:left 0.5s;
-
-        &.open{
-          transition:left 0.5s;
-        }
-
-        &.quickclose {
-          transition:left 0s;
-        }
-
+       
         ul li a:after {
           content:"";
         }

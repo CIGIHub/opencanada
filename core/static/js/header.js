@@ -14,19 +14,17 @@ var Header = Header || {
                 */
                 var offset = Math.max($('header').height(), $('.jumbotron.main-feature').height());
 
-                if ($(document).scrollTop() >= offset) {
-
-                    //transition from large header to smaller header
-                    quickClose();
+                if ($(document).scrollTop() >= offset || $(window).width() < breakpoint  ) {
                     collapseHeaderOn();
 
                 } else {
                     collapseHeaderOff();
                 }
 
-                //on window resize, if going from large to small screen, then quickly hide the menu
-                if (!$('#main-menu').hasClass("open") && $(window).width() < breakpoint  ) {
-                    quickClose();
+                if ($(document).scrollTop() >= offset ) {
+                    $('header').addClass('scrolled');
+                } else {
+                    $('header').removeClass('scrolled');
                 }
 
                 function collapseHeaderOn() {
@@ -47,11 +45,6 @@ var Header = Header || {
                     }
 
                     $('header').removeClass('collapsed');
-                }
-
-                function quickClose() {
-                    $('#main-menu').addClass("quickclose");
-                    setTimeout(function(){$('#main-menu').removeClass("quickclose") }, 500);
                 }
             }
         }, 
