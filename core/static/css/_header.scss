@@ -107,10 +107,14 @@ header{
     background: #000;
     text-align: left;
     transition:left 0.5s, visibility 0.5s;
-      visibility: hidden;
+    visibility: hidden;
 
     &.quickclose {
-      display: none !important;
+      transition:left 0s !important;
+    }
+
+    &.quickopen {
+      transition:left 0s !important;
     }
 
     &.open{
@@ -176,7 +180,7 @@ header{
       visibility: visible;
     }
 
-        //for large displays
+    //for large displays
     &.collapsed{
       
       #toggle-mobile {
@@ -192,14 +196,12 @@ header{
         padding: 25px;
         background: #000;
         visibility: hidden;
-        //transition:left 0.5s, visibility 0.5s;
+        transition:left 0.5s, visibility 0.5s;
         
 
         &.open{
           left: 0;
           visibility: visible;
-          //transition:left 0.5s, visibility 0.5s;
-          
         }
       }
     }

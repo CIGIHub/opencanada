@@ -1,4 +1,5 @@
 var breakpoint = 985;
+var collapsedHeader = false;
 
 jQuery(document).ready(function() {
 
@@ -36,6 +37,7 @@ function initForWindow(){
 
 $(window).resize(function(){
     initForWindow();
+    Menu.quickClose();
 });
 
 $(window).scroll(function(){

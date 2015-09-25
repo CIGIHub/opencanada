@@ -42,5 +42,10 @@ var Menu = Menu || {
         quickClose: function() {
             $('#main-menu').addClass("quickclose");
             setTimeout(function(){$('#main-menu').removeClass("quickclose") }, 500);
+        },
+
+        quickOpen: function() {
+            $('#main-menu').addClass("quickopen");
+            setTimeout(function(){$('#main-menu').removeClass("quickopen") }, 500);
         }
     };
