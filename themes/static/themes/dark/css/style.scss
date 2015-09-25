@@ -1,6 +1,7 @@
 $bgcolor: #000;
 $textcolor: #fff;
 $textalternate :#929191;
+$breakpoint: 1000px; //to match the javascript breakpoint variable.
 
 body {
 	background: $bgcolor;
@@ -8,14 +9,41 @@ body {
 }
 
 header {
-	background: $bgcolor;
+	background: transparent;
 
-	&.transparency {
-		.wordmark a:hover {
+	.wordmark a {
+		color:rgba(255,255,255,0.5);
+    	transition: color 1s;
+
+    	&:hover {
 			color:$textcolor;
 			transition:color 1s;
 		}
-	}
+
+    }
+
+    	
+    
+
+
+
+    .menu, .search {
+    		opacity: 0;
+    		transition:opacity 1s;
+    	}
+
+    &.collapsed {
+    	.menu, .search {
+    		opacity: 1;
+    		transition:opacity 1s;
+    	}
+
+    	
+		.wordmark a {
+			color:$textcolor;
+		}
+    	
+    }
 }
 
 footer {
