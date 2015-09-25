@@ -109,11 +109,7 @@ header{
     transition:left 0.5s, visibility 0.5s;
     visibility: hidden;
 
-    &.quickclose {
-      transition:left 0s !important;
-    }
-
-    &.quickopen {
+    &.noAnimation {
       transition:left 0s !important;
     }
 

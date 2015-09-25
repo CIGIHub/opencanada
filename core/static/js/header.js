@@ -24,12 +24,12 @@ var Header = Header || {
                 //transition between collapsed and not collapsed, quickly hide/show the menu with no animation
                 if ($(document).scrollTop() >= offset) {
                     if (!collapsedHeader) {
-                        Menu.quickClose();
+                        Menu.noAnimation();
                         collapsedHeader = true;
                     }   
                 } else {
                     if (collapsedHeader) {
-                        Menu.quickOpen();
+                        Menu.noAnimation();
                         collapsedHeader = false;
                     } 
                 }

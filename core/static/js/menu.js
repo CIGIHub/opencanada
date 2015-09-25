@@ -38,14 +38,8 @@ var Menu = Menu || {
                 $('#main-menu').css("top", offset + "px");
             }
         },
-
-        quickClose: function() {
-            $('#main-menu').addClass("quickclose");
-            setTimeout(function(){$('#main-menu').removeClass("quickclose") }, 500);
-        },
-
-        quickOpen: function() {
-            $('#main-menu').addClass("quickopen");
-            setTimeout(function(){$('#main-menu').removeClass("quickopen") }, 500);
+        noAnimation: function() {
+            $('#main-menu').addClass("noAnimation");
+            setTimeout(function(){$('#main-menu').removeClass("noAnimation") }, 500);
         }
     };

@@ -37,7 +37,7 @@ function initForWindow(){
 
 $(window).resize(function(){
     initForWindow();
-    Menu.quickClose();
+    Menu.noAnimation();
 });
 
 $(window).scroll(function(){
