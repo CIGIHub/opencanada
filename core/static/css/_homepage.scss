@@ -261,7 +261,7 @@
     }
   }
 
-  @media(max-width: $screen-sm){
+  @media(max-width: $screen-xs-max){
     .row{
       margin-bottom: 0px;
       & > [class*='col-'] {
