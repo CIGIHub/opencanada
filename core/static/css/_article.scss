@@ -194,15 +194,14 @@ article {
     @include row-divider;
   }
 
+  .feature-line p{
+    margin-bottom: 0px;
+  }
+
   &.row.teaser {
     margin-left: 0px;
     margin-right: 0px;
-    h2 {
-      margin-top: 0px;
-    }
-    .feature-line {
-      margin-top: 10px;
-    }
+
     .col-xs-12{
       padding-left: 0px;
       padding-right: 0px;
@@ -222,15 +221,9 @@ article {
   
   .story {
     overflow-x:hidden;
-
-    section{
-      line-height: 150%;
-    }
   }
 
-  h2, h3 {
-    margin: 10px 0;
-  }
+
   h4, h5, h6 {
     margin: 10px 0 5px 0;
   }
@@ -671,7 +664,7 @@ article {
   }
   h3{
     margin: 0 0 5px 0;
-    font-size: 18px;
+    font-size: 21px;
     font-weight: 900;
     a{
       color: black;
@@ -679,13 +672,6 @@ article {
   }
   .series-teaser{
     padding-bottom: 20px;
-  }
-
-  @media(max-width: $screen-sm){
-    .row{
-      padding: 10px 0;
-      
-    }
   }
 }
 

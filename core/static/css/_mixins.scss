@@ -15,11 +15,12 @@
 @mixin subheading($font-size: 22px){
     color: $heading-grey;
     font-family: $sans-serif;
-    font-weight: 700;
+    font-weight: 800;
     font-size: $font-size;
     text-transform: uppercase;
-    border-bottom: $border_black;
+    border-bottom: $border_grey;
     margin-top: 40px;
+    margin-bottom: 25px;
 }
 
 
@@ -32,8 +33,12 @@
 
 @mixin row-divider{
   border-bottom: $border-grey;
-  padding-bottom: 15px;
-  margin-bottom: 15px;
+  padding-bottom: 25px;
+  margin-bottom: 25px;
+  @media (max-width: $screen-xs-max) {
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+  }
 }
 
 @mixin no-row-divider{
@@ -266,23 +271,25 @@
 
 @mixin fullbleed-overlay{
   h1{
+
     font-size: 67px;
-    font-weight: bold;
-    margin: 0px;
+    font-weight: 700;
+    line-height: 1.0em;
+    margin-bottom: 0.25em;
   }
   .feature-line, h2{
     font-size: 18px;
-    line-height: 130%;
+    line-height: 120%;
   }
   @media(max-width: $screen-md){
     h1{
-      font-size: 46px;
+      font-size: 55px;
     }
   }
 
   @media(max-width: $screen-sm){
     h1{
-      font-size: 32px;
+      font-size: 42px;
     }
   }
 

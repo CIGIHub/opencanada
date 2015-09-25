@@ -89,8 +89,7 @@
 
     h2 {
       @include subheading(22px);
-      font-weight: 800;
-      margin-top: 20px;
+
     }
     a{
       color: black;
@@ -212,7 +211,7 @@
   .row{
     margin-left: 0px;
     margin-right: 0px;
-    margin-bottom: 15px;
+    margin-bottom: 25px;
 
     & > [class*='col-'] {
         padding-right:0;
@@ -224,7 +223,7 @@
       padding-right: 5px;
       .image-feature, .simple-feature{
         position: relative;
-        height: 320px;
+        height: 380px;
         border: $border-grey;
       }
       .feature-content{
@@ -247,19 +246,19 @@
   }
 
   .row.full-width + .row.full-width{
-    padding-top: 15px;
+    padding-top: 25px;
     border-top: $border-grey;
   }
 
-  //@media(max-width: $screen-md){
-  //  .row{
-  //    .col-sm-4{
-  //      .image-feature, .simple-feature{
-  //        height: 420px;
-  //      }
-  //    }
-  //  }
-  //}
+  @media(max-width: $screen-md){
+    .row{
+      .col-sm-4{
+        .image-feature, .simple-feature{
+          height: 450px;
+        }
+      }
+    }
+  }
   @media(max-width: $screen-xs-max){
     .row{
       margin-bottom: 0px;
@@ -307,8 +306,8 @@
     }
 
     h3.double-height{
-      font-size: 55px;
-      font-weight: bold;
+      font-size: 45px;
+      font-weight: 700;
       margin-bottom: 0;
       padding:0;
 
@@ -441,6 +440,9 @@
     h3{
       font-size: 35px;
 
+      @media(max-width: $screen-md){
+        font-size: 28px;
+      }
       @media(max-width: $screen-sm){
         font-size: 22px;
       }

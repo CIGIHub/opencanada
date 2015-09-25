@@ -7,10 +7,9 @@ html {
 body{
   color: $text-color;
   font-family: $serif;
-  font-size: 15px;
-  font-weight: 300;
+  font-weight: $body-font-weight;
+  line-height: $body-font-line-height;
   height: auto;
-  line-height: 1.5;
 }
 
 h1, h2, h3{
@@ -28,8 +27,13 @@ h1.subheading, .narrow-page h1{
 }
 
 h2{
-  font-size: 18px;
-  margin-top: 0px;
+  font-size: 21px;
+  margin: 0px;
+  font-weight: 900;
+
+  a{
+    color: $black;
+  }
 }
 
 h3{
@@ -60,8 +64,12 @@ h5, h6{
   }
 }
 
+p{
+  margin-bottom: 20px;
+}
 a, a:hover{
   color: $red;
+  text-decoration: none;
 }
 
 img{
@@ -102,13 +110,15 @@ footer{
   font-family: $sans-serif;
   background: $light-grey;
   padding-bottom: 40px;
+  font-size: 14px;
+  line-height: 120%;
 
   a{
     color: white;
   }
 
   h3{
-    @include type(white, 12px);
+    @include type(white, 14px);
     font-weight: 700;
     letter-spacing: 0.06em;
   }
@@ -131,11 +141,6 @@ footer{
 
   .row.infobar{
       display: table;
-    p{
-      font-weight: 200;
-      font-size: 14px;
-      line-height: 120%;
-    }
   }
    .row.infobar .col-sm-4 {
      border-right: $border-white;
@@ -198,7 +203,6 @@ footer{
   }
   .partners, .contact{
     @include centered-fixed-width(550px);
-    @include small-type;
     text-align: center;
   }
   .contact{
