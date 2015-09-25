@@ -38,4 +38,9 @@ var Menu = Menu || {
                 $('#main-menu').css("top", offset + "px");
             }
         },
+
+        quickClose: function() {
+            $('#main-menu').addClass("quickclose");
+            setTimeout(function(){$('#main-menu').removeClass("quickclose") }, 500);
+        }
     };
