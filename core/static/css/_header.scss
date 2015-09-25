@@ -106,8 +106,10 @@ header{
     margin-top: 0px;
     background: #000;
     text-align: left;
-    transition:left 0.5s, visibility 0.5s;
     visibility: hidden;
+    opacity: 0;
+    transition:left 0.5s, visibility 0.5s, opacity 0.5s;
+    
 
     &.noAnimation {
       transition:left 0s !important;
@@ -115,8 +117,9 @@ header{
 
     &.open{
       left: 0;
+      opacity: 1;
       visibility: visible;
-      transition:left 0.5s, visibility 0.5s;
+      transition:left 0.5s, visibility 0.5s, opacity 0.5s;
     }
 
     ul li a{
@@ -172,8 +175,9 @@ header{
       width: auto;
       padding: 0px;
       background: transparent;  
-      transition:left 0s, visibility 0s;
+      transition:left 0s, visibility 0s, opacity 0s;
       visibility: visible;
+      opacity: 1
     }
 
     //for large displays
