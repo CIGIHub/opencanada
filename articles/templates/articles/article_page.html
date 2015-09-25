@@ -18,7 +18,7 @@
     <div id="article-page" class="container">
         <article>
         {% block share_links %}
-            {% include 'articles/includes/share_links.html' %}
+{#            {% include 'articles/includes/share_links.html' %}#}
         {% endblock %}
 
             {% if not self.include_main_image_overlay or self.include_main_image_overlay and not self.main_image %}

@@ -4,13 +4,19 @@ $screen-tiny-max: 360px;
 $grid-float-breakpoint: $screen-md-min;
 $breakpoint: 1000px; //to match the javascript breakpoint variable.
 
+
 $serif: 'Libre Baskerville', Georgia, serif;
 $sans-serif: proxima-nova, Helvetica, sans-serif;
 //over-ride bootstrap font settings
 $font-family-sans-serif:  $sans-serif;
 $font-family-serif: $serif;
+$font-size-base: 15px;
 
+$body-font-weight: 300;
+$body-font-line-height: 165%;
 $text-color: #333;
+
+
 $red: #bf1e2e;
 $blue: #0098FD;
 $grey: #666;
@@ -35,4 +41,5 @@ $jumbotron-padding: 0;
 
 $nav-link-padding: 5px;
 $navbar-padding-vertical: 0px;
+
 
