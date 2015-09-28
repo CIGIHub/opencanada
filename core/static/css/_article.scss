@@ -472,7 +472,8 @@ article {
       line-height: 120%;
       padding: 20px;
       margin: 10px;
-      background-color: #f6f6f6; 
+      border-left:5px solid $red;
+      color: $light-grey;
   }
 
   @media(max-width: $screen-sm) {
