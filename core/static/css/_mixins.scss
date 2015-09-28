@@ -1,3 +1,14 @@
+@mixin body-link(){
+  color: $text-color;
+  a{
+    color: $text-link-color;
+    text-decoration: none;
+  }
+  a:hover{
+    color: $text-link-hover-color;
+  }
+}
+
 @mixin type($color:$text-color, $font-size:12px){
     font-family: $sans-serif;
     font-size: $font-size;
@@ -5,15 +16,8 @@
     color: $color;
 }
 
-@mixin small-type{
-  font-family: $sans-serif;
-  font-size: 12px;
-  line-height: 125%;
-  font-weight: 200;
-}
-
 @mixin subheading($font-size: 22px){
-    color: $heading-grey;
+    color: $subheading-color;
     font-family: $sans-serif;
     font-weight: 800;
     font-size: $font-size;
@@ -23,6 +27,22 @@
     margin-bottom: 25px;
 }
 
+@mixin article-title(){
+  font-size: 67px;
+  font-weight: 700;
+  margin-top: 10px;
+}
+
+@mixin article-list-title(){
+  font-size: 22px;
+  font-weight: 900;
+}
+
+@mixin rowheight-x {
+  @for $i from 1 through ($max-rows){
+    .rowheight-#{$i} { height: #{$row-height + (($i - 1) * 190)}px; }
+  }
+}
 
 @mixin inline-divider($padding-left, $padding-right, $color){
   padding-left: $padding-left;
@@ -95,16 +115,21 @@
     }
 }
 
-@mixin button($font-family:$sans-serif){
-    font-family: $font-family;
-    background: $red;
+@mixin button($font-size: 12px ){
+    font-family: $sans-serif;
+    background: $button-background-color;
+    font-size: $font-size;
     border-radius: 3px;
+    padding: 7px 14px;
     border: none;
-    color: white;
+    color: $button-text-color;
     text-transform: uppercase;
-    a{
-      color: white;
-    }
+    text-decoration: none;
+    transition:background 0.4s ease;
+        &:hover {
+          background: $black;
+          transition:background 0.4s ease;
+        }
 }
 
 

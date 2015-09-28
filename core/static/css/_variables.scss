@@ -1,45 +1,66 @@
+//color library
+$red: #bf1e2e;
+$white: #ffffff;
+$black: #000000;
+$blue: #0098FD;
+$grey: #666;
+$light-grey: #a5a5a5;
+$mid-grey: #ccc;
+$background-grey: #f3f0f0;
+
+
+
 $container-large-desktop: 940px;
 $screen-md-min: 992px;
 $screen-tiny-max: 360px;
 $grid-float-breakpoint: $screen-md-min;
 $breakpoint: 1000px; //to match the javascript breakpoint variable.
 
-
+//body font
 $serif: 'Libre Baskerville', Georgia, serif;
 $sans-serif: proxima-nova, Helvetica, sans-serif;
-//over-ride bootstrap font settings
-$font-family-sans-serif:  $sans-serif;
-$font-family-serif: $serif;
 $font-size-base: 15px;
-
 $body-font-weight: 300;
 $body-font-line-height: 165%;
 $text-color: #333;
+$text-link-color: $red;
+$text-link-hover-color: $text-link-color;
 
 
-$red: #bf1e2e;
-$blue: #0098FD;
-$grey: #666;
-$light-grey: #a5a5a5;
-$mid-grey: #ccc;
-$background-grey: #f3f0f0;
-$caption-grey: #929191;
-$heading-grey: #999999;
+//text colors
+$heading-color: $black;
+$subheading-color: #999999;
+$caption-color: #929191;
+$text-link-color: $red;
+$caption-color: #929191;
 
-$white: #fff;
-$black: #000;
+$button-text-color: $white;
+$button-text-hover-color: $white;
+$button-background-color: $red;
+$button-background-hover-color: $black;
+
+$header-color: $red;
+$header-hover-color: $black;
+
 $twitter-blue: #0cf;
-
-$border-black: solid 1px black;
+//borders
+$border-black: solid 1px $black;
 $border-grey: solid 1px $mid-grey;
 $border-red: solid 1px $red;
-$border-white: solid 1px white;
+$border-white: solid 1px $white;
 
 $input-border-focus: $red;
-$jumbotron-bg: #ffffff;
+$jumbotron-bg: $white;
 $jumbotron-padding: 0;
 
+//bootstrap overrides
 $nav-link-padding: 5px;
 $navbar-padding-vertical: 0px;
+$font-family-sans-serif:  $sans-serif;
+$font-family-serif: $serif;
+
+//feature box limits
+$max-rows: 3;
+$row-height: 380;
 
 

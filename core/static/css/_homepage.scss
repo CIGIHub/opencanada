@@ -1,7 +1,6 @@
 
 /**************   Homepage  **************/
 
-
 .template-home-page .main-feature{
   @include article-overlay;
   @include fullbleed-overlay;
@@ -17,7 +16,7 @@
     height: 50px;
 
     a{
-      color: white;
+      color: $white;
       text-decoration: none;
       display: block;
       text-align: center;
@@ -59,49 +58,20 @@
   }
 }
 
-#features {
-  .rowheight-1 {
-    @media(max-width: $breakpoint) {
-      height: 140px;
-    }
-    @media(min-width: $breakpoint + 1px) {
-      height: 280px;
-    }
-  }
-  .rowheight-2 {
-    @media(max-width: $breakpoint) {
-      height: 280px;
-    }
-    @media(min-width: $breakpoint + 1px) {
-      height: 560px;
-    }
-  }
-}
 
 .template-home-page {
-  section{
-    margin-bottom: 20px;
-    margin-top: 20px;
-
-    &.features {
-      margin-top: 0;
-    }
+  .features{
+    @include rowheight-x;
 
     h2 {
-      @include subheading(22px);
-
-    }
-    a{
-      color: black;
+      @include subheading;
     }
 
     h3{
-      font-size: 21px;
-      font-weight: 900;
+      @include article-list-title;
     }
 
     h3 {
-
       &.columns-3 {
         font-size: 16px;
         padding-top: 10px;
@@ -109,22 +79,7 @@
         line-height: 125%;
       }
     }
-    .read-more {
-      text-align: center;
-      a.button {
-        @include button;
-        font-size: 12px;
-        padding: 5px 14px;
-        display: inline-block;
-        text-decoration: none;
-        transition:background 0.4s ease;
 
-        &:hover {
-          background: $black;
-          transition:background 0.4s ease;
-        }
-      }
-    }
   }
 
   .simple{
@@ -197,284 +152,6 @@
   }
 }
 
-.features, .related-articles, .items.side-image{
-  color: black;
-  a{
-    color: black;
-  }
-
-  h3{
-    font-size: 21px;
-    font-weight: 900;
-  }
-
-  .row{
-    margin-left: 0px;
-    margin-right: 0px;
-    margin-bottom: 25px;
-
-    & > [class*='col-'] {
-        padding-right:0;
-        padding-left:0;
-    }
-
-    .col-sm-4{
-      padding-left: 5px;
-      padding-right: 5px;
-      .image-feature, .simple-feature{
-        position: relative;
-        height: 380px;
-        border: $border-grey;
-      }
-      .feature-content{
-          padding: 10px;
-        }
-      .contributors{
-        position: absolute;
-        bottom: 0;
-      }
-    }
-    .col-sm-4:first-child{
-      padding-left: 0px;
-      padding-right: 10px;
-    }
-    .col-sm-4:last-child{
-      padding-left: 10px;
-      padding-right: 0px;
-    }
-
-  }
-
-  .row.full-width + .row.full-width{
-    padding-top: 25px;
-    border-top: $border-grey;
-  }
-
-  @media(max-width: $screen-md){
-    .row{
-      .col-sm-4{
-        .image-feature, .simple-feature{
-          height: 450px;
-        }
-      }
-    }
-  }
-  @media(max-width: $screen-xs-max){
-    .row{
-      margin-bottom: 0px;
-      & > [class*='col-'] {
-        @include row-divider;
-      }
-
-      .col-sm-4{
-        padding-left: 0px;
-        padding-right: 0px;
-        .image-feature, .simple-feature{
-          border: none;
-          height: auto;
-          padding: 0px;
-        }
-        .contributors{
-          position: relative;
-        }
-      }
-      .col-sm-4:last-child, .col-sm-4:first-child{
-        padding-left: 0px;
-        padding-right: 0px;
-      }
-    }
-    .row.last{
-      & > [class*='col-']:last-child {
-        @include no-row-divider;
-        margin-bottom: 15px;
-      }
-    }
-
-    .row.full-width + .row.full-width{
-      padding-top: 0px;
-      border-top: none;
-    }
-  }
-
-  .overlay-feature{
-    @include article-overlay;
-
-    @media(max-width: $screen-xs-max) {
-      margin-left:-15px;
-      margin-right:-15px;
-      border-bottom: 0;
-    }
-
-    h3.double-height{
-      font-size: 45px;
-      font-weight: 700;
-      margin-bottom: 0;
-      padding:0;
-
-      a {
-        padding:0 0 7% 0;
-        width: 100%;
-        @include box-sizing(border-box);
-      }
-
-      @media(max-width: $screen-sm){
-        font-size: 32px;
-      }
-    }
-    .feature-text  {
-      padding:0 20px;
-    }
-  }
-
-  .feature-text {
-    position: relative;
- 
-    .contributors {
-      max-width: 100%;
-      box-sizing: border-box;
-
-      a {
-        padding:0;
-      }
-    }
-  }
-
-  .feature-wrapper{
-    padding:0px;
-    max-width: 100%;
-  }
-
-  .image-feature{
-    figure{
-      position: relative;
-      
-      a {
-        width:100%;
-        height:100%;
-        display:block;
-
-        &:hover:before, &.hover:before {
-          width:100%;
-          height:100%;
-          background:rgba(0,0,0,0.25);
-          display: block;
-          position: absolute;
-          top:0;
-          left:0;
-          z-index: 1;
-          content:"";
-        }
-      }
-    }
-
-    h3 {
-      a:hover, a.hover{
-        color:$grey;
-        text-decoration: underline;
-      }
-    }
-
-    .editors-pick-link, .most-popular {
-      top:35px;
-      right:22px;
-
-      a:hover {
-        color:$mid-grey;
-      }
-
-      @media(min-width: $screen-sm) {
-        top:10px;
-        right:25px;
-      }
-    }
-  }
-
-  @media(min-width: $screen-sm) {
-    .col-sm-4.last {
-      .image-feature {
-        .editors-pick-link, .most-popular {
-          right:10px;
-        }
-      }
-    }
-  }
-
-  .feature-image {
-    position: absolute !important;
-    z-index: 1;
-
-    &:before {
-      opacity: 0;
-      width:100%;
-      height:100%;
-      background:rgba(0,0,0,0.25);
-      display: block;
-      position: absolute;
-      top:0;
-      left:0;
-      z-index: 1;
-      content:"";
-    }
-
-    &:hover:before, &.hover:before {
-      opacity: 1;
-    }
-
-    > a {
-      width:100%;
-      height:100%;
-    }
-  }
-
-  .feature-wrapper {
-    z-index: 2;
-
-    &.hover {
-      h1 a, h3 a {
-        color:$mid-grey;
-      }
-    }
-  }
-
-  .simple-feature{
-    h3{
-      font-size: 35px;
-
-      @media(max-width: $screen-md){
-        font-size: 28px;
-      }
-      @media(max-width: $screen-sm){
-        font-size: 22px;
-      }
-    }
-
-    .editors-pick-link, .most-popular {
-      top:5%;
-      right:0;
-
-      @media(min-width: $screen-sm) {
-        top:10px;
-        right:10px;
-      }
-    }
-  }
-
-  .feature-line {
-      a {
-        color:#fff;
-        padding-top: 10px;
-        padding-bottom: 5%;
-
-        &:hover {
-          color:#fff;
-        }
-      }
-  }
-
-  h3{
-    margin-bottom: 5px;
-  }
-}
 
 .editors-pick-link, .most-popular {
   display: block;
@@ -523,7 +200,7 @@
 }
 
 .most-popular{
-  background: $red;
+  background: $button-background-color;
 }
 
 .pager{
