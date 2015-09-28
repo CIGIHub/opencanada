@@ -33,20 +33,13 @@ h2{
 }
 
 h3{
-  font-size: 18px;
-  margin-top: 0px;
+  @include article-list-title;
 }
 
 h4{
-  font-size: 14px;
-  font-weight: bold;
-  text-transform: uppercase;
+  @include type(14px);
 }
 
-h5, h6{
-  font-weight: bold;
-  font-size: 14px;
-}
 
 @media(max-width: $screen-sm){
   h1{
@@ -63,9 +56,16 @@ h5, h6{
 p{
   margin-bottom: 20px;
 }
-a, a:hover{
-  color: $text-link-color;
+
+a{
+  color: $text-color;
   text-decoration: none;
+
+  &:hover{
+    color: $text-link-hover-color;
+    text-decoration: none;
+    transition:color 0.5s;
+  }
 }
 
 img{
@@ -82,9 +82,22 @@ button:focus {outline:0;}
   text-align: center;
   a.button {
     @include button;
-
   }
 }
+
+.pager{
+  li{
+    @include type($grey);
+  }
+  li > a, li > span{
+    @include button;
+  }
+  li > a:hover, li > span:hover{
+    color: white;
+    background: $button-bg-color;
+  }
+}
+
 
 .clear{
   clear:both;
@@ -96,11 +109,6 @@ button:focus {outline:0;}
     line-height: 125%;
     font-family: $sans-serif;
     color: $caption-color;
-  }
-
-  .image-source{
-    margin-top: 3px;
-    @include type($light-grey, 10px)
   }
 
 .date{
@@ -218,21 +226,6 @@ footer{
 
 main{
   margin-bottom: 30px;
-}
-
-.navigation-lock {
-    overflow: hidden !important;
-
-    main:before {
-      content:"";
-      top:0;
-      left:0;
-      bottom:0;
-      right:0;
-      background: rgba(255,255,255,0.75);
-      z-index: 12;
-      position: fixed;
-    }
 }
 
 .block-Overflow {

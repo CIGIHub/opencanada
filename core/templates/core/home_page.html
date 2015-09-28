@@ -43,7 +43,7 @@
                                     {% endif %}
 
                                     <h3><a style="color: {{ article.font_style.text_colour.hex_value }};" href="{{ article.url }}">{{ article.title }}</a></h3>
-                                    {% if article.feature_style.number_of_rows == 1 %}
+                                    {% if article.feature_style.number_of_rows == 2 %}
                                         {% if article.subtitle %}
                                             <div class="feature-line">{{ article.subtitle|richtext }}</div>
                                         {% else %}

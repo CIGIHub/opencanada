@@ -16,7 +16,7 @@
     height: 50px;
 
     a{
-      color: $white;
+      color: $overlay-link-color;
       text-decoration: none;
       display: block;
       text-align: center;
@@ -71,17 +71,9 @@
       @include article-list-title;
     }
 
-    h3 {
-      &.columns-3 {
-        font-size: 16px;
-        padding-top: 10px;
-        font-weight: 500;
-        line-height: 125%;
-      }
-    }
-
   }
 
+  //visualizations
   .simple{
     img{
       padding-bottom: 10px;
@@ -105,6 +97,7 @@
     }
   }
 
+  //readings and in-depths
   .items.side-image{
 
     .row{
@@ -162,7 +155,7 @@
   width: 50px;
   height: 50px;
   border-radius: 30px;
-  background: $blue;
+  background: $highlight-button-color;
     
   @media(min-width: $screen-sm){
     top: 0%;
@@ -200,18 +193,6 @@
 }
 
 .most-popular{
-  background: $button-background-color;
+  background: $button-bg-color;
 }
 
-.pager{
-  li{
-    @include type($grey);
-  }
-  li > a, li > span{
-    @include button;
-  }
-  li > a:hover, li > span:hover{
-    color: white;
-    background: $red;
-  }
-}

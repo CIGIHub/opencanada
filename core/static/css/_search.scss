@@ -35,8 +35,6 @@
 
   .search-suggestions{
     display: none;
-    //padding-top: 10px;
-    //@include inline-list-divided(white);
   }
 
   @media (min-width: $screen-sm) {
@@ -44,10 +42,6 @@
   }
 
 }
-
-
-
-
 
 .search-results-page{
   ul li{
@@ -75,8 +69,11 @@
   h1{
     @include subheading;
   }
+
   h2{
     @include type(black, 16px);
+    font-weight: 300;
+    margin-bottom: 20px;
     border-bottom: $border-grey;
   }
 }
