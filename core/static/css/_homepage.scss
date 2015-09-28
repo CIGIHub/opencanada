@@ -181,6 +181,10 @@
         padding:15px 0px;
         line-height: 1em;
         outline:none;
+
+        &:hover {
+          color:$mid-grey;
+        }
       }
     }
   }
