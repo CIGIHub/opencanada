@@ -37,6 +37,11 @@ article {
 
 	.toc ul {
 		background-color: $textalternate;
+		border-top:5px solid $textalternate;
+		border-bottom:5px solid $textalternate;
+		padding-top:20px;
+		padding-bottom: 20px;
+		margin-top:10px;
 
 		li {
 			a, i {
