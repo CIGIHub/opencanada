@@ -36,8 +36,10 @@ var Header = Header || {
 
                 if ($(document).scrollTop() >= offset ) {
                     $('header').addClass('scrolled');
+                    $('header').removeClass('notscrolled');
                 } else {
                     $('header').removeClass('scrolled');
+                    $('header').addClass('notscrolled');
                 }
 
                 function collapseHeaderOn() {
