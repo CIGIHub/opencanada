@@ -3,10 +3,8 @@
 
 {% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
 
-{% block extra_css %}
-    {% compress css %}
+{% block theme_css %}
         <link rel="stylesheet" type="text/x-scss" href="{% static 'themes/dark/css/style.scss' %}">
-    {% endcompress %}
 {% endblock %}
 
 {% block extra_js %}

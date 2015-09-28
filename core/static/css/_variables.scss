@@ -8,8 +8,7 @@ $light-grey: #a5a5a5;
 $mid-grey: #ccc;
 $background-grey: #f3f0f0;
 
-
-
+//screen settings
 $container-large-desktop: 940px;
 $screen-md-min: 992px;
 $screen-tiny-max: 360px;
@@ -17,50 +16,64 @@ $grid-float-breakpoint: $screen-md-min;
 $breakpoint: 1000px; //to match the javascript breakpoint variable.
 
 //body font
-$serif: 'Libre Baskerville', Georgia, serif;
-$sans-serif: proxima-nova, Helvetica, sans-serif;
-$font-size-base: 15px;
-$body-font-weight: 300;
-$body-font-line-height: 165%;
-$text-color: #333;
-$text-link-color: $red;
-$text-link-hover-color: $text-link-color;
+$serif: 'Libre Baskerville', Georgia, serif !default;
+$sans-serif: proxima-nova, Helvetica, sans-serif !default;
+$font-size-base: 15px !default;
+$body-font-weight: 300 !default;
+$body-font-line-height: 165% !default;
+$text-color: #333 !default;
+$text-link-color: $red !default;
+$text-link-hover-color: $text-link-color !default;
+
+$overlay-text-color: #fff !default;
+$overlay-link-color: #fff !default;
+
+$topic-link-color: $red !default;
+$blurb-author-link-color: $text-color !default;
+$blurb-link-color: $text-color !default;
+$blurb-bio-text-color: #666 !default;
 
 
 //text colors
-$heading-color: $black;
-$subheading-color: #999999;
-$caption-color: #929191;
-$text-link-color: $red;
-$caption-color: #929191;
+$heading-color: #000 !default;
+$subheading-color: #999999 !default;
+$caption-color: #929191 !default;
+$text-link-color: $red !default;
 
-$button-text-color: $white;
-$button-text-hover-color: $white;
-$button-background-color: $red;
-$button-background-hover-color: $black;
+$button-text-color: $white !default;
+$button-text-hover-color: $white !default;
+$button-bg-color: $red !default;
+$button-bg-hover-color: $black !default;
 
-$header-color: $red;
-$header-hover-color: $black;
+$header-color: $red !default;
+$header-hover-color: $black !default;
 
 $twitter-blue: #0cf;
 //borders
 $border-black: solid 1px $black;
-$border-grey: solid 1px $mid-grey;
+$border-grey: solid 1px #ccc !default;
 $border-red: solid 1px $red;
 $border-white: solid 1px $white;
 
-$input-border-focus: $red;
-$jumbotron-bg: $white;
-$jumbotron-padding: 0;
+$row-border: $border-grey !default;
+$blurb-border: $border-grey !default;
+$pull-quote-bg: $border-grey !default;
+$quote-border: $red !default;
+$list-border: $border-grey !default;
+
+
+$highlight-button-color: $blue !default;
 
 //bootstrap overrides
-$nav-link-padding: 5px;
-$navbar-padding-vertical: 0px;
+$input-border-focus: $red !default;
+$jumbotron-bg: $white;
+$jumbotron-padding: 0;
 $font-family-sans-serif:  $sans-serif;
 $font-family-serif: $serif;
 
 //feature box limits
 $max-rows: 3;
 $row-height: 380;
+
 
 

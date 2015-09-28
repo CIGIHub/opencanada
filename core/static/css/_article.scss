@@ -17,7 +17,7 @@
     //}
 
     .date{
-      color: white;
+      color: $overlay-text-color;
       font-size: 12px;
     }
     .primary-topic {
@@ -58,7 +58,7 @@
 
     .fa-camera {
       &:hover, &.highlighted {
-        color:$red;
+        color: $overlay-link-color;
         cursor: pointer;
       }
     }
@@ -72,18 +72,15 @@
 }
 
 .article-scroll{
-  header .wordmark{
-      //display: none;
-  }
+
   .article-title{
-    //display: block;
     text-align: center;
     line-height: 30px;
   }
 }
 
 .date{
-  @include type(#000);
+  @include type($text-color);
 }
 
 article .title,
@@ -192,6 +189,7 @@ article {
 
   &.row {
     @include row-divider;
+
   }
 
   .feature-line p{
@@ -233,7 +231,7 @@ article {
   }
 
   .top-link {
-      color: $red;
+      color: $topic-link-color;
       text-align: right;
       display: block;
       margin-right: 10%;
@@ -257,7 +255,7 @@ article {
       float:left;
     }
     @include type($text-color);
-    @include inline-list-divided($red);
+    @include inline-list-divided($topic-link-color);
     ul.list-inline {
       padding-left: 68px;
       display: block;
@@ -297,7 +295,9 @@ article {
       width: 20px;
       margin-left: 5px;
       display:inline-block;
-      color: $red;
+      span:hover{
+        color: $text-link-hover-color;
+      }
     }
     i {
       cursor: pointer;
@@ -486,7 +486,7 @@ article {
   }
 
   .block-Quote {
-    border-left: solid $red 5px;
+    border-left: $quote-border;
     color: $light-grey;
     margin-left: 15%;
     margin-top:20px;
@@ -533,7 +533,7 @@ article {
       width: 250px;
       padding: 5px 15px;
       margin: 10px 0 10px 15px;
-      border-left: solid 1px $mid-grey;
+      border-left: $blurb-border;
       margin-bottom: 20px;
       padding: 5px 15px;
       img{
@@ -542,12 +542,12 @@ article {
     }
 
     .author a, .author{
-      @include type(black);
+      @include type($blurb-author-link-color);
     }
     .short-bio {
       font-size: 12px;
       line-height: 120%;
-      color: $grey;
+      color: $blurb-bio-text-color;
     }
     ul {
       padding: 5px 0 0 0;
@@ -558,7 +558,7 @@ article {
         list-style: none;
         line-height: 120%;
         a{
-          color: black;
+          color: $blurb-link-color;
         }
       }
     }

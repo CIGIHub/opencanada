@@ -1,6 +1,6 @@
 
 .features, .related-articles, .items.side-image{
- 
+
   h3{
     @include article-list-title;
   }
@@ -21,7 +21,7 @@
       .image-feature, .simple-feature{
         position: relative;
         height: 380px;
-        border: $border-grey;
+        border: $row-border;
       }
       .feature-content{
           padding: 10px;
@@ -44,7 +44,7 @@
 
   .row.full-width + .row.full-width{
     padding-top: 25px;
-    border-top: $border-grey;
+    border-top: $row-border;
   }
 
   @media(max-width: $screen-md){
@@ -56,6 +56,7 @@
       }
     }
   }
+
   @media(max-width: $screen-xs-max){
     .row{
       margin-bottom: 0px;
@@ -102,17 +103,8 @@
       border-bottom: 0;
     }
 
-    h3.double-height{
-      font-size: 45px;
-      font-weight: 700;
-      margin-bottom: 0;
-      padding:0;
-
-      a {
-        padding:0 0 7% 0;
-        width: 100%;
-        @include box-sizing(border-box);
-      }
+    h3{
+      @include article-overlay-title;
 
       @media(max-width: $screen-sm){
         font-size: 32px;
@@ -256,19 +248,19 @@
     }
   }
 
-  .feature-line {
-      a {
-        color:#fff;
-        padding-top: 10px;
-        padding-bottom: 5%;
-
-        &:hover {
-          color:#fff;
-        }
-      }
-  }
-
-  h3{
-    margin-bottom: 5px;
-  }
+  //.feature-line {
+  //    a {
+  //      color:#fff;
+  //      padding-top: 10px;
+  //      padding-bottom: 5%;
+  //
+  //      &:hover {
+  //        color:#fff;
+  //      }
+  //    }
+  //}
+  //
+  //h3{
+  //  margin-bottom: 5px;
+  //}
 }
