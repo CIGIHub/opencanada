@@ -1,6 +1,8 @@
 var Search = Search || {
         Structure: {
             initialize: function () {
+                $("#search-box").show(); //show search dropdown (offscreen) after everthing is loaded 
+            
                 $('.search-form input[type=text]').keydown(function () {
                     setTimeout(function() {
                         if ($('.search-form input[type=text]').val() == '') {
@@ -30,7 +32,6 @@ var Search = Search || {
                 
                 if (search.hasClass('open')) {
                     search.removeClass('open');
-                    //FeatureStyles.MainFeatures.removeNavigationLock();
                 }
             },
             openBox: function() {
@@ -39,7 +40,6 @@ var Search = Search || {
                 if (!(search.hasClass('open'))) {
                     Menu.close();
                     search.addClass('open');
-                    //FeatureStyles.MainFeatures.addNavigationLock();
                 }
             },
             isOpen: function(){
@@ -58,7 +58,5 @@ var Search = Search || {
                 }
             }
         }
-
-
     };
 

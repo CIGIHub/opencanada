@@ -1,5 +1,7 @@
 var Menu = Menu || {
         initialize: function () {
+
+            $("#main-menu").show(); //show main menu after everthing is loaded 
             $("#toggle-mobile").click(function () {
                 Menu.toggle();
             });
