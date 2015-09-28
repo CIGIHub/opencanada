@@ -25,9 +25,12 @@
 
         {% block feedlink %}<link rel="home" type="application/rss+xml" href="/feed/" />{% endblock feedlink %}
 
-        <link href='https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700' rel='stylesheet' type='text/css'>
-        <script src="//use.typekit.net/nat2qtz.js"></script>
-        <script>try{Typekit.load({ async: true });}catch(e){}</script>
+        {% block webfonts %}
+            <link href='https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700' rel='stylesheet' type='text/css'>
+            <script src="//use.typekit.net/nat2qtz.js"></script>
+            <script>try{Typekit.load({ async: true });}catch(e){}</script>
+        {% endblock %}
+
         <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 
 {#        <link rel="stylesheet" type="text/x-scss" href="{% static 'css/font-awesome.min.css' %}">#}
@@ -60,6 +63,7 @@
     {% if ADMIN_ENABLED %}
         {% wagtailuserbar %}
     {% endif %}
+
         {% block header %}
             {% include 'core/header.html' with tagline=true %}
         {% endblock %}

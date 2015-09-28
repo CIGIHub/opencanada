@@ -18,7 +18,7 @@
 
 
 {% block content %}
-    <section class="container features" id="features">
+    <section class="container features">
         <h2>Most Recent</h2>
 
         {% for row in self.articles %}
@@ -41,16 +41,14 @@
                                     {% if article == self.most_popular_article %}
                                         <div class="most-popular"><div class="table"><div class="table-cell"><a href="{% slugurl 'most-popular' %}" class="article-feature ">Most Popular</a></div></div></div>
                                     {% endif %}
-                            
+
+                                    <h3><a style="color: {{ article.font_style.text_colour.hex_value }};" href="{{ article.url }}">{{ article.title }}</a></h3>
                                     {% if article.feature_style.number_of_rows == 1 %}
-                                        <h3><a style="color: {{ article.font_style.text_colour.hex_value }};" href="{{ article.url }}">{{ article.title }}</a></h3>
                                         {% if article.subtitle %}
                                             <div class="feature-line">{{ article.subtitle|richtext }}</div>
                                         {% else %}
                                             <div class="feature-line">{{ article.excerpt|richtext }}</div>
                                         {% endif %}
-                                    {%  else %}
-                                        <h3 class="double-height"><a style="color: {{ article.font_style.text_colour.hex_value }};" href="{{ article.url }}">{{ article.title }}</a></h3>
                                     {% endif %}
 
                                     {% if article.authors %}
@@ -80,13 +78,15 @@
                             <figure><a href="{{ article.url }}">{%  image article.main_image fill-710x475 %}</a></figure>
                             <div class="feature-content">
                                 <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
-                               {% spaceless %}
+                                {% if article.authors %}
+                                    {% spaceless %}
                                     <div class="contributors">By:
                                         {% for author in article.authors %}
                                             <a href="{{ author.url }}">{{ author.full_name }}</a><span>{% if not forloop.last %}, {% endif %}</span>
                                         {% endfor %}
                                     </div>
-                               {% endspaceless %}
+                                    {% endspaceless %}
+                                {% endif %}
                             </div>
                         </div>
 
@@ -106,13 +106,15 @@
                                 <div class="feature-line">{{ article.excerpt|richtext }}</div>
                             {% endif %}
 
-                            {% spaceless %}
+                            {% if article.authors %}
+                                {% spaceless %}
                                 <div class="contributors">By:
                                     {% for author in article.authors %}
                                         <a href="{{ author.url }}">{{ author.full_name }}</a><span>{% if not forloop.last %}, {% endif %}</span>
                                     {% endfor %}
                                 </div>
-                            {% endspaceless %}
+                                {% endspaceless %}
+                            {% endif %}
                         </div>
                     {% endif %}
                 </div>

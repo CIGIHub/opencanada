@@ -12,14 +12,16 @@ body{
   height: auto;
 }
 
-h1, h2, h3{
+h1, h2, h3, h4{
   font-family: $sans-serif;
+  margin: 0px;
+  a{
+    color: $heading-color;
+  }
 }
 
 h1, .jumbotron h1{
-  margin-top: 10px;
-  font-size: 67px;
-  font-weight: bold;
+  @include article-title;
 }
 
 h1.subheading, .narrow-page h1{
@@ -27,13 +29,7 @@ h1.subheading, .narrow-page h1{
 }
 
 h2{
-  font-size: 21px;
-  margin: 0px;
-  font-weight: 900;
-
-  a{
-    color: $black;
-  }
+  @include article-list-title;
 }
 
 h3{
@@ -68,7 +64,7 @@ p{
   margin-bottom: 20px;
 }
 a, a:hover{
-  color: $red;
+  color: $text-link-color;
   text-decoration: none;
 }
 
@@ -82,6 +78,14 @@ button{
 }
 button:focus {outline:0;}
 
+.read-more {
+  text-align: center;
+  a.button {
+    @include button;
+
+  }
+}
+
 .clear{
   clear:both;
 }
@@ -91,7 +95,7 @@ button:focus {outline:0;}
     font-size: 10px;
     line-height: 125%;
     font-family: $sans-serif;
-    color: $caption-grey;
+    color: $caption-color;
   }
 
   .image-source{

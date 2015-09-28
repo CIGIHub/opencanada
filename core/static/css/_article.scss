@@ -52,7 +52,7 @@
   .feature-caption{
     font-family: $sans-serif;
     font-size: 10px;
-    color: $caption-grey;
+    color: $caption-color;
     float: right;
     margin: 10px;
 
@@ -389,7 +389,7 @@ article {
       }
 
       .image-label {
-        color:$caption-grey;
+        color:$caption-color;
         text-transform: none;
         font-size:10px;
         margin-bottom: 0;
