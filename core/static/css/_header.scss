@@ -95,7 +95,6 @@ header{
 
   //for mobile displays
   #main-menu{
-    z-index: 300;   
     position: fixed;
     top: 54px;
     left: -400px;
@@ -106,17 +105,20 @@ header{
     margin-top: 0px;
     background: #000;
     text-align: left;
-    transition:left 0.5s, visibility 0.5s;
-      visibility: hidden;
+    visibility: hidden;
+    opacity: 0;
+    transition:left 0.5s, visibility 0.5s, opacity 0.5s;
+    
 
-    &.quickclose {
-      display: none !important;
+    &.noAnimation {
+      transition:left 0s !important;
     }
 
     &.open{
       left: 0;
+      opacity: 1;
       visibility: visible;
-      transition:left 0.5s, visibility 0.5s;
+      transition:left 0.5s, visibility 0.5s, opacity 0.5s;
     }
 
     ul li a{
@@ -172,11 +174,12 @@ header{
       width: auto;
       padding: 0px;
       background: transparent;  
-      transition:left 0s, visibility 0s;
+      transition:left 0s, visibility 0s, opacity 0s;
       visibility: visible;
+      opacity: 1
     }
 
-        //for large displays
+    //for large displays
     &.collapsed{
       
       #toggle-mobile {
@@ -192,14 +195,12 @@ header{
         padding: 25px;
         background: #000;
         visibility: hidden;
-        //transition:left 0.5s, visibility 0.5s;
+        transition:left 0.5s, visibility 0.5s;
         
 
         &.open{
           left: 0;
           visibility: visible;
-          //transition:left 0.5s, visibility 0.5s;
-          
         }
       }
     }

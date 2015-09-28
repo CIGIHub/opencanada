@@ -21,6 +21,19 @@ var Header = Header || {
                     collapseHeaderOff();
                 }
 
+                //transition between collapsed and not collapsed, quickly hide/show the menu with no animation
+                if ($(document).scrollTop() >= offset) {
+                    if (!collapsedHeader) {
+                        Menu.noAnimation();
+                        collapsedHeader = true;
+                    }   
+                } else {
+                    if (collapsedHeader) {
+                        Menu.noAnimation();
+                        collapsedHeader = false;
+                    } 
+                }
+
                 if ($(document).scrollTop() >= offset ) {
                     $('header').addClass('scrolled');
                 } else {
