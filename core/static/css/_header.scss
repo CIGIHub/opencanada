@@ -72,6 +72,7 @@ header{
 
     a {
       color: white;
+      outline: none;
       
       &:hover{
         text-decoration: none;
@@ -148,7 +149,8 @@ header{
         a {
           color: #fff;
           font-family: $sans-serif;
-          font-weight: 700;
+          font-weight: 300;
+          outline:none;
           font-size: 12px;
           text-transform: uppercase;
         }
