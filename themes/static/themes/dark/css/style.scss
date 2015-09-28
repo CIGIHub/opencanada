@@ -119,7 +119,8 @@ article {
 	}
 
 	.block-PullQuote {
-		background:$textalternate;
+		color:$textalternate;
+		border-left-color: $textalternate;
 	}
 
 	.block-Quote {
