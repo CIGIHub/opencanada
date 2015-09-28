@@ -93,7 +93,6 @@ INSTALLED_APPS = (
     'newsletter',
     'events',
     'jobs',
-    'wordpress_importer',
     'analytics',
 )
 
@@ -203,7 +202,6 @@ WAGTAILSEARCH_RESULTS_TEMPLATE = 'basic_site/search_results.html'
 WAGTAILIMAGES_FEATURE_DETECTION_ENABLED = False
 
 FAVICON_PATH = STATIC_URL + 'img/favicon.png'
-WP_IMPORTER_IMAGE_DOWNLOAD_DOMAINS = ('opencanada.org', 'www.opencanada.org')
 
 WAGTAILIMAGES_IMAGE_MODEL = 'images.AttributedImage'
 
