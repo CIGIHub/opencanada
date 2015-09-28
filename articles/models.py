@@ -274,7 +274,7 @@ class Sharelinks(models.Model):
             total_shares = 0
             for page_url in urls:
                 url = 'https://cdn.api.twitter.com/1/urls/count.json?url={}'.format(page_url)
-                response = requests.get(url)
+                response = requests.get(url, timeout=5)
                 j = response.json()
                 total_shares += j.get('count', 0)
             return total_shares
@@ -285,7 +285,7 @@ class Sharelinks(models.Model):
     def _get_facebook_count(self):
         try:
             url = 'https://graph.facebook.com/?ids=https://opencanada.org{0},http://opencanada.org{0}'.format(self.url)
-            response = requests.get(url)
+            response = requests.get(url, timeout=5)
             j = response.json()
             total_shares = 0
             for key, values in j.iteritems():
