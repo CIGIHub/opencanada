@@ -60,6 +60,7 @@ p{
 a{
   color: $text-color;
   text-decoration: none;
+  outline:none;
 
   &:hover{
     color: $text-link-hover-color;
