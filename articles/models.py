@@ -467,7 +467,11 @@ class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, Sharelinks, Pag
 
     @property
     def authors(self):
-        return [link.author for link in self.author_links.all()]
+        author_list = []
+        for link in self.author_links.all():
+            if link.author:
+                author_list.append((link.author))
+        return author_list
 
     @property
     def series_articles(self):
@@ -913,7 +917,8 @@ class SeriesPage(ThemeablePage, FeatureStyleFields, Promotable, Sharelinks, Page
             if article_link.article:
                 if article_link.article:
                     for author_link in article_link.article.author_links.all():
-                        author_list.append(author_link.author)
+                        if author_link.author:
+                            author_list.append(author_link.author)
         author_list.sort(key=attrgetter('last_name'))
         return author_list
 
