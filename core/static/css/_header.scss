@@ -66,7 +66,7 @@ header{
   .wordmark {
     font-weight: 700;
     font-size: 20px;
-    padding-top:7px;
+    padding-top:4px;
     line-height: 20px;
     text-transform: uppercase;
 
@@ -227,6 +227,14 @@ header{
 
     //header is collapsed and smaller.
     &.collapsed {
+      .menu, .search {
+        width: 5%;
+      }
+
+      .logo {
+        width: 90%;
+      }
+
       .banner{
         padding-top: 12px;
         padding-bottom: 12px;
