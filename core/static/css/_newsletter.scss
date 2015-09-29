@@ -1,9 +1,6 @@
 /**************  Newsletter  **************/
 .newsletter-form{
-  background: $mid-grey;
-  padding: 5px;
-  margin-bottom: 20px;
-
+  
   ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
   color:   $text-color;
   }
@@ -21,6 +18,10 @@
 
   #mc_embed_signup{
     font-family: $sans-serif;
+    background: $mid-grey;
+    padding: 5px;
+    margin-bottom: 2em;
+
     form{
       padding: 0px;
     }
@@ -44,7 +45,7 @@
         border-radius: none;
         border: none;
         background: none;
-        width:75%;
+        width:74%;
         padding: 5px 5px 0 0;
         box-sizing:border-box;
         margin: 3px 0px 0 0px;
@@ -56,12 +57,15 @@
       &.button{
         
         @include button;
-        width:25%;
+        width:26%;
         min-width: 0;
         display:inline-block;
         margin: 0px;
         font-weight: 300;
         font-size: 12px;
+        padding:2px 0px;
+        height: 28px;
+        line-height: 28px;
       }
     }
   }
