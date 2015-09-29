@@ -93,10 +93,12 @@ button:focus {outline:0;}
   }
   li > a, li > span{
     @include button;
+    line-height: 12px;
   }
+
   li > a:hover, li > span:hover{
     color: white;
-    background: $button-bg-color;
+    background: $black;
   }
 }
 
