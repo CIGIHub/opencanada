@@ -5,6 +5,7 @@ html {
 }
 
 body{
+  background: $body-bg-color;
   color: $text-color;
   font-family: $serif;
   font-weight: $body-font-weight;
@@ -59,7 +60,7 @@ p{
 }
 
 a{
-  color: $text-color;
+  color: $text-link-color;
   text-decoration: none;
   outline:none;
 
@@ -118,7 +119,6 @@ button:focus {outline:0;}
 .date{
   display: inline-block;
 }
-
 
 /**************   Main  **************/
 

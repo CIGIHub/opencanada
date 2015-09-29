@@ -9,6 +9,8 @@
       padding:0 20px;
     }
 
+
+
     //@media(min-width: $screen-sm){
     //  .feature-text{
     //    padding-left:40px;
@@ -63,6 +65,11 @@
       }
     }
   }
+  h2{
+      font-weight: normal;
+      font-size: 18px;
+      line-height: 135%;
+    }
 
   .block-Paragraph {
     ul li {
@@ -231,7 +238,7 @@ article {
   }
 
   .top-link {
-      color: $topic-link-color;
+      color: $top-link-color;
       text-align: right;
       display: block;
       margin-right: 10%;
@@ -295,8 +302,15 @@ article {
       width: 20px;
       margin-left: 5px;
       display:inline-block;
+      color: $share-link-color;
       span:hover{
-        color: $text-link-hover-color;
+        color: $share-link-hover-color;
+      }
+      a{
+        color: $share-link-color;
+        &:hover{
+          color: $share-link-hover-color;
+        }
       }
     }
     i {
@@ -407,7 +421,7 @@ article {
     }
 
     .photo-zoom {
-      color: #bf1e2e;
+      color: $text-link-color;
       position: absolute;
       top: 10px;
       right: 10px;
@@ -418,7 +432,7 @@ article {
   .image-label {
       float: right;
       margin-bottom: 20px;
-      color: #bf1e2e;
+      color: $text-link-color;
       font-family: $sans-serif;
       text-transform: uppercase;
       font-size: 0.9em;
@@ -469,11 +483,11 @@ article {
       width: 33%;
       float: right;
       font-size: 28px;
-      line-height: 120%;
+      line-height: 130%;
       padding: 20px;
       margin: 10px;
-      border-left:5px solid $red;
-      color: $light-grey;
+      color: $article-block-text-color;
+      background: $article-block-bg-color;
   }
 
   @media(max-width: $screen-sm) {
@@ -486,8 +500,8 @@ article {
   }
 
   .block-Quote {
-    border-left: $quote-border;
-    color: $light-grey;
+    border-left: $article-quote-border;
+    color: $article-quote-text-color;
     margin-left: 15%;
     margin-top:20px;
     margin-bottom:20px;
@@ -506,8 +520,8 @@ article {
   .block-Sharable {
     display: table;
     padding: 10px;
-    border-left: solid $red 5px;
-    color: $red;
+    border-left: $article-quote-border;
+    color: $article-shareable-text-color;
 
     .quote, .tweet {
       display: table-cell;
@@ -613,7 +627,7 @@ article {
   .toc {
     font-family: $sans-serif;
     ul {
-      background-color: #f6f6f6;
+      background-color: $article-toc-bg-color;
       padding-top: 30px;
       padding-bottom: 30px;
       padding-left: 40px;
@@ -621,12 +635,18 @@ article {
       margin-left: 0;
 
       li {
-        margin: 3px;
+        a{
+          color: $article-toc-link-color;
+          &:hover{
+            color: $article-toc-link-hover-color;
+            text-decoration: $article-toc-link-underline;
+          }
+        }
 
         i {
-          color: grey;
+          color: $article-block-list-marker-color;
           font-size: 0.75em;
-          padding-right: 5px;
+          padding: 5px 5px 0 0;
         }
       }
     }
@@ -636,6 +656,7 @@ article {
     margin-top: 2em;
     font-family: $sans-serif;
     font-size: 20px;
+    font-weight: 500;
   }
 
   .chapter h3 {
@@ -646,7 +667,7 @@ article {
   }
 
   .modal-link {
-    color: $red;
+    color: $text-link-color;
   }
 }
 
@@ -660,17 +681,16 @@ article {
 
 .in-the-series, .related-articles, .newsletter-list{
   margin: 20px 0;
+  color: $article-teaser-color;
 
   h2{
-    @include subheading
+    @include subheading;
   }
   h3{
     margin: 0 0 5px 0;
     font-size: 21px;
     font-weight: 900;
-    a{
-      color: black;
-    }
+
   }
   .series-teaser{
     padding-bottom: 20px;

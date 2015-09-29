@@ -1,17 +1,44 @@
 $body-bg-color: #000;
+
 $text-color: #fff;
 $text-link-color: #929191;
+$text-link-hover-color: $text-color;
 
-$border-grey: solid 1px #929191 ;
-$blurb-author-link-color:#fff;
+$subheading-color: $text-color;
+$article-list-link-color: $text-color;
+
+$header-bg-color: $body-bg-color;
+
+$footer-bg-color: $body-bg-color;
+$footer-text-color: $text-color;
+$footer-link-color: $text-color;
+
+$border-grey: solid 1px $text-link-color;
+
+$topic-link-color: $text-color;
+
+$blurb-author-link-color: $text-color;
 $blurb-link-color: $text-link-color;
 $blurb-bio-text-color: $text-link-color;
+$blurb-border: $border-grey !default;
 
-$caption-color: $text-link-color;
+$article-block-bg-color: #afafaf;
+$article-block-text-color: $text-color;
+$article-block-link-color: $text-color;
+$article-block-list-marker-color: $text-color;
 
-$pull-quote-border: $text-link-color;
-$quote-bg:$text-link-color;
+$article-quote-border-color: $text-link-color;
 
-$topic-link-color: #fff;
+$article-toc-bg-color: $article-block-bg-color;
+$article-toc-link-color: $text-color;
+$article-toc-link-hover-color: $text-link-hover-color;
+$article-toc-link-underline: underline;
 
-$textalternate :#929191;
+$article-teaser-color: $text-link-color;
+
+$share-link-color: $text-color;
+$share-link-hover-color: $text-link-hover-color;
+$share-link-hover-underline: underline;
+
+$article-shareable-text-color: $text-color;
+$top-link-color: $text-link-color;
