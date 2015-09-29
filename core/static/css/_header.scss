@@ -9,6 +9,19 @@ header{
   color: $header-text-color;
   background: $header-bg-color;
   transition: height 0.3s, background 1s;
+<<<<<<< HEAD
+=======
+
+  &.transparency {
+    background: transparent;
+    position: absolute;
+
+    .wordmark a {
+      color:rgba(255,255,255,0.5);
+      transition: color 1s;
+    }
+  }
+>>>>>>> f48c72c2d764d5ecbb03889ad8726f9279f33a51
 
   &.scrolled {
     background: #000;
