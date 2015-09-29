@@ -377,6 +377,8 @@ class PageLayoutOptions(models.Model):
     include_main_image = models.BooleanField(default=True)
     include_main_image_overlay = models.BooleanField(default=False, help_text="Check to use a full-bleed image layout.",
                                                      verbose_name="Use Main Image Full-Bleed Layout")
+    include_caption_in_footer = models.BooleanField(default=False, help_text="Check to display the image caption in the footer.",
+                                                    verbose_name="Show caption in footer")
     full_bleed_image_size = models.PositiveSmallIntegerField(default=75,
                                                              help_text="Enter a value from 0 - 100, indicating the percentage of the screen to use for the full-bleed image layout. This value is only used if 'Use Main Image Full-Bleed Layout' is checked.")
 
@@ -592,6 +594,7 @@ class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, Sharelinks, Pag
                 FieldPanel('include_main_image'),
                 FieldPanel('include_main_image_overlay'),
                 FieldPanel('full_bleed_image_size'),
+                FieldPanel('include_caption_in_footer'),
             ],
             heading="Main Image"
         ),
@@ -989,6 +992,7 @@ class SeriesPage(ThemeablePage, FeatureStyleFields, Promotable, Sharelinks, Page
                 FieldPanel('include_main_image'),
                 FieldPanel('include_main_image_overlay'),
                 FieldPanel('full_bleed_image_size'),
+                FieldPanel('include_caption_in_footer'),
             ],
             heading="Main Image"
         ),

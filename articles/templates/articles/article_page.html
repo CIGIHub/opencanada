@@ -103,6 +103,14 @@
                     </div>
                 {% endif %}
 
+                 {% if self.main_image and self.include_caption_in_footer %}   
+                    <div class="feature-caption">
+                        {% if self.main_image.credit %}
+                            {{ self.main_image.credit }}
+                        {% endif %}
+                    </div>
+                    <div class="clear"></div>
+                {% endif %}
                 <div class="home-link"><a href="/"><img src="{% static 'img/opencanada-mark.png' %}"></a></div>
             </div>
 
