@@ -1,0 +1,12 @@
+header{
+  &.transparency {
+    background: transparent !important;
+    transition: background 0s !important;
+    position: absolute;
+
+    .wordmark a {
+      color:rgba(255,255,255,0.5);
+      transition: color 1s;
+    }
+  }
+}
