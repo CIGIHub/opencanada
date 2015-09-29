@@ -1,15 +1,19 @@
 /**************   FOOTER  **************/
 
 footer{
-  color: $black;
+  color: $footer-text-color;
   font-family: $sans-serif;
-  background: $white;
+  background: $footer-bg-color;
   padding-bottom: 40px;
   font-size: 14px;
   line-height: 120%;
 
   a{
-    color: $black;
+    color: $footer-link-color;
+
+    &:hover {
+      color: $footer-link-hover-color;
+    }
   }
 
   h3{
