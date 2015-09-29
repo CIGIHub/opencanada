@@ -15,10 +15,12 @@
     </div>
 
 </div>
-<div class="feature-caption">
-    <i class="fa fa-camera"></i>
-    {% if self.main_image.credit %}
-        {{ self.main_image.credit }}
-    {% endif %}
-</div>
+{% if not self.include_caption_in_footer %}
+    <div class="feature-caption">
+        <i class="fa fa-camera"></i>
+        {% if self.main_image.credit  %}
+            {{ self.main_image.credit }}
+        {% endif %}
+    </div>
+ {% endif %}
 <div class="clear"></div>
