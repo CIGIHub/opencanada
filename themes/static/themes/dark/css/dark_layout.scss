@@ -8,13 +8,6 @@ header {
 	&.notscrolled {
 		background: $body-bg-color;
 	}
-
-	&.transparency {
-		.wordmark a:hover {
-			color:$text-color;
-			transition:color 1s;
-		}
-	}
 }
 
 footer {
