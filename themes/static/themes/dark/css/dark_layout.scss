@@ -5,6 +5,10 @@ body {
 header {
 	background: $body-bg-color;
 
+	&.notscrolled {
+		background: $body-bg-color;
+	}
+
 	&.transparency {
 		.wordmark a:hover {
 			color:$text-color;
