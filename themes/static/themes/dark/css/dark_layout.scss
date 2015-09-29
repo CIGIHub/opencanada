@@ -26,9 +26,11 @@ footer {
 }
 
 .template-article-page, .template-chaptered-article-page, .template-series-page {
-	.feature-caption {
-		float: none;
-		text-align: center;
+	footer {
+		.feature-caption {
+			float: none;
+			text-align: center;
+		}
 	}
 }
 
