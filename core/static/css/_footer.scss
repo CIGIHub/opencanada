@@ -97,6 +97,32 @@ footer{
     }
   }
 
+  @media(min-width: $screen-xs) and (max-width: $screen-sm -1) { 
+    .row.infobar .col-sm-4:last-child {
+      .newsletter-form, .follow {
+        display: block;
+        float: left;
+        width:50%;
+        padding-right:20px;
+      }
+
+      .follow {
+        padding-right:0;
+        padding-left:20px;
+
+        h3 {
+          float: none;
+          margin:0;
+        }
+
+        ul {
+          display: block;
+          padding-left: 0;
+        }
+      }
+    }
+  }
+
   .partner{
     text-align: center;
     padding: 0 0 20px 0;

@@ -1,9 +1,6 @@
 /**************  Newsletter  **************/
 .newsletter-form{
-  background: $mid-grey;
-  padding: 5px;
-  margin-bottom: 2em;
-
+  
   ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
   color:   $text-color;
   }
@@ -21,6 +18,10 @@
 
   #mc_embed_signup{
     font-family: $sans-serif;
+    background: $mid-grey;
+    padding: 5px;
+    margin-bottom: 2em;
+
     form{
       padding: 0px;
     }
