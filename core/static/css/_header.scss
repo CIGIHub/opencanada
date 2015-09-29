@@ -11,7 +11,8 @@ header{
   transition: height 0.3s;
 
   &.transparency {
-    background: transparent;
+    background: transparent !important;
+    transition: background 0s !important;
     position: absolute;
 
     .wordmark a {

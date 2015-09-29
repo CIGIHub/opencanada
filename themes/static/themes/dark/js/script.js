@@ -6,8 +6,12 @@ jQuery(document).ready(function() {
 	    updateHeaderTransparency();
 	});
 
+    $(window).resize(function(){
+        updateHeaderTransparency();
+    });
+
     function updateHeaderTransparency() {
-    	if ($('header').hasClass('collapsed')) {
+    	if ($('header').hasClass('scrolled')) {
 	        transparencyOff();
 	    } else if ($('.jumbotron').length && !$("body").hasClass("template-home-page")) {
 	         transparencyOn();
