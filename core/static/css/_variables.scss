@@ -5,7 +5,7 @@ $black: #000000;
 $blue: #0098FD;
 $grey: #666;
 $light-grey: #a5a5a5;
-$mid-grey: #ccc;
+$mid-grey: #d6d6d6;
 $background-grey: #f3f0f0;
 
 //screen settings
@@ -52,6 +52,7 @@ $twitter-blue: #0cf;
 //borders
 $border-black: solid 1px $black;
 $border-grey: solid 1px #ccc !default;
+$border-light-grey: solid 1px #efefef !default;
 $border-red: solid 1px $red;
 $border-white: solid 1px $white;
 
