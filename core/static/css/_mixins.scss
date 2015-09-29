@@ -26,6 +26,9 @@
 @mixin article-list-title{
   font-size: 22px;
   font-weight: 900;
+  a{
+      color: $article-list-link-color;
+  }
 }
 
 @mixin article-overlay-title{
@@ -306,7 +309,7 @@
   }
   .feature-line, h2{
     font-size: 18px;
-    line-height: 120%;
+    line-height: 135%;
   }
   @media(max-width: $screen-md){
     h1{

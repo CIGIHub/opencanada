@@ -5,6 +5,7 @@ html {
 }
 
 body{
+  background: $body-bg-color;
   color: $text-color;
   font-family: $serif;
   font-weight: $body-font-weight;
@@ -59,7 +60,7 @@ p{
 }
 
 a{
-  color: $text-color;
+  color: $text-link-color;
   text-decoration: none;
   outline:none;
 
@@ -120,9 +121,9 @@ button:focus {outline:0;}
 /**************   FOOTER  **************/
 
 footer{
-  color: white;
+  color: $footer-text-color;
   font-family: $sans-serif;
-  background: $light-grey;
+  background: $footer-bg-color;
   padding-bottom: 40px;
   font-size: 14px;
   line-height: 120%;

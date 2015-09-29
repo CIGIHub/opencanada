@@ -15,7 +15,15 @@ $screen-tiny-max: 360px;
 $grid-float-breakpoint: $screen-md-min;
 $breakpoint: 1000px; //to match the javascript breakpoint variable.
 
+//borders
+$border-black: solid 1px $black;
+$border-grey: solid 1px #ccc !default;
+$border-red: solid 1px $red;
+$border-white: solid 1px $white;
+
+
 //body font
+$body-bg-color: #fff !default;
 $serif: 'Libre Baskerville', Georgia, serif !default;
 $sans-serif: proxima-nova, Helvetica, sans-serif !default;
 $font-size-base: 15px !default;
@@ -23,46 +31,70 @@ $body-font-weight: 300 !default;
 $body-font-line-height: 165% !default;
 $text-color: #333 !default;
 $text-link-color: $red !default;
-$text-link-hover-color: $text-link-color !default;
+$text-link-hover-color: $text-color !default;
 
 $overlay-text-color: #fff !default;
 $overlay-link-color: #fff !default;
 
-$topic-link-color: $red !default;
-$blurb-author-link-color: $text-color !default;
-$blurb-link-color: $text-color !default;
-$blurb-bio-text-color: #666 !default;
+$footer-bg-color: $light-grey !default;
+$footer-text-color: #fff !default;
+$footer-link-color: #fff !default;
+$footer-link-hover-color: $red !default;
 
+$header-bg-color: $red !default;
+$header-collapsed-bg-color: #000 !default;
+$header-text-color: #fff !default;
+$header-link-color: #fff !default;
+$header-link-hover-color: #000 !default;
 
 //text colors
 $heading-color: #000 !default;
 $subheading-color: #999999 !default;
-$caption-color: #929191 !default;
-$text-link-color: $red !default;
+$article-list-link-color: $text-color !default;
 
+$caption-color: #929191 !default;
+
+//buttons and pagers
 $button-text-color: $white !default;
 $button-text-hover-color: $white !default;
 $button-bg-color: $red !default;
 $button-bg-hover-color: $black !default;
 
-$header-color: $red !default;
-$header-hover-color: $black !default;
+//article elements
+$topic-link-color: $red !default;
 
-$twitter-blue: #0cf;
-//borders
-$border-black: solid 1px $black;
-$border-grey: solid 1px #ccc !default;
-$border-red: solid 1px $red;
-$border-white: solid 1px $white;
+$blurb-author-link-color: $text-color !default;
+$blurb-link-color: $text-color !default;
+$blurb-bio-text-color: #666 !default;
+$blurb-border-color: $border-grey !default;
+$blurb-border: solid 1px $blurb-border-color !default;
+
+$article-block-bg-color: #f6f6f6 !default;
+$article-block-text-color: $text-color !default;
+$article-block-link-color: $red !default;
+$article-block-list-marker-color: $grey !default;
+
+$article-quote-border-color: $red !default;
+$article-quote-border: solid 5px $article-quote-border-color !default;
+$article-quote-text-color: $light-grey !default;
+
+$article-shareable-text-color: $red !default;
+
+$article-toc-bg-color: $article-block-bg-color !default;
+$article-toc-link-color: $text-link-color !default;
+$article-toc-link-hover-color: $text-link-hover-color !default;
+$article-toc-link-underline: none !default;
+$article-teaser-color: $text-color !default;
+
+$top-link-color: $red !default;
+
+$share-link-color: $text-link-color !default;
+$share-link-hover-color: $text-link-hover-color !default;
+
+$badge-color: $blue !default;
 
 $row-border: $border-grey !default;
-$blurb-border: $border-grey !default;
-$pull-quote-bg: $border-grey !default;
-$quote-border: $red !default;
-$list-border: $border-grey !default;
 
-
-$highlight-button-color: $blue !default;
 
 //bootstrap overrides
 $input-border-focus: $red !default;

@@ -1,10 +1,4 @@
-body {
-	background: $body-bg-color;
-}
-
 header {
-	background: $body-bg-color;
-
 	&.transparency {
 		.wordmark a:hover {
 			color:$text-color;
@@ -14,66 +8,17 @@ header {
 }
 
 footer {
-	background: $body-bg-color;
-	color:$text-color;
 	padding-top:20px;
-
 	.container {
 		padding-top:20px;
 		border-top:1px solid $text-color;
 	}
-
-	a:hover {
-		color:$text-color;
-	}
 }
 
 article {
-
 	.home-link img {
 		filter: grayscale(1) brightness(10);
 		-webkit-filter: grayscale(1) brightness(10);
-	}
-
-	.toc ul {
-		background-color: $textalternate;
-		border-top:5px solid $textalternate;
-		border-bottom:5px solid $textalternate;
-		padding-top:20px;
-		padding-bottom: 20px;
-		margin-top:10px;
-
-		li {
-			a, i {
-				color:$text-color;
-			}
-		}
-	}
-
-	.top-link {
-		color:$textalternate;
-	}
-
-	.modal-link  {
-		color:$textalternate;
-	}
-	.image-label  {
-		color:$textalternate;
-	}
-
-	/*------- series page styling --------*/
-	.in-the-series {
-		h2 {
-			color:$text-color;
-		}
-
-		h3 a {
-			color: $text-color;
-		}
-
-		.rich-text {
-			color:$textalternate;
-		}
 	}
 }
 
