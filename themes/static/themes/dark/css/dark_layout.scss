@@ -8,13 +8,6 @@ header {
 	&.notscrolled {
 		background: $body-bg-color;
 	}
-
-	&.transparency {
-		.wordmark a:hover {
-			color:$text-color;
-			transition:color 1s;
-		}
-	}
 }
 
 footer {
@@ -29,6 +22,15 @@ footer {
 
 	a:hover {
 		color:$text-color;
+	}
+}
+
+.template-article-page, .template-chaptered-article-page, .template-series-page {
+	footer {
+		.feature-caption {
+			float: none;
+			text-align: center;
+		}
 	}
 }
 
