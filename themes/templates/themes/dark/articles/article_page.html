@@ -17,7 +17,7 @@
 {% block content %}
 
     {% if self.main_image and self.include_main_image_overlay %}
-        {% include 'themes/dark/articles/article-feature.html' with metadata='articles/includes/article-metadata.html' %}
+        {% include 'articles/includes/article-feature.html' with metadata='articles/includes/article-metadata.html' %}
     {% endif %}
 
     <div id="article-page" class="container">
@@ -60,6 +60,7 @@
                         </section>
                     {% endif %}
                 {% endfor %}
+
                 <div class="home-link"><a href="/"><img src="{% static 'img/opencanada-mark.png' %}"></a></div>
             </div>
 
