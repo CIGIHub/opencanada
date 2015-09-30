@@ -488,6 +488,8 @@ article {
       margin: 10px;
       color: $article-block-text-color;
       background: $article-block-bg-color;
+      border-left:$article-block-border-width solid $article-block-border-color;
+      
   }
 
   @media(max-width: $screen-sm) {
@@ -628,6 +630,9 @@ article {
     font-family: $sans-serif;
     ul {
       background-color: $article-toc-bg-color;
+      border-top:$article-toc-border-width solid $article-toc-border-color;
+      border-bottom:$article-toc-border-width solid $article-toc-border-color;
+      
       padding-top: 30px;
       padding-bottom: 30px;
       padding-left: 40px;

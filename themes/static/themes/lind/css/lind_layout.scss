@@ -79,8 +79,10 @@ article {
 		}
 	}
 
-	.block-PullQuote {
-		border-left:3px solid $dark-blue;
+	.toc ul {
+ 		padding-top:20px;
+		padding-bottom: 20px;
+		margin-top:10px;
 	}
 
 	.block-Quote, .block-Sharable {
@@ -89,18 +91,6 @@ article {
 
 	.blurb-content .author {
 		font-weight: 500;
-	}
-}
-
-.template-article-page, .template-article-page, .template-chaptered-article-page {
-	.feature-caption {
-		.fa-camera:hover, .fa-camera.highlighted{
-			color:$dark-blue;
-		}
-	}
-
-	.main-feature .primary-topic a {
-		font-weight: 700;
 	}
 }
 
@@ -115,6 +105,21 @@ a {
 		font-weight: 700;
 		font-size: 1.1em;
 		line-height: 2.2em;
+	}
+
+	.feature-caption {
+		.fa-camera:hover, .fa-camera.highlighted{
+			color:$dark-blue;
+		}
+	}
+
+	.main-feature {
+		.primary-topic a {
+			font-weight: 700;
+		}
+		.type a {
+			font-weight: 700;
+		}
 	}
 }
 
