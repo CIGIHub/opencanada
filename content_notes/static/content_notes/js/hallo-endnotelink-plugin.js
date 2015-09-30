@@ -1,6 +1,6 @@
 (function () {
     (function ($) {
-        return $.widget('IKS.hallomodallink', {
+        return $.widget('IKS.halloendnotelink', {
             options: {
                 uuid: '',
                 editable: null
@@ -21,7 +21,7 @@
                 button.hallobutton({
                     uuid: this.options.uuid,
                     editable: this.options.editable,
-                    label: 'Pop-Up Image Link',
+                    label: 'Pop-Up End Note Link',
                     icon: 'fa fa-external-link-square',
                     command: null,
                     queryState: function(event) {
@@ -41,29 +41,30 @@
 
                         lastSelection = widget.options.editable.getSelection();
                         if (lastSelection.collapsed) {
-                            url = window.chooserUrls.imageChooser + '?prompt_for_link_text=true';
+                            url = window.chooserUrls.endNoteChooser;
                         } else {
-                            url = window.chooserUrls.imageChooser;
+                            url = window.chooserUrls.endNoteChooser;
                         }
                     }
 
                     return ModalWorkflow({
                         url: url,
                         responses: {
-                            imageChosen: function(imageData) {
+                            endnoteChosen: function(itemData) {
                                 var elem;
 
-                                elem = document.createElement('span');
+                                elem = document.createElement('sup');
                                 elem.setAttribute('data-toggle', 'modal');
-                                if (imageData.id){
-                                    elem.setAttribute('data-target', '#photoModal' + imageData.id);
+                                if (itemData.id){
+                                    elem.setAttribute('data-target', '#endNoteModal' + itemData.id);
+                                    elem.setAttribute('data-reference', itemData.id);
                                 }
-                                $(elem).addClass('modal-link clickable');
+                                $(elem).addClass('modal-link clickable endnote-link');
 
                                 if ((!lastSelection.collapsed) && lastSelection.canSurroundContents()) {
                                     lastSelection.surroundContents(elem);
                                 } else {
-                                    elem.appendChild(document.createTextNode(imageData.title));
+                                    elem.appendChild(document.createTextNode("endnote"));
                                     lastSelection.insertNode(elem);
                                 }
 

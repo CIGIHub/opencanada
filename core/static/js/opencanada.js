@@ -10,6 +10,7 @@ jQuery(document).ready(function() {
     FeatureStyles.FeatureImages.initialize();
     FeatureStyles.ImageFeature.initialize();
     FeatureStyles.RelatedArticles.initialize();
+    FeatureStyles.EndNotes.initialize();
 
     Search.Structure.initialize();
 

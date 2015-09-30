@@ -173,5 +173,14 @@ var FeatureStyles = FeatureStyles || {
 
             }
         },
+        EndNotes:{
+            initialize: function(){
+                $(".endnote-link").each(function(index, elem){
+                    reference_id = $(elem).data("reference");
+                    label_text = $("#" + reference_id + " .identifier");
+                    $(elem).text(label_text.text());
+                })
+            }
+        }
 
     };

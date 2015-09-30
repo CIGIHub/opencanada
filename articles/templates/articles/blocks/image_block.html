@@ -1,6 +1,6 @@
 {% load wagtailimages_tags %}
 {% if self.expandable %}
-<div class="modal fade" id="photoModel{{ self.image.id }}">
+<div class="modal fade" id="photoModal{{ self.image.id }}">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
         <div class="modal-header">
@@ -16,14 +16,14 @@
             <div class="image-label">{{ self.label }}</div>
         {% endif %}
       </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+    </div>
+  </div>
+</div>
 {% endif %}
 <div class="image-wrapper {% if self.placement == 'left' %} left-aligned{% elif self.placement == 'right' %} right-aligned{% elif self.placement == 'full' %}full-width {% elif self.placement == 'editorial' %} full-width-editorial{% endif %}">
   <div
           class="image"
-          {% if self.expandable %}data-toggle="modal" data-target="#photoModel{{ self.image.id }}"{% endif %}
+          {% if self.expandable %}data-toggle="modal" data-target="#photoModal{{ self.image.id }}"{% endif %}
           >
       {% if self.placement == 'left' or self.placement == 'right' %}
           {% image self.image width-350 %}
@@ -37,7 +37,7 @@
 
   </div>
   {% if self.label %}
-          <div class="image-label{% if self.expandable %} clickable{% endif %}"{% if self.expandable %} data-toggle="modal" data-target="#photoModel{{ self.image.id }}" {% endif %}>{{ self.label }}</div>
+          <div class="image-label{% if self.expandable %} clickable{% endif %}"{% if self.expandable %} data-toggle="modal" data-target="#photoModal{{ self.image.id }}" {% endif %}>{{ self.label }}</div>
           <div class="clear"></div>
       {% endif %}
 </div>
