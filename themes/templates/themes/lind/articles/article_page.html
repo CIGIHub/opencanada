@@ -21,6 +21,10 @@
 </script>
 {% endblock %}
 
+{% block header %}
+    {% include 'themes/lind/lind_header.html' with tagline=true %}
+{% endblock %}
+
 {% block content %}
 
     {% if self.main_image and self.include_main_image_overlay %}
