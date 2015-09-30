@@ -179,11 +179,19 @@ article .title,
 
         .contributors{
           display: block;
-          color: $light-grey;
+          color: $related-contributors-color;
           margin-bottom: 0;
 
+          .contributor-label {
+            color: $related-contributors-color;
+          }
+
           a {
-            color: $light-grey;
+            color: $related-contributors-color;
+
+            &:hover {
+              color: $related-contributors-hover-color;
+            }
           }
         }
       }

@@ -38,26 +38,14 @@
 	}
 }
 
+/******** Main overrides *******/
+a {
+	font-weight: 500;
+}
 
-/******** Overrides ********/
 .contributors {
 	a {
 		font-weight: 300;
-	}
-}
-
-.block-RelatedItems ul.item_list li .item_content .contributors {
-
-	a {
-		color:$grey;	
-
-		&:hover {
-			color:$dark-blue;
-		}
-	}
-
-	.contributor-label {
-		color:$grey;
 	}
 }
 
@@ -67,11 +55,6 @@ article {
 	}
 }
 
-
-/******** Main overrides *******/
-a {
-	font-weight: 500;
-}
 
 .template-article-page, .template-chaptered-article-page, .template-series-page {
 	h2 {
@@ -91,7 +74,7 @@ a {
 }
 
 .feature-image-overlay {
-	background-color: $blue !important;
+	background-color: $blue-overlay !important;
 }
 
 /******** Header styling ********/
@@ -101,9 +84,7 @@ header {
 		@include ubc;
 
 		.courses a {
-			color:$lighter-grey;
-
-			
+			color:$lighter-grey;		
 		}
 	}
 
