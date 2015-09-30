@@ -41,19 +41,12 @@
 
 /******** Overrides ********/
 .contributors {
-	.contributor-label {
-		color:$white;
-	}
-
 	a {
 		font-weight: 300;
 	}
 }
 
 .block-RelatedItems ul.item_list li .item_content .contributors {
-	.contributor-label {
-		color:$text-color;
-	}
 
 	a {
 		color:$grey;	
@@ -61,6 +54,10 @@
 		&:hover {
 			color:$dark-blue;
 		}
+	}
+
+	.contributor-label {
+		color:$grey;
 	}
 }
 
@@ -85,10 +82,6 @@ article {
 		margin-top:10px;
 	}
 
-	.block-Quote, .block-Sharable {
-		border-left-width: 3px;
-	}
-
 	.blurb-content .author {
 		font-weight: 500;
 	}
@@ -107,12 +100,6 @@ a {
 		line-height: 2.2em;
 	}
 
-	.feature-caption {
-		.fa-camera:hover, .fa-camera.highlighted{
-			color:$dark-blue;
-		}
-	}
-
 	.main-feature {
 		.primary-topic a {
 			font-weight: 700;
@@ -129,12 +116,6 @@ a {
 
 /******** Header styling ********/
 header {
-	background: $dark-blue;
-
-	&.notscrolled {
-		background: $dark-blue;
-
-	}
 
 	.ubc {
 		@include ubc;

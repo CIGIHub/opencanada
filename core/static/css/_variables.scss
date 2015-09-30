@@ -2,7 +2,6 @@
 $red: #bf1e2e;
 $white: #ffffff;
 $black: #000000;
-$blue: rgba(0,152,253,0.45);
 $grey: #666;
 $light-grey: #a5a5a5;
 $mid-grey: #d6d6d6;
@@ -78,8 +77,9 @@ $article-block-text-color: $text-color !default;
 $article-block-link-color: $red !default;
 $article-block-list-marker-color: $grey !default;
 
+$article-quote-border-width: 5px !default;
 $article-quote-border-color: $red !default;
-$article-quote-border: solid 5px $article-quote-border-color !default;
+$article-quote-border: solid $article-quote-border-width $article-quote-border-color !default;
 $article-quote-text-color: $light-grey !default;
 
 $article-shareable-text-color: $red !default;
@@ -92,12 +92,16 @@ $article-toc-link-hover-color: $text-link-hover-color !default;
 $article-toc-link-underline: none !default;
 $article-teaser-color: $text-color !default;
 
+$article-citation-color:$light-grey !default;
+$article-end-notes-color:$light-grey !default;
+
+$contributor-label-color: $caption-color !default;
 $top-link-color: $red !default;
 
 $share-link-color: $text-link-color !default;
 $share-link-hover-color: $text-link-hover-color !default;
 
-$badge-color: $blue !default;
+//$badge-color: $blue !default;
 
 $row-border: $border-grey !default;
 

@@ -594,7 +594,7 @@ article {
   }
 
   .end-notes {
-    color: $light-grey;
+    color: $article-end-notes-color;
     padding-left:0;
 
     li {
@@ -622,7 +622,7 @@ article {
   }
 
   .citation{
-    color: $light-grey;
+    color: $article-citation-color;
     margin-bottom: 10px;
   }
 
