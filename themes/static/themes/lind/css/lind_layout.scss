@@ -1,5 +1,81 @@
+/******** Color overrides ********/
+.block-RelatedItems ul.item_list li .item_content .contributors {
+	.contributor-label {
+		color:$grey;
+	}
+
+	a {
+		color:$grey;	
+	}
+}
+
+article {
+	.topics ul li {
+		a, a:after {
+			color: $dark-blue;
+		}
+	}
+
+	.block-PullQuote {
+		border-left:1px solid $dark-blue;
+	}
+}
 
 
+/******** Main overrides *******/
+
+.template-article-page, .template-chaptered-article-page, .template-series-page {
+	h2 {
+		font-weight: 700;
+		font-size: 1.1em;
+		line-height: 2.2em;
+	}
+}
+
+
+/******** Footer styling ********/
+
+
+footer {
+	.container {
+		border-top:1px solid $dark-blue;
+	}
+
+	.ubc {
+		text-align: center;
+
+		a {
+			font-weight: 600;
+			font-size: 16px;
+			text-transform: uppercase;
+			padding: 0 1em;
+			display: inline-block;
+			border-right: 1px solid $mid-grey;
+
+			img {
+				max-height: 34px;
+				display: inline-block;
+				padding-right:1em;
+			}
+		}
+
+		.courses {
+			a {
+				font-weight: 300;
+				border-right: 0;
+			}
+		}
+	}
+
+	.opencanada {
+		text-align: center;
+
+		img {
+			max-height: 18px;
+			display: inline-block;
+		}
+	}
+}
 
 
 
