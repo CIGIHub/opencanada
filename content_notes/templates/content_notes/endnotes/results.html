@@ -1,0 +1,24 @@
+{% load i18n %}
+{% if items %}
+    {% if is_searching %}
+        <h2>
+        {% blocktrans count counter=items.paginator.count %}
+            There is one match
+        {% plural %}
+            There are {{ counter }} matches
+        {% endblocktrans %}
+        </h2>
+    {% endif %}
+
+    {% include "content_notes/endnotes/list.html" %}
+
+    {% url 'content_notes:list' as endnotes_list_url %}
+    {% include "wagtailadmin/shared/pagination_nav.html" with items=items is_searching=is_searching linkurl=endnotes_list_url %}
+{% else %}
+    {% if is_searching %}
+         <p>{% blocktrans %}Sorry, no end notes match "<em>{{ query_string }}</em>"{% endblocktrans %}</p>
+    {% else %}
+
+        <p class="no-results-message">{% blocktrans %}No end notes have been created.{% endblocktrans %}</p>
+    {% endif %}
+{% endif %}

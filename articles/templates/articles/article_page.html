@@ -105,22 +105,13 @@
                 </div>
             {% endif %}
 
-            {% if self.endnote_links.all %}
-                <div class="container">
-                    <div class="block-end-notes">
-                        {% if self.endnotes_heading %}
-                        <h2>{{ self.endnotes_heading }}</h2>
-                        {% endif %}
-                        <ul class="end-notes">
-                            {% for endnote in self.endnote_links.all %}
-                                <li class="end-note"><span id="end-note-{{ endnote.id }}" class="identifier">{% if self.endnote_identifier_style == "roman-lower" %}{{ forloop.counter|romanize }}{% elif self.endnote_identifier_style == "roman-upper" %}{{ forloop.counter|romanize|upper }}{% else %}{{ forloop.counter }}{% endif %}</span><span
-                                        class="note">{{ endnote.text|richtext }}</span></li>
 
-                            {% endfor %}
-                        </ul>
+                {% if self.endnote_links.all %}
+                     <div class="container">
+                    {% include 'articles/includes/end_notes.html' %}
                     </div>
-                </div>
-            {% endif %}
+                {% endif %}
+
 
              {% if self.main_image and self.include_caption_in_footer %}
                  <div class="container">

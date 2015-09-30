@@ -19,7 +19,6 @@ from wagtail.contrib.wagtailroutablepage.models import RoutablePageMixin, route
 from wagtail.wagtailadmin.edit_handlers import (FieldPanel, InlinePanel,
                                                 MultiFieldPanel, ObjectList,
                                                 PageChooserPanel,
-                                                RichTextFieldPanel,
                                                 StreamFieldPanel,
                                                 TabbedInterface)
 from wagtail.wagtailcore.fields import RichTextField, StreamField
@@ -625,33 +624,8 @@ class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, Sharelinks, Pag
     ])
 
 
-class EndNote(Orderable):
-    text = RichTextField()
-    article = ParentalKey(
-        "ArticlePage",
-        related_name='endnote_links'
-    )
-
-    panels = [
-        RichTextFieldPanel('text'),
-    ]
-
-
-class Citation(Orderable):
-    text = RichTextField()
-    article = ParentalKey(
-        "ArticlePage",
-        related_name='citation_links'
-    )
-
-    panels = [
-        RichTextFieldPanel('text'),
-    ]
-
-
 # TODO: remove once content is migrated to ArticlePages.
 class ChapteredArticlePage(ArticlePage):
-    # chapters = article_fields.ChapterField(blank=True, null=True)
     works_cited = StreamField(
         block_types=[
             ('citation', article_fields.CitationBlock()),

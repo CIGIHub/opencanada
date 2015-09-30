@@ -1,0 +1,41 @@
+{% extends "wagtailadmin/base.html" %}
+{% load i18n %}
+{% block titletag %}End Notes{% endblock %}
+
+{% block extra_js %}
+    <script>
+        window.headerSearch = {
+            url: "{% url 'content_notes:list' %}",
+            termInput: "#id_q",
+            targetOutput: "#content_notes-results"
+        }
+    </script>
+{% endblock %}
+
+{% block content %}
+
+    <header class="nice-padding">
+        <div class="row row-flush">
+            <div class="left col9">
+                <h1 class="icon icon-snippet">End Notes</span>{% endblocktrans %}</h1>
+
+                {% if is_searchable %}
+                    <form class="col search-form" action="{% url 'content_notes:list' content_type.app_label content_type.model %}" method="get">
+                        <ul class="fields">
+                            {% for field in search_form %}
+                                {% include "wagtailadmin/shared/field_as_li.html" with field=field field_classes="field-small iconfield" input_classes="icon-search" %}
+                            {% endfor %}
+                            <li class="submit visuallyhidden"><input type="submit" value="Search" class="button" /></li>
+                        </ul>
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+
+    <div class="nice-padding">
+        <div id="endnotes-results" class="endnotes">
+            {% include "content_notes/endnotes/results.html" %}
+        </div>
+    </div>
+{% endblock %}
