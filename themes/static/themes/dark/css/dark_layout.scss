@@ -1,8 +1,6 @@
 
 
 footer {
-	padding-top:20px;
-
 	.contact {
 		padding-top: 20px;
 		border-top:1px solid $text-color;
@@ -22,12 +20,6 @@ article {
 	.home-link img {
 		filter: grayscale(1) brightness(10);
 		-webkit-filter: grayscale(1) brightness(10);
-	}
-
-	.toc ul {
- 		padding-top:20px;
-		padding-bottom: 20px;
-		margin-top:10px;
 	}
 }
 

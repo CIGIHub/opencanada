@@ -62,26 +62,6 @@
 }
 
 article {
-	.topics ul li {
-		a {
-			color: $dark-blue;
-
-			&:hover {
-				color:$grey;
-			}
-
-			&:after {
-				color: $dark-blue;
-			}
-		}
-	}
-
-	.toc ul {
- 		padding-top:20px;
-		padding-bottom: 20px;
-		margin-top:10px;
-	}
-
 	.blurb-content .author {
 		font-weight: 500;
 	}

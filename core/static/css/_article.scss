@@ -262,7 +262,7 @@ article {
       float:left;
     }
     @include type($text-color);
-    @include inline-list-divided($topic-link-color);
+    @include inline-list-divided($topic-link-color,12px, $divider-color);
     ul.list-inline {
       padding-left: 68px;
       display: block;
@@ -633,12 +633,10 @@ article {
       border-top:$article-toc-border-width solid $article-toc-border-color;
       border-bottom:$article-toc-border-width solid $article-toc-border-color;
       
-      padding-top: 30px;
-      padding-bottom: 30px;
-      padding-left: 40px;
-      padding-right: 40px;
       margin-left: 0;
-
+      margin-top:10px;
+      padding:20px 40px;
+      
       li {
         a{
           color: $article-toc-link-color;
