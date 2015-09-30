@@ -345,6 +345,8 @@ class FeatureStyleFields(models.Model):
         on_delete=models.SET_NULL
     )
 
+    fullbleed_feature = models.BooleanField(default=False)
+
     image_overlay_color = models.ForeignKey(
         Colour,
         default=1,
@@ -574,6 +576,7 @@ class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, Sharelinks, Pag
                 FieldPanel('sticky_for_type_section'),
                 FieldPanel('editors_pick'),
                 FieldPanel('feature_style'),
+                FieldPanel('fullbleed_feature'),
                 MultiFieldPanel(
                     [
                         FieldPanel('image_overlay_opacity'),
@@ -973,6 +976,7 @@ class SeriesPage(ThemeablePage, FeatureStyleFields, Promotable, Sharelinks, Page
                 FieldPanel('sticky_for_type_section'),
                 FieldPanel('editors_pick'),
                 FieldPanel('feature_style'),
+                FieldPanel('fullbleed_feature'),
                 MultiFieldPanel(
                     [
                         FieldPanel('image_overlay_opacity'),

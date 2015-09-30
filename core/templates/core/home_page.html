@@ -18,13 +18,27 @@
 
 
 {% block content %}
-    <section class="container features">
+    <section class="features">
         <h2>Most Recent</h2>
 
         {% for row in self.articles %}
-            <div class="row {% if forloop.last %}last{% endif %} {% if row|column_class == 12 %}full-width{% endif %}">
 
             {% for article in row %}
+                {% if article.fullbleed_feature == True and row|column_class == 12 %}
+                    <div class="container-fluid">
+                {% elif row|column_class == 12 %}
+                    <div class="container full-width">
+                {% endif %}
+            {% endfor %}
+
+            {% if row|column_class == 4 %}
+                <div class="container">
+            {% endif %}
+
+            <div class="row {% if forloop.last %}last {% endif %}">
+
+            {% for article in row %}
+
                 <div class="col-sm-{{ row|column_class }} feature-item overlay">
                     {% if article.feature_style.include_image and article.feature_style.overlay_text %}
                         <div class="overlay-feature rowheight-{{ article.feature_style.number_of_rows }}">
@@ -120,7 +134,7 @@
                 </div>
 
                 {% endfor %}
-
+                </div>
             </div>
         {% endfor %}
         <div class="read-more">

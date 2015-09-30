@@ -42,9 +42,11 @@
 
   }
 
-  .row.full-width + .row.full-width{
-    padding-top: 25px;
-    border-top: $row-border;
+  .container.full-width + .container.full-width{
+    .row{
+      padding-top: 25px;
+      border-top: $row-border;
+    }
   }
 
   @media(max-width: $screen-md){
