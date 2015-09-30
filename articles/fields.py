@@ -28,6 +28,7 @@ class BodyField(StreamField):
             ('PullQuote', PullQuoteBlock()),
             ('Quote', SimpleQuoteBlock()),
             ('Overflow', OverflowStreamBlock()),
+            ('FullBleed', FullBleedStreamBlock()),
             ('ColumnedContent', ColumnarStreamBlock()),
             ('Interactive', InteractiveBlock(Interactive, icon="cogs")),
             ('RelatedItems', RelatedItemsBlock()),
@@ -179,8 +180,16 @@ class OverflowStreamBlock(blocks.StructBlock):
         template = "articles/blocks/overflow.html"
 
 
+class FullBleedStreamBlock(blocks.StructBlock):
+    body = ColumnBodyBlock(required=False)
+
+    class Meta:
+        template = "articles/blocks/fullbleed.html"
+
+
 class BodyBlock(SimpleBodyBlock):
     Overflow = OverflowStreamBlock()
+    FullBleed = FullBleedStreamBlock()
     ColumnedContent = ColumnarStreamBlock()
 
 

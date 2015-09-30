@@ -28,7 +28,7 @@
       {% if self.placement == 'left' or self.placement == 'right' %}
           {% image self.image width-350 %}
       {% else %}
-          {% image self.image width-950 %}
+          {% image self.image fill-2048x1200-c100 %}
       {% endif %}
       {% if self.expandable %}<i class="fa fa-search-plus photo-zoom"></i>{% endif %}
       <div class="image-credit">{{ self.image.credit }}</div>
