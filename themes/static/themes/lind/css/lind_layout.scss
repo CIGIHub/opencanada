@@ -1,90 +1,122 @@
-body {
-	background: $body-bg-color;
-}
+@mixin ubc{
+	text-align: center;
 
-header {
-	background: $body-bg-color;
+	a {
+		font-weight: 600;
+		font-size: 16px;
+		text-transform: uppercase;
+		padding: 0 1em;
+		display: inline-block;
+		border-right: 1px solid $mid-grey;
 
-	&.notscrolled {
-		background: $body-bg-color;
-	}
-
-	&.transparency {
-		.wordmark a:hover {
-			color:$text-color;
-			transition:color 1s;
+		img {
+			max-height: 34px;
+			display: inline-block;
+			padding-right:1em;
 		}
 	}
-}
 
-footer {
-	background: $body-bg-color;
-	color:$text-color;
-	
-	.contact {
-		padding-top:20px;
-		margin-top: 20px;
-		border-top:1px solid $text-color;
-	}
+	.courses {
+		a {
+			font-weight: 300;
+			border-right: 0;
 
-	a:hover {
-		color:$text-color;
-	}
-}
-
-article {
-
-	.home-link img {
-		filter: grayscale(1) brightness(10);
-		-webkit-filter: grayscale(1) brightness(10);
-	}
-
-	.toc ul {
-		background-color: $textalternate;
-		border-top:5px solid $textalternate;
-		border-bottom:5px solid $textalternate;
-		padding-top:20px;
-		padding-bottom: 20px;
-		margin-top:10px;
-
-		li {
-			a, i {
-				color:$text-color;
+			&:hover {
+				color:$grey;
 			}
 		}
 	}
 
-	.top-link {
-		color:$textalternate;
-	}
-
-	.modal-link  {
-		color:$textalternate;
-	}
-	.image-label  {
-		color:$textalternate;
-	}
-
-	/*------- series page styling --------*/
-	.in-the-series {
-		h2 {
-			color:$text-color;
+	@media (max-width: $screen-xs) {
+		a {
+			border-right:0;
 		}
 
-		h3 a {
-			color: $text-color;
+		.courses {
+			display: none;
 		}
+	}
+}
 
-		.rich-text {
-			color:$textalternate;
+/******** Main overrides *******/
+a {
+	font-weight: 500;
+}
+
+.contributors {
+	a {
+		font-weight: 300;
+	}
+}
+
+article {
+	.blurb-content .author {
+		font-weight: 500;
+	}
+}
+
+
+.template-article-page, .template-chaptered-article-page, .template-series-page {
+	h2 {
+		font-weight: 700;
+		font-size: 1.1em;
+		line-height: 2.2em;
+	}
+
+	.main-feature {
+		.primary-topic a {
+			font-weight: 700;
+		}
+		.type a {
+			font-weight: 700;
+		}
+	}
+}
+
+.feature-image-overlay {
+	background-color: $blue-overlay !important;
+}
+
+/******** Header styling ********/
+header {
+
+	.ubc {
+		@include ubc;
+
+		.courses a {
+			color:$lighter-grey;		
+		}
+	}
+
+	a {
+		color: $white;
+
+		&:hover {
+			color: $white;
 		}
 	}
 }
 
 
+/******** Footer styling ********/
+footer {
+	.container {
+		border-top:1px solid $dark-blue;
+	}
 
+	.ubc {
+		@include ubc;
+	}
 
+	.opencanada {
+		text-align: center;
 
+		img {
+			max-height: 18px;
+			display: inline-block;
+		}
+	}
+}
 
 
 

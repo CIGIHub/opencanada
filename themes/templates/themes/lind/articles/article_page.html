@@ -3,6 +3,14 @@
 
 {% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
 
+
+
+{% block webfonts %}
+            <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900,300italic,400italic,600italic' rel='stylesheet' type='text/css'>
+            <script src="//use.typekit.net/nat2qtz.js"></script>
+            <script>try{Typekit.load({ async: true });}catch(e){}</script>
+{% endblock %}
+
 {% block theme_css %}
     <link rel="stylesheet" type="text/x-scss" href="{% static 'themes/lind/css/lind.scss' %}">
 {% endblock %}
@@ -11,6 +19,10 @@
 <script>
     FeatureStyles.MainFeatures.setSize({{ self.full_bleed_image_size }});
 </script>
+{% endblock %}
+
+{% block header %}
+    {% include 'themes/lind/lind_header.html' with tagline=true %}
 {% endblock %}
 
 {% block content %}
@@ -59,8 +71,6 @@
                         </section>
                     {% endif %}
                 {% endfor %}
-
-                <div class="home-link"><a href="/"><img src="{% static 'img/opencanada-mark.png' %}"></a></div>
             </div>
 
             {% if self.topics %}
@@ -83,7 +93,7 @@
 {% endblock %}
 
 {% block footer %}
-   {% include 'themes/dark/footer.html' %}
+   {% include 'themes/lind/lind_footer.html' %}
 {% endblock %}
 
 

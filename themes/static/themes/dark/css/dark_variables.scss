@@ -16,23 +16,31 @@ $footer-link-color: $text-color;
 $border-grey: solid 1px $text-link-color;
 
 $topic-link-color: $text-color;
+$divider-color: $text-link-color;
 
 $blurb-author-link-color: $text-color;
 $blurb-link-color: $text-link-color;
 $blurb-bio-text-color: $text-link-color;
 $blurb-border: $border-grey !default;
 
-$article-block-bg-color: #afafaf;
-$article-block-text-color: $text-color;
+$article-block-bg-color: transparent;
+
+$article-block-text-color: $text-link-color;
 $article-block-link-color: $text-color;
-$article-block-list-marker-color: $text-color;
+$article-block-list-marker-color: $text-link-color;
+$article-block-border-width:5px;
+$article-block-border-color:$text-link-color;
+
 
 $article-quote-border-color: $text-link-color;
 
-$article-toc-bg-color: $article-block-bg-color;
-$article-toc-link-color: $text-color;
-$article-toc-link-hover-color: $text-link-hover-color;
+$article-toc-border-width: 3px;
+$article-toc-border-color: $text-link-color;
+$article-toc-bg-color: transparent;
+$article-toc-link-color: $text-link-color;
+$article-toc-link-hover-color: $text-color;
 $article-toc-link-underline: underline;
+
 
 $article-teaser-color: $text-link-color;
 

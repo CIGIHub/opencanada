@@ -158,11 +158,19 @@
 
         .contributors{
           display: block;
-          color: $light-grey;
+          color: $related-contributors-color;
           margin-bottom: 0;
 
+          .contributor-label {
+            color: $related-contributors-color;
+          }
+
           a {
-            color: $light-grey;
+            color: $related-contributors-color;
+
+            &:hover {
+              color: $related-contributors-hover-color;
+            }
           }
         }
       }
@@ -349,7 +357,7 @@ article {
       float:left;
     }
     @include type($text-color);
-    @include inline-list-divided($topic-link-color);
+    @include inline-list-divided($topic-link-color,12px, $divider-color);
     ul.list-inline {
       padding-left: 68px;
       display: block;
@@ -487,6 +495,8 @@ article {
       margin: 10px;
       color: $article-block-text-color;
       background: $article-block-bg-color;
+      border-left:$article-block-border-width solid $article-block-border-color;
+      
   }
 
   @media(max-width: $screen-sm) {
@@ -591,7 +601,7 @@ article {
   }
 
   .end-notes {
-    color: $light-grey;
+    color: $article-end-notes-color;
     padding-left:0;
 
     li {
@@ -619,7 +629,7 @@ article {
   }
 
   .citation{
-    color: $light-grey;
+    color: $article-citation-color;
     margin-bottom: 10px;
   }
 
@@ -627,12 +637,13 @@ article {
     font-family: $sans-serif;
     ul {
       background-color: $article-toc-bg-color;
-      padding-top: 30px;
-      padding-bottom: 30px;
-      padding-left: 40px;
-      padding-right: 40px;
+      border-top:$article-toc-border-width solid $article-toc-border-color;
+      border-bottom:$article-toc-border-width solid $article-toc-border-color;
+      
       margin-left: 0;
-
+      margin-top:10px;
+      padding:20px 40px;
+      
       li {
         a{
           color: $article-toc-link-color;

@@ -1,0 +1,28 @@
+{% load wagtailcore_tags article_tags static core_tags wagtailembeds_tags wagtailimages_tags  %}
+
+<footer role="contentinfo">
+    <div class="container">
+    	{% if self.main_image and self.include_caption_in_footer %}   
+			<div class="feature-caption">
+			    {% if self.main_image.credit %}
+			        {{ self.main_image.credit }}
+			    {% endif %}
+			</div>
+			<div class="clear"></div>
+		{% endif %}
+	    
+        <div class="row">
+          <div class="ubc">  
+            	<a href="http://lindinitiative.ubc.ca/" target="_blank" >
+            		<img class="ubc-logo" src="{% static 'themes/lind/img/ubc-logo.png' %}"> The Lind Initiative
+            	</a>
+             	<span class="courses"><a href="http://lindinitiative.ubc.ca/inequality" target="_blank" >Year 1: Inequality </a></span>  
+          </div>    	
+        </div>
+        <div class="row">
+            <div class="opencanada">
+          		<a href="/"><img class="oc-logo" src="{% static 'themes/lind/img/opencanada-logo.png' %}"></a>
+          	</div>
+        </div>
+    </div>
+</footer>

@@ -11,13 +11,13 @@ header{
   transition: height 0.3s, background 1s;
 
   &.scrolled {
-    background: #000;
+    background: $header-collapsed-bg-color;
     transition: background 1s;
   }
 
   //have to add this due to blackberry fading in the background on load otherwise.
   &.notscrolled {
-    background: $red;
+    background: $header-bg-color;
     transition: background 1s;
   }
 

@@ -1,17 +1,51 @@
-$body-bg-color: #000;
-$text-color: #fff;
-$text-link-color: #929191;
+$body-bg-color: #e5f2ff;
 
-$border-grey: solid 1px #929191 ;
-$blurb-author-link-color:#fff;
-$blurb-link-color: $text-link-color;
-$blurb-bio-text-color: $text-link-color;
+$serif: 'Source Sans Pro', sans-serif;
+$sans-serif: $serif;
 
-$caption-color: $text-link-color;
+$white: #fff;
+$text-color: #000;
+$dark-blue: #002045;
+$blue-overlay: rgba(0,152,253,0.45);
+$grey: #666666;
+$lighter-grey: #cccccc;
+$text-link-color: $dark-blue;
+$text-link-hover-color: $grey;
+$header-bg-color: $dark-blue;
 
-$pull-quote-border: $text-link-color;
-$quote-bg:$text-link-color;
+$overlay-link-color:$dark-blue;
+$main-border-width: 3px;
 
-$topic-link-color: #fff;
+$border-grey: solid 1px $dark-blue;
 
-$textalternate :#929191;
+$blurb-author-link-color: $dark-blue;
+$blurb-link-color: $dark-blue;
+$blurb-bio-text-color: $text-color;
+$blurb-border: $border-grey;
+
+
+$footer-bg-color: $body-bg-color;
+$footer-link-hover-color: $text-link-color;
+
+$article-quote-border-color: $dark-blue;
+$article-block-text-color: $dark-blue;
+$article-quote-text-color: $dark-blue;
+$article-shareable-text-color: $dark-blue;
+$article-block-bg-color: transparent;
+$article-block-border-width: $main-border-width; 
+$article-block-border-color: $dark-blue;
+
+$article-quote-border-width: $main-border-width;
+
+$article-toc-border-width: $main-border-width;
+$article-toc-border-color: $dark-blue;
+
+$article-citation-color: $grey;
+$article-end-notes-color: $grey;
+
+$top-link-color: $dark-blue;
+$divider-color: $dark-blue;
+$topic-link-color: $dark-blue;
+
+$contributor-label-color: $white;
+$related-contributors-color:$grey;

@@ -37,9 +37,9 @@ $text-link-hover-color: $text-color !default;
 $overlay-text-color: #fff !default;
 $overlay-link-color: #fff !default;
 
-$footer-bg-color: $light-grey !default;
-$footer-text-color: #fff !default;
-$footer-link-color: #fff !default;
+$footer-bg-color: $white !default;
+$footer-text-color: $black !default;
+$footer-link-color: $black !default;
 $footer-link-hover-color: $red !default;
 
 $header-bg-color: $red !default;
@@ -72,21 +72,34 @@ $blurb-border-color: $border-grey !default;
 $blurb-border: solid 1px $blurb-border-color !default;
 
 $article-block-bg-color: #f6f6f6 !default;
+$article-block-border-width:0px !default;
+$article-block-border-color:$article-block-bg-color !default;
 $article-block-text-color: $text-color !default;
 $article-block-link-color: $red !default;
 $article-block-list-marker-color: $grey !default;
 
+$article-quote-border-width: 5px !default;
 $article-quote-border-color: $red !default;
-$article-quote-border: solid 5px $article-quote-border-color !default;
+$article-quote-border: solid $article-quote-border-width $article-quote-border-color !default;
 $article-quote-text-color: $light-grey !default;
 
 $article-shareable-text-color: $red !default;
 
 $article-toc-bg-color: $article-block-bg-color !default;
+$article-toc-border-width: 0px !default;
+$article-toc-border-color: $article-toc-bg-color !default;
 $article-toc-link-color: $text-link-color !default;
 $article-toc-link-hover-color: $text-link-hover-color !default;
 $article-toc-link-underline: none !default;
 $article-teaser-color: $text-color !default;
+
+$article-citation-color:$light-grey !default;
+$article-end-notes-color:$light-grey !default;
+
+$contributor-label-color: $caption-color !default;
+$related-contributors-color:$light-grey !default;
+$related-contributors-hover-color: $text-color !default;
+
 
 $top-link-color: $red !default;
 
@@ -94,6 +107,7 @@ $share-link-color: $text-link-color !default;
 $share-link-hover-color: $text-link-hover-color !default;
 
 $badge-color: $blue !default;
+$divider-color: $red !default;
 
 $row-border: $border-grey !default;
 
