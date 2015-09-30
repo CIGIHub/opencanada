@@ -1,7 +1,7 @@
 {% load static core_tags wagtailcore_tags wagtailimages_tags article_tags %}
 
 {% block related_articles %}
-
+<div class="container">
     <section class="related-articles">
         <h2>Related Articles</h2>
             {% for article in self|related_articles:article_count %}
@@ -48,5 +48,5 @@
         </div>
 
     </section>
-
+</div>
 {% endblock %}

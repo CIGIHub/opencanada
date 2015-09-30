@@ -1,6 +1,7 @@
 /**************  Article  **************/
 
 .template-article-page, .template-chaptered-article-page, .template-series-page {
+
   .main-feature {
     @include article-overlay;
     @include fullbleed-overlay;
@@ -8,15 +9,6 @@
     .feature-text{
       padding:0 20px;
     }
-
-
-
-    //@media(min-width: $screen-sm){
-    //  .feature-text{
-    //    padding-left:40px;
-    //    padding-right:40px;
-    //  }
-    //}
 
     .date{
       color: $overlay-text-color;
@@ -90,29 +82,16 @@
   @include type($text-color);
 }
 
-article .title,
-.block-Paragraph,
-.block-Heading,
-.block-Image,
-.block-Quote,
-.block-PullQuote,
-.block-Embed,
-.block-ColumnedContent,
-.block-RelatedItems,
-.block-Interactive,
-.block-end_note,
-.block-citation,
-.block-chapter h2,
-.block-end-notes h2,
-.block-citations h2,
 .topics,
 .series-articles,
 .toc,
 .contributor-profile,
 .search-results-page,
-.narrow-page
+.narrow-page,
+.narrow-container
 
 {
+
   margin-left: 10%;
   margin-right: 10%;
 
@@ -189,6 +168,114 @@ article .title,
       }
     }
   }
+}
+
+.block-Image {
+
+  .image {
+    margin: 0 0 10px 0;
+  }
+
+  .left-aligned {
+    float: left;
+    margin: 5px 20px 0px 0;
+    width:350px;
+  }
+  .right-aligned {
+    float: right;
+    margin: 5px 0px 0px 20px;
+    width:350px;
+  }
+  .full-width {
+    img {
+      margin: 0 auto;
+    }
+    .credit {
+      text-align: center;
+    }
+  }
+  .image-wrapper {
+    clear: both;
+    max-width: 100%;
+
+    &.full-width-editorial {
+      margin-bottom: 10px;
+      .image {
+          margin-bottom: 0;
+
+          img {
+          width: 100%;
+          border:0;
+          margin-bottom: 0;
+        }
+      }
+
+      .image-label {
+        color:$caption-color;
+        text-transform: none;
+        font-size:10px;
+        margin-bottom: 0;
+      }
+    }
+
+  }
+
+  .image{
+    position: relative;
+
+    img {
+      border:solid 3px #e0e0e0;
+      margin-bottom: 10px;
+    }
+
+    .photo-zoom {
+      color: $text-link-color;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 18px;
+    }
+  }
+
+  .image-label {
+      float: right;
+      margin-bottom: 20px;
+      color: $text-link-color;
+      font-family: $sans-serif;
+      text-transform: uppercase;
+      font-size: 0.9em;
+
+      &.clickable {
+        &:after {
+          content:"\f08e";
+          font-family: "FontAwesome";
+          padding-left: 0.4em;
+        }
+      }
+    }
+}
+
+.block-FullBleed{
+
+  .block-Image{
+    .image img{
+      border: none;
+    }
+    .image-label{
+      margin-right: 10px;
+    }
+
+  }
+
+  div:nth-child(1){
+      margin-left: 0px;
+      margin-right: 0px;
+  }
+  .container-fluid{
+      padding-left: 0px;
+      padding-right: 0px;
+  }
+
 }
 
 article {
@@ -289,10 +376,8 @@ article {
 
   ul.share-links {
     position: absolute;
-    margin-left: -100px;
     padding: 0 0 20px 0;
-    top: 0.15em;
-    left:0;
+    top: 20px;
 
     &.below-topic {
       padding-top:42px;
@@ -358,93 +443,7 @@ article {
     text-transform: uppercase;
   }
 
-  .block-Image {
 
-    .image {
-      margin: 0 0 10px 0;
-    }
-    .credit {
-
-    }
-    .left-aligned {
-      float: left;
-      margin: 5px 20px 0px 0;
-      width:350px;
-    }
-    .right-aligned {
-      float: right;
-      margin: 5px 0px 0px 20px;
-      width:350px;
-    }
-    .full-width {
-      img {
-        margin: 0 auto;
-      }
-      .credit {
-        text-align: center;
-      }
-    }
-  }
-
-  .image-wrapper {
-    clear: both;
-    max-width: 100%;
-
-    &.full-width-editorial {
-      margin-bottom: 10px;
-      .image {
-          margin-bottom: 0;
-
-          img {
-          width: 100%;
-          border:0;
-          margin-bottom: 0;
-        }
-      }
-
-      .image-label {
-        color:$caption-color;
-        text-transform: none;
-        font-size:10px;
-        margin-bottom: 0;
-      }
-    }
-
-  }
-
-  .image{
-    position: relative;
-    
-    img {
-      border:solid 3px #e0e0e0;
-      margin-bottom: 10px;
-    }
-
-    .photo-zoom {
-      color: $text-link-color;
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      font-size: 18px;
-    }
-  }
-
-  .image-label {
-      float: right;
-      margin-bottom: 20px;
-      color: $text-link-color;
-      font-family: $sans-serif;
-      text-transform: uppercase;
-      font-size: 0.9em;
-
-      &.clickable {
-        &:after {
-          content:"\f08e";
-          font-family: "FontAwesome";
-          padding-left: 0.4em;
-        }
-      }
-    }
 
     .block-Overflow .block-ColumnedContent,
     .block-Overflow .block-Image,
