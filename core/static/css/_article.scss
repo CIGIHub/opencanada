@@ -101,8 +101,7 @@
 }
 
 .series-articles{
-  font-size: 12px;
-  line-height: 165%;
+  @include serif-small;
 }
 
 .block-Sharable{
@@ -311,10 +310,9 @@ article {
   }
 
   &.row.teaser {
+    @include serif-small;
     margin-left: 0px;
     margin-right: 0px;
-    font-size: 12px;
-    line-height: 165%;
 
     .col-xs-12{
       padding-left: 0px;

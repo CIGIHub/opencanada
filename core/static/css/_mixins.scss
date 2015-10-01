@@ -5,6 +5,11 @@
     color: $color;
 }
 
+@mixin serif-small{
+  font-size: 12px;
+  line-height: 165%;
+}
+
 @mixin subheading($font-size: 22px){
     color: $subheading-color;
     font-family: $sans-serif;

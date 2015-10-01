@@ -112,8 +112,7 @@
 
       .teaser{
         margin-left: 100px;
-        font-size: 12px;
-        line-height: 165%;
+        @include serif-small;
 
         .block-Paragraph {
           margin-left:0;

@@ -235,8 +235,7 @@
   }
 
   .simple-feature{
-    font-size: 12px;
-    line-height: 165%;
+    @include serif-small;
     h3{
       font-size: 35px;
 
