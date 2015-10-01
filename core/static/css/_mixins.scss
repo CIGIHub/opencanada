@@ -33,6 +33,9 @@
   a{
       color: $article-list-link-color;
   }
+  a:hover{
+    color: $red;
+  }
 }
 
 @mixin article-overlay-title{
@@ -263,10 +266,9 @@
 
   .contributors, .contributors a, a{
     color: white;
-    text-decoration:none;
   }
   .contributors a:hover, a:hover{
-    color: $mid-grey;
+    color: $red;
   }
 
   .contributors{

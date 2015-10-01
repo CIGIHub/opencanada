@@ -13,6 +13,9 @@
   a{
     color: $text_color;
   }
+  a:hover{
+    color: $red;
+  }
   .contributor{
     display: inline-block;
   }

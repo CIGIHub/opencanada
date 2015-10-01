@@ -167,8 +167,7 @@
 
     h3 {
       a:hover, a.hover{
-        color:$grey;
-        text-decoration: underline;
+        color:$red;
       }
     }
 
@@ -229,7 +228,7 @@
 
     &.hover {
       h1 a, h3 a {
-        color:$mid-grey;
+        color:$red;
       }
     }
   }
