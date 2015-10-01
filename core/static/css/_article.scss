@@ -327,15 +327,16 @@ article {
     }
   }
 
-  .title, .topics, .story {
+  .topics, .story{
     margin-top: 20px;
     margin-bottom: 20px;
   }
-  
-  .story {
-    overflow-x:hidden;
+  .title{
+    margin-top: 40px;
   }
-
+  .title + .main-image{
+    margin-top: 10px;
+  }
 
   h4, h5, h6 {
     margin: 10px 0 5px 0;
@@ -398,7 +399,7 @@ article {
   ul.share-links {
     position: absolute;
     padding: 0 0 20px 0;
-    top: 20px;
+    top: 40px;
 
     &.below-topic {
       padding-top:42px;
@@ -703,7 +704,6 @@ article {
 }
 
 .in-the-series, .related-articles, .newsletter-list{
-  margin: 20px 0;
   color: $article-teaser-color;
 
   h2{
@@ -722,7 +722,7 @@ article {
 
 .in-the-series{
   .row{
-    padding: 20px 0;
+    padding-bottom: 20px;
   }
   .series-title{
     display:inline-block;
