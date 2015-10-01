@@ -156,6 +156,13 @@
           width:100%;
         }
 
+        a {
+          color: $related-title-color;
+          &:hover {
+            color: $related-title-hover-color;
+          }
+        }
+
         .contributors{
           display: block;
           color: $related-contributors-color;
