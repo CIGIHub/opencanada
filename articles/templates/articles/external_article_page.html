@@ -10,8 +10,8 @@
             </div>
 
             <div class="content">
-                <p>{{ self.body|richtext }}</p>
-                <p><a href="{{ self.website_link }}" target="_blank" >Read the article <i class="fa fa-external-link"></i></a></p>
+                {{ self.body|richtext }}
+                <a href="{{ self.website_link }}" target="_blank" >Read the article <i class="fa fa-external-link"></i></a>
             </div>
         </div>
     </div>
