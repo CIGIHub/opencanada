@@ -1,0 +1,45 @@
+{% load  core_tags wagtailcore_tags article_tags wagtailimages_tags %}
+
+<section class="fullbleed-section">
+    <div class="container">
+        <h2>{{ heading_text }}</h2>
+    </div>
+    <div class="container-full-bleed">
+        {% for row in item_collection %}
+
+
+            <div class="row {% if forloop.last %}last{% endif %}">
+            {% for item in row %}
+                <div class="col-sm-12 feature-item overlay">
+                    <div class="overlay-feature rowheight-2">
+                        {% image item.main_image fill-910x560 as background_image %}
+
+                        <div class="feature-image" style="background-image: url('{{ background_image.url }}')">
+                            <a href="{{ item.url }}"><div class="feature-image-overlay" style="background: rgba( {{ item.image_overlay_color.rgb }}, {{ item.opacity }} )"></div></a>
+                        </div>
+                        <div class="feature-wrapper">
+                            <div class="feature-text {% if item.editors_pick or article == self.most_popular_article  %} article-feature{% endif %}" style="color: {{ item.font_style.text_colour.hex_value }};">
+                                <div class="feature-label">In Depth</div>
+                                {% if item.editors_pick %}
+                                    <div class="editors-pick-link"><div class="table"><div class="table-cell"><a href="{% slugurl 'editors-picks' %}" class="article-feature editors-pick">Editor's Pick</a></div></div></div>
+                                {% endif %}
+                                {% if item == self.most_popular_article %}
+                                    <div class="most-popular"><div class="table"><div class="table-cell"><a href="{% slugurl 'most-popular' %}" class="article-feature ">Most Popular</a></div></div></div>
+                                {% endif %}
+
+                                <h3><a style="color: {{ item.font_style.text_colour.hex_value }};" href="{{ item.url }}">{{ item.title }}</a></h3>
+
+                            </div>
+                        </div>
+                        <div class="camera"><i class="fa fa-camera"></i></div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+        {% endfor %}
+        <div class="read-more">
+            <a class="button" href="{% slugurl more_link_slug %}">{{ more_link_text }} <i class="fa fa-chevron-right"></i></a>
+        </div>
+    </div>
+    </section>

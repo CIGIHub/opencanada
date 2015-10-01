@@ -47,7 +47,6 @@ class HomePage(Page):
     number_of_rows_of_articles = models.IntegerField(default=12, verbose_name="Rows")
     number_of_columns_of_articles = models.IntegerField(default=3, verbose_name="Columns")
     number_of_rows_of_series = models.IntegerField(default=1, verbose_name="Rows")
-    number_of_columns_of_series = models.IntegerField(default=4, verbose_name="Columns")
     number_of_rows_of_external_articles = models.IntegerField(default=2, verbose_name="Rows")
     number_of_columns_of_external_articles = models.IntegerField(default=2, verbose_name="Columns")
     number_of_rows_of_visualizations = models.IntegerField(default=2, verbose_name="Rows")
@@ -182,13 +181,13 @@ class HomePage(Page):
 
     @property
     def series(self):
-        number_of_series = self.number_of_rows_of_series * self.number_of_columns_of_series
+        number_of_series = self.number_of_rows_of_series
         series_list = article_models.SeriesPage.objects.live().annotate(
             sticky_value=models.Case(
                 models.When(models.Q(sticky_for_type_section=True), then=models.Value(1)), default=models.Value(0),
                 output_field=models.IntegerField())).order_by("-sticky_value", "-first_published_at")[:number_of_series]
 
-        return self.get_rows(self.number_of_rows_of_series, self.number_of_columns_of_series, series_list)
+        return self.get_rows(self.number_of_rows_of_series, 1, series_list)
 
     content_panels = Page.content_panels + [
         MultiFieldPanel(
@@ -208,7 +207,6 @@ class HomePage(Page):
         MultiFieldPanel(
             [
                 FieldPanel("number_of_rows_of_series"),
-                FieldPanel("number_of_columns_of_series"),
             ],
             heading="Series Section Settings"
         ),

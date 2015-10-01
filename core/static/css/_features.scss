@@ -1,5 +1,5 @@
 
-.features, .related-articles, .items.side-image{
+.features, .related-articles, .items.side-image, .fullbleed-section{
 
   h3{
     @include article-list-title;
@@ -98,7 +98,6 @@
 
   .overlay-feature{
     @include article-overlay;
-
     @media(max-width: $screen-xs-max) {
       margin-left:-15px;
       margin-right:-15px;
@@ -127,6 +126,14 @@
       a {
         padding:0;
       }
+    }
+  }
+
+  .container-full-bleed .overlay-feature{
+    @media(max-width: $screen-xs-max) {
+      margin-left: 0px;
+      margin-right: 0px;
+      border-bottom: 0;
     }
   }
 
@@ -249,20 +256,4 @@
       }
     }
   }
-
-  //.feature-line {
-  //    a {
-  //      color:#fff;
-  //      padding-top: 10px;
-  //      padding-bottom: 5%;
-  //
-  //      &:hover {
-  //        color:#fff;
-  //      }
-  //    }
-  //}
-  //
-  //h3{
-  //  margin-bottom: 5px;
-  //}
 }

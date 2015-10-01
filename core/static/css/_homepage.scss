@@ -58,24 +58,18 @@
   }
 }
 
-
 .template-home-page {
-  .features{
-    @include rowheight-x;
+  @include container-full-bleed;
+  @include rowheight-x;
 
-    h2 {
-      @include subheading;
-    }
-
-    h3{
-      @include article-list-title;
-    }
-
-    .container-fluid{
-      padding-left: 0px;
-      padding-right: 0px;
-    }
+  h2 {
+    @include subheading;
   }
+
+  h3{
+     @include article-list-title;
+  }
+
 
   //visualizations
   .simple{
