@@ -92,7 +92,6 @@
 .narrow-container
 
 {
-
   margin-left: 10%;
   margin-right: 10%;
 
@@ -100,6 +99,10 @@
     margin-left: 0;
     margin-right: 0;
   }
+}
+
+.series-articles{
+  @include serif-small;
 }
 
 .block-Sharable{
@@ -117,6 +120,7 @@
 .series-teaser .block-Paragraph{
   margin-left: 0;
   margin-right: 0;
+
 }
 
 .block-Embed iframe{
@@ -307,6 +311,7 @@ article {
   }
 
   &.row.teaser {
+    @include serif-small;
     margin-left: 0px;
     margin-right: 0px;
 

@@ -24,7 +24,7 @@
                 </div>
                 <div class="col-xs-10">
                     <h2><a href="{{ article.website_link }}">{{ article.title }}</a></h2>
-                    <p>{{ article.body|richtext }}</p>
+                    {{ article.body|richtext }}
                 </div>
             </article>
         {% endfor %}

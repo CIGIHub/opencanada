@@ -16,7 +16,8 @@ body{
 
 h1, h2, h3, h4{
   font-family: $sans-serif;
-  margin: 0px;
+  margin-top: 0px;
+  margin-bottom: 5px;
   a{
     color: $heading-color;
   }
@@ -57,6 +58,9 @@ h4{
 
 p{
   margin-bottom: 20px;
+}
+.teaser .block-Paragraph p{
+  margin-bottom: 10px;
 }
 
 a{

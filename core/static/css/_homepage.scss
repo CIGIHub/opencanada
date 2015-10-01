@@ -112,6 +112,7 @@
 
       .teaser{
         margin-left: 100px;
+        @include serif-small;
 
         .block-Paragraph {
           margin-left:0;
