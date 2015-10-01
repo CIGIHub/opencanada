@@ -18,13 +18,27 @@
 
 
 {% block content %}
-    <section class="container features">
-        <h2>Most Recent</h2>
+    <section class="features">
+        <div class="container"><h2>Most Recent</h2></div>
 
         {% for row in self.articles %}
-            <div class="row {% if forloop.last %}last{% endif %} {% if row|column_class == 12 %}full-width{% endif %}">
 
             {% for article in row %}
+                {% if article.fullbleed_feature == True and row|column_class == 12 %}
+                    <div class="container-full-bleed">
+                {% elif row|column_class == 12 %}
+                    <div class="container full-width">
+                {% endif %}
+            {% endfor %}
+
+            {% if row|column_class == 4 %}
+                <div class="container">
+            {% endif %}
+
+            <div class="row {% if forloop.last %}last {% endif %}">
+
+            {% for article in row %}
+
                 <div class="col-sm-{{ row|column_class }} feature-item overlay">
                     {% if article.feature_style.include_image and article.feature_style.overlay_text %}
                         <div class="overlay-feature rowheight-{{ article.feature_style.number_of_rows }}">
@@ -120,7 +134,7 @@
                 </div>
 
                 {% endfor %}
-
+                </div>
             </div>
         {% endfor %}
         <div class="read-more">
@@ -128,7 +142,7 @@
         </div>
     </section>
 
-    {% include 'core/includes/section-circle-descriptions.html' with heading_text="In-Depths" item_collection=self.series use_ring=False more_link_slug='indepth' more_link_text='More In-Depths' %}
+    {% include 'core/includes/section-fullbleed.html' with heading_text="In-Depths" item_collection=self.series use_ring=False more_link_slug='indepth' more_link_text='More In-Depths' %}
 
     {% include 'core/includes/section-circle-descriptions.html' with heading_text="Best of the Web" item_collection=self.external_articles use_ring=True more_link_slug='readings' more_link_text='More from the Web' %}
 

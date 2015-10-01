@@ -41,4 +41,3 @@ Performs flake8 and isort checks before allowing commit.
 To run the unit tests:
 
   -  run `./manage.py test --settings=opencanada.settings.test`
-  
