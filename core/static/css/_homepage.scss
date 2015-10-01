@@ -64,6 +64,8 @@
 
   h2 {
     @include subheading;
+    margin-top: 40px;
+
   }
 
   h3{
@@ -99,12 +101,10 @@
   .items.side-image{
 
     .row{
-      padding-top: 15px;
       @include row-divider;
     }
     .row.last{
       @include no-row-divider;
-      margin-bottom: 15px;
     }
       figure{
         float:left;
@@ -113,10 +113,8 @@
       .teaser{
         margin-left: 100px;
         @include serif-small;
-
-        .block-Paragraph {
-          margin-left:0;
-          margin-right:0;
+        p{
+          margin-bottom: 0px;
         }
       }
 
