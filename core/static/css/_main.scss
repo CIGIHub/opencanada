@@ -126,6 +126,23 @@ main{
   margin-bottom: 30px;
 }
 
+.container-clear-none{
+  margin-right: auto;
+  margin-left: auto;
+  padding-left:  15px;
+  padding-right: 15px;
+
+  @media (min-width: $screen-sm-min) {
+    width: $container-sm;
+  }
+  @media (min-width: $screen-md-min) {
+    width: $container-md;
+  }
+  @media (min-width: $screen-lg-min) {
+    width: $container-lg;
+  }
+}
+
 .block-Overflow {
   margin-bottom: 20px;
 }
