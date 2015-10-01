@@ -19,13 +19,13 @@
 
 {% block content %}
     <section class="features">
-        <h2>Most Recent</h2>
+        <div class="container"><h2>Most Recent</h2></div>
 
         {% for row in self.articles %}
 
             {% for article in row %}
                 {% if article.fullbleed_feature == True and row|column_class == 12 %}
-                    <div class="container-fluid">
+                    <div class="container-full-bleed">
                 {% elif row|column_class == 12 %}
                     <div class="container full-width">
                 {% endif %}
@@ -142,7 +142,7 @@
         </div>
     </section>
 
-    {% include 'core/includes/section-circle-descriptions.html' with heading_text="In-Depths" item_collection=self.series use_ring=False more_link_slug='indepth' more_link_text='More In-Depths' %}
+    {% include 'core/includes/section-fullbleed.html' with heading_text="In-Depths" item_collection=self.series use_ring=False more_link_slug='indepth' more_link_text='More In-Depths' %}
 
     {% include 'core/includes/section-circle-descriptions.html' with heading_text="Best of the Web" item_collection=self.external_articles use_ring=True more_link_slug='readings' more_link_text='More from the Web' %}
 

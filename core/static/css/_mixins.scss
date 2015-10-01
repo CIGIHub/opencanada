@@ -34,11 +34,12 @@
 @mixin article-overlay-title{
   font-size: 45px;
   font-weight: 700;
-  //a {
-  //  padding:0 0 7% 0;
-  //  width: 100%;
-  //  @include box-sizing(border-box);
-  //}
+}
+
+@mixin container-full-bleed{
+  @extend .container-fluid;
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
 @mixin rowheight-x {
@@ -249,7 +250,10 @@
       position: relative;
       max-width: 940px;
       margin: 0 auto;
-
+      .feature-label{
+        @include type($red, 22px);
+        font-weight: 900;
+      }
     }
  }
 
@@ -301,7 +305,6 @@
 
 @mixin fullbleed-overlay{
   h1{
-
     font-size: 67px;
     font-weight: 700;
     line-height: 1.0em;
