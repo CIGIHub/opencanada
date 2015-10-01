@@ -107,6 +107,12 @@
         </section>
         {% endif %}
 
+         {% block related_articles %}
+            {% with article_count=3 %}
+                {% include 'articles/includes/related_articles.html' with heading='h3' image=True %}
+            {% endwith %}
+        {% endblock %}
+
     </div>
 
 
