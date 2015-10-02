@@ -26,7 +26,8 @@
             {% block share_links %}
                 {% include 'articles/includes/share_links.html' %}
             {% endblock %}
-<div class="narrow-container">
+
+            <div class="narrow-content">
             {% if not self.include_main_image_overlay or self.include_main_image_overlay and not self.main_image %}
                 {% include 'articles/includes/article-metadata.html' %}
                 {% if self.include_main_image and self.main_image %}
@@ -57,7 +58,7 @@
             {% for block in self.body %}
                 {% if block.block_type == 'Embed' %}
                     <div class="container-clear-none">
-                        <section class="block-Embed narrow-container">
+                        <section class="block-Embed narrow-content">
                             {{ block.value.url|embed:720 }}
                         </section>
                     </div>
@@ -70,7 +71,7 @@
                     </section>
                 {% else %}
                     <div class="container-clear-none">
-                        <section class="block-{{ block.block_type }} narrow-container">
+                        <section class="block-{{ block.block_type }} narrow-content">
                             {{ block }}
                         </section>
                     </div>
@@ -83,7 +84,7 @@
 
         {% if self.topics %}
             <div class="container">
-                <div class="topics related">
+                <div class="topics related narrow-content">
                     <div class="topic-label"><i class="fa fa-tags"></i> Topics:</div>
                     <ul class="list-inline">
                         {% for topic in self.topics %}
