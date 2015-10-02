@@ -394,8 +394,25 @@ article {
     padding: 0 0 20px 0;
     top: 0px;
 
-    &.below-topic {
-      padding-top:42px;
+    @media(max-width: $screen-sm) {
+      position: relative;
+      margin: 0 10%;
+      padding-bottom: 0px;
+      li{
+        display: inline-block;
+        margin-right: 5px;
+        div{
+          text-align: left;
+          margin: 0px;
+        }
+      }
+    }
+    @media(max-width: $screen-xs) {
+      margin: 0px;
+    }
+
+    &.below-feature {
+      padding-top:20px;
     }
 
     div{
@@ -424,30 +441,6 @@ article {
       list-style: none;
       text-align:right;
     }
-
-  }
-
-  .small-article & ul.share-links {
-    position: relative;
-    margin-left: 10%;
-    margin-bottom: 0px;
-    top: 20px;
-    li {
-      display: inline-block;
-      padding-right: 7px;
-      div{
-        width: auto;
-      }
-    }
-    li.print{
-      display: none;
-    }
-    @media(max-width: $screen-xs) {
-      margin-left: 0px;
-    }
-  }
-  .small-article & .title {
-    margin-top: 10px;
   }
 
   .dropcap-start p:first-child:first-letter {
