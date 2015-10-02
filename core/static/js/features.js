@@ -134,7 +134,7 @@ var FeatureStyles = FeatureStyles || {
 
                 function fadeInContent() {
                     /* Check the location of each desired element */
-                    $('.related-articles .row > div, #features .row > div, .items .row > div, .graphics .row > div').each( function(i){
+                    $('main .container .row > div, main .container-full-bleed .row > div').each( function(i){
                         
                         var windowWidth = $(window).width();
                         if (windowWidth >= breakpoint && !$(this).hasClass("fadedIn")) {
