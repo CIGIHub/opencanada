@@ -66,13 +66,16 @@ p{
 a{
   color: $text-link-color;
   text-decoration: none;
-  outline:none;
   transition:color 0.25s;
 
   &:hover{
     color: $text-link-hover-color;
     text-decoration: none;
     transition:color 0.25s;
+  }
+
+  &:focus {
+    outline:none;
   }
 }
 
