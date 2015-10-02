@@ -76,6 +76,7 @@ a{
 
   &:focus {
     outline:none;
+    text-decoration: none;
   }
 }
 
@@ -131,8 +132,15 @@ button:focus {outline:0;}
 /**************   Main  **************/
 
 main{
-  margin-bottom: 30px;
+  padding-bottom: 40px;
+  padding-top: 40px;
+
+  @media (min-width: $screen-sm) {
+    padding-bottom: 60px;
+    padding-top: 60px;
+  }
 }
+
 
 .container-clear-none{
   margin-right: auto;

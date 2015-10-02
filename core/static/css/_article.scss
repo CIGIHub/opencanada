@@ -330,12 +330,7 @@ article {
     margin-top: 20px;
     margin-bottom: 20px;
   }
-  .title{
-    margin-top: 40px;
-  }
-  .title + .main-image{
-    margin-top: 10px;
-  }
+  
 
   h4, h5, h6 {
     margin: 10px 0 5px 0;
@@ -389,6 +384,8 @@ article {
   .primary-topic {
     @include subheading(14px);
     @include type($red);
+    margin-top: 0px;
+
     i {
       color: $text-color;
     }
@@ -397,7 +394,7 @@ article {
   ul.share-links {
     position: absolute;
     padding: 0 0 20px 0;
-    top: 40px;
+    top: 0px;
 
     &.below-topic {
       padding-top:42px;
