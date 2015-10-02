@@ -2,7 +2,7 @@ var Sharing = Sharing || {
         Links: {
             initialize: function () {
 
-                function social_setup(){
+                function social_setup() {
                     window.fbAsyncInit = function () {
                         FB.init({
                             appId: '1209700165722055',
@@ -33,8 +33,25 @@ var Sharing = Sharing || {
                     });
                 }
 
+                function load_share_counts(page_id) {
+                    $.getJSON('/articles/share/count/' + page_id, function (data) {
+                        $.each(data, function (key, val) {
+                            var social_count = $("." + key + " .count");
+                            if (social_count.length > 0) {
+                                social_count.text(val);
+                            }
+                        });
+                    });
+                }
+
                 if ($(".facebook-share-link").length > 0) {
                     social_setup();
+                }
+
+                var share_links = $(".share-links");
+                if (share_links.length > 0) {
+                    var page_id = share_links.data('page-id');
+                    load_share_counts(page_id);
                 }
             },
             initializeForWindow: function () {
@@ -49,6 +66,7 @@ var Sharing = Sharing || {
                 }
 
             }
+
         }
 
     };

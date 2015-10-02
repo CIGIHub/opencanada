@@ -1,14 +1,10 @@
-<ul class="share-links">
+<ul class="share-links" data-page-id="{{ self.id }}">
     <li class="facebook">
-        {% if self.facebook_count > 0 %}
-            <div class="count">{{ self.facebook_count }}</div>
-        {% endif %}
+        <div class="count">{% if self.facebook_count > 0 %}{{ self.facebook_count }}{% endif %}</div>
         <div><span class="facebook-share-link" data-url="{{ self.full_url }}"><i class="fa fa-facebook"></i></span></div>
     </li>
     <li class="twitter">
-        {% if self.twitter_count > 0 %}
-            <div class="count">{{ self.twitter_count }}</div>
-        {% endif %}
+        <div class="count">{% if self.twitter_count > 0 %}{{ self.twitter_count }}{% endif %}}</div>
         <div><a href="https://twitter.com/share?text={{ self.title }}"><i class="fa fa-twitter"></i></a></div>
     </li>
     <li class="print"><div><a href="javascript:window.print()"><i class="fa fa-print"></i></a></div></li>
