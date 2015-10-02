@@ -328,7 +328,7 @@ article {
     margin-top: 20px;
     margin-bottom: 20px;
   }
-  
+
 
   h4, h5, h6 {
     margin: 10px 0 5px 0;
@@ -564,14 +564,20 @@ article {
       padding: 5px 15px;
       margin: 10px 0 20px 15px;
       border-left: $blurb-border;
-     
+
       img{
         margin: 0 auto 20px;
       }
     }
 
-    .author a, .author{
+    .author{
       @include type($blurb-author-link-color);
+    }
+    a{
+      color: $blurb-link-color;
+      &:hover{
+        color: $blurb-link-hover-color;
+      }
     }
     .short-bio {
       font-size: 12px;

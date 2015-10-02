@@ -13,12 +13,8 @@
             <article class="row teaser">
                     <div class="col-xs-12">
                         <h2><a href="{{ job.url }}">{{ job.title }}</a></h2>
-
-                            <div class="date">{{ job.first_published_at|date:"F j, Y" }}</div>
-
-                        <div class="feature-line">
-                            {{ job.body|truncatewords_html:80|richtext }}
-                        </div>
+                        <div class="date">{{ job.first_published_at|date:"F j, Y" }}</div>
+                        {{ job.body|truncatewords_html:80|richtext }}
                     </div>
             </article>
         {% endfor %}
