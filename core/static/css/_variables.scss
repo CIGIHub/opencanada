@@ -68,17 +68,17 @@ $topic-link-color: $red !default;
 $blurb-author-link-color: $text-color !default;
 $blurb-link-color: $text-color !default;
 $blurb-bio-text-color: #666 !default;
-$blurb-border-color: $border-grey !default;
-$blurb-border: solid 1px $blurb-border-color !default;
+$blurb-border-color: $grey !default;
+$blurb-border: 1px solid $blurb-border-color !default;
 
-$article-block-bg-color: #f6f6f6 !default;
-$article-block-border-width:0px !default;
-$article-block-border-color:$article-block-bg-color !default;
-$article-block-text-color: $text-color !default;
+$article-block-bg-color: transparent !default;
+$article-block-border-width:3px !default;
+$article-block-border-color:$red !default;
+$article-block-text-color: $light-grey !default;
 $article-block-link-color: $red !default;
 $article-block-list-marker-color: $grey !default;
 
-$article-quote-border-width: 5px !default;
+$article-quote-border-width: 3px !default;
 $article-quote-border-color: $red !default;
 $article-quote-border: solid $article-quote-border-width $article-quote-border-color !default;
 $article-quote-text-color: $light-grey !default;
