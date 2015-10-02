@@ -309,12 +309,10 @@ class Sharelinks(models.Model):
 
     @property
     def twitter_count(self):
-        self.update_cache()
         return self.cached_twitter_count
 
     @property
     def facebook_count(self):
-        self.update_cache()
         return self.cached_facebook_count
 
     class Meta:
