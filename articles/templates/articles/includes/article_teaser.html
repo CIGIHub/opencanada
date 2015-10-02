@@ -23,9 +23,7 @@
              {% else %}
                 <div class="date">{{ article.first_published_at|date:"F j, Y" }}</div>
             {% endif %}
+            {{ article.excerpt|richtext }}
 
-            <div class="feature-line">
-                {{ article.excerpt|richtext }}
-            </div>
         </div>
 </article>
