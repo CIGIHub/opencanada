@@ -18,11 +18,8 @@ jQuery(document).ready(function() {
     });
 
     function updateHeaderTransparency() {
-
         var offset = ($('header').height() + parseInt($('main').css('padding-top')) ) * -1;
-        //alert ($('main').css('padding-top'))
         $('.jumbotron.main-feature').css("margin-top", offset);
-        
 
     	if ($('header').hasClass('scrolled') || $('#search-box').hasClass("open")) {
 	        transparencyOff();
