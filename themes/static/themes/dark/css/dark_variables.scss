@@ -28,7 +28,7 @@ $article-block-bg-color: transparent;
 $article-block-text-color: $text-link-color;
 $article-block-link-color: $text-color;
 $article-block-list-marker-color: $text-link-color;
-$article-block-border-width:5px;
+$article-block-border-width:3px;
 $article-block-border-color:$text-link-color;
 
 
@@ -50,5 +50,5 @@ $share-link-color: $text-color;
 $share-link-hover-color: $text-link-hover-color;
 $share-link-hover-underline: underline;
 
-$article-shareable-text-color: $text-color;
+$article-shareable-text-color: $text-link-color;
 $top-link-color: $text-link-color;
