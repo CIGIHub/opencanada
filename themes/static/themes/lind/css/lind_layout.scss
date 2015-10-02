@@ -106,10 +106,12 @@ footer {
 
 	.ubc {
 		@include ubc;
+		padding:20px 0;
 	}
 
 	.opencanada {
 		text-align: center;
+		padding-bottom: 40px;
 
 		img {
 			max-height: 18px;
