@@ -150,9 +150,14 @@
   
   button{
     @include button($sans-serif);
-    padding: 6px;
+    padding: 3px 6px;
     width: 26%;
     float:left;
+    border:1px solid $red;
+
+    &:hover {
+
+    }
   }
 
   input{
