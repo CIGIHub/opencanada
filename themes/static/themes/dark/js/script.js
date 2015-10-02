@@ -1,6 +1,13 @@
 jQuery(document).ready(function() {
 
-	updateHeaderTransparency();    
+    updateHeaderTransparency(); 
+
+    $('.wordmark').hover(function(){
+        $(this).css("opacity", 1);
+    },
+    function(){
+        $(this).css("opacity", 0.5);
+    });
 
     $(window).scroll(function(){
 	    updateHeaderTransparency();
@@ -11,6 +18,11 @@ jQuery(document).ready(function() {
     });
 
     function updateHeaderTransparency() {
+
+        var offset = ($('header').height() + parseInt($('main').css('padding-top')) ) * -1;
+        //alert ($('main').css('padding-top'))
+        $('.jumbotron.main-feature').css("margin-top", offset);
+        
 
     	if ($('header').hasClass('scrolled') || $('#search-box').hasClass("open")) {
 	        transparencyOff();
@@ -24,6 +36,7 @@ jQuery(document).ready(function() {
         $('#toggle-mobile').hide();
         $('#search-box-toggle').hide();
         $('#main-menu').hide();
+        $('.wordmark').css("opacity", 0.5);
     }
 
     function transparencyOff() {
@@ -31,6 +44,7 @@ jQuery(document).ready(function() {
         $('#toggle-mobile').show();
         $('#search-box-toggle').show();
         $('#main-menu').show();
+        $('.wordmark').css("opacity",1);
 
         if ($('#search-box').hasClass("open") && $(window).width() >= breakpoint) {  
             
