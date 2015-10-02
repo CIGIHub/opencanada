@@ -86,10 +86,8 @@
 .topics,
 .series-articles,
 .toc,
-.contributor-profile,
 .search-results-page,
-.narrow-page,
-.narrow-container
+.narrow-content
 
 {
   margin-left: 10%;
@@ -134,7 +132,7 @@
 
 .block-RelatedItems{
   margin:20px 15%;
- 
+
   .heading{
     //margin: 10px 20px;
     text-transform: uppercase;
@@ -365,7 +363,7 @@ article {
 
   .topics {
     display: block;
-    
+
     .topic-label {
       display:block;
       float:left;
@@ -376,7 +374,7 @@ article {
       padding-left: 68px;
       display: block;
       width: 100%;
-      
+
       li {
         display: inline;
       }
@@ -510,7 +508,7 @@ article {
       color: $article-block-text-color;
       background: $article-block-bg-color;
       border-left:$article-block-border-width solid $article-block-border-color;
-      
+
   }
 
   @media(max-width: $screen-sm) {
@@ -528,7 +526,7 @@ article {
     margin-left: 15%;
     margin-top:20px;
     margin-bottom:20px;
-    
+
     .quote {
       padding-left: 10px;
       width: 80%;
@@ -653,11 +651,11 @@ article {
       background-color: $article-toc-bg-color;
       border-top:$article-toc-border-width solid $article-toc-border-color;
       border-bottom:$article-toc-border-width solid $article-toc-border-color;
-      
+
       margin-left: 0;
       margin-top:10px;
       padding:20px 40px;
-      
+
       li {
         a{
           color: $article-toc-link-color;
@@ -755,8 +753,3 @@ article {
     }
   }
 }
-
-
-
-
-
