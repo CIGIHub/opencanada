@@ -27,7 +27,7 @@ h1, .jumbotron h1{
   @include article-title;
 }
 
-h1.subheading, .narrow-page h1{
+h1.subheading, .narrow-content h1{
   @include subheading;
 }
 
@@ -162,5 +162,3 @@ main{
 .block-Overflow {
   margin-bottom: 20px;
 }
-
-

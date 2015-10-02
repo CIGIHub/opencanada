@@ -31,49 +31,54 @@
         {% include 'articles/includes/article-feature.html' with metadata='articles/includes/article-metadata.html' %}
     {% endif %}
 
-    <div id="article-page" class="container">
-        <article>
-        {% block share_links %}
-            {% include 'articles/includes/share_links.html' %}
-        {% endblock %}
-
-            {% if not self.include_main_image_overlay or self.include_main_image_overlay and not self.main_image %}
-                {% include 'articles/includes/article-metadata.html' %}
-                {% if self.include_main_image and self.main_image %}
-                    <figure class="main-image">
-                        {% image self.main_image fill-940x627 %}
-                    </figure>
-                    {% if self.main_image.credit %}
-                        <div class="image-credit">
-                            {{ self.main_image.credit }}
-                        </div>
-                    {% endif %}
-                    {% if self.main_image.source %}
-                        <div class="image-source">
-                            {{ self.main_image.source }}
-                        </div>
-                    {% endif %}
-                {% endif %}
-            {% endif %}
-
-            <div class="story">
+    <article id="article-page">
+        <div class="container">
+          {% block share_links %}
+              {% include 'articles/includes/share_links.html' %}
+          {% endblock %}
+            <div class="narrow-content">
+              {% if not self.include_main_image_overlay or self.include_main_image_overlay and not self.main_image %}
+                  {% include 'articles/includes/article-metadata.html' %}
+                  {% if self.include_main_image and self.main_image %}
+                      <figure class="main-image">
+                          {% image self.main_image fill-940x627 %}
+                      </figure>
+                      {% if self.main_image.credit %}
+                          <div class="image-credit">
+                              {{ self.main_image.credit }}
+                          </div>
+                      {% endif %}
+                      {% if self.main_image.source %}
+                          <div class="image-source">
+                              {{ self.main_image.source }}
+                          </div>
+                      {% endif %}
+                  {% endif %}
+              {% endif %}
+            </div>
+        </div>
+          <div class="story">
                 {% if self.include_author_block %}
                 {% include 'articles/includes/author_blurb.html' %}
                 {% endif %}
                 {% for block in self.body %}
                     {% if block.block_type == 'Embed' %}
-                        <section class="block-Embed">
-                            {{ block.value.url|embed:720 }}
-                        </section>
+                      <div class="container">
+                          <section class="block-Embed narrow-content">
+                              {{ block.value.url|embed:720 }}
+                          </section>
+                        </div>
                     {% else %}
-                        <section class="block-{{ block.block_type }}">
+                      <div class="container">
+                        <section class="block-{{ block.block_type }} narrow-content">
                             {{ block }}
                         </section>
+                      </div>
                     {% endif %}
                 {% endfor %}
-            </div>
-
+          </div>
             {% if self.topics %}
+            <div class="container">
                 <div class="topics related">
                     <div class="topic-label"><i class="fa fa-tags"></i> Topics:</div>
                     <ul class="list-inline">
@@ -82,18 +87,12 @@
                         {% endfor %}
                     </ul>
                 </div>
+              </div>
             {% endif %}
-        </article>
-
-        
-
-    </div>
-
+    </article>
 
 {% endblock %}
 
 {% block footer %}
    {% include 'themes/lind/lind_footer.html' %}
 {% endblock %}
-
-
