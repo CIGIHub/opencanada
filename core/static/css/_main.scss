@@ -27,7 +27,7 @@ h1, .jumbotron h1{
   @include article-title;
 }
 
-h1.subheading, .narrow-content h1{
+h1.subheading{
   @include subheading;
 }
 
