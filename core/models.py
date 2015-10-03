@@ -9,7 +9,8 @@ from django.dispatch.dispatcher import receiver
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.timezone import now
 from wagtail.wagtailadmin.edit_handlers import (FieldPanel, MultiFieldPanel,
-                                                PageChooserPanel)
+                                                ObjectList, PageChooserPanel,
+                                                TabbedInterface)
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailcore.signals import page_published
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
@@ -20,10 +21,11 @@ from events import models as event_models
 from jobs import models as jobs_models
 from newsletter import models as newsletter_models
 from people import models as people_models
+from themes.models import ThemeablePage
 
 
 @python_2_unicode_compatible
-class HomePage(Page):
+class HomePage(ThemeablePage):
     subpage_types = [
         article_models.ArticleListPage,
         article_models.SeriesListPage,
@@ -226,6 +228,15 @@ class HomePage(Page):
         ),
     ]
 
+    style_panels = ThemeablePage.style_panels
+
+    edit_handler = TabbedInterface([
+        ObjectList(content_panels, heading='Content'),
+        ObjectList(style_panels, heading='Page Style Options'),
+        ObjectList(Page.promote_panels, heading='Promote'),
+        ObjectList(Page.settings_panels, heading='Settings', classname="settings"),
+    ])
+
 
 @receiver(page_published, sender=HomePage)
 def on_publish(**kwargs):
@@ -292,6 +303,7 @@ class SiteDefaults(models.Model):
         'images.AttributedImage',
         related_name='+'
     )
+    contact_email = models.EmailField(blank=True, default="")
 
     def __str__(self):
         return "{}".format(self.site)
@@ -301,6 +313,7 @@ class SiteDefaults(models.Model):
 
     panels = [
         FieldPanel('site'),
-        ImageChooserPanel('default_external_article_source_logo')
+        ImageChooserPanel('default_external_article_source_logo'),
+        FieldPanel('contact_email'),
     ]
 register_snippet(SiteDefaults)

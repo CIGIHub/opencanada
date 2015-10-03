@@ -1,4 +1,4 @@
-{% load wagtailcore_tags article_tags static core_tags wagtailembeds_tags wagtailimages_tags  %}
+{% load wagtailcore_tags article_tags static core_tags wagtailembeds_tags wagtailimages_tags theme_tags  %}
 
 <footer role="contentinfo">
     <div class="container">
@@ -74,7 +74,8 @@
         </div>
         <div class="contact">
             Copyright &copy; {% now "Y" %} Open Canada, All rights reserved.<br>
-            <a href="mailto:info@opencanada.org">info@opencanada.org</a>
+            {% get_contact_email self.theme as contact_email %}
+            <a href="mailto:{{ contact_email }}">{{ contact_email }}</a>
         </div>
 
     </div>
