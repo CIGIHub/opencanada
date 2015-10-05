@@ -19,7 +19,9 @@
 
 {% block content %}
     <section class="features" id="features">
-        <div class="container"><h2>Most Recent</h2></div>
+        <div class="container">
+          <h2><a class="read-more" href="{% slugurl 'features' %}">Features <i class="fa fa-angle-right"></i></a></h2>
+        </div>
 
         {% for row in self.articles %}
 
@@ -137,9 +139,6 @@
                 </div>
             </div>
         {% endfor %}
-        <div class="read-more">
-            <a class="button" href="{% slugurl 'features' %}">All Features <i class="fa fa-chevron-right"></i></a>
-        </div>
     </section>
 
     {% include 'core/includes/section-fullbleed.html' with heading_text="In-Depths" item_collection=self.series use_ring=False more_link_slug='indepth' more_link_text='More In-Depths' %}
