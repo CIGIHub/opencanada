@@ -177,17 +177,13 @@
 
     h3 {
       a:hover, a.hover{
-        color:$red;
+        color:$text-link-color;
       }
     }
 
     .editors-pick-link, .most-popular {
       top:35px;
       right:22px;
-
-      a:hover {
-        color:$mid-grey;
-      }
 
       @media(min-width: $screen-sm) {
         top:10px;
@@ -238,7 +234,7 @@
 
     &.hover {
       h1 a, h3 a {
-        color:$red;
+        color:$text-link-color !important;
       }
     }
   }
@@ -267,3 +263,12 @@
     }
   }
 }
+
+.main-feature {
+  .feature-wrapper.hover {
+    h1 a {
+      color:$text-link-color !important;
+    }
+  }
+}
+ 

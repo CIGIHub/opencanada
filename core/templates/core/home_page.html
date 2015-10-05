@@ -51,13 +51,6 @@
                             </div>
                             <div class="feature-wrapper">
                                 <div class="feature-text {% if article.editors_pick or article == self.most_popular_article  %} article-feature{% endif %}" style="color: {{ article.font_style.text_colour.hex_value }};">
-                                    {% if article.editors_pick %}
-                                        <div class="editors-pick-link"><div class="table"><div class="table-cell"><a href="{% slugurl 'editors-picks' %}" class="article-feature editors-pick">Editor's Pick</a></div></div></div>
-                                    {% endif %}
-                                    {% if article == self.most_popular_article %}
-                                        <div class="most-popular"><div class="table"><div class="table-cell"><a href="{% slugurl 'most-popular' %}" class="article-feature ">Most Popular</a></div></div></div>
-                                    {% endif %}
-
                                     <h3><a style="color: {{ article.font_style.text_colour.hex_value }};" href="{{ article.url }}">{{ article.title }}</a></h3>
                                     {% if article.feature_style.number_of_rows == 2 %}
                                         {% if article.subtitle %}
@@ -80,6 +73,14 @@
                                     {% endif %}
                                 </div>
                             </div>
+                            
+                            {% if article.editors_pick %}
+                                <div class="editors-pick-link"><div class="table"><div class="table-cell"><a href="{% slugurl 'editors-picks' %}" class="article-feature editors-pick">Editor's Pick</a></div></div></div>
+                            {% endif %}
+                            {% if article == self.most_popular_article %}
+                                <div class="most-popular"><div class="table"><div class="table-cell"><a href="{% slugurl 'most-popular' %}" class="article-feature ">Most Popular</a></div></div></div>
+                            {% endif %}
+
                             <div class="camera"><i class="fa fa-camera"></i></div>
                         </div>
 

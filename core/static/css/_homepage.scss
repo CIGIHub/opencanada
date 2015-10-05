@@ -109,7 +109,7 @@
 .editors-pick-link, .most-popular {
   display: block;
   position: absolute;
-  top: 0%;
+  top: 20%;
   right: 20px;
   z-index: 11;
   width: 50px;
@@ -141,9 +141,15 @@
         padding:15px 0px;
         line-height: 1em;
         outline:none;
+        border-radius: 30px;
+        background: $badge-color;
+        transition:background 0.25s;
 
         &:hover {
-          color:$mid-grey;
+          color:$black;
+          background:$mid-grey;
+          transition:background 0.25s;
+
         }
       }
     }
