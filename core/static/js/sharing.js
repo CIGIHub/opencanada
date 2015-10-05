@@ -55,13 +55,12 @@ var Sharing = Sharing || {
                 }
             },
             initializeForWindow: function () {
-                if ($("article > .title").children().hasClass("primary-topic")) {
-
+                if (($("article").length > 0) && ($(".jumbotron").length > 0)) {
                     if ($(window).width() >= breakpoint) {
-                        $('ul.share-links').addClass("below-topic");
+                        $('ul.share-links').addClass("below-feature");
                     }
                     else {
-                        $('ul.share-links').removeClass("below-topic");
+                        $('ul.share-links').removeClass("below-feature");
                     }
                 }
 
