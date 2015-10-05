@@ -17,7 +17,6 @@
                         </div>
                         <div class="feature-wrapper">
                             <div class="feature-text {% if item.editors_pick or article == self.most_popular_article  %} article-feature{% endif %}" style="color: {{ item.font_style.text_colour.hex_value }};">
-                                <div class="feature-label">In Depth</div>
                                 {% if item.editors_pick %}
                                     <div class="editors-pick-link"><div class="table"><div class="table-cell"><a href="{% slugurl 'editors-picks' %}" class="article-feature editors-pick">Editor's Pick</a></div></div></div>
                                 {% endif %}
@@ -26,6 +25,17 @@
                                 {% endif %}
 
                                 <h3><a style="color: {{ item.font_style.text_colour.hex_value }};" href="{{ item.url }}">{{ item.title }}</a></h3>
+                                {% if item.authors %}
+                                    {% spaceless %}
+                                    <div class="contributors">Series Contributors:
+                                        {% for author in item.authors %}
+                                            <a href="{{ author.url }}" style="color: {{ author.font_style.text_colour.hex_value }};">
+                                                {{ author.full_name }}</a>
+                                            <span>{% if not forloop.last %}, {% endif %}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% endspaceless %}
+                                {% endif %}
 
                             </div>
                         </div>
