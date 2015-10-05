@@ -14,7 +14,7 @@ def set_themes(apps, schema_editor):
         slug="home"
     )
 
-    home.theme = default_theme
+    home.theme_id = default_theme.id
     home.save()
 
 

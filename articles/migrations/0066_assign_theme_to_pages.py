@@ -16,7 +16,7 @@ def set_themes(apps, schema_editor):
         pages = page_model.objects.all()
 
         for page in pages:
-            page.theme = default_theme
+            page.theme_id = default_theme.id
             page.save()
 
 
