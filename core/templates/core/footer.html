@@ -1,22 +1,25 @@
-{% load wagtailcore_tags article_tags static core_tags wagtailembeds_tags wagtailimages_tags  %}
+{% load wagtailcore_tags article_tags static core_tags wagtailembeds_tags wagtailimages_tags theme_tags  %}
 
 <footer role="contentinfo">
     <div class="container">
         <div class="row infobar">
             <div class="col-sm-4">
-                <h3>About</h3>
-                <p>Open Canada is a Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. quis nostrud exercitation.</p>
-
+                {% with self.theme|get_text_block:"about-block" as block %}
+                <h3>{{ block.heading }}</h3>
+                {{ block.content|richtext }}
+                {% endwith %}
             </div>
             <div class="col-sm-4">
-                <h3>Masthead</h3>
-                <p><a href="https://twitter.com/taylor_owen">@Taylor Owen</a> / Editor-in-Chief</p>
-                <p><a href="https://twitter.com/eva_sita">@Eva Salinas</a> / Managing Editor</p>
-                <p><a href="https://twitter.com/cattsalikis">@Catherine Tsalikis</a> / Journalist &amp; Editor</p>
+                {% with self.theme|get_text_block:"masthead-block" as block %}
+                <h3>{{ block.heading }}</h3>
+                {{ block.content|richtext }}
+                {% endwith %}
             </div>
             <div class="col-sm-4">
                 <div class="newsletter-form">
-                    <h3>Weekly Newsletter</h3>
+                    {% with self.theme|get_text_block:"newsletter-block" as block %}
+                    <h3>{{ block.heading }}</h3>
+                    {% endwith %}
                     <!-- Begin MailChimp Signup Form -->
                     <link href="//cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css">
                     <div id="mc_embed_signup">
@@ -36,22 +39,26 @@
                     <!--End mc_embed_signup-->
                 </div>
                 <div class="follow">
-                    <h3>Follow</h3>
+                    {% with self.theme|get_text_block:"follow-block" as block %}
+                    <h3>{{ block.heading }}</h3>
                     <div class="social-links">
                         <ul>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                            <li><a rel="home" type="application/rss+xml" href="{% url 'main_feed' %}"><i class="fa fa-rss"></i></a></li>
+                            <li><a href="{{ self.theme|get_follow_link:"twitter" }}"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="{{ self.theme|get_follow_link:"facebook" }}"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="{{ self.theme|get_follow_link:"google-plus" }}"><i class="fa fa-google-plus"></i></a></li>
+                            <li><a rel="home" type="application/rss+xml" href="{{ self.theme|get_follow_link:"rss-feed" }}"><i class="fa fa-rss"></i></a></li>
                         </ul>
                     </div>
+                    {% endwith %}
                 </div>
             </div>
         </div>
         <div class="row partner-row">
             <div class="col-xs-12">
                 <div class="partners">
-                    OpenCanada.org is a publication of the Canadian International Council, the Centre for International Governance Innovation and the Bill Graham Centre
+                    {% with self.theme|get_text_block:"tagline-block" as block %}
+                    {{ block.content|richtext }}
+                    {% endwith %}
                </div>
             </div>
         </div>
@@ -68,13 +75,15 @@
             </div>
             <div class="col-xs-4">
                 <div class="partner cigi">
-                    <a href="/"><img src="{% static 'img/cigi-footer-logo.png' %}" alt="CIGI Logo" class="img-responsive" ></a>
+                    {% image self.theme|get_logo:"cigi-logo-black" original as cigi_logo %}
+                    <a href="/"><img src="{{ cigi_logo.url }}" alt="CIGI Logo" class="img-responsive" ></a>
                 </div>
             </div>
         </div>
         <div class="contact">
             Copyright &copy; {% now "Y" %} Open Canada, All rights reserved.<br>
-            <a href="mailto:info@opencanada.org">info@opencanada.org</a>
+            {% get_contact_email self.theme as contact_email %}
+            <a href="mailto:{{ contact_email }}">{{ contact_email }}</a>
         </div>
 
     </div>

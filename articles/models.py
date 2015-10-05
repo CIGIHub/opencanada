@@ -89,7 +89,7 @@ class FontStyle(models.Model):
 register_snippet(FontStyle)
 
 
-class ArticleListPage(PaginatedListPageMixin, Page):
+class ArticleListPage(PaginatedListPageMixin, ThemeablePage):
     subpage_types = ['ArticlePage',
                      # 'ChapteredArticlePage',
                      ]
@@ -126,8 +126,17 @@ class ArticleListPage(PaginatedListPageMixin, Page):
         FieldPanel('filter', widget=forms.Select),
     ]
 
+    style_panels = ThemeablePage.style_panels
 
-class ExternalArticleListPage(PaginatedListPageMixin, Page):
+    edit_handler = TabbedInterface([
+        ObjectList(content_panels, heading='Content'),
+        ObjectList(style_panels, heading='Page Style Options'),
+        ObjectList(Page.promote_panels, heading='Promote'),
+        ObjectList(Page.settings_panels, heading='Settings', classname="settings"),
+    ])
+
+
+class ExternalArticleListPage(PaginatedListPageMixin, ThemeablePage):
     subpage_types = ['ExternalArticlePage']
 
     articles_per_page = models.IntegerField(default=20)
@@ -142,6 +151,15 @@ class ExternalArticleListPage(PaginatedListPageMixin, Page):
     content_panels = Page.content_panels + [
         FieldPanel('articles_per_page'),
     ]
+
+    style_panels = ThemeablePage.style_panels
+
+    edit_handler = TabbedInterface([
+        ObjectList(content_panels, heading='Content'),
+        ObjectList(style_panels, heading='Page Style Options'),
+        ObjectList(Page.promote_panels, heading='Promote'),
+        ObjectList(Page.settings_panels, heading='Settings', classname="settings"),
+    ])
 
 
 @python_2_unicode_compatible
@@ -166,7 +184,7 @@ Topic.panels = [
 ]
 
 
-class TopicListPage(RoutablePageMixin, Page):
+class TopicListPage(RoutablePageMixin, ThemeablePage):
     articles_per_page = models.IntegerField(default=20)
 
     @property
@@ -225,6 +243,15 @@ class TopicListPage(RoutablePageMixin, Page):
     content_panels = Page.content_panels + [
         FieldPanel('articles_per_page'),
     ]
+
+    style_panels = ThemeablePage.style_panels
+
+    edit_handler = TabbedInterface([
+        ObjectList(content_panels, heading='Content'),
+        ObjectList(style_panels, heading='Page Style Options'),
+        ObjectList(Page.promote_panels, heading='Promote'),
+        ObjectList(Page.settings_panels, heading='Settings', classname="settings"),
+    ])
 
 
 class ArticleCategoryManager(models.Manager):
@@ -773,7 +800,7 @@ class ArticleAuthorLink(Orderable, models.Model):
     ]
 
 
-class SeriesListPage(PaginatedListPageMixin, Page):
+class SeriesListPage(PaginatedListPageMixin, ThemeablePage):
     subpage_types = ['SeriesPage']
 
     series_per_page = models.IntegerField(default=5)
@@ -789,6 +816,15 @@ class SeriesListPage(PaginatedListPageMixin, Page):
     content_panels = Page.content_panels + [
         FieldPanel('series_per_page')
     ]
+
+    style_panels = ThemeablePage.style_panels
+
+    edit_handler = TabbedInterface([
+        ObjectList(content_panels, heading='Content'),
+        ObjectList(style_panels, heading='Page Style Options'),
+        ObjectList(Page.promote_panels, heading='Promote'),
+        ObjectList(Page.settings_panels, heading='Settings', classname="settings"),
+    ])
 
 
 class SeriesArticleLink(Orderable, models.Model):
