@@ -44,7 +44,7 @@
   /* Chrome, Safari, Opera */
   @-webkit-keyframes bounce {
     0%, 25%, 75%, 100% {
-        -webkit-transform: translateY(0); 
+        -webkit-transform: translateY(0);
     }
     50% {
         -webkit-transform: translateY(0.4em);
@@ -62,6 +62,16 @@
   @include container-full-bleed;
   @include rowheight-x;
 
+  section{
+    margin-bottom: 50px;
+    @media(max-width: $screen-sm){
+      margin-bottom: 25px;
+    }
+  }
+  section:last-child{
+    margin-bottom: 0px;
+  }
+
   h2 {
     @include subheading;
   }
@@ -69,7 +79,6 @@
   main h3{
      @include article-list-title;
   }
-
 
   //visualizations
   .simple{
@@ -151,7 +160,7 @@
   height: 50px;
   border-radius: 30px;
   background: $badge-color;
-    
+
   @media(min-width: $screen-sm){
     top: 0%;
   }
@@ -160,7 +169,7 @@
     display: table;
     margin-bottom: 0;
     height: 100%;
-    
+
     .table-cell {
       display: table-cell;
       vertical-align: middle;
@@ -194,4 +203,3 @@
 .most-popular{
   background: $button-bg-color;
 }
-

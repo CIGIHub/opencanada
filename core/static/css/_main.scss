@@ -90,10 +90,11 @@ button{
 }
 button:focus {outline:0;}
 
-.read-more {
-  text-align: center;
-  a.button {
-    @include button;
+a.read-more {
+  color: $light-grey;
+  i{
+    color: $red;
+    padding-left: 3px;
   }
 }
 

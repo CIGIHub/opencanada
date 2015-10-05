@@ -2,12 +2,10 @@
 
 <section class="fullbleed-section">
     <div class="container">
-        <h2>{{ heading_text }}</h2>
+        <h2><a class="read-more" href="{% slugurl more_link_slug %}">{{ heading_text }} <i class="fa fa-angle-right"></i></a></h2>
     </div>
     <div class="container-full-bleed">
         {% for row in item_collection %}
-
-
             <div class="row {% if forloop.last %}last{% endif %}">
             {% for item in row %}
                 <div class="col-sm-12 feature-item overlay">
@@ -38,8 +36,5 @@
             </div>
 
         {% endfor %}
-        <div class="read-more">
-            <a class="button" href="{% slugurl more_link_slug %}">{{ more_link_text }} <i class="fa fa-chevron-right"></i></a>
-        </div>
     </div>
-    </section>
+  </section>

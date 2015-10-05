@@ -1,7 +1,7 @@
 {% load  core_tags wagtailcore_tags article_tags wagtailimages_tags %}
 
 <section class="container items simple">
-    <h2>{{ heading_text }}</h2>
+      <h2><a class="read-more" href="{% slugurl more_link_slug %}">{{ heading_text }} <i class="fa fa-angle-right"></i></a></h2>
     {% for item_row in item_collection %}
         <div class="row {% if forloop.last %}last{% endif %}">
             {% for item in item_row %}
@@ -13,7 +13,4 @@
             {% endfor %}
         </div>
     {% endfor %}
-    <div class="read-more">
-        <a class="button" href="{% slugurl more_link_slug %}">{{ more_link_text }} <i class="fa fa-chevron-right"></i></a>
-    </div>
 </section>
