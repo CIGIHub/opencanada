@@ -19,7 +19,7 @@ $breakpoint: 1000px; //to match the javascript breakpoint variable.
 $border-black: solid 1px $black;
 $border-grey: solid 1px #ccc !default;
 $border-red: solid 1px $red;
-$border-white: solid 1px $white;
+$border-white: solid 1px $white !default;
 $border-light-grey: solid 1px #d6d6d6;
 
 
@@ -54,6 +54,7 @@ $subheading-color: #999999 !default;
 $article-list-link-color: #000!default;
 
 $caption-color: #929191 !default;
+$primary-topic-color: #fff !default;
 
 //buttons and pagers
 $button-text-color: $white !default;

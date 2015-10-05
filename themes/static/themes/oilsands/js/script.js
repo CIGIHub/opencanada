@@ -1,6 +1,8 @@
 jQuery(document).ready(function() {
 
     updateHeaderTransparency(); 
+    updateJumbotron();
+                        
 
     $('.wordmark').hover(function(){
         $(this).css("opacity", 1);
@@ -15,6 +17,7 @@ jQuery(document).ready(function() {
 
     $(window).resize(function(){
         updateHeaderTransparency();
+        updateJumbotron();
     });
 
     function updateHeaderTransparency() {
@@ -26,6 +29,18 @@ jQuery(document).ready(function() {
 	    } else if ($('.jumbotron').length && !$("body").hasClass("template-home-page")) {
 	         transparencyOn();
 	    }
+    }
+
+    //update the height of the jumbotron depending on the screen size.
+    //since we know the bg image is 1300 x 1175, we can always show the same percentage of the image
+    //no matter what screen size we are on.
+    function updateJumbotron(){
+
+        var width = $(window).width();
+        height = width * 1175 / 1300;
+        height = Math.min( 1000, Math.max( 550, height * 0.85)); //85% so there is some overlap into the main content
+
+        $('.jumbotron.main-feature').css("height", height + "px");
     }
 
     function transparencyOn() {
