@@ -2,7 +2,8 @@ from __future__ import absolute_import, unicode_literals
 
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
-from wagtail.wagtailadmin.edit_handlers import FieldPanel
+from wagtail.wagtailadmin.edit_handlers import (FieldPanel, ObjectList,
+                                                TabbedInterface)
 from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
@@ -10,6 +11,7 @@ from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 
 from core.base import PaginatedListPageMixin
+from themes.models import ThemeablePage
 
 
 @python_2_unicode_compatible
@@ -38,7 +40,7 @@ Organization.panels = [
 ]
 
 
-class EventListPage(PaginatedListPageMixin, Page):
+class EventListPage(PaginatedListPageMixin, ThemeablePage):
     subpage_types = ['EventPage']
 
     events_per_page = models.IntegerField(default=20)
@@ -56,9 +58,18 @@ class EventListPage(PaginatedListPageMixin, Page):
         FieldPanel('events_per_page')
     ]
 
+    style_panels = ThemeablePage.style_panels
+
+    edit_handler = TabbedInterface([
+        ObjectList(content_panels, heading='Content'),
+        ObjectList(style_panels, heading='Page Style Options'),
+        ObjectList(Page.promote_panels, heading='Promote'),
+        ObjectList(Page.settings_panels, heading='Settings', classname="settings"),
+    ])
+
 
 @python_2_unicode_compatible
-class EventPage(Page):
+class EventPage(ThemeablePage):
     date = models.DateTimeField("Event Date")
     location = models.CharField(max_length=255)
     event_link = models.URLField(max_length=255)
@@ -84,3 +95,12 @@ class EventPage(Page):
         FieldPanel("body"),
         SnippetChooserPanel('organization', Organization),
     ]
+
+    style_panels = ThemeablePage.style_panels
+
+    edit_handler = TabbedInterface([
+        ObjectList(content_panels, heading='Content'),
+        ObjectList(style_panels, heading='Page Style Options'),
+        ObjectList(Page.promote_panels, heading='Promote'),
+        ObjectList(Page.settings_panels, heading='Settings', classname="settings"),
+    ])

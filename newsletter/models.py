@@ -5,21 +5,23 @@ from django.utils.encoding import python_2_unicode_compatible
 from django.utils.timezone import now
 from modelcluster.fields import ParentalKey
 from wagtail.wagtailadmin.edit_handlers import (FieldPanel, InlinePanel,
-                                                PageChooserPanel)
+                                                ObjectList, PageChooserPanel,
+                                                TabbedInterface)
 from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
+from themes.models import ThemeablePage
+
 
 @python_2_unicode_compatible
-class NewsletterListPage(Page):
+class NewsletterListPage(ThemeablePage):
     subpage_types = ['NewsletterPage']
     intro_text = RichTextField()
     body = RichTextField()
 
     @property
     def subpages(self):
-        # Get list of live event pages that are descendants of this page
         subpages = NewsletterPage.objects.live().descendant_of(self).order_by('-issue_date')
 
         return subpages
@@ -27,15 +29,23 @@ class NewsletterListPage(Page):
     def __str__(self):
         return self.title
 
+    content_panels = Page.content_panels + [
+        FieldPanel('intro_text'),
+        FieldPanel('body'),
+    ]
 
-NewsletterListPage.content_panels = Page.content_panels + [
-    FieldPanel('intro_text'),
-    FieldPanel('body'),
-]
+    style_panels = ThemeablePage.style_panels
+
+    edit_handler = TabbedInterface([
+        ObjectList(content_panels, heading='Content'),
+        ObjectList(style_panels, heading='Page Style Options'),
+        ObjectList(Page.promote_panels, heading='Promote'),
+        ObjectList(Page.settings_panels, heading='Settings', classname="settings"),
+    ])
 
 
 @python_2_unicode_compatible
-class NewsletterPage(Page):
+class NewsletterPage(ThemeablePage):
     issue_date = models.DateField("Issue Date", default=now)
 
     @property
@@ -66,13 +76,21 @@ class NewsletterPage(Page):
     def __str__(self):
         return self.issue_date.strftime('%Y-%m-%d')
 
+    content_panels = Page.content_panels + [
+        FieldPanel('issue_date'),
+        InlinePanel('article_links', label="Articles", help_text='The first article will be the newsletter feature story'),
+        InlinePanel('external_article_links', label="External Articles"),
+        InlinePanel('event_links', label="Events"),
+    ]
 
-NewsletterPage.content_panels = Page.content_panels + [
-    FieldPanel('issue_date'),
-    InlinePanel('article_links', label="Articles", help_text='The first article will be the newsletter feature story'),
-    InlinePanel('external_article_links', label="External Articles"),
-    InlinePanel('event_links', label="Events"),
-]
+    style_panels = ThemeablePage.style_panels
+
+    edit_handler = TabbedInterface([
+        ObjectList(content_panels, heading='Content'),
+        ObjectList(style_panels, heading='Page Style Options'),
+        ObjectList(Page.promote_panels, heading='Promote'),
+        ObjectList(Page.settings_panels, heading='Settings', classname="settings"),
+    ])
 
 
 @python_2_unicode_compatible
