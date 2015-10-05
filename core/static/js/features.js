@@ -14,7 +14,6 @@ var FeatureStyles = FeatureStyles || {
                 
                 if ((bodyTag.hasClass('template-home-page')
                     || bodyTag.hasClass('template-article-page')
-                    || bodyTag.hasClass('template-chaptered-article-page')
                     || bodyTag.hasClass('template-series-page')
                     )
                     && $('.jumbotron').length) {

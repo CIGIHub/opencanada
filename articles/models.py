@@ -21,7 +21,7 @@ from wagtail.wagtailadmin.edit_handlers import (FieldPanel, InlinePanel,
                                                 PageChooserPanel,
                                                 StreamFieldPanel,
                                                 TabbedInterface)
-from wagtail.wagtailcore.fields import RichTextField, StreamField
+from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
@@ -91,7 +91,6 @@ register_snippet(FontStyle)
 
 class ArticleListPage(PaginatedListPageMixin, ThemeablePage):
     subpage_types = ['ArticlePage',
-                     # 'ChapteredArticlePage',
                      ]
 
     articles_per_page = models.IntegerField(default=20)
@@ -649,42 +648,6 @@ class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, Sharelinks, Pag
         ObjectList(style_panels, heading='Page Style Options'),
         ObjectList(promote_panels, heading='Promote'),
         ObjectList(settings_panels, heading='Settings', classname="settings"),
-    ])
-
-
-# TODO: remove once content is migrated to ArticlePages.
-class ChapteredArticlePage(ArticlePage):
-    works_cited = StreamField(
-        block_types=[
-            ('citation', article_fields.CitationBlock()),
-        ],
-        blank=True, null=True
-    )
-    end_notes = StreamField(
-        block_types=[
-            ('end_note', article_fields.EndNoteBlock()),
-        ],
-        blank=True, null=True
-    )
-
-    content_panels = Page.content_panels + [
-        FieldPanel('excerpt'),
-        InlinePanel('author_links', label="Authors"),
-        ImageChooserPanel('main_image'),
-        StreamFieldPanel('body'),
-        SnippetChooserPanel('primary_topic', Topic),
-        InlinePanel('topic_links', label="Secondary Topics"),
-        StreamFieldPanel('chapters'),
-        StreamFieldPanel('works_cited'),
-        StreamFieldPanel('end_notes'),
-        InlinePanel('endnote_links', label="End Notes"),
-    ]
-
-    edit_handler = TabbedInterface([
-        ObjectList(content_panels, heading='Content'),
-        ObjectList(ArticlePage.style_panels, heading='Page Style Options'),
-        ObjectList(ArticlePage.promote_panels, heading='Promote'),
-        ObjectList(ArticlePage.settings_panels, heading='Settings', classname="settings"),
     ])
 
 
