@@ -79,48 +79,48 @@ def create_themes(apps, schema_editor):
     )
 
     ContentBlockLink.objects.create(
-        theme_content=default_content,
-        block=about_block
+        theme_content_id=default_content.id,
+        block_id=about_block.id
     )
 
     ContentBlockLink.objects.create(
-        theme_content=default_content,
-        block=masthead_block
+        theme_content_id=default_content.id,
+        block_id=masthead_block.id
     )
 
     ContentBlockLink.objects.create(
-        theme_content=default_content,
-        block=newsletter_block
+        theme_content_id=default_content.id,
+        block_id=newsletter_block.id
     )
 
     ContentBlockLink.objects.create(
-        theme_content=default_content,
-        block=follow_block
+        theme_content_id=default_content.id,
+        block_id=follow_block.id
     )
 
     ContentBlockLink.objects.create(
-        theme_content=default_content,
-        block=tagline_block
+        theme_content_id=default_content.id,
+        block_id=tagline_block.id
     )
 
     ContentFollowLink.objects.create(
-        theme_content=default_content,
-        block=twitter
+        theme_content_id=default_content.id,
+        block_id=twitter.id
     )
 
     ContentFollowLink.objects.create(
-        theme_content=default_content,
-        block=facebook
+        theme_content_id=default_content.id,
+        block_id=facebook.id
     )
 
     ContentFollowLink.objects.create(
-        theme_content=default_content,
-        block=google_plus
+        theme_content_id=default_content.id,
+        block_id=google_plus.id
     )
 
     ContentFollowLink.objects.create(
-        theme_content=default_content,
-        block=rss_feed
+        theme_content_id=default_content.id,
+        block_id=rss_feed.id
     )
 
     default_theme, created = Theme.objects.get_or_create(
