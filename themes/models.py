@@ -18,11 +18,31 @@ def get_default_theme():
 
 
 @python_2_unicode_compatible
+class ThemeContent(models.Model):
+    name = models.CharField(max_length=255)
+    contact_email = models.EmailField(blank=True, null=True, help_text="Only provide if this should be different from the site default email contact address.")
+
+    panels = [
+        FieldPanel('name'),
+        FieldPanel('contact_email'),
+        InlinePanel('menu_links', label="Menus"),
+        InlinePanel('block_links', label="Content Blocks"),
+        InlinePanel('follow_links', label="Follow Links"),
+        InlinePanel('logo_links', label="Logos"),
+    ]
+
+    def __str__(self):
+        return self.name
+
+register_snippet(ThemeContent)
+
+
+@python_2_unicode_compatible
 class Theme(models.Model):
     name = models.CharField(max_length=1024)
     folder = models.CharField(max_length=1024, default="themes/default")
     is_default = models.BooleanField(default=False)
-    content = models.ForeignKey('ThemeContent', null=True)
+    content = models.ForeignKey(ThemeContent, null=True)
 
     def __str__(self):
         return self.name
@@ -31,7 +51,7 @@ class Theme(models.Model):
         FieldPanel('name'),
         FieldPanel('folder'),
         FieldPanel('is_default'),
-        SnippetChooserPanel('content', 'ThemeContent'),
+        SnippetChooserPanel('content', ThemeContent),
     ]
 
 register_snippet(Theme)
@@ -63,26 +83,6 @@ class ThemeablePage(Page):
             heading="Theme"
         ),
     ]
-
-
-@python_2_unicode_compatible
-class ThemeContent(models.Model):
-    name = models.CharField(max_length=255)
-    contact_email = models.EmailField(blank=True, null=True, help_text="Only provide if this should be different from the site default email contact address.")
-
-    panels = [
-        FieldPanel('name'),
-        FieldPanel('contact_email'),
-        InlinePanel('menu_links', label="Menus"),
-        InlinePanel('block_links', label="Content Blocks"),
-        InlinePanel('follow_links', label="Follow Links"),
-        InlinePanel('logo_links', label="Logos"),
-    ]
-
-    def __str__(self):
-        return self.name
-
-register_snippet(ThemeContent)
 
 
 class ContentBlockLink(models.Model):

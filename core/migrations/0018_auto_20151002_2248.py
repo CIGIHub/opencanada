@@ -10,7 +10,7 @@ import themes.models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('themes', '0003_theme_footer_content'),
+        ('themes', '0006_create_themes'),
         ('core', '0017_sitedefaults_contact_email'),
     ]
 
