@@ -61,7 +61,7 @@
 
     </head>
 
-    <body class="{% block body_class %}{% endblock %}">
+    <body class="{% block body_class %}{% endblock %}" style="{% block body_style %}{% endblock %}" >
     {% if ADMIN_ENABLED %}
         {% wagtailuserbar %}
     {% endif %}
