@@ -27,7 +27,7 @@ def get_site_defaults(context):
 
 
 @register.assignment_tag(takes_context=True)
-def section_image(context, item):
+def external_article_image(context, item):
     if hasattr(item, "source"):
         if item.source and item.source.logo:
             return item.source.logo

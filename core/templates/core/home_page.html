@@ -24,7 +24,6 @@
         </div>
 
         {% for row in self.articles %}
-
             {% for article in row %}
                 {% if article.fullbleed_feature == True and row|column_class == 12 %}
                     <div class="container-full-bleed">
@@ -34,7 +33,7 @@
             {% endfor %}
 
             {% if row|column_class == 4 %}
-                <div class="container">
+                <div class="container multi-block">
             {% endif %}
 
             <div class="row {% if forloop.last %}last {% endif %}">
@@ -44,14 +43,15 @@
                 <div class="col-sm-{{ row|column_class }} feature-item overlay">
                     {% if article.feature_style.include_image and article.feature_style.overlay_text %}
                         <div class="overlay-feature rowheight-{{ article.feature_style.number_of_rows }}">
+                          <a href="{{ article.url }}">
                             {% image article.main_image fill-910x560 as background_image %}
 
                             <div class="feature-image" style="background-image: url('{{ background_image.url }}')">
-                                <a href="{{ article.url }}"><div class="feature-image-overlay" style="background: rgba( {{ article.image_overlay_color.rgb }}, {{ article.opacity }} )"></div></a>
+                                <div class="feature-image-overlay" style="background: rgba( {{ article.image_overlay_color.rgb }}, {{ article.opacity }} )"></div>
                             </div>
                             <div class="feature-wrapper">
                                 <div class="feature-text {% if article.editors_pick or article == self.most_popular_article  %} article-feature{% endif %}" style="color: {{ article.font_style.text_colour.hex_value }};">
-                                    <h3><a style="color: {{ article.font_style.text_colour.hex_value }};" href="{{ article.url }}">{{ article.title }}</a></h3>
+                                    <h3 style="color: {{ article.font_style.text_colour.hex_value }};" href="{{ article.url }}">{{ article.title }}</h3>
                                     {% if article.feature_style.number_of_rows == 2 %}
                                         {% if article.subtitle %}
                                             <div class="feature-line">{{ article.subtitle|richtext }}</div>
@@ -59,21 +59,12 @@
                                             <div class="feature-line">{{ article.excerpt|richtext }}</div>
                                         {% endif %}
                                     {% endif %}
-
                                     {% if article.authors %}
-                                        {% spaceless %}
-                                        <div class="contributors">By:
-                                            {% for author in article.authors %}
-                                                <a href="{{ author.url }}" style="color: {{ article.font_style.text_colour.hex_value }};">
-                                                    {{ author.full_name }}</a>
-                                                <span>{% if not forloop.last %}, {% endif %}</span>
-                                            {% endfor %}
-                                        </div>
-                                    {% endspaceless %}
+                                        {% include 'articles/includes/article-contributors.html' with authors=article.authors links=False %}
                                     {% endif %}
                                 </div>
-                            </div>
-                            
+                              </div>
+                            </a>
                             {% if article.editors_pick %}
                                 <div class="editors-pick-link"><div class="table"><div class="table-cell"><a href="{% slugurl 'editors-picks' %}" class="article-feature editors-pick">Editor's Pick</a></div></div></div>
                             {% endif %}
@@ -82,60 +73,50 @@
                             {% endif %}
 
                             <div class="camera"><i class="fa fa-camera"></i></div>
+
                         </div>
 
                     {% elif article.feature_style.include_image and not article.feature_style.overlay_text %}
+                      {% if article.editors_pick %}
+                          <div class="editors-pick-link"><div class="table"><div class="table-cell"><a href="{% slugurl 'editors-picks' %}" class="article-feature editors-pick">Editor's Pick</a></div></div></div>
+                      {% endif %}
+                      {% if article == self.most_popular_article %}
+                          <div class="most-popular"><div class="table"><div class="table-cell"><a href="{% slugurl 'most-popular' %}" class="article-feature ">Most Popular</a></div></div></div>
+                      {% endif %}
+                      <a href="{{ article.url }}">
                         <div class="image-feature">
-                            {% if article.editors_pick %}
-                                <div class="editors-pick-link"><div class="table"><div class="table-cell"><a href="{% slugurl 'editors-picks' %}" class="article-feature editors-pick">Editor's Pick</a></div></div></div>
-                            {% endif %}
-                            {% if article == self.most_popular_article %}
-                                <div class="most-popular"><div class="table"><div class="table-cell"><a href="{% slugurl 'most-popular' %}" class="article-feature ">Most Popular</a></div></div></div>
-                            {% endif %}
-                            <figure><a href="{{ article.url }}">{%  image article.main_image fill-710x475 %}</a></figure>
-                            <div class="feature-content">
-                                <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
-                                {% if article.authors %}
-                                    {% spaceless %}
-                                    <div class="contributors">By:
-                                        {% for author in article.authors %}
-                                            <a href="{{ author.url }}">{{ author.full_name }}</a><span>{% if not forloop.last %}, {% endif %}</span>
-                                        {% endfor %}
-                                    </div>
-                                    {% endspaceless %}
-                                {% endif %}
-                            </div>
+                          <figure>{%  image article.main_image fill-710x475 %}</figure>
+                          <div class="feature-content">
+                              <h3>{{ article.title }}</h3>
+                              {% if article.authors %}
+                                  {% include 'articles/includes/article-contributors.html' with authors=article.authors links=False %}
+                              {% endif %}
+                          </div>
                         </div>
-
+                      </a>
                     {% else %}
+                      {% if article.editors_pick %}
+                          <div class="editors-pick-link"><div class="table"><div class="table-cell"><a href="{% slugurl 'editors-picks' %}" class="article-feature editors-pick">Editor's Pick</a></div></div></div>
+                      {% endif %}
+                      {% if article == self.most_popular_article %}
+                          <div class="most-popular"><div class="table"><div class="table-cell"><a href="{% slugurl 'most-popular' %}" class="article-feature ">Most Popular</a></div></div></div>
+                      {% endif %}
+                      <a href="{{ article.url }}">
                         <div class="simple-feature feature-content">
-                            {% if article.editors_pick %}
-                                <div class="editors-pick-link"><div class="table"><div class="table-cell"><a href="{% slugurl 'editors-picks' %}" class="article-feature editors-pick">Editor's Pick</a></div></div></div>
-                            {% endif %}
-                            {% if article == self.most_popular_article %}
-                                <div class="most-popular"><div class="table"><div class="table-cell"><a href="{% slugurl 'most-popular' %}" class="article-feature ">Most Popular</a></div></div></div>
-                            {% endif %}
-                            <h3 class="{% if article.editors_pick or article == self.most_popular_article %} article-feature{% endif %}"><a href="{{ article.url }}">{{ article.title }}</a></h3>
+                            <h3 class="{% if article.editors_pick or article == self.most_popular_article %} article-feature{% endif %}">{{ article.title }}</h3>
 
                             {% if article.subtitle %}
                                 <div class="feature-line">{{ article.subtitle|richtext }}</div>
                             {% else %}
                                 <div class="feature-line">{{ article.excerpt|richtext }}</div>
                             {% endif %}
-
                             {% if article.authors %}
-                                {% spaceless %}
-                                <div class="contributors">By:
-                                    {% for author in article.authors %}
-                                        <a href="{{ author.url }}">{{ author.full_name }}</a><span>{% if not forloop.last %}, {% endif %}</span>
-                                    {% endfor %}
-                                </div>
-                                {% endspaceless %}
+                                {% include 'articles/includes/article-contributors.html' with authors=article.authors links=False %}
                             {% endif %}
                         </div>
+                      </a>
                     {% endif %}
-                </div>
-
+                  </div>
                 {% endfor %}
                 </div>
             </div>
@@ -144,7 +125,7 @@
 
     {% include 'core/includes/section-fullbleed.html' with heading_text="In-Depths" item_collection=self.series use_ring=False more_link_slug='indepth' more_link_text='More In-Depths' %}
 
-    {% include 'core/includes/section-circle-descriptions.html' with heading_text="Best of the Web" item_collection=self.external_articles use_ring=True more_link_slug='readings' more_link_text='More from the Web' %}
+    {% include 'core/includes/section-external-features.html' with heading_text="Best of the Web" item_collection=self.external_articles use_ring=True more_link_slug='readings' more_link_text='More from the Web' %}
 
     {% include 'core/includes/section-simple.html' with heading_text="Graphics" item_collection=self.graphics  more_link_slug='visualizations' more_link_text='More Graphics' %}
 
