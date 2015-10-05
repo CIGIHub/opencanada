@@ -127,25 +127,25 @@ def create_themes(apps, schema_editor):
         name="default"
     )
     default_theme.is_default=True
-    default_theme.content=default_content
+    default_theme.content_id=default_content.id
     default_theme.save()
 
     dark, created = Theme.objects.get_or_create(
         name="dark",
     )
-    dark.content = default_content
+    dark.content_id = default_content.id
     dark.save()
 
     light, created = Theme.objects.get_or_create(
         name="light"
     )
-    light.content = default_content
+    light.content_id = default_content.id
     light.save()
 
     lind, created = Theme.objects.get_or_create(
         name="lind"
     )
-    lind.content = default_content
+    lind.content_id = default_content.id
     lind.save()
 
 
