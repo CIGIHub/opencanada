@@ -1,20 +1,32 @@
 from django.db import models
-from wagtail.wagtailadmin.edit_handlers import FieldPanel, RichTextFieldPanel
+from wagtail.wagtailadmin.edit_handlers import (FieldPanel, ObjectList,
+                                                RichTextFieldPanel,
+                                                TabbedInterface)
 from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailcore.models import Page
 
 from core.base import PaginatedListPageMixin
+from themes.models import ThemeablePage
 
 
-class JobPostingPage(Page):
+class JobPostingPage(ThemeablePage):
     body = RichTextField()
 
     content_panels = Page.content_panels + [
         RichTextFieldPanel('body'),
     ]
 
+    style_panels = ThemeablePage.style_panels
 
-class JobPostingListPage(PaginatedListPageMixin, Page):
+    edit_handler = TabbedInterface([
+        ObjectList(content_panels, heading='Content'),
+        ObjectList(style_panels, heading='Page Style Options'),
+        ObjectList(Page.promote_panels, heading='Promote'),
+        ObjectList(Page.settings_panels, heading='Settings', classname="settings"),
+    ])
+
+
+class JobPostingListPage(PaginatedListPageMixin, ThemeablePage):
     subpage_types = [
         'JobPostingPage',
     ]
@@ -31,3 +43,12 @@ class JobPostingListPage(PaginatedListPageMixin, Page):
     content_panels = Page.content_panels + [
         FieldPanel('jobs_per_page'),
     ]
+
+    style_panels = ThemeablePage.style_panels
+
+    edit_handler = TabbedInterface([
+        ObjectList(content_panels, heading='Content'),
+        ObjectList(style_panels, heading='Page Style Options'),
+        ObjectList(Page.promote_panels, heading='Promote'),
+        ObjectList(Page.settings_panels, heading='Settings', classname="settings"),
+    ])

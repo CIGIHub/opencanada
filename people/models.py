@@ -6,14 +6,17 @@ from django.db import models
 from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
 from wagtail.wagtailadmin.edit_handlers import (FieldPanel, MultiFieldPanel,
-                                                RichTextFieldPanel)
+                                                ObjectList, RichTextFieldPanel,
+                                                TabbedInterface)
 from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
 
+from themes.models import ThemeablePage
 
-class ContributorListPage(Page):
+
+class ContributorListPage(ThemeablePage):
     subpage_types = ['ContributorPage']
 
     def get_rows(self, contributors, number_of_columns=3, max_columns=4):
@@ -56,9 +59,18 @@ class ContributorListPage(Page):
         contributors = ContributorPage.objects.live().filter(featured=True).order_by('last_name', 'first_name')
         return self.get_rows(contributors)
 
+    style_panels = ThemeablePage.style_panels
+
+    edit_handler = TabbedInterface([
+        ObjectList(Page.content_panels, heading='Content'),
+        ObjectList(style_panels, heading='Page Style Options'),
+        ObjectList(Page.promote_panels, heading='Promote'),
+        ObjectList(Page.settings_panels, heading='Settings', classname="settings"),
+    ])
+
 
 @python_2_unicode_compatible
-class ContributorPage(Page):
+class ContributorPage(ThemeablePage):
     first_name = models.CharField(max_length=255, blank=True, default="")
     last_name = models.CharField(max_length=255, blank=True, default="")
     nickname = models.CharField(max_length=1024, blank=True, default="")
@@ -126,3 +138,12 @@ class ContributorPage(Page):
             heading="Featuring Settings"
         )
     ]
+
+    style_panels = ThemeablePage.style_panels
+
+    edit_handler = TabbedInterface([
+        ObjectList(content_panels, heading='Content'),
+        ObjectList(style_panels, heading='Page Style Options'),
+        ObjectList(promote_panels, heading='Promote'),
+        ObjectList(Page.settings_panels, heading='Settings', classname="settings"),
+    ])
