@@ -30,6 +30,7 @@
 @mixin article-list-title{
   font-size: 22px;
   font-weight: 900;
+  color: $article-list-link-color;
   a{
       color: $article-list-link-color;
   }
@@ -147,7 +148,7 @@
 
 @mixin search-form{
   font-family: $sans-serif;
-  
+
   button{
     @include button($sans-serif);
     padding: 3px 6px;
@@ -173,7 +174,7 @@
     &::-ms-clear {
       display: none;
     }
-    
+
   }
 
   input:focus{
@@ -207,7 +208,7 @@
     }
 
     button {
-      
+
       width: 32%;
       float:right;
     }
