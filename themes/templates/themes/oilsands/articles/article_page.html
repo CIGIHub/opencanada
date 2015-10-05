@@ -7,6 +7,7 @@
     background-image:url('{% static 'themes/oilsands/img/footer_bg.png' %}');
 {% endblock %}
 
+
 {% block theme_css %}
     <link rel="stylesheet" type="text/x-scss" href="{% static 'themes/oilsands/css/oilsands.scss' %}">
 {% endblock %}
@@ -22,11 +23,15 @@
     {% include 'themes/oilsands/header.html' %}
 {% endblock %}
 
+{% block main_style %}
+    {% image self.main_image original as bg_image %}
+    background-image:url('{{ bg_image.url }}');
+{% endblock %}
 
 {% block content %}
 
     {% if self.main_image and self.include_main_image_overlay %}
-        {% include 'articles/includes/article-feature.html' with metadata='articles/includes/article-metadata.html' %}
+        {% include 'themes/oilsands/articles/article-feature.html' with metadata='articles/includes/article-metadata.html' %}
     {% endif %}
 
     <article id="article-page">
@@ -104,12 +109,6 @@
             </div>
         {% endif %}
     </article>
-
-    {% block related_articles %}
-        {% with article_count=3 %}
-            {% include 'articles/includes/related_articles.html' with heading='h3' image=True %}
-        {% endwith %}
-    {% endblock %}
 
 {% endblock %}
 
