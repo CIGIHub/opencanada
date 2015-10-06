@@ -95,9 +95,8 @@
                         {% if self.citations_heading %}
                         <h2>{{ self.citations_heading }}</h2>
                         {% endif %}
-                        {{ self.works_cited }}
-                            {% for endnote in self.endnote_links.all %}
-                                <div class="citation">{{ endnote.text|richtext }}</div>
+                            {% for citation in self.citation_links.all %}
+                                <div class="citation">{{ citation.text|richtext }}</div>
                             {% endfor %}
                     </div>
                 </div>
