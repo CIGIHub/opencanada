@@ -1,7 +1,7 @@
 jQuery(document).ready(function() {
 
     updateHeaderTransparency();
-    updateFeature();
+    updateMainFeature();
 
     $(window).scroll(function(){
 	    updateHeaderTransparency();
@@ -9,7 +9,7 @@ jQuery(document).ready(function() {
 
     $(window).resize(function(){
         updateHeaderTransparency();
-        updateFeature();
+        updateMainFeature();
     });
 
     function updateHeaderTransparency() {
@@ -26,7 +26,7 @@ jQuery(document).ready(function() {
     //update the height of the main feature depending on the screen size.
     //since we know the bg image is 1300 x 1175, we can always show the same percentage of the image
     //no matter what screen size we are on.
-    function updateFeature(){
+    function updateMainFeature(){
 
         var width = $(window).width();
         height = width * 1175 / 1300;
