@@ -46,10 +46,11 @@
         border: none;
         background: none;
         width:74%;
-        padding: 5px 5px 0 0;
+        padding: 2px 5px 0 0;
         box-sizing:border-box;
-        margin: 3px 0px 0 0px;
+        margin: 0;
         font-size: 12px;
+        height:28px;
         outline: none;
         float:left;
       }
@@ -68,6 +69,12 @@
         line-height: 28px;
       }
     }
+  }
+}
+
+.newsletter-list {
+  h1 {
+    @include subheading();
   }
 }
 
