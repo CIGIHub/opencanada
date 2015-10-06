@@ -45,8 +45,8 @@ jQuery(document).ready(function() {
 
     function transparencyOff() {
         $('header').removeClass("transparency");
-        $('#toggle-mobile').show();
-        $('#search-box-toggle').show();
+        $('#toggle-mobile').fadeIn(1000);
+        $('#search-box-toggle').fadeIn(1000);
         $('#main-menu').show();
         //$('.wordmark').css("opacity",1);
 

@@ -29,6 +29,15 @@ header{
 	&.transparency {
     	position: absolute;
 	}
+
+	&.scrolled {
+		border-bottom:1px solid #efefef;
+	}
+
+	#main-menu.open {
+		border-right: 1px solid #efefef;
+		border-top:1px solid #efefef;
+	}
 }
 
 
