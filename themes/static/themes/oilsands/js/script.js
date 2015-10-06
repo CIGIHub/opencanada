@@ -1,7 +1,7 @@
 jQuery(document).ready(function() {
 
-    updateHeaderTransparency(); 
-    updateJumbotron();
+    updateHeaderTransparency();
+    updateFeature();
 
     $(window).scroll(function(){
 	    updateHeaderTransparency();
@@ -9,30 +9,30 @@ jQuery(document).ready(function() {
 
     $(window).resize(function(){
         updateHeaderTransparency();
-        updateJumbotron();
+        updateFeature();
     });
 
     function updateHeaderTransparency() {
         var offset = ($('header').height() + parseInt($('main').css('padding-top')) ) * -1;
-        $('.jumbotron.main-feature').css("margin-top", offset);
+        $('.main-feature').css("margin-top", offset);
 
     	if ($('header').hasClass('scrolled') || $('#search-box').hasClass("open")) {
 	        transparencyOff();
-	    } else if ($('.jumbotron').length && !$("body").hasClass("template-home-page")) {
+	    } else if ($('.main-feature').length && !$("body").hasClass("template-home-page")) {
 	         transparencyOn();
 	    }
     }
 
-    //update the height of the jumbotron depending on the screen size.
+    //update the height of the main feature depending on the screen size.
     //since we know the bg image is 1300 x 1175, we can always show the same percentage of the image
     //no matter what screen size we are on.
-    function updateJumbotron(){
+    function updateFeature(){
 
         var width = $(window).width();
         height = width * 1175 / 1300;
         height = Math.min( 1000, Math.max( 550, height * 0.85)); //85% so there is some overlap into the main content
 
-        $('.jumbotron.main-feature').css("height", height + "px");
+        $('.main-feature').css("height", height + "px");
     }
 
     function transparencyOn() {
@@ -50,12 +50,12 @@ jQuery(document).ready(function() {
         $('#main-menu').show();
         //$('.wordmark').css("opacity",1);
 
-        if ($('#search-box').hasClass("open") && $(window).width() >= breakpoint) {  
-            
+        if ($('#search-box').hasClass("open") && $(window).width() >= breakpoint) {
+
             if ($('header').hasClass('collapsed')) {
                 $('#toggle-mobile').show();
             } else {
-               $('#toggle-mobile').hide(); 
+               $('#toggle-mobile').hide();
             }
         }
     }
