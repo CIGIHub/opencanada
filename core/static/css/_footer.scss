@@ -30,7 +30,7 @@ footer{
       padding: 3px 0px;
       @include type(white);
     }
-    @include inline-list-divided($red);
+    @include inline-list-divided($site-primary-color);
     ul li a:hover{
       text-decoration: underline;
     }
@@ -61,7 +61,7 @@ footer{
   .row.infobar{
     display: table;
     border-top:$border-light-grey;
-    
+
     .col-sm-4 {
       border-right: $border-light-grey;
       display: table-cell;
@@ -99,7 +99,7 @@ footer{
       display:block;
       border-top: $border-light-grey;
       border-right: none;
-      
+
       &:first-child {
         border-top:0;
       }
@@ -107,9 +107,9 @@ footer{
   }
 
   .social-links{
-    @include inline-list($red, 18px);
-    
-    ul { 
+    @include inline-list($site-primary-color, 18px);
+
+    ul {
       display: inline-block;
       padding-left:1em;
 
@@ -132,7 +132,7 @@ footer{
     }
   }
 
-  @media(min-width: $screen-xs) and (max-width: $screen-sm + -1) { 
+  @media(min-width: $screen-xs) and (max-width: $screen-sm + -1) {
     .row.infobar .col-sm-4:last-child {
       .newsletter-form, .follow {
         display: block;
@@ -159,7 +159,7 @@ footer{
   }
 
   @media(min-width: $screen-sm) {
-    
+
     padding-bottom: 60px;
 
     .row.infobar {
@@ -168,5 +168,5 @@ footer{
 
   }
 
-  
+
 }

@@ -23,7 +23,7 @@ h1, h2, h3, h4{
   }
 }
 
-h1, .jumbotron h1{
+h1, .main-feature h1{
   @include article-title;
 }
 
@@ -93,7 +93,7 @@ button:focus {outline:0;}
 a.read-more {
   color: $light-grey;
   i{
-    color: $red;
+    color: $site-primary-color;
     padding-left: 3px;
   }
 }

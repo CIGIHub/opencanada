@@ -55,7 +55,7 @@ var Sharing = Sharing || {
                 }
             },
             initializeForWindow: function () {
-                if (($("article").length > 0) && ($(".jumbotron").length > 0)) {
+                if (($("article").length > 0) && ($(".main-feature").length > 0)) {
                     if ($(window).width() >= breakpoint) {
                         $('ul.share-links').addClass("below-feature");
                     }

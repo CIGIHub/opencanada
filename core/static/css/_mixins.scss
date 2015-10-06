@@ -36,7 +36,7 @@
 @mixin article-overlay-title{
   font-size: 45px;
   font-weight: 700;
-  color: #fff;
+  color: $overlay-text-color;
 }
 
 @mixin container-full-bleed{
@@ -149,7 +149,7 @@
     padding: 3px 6px;
     width: 26%;
     float:left;
-    border:1px solid $red;
+    border:1px solid $site-primary-color;
 
     &:hover {
 
@@ -234,7 +234,7 @@
     &:hover, &:focus{
       color: $overlay-link-color;
       h3, h1{
-        color: $red;
+        color: $site-primary-color;
         transition:color 0.5s;
       }
     }
@@ -263,7 +263,6 @@
     z-index: 10;
     top: 20%;
     width:100%;
-    pointer-events:none;
 
     .feature-text{
       padding-left:40px;
@@ -272,7 +271,7 @@
       max-width: 940px;
       margin: 0 auto;
       .feature-label{
-        @include type($red, 22px);
+        @include type($site-primary-color, 22px);
         font-weight: 900;
       }
     }
@@ -304,7 +303,7 @@
     &.highlighted,
     &:hover{
       cursor: pointer;
-      color: $red;
+      color: $site-primary-color;
     }
   }
     @media(max-width: $screen-sm){

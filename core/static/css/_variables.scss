@@ -1,5 +1,5 @@
 //color library
-$red: #bf1e2e;
+//$red: #bf1e2e;
 $white: #ffffff;
 $black: #000000;
 $blue: #0098FD;
@@ -7,6 +7,8 @@ $grey: #666;
 $light-grey: #a5a5a5;
 $mid-grey: #d6d6d6;
 $background-grey: #f3f0f0;
+
+$site-primary-color: #bf1e2e;
 
 //screen settings
 $container-large-desktop: 940px;
@@ -18,7 +20,7 @@ $breakpoint: 1000px; //to match the javascript breakpoint variable.
 //borders
 $border-black: solid 1px $black;
 $border-grey: solid 1px #ccc !default;
-$border-red: solid 1px $red;
+$border-red: solid 1px $site-primary-color;
 $border-white: solid 1px $white !default;
 $border-light-grey: solid 1px #d6d6d6;
 
@@ -33,19 +35,19 @@ $font-size-base: 15px !default;
 $body-font-weight: 300 !default;
 $body-font-line-height: 165% !default;
 $text-color: #333 !default;
-$text-link-color: $red !default;
+$text-link-color: $site-primary-color !default;
 $text-link-hover-color: $text-color !default;
 
 $overlay-text-color: #fff !default;
 $overlay-link-color: #fff !default;
-$overlay-link-hover-color: $red !default;
+$overlay-link-hover-color: $site-primary-color !default;
 
 $footer-bg-color: $white !default;
 $footer-text-color: $black !default;
 $footer-link-color: $black !default;
-$footer-link-hover-color: $red !default;
+$footer-link-hover-color: $site-primary-color !default;
 
-$header-bg-color: $red !default;
+$header-bg-color: $site-primary-color !default;
 $header-collapsed-bg-color: #000 !default;
 $header-text-color: #fff !default;
 $header-link-color: #fff !default;
@@ -62,34 +64,34 @@ $primary-topic-color: #fff !default;
 //buttons and pagers
 $button-text-color: $white !default;
 $button-text-hover-color: $white !default;
-$button-bg-color: $red !default;
+$button-bg-color: $site-primary-color !default;
 $button-bg-hover-color: $black !default;
 
 //article elements
-$topic-link-color: $red !default;
+$topic-link-color: $site-primary-color !default;
 
 
 $blurb-author-link-color: $text-color !default;
-$blurb-link-hover-color: $red !default;
+$blurb-link-hover-color: $site-primary-color !default;
 $blurb-link-color: $text-color !default;
-$blurb-link-hover-color: $red !default;
+$blurb-link-hover-color: $site-primary-color !default;
 $blurb-bio-text-color: #666 !default;
 $blurb-border-color: $grey !default;
 $blurb-border: 1px solid $blurb-border-color !default;
 
 $article-block-bg-color: transparent !default;
 $article-block-border-width:3px !default;
-$article-block-border-color:$red !default;
+$article-block-border-color:$site-primary-color !default;
 $article-block-text-color: $light-grey !default;
-$article-block-link-color: $red !default;
+$article-block-link-color: $site-primary-color !default;
 $article-block-list-marker-color: $grey !default;
 
 $article-quote-border-width: 3px !default;
-$article-quote-border-color: $red !default;
+$article-quote-border-color: $site-primary-color !default;
 $article-quote-border: solid $article-quote-border-width $article-quote-border-color !default;
 $article-quote-text-color: $light-grey !default;
 
-$article-shareable-text-color: $red !default;
+$article-shareable-text-color: $site-primary-color !default;
 
 $article-toc-bg-color: $article-block-bg-color !default;
 $article-toc-border-width: 0px !default;
@@ -105,17 +107,17 @@ $article-end-notes-color:$light-grey !default;
 $contributor-label-color: $caption-color !default;
 $related-contributors-color:$light-grey !default;
 $related-contributors-hover-color: $text-color !default;
-$related-title-color: $red !default;
+$related-title-color: $site-primary-color !default;
 $related-title-hover-color: $text-color !default;
 
 
-$top-link-color: $red !default;
+$top-link-color: $site-primary-color !default;
 
 $share-link-color: $text-link-color !default;
 $share-link-hover-color: $text-link-hover-color !default;
 
 $badge-color: $blue !default;
-$divider-color: $red !default;
+$divider-color: $site-primary-color !default;
 
 $row-border: $border-grey !default;
 
@@ -124,9 +126,7 @@ $main-menu-color: #fff !default;
 
 
 //bootstrap overrides
-$input-border-focus: $red !default;
-$jumbotron-bg: $white;
-$jumbotron-padding: 0;
+$input-border-focus: $site-primary-color !default;
 $font-family-sans-serif:  $sans-serif;
 $font-family-serif: $serif;
 $pager-hover-bg: $black;

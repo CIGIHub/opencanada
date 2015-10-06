@@ -6,8 +6,15 @@
     @include article-overlay;
     @include fullbleed-overlay;
 
-    .feature-text{
-      padding:0 20px;
+    color: $overlay-text-color;
+    a{display:inline-block;
+      &:hover{
+        color: $site-primary-color;
+      }
+    }
+
+    h2{
+      color: $overlay-text-color;
     }
 
     .date{
@@ -19,9 +26,12 @@
       font-weight: 700;
       margin-bottom: 10px;
       border-bottom: $border-white;
-      a {
+      a{
         padding-left: 0.5em;
         color:$primary-topic-color;
+        &:hover{
+          color: $site-primary-color;
+        }
       }
     }
 
@@ -379,12 +389,12 @@ article {
   }
 
   .type {
-    @include type($red);
+    @include type($site-primary-color);
     @include subheading(14px);
   }
   .primary-topic {
     @include subheading(14px);
-    @include type($red);
+    @include type($site-primary-color);
     margin-top: 0px;
 
     i {

@@ -10,7 +10,7 @@
     &:hover, &:focus{
       color: $text-color;
       h3{
-        color: $red;
+        color: $site-primary-color;
         transition:color 0.5s;
       }
     }
