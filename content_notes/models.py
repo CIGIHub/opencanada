@@ -15,13 +15,13 @@ logger = logging.getLogger('OpenCanada.ArticleModels')
 
 
 def get_uuid():
-    uuid4().hex
+    return uuid4().hex
 
 
 @python_2_unicode_compatible
 class EndNote(Orderable):
     text = RichTextField()
-    uuid = models.CharField(default=get_uuid, max_length=64)
+    uuid = models.CharField(default=get_uuid, max_length=64, blank=True)
     article = ParentalKey(
         "articles.ArticlePage",
         null=True,
