@@ -52,6 +52,8 @@
     }
     .feature-content{
       padding: 10px;
+      font-size: 12px;
+      line-height: 165%;
     }
     .feature-box{
       position: relative;
@@ -135,15 +137,6 @@
   }
 }
 
-//
-//   .container-full-bleed .overlay-feature{
-//     @media(max-width: $screen-xs-max) {
-//       margin-left: 0px;
-//       margin-right: 0px;
-//       border-bottom: 0;
-//     }
-//   }
-//
 //   // .overlay-feature{
 //   //   @include article-overlay;
 //   //   @media(max-width: $screen-xs-max) {
@@ -151,9 +144,6 @@
 //   //     margin-right:-15px;
 //   //     border-bottom: 0;
 //   //   }
-//   //
-//   //   h3{
-//   //     @include article-overlay-title;
 //   //
 //   //     @media(max-width: $screen-sm){
 //   //       font-size: 32px;
@@ -177,12 +167,6 @@
 //   //   }
 //   // }
 //
-//
-//
-//   .feature-wrapper{
-//     padding:0px;
-//     max-width: 100%;
-//   }
 //
 //   .image-feature{
 //     figure{
