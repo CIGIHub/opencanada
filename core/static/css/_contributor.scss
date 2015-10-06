@@ -14,7 +14,7 @@
     color: $text_color;
   }
   a:hover{
-    color: $red;
+    color: $site-primary-color;
   }
   .contributor{
     display: inline-block;
@@ -98,7 +98,7 @@
     font-size: 11px;
     line-height: 130%;
   }
-  
+
   .contributor{
     max-width: 250px;
     margin: 0 auto 20px;
@@ -118,7 +118,7 @@
       width:50%;
     }
   }
-  
+
 
 }
 .nonfeatured-contributors{

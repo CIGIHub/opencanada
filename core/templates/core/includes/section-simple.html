@@ -1,16 +1,27 @@
 {% load  core_tags wagtailcore_tags article_tags wagtailimages_tags %}
 
-<section class="container items simple">
+<section class="simple-feature-section">
+  <div class="container">
       <h2><a class="read-more" href="{% slugurl more_link_slug %}">{{ heading_text }} <i class="fa fa-angle-right"></i></a></h2>
+  </div>
+  <div class="container multi-block">
     {% for item_row in item_collection %}
         <div class="row {% if forloop.last %}last{% endif %}">
             {% for item in item_row %}
-                {% section_image item as image %}
                 <div class="col-sm-{{ item_row|column_class }}{% if forloop.last %} last{% endif %}">
-                <a href="{{ item.url }}">{% image image fill-455x302 %}</a>
-                <h3 class="columns-{{ item_row|column_class }}"><a href="{{ item.url }}">{{ item.title }}</a></h3>
+                  <a href="{{ item.url }}">
+                    <div class="feature-box graphics-feature">
+                      {% if item.main_image %}
+                          {% image item.main_image fill-455x302 %}
+                      {% endif %}
+                      <div class="feature-content">
+                        <h3 class="columns-{{ item_row|column_class }}">{{ item.title }}</h3>
+                      </div>
+                    </div>
+                  </a>
                 </div>
             {% endfor %}
         </div>
     {% endfor %}
+  </div>
 </section>

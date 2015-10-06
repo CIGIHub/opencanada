@@ -1,35 +1,27 @@
 {% load static core_tags wagtailcore_tags wagtailimages_tags %}
-<div class="jumbotron main-feature overlay" style="height: 400px;">
-    {% image self.typed_featured_item.main_image fill-2048x1200-c100 as background_image %}
-    <div class="feature-image" style="background-image: url('{{ background_image.url }}')">
-        <a href="{{ self.typed_featured_item.url }}">
-            <div class="feature-image-overlay"
-                 style="background: rgba( {% if self.typed_featured_item.image_overlay_color.rgb %} {{ self.typed_featured_item.image_overlay_color.rgb }} {% endif %},
-                         {% if self.typed_featured_item.opacity %} {{ self.typed_featured_item.opacity }} {% endif %})">
-            </div>
-        </a>
-    </div>
-    <div class="feature-wrapper">
-        <div class="feature-text" style="color: {{ self.typed_featured_item.font_style.text_colour.hex_value }}">
-            <h1>
-            <a style="color: {{ self.typed_featured_item.font_style.text_colour.hex_value }}; font-size: {{ self.typed_featured_item.font_style.font_size }}em; line-height: {{ self.typed_featured_item.font_style.line_size }}%;" href="{{ self.typed_featured_item.url }}">{{ self.typed_featured_item.title }}</a></h1>
-            {%  if self.typed_featured_item.subtitle %}
-                <div class="feature-line"><a href="{{ self.typed_featured_item.url }}">{{ self.typed_featured_item.subtitle|richtext }}</a></div>
-            {%  elif self.typed_featured_item.excerpt %}
-                <div class="feature-line"><a href="{{ self.typed_featured_item.url }}">{{ self.typed_featured_item.excerpt|richtext }}</a></div>
-            {% endif %}
-            {% if self.typed_featured_item.authors %}
-                <div class="contributors" style="color: {{ self.typed_featured_item.font_style.text_colour.hex_value }}">By:
-                    {% for author in self.typed_featured_item.authors %}
-                       <a style="color: {{ self.typed_featured_item.font_style.text_colour.hex_value }}" href="{{ author.url }}">{{ author.first_name }} {{ author.last_name }}</a><span>{% if not forloop.last %}, {% endif %}</span>
-                    {% endfor %}
-                </div>
-            {% endif %}
-
-
+<div class="container-full-bleed main-feature overlay">
+    <a href="{{ self.typed_featured_item.url }}">
+      {% image self.typed_featured_item.main_image fill-2048x1200-c100 as background_image %}
+      <div class="feature-image" style="background-image: url('{{ background_image.url }}')">
+        <div class="feature-image-overlay"
+             style="background: rgba( {% if self.typed_featured_item.image_overlay_color.rgb %} {{ self.typed_featured_item.image_overlay_color.rgb }} {% endif %},
+                     {% if self.typed_featured_item.opacity %} {{ self.typed_featured_item.opacity }} {% endif %})">
         </div>
-    </div>
-
+      </div>
+      <div class="feature-wrapper">
+          <div class="feature-text" style="color: {{ self.typed_featured_item.font_style.text_colour.hex_value }}">
+              <h1 style="color: {{ self.typed_featured_item.font_style.text_colour.hex_value }}; font-size: {{ self.typed_featured_item.font_style.font_size }}em; line-height: {{ self.typed_featured_item.font_style.line_size }}%;" href="{{ self.typed_featured_item.url }}">{{ self.typed_featured_item.title }}</h1>
+              {%  if self.typed_featured_item.subtitle %}
+                  <div class="feature-line">{{ self.typed_featured_item.subtitle|richtext }}</div>
+              {%  elif self.typed_featured_item.excerpt %}
+                  <div class="feature-line">{{ self.typed_featured_item.excerpt|richtext }}</div>
+              {% endif %}
+              {% if self.typed_featured_item.authors %}
+                  {% include 'articles/includes/article-contributors.html' with authors=self.typed_featured_item.authors links=False %}
+              {% endif %}
+          </div>
+      </div>
+    </a>
     <div class="scroll"><a href="#features" style="color: {{ self.typed_featured_item.font_style.text_colour.hex_value }};"><i class="fa fa-angle-down"></i></a></div>
     <div class="camera" style="color: {{ self.typed_featured_item.font_style.text_colour.hex_value }};"><i class="fa fa-camera"></i></div>
 </div>
