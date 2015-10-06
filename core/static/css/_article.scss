@@ -47,7 +47,8 @@
     font-size: 10px;
     color: $caption-color;
     float: right;
-    margin: 0 10px;
+    margin: 5px 10px;
+    line-height: 1.2em;
 
     .fa-camera {
       &:hover, &.highlighted {
@@ -391,12 +392,12 @@ article {
 
   ul.share-links {
     position: absolute;
-    padding: 0 0 20px 0;
+    padding: 20px 0 20px 0;
     top: 0px;
 
     @media(max-width: $screen-sm) {
       position: relative;
-      margin: 0 10%;
+      margin:0px 10% 0;
       padding-bottom: 0px;
       li{
         display: inline-block;
@@ -408,7 +409,8 @@ article {
       }
     }
     @media(max-width: $screen-xs) {
-      margin: 0px;
+      margin-left: 0px;
+      margin-right:0;
     }
 
     &.below-feature {
