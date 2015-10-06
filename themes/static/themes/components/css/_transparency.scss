@@ -1,3 +1,5 @@
+$wordmark-color: rgba(255,255,255,0.5) !default;
+
 header{
   &.transparency {
     background: transparent !important;
@@ -5,7 +7,7 @@ header{
     position: absolute;
 
     .wordmark a {
-      color:rgba(255,255,255,0.5);
+      color:$wordmark-color;
       transition: color 1s;
     }
   }

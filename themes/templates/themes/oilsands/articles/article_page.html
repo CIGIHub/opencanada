@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% load static article_tags compress core_tags wagtailcore_tags wagtailembeds_tags wagtailimages_tags %}
+
+{% block body_class %}template-{{ self.get_verbose_name|slugify }} oilsands{% endblock %}
+
+{% block body_style %}
+    background-image:url('{% static 'themes/oilsands/img/footer_bg.png' %}');
+{% endblock %}
+
+
+{% block theme_css %}
+    <link rel="stylesheet" type="text/x-scss" href="{% static 'themes/oilsands/css/oilsands.scss' %}">
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    FeatureStyles.MainFeatures.setSize({{ self.full_bleed_image_size }});
+</script>
+<script type="text/javascript" src="{% static 'themes/oilsands/js/script.js' %}"></script>
+{% endblock %}
+
+{% block header %}
+    {% include 'themes/oilsands/header.html' %}
+{% endblock %}
+
+{% block main_style %}
+    {% image self.main_image original as bg_image %}
+    background-image:url('{{ bg_image.url }}');
+{% endblock %}
+
+{% block content %}
+
+    {% if self.main_image and self.include_main_image_overlay %}
+        {% include 'themes/oilsands/articles/article-feature.html' with metadata='articles/includes/article-metadata.html' %}
+    {% endif %}
+
+    <article id="article-page">
+        <div class="container">
+
+            {% block share_links %}
+                {% include 'articles/includes/share_links.html' %}
+            {% endblock %}
+
+            <div class="narrow-content">
+            {% if not self.include_main_image_overlay or self.include_main_image_overlay and not self.main_image %}
+                {% include 'articles/includes/article-metadata.html' %}
+                {% if self.include_main_image and self.main_image %}
+                    <figure class="main-image">
+                        {% image self.main_image fill-940x627 %}
+                    </figure>
+                    {% if self.main_image.credit %}
+                        <div class="image-credit">
+                            {{ self.main_image.credit }}
+                        </div>
+                    {% endif %}
+                    {% if self.main_image.source %}
+                        <div class="image-source">
+                            {{ self.main_image.source }}
+                        </div>
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+            </div>
+        </div>
+
+        <div class="story">
+            <div class="container-clear-none">
+                {% if self.include_author_block %}
+                    {% include 'articles/includes/author_blurb.html' %}
+                {% endif %}
+            </div>
+            {% for block in self.body %}
+                {% if block.block_type == 'Embed' %}
+                    <div class="container-clear-none">
+                        <section class="block-Embed narrow-content">
+                            {{ block.value.url|embed:720 }}
+                        </section>
+                    </div>
+
+                {% elif block.block_type == 'FullBleed' %}
+                    <section class="block-FullBleed">
+                        <div class="container-fluid">
+                            {{ block }}
+                        </div>
+                    </section>
+                {% else %}
+                    <div class="container-clear-none">
+                        <section class="block-{{ block.block_type }} narrow-content">
+                            {{ block }}
+                        </section>
+                    </div>
+
+                {% endif %}
+            {% endfor %}
+
+            <div class="home-link"><a href="/"><img src="{% static 'themes/dark/img/opencanada-mark-white.png' %}"></a></div>
+        </div>
+
+        {% if self.topics %}
+            <div class="container">
+                <div class="topics related narrow-content">
+                    <div class="topic-label"><i class="fa fa-tags"></i> Topics:</div>
+                    <ul class="list-inline">
+                        {% for topic in self.topics %}
+                            <li><a href="{% topic_url topic %}">{{ topic }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        {% endif %}
+    </article>
+
+{% endblock %}
+
+{% block footer %}
+   {% include 'themes/components/simple_footer.html' %}
+{% endblock %}
+
+

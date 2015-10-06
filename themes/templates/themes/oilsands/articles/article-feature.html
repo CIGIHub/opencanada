@@ -1,0 +1,20 @@
+{% load static article_tags core_tags wagtailcore_tags wagtailembeds_tags wagtailimages_tags %}
+
+<div class="jumbotron main-feature overlay" style="height: 400px;">
+    {% image self.main_image fill-2048x1200-c100 as background_image %}
+    <div class="feature-wrapper">
+        <div class="feature-text">
+            {% include metadata %}
+        </div>
+    </div>
+
+</div>
+{% if not self.include_caption_in_footer %}
+    <div class="feature-caption">
+        <i class="fa fa-camera"></i>
+        {% if self.main_image.credit  %}
+            {{ self.main_image.credit }}
+        {% endif %}
+    </div>
+ {% endif %}
+<div class="clear"></div>
