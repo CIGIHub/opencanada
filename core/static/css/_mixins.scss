@@ -31,17 +31,12 @@
   font-size: 22px;
   font-weight: 900;
   color: $article-list-link-color;
-  a{
-      color: $article-list-link-color;
-  }
-  a:hover{
-    color: $red;
-  }
 }
 
 @mixin article-overlay-title{
   font-size: 45px;
   font-weight: 700;
+  color: #fff;
 }
 
 @mixin container-full-bleed{
@@ -230,8 +225,20 @@
 @mixin article-overlay{
   min-height: 400px;
   position: relative;
-  color: white;
   font-family: $sans-serif;
+
+  a{
+    display: block;
+    color: $overlay-link-color;
+
+    &:hover, &:focus{
+      color: $overlay-link-color;
+      h3, h1{
+        color: $red;
+        transition:color 0.5s;
+      }
+    }
+  }
 
   .feature-image{
     position: absolute;
@@ -270,17 +277,10 @@
       }
     }
  }
-
-  .contributors, .contributors a, a{
-    color: white;
-  }
-  .contributors a:hover, a:hover{
-    color: $red;
-  }
-
   .contributors{
     margin-top: 5%;
     font-size: 12px;
+    color: $overlay-link-color;
     .contributor-list{
         margin-left: 25px;
     }
@@ -313,7 +313,6 @@
         padding-right: 20px;
       }
     }
-
 }
 
 @mixin fullbleed-overlay{
@@ -323,6 +322,7 @@
     line-height: 1.0em;
     margin-bottom: 0.25em;
   }
+
   .feature-line, h2{
     font-size: 18px;
     line-height: 135%;
@@ -332,7 +332,6 @@
       font-size: 55px;
     }
   }
-
   @media(max-width: $screen-sm){
     h1{
       font-size: 42px;

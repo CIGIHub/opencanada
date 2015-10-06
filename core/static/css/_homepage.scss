@@ -2,8 +2,8 @@
 /**************   Homepage  **************/
 
 .template-home-page .main-feature{
-  @include article-overlay;
-  @include fullbleed-overlay;
+    @include article-overlay;
+    @include fullbleed-overlay;
 
   .scroll{
     position: absolute;
@@ -75,42 +75,14 @@
   h2 {
     @include subheading;
   }
-
-  main h3{
-     @include article-list-title;
-  }
-
-  //visualizations
-  .simple{
-    img{
-      padding-bottom: 10px;
-    }
-    .row.last{
-      margin-bottom: 15px;
-    }
-  }
-
-  @media(min-width:$screen-xs-min) and (max-width: $screen-sm-min) {
-    .simple{
-      .col-sm-3, .col-sm-6 {
-        width: 50%;
-        float:left;
-        margin-bottom: 1em;
-
-        &:nth-child(odd) {
-          clear: both;
-        }
-      }
-    }
-  }
 }
-
 
 .editors-pick-link, .most-popular {
   display: block;
   position: absolute;
   top: 20%;
   right: 20px;
+  font-size: 10px;
   z-index: 11;
   width: 50px;
   height: 50px;
@@ -134,12 +106,13 @@
       padding:0px;
 
       a {
-        text-decoration: none;
         display: inherit;
         height: 100%;
         width: 100%;
         padding:15px 0px;
         line-height: 1em;
+        color: $overlay-link-color;
+        font-family: $sans-serif;
         outline:none;
         border-radius: 30px;
         background: $badge-color;
@@ -147,21 +120,14 @@
 
         &:hover {
           color:$black;
-          background:$mid-grey;
+          background:$light-grey;
           transition:background 0.25s;
 
         }
       }
     }
   }
-
-  a.article-feature{
-    color: white;
-    font-family: $sans-serif;
-    font-size: 10px;
-  }
 }
-
 .most-popular{
   background: $button-bg-color;
 }

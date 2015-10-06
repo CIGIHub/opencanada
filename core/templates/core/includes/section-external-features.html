@@ -9,26 +9,27 @@
             <div class="row {% if forloop.last %}last{% endif %}">
                 {% for item in item_row %}
                     <div class="col-md-{{ item_row|column_class }} col-sm-6">
-                      <a href="{{ item.url }}">
-                        <div class="feature-content">
-                          <h3 class="columns-{{ item_row|column_class }}">{{ item.title }}</h3>
-                          {% if item.short_description %}
-                          {{ item.short_description|richtext }}
-                          {% else %}
-                          {{ item.body|truncatewords_html:80|richtext }}
-                          {% endif %}
-
-                          <figure>
-                            {% external_article_image item as image %}
-                            {% if image %}
-                                {% if use_ring %}
-                                    {% image image rcircle-35x35-rgba_204-w_1 %}
-                                {% else %}
-                                    {% image image circle-35x35 %}
-                                {% endif %}
+                      <a href="{{ item.website_link }}">
+                        <div class="feature-box">
+                          <div class="external-feature feature-content">
+                            <h3 class="columns-{{ item_row|column_class }}">{{ item.title }}</h3>
+                            {% if item.short_description %}
+                              {{ item.short_description|richtext }}
+                            {% else %}
+                              {{ item.body|truncatewords_html:80|richtext }}
                             {% endif %}
-                        </figure>
+                            <figure>
+                              {% external_article_image item as image %}
+                              {% if image %}
+                                  {% if use_ring %}
+                                      {% image image rcircle-35x35-rgba_204-w_1 %}
+                                  {% else %}
+                                      {% image image circle-35x35 %}
+                                  {% endif %}
+                              {% endif %}
+                          </figure>
 
+                          </div>
                         </div>
                       </a>
                     </div>

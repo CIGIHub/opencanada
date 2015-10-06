@@ -11,26 +11,26 @@ var FeatureStyles = FeatureStyles || {
             initializeForWindow: function () {
                 var bodyTag = $('body');
                 var windowHeight = $(window).height();
-                
+
                 if ((bodyTag.hasClass('template-home-page')
                     || bodyTag.hasClass('template-article-page')
                     || bodyTag.hasClass('template-series-page')
                     )
-                    && $('.jumbotron').length) {
+                    && $('.main-feature').length) {
 
                     //set the Homepage Feature height based on window height
                     var bannerHeight = $('header').height();
                     var gap = FeatureStyles.MainFeatures.gap_size.value * windowHeight;
                     var featureHeight = windowHeight - gap;
 
-                    $('.jumbotron.main-feature').css("height", featureHeight + "px");
-                    
-                    $('.jumbotron.main-feature').css("margin-top", -1 * $('header').height());
-                    
-                    if (bodyTag.hasClass('template-home-page')) { 
+                    $('.main-feature').css("height", featureHeight + "px");
+
+                    $('.main-feature').css("margin-top", -1 * $('header').height());
+
+                    if (bodyTag.hasClass('template-home-page')) {
                         featureHeight = windowHeight - bannerHeight - gap;
-                        $('.jumbotron.main-feature').css("height", featureHeight + "px");
-                        $('.jumbotron.main-feature').css("margin-top", 0 + "px");
+                        $('.main-feature').css("height", featureHeight + "px");
+                        $('.main-feature').css("margin-top", 0 + "px");
                     }
 
                 }
@@ -46,7 +46,7 @@ var FeatureStyles = FeatureStyles || {
         },
         Camera: {
             initialize: function () {
-                
+
                 function toggleImage(element){
                     var selected = element;
 
@@ -57,7 +57,7 @@ var FeatureStyles = FeatureStyles || {
                         //not found, so we might be on an template-article-page. Try again.
                         target = selected.closest($('main')).find(".overlay");
                     }
-                    
+
                     target.find($('.editors-pick-link')).fadeToggle();
                     target.find($('.feature-text')).fadeToggle();
                     target.find($('.feature-image-overlay')).fadeToggle();
@@ -77,7 +77,7 @@ var FeatureStyles = FeatureStyles || {
 
                 //mobile toggling
                 $('.fa-camera').on('touchstart', function (e) {
-                        toggleImage($(this));       
+                        toggleImage($(this));
                 });
             }
         },
@@ -102,7 +102,7 @@ var FeatureStyles = FeatureStyles || {
                 //$('.image-feature figure a, .image-feature h3 a, .image-feature .editors-pick-link, .image-feature .most-popular').hover(function () {
                 //    $(this).prev(".image-feature").find("figure a").toggleClass("hover");
                 //    $(this).closest(".image-feature").find("h3 a").toggleClass("hover");
-                //});  
+                //});
             }
         },
         Arrow: {
@@ -129,30 +129,30 @@ var FeatureStyles = FeatureStyles || {
         },
         RelatedArticles: {
             initialize: function () {
-                
+
 
                 function fadeInContent() {
                     /* Check the location of each desired element */
                     $('main .container .row > div, main .container-full-bleed .row > div').each( function(i){
-                        
+
                         var windowWidth = $(window).width();
                         if (windowWidth >= breakpoint && !$(this).hasClass("fadedIn")) {
-                            $(this).css('opacity', 0); 
+                            $(this).css('opacity', 0);
 
                         }else if (windowWidth < breakpoint) {
-                            $(this).css('opacity', 1); 
+                            $(this).css('opacity', 1);
                         }
                         var fifth_of_object = $(this).offset().top + $(this).outerHeight() /5;
                         var bottom_of_window = $(window).scrollTop() + $(window).height();
                         var top_of_object = $(this).offset().top;
-                        
+
                         /* If the object is scrolling to visible in the window, fade it it */
-                        if( bottom_of_window > fifth_of_object  || bottom_of_window > top_of_object + 40){  
-                            $(this).animate({'opacity':'1'},400); 
-                            $(this).addClass("fadedIn");        
-                        }   
-                    });  
-                    
+                        if( bottom_of_window > fifth_of_object  || bottom_of_window > top_of_object + 40){
+                            $(this).animate({'opacity':'1'},400);
+                            $(this).addClass("fadedIn");
+                        }
+                    });
+
                 }
 
                 /* Every time the window is scrolled ... */
@@ -160,7 +160,7 @@ var FeatureStyles = FeatureStyles || {
                     fadeInContent();
                 });
 
-                //if you refesh, you could be down the page, and the featured articles would be hidden. 
+                //if you refesh, you could be down the page, and the featured articles would be hidden.
                 //Do a check and display any articles that the user can see.
                 $(window).load(function () {
                     fadeInContent();
