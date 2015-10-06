@@ -65,6 +65,7 @@ INSTALLED_APPS = (
     'compressor',
     'taggit',
     'modelcluster',
+    'overextends',
 
     'core',
     'themes',
