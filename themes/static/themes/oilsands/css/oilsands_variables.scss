@@ -7,7 +7,7 @@ $text-link-hover-color: $text-color;
 $subheading-color: $text-color;
 $article-list-link-color: $text-color;
 
-$header-bg-color: $body-bg-color;
+$header-bg-color: transparent;
 
 $footer-bg-color: transparent;
 $footer-text-color: $text-color;
@@ -58,3 +58,13 @@ $footer-link-hover-color: $text-link-color;
 $primary-topic-color: #000;
 $jumbotron-heading-color: #000;
 $border-white:0;
+
+$social-border: 1px solid #000;
+
+$header-collapsed-bg-color: #fff ;
+$header-text-color: #000;
+$header-link-color: #000;
+$header-link-hover-color: #fff;
+
+$main-menu-bg-color: #fff;
+$main-menu-color: #000;
