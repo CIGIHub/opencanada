@@ -85,9 +85,27 @@
     }
 
     @media(max-width: $screen-xs-max){
-      [class*='col-']{
-        padding-left: 0px;
-        padding-right: 0px;
+      .row{
+        & > [class*='col-']{
+          padding-left: 0px;
+          padding-right: 0px;
+          margin-bottom: 15px;
+        }
+        & > [class*='col-']:first-child{
+          padding-left: 0px;
+          padding-right: 0px;
+        }
+        & > [class*='col-']:last-child{
+          padding-left: 0px;
+          padding-right: 0px;
+        }
+      }
+
+      .simple-feature, .image-feature, .graphics-feature{
+        height: auto;
+      }
+      .external-feature{
+        height: 220px;
       }
       .contributors{
         position: relative;
