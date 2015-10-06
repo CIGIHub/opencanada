@@ -10,7 +10,7 @@ import themes.models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('themes', '0001_initial'),
+        ('themes', '0006_create_themes'),
         ('articles', '0058_auto_20150904_0245'),
     ]
 
