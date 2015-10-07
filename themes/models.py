@@ -13,8 +13,13 @@ from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 
 
+def get_default_theme_object():
+    return Theme.objects.filter(is_default=True).order_by('id').first()
+
+
 def get_default_theme():
-    return Theme.objects.filter(is_default=True).order_by('id').first().id
+    theme = get_default_theme_object()
+    return theme.id
 
 
 @python_2_unicode_compatible
