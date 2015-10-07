@@ -5,11 +5,11 @@ from wagtail.wagtailadmin.edit_handlers import (FieldPanel, ObjectList,
 from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailcore.models import Page
 
-from core.base import PaginatedListPageMixin
+from core.base import PaginatedListPageMixin, ShareLinksMixin
 from themes.models import ThemeablePage
 
 
-class JobPostingPage(ThemeablePage):
+class JobPostingPage(ThemeablePage, ShareLinksMixin):
     body = RichTextField()
 
     content_panels = Page.content_panels + [

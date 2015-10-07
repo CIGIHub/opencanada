@@ -22,7 +22,7 @@ base_urlpatterns = [
     url(r'^', include('favicon.urls')),
     url(r'^feed/', MainFeed(), name='main_feed'),
     url(r'^error/', lambda r: 1 / 0),
-    url(r'^articles/', include('articles.urls', namespace='articles'))
+    url(r'^core/', include('core.urls', namespace='core'))
 ]
 
 
