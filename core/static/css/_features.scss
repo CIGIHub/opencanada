@@ -50,15 +50,15 @@
   .multi-block{
     .row{
       & > [class*='col-']{
-        padding-left: 5px;
-        padding-right: 5px;
+        padding-left: 7.5px;
+        padding-right: 7.5px;
       }
       & > [class*='col-']:first-child{
         padding-left: 0px;
-        padding-right: 10px;
+        padding-right: 7.5px;
       }
       & > [class*='col-']:last-child{
-        padding-left: 10px;
+        padding-left: 7.5px;
         padding-right: 0px;
       }
     }
@@ -72,13 +72,23 @@
       border: $row-border;
     }
     .image-feature, .simple-feature{
-      height: 380px;
+      .feature-box{
+        height: 380px;
+      }
+    }
+    .simple-feature{
+      h3{
+        font-size: 32px;
+      }
     }
     .graphics-feature{
-      height: 265px;
+      .feature-box{
+        height: 265px;
+      }
     }
     .external-feature{
-      height: 550px;
+      height: 330px;
+      margin-bottom: 50px;
       figure{
         position: absolute;
         bottom: 0;
@@ -92,7 +102,9 @@
 
     @media(max-width: $screen-md){
       .image-feature, .simple-feature{
-        height: 450px;
+        .feature-box{
+          height: 450px;
+        }
       }
     }
 
@@ -114,26 +126,69 @@
       }
 
       .simple-feature, .image-feature, .graphics-feature{
-        height: auto;
+        .feature-box{
+          height: auto;
+        }
       }
       .external-feature{
-        height: 220px;
+        height: 180px;
       }
       .contributors{
         position: relative;
       }
     }
   }//end multi-block row
+}
 
-  .editors-pick-link, .most-popular {
-    top:5%;
-    right:0;
+.editors-pick-link, .most-popular {
+  display: block;
+  position: absolute;
+  top:5%;
+  right: 20px;
+  font-size: 10px;
+  z-index: 11;
+  width: 50px;
+  height: 50px;
+  border-radius: 30px;
+  background: $badge-color;
 
-    @media(min-width: $screen-sm) {
-      top:10px;
-      right:10px;
+  .table {
+    display: table;
+    margin-bottom: 0;
+    height: 100%;
+
+    .table-cell {
+      display: table-cell;
+      vertical-align: middle;
+      height: 100%;
+      text-align: center;
+      padding:0px;
+
+      a {
+        display: inherit;
+        height: 100%;
+        width: 100%;
+        padding:15px 0px;
+        line-height: 1em;
+        color: $overlay-link-color;
+        font-family: $sans-serif;
+        outline:none;
+        border-radius: 30px;
+        background: $badge-color;
+        transition:background 0.25s;
+
+        &:hover {
+          color:$black;
+          background:$light-grey;
+          transition:background 0.25s;
+
+        }
+      }
     }
   }
+}
+.most-popular{
+  background: $button-bg-color;
 }
 
 //overlay rows and content

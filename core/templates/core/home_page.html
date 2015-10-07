@@ -77,45 +77,47 @@
                         </div>
 
                     {% elif article.feature_style.include_image and not article.feature_style.overlay_text %}
-                      {% if article.editors_pick %}
-                          <div class="editors-pick-link"><div class="table"><div class="table-cell"><a href="{% slugurl 'editors-picks' %}" class="article-feature editors-pick">Editor's Pick</a></div></div></div>
-                      {% endif %}
-                      {% if article == self.most_popular_article %}
-                          <div class="most-popular"><div class="table"><div class="table-cell"><a href="{% slugurl 'most-popular' %}" class="article-feature ">Most Popular</a></div></div></div>
-                      {% endif %}
-
-                      <a href="{{ article.url }}">
-                        <div class="image-feature feature-box">
-                          <figure>{%  image article.main_image fill-710x475 %}</figure>
-                          <div class="feature-content">
-                              <h3>{{ article.title }}</h3>
-                              {% if article.authors %}
-                                  {% include 'articles/includes/article-contributors.html' with authors=article.authors links=False %}
-                              {% endif %}
+                      <div class="image-feature">
+                          {% if article.editors_pick %}
+                              <div class="editors-pick-link"><div class="table"><div class="table-cell"><a href="{% slugurl 'editors-picks' %}" class="article-feature editors-pick">Editor's Pick</a></div></div></div>
+                          {% endif %}
+                          {% if article == self.most_popular_article %}
+                              <div class="most-popular"><div class="table"><div class="table-cell"><a href="{% slugurl 'most-popular' %}" class="article-feature ">Most Popular</a></div></div></div>
+                          {% endif %}
+                          <a href="{{ article.url }}">
+                          <div class="feature-box">
+                            <figure>{%  image article.main_image fill-710x475 %}</figure>
+                            <div class="feature-content">
+                                <h3>{{ article.title }}</h3>
+                                {% if article.authors %}
+                                    {% include 'articles/includes/article-contributors.html' with authors=article.authors links=False %}
+                                {% endif %}
+                            </div>
                           </div>
-                        </div>
-                      </a>
+                        </a>
+                      </div>
                     {% else %}
-                      {% if article.editors_pick %}
-                          <div class="editors-pick-link"><div class="table"><div class="table-cell"><a href="{% slugurl 'editors-picks' %}" class="article-feature editors-pick">Editor's Pick</a></div></div></div>
-                      {% endif %}
-                      {% if article == self.most_popular_article %}
-                          <div class="most-popular"><div class="table"><div class="table-cell"><a href="{% slugurl 'most-popular' %}" class="article-feature ">Most Popular</a></div></div></div>
-                      {% endif %}
+                        <div class="simple-feature">
+                          {% if article.editors_pick %}
+                              <div class="editors-pick-link"><div class="table"><div class="table-cell"><a href="{% slugurl 'editors-picks' %}" class="article-feature editors-pick">Editor's Pick</a></div></div></div>
+                          {% endif %}
+                          {% if article == self.most_popular_article %}
+                              <div class="most-popular"><div class="table"><div class="table-cell"><a href="{% slugurl 'most-popular' %}" class="article-feature ">Most Popular</a></div></div></div>
+                          {% endif %}
+                          <a href="{{ article.url }}">
+                          <div class="feature-box">
+                            <div class="feature-content">
+                                <h3 class="{% if article.editors_pick or article == self.most_popular_article %} article-feature{% endif %}">{{ article.title }}</h3>
 
-                      <a href="{{ article.url }}">
-                        <div class="feature-box simple-feature">
-                          <div class="feature-content">
-                              <h3 class="{% if article.editors_pick or article == self.most_popular_article %} article-feature{% endif %}">{{ article.title }}</h3>
-
-                              {% if article.subtitle %}
-                                  <div class="feature-line">{{ article.subtitle|richtext }}</div>
-                              {% else %}
-                                  <div class="feature-line">{{ article.excerpt|richtext }}</div>
-                              {% endif %}
-                              {% if article.authors %}
-                                  {% include 'articles/includes/article-contributors.html' with authors=article.authors links=False %}
-                              {% endif %}
+                                {% if article.subtitle %}
+                                    <div class="feature-line">{{ article.subtitle|richtext }}</div>
+                                {% else %}
+                                    <div class="feature-line">{{ article.excerpt|richtext }}</div>
+                                {% endif %}
+                                {% if article.authors %}
+                                    {% include 'articles/includes/article-contributors.html' with authors=article.authors links=False %}
+                                {% endif %}
+                            </div>
                           </div>
                         </div>
                       </a>
