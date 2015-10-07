@@ -87,7 +87,6 @@ def cloudflare_request(method, url, data):
         'X-Auth-Key': cloudflare_config['TOKEN'],
     }
 
-    print(method, url, data)
     resp = method(url, json=data, headers=headers)
     try:
         resp_json = resp.json()
