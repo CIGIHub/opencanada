@@ -98,6 +98,13 @@ class ContributorPage(ThemeablePage):
         index.SearchField('long_bio', partial_match=True),
     )
 
+    def search_result_text(self):
+        if self.short_bio:
+            self.search_result_text = self.short_bio
+        else:
+            self.search_result_text = self.long_bio[0:240]
+        return self.search_result_text
+
     def save(self, *args, **kwargs):
         if self.twitter_handle and not self.twitter_handle.startswith("@"):
             self.twitter_handle = "@{}".format(self.twitter_handle)

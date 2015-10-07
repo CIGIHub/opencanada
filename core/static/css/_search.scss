@@ -25,7 +25,7 @@
     transform: translate(0, 0%);
     -webkit-transform: translate(0, 0%);
     -ms-transform: translate(0, 0);
-    
+
   }
 
   .container{
@@ -37,11 +37,6 @@
   .search-suggestions{
     display: none;
   }
-
-  @media (min-width: $screen-sm) {
-    padding:40px 0;
-  }
-
 }
 
 .search-results-page{
@@ -50,7 +45,7 @@
   }
   .searchbox{
     @include search-form;
-    padding: 40px 0;
+    padding: 20px 0 40px 0;
 
     @media (min-width: $screen-md) {
       input {
@@ -78,4 +73,3 @@
     border-bottom: $border-grey;
   }
 }
-
