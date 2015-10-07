@@ -74,7 +74,8 @@
 
             {% if self.chapters %}
                 <div class="container">
-                    <div class="toc narrow-content">
+                  <div class="narrow-content">
+                    <div class="toc">
                         {% if self.table_of_contents_heading %}
                         <h2 id="toc">{{ self.table_of_contents_heading }}</h2>
                         {% endif %}
@@ -87,6 +88,7 @@
                     </div>
                     {{ self.chapters }}
                 </div>
+              </div> 
             {% endif %}
 
             {% if self.citation_links.all %}
@@ -105,7 +107,7 @@
 
                 {% if self.endnote_links.all %}
                      <div class="container">
-                       <div class=" narrow-content">
+                       <div class="narrow-content">
                           {% include 'articles/includes/end_notes.html' %}
                         </div>
                     </div>
