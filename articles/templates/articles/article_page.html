@@ -154,10 +154,13 @@
         </div>
     {% endif %}
 
+
     {% block related_articles %}
+        {% if self.number_of_related_articles > 0 %}
         {% with article_count=self.number_of_related_articles %}
             {% include 'articles/includes/related_articles.html' with heading='h3' image=True %}
         {% endwith %}
+        {% endif %}
     {% endblock %}
 
 {% endblock %}
