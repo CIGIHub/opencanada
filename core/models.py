@@ -120,9 +120,12 @@ class HomePage(ThemeablePage):
                 default=models.Value(0),
                 output_field=models.IntegerField())).order_by("-sticky", "-first_published_at")
 
+        used = []
+        if self.featured_item:
+            used.append(self.featured_item.id)
         self._articles = self.get_article_set(self.number_of_columns_of_articles,
                                               self.number_of_rows_of_articles, articles,
-                                              [])
+                                              used)
 
         return self._articles
 
