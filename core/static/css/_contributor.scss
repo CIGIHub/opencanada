@@ -33,28 +33,30 @@
 
   .headshot img{
     margin: 0 auto;
+    padding-bottom: 20px;
   }
 
   h1{
     font-weight: 700;
     font-size: 30px;
   }
-
+  .short-bio{
+    line-height: 135%;
+  }
   .bio{
     margin: 40px 0;
-    line-height: 150%;
+    line-height: 165%;
     @media(max-width: $screen-sm){
       margin: 10px 0;
     }
   }
 
   h2{
-
     @include subheading;
   }
 
   h3{
-    font-size: 30px;
+    @include article-list-title;
 
     &.editors-pick {
       padding-right: 65px;

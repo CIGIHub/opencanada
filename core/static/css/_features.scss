@@ -15,6 +15,18 @@
       }
     }
   }
+
+  a.read-more {
+    color: $light-grey;
+    i{
+      color: $site-primary-color;
+      padding-left: 3px;
+    }
+    &:hover{
+      color: $site-primary-color;
+    }
+  }
+
   .row{
     margin-left: 0px;
     margin-right: 0px;
