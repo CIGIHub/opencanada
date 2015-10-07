@@ -25,7 +25,6 @@ class ThemeContent(models.Model):
     panels = [
         FieldPanel('name'),
         FieldPanel('contact_email'),
-        InlinePanel('menu_links', label="Menus"),
         InlinePanel('block_links', label="Content Blocks"),
         InlinePanel('follow_links', label="Follow Links"),
         InlinePanel('logo_links', label="Logos"),
@@ -168,55 +167,3 @@ class LogoBlock(UniquelySlugable):
         return self.name
 
 register_snippet(LogoBlock)
-
-
-@python_2_unicode_compatible
-class MenuItem(models.Model):
-    label = models.TextField()
-    link = models.TextField()
-
-    def __str__(self):
-        return self.label
-
-    panels = [
-        FieldPanel('label'),
-        FieldPanel('link'),
-    ]
-
-register_snippet(MenuItem)
-
-
-@python_2_unicode_compatible
-class Menu(UniquelySlugable):
-    name = models.CharField(max_length=255)
-
-    def __str__(self):
-        return self.name
-
-    panels = [
-        InlinePanel('item_links', label="Menu Items")
-    ]
-
-register_snippet(Menu)
-
-
-class MenuItemLink(models.Model):
-    item = models.ForeignKey(
-        "MenuItem",
-        related_name='menu_links'
-    )
-    menu = ParentalKey(
-        "Menu",
-        related_name='item_links'
-    )
-
-
-class ContentMenuLink(models.Model):
-    menu = models.ForeignKey(
-        "Menu",
-        related_name='content_links'
-    )
-    theme_content = ParentalKey(
-        "ThemeContent",
-        related_name='menu_links'
-    )
