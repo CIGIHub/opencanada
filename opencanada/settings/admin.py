@@ -10,6 +10,4 @@ ROOT_URLCONF = 'opencanada.urls_admin'
 
 WAGTAILFRONTENDCACHE = {}
 
-INSTALLED_APPS = [app for app in INSTALLED_APPS if app != 'caching']
-
 ADMIN_ENABLED = True
