@@ -9,16 +9,18 @@
         <div class="row {% if forloop.last %}last{% endif %}">
             {% for item in item_row %}
                 <div class="col-sm-{{ item_row|column_class }}{% if forloop.last %} last{% endif %}">
-                  <a href="{{ item.url }}">
-                    <div class="feature-box graphics-feature">
-                      {% if item.main_image %}
-                          {% image item.main_image fill-455x302 %}
-                      {% endif %}
-                      <div class="feature-content">
-                        <h3 class="columns-{{ item_row|column_class }}">{{ item.title }}</h3>
+                  <div class="graphics-feature">
+                    <a href="{{ item.url }}">
+                      <div class="feature-box">
+                        {% if item.main_image %}
+                            {% image item.main_image fill-455x302 %}
+                        {% endif %}
+                        <div class="feature-content">
+                          <h3 class="columns-{{ item_row|column_class }}">{{ item.title }}</h3>
+                        </div>
                       </div>
-                    </div>
-                  </a>
+                    </a>
+                  </div>
                 </div>
             {% endfor %}
         </div>
