@@ -283,6 +283,9 @@
     .contributor-list{
         margin-left: 25px;
     }
+    .contributor-label{
+      color: $overlay-link-color;
+    }
 
     &.series {
       .contributor-list{

@@ -62,6 +62,12 @@
                             {{ block }}
                         </div>
                     </section>
+                {% elif block.block_type == 'Overflow' %}
+                  <section class="block-Overflow">
+                      <div class="container-clear-none">
+                          {{ block }}
+                      </div>
+                  </section>
                 {% else %}
                     <div class="container-clear-none">
                         <section class="block-{{ block.block_type }} narrow-content">
@@ -74,6 +80,7 @@
 
             {% if self.chapters %}
                 <div class="container">
+                  <div class="narrow-content">
                     <div class="toc">
                         {% if self.table_of_contents_heading %}
                         <h2 id="toc">{{ self.table_of_contents_heading }}</h2>
@@ -87,11 +94,12 @@
                     </div>
                     {{ self.chapters }}
                 </div>
+              </div>
             {% endif %}
 
             {% if self.citation_links.all %}
                 <div class="container">
-                    <div class="block-citations">
+                    <div class="block-citations narrow-content">
                         {% if self.citations_heading %}
                         <h2>{{ self.citations_heading }}</h2>
                         {% endif %}
@@ -105,14 +113,16 @@
 
                 {% if self.endnote_links.all %}
                      <div class="container">
-                    {% include 'articles/includes/end_notes.html' %}
+                       <div class="narrow-content">
+                          {% include 'articles/includes/end_notes.html' %}
+                        </div>
                     </div>
                 {% endif %}
 
 
              {% if self.main_image and self.include_caption_in_footer %}
                  <div class="container">
-                    <div class="feature-caption">
+                    <div class="feature-caption narrow-content">
                         {% if self.main_image.credit %}
                             {{ self.main_image.credit }}
                         {% endif %}
@@ -124,7 +134,7 @@
 
         {% if self.topics %}
             <div class="container">
-                <div class="topics related">
+                <div class="topics related narrow-content">
                     <div class="topic-label"><i class="fa fa-tags"></i> Topics:</div>
                     <ul class="list-inline">
                         {% for topic in self.topics %}

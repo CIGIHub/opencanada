@@ -9,7 +9,7 @@
             <div class="row {% if forloop.last %}last{% endif %}">
             {% for item in row %}
                 <div class="col-sm-12 feature-item overlay">
-                    <div class="overlay-feature rowheight-2">
+                    <div class="overlay-feature rowheight-1">
                         {% image item.main_image fill-910x560 as background_image %}
                         {% if item.editors_pick %}
                             <div class="editors-pick-link"><div class="table"><div class="table-cell"><a href="{% slugurl 'editors-picks' %}" class="article-feature editors-pick">Editor's Pick</a></div></div></div>
@@ -17,17 +17,19 @@
                         {% if item == self.most_popular_article %}
                             <div class="most-popular"><div class="table"><div class="table-cell"><a href="{% slugurl 'most-popular' %}" class="article-feature ">Most Popular</a></div></div></div>
                         {% endif %}
-                        <div class="feature-image" style="background-image: url('{{ background_image.url }}')">
-                            <a href="{{ item.url }}"><div class="feature-image-overlay" style="background: rgba( {{ item.image_overlay_color.rgb }}, {{ item.opacity }} )"></div></a>
-                        </div>
-                        <div class="feature-wrapper">
-                            <div class="feature-text {% if item.editors_pick or article == self.most_popular_article  %} article-feature{% endif %}" style="color: {{ item.font_style.text_colour.hex_value }};">
-                                <h3 style="color: {{ item.font_style.text_colour.hex_value }};" href="{{ item.url }}">{{ item.title }}</h3>
-                                {% if item.authors %}
-                                    {% include 'articles/includes/article-contributors.html' with authors=item.authors links=False %}
-                                {% endif %}
-                            </div>
-                        </div>
+                        <a href="{{ item.url }}">
+                          <div class="feature-image" style="background-image: url('{{ background_image.url }}')">
+                              <div class="feature-image-overlay" style="background: rgba( {{ item.image_overlay_color.rgb }}, {{ item.opacity }} )"></div>
+                          </div>
+                          <div class="feature-wrapper">
+                              <div class="feature-text {% if item.editors_pick or article == self.most_popular_article  %} article-feature{% endif %}" style="color: {{ item.font_style.text_colour.hex_value }};">
+                                  <h3 style="color: {{ item.font_style.text_colour.hex_value }};" href="{{ item.url }}">{{ item.title }}</h3>
+                                  {% if item.authors %}
+                                      {% include 'articles/includes/article-contributors.html' with authors=item.authors links=False %}
+                                  {% endif %}
+                              </div>
+                          </div>
+                        </a>
                         <div class="camera"><i class="fa fa-camera"></i></div>
                     </div>
                 </div>
