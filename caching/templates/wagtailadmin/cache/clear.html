@@ -1,0 +1,31 @@
+{% extends  "wagtailadmin/base.html" %}
+{% load gravatar static compress i18n %}
+{% block titletag %}{% trans "Clear Cache" %}{% endblock %}
+{% block bodyclass %}clear-cache{% endblock %}
+
+
+{% block content %}
+<header class="nice-padding">
+
+        <div class="row row-flush">
+            <div class="left col9">
+                <h1 class="icon icon-cross">{% trans 'Clear Cache' %}</h1>
+            </div>
+        </div>
+    </header>
+    <div class="row row-flush nice-padding">
+        <div class="col8">
+          <form id="page-edit-form" method="POST">
+              {% csrf_token %}
+              <div class=nice-padding">
+                <h2>Clear Cloudflare Cache?</h2>
+                <div class="help-block help-critical">
+                  Clearing the cache will remove all pages from Cloudflare caching system.<br>Performace on the site will be temporarily degraded.
+                </div>
+                <input type="submit" value="yes" class="button yes"> <a href="{% url 'wagtailadmin_home' %}" class="button no">no</a>
+              </div>
+          </form>
+
+        </div>
+    </div>
+      {% endblock %}
