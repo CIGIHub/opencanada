@@ -1,10 +1,8 @@
 from __future__ import absolute_import, division, unicode_literals
 
 import logging
-from datetime import timedelta
 from operator import attrgetter
 
-import requests
 from basic_site.models import UniquelySlugable
 from django import forms
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
@@ -12,7 +10,6 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.db.models import Count
 from django.shortcuts import get_object_or_404, render
-from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
 from modelcluster.fields import ParentalKey
 from wagtail.contrib.wagtailroutablepage.models import RoutablePageMixin, route
@@ -28,7 +25,7 @@ from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 
-from core.base import PaginatedListPageMixin
+from core.base import PaginatedListPageMixin, ShareLinksMixin
 from people.models import ContributorPage
 from themes.models import ThemeablePage
 
@@ -287,64 +284,6 @@ class Promotable(models.Model):
         abstract = True
 
 
-class Sharelinks(models.Model):
-    cached_twitter_count = models.IntegerField(default=0)
-    cached_facebook_count = models.IntegerField(default=0)
-    cached_last_updated = models.DateTimeField(blank=True, null=True)
-
-    def _get_twitter_count(self):
-        try:
-
-            urls = ["https://opencanada.org{}".format(self.url), "http://opencanada.org{}".format(self.url)]
-            total_shares = 0
-            for page_url in urls:
-                url = 'https://cdn.api.twitter.com/1/urls/count.json?url={}'.format(page_url)
-                response = requests.get(url, timeout=5)
-                j = response.json()
-                total_shares += j.get('count', 0)
-            return total_shares
-        except requests.exceptions.RequestException:
-            logger.error('There was an error getting the Twitter share count.', exc_info=True, extra={"page": self})
-            return 0
-
-    def _get_facebook_count(self):
-        try:
-            url = 'https://graph.facebook.com/?ids=https://opencanada.org{0},http://opencanada.org{0}'.format(self.url)
-            response = requests.get(url, timeout=5)
-            j = response.json()
-            total_shares = 0
-            for key, values in j.iteritems():
-                total_shares += values.get('shares', 0)
-            return total_shares
-        except requests.exceptions.RequestException:
-            logger.error('There was an error getting the Facebook share count.', exc_info=True, extra={"page": self})
-            return 0
-
-    def update_cache(self):
-        if not self.cached_last_updated or (timezone.now() - self.cached_last_updated) > timedelta(minutes=10):
-            tweet_count = self._get_twitter_count()
-            if tweet_count > 0:
-                self.cached_twitter_count = tweet_count
-
-            facebook_count = self._get_facebook_count()
-            if facebook_count > 0:
-                self.cached_facebook_count = facebook_count
-
-            self.cached_last_updated = timezone.now()
-            self.save()
-
-    @property
-    def twitter_count(self):
-        return self.cached_twitter_count
-
-    @property
-    def facebook_count(self):
-        return self.cached_facebook_count
-
-    class Meta:
-        abstract = True
-
-
 @python_2_unicode_compatible
 class FeatureStyle(models.Model):
     name = models.CharField(max_length=100)
@@ -411,7 +350,7 @@ class PageLayoutOptions(models.Model):
         abstract = True
 
 
-class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, Sharelinks, PageLayoutOptions):
+class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin, PageLayoutOptions):
     excerpt = RichTextField(blank=True, default="")
     body = article_fields.BodyField()
     chapters = article_fields.ChapterField(blank=True, null=True)
@@ -828,7 +767,7 @@ class SeriesArticleLink(Orderable, models.Model):
     ]
 
 
-class SeriesPage(ThemeablePage, FeatureStyleFields, Promotable, Sharelinks, PageLayoutOptions):
+class SeriesPage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin, PageLayoutOptions):
     subtitle = RichTextField(blank=True, default="")
     short_description = RichTextField(blank=True, default="")
     body = article_fields.BodyField(blank=True, default="")

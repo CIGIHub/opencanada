@@ -34,7 +34,7 @@ var Sharing = Sharing || {
                 }
 
                 function load_share_counts(page_id) {
-                    $.getJSON('/articles/share/count/' + page_id, function (data) {
+                    $.getJSON('/core/share/count/' + page_id, function (data) {
                         $.each(data, function (key, val) {
                             if (val > 0){
                                 var social_count = $("." + key + " .count");
