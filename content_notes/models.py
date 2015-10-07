@@ -21,13 +21,23 @@ def get_uuid():
 @python_2_unicode_compatible
 class EndNote(Orderable):
     text = RichTextField()
-    uuid = models.CharField(default=get_uuid, max_length=64, blank=True)
+    uuid = models.CharField(max_length=64, blank=True)
     article = ParentalKey(
         "articles.ArticlePage",
         null=True,
         on_delete=models.SET_NULL,
         related_name='endnote_links'
     )
+
+    def __init__(self, *args, **kwargs):
+        super(EndNote, self).__init__(*args, **kwargs)
+        if not self.uuid:
+            self.uuid = get_uuid()
+
+    def save(self, *args, **kwargs):
+        if not self.uuid:
+            self.uuid = get_uuid()
+        super(EndNote, self).save()
 
     def __str__(self):
         return self.text
