@@ -27,7 +27,7 @@
                       <div class="feature-content">
                       <h3>{{ article.title }}</h3>
                       {% if article.authors %}
-                        {% include 'articles/includes/article-contributors.html' with authors=self.authors date=self.first_published_at links=False %}
+                        {% include 'articles/includes/article-contributors.html' with authors=article.authors links=False %}
                       {% endif %}
                       {% if article.feature_style.include_image and article.main_image %}
                         </div>

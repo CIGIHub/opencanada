@@ -8,7 +8,7 @@
         <h1>{{ self.title }}</h1>
        {% for article in articles %}
             <article class="row teaser">
-                <div class="col-xs-2">
+                <div class="col-sm-2">
                 {% spaceless %}
                     <figure>
                        {% if article.source and article.source.logo %}
@@ -22,7 +22,7 @@
                     </figure>
                 {% endspaceless %}
                 </div>
-                <div class="col-xs-10">
+                <div class="col-xs-12 col-sm-10">
                     <h2><a href="{{ article.website_link }}">{{ article.title }}</a></h2>
                     {{ article.body|richtext }}
                 </div>
