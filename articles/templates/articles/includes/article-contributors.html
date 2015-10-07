@@ -2,15 +2,9 @@
         <div class="contributors {{ extra_classes }}">
             <span class="contributor-label">{% if label %}{{ label }}{% else %}By{% endif %}: </span>
                 {% for author in authors %}
-                  <div class="contributor">
-                      {% if links == True %}
-                        <a href="{{ author.url }}">{{ author.full_name }}</a>
-                      {% else %}
-                        {{ author.full_name }}
-                      {% endif %}
-                      <span>{% if not forloop.last %}, {% endif %}</span>
-                  </div>
-                {% endfor %}
+                   <div class="contributor"><a href="{{ author.url }}">{{ author.full_name }}</a></div>
+                  <span>{% if not forloop.last %}, {% endif %}</span>
+               {% endfor %}
             {% if date %}
                <span> / </span><div class="date">{{ date|date:"F j, Y" }}</div>
             {% endif %}
