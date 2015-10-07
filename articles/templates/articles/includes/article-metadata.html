@@ -9,7 +9,7 @@
     {% endif %}
 
     <h1>{{ self.title}}</h1>
-    <h2>{{ self.excerpt|richtext }}</h2>
+    <div class="subtitle">{{ self.excerpt|richtext }}</div>
     {% if self.authors %}
         {% include 'articles/includes/article-contributors.html' with authors=self.authors date=self.first_published_at links=True %}
     {% endif %}
