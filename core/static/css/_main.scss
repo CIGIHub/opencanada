@@ -43,19 +43,6 @@ h4{
   @include type(14px);
 }
 
-
-@media(max-width: $screen-sm){
-  h1{
-    font-size: 24px;
-  }
-  h2{
-    font-size: 18px;
-  }
-  h3{
-    font-size: 14px;
-  }
-}
-
 p{
   margin-bottom: 20px;
 }
@@ -89,14 +76,6 @@ button{
   background: none;
 }
 button:focus {outline:0;}
-
-a.read-more {
-  color: $light-grey;
-  i{
-    color: $site-primary-color;
-    padding-left: 3px;
-  }
-}
 
 .pager{
   li{
@@ -133,15 +112,14 @@ a.read-more {
 /**************   Main  **************/
 
 main{
-  padding-bottom: 40px;
-  padding-top: 40px;
+  padding-bottom: 60px;
+  padding-top: 60px;
 
-  @media (min-width: $screen-sm) {
-    padding-bottom: 60px;
-    padding-top: 60px;
+  @media (max-width: $screen-sm) {
+    padding-bottom: 20px;
+    padding-top: 20px;
   }
 }
-
 
 .container-clear-none{
   margin-right: auto;

@@ -22,15 +22,26 @@
 }
 
 @mixin article-title(){
-  font-size: 67px;
+  font-size: 58px;
   line-height: 90%;
   font-weight: 700;
+  @media(max-width: $screen-sm){
+    font-size: 38px;
+    line-height: 100%;
+  }
+
 }
 
 @mixin article-list-title{
   font-size: 22px;
   font-weight: 900;
   color: $article-list-link-color;
+  a{
+    color: $article-list-link-color;
+    &:hover{
+      color: $article-list-link-hover-color;
+    }
+  }
 }
 
 @mixin article-overlay-title{
