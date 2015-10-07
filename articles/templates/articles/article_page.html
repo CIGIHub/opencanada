@@ -62,6 +62,12 @@
                             {{ block }}
                         </div>
                     </section>
+                {% elif block.block_type == 'Overflow' %}
+                  <section class="block-Overflow">
+                      <div class="container-clear-none">
+                          {{ block }}
+                      </div>
+                  </section>
                 {% else %}
                     <div class="container-clear-none">
                         <section class="block-{{ block.block_type }} narrow-content">
@@ -88,7 +94,7 @@
                     </div>
                     {{ self.chapters }}
                 </div>
-              </div> 
+              </div>
             {% endif %}
 
             {% if self.citation_links.all %}
