@@ -21,7 +21,7 @@ base_urlpatterns = [
     url(r'^documents/', include(wagtaildocs_urls)),
     url(r'^', include('favicon.urls')),
     url(r'^feed/', MainFeed(), name='main_feed'),
-    url(r'^error/', lambda r: 1 / 0),
+    url(r'^error/', lambda r: 1 / 0, name='error'),
     url(r'^core/', include('core.urls', namespace='core'))
 ]
 
