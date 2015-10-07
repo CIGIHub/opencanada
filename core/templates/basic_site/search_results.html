@@ -26,19 +26,16 @@
                 <div class="col-xs-12">
                     <h3><a href="{% pageurl result.specific %}">{{ result.specific.title }}</a></h3>
                     {% if result.specific.authors %}
-                        <div class="contributors">
-                            {% for author in result.specific.authors %}
-                                <div class="contributor"><a href="{{ author.url  }}">{{ author.first_name }} {{ author.last_name }}</a></div>
-                            {% endfor %}
-                        </div>
+                        {% include 'articles/includes/article-contributors.html' with authors=result.specific.authors date=result.specific.first_published_at links=True %}
                     {% endif %}
-                    <div class="date"> / {{ result.specific.first_published_at|date:"F j, Y" }}</div>
+
                     <div>
                     {% if result.specific.search_description %}
                       {{ result.specific.search_description|safe }}
                     {% elif result.specific.body %}
-
                         {{ result.specific.body|safe|truncatewords_html:80|striptags }}
+                    {% elif result.specific.search_result_text %}
+                        {{ result.specific.search_result_text|safe }}
                     {% endif %}
                     </div>
                 </div>
