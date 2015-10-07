@@ -5,7 +5,8 @@ register = template.Library()
 
 
 @register.assignment_tag(takes_context=True)
-def get_contact_email(context, theme):
+def get_contact_email(context):
+    theme = get_theme(context)
 
     email = theme.content.contact_email
     if not email:
@@ -18,16 +19,28 @@ def get_contact_email(context, theme):
     return email
 
 
-@register.filter
-def get_text_block(theme, slug):
+def get_theme(context):
+    default_theme = context["default_theme"]
+    try:
+        page = context["self"]
+        return page.theme
+    except:
+        return default_theme
+
+
+@register.assignment_tag(takes_context=True)
+def get_text_block(context, slug):
+    theme = get_theme(context)
     return theme.content.block_links.filter(theme_content=theme.content, block__slug=slug).first().block
 
 
-@register.filter
-def get_follow_link(theme, slug):
+@register.assignment_tag(takes_context=True)
+def get_follow_link(context, slug):
+    theme = get_theme(context)
     return theme.content.follow_links.filter(theme_content=theme.content, block__slug=slug).first().block.link
 
 
-@register.filter
-def get_logo(theme, slug):
+@register.assignment_tag(takes_context=True)
+def get_logo(context, slug):
+    theme = get_theme(context)
     return theme.content.logo_links.filter(theme_content=theme.content, block__slug=slug).first().block.logo

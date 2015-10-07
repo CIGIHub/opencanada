@@ -179,7 +179,8 @@ COMPRESS_PRECOMPILERS = (
 
 TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
     'django.core.context_processors.request',
-    'core.context_processors.settings_context'
+    'core.context_processors.settings_context',
+    'themes.context_processors.default_theme_context',
 )
 
 

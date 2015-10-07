@@ -4,22 +4,19 @@
     <div class="container">
         <div class="row infobar">
             <div class="col-sm-4">
-                {% with self.theme|get_text_block:"about-block" as block %}
+                {% get_text_block "about-block" as block %}
                 <h3>{{ block.heading }}</h3>
                 {{ block.content|richtext }}
-                {% endwith %}
             </div>
             <div class="col-sm-4">
-                {% with self.theme|get_text_block:"masthead-block" as block %}
+                {% get_text_block "masthead-block" as block %}
                 <h3>{{ block.heading }}</h3>
                 {{ block.content|richtext }}
-                {% endwith %}
             </div>
             <div class="col-sm-4">
                 <div class="newsletter-form">
-                    {% with self.theme|get_text_block:"newsletter-block" as block %}
+                    {% get_text_block "newsletter-block" as block %}
                     <h3>{{ block.heading }}</h3>
-                    {% endwith %}
                     <!-- Begin MailChimp Signup Form -->
                     <link href="//cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css">
                     <div id="mc_embed_signup">
@@ -39,26 +36,28 @@
                     <!--End mc_embed_signup-->
                 </div>
                 <div class="follow">
-                    {% with self.theme|get_text_block:"follow-block" as block %}
+                    {% get_text_block "follow-block" as block %}
                     <h3>{{ block.heading }}</h3>
+                    {% get_follow_link "twitter" as twitter_link %}
+                    {% get_follow_link "facebook" as facebook_link %}
+                    {% get_follow_link "google-plus" as google_plus_link %}
+                    {% get_follow_link "rss-feed" as rss_link %}
                     <div class="social-links">
                         <ul>
-                            <li><a href="{{ self.theme|get_follow_link:"twitter" }}"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="{{ self.theme|get_follow_link:"facebook" }}"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="{{ self.theme|get_follow_link:"google-plus" }}"><i class="fa fa-google-plus"></i></a></li>
-                            <li><a rel="home" type="application/rss+xml" href="{{ self.theme|get_follow_link:"rss-feed" }}"><i class="fa fa-rss"></i></a></li>
+                            <li><a href="{{ twitter_link }}"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="{{ facebook_link }}"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="{{ google_plus_link }}"><i class="fa fa-google-plus"></i></a></li>
+                            <li><a rel="home" type="application/rss+xml" href="{{ rss_link }}"><i class="fa fa-rss"></i></a></li>
                         </ul>
                     </div>
-                    {% endwith %}
                 </div>
             </div>
         </div>
         <div class="row partner-row">
             <div class="col-xs-12">
                 <div class="partners">
-                    {% with self.theme|get_text_block:"tagline-block" as block %}
+                    {% get_text_block "tagline-block" as block %}
                     {{ block.content|richtext }}
-                    {% endwith %}
                </div>
             </div>
         </div>
@@ -75,14 +74,15 @@
             </div>
             <div class="col-xs-4">
                 <div class="partner cigi">
-                    {% image self.theme|get_logo:"cigi-logo-black" original as cigi_logo %}
+                    {% get_logo "cigi-logo-black" as logo %}
+                    {% image logo original as cigi_logo %}
                     <a href="/"><img src="{{ cigi_logo.url }}" alt="CIGI Logo" class="img-responsive" ></a>
                 </div>
             </div>
         </div>
         <div class="contact">
             Copyright &copy; {% now "Y" %} Open Canada, All rights reserved.<br>
-            {% get_contact_email self.theme as contact_email %}
+            {% get_contact_email as contact_email %}
             <a href="mailto:{{ contact_email }}">{{ contact_email }}</a>
         </div>
 
