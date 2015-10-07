@@ -27,7 +27,7 @@ header{
     line-height: 1em;
     width: 10%;
     padding:0;
-    
+
     #search-box-toggle {
       width: 25px;
       float:right;
@@ -111,7 +111,7 @@ header{
     opacity: 0;
     transition:left 0.5s, visibility 0.5s, opacity 0.5s;
     display: none;
-    
+
 
     &.noAnimation {
       transition:left 0s !important;
@@ -129,7 +129,7 @@ header{
       margin-top: 10px;
       padding-top: 10px;
       li a{
-        font-size: 12px;
+        font-size: 14px;
       }
       i{
         width: 20px;
@@ -142,14 +142,14 @@ header{
 
       li{
         display: block;
-        padding: 3px 5px;
+        padding: 5px;
 
         a {
           color:$main-menu-color;
           font-family: $sans-serif;
           font-weight: 300;
           outline:none;
-          font-size: 12px;
+          font-size: 14px;
           text-transform: uppercase;
         }
       }
@@ -158,7 +158,7 @@ header{
 
   @media(min-width: $breakpoint){
 
-    #main-menu{ 
+    #main-menu{
       @include inline-list-divided($main-menu-color, 12px);
       display: block;
       position: relative;
@@ -166,7 +166,7 @@ header{
       left: 0;
       width: auto;
       padding: 0px;
-      background: transparent;  
+      background: transparent;
       transition:left 0s, visibility 0s, opacity 0s;
       visibility: visible;
       opacity: 1
@@ -182,7 +182,7 @@ header{
 
     //for large displays
     &.collapsed{
-      
+
       #toggle-mobile {
         display: block;
       }
@@ -197,7 +197,7 @@ header{
         background: $main-menu-bg-color;
         visibility: hidden;
         transition:left 0.5s, visibility 0.5s;
-        
+
 
         &.open{
           left: 0;
@@ -244,15 +244,15 @@ header{
       .banner{
         padding-top: 15px;
         padding-bottom: 15px;
-       
+
       }
 
       .social {
         display: block;
       }
 
-      #main-menu{ 
-       
+      #main-menu{
+
         ul li a:after {
           content:"";
         }
