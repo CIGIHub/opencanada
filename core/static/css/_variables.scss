@@ -23,7 +23,6 @@ $border-grey: solid 1px #ccc !default;
 $border-red: solid 1px $site-primary-color;
 $border-white: solid 1px $white !default;
 $border-light-grey: solid 1px #d6d6d6;
-
 $social-border: $border-white !default;
 
 
@@ -46,6 +45,7 @@ $footer-bg-color: $white !default;
 $footer-text-color: $black !default;
 $footer-link-color: $black !default;
 $footer-link-hover-color: $site-primary-color !default;
+$footer-border: solid 3px $site-primary-color !default;
 
 $header-bg-color: $site-primary-color !default;
 $header-collapsed-bg-color: #000 !default;
