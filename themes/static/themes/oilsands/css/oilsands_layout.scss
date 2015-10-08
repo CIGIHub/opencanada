@@ -14,13 +14,32 @@
 		margin-top: -60px;
 
 		@media (min-width: $screen-lg) {
-			background-size: initial;
-			background-position: top right;
+			//background-size: contain;
+			//background-position: top center;
 		}
 	}
 
 	.main-feature {
 		background-color: transparent;
+		//height: auto !important;
+
+		
+
+		@media (max-width: $screen-xs) {
+
+			height: auto !important;
+
+			.feature-wrapper {	
+				padding-top:300px;
+				position: relative;
+			}
+		}
+
+		@media (max-width: $screen-sm) {
+			.feature-wrapper {
+				top:27%;
+			}
+		}
 	}
 
 }

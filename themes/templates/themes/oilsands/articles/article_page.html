@@ -24,7 +24,7 @@
 {% endblock %}
 
 {% block main_style %}
-    {% image self.main_image original as bg_image %}
+    {% image self.main_image fill-1276x1020 as bg_image %}
     background-image:url('{{ bg_image.url }}');
 {% endblock %}
 
@@ -92,6 +92,58 @@
 
                 {% endif %}
             {% endfor %}
+
+            {% if self.chapters %}
+                <div class="container">
+                  <div class="narrow-content">
+                    <div class="toc">
+                        {% if self.table_of_contents_heading %}
+                        <h2 id="toc">{{ self.table_of_contents_heading }}</h2>
+                        {% endif %}
+                        <ul class="fa-ul">
+                            {% for chapter in self.chapters %}
+                                <li><i class="fa fa-li fa-chevron-down"></i><a
+                                        href="#{{ chapter.value.heading|slugify }}">{{ chapter.value.heading }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {{ self.chapters }}
+                </div>
+              </div>
+            {% endif %}
+
+            {% if self.citation_links.all %}
+                <div class="container">
+                    <div class="block-citations narrow-content">
+                        {% if self.citations_heading %}
+                        <h2>{{ self.citations_heading }}</h2>
+                        {% endif %}
+                            {% for citation in self.citation_links.all %}
+                                <div class="citation">{{ citation.text|richtext }}</div>
+                            {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+
+
+                {% if self.endnote_links.all %}
+                     <div class="container">
+                       <div class="narrow-content">
+                          {% include 'articles/includes/end_notes.html' %}
+                        </div>
+                    </div>
+                {% endif %}
+
+
+             {% if self.main_image and self.include_caption_in_footer %}
+                 <div class="container">
+                    <div class="feature-caption narrow-content">
+                        {% if self.main_image.credit %}
+                            {{ self.main_image.credit }}
+                        {% endif %}
+                    </div>
+                 </div>
+            {% endif %}
 
             <div class="home-link"><a href="/"><img src="{% static 'themes/dark/img/opencanada-mark-white.png' %}"></a></div>
         </div>
