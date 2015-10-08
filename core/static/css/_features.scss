@@ -36,6 +36,9 @@
         padding-right:0;
         padding-left:0;
     }
+    &.last{
+      margin-bottom: 0px;
+    }
   }
 
   //full width container
@@ -71,7 +74,7 @@
       position: relative;
       border: $row-border;
     }
-    .image-feature, .simple-feature{
+    .image-feature, .simple-feature, .external-feature{
       .feature-box{
         height: 380px;
       }
@@ -83,12 +86,10 @@
     }
     .graphics-feature{
       .feature-box{
-        height: 265px;
+        height: 275px;
       }
     }
     .external-feature{
-      height: 330px;
-      margin-bottom: 50px;
       figure{
         position: absolute;
         bottom: 0;
@@ -100,7 +101,8 @@
       bottom: 0;
     }
 
-    @media(max-width: $screen-md){
+
+    @media(max-width: $screen-sm){
       .image-feature, .simple-feature{
         .feature-box{
           height: 450px;
@@ -130,9 +132,6 @@
           height: auto;
         }
       }
-      .external-feature{
-        height: 180px;
-      }
       .contributors{
         position: relative;
       }
@@ -140,6 +139,48 @@
   }//end multi-block row
 }
 
+.external-feature-section{
+
+  @media(max-width: $screen-sm-max){
+    .multi-block .row{
+      & > [class*='col-']:first-child,
+      & > [class*='col-']:nth-child(3){
+        padding-left: 0px;
+        padding-right: 7.5px;
+      }
+      & > [class*='col-']:last-child,
+      & > [class*='col-']:nth-child(2){
+        padding-left: 7.5px;
+        padding-right: 0px;
+      }
+      .external-feature{
+        .feature-box{
+          height: 250px
+        }
+        margin-bottom: 25px;
+      }
+    }
+  }
+  @media(max-width: $screen-xs-max){
+    .multi-block .row{
+      & > [class*='col-']:first-child,
+      & > [class*='col-']:nth-child(3){
+        padding-left: 0px;
+        padding-right: 0px;
+      }
+      & > [class*='col-']:last-child,
+      & > [class*='col-']:nth-child(2){
+        padding-left: 0px;
+        padding-right: 0px;
+      }
+      .external-feature{
+        margin-bottom: 0px;
+      }
+    }
+
+  }
+
+}
 .editors-pick-link, .most-popular {
   display: block;
   position: absolute;

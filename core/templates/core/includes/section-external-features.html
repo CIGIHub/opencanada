@@ -8,10 +8,11 @@
       {% for item_row in item_collection %}
             <div class="row {% if forloop.last %}last{% endif %}">
                 {% for item in item_row %}
-                    <div class="col-md-{{ item_row|column_class }} col-sm-6">
+                    <div class="col-md-{{ item_row|column_class }} col-sm-6 col-xs-12">
+                      <div class="external-feature">
                       <a href="{{ item.website_link }}">
                         <div class="feature-box">
-                          <div class="external-feature feature-content">
+                          <div class=" feature-content">
                             <h3 class="columns-{{ item_row|column_class }}">{{ item.title }}</h3>
                             {% if item.short_description %}
                               {{ item.short_description|richtext }}
@@ -32,6 +33,7 @@
                           </div>
                         </div>
                       </a>
+                    </div>
                     </div>
                 {% endfor %}
             </div>
