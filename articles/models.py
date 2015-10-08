@@ -165,19 +165,24 @@ class Topic(UniquelySlugable, index.Indexed):
     def __str__(self):
         return self.name
 
+    @property
+    def articles(self):
+        return ArticlePage.objects.live().filter(
+            models.Q(primary_topic=self) | models.Q(topic_links__topic=self)
+        ).order_by('-first_published_at').distinct()
+
     class Meta:
         ordering = ["name", ]
 
     search_fields = [
         index.SearchField('name', partial_match=True),
     ]
+    panels = [
+        FieldPanel("name"),
+    ]
 
 
 register_snippet(Topic)
-
-Topic.panels = [
-    FieldPanel("name"),
-]
 
 
 class TopicListPage(RoutablePageMixin, ThemeablePage):
@@ -200,9 +205,7 @@ class TopicListPage(RoutablePageMixin, ThemeablePage):
     def topic_view(self, request, topic_slug):
         topic = get_object_or_404(Topic, slug=topic_slug)
 
-        articles = ArticlePage.objects.live().filter(
-            models.Q(primary_topic=topic) | models.Q(topic_links__topic=topic)
-        ).order_by('-first_published_at').distinct()
+        articles = topic.articles
 
         paginator = Paginator(articles, self.articles_per_page)
         page = request.GET.get('page')
