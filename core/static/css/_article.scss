@@ -1,6 +1,7 @@
 /**************  Article  **************/
 
 .template-article-page, .template-series-page {
+  @include article-title;
 
   .main-feature {
     @include article-overlay;
@@ -71,8 +72,9 @@
   }
   .subtitle{
       font-weight: normal;
+      font-family: $sans-serif;
       font-size: 18px;
-      line-height: 135%;
+      line-height: 125%;
     }
 
   .block-Paragraph {
