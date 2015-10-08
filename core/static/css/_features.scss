@@ -86,7 +86,7 @@
     }
     .graphics-feature{
       .feature-box{
-        height: 265px;
+        height: 275px;
       }
     }
     .external-feature{
@@ -100,6 +100,7 @@
       position: absolute;
       bottom: 0;
     }
+
 
     @media(max-width: $screen-sm){
       .image-feature, .simple-feature{
