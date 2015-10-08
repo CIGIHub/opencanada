@@ -24,8 +24,9 @@
             <div class="col-md-4 col-xs-8 logo header-row">
                 <div class="wordmark">
                     {% get_logo "opencanada-logo" as logo %}
+                    {% get_logo_link "opencanada-logo" as logo_link %}
                     {% image logo original as opencanada_logo %}
-                    <a href="/"><img src="{{ opencanada_logo.url }}"  alt="OpenCanada.org" /></a>
+                    <a href="{{ logo_link }}"><img src="{{ opencanada_logo.url }}"  alt="OpenCanada.org" /></a>
                 </div>
                 <div class="tagline">
                     {% get_logo "international-affairs-explained" as logo %}

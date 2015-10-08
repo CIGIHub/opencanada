@@ -89,39 +89,6 @@ class ThemeablePage(Page):
     ]
 
 
-class ContentBlockLink(models.Model):
-    block = models.ForeignKey(
-        "TextBlock",
-        related_name='content_links'
-    )
-    theme_content = ParentalKey(
-        "ThemeContent",
-        related_name='block_links'
-    )
-
-
-class ContentFollowLink(models.Model):
-    block = models.ForeignKey(
-        "FollowLink",
-        related_name='content_links'
-    )
-    theme_content = ParentalKey(
-        "ThemeContent",
-        related_name='follow_links'
-    )
-
-
-class ContentLogoLink(models.Model):
-    block = models.ForeignKey(
-        "LogoBlock",
-        related_name='content_links'
-    )
-    theme_content = ParentalKey(
-        "ThemeContent",
-        related_name='logo_links'
-    )
-
-
 @python_2_unicode_compatible
 class TextBlock(UniquelySlugable):
     name = models.CharField(max_length=255)
@@ -162,13 +129,54 @@ class LogoBlock(UniquelySlugable):
     logo = models.ForeignKey(
         'images.AttributedImage',
     )
+    link = models.CharField(max_length=2048, blank=True, null=True)
 
     panels = [
         FieldPanel('name'),
         ImageChooserPanel('logo'),
+        FieldPanel('link'),
     ]
 
     def __str__(self):
         return self.name
 
 register_snippet(LogoBlock)
+
+
+class ContentBlockLink(models.Model):
+    block = models.ForeignKey(
+        "TextBlock",
+        related_name='content_links'
+    )
+    theme_content = ParentalKey(
+        "ThemeContent",
+        related_name='block_links'
+    )
+
+    panels = [SnippetChooserPanel("block", TextBlock)]
+
+
+class ContentFollowLink(models.Model):
+    block = models.ForeignKey(
+        "FollowLink",
+        related_name='content_links'
+    )
+    theme_content = ParentalKey(
+        "ThemeContent",
+        related_name='follow_links'
+    )
+
+    panels = [SnippetChooserPanel("block", FollowLink)]
+
+
+class ContentLogoLink(models.Model):
+    block = models.ForeignKey(
+        "LogoBlock",
+        related_name='content_links'
+    )
+    theme_content = ParentalKey(
+        "ThemeContent",
+        related_name='logo_links'
+    )
+
+    panels = [SnippetChooserPanel("block", LogoBlock)]

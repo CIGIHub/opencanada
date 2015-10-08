@@ -44,3 +44,9 @@ def get_follow_link(context, slug):
 def get_logo(context, slug):
     theme = get_theme(context)
     return theme.content.logo_links.filter(theme_content=theme.content, block__slug=slug).first().block.logo
+
+
+@register.assignment_tag(takes_context=True)
+def get_logo_link(context, slug):
+    theme = get_theme(context)
+    return theme.content.logo_links.filter(theme_content=theme.content, block__slug=slug).first().block.link
