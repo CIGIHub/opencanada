@@ -159,6 +159,7 @@ header{
   @media(min-width: $breakpoint){
 
     #main-menu{
+
       @include inline-list-divided($main-menu-color, 12px);
       display: block;
       position: relative;
@@ -169,8 +170,12 @@ header{
       background: transparent;
       transition:left 0s, visibility 0s, opacity 0s;
       visibility: visible;
-      opacity: 1
+      opacity: 1;
+      ul li:first-child{
+          display: none;
+      }
     }
+
 
     .menu, .search {
       width: 32%;
@@ -197,7 +202,6 @@ header{
         background: $main-menu-bg-color;
         visibility: hidden;
         transition:left 0.5s, visibility 0.5s;
-
 
         &.open{
           left: 0;
