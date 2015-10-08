@@ -1,4 +1,4 @@
-{% load wagtailcore_tags static core_tags jobs_tags %}
+{% load theme_tags wagtailimages_tags wagtailcore_tags static core_tags jobs_tags %}
 {% get_active_posting_page as active_jobs_page %}
 
 <header role="banner">
@@ -23,9 +23,15 @@
             </div>
             <div class="col-md-4 col-xs-8 logo header-row">
                 <div class="wordmark">
-                    <a href="/"><img src="{% static 'img/opencanada-logo.png' %}" alt="OpenCanada.org" /></a>
+                    {% get_logo "opencanada-logo" as logo %}
+                    {% image logo original as opencanada_logo %}
+                    <a href="/"><img src="{{ opencanada_logo.url }}"  alt="OpenCanada.org" /></a>
                 </div>
-                <div class="tagline"><img src="{% static 'img/canadas-hub.png' %}" alt="International Affairs Explained" /></div>
+                <div class="tagline">
+                    {% get_logo "international-affairs-explained" as logo %}
+                    {% image logo original as iae_wordmark %}
+                    <img src="{{ iae_wordmark.url }}"  alt="International Affairs Explained" />
+                </div>
                 <div class="article-title">{{ self.title }}</div>
             </div>
             <div class="col-md-4 col-xs-2 search header-row">
