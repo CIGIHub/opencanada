@@ -41,6 +41,10 @@ h3{
 
 h4{
   @include type(14px);
+
+  &.modal-title {
+    display: inline;
+  }
 }
 
 p{
