@@ -62,6 +62,7 @@ a{
   }
 
   &:focus {
+    color: $text-link-hover-color;
     outline:none;
     text-decoration: none;
   }
