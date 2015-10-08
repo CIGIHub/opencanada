@@ -61,6 +61,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 
     'compressor',
     'taggit',
@@ -96,6 +97,8 @@ INSTALLED_APPS = (
     'events',
     'jobs',
     'analytics',
+
+    'robots',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -222,3 +225,5 @@ ANALYTICS_SERVICE_ACCOUNT_EMAIL = get_env_variable("ANALYTICS_SERVICE_ACCOUNT_EM
 
 IS_PRODUCTION = False
 ADMIN_ENABLED = True
+
+SITE_ID = 1

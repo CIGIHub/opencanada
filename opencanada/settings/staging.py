@@ -12,3 +12,5 @@ CACHES = {
 
 IS_PRODUCTION = False
 ADMIN_ENABLED = True
+
+SITE_ID = 3
