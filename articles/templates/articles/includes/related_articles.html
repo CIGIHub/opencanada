@@ -14,34 +14,30 @@
               </div><div class="row">
           {% endif %}
               <div class="col-xs-12 col-sm-4">
-                <a href="{{ article.url }}">
-                  <div class="feature-box">
-                      {% if article.feature_style.include_image and article.main_image %}
-                          <div class="image-feature">
-                              <figure>
-                                  {% image article.main_image fill-940x627 %}
-                              </figure>
-                      {% else %}
-                          <div class="simple-feature">
-                      {% endif %}
+                {% if article.feature_style.include_image and article.main_image %}
+                    <div class="image-feature">
+                {% else %}
+                    <div class="simple-feature">
+                {% endif %}
+                  <a href="{{ article.url }}">
+                    <div class="feature-box">
+                      <figure>
+                          {% image article.main_image fill-940x627 %}
+                      </figure>
                       <div class="feature-content">
-                      <h3>{{ article.title }}</h3>
-                      {% if article.authors %}
-                        {% include 'articles/includes/article-contributors.html' with authors=article.authors links=False %}
-                      {% endif %}
-                      {% if article.feature_style.include_image and article.main_image %}
-                        </div>
+                        <h3>{{ article.title }}</h3>
+                        {% if article.subtitle %}
+                            <div class="feature-line">{{ article.subtitle|richtext }}</div>
                         {% else %}
-                            {% if article.subtitle %}
-                                <div class="feature-line">{{ article.subtitle|richtext }}</div>
-                            {% else %}
-                                <div class="feature-line">{{ article.excerpt|richtext }}</div>
-                            {% endif %}
-                        </div>
-                    {% endif %}
+                            <div class="feature-line">{{ article.excerpt|richtext }}</div>
+                        {% endif %}
+                        {% if article.authors %}
+                          {% include 'articles/includes/article-contributors.html' with authors=article.authors links=False %}
+                        {% endif %}
+                      </div>
                     </div>
-                  </div>
-                </a>
+                  </a>
+                </div>
               </div>
           {% if forloop.last %}</div>{% endif %}
       {% endfor %}
