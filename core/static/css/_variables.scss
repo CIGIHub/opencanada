@@ -39,12 +39,12 @@ $text-link-hover-color: $text-color !default;
 
 $overlay-text-color: #fff !default;
 $overlay-link-color: #fff !default;
-$overlay-link-hover-color: $site-primary-color !default;
+$overlay-link-hover-color: $light-grey !default;
 
 $footer-bg-color: $white !default;
 $footer-text-color: $black !default;
 $footer-link-color: $black !default;
-$footer-link-hover-color: $site-primary-color !default;
+$footer-link-hover-color: $light-grey !default;
 $footer-border: solid 3px $site-primary-color !default;
 
 $header-bg-color: $site-primary-color !default;
@@ -57,7 +57,7 @@ $header-link-hover-color: #000 !default;
 $heading-color: #000 !default;
 $subheading-color: #999999 !default;
 $article-list-link-color: #000!default;
-$article-list-link-hover-color: $site-primary-color !default;
+$article-list-link-hover-color: $light-grey !default;
 
 $caption-color: #929191 !default;
 $primary-topic-color: #fff !default;
@@ -110,7 +110,6 @@ $related-contributors-hover-color: $text-color !default;
 $related-title-color: $site-primary-color !default;
 $related-title-hover-color: $text-color !default;
 
-
 $top-link-color: $site-primary-color !default;
 
 $share-link-color: $text-link-color !default;
@@ -123,7 +122,6 @@ $row-border: $border-grey !default;
 
 $main-menu-bg-color: #000 !default;
 $main-menu-color: #fff !default;
-
 
 //bootstrap overrides
 $input-border-focus: $site-primary-color !default;
