@@ -115,7 +115,7 @@
         & > [class*='col-']{
           padding-left: 0px;
           padding-right: 0px;
-          margin-bottom: 15px;
+          margin-bottom: 25px;
         }
         & > [class*='col-']:first-child{
           padding-left: 0px;
@@ -124,6 +124,7 @@
         & > [class*='col-']:last-child{
           padding-left: 0px;
           padding-right: 0px;
+          margin-bottom: 0px;
         }
       }
 
