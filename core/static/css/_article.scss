@@ -408,6 +408,7 @@ article {
   ul.share-links {
     position: absolute;
     padding: 0 0 20px 0;
+    margin: 3px 0 0 0;
     top: 0px;
 
     @media(max-width: $screen-sm) {
@@ -418,9 +419,17 @@ article {
         display: inline-block;
         margin-right: 5px;
         div{
+          width: auto;
           text-align: left;
           margin: 0px;
+          padding: 10px;
         }
+        i{
+          font-size: 20px;
+        }
+      }
+      .count{
+        display: none;
       }
     }
     @media(max-width: $screen-xs) {
@@ -706,9 +715,10 @@ article {
 
 .story{
   .dropcap-start p:first-child:first-letter {
-    font-size: 85px;
-    line-height: 72px;
+    font-size: 65px;
+    line-height: 65px;
     margin-right: 10px;
+    margin-top:5px;
     float: left;
     text-transform: uppercase;
   }
