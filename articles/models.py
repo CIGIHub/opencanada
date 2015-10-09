@@ -1,6 +1,7 @@
 from __future__ import absolute_import, division, unicode_literals
 
 import logging
+from itertools import chain
 from operator import attrgetter
 
 from basic_site.models import UniquelySlugable
@@ -166,10 +167,18 @@ class Topic(UniquelySlugable, index.Indexed):
         return self.name
 
     @property
-    def articles(self):
-        return ArticlePage.objects.live().filter(
+    def item_list(self):
+        article_list = ArticlePage.objects.live().filter(
             models.Q(primary_topic=self) | models.Q(topic_links__topic=self)
         ).order_by('-first_published_at').distinct()
+
+        series_list = SeriesPage.objects.live().filter(
+            primary_topic=self
+        ).order_by('-first_published_at').distinct()
+
+        return sorted(chain(article_list, series_list),
+                      key=lambda x: x.first_published_at,
+                      reverse=True)
 
     class Meta:
         ordering = ["name", ]
@@ -205,7 +214,7 @@ class TopicListPage(RoutablePageMixin, ThemeablePage):
     def topic_view(self, request, topic_slug):
         topic = get_object_or_404(Topic, slug=topic_slug)
 
-        articles = topic.articles
+        articles = topic.item_list
 
         paginator = Paginator(articles, self.articles_per_page)
         page = request.GET.get('page')
