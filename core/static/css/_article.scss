@@ -677,19 +677,19 @@ article {
     }
   }
 
-  .toc h2, h2.chapter-heading {
-    margin-top: 2em;
-    font-family: $sans-serif;
-    font-size: 20px;
-    font-weight: 500;
-  }
+  // .toc h2, h2.chapter-heading {
+    // margin-top: 2em;
+    // font-family: $sans-serif;
+    // font-size: 20px;
+    // font-weight: 500;
+  // }
 
-  .chapter h3 {
-    font-family: $sans-serif;
-    font-size: 18px;
-    margin:1.25em 0;
-    font-weight: 700;
-  }
+  // .chapter h3 {
+  //   font-family: $sans-serif;
+  //   font-size: 18px;
+  //   margin:1.25em 0;
+  //   font-weight: 700;
+  // }
 
   .modal-link {
     color: $text-link-color;
@@ -714,7 +714,13 @@ article {
   }
 
   h2{
+    @include article-list-title;
+  }
+  h3{
     font-weight: 700;
+    font-size: 20px;
+    margin: 1.25em, 0;
+    font-family: sans-serif;
   }
 }
 .in-the-series, .related-articles, .newsletter-list{
