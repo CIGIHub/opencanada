@@ -1,4 +1,4 @@
-.oilsands {
+.light {
 	background-position: bottom center;
 	background-size: contain;
 	background-repeat:no-repeat;
@@ -7,41 +7,11 @@
 		background-size: initial;
 	}
 
-	main {
-		background-position: top center;
-		background-size: contain;
-		background-repeat:no-repeat;
-		margin-top: -60px;
-
-		@media (min-width: $screen-lg) {
-			//background-size: contain;
-			//background-position: top center;
-		}
-	}
-
 	.main-feature {
-		background-color: transparent;
-		//height: auto !important;
-
-		
-
-		@media (max-width: $screen-xs) {
-
-			height: auto !important;
-
-			.feature-wrapper {	
-				padding-top:300px;
-				position: relative;
-			}
-		}
-
-		@media (max-width: $screen-sm) {
-			.feature-wrapper {
-				top:27%;
-			}
-		}
-	}
-
+		.feature-image-overlay{
+	    background: rgba(255,255,255, 0.5);
+	  }
+ }
 }
 
 header{

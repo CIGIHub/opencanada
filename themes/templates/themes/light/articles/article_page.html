@@ -1,37 +1,31 @@
 {% extends "base.html" %}
 {% load static article_tags compress core_tags wagtailcore_tags wagtailembeds_tags wagtailimages_tags %}
 
-{% block body_class %}template-{{ self.get_verbose_name|slugify }} oilsands{% endblock %}
+{% block body_class %}template-{{ self.get_verbose_name|slugify }} light{% endblock %}
 
 {% block body_style %}
-    background-image:url('{% static 'themes/oilsands/img/footer_bg.png' %}');
+    background-image:url('{% static 'themes/light/img/footer_bg.png' %}');
 {% endblock %}
 
-
 {% block theme_css %}
-    <link rel="stylesheet" type="text/x-scss" href="{% static 'themes/oilsands/css/oilsands.scss' %}">
+    <link rel="stylesheet" type="text/x-scss" href="{% static 'themes/light/css/light.scss' %}">
 {% endblock %}
 
 {% block extra_js %}
 <script>
     FeatureStyles.MainFeatures.setSize({{ self.full_bleed_image_size }});
 </script>
-<script type="text/javascript" src="{% static 'themes/oilsands/js/script.js' %}"></script>
+<script type="text/javascript" src="{% static 'themes/light/js/script.js' %}"></script>
 {% endblock %}
 
 {% block header %}
-    {% include 'themes/oilsands/header.html' %}
-{% endblock %}
-
-{% block main_style %}
-    {% image self.main_image fill-1276x1020 as bg_image %}
-    background-image:url('{{ bg_image.url }}');
+    {% include 'themes/light/header.html' %}
 {% endblock %}
 
 {% block content %}
 
     {% if self.main_image and self.include_main_image_overlay %}
-        {% include 'themes/oilsands/articles/article-feature.html' with metadata='articles/includes/article-metadata.html' %}
+        {% include 'themes/light/articles/article-feature.html' with metadata='articles/includes/article-metadata.html' %}
     {% endif %}
 
     <article id="article-page">
@@ -167,5 +161,3 @@
 {% block footer %}
    {% include 'themes/components/simple_footer.html' %}
 {% endblock %}
-
-
