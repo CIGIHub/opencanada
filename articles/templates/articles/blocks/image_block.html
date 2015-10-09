@@ -20,7 +20,7 @@
   </div>
 </div>
 {% endif %}
-<div class="image-wrapper {% if self.placement == 'left' %} left-aligned{% elif self.placement == 'right' %} right-aligned{% elif self.placement == 'full' %} full-width{% elif self.placement == 'editorial' %} full-width-editorial{% elif self.placement == 'nocrop' %} full-width full-width-no-crop{% endif %}">
+<div class="image-wrapper {% if self.placement == 'left' %} left-aligned{% elif self.placement == 'right' %} right-aligned{% elif self.placement == 'full' %} full-width{% elif self.placement == 'nocrop' %} full-width full-width-no-crop{% endif %}{% if self.include_border %} bordered{% endif %}">
   <div
           class="image"
           {% if self.expandable %}data-toggle="modal" data-target="#photoModal{{ self.image.id }}"{% endif %}
