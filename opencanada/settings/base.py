@@ -62,6 +62,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'django.contrib.sitemaps',
 
     'compressor',
     'taggit',
@@ -98,6 +99,7 @@ INSTALLED_APPS = (
     'jobs',
     'analytics',
 
+    'sitemap',
     'robots',
 )
 
