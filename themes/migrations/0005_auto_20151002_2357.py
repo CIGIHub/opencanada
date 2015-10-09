@@ -125,17 +125,17 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='contentmenulink',
             name='theme_content',
-            field=modelcluster.fields.ParentalKey(related_name='menu_links', to='themes.ThemeContent'),
+            field=modelcluster.fields.ForeignKey(related_name='menu_links', to='themes.ThemeContent'),
         ),
         migrations.AddField(
             model_name='contentlogolink',
             name='theme_content',
-            field=modelcluster.fields.ParentalKey(related_name='logo_links', to='themes.ThemeContent'),
+            field=modelcluster.fields.ForeignKey(related_name='logo_links', to='themes.ThemeContent'),
         ),
         migrations.AddField(
             model_name='contentfollowlink',
             name='theme_content',
-            field=modelcluster.fields.ParentalKey(related_name='follow_links', to='themes.ThemeContent'),
+            field=modelcluster.fields.ForeignKey(related_name='follow_links', to='themes.ThemeContent'),
         ),
         migrations.AddField(
             model_name='contentblocklink',
@@ -145,7 +145,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='contentblocklink',
             name='theme_content',
-            field=modelcluster.fields.ParentalKey(related_name='block_links', to='themes.ThemeContent'),
+            field=modelcluster.fields.ForeignKey(related_name='block_links', to='themes.ThemeContent'),
         ),
         migrations.AddField(
             model_name='theme',

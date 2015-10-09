@@ -3,7 +3,6 @@ from __future__ import absolute_import, division, unicode_literals
 from basic_site.models import UniquelySlugable
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
-from modelcluster.fields import ParentalKey
 from wagtail.wagtailadmin.edit_handlers import (FieldPanel, InlinePanel,
                                                 MultiFieldPanel)
 from wagtail.wagtailcore.fields import RichTextField
@@ -148,7 +147,7 @@ class ContentBlockLink(models.Model):
         "TextBlock",
         related_name='content_links'
     )
-    theme_content = ParentalKey(
+    theme_content = models.ForeignKey(
         "ThemeContent",
         related_name='block_links'
     )
@@ -161,7 +160,7 @@ class ContentFollowLink(models.Model):
         "FollowLink",
         related_name='content_links'
     )
-    theme_content = ParentalKey(
+    theme_content = models.ForeignKey(
         "ThemeContent",
         related_name='follow_links'
     )
@@ -174,7 +173,7 @@ class ContentLogoLink(models.Model):
         "LogoBlock",
         related_name='content_links'
     )
-    theme_content = ParentalKey(
+    theme_content = models.ForeignKey(
         "ThemeContent",
         related_name='logo_links'
     )
