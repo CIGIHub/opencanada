@@ -1,0 +1,45 @@
+.light {
+	background-position: bottom center;
+	background-size: contain;
+	background-repeat:no-repeat;
+
+	@media (min-width: $screen-lg) {
+		background-size: initial;
+	}
+
+	.main-feature {
+		.feature-image-overlay{
+	    background: rgba(255,255,255, 0.5);
+	  }
+ }
+}
+
+header{
+	&.transparency {
+    	position: absolute;
+	}
+
+	&.scrolled {
+		border-bottom:1px solid #efefef;
+	}
+
+	#main-menu.open {
+		border-right: 1px solid #efefef;
+		border-top:1px solid #efefef;
+	}
+}
+
+
+footer {
+	.contact {
+		padding-top: 40px;
+		padding-bottom: 160px;
+		border-top:1px solid $text-color;
+		max-width: 752px;
+		line-height: 1.5em;
+
+		@media (min-width: $screen-lg) {
+			padding-bottom: 80px;
+		}
+	}
+}
