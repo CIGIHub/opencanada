@@ -115,18 +115,6 @@
   @include serif-small;
 }
 
-.block-Sharable{
-  margin-left: 15%;
-  margin-right: 15%;
-  margin-top: 20px;
-  margin-bottom: 20px;
-
-  @media(max-width: $screen-xs){
-    margin-left: 0;
-    margin-right: 0;
-  }
-}
-
 .series-teaser .block-Paragraph{
   margin-left: 0;
   margin-right: 0;
@@ -201,7 +189,6 @@
 }
 
 .block-Image {
-
   .image {
     margin: 0 0 10px 0;
   }
@@ -460,16 +447,6 @@ article {
     }
   }
 
-    .block-Overflow .block-ColumnedContent,
-    .block-Overflow .block-Image,
-    .block-Overflow .block-Paragraph,
-    .block-Overflow .block-Sharable,
-    .block-Overflow .block-Interactive
-    {
-        margin-left: 0;
-        margin-right: 0;
-    }
-
     .block-ColumnedContent {
       .col-lg-6 {
         width: 50%;
@@ -503,43 +480,36 @@ article {
       color: $article-block-text-color;
       background: $article-block-bg-color;
       border-left:$article-block-border-width solid $article-block-border-color;
-
+      @media(max-width: $screen-sm-max) {
+          width: auto;
+          margin-left: 15%;
+          margin-right: 15%;
+          font-size: 18px;
+          float:none;
+        }
   }
 
-  @media(max-width: $screen-sm-max) {
-    .block-PullQuote {
-      width: auto;
-      padding: 10px 20px;
-      margin: 0 0 20px 0;
-      font-size: 18px;
-      float:none;
-      margin-left:10%;
-      margin-right:10%;
+  .block-Sharable, .block-Quote{
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-left: $article-quote-border;
+    .quote{
+      p{
+        margin: 0px;
+      }
+      padding-left: 10px;
     }
   }
 
   .block-Quote {
-    border-left: $article-quote-border;
     color: $article-quote-text-color;
-    margin-left: 15%;
-    margin-top:20px;
-    margin-bottom:20px;
-
-    .quote {
-      padding-left: 10px;
-      width: 80%;
-      margin-bottom: 20px;
-    }
-
-    @media(max-width: $screen-xs) {
-      margin-left: 8%;
-    }
   }
 
   .block-Sharable {
     display: table;
-    padding: 10px;
-    border-left: $article-quote-border;
     color: $article-shareable-text-color;
 
     .quote, .tweet {
@@ -547,7 +517,6 @@ article {
       vertical-align: middle;
     }
     .quote {
-      padding-left: 10px;
       font-size: 24px;
       line-height: 120%;
       width: 95%;
@@ -555,6 +524,13 @@ article {
     .tweet {
       font-size: 20px;
       text-align: right;
+    }
+  }
+
+  .block-Sharable, .block-Quote, .block-PullQuote{
+    @media(max-width: $screen-xs){
+      margin-left: 0;
+      margin-right: 0;
     }
   }
 
