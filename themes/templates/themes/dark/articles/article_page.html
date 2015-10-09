@@ -57,11 +57,14 @@
             </div>
             {% for block in self.body %}
                 {% if block.block_type == 'Embed' %}
-                    <div class="container-clear-none">
+                    <!-- <div class="container-clear-none">
                         <section class="block-Embed narrow-content">
+
+                          <div class="embed-responsive embed-responsive-16by9">
                             {{ block.value.url|embed:720 }}
+                          </div>
                         </section>
-                    </div>
+                    </div> -->
 
                 {% elif block.block_type == 'FullBleed' %}
                     <section class="block-FullBleed">
