@@ -134,11 +134,18 @@ class HomePage(ThemeablePage):
         if self._most_popular_article is not None:
             return self._most_popular_article
 
+        def get_views(article):
+            try:
+                if article.analytics:
+                    return article.analytics.last_period_views
+            except:
+                return 0
+
         # flatten the list of lists with generator
         articles = itertools.chain.from_iterable(self.articles)
         articles_by_popularity = sorted(
             articles,
-            key=lambda x: x.analytics.last_period_views
+            key=get_views
         )
 
         self._most_popular_article = articles_by_popularity[-1]
