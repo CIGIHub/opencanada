@@ -69,6 +69,11 @@
         cursor: pointer;
       }
     }
+    @media(max-width: $screen-sm){
+      .fa-camera{
+        display: none;
+      }
+    }
   }
   .subtitle{
       font-weight: normal;
