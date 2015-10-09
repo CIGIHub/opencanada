@@ -447,18 +447,6 @@ article {
     }
   }
 
-    // .block-Overflow .block-ColumnedContent,
-    // .block-Overflow .block-Image,
-    // .block-Overflow .block-Paragraph,
-    // .block-Overflow .block-Sharable,
-    // .block-Overflow .block-Quote,
-    // .block-Overflow .block-PullQuote
-    // .block-Overflow .block-Interactive
-    // {
-    //     margin-left: 0;
-    //     margin-right: 0;
-    // }
-
     .block-ColumnedContent {
       .col-lg-6 {
         width: 50%;
@@ -518,7 +506,6 @@ article {
 
   .block-Quote {
     color: $article-quote-text-color;
-
   }
 
   .block-Sharable {
