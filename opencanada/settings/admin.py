@@ -8,8 +8,6 @@ from .production import *
 
 ROOT_URLCONF = 'opencanada.urls_admin'
 
-WAGTAILFRONTENDCACHE = {}
-
 ADMIN_ENABLED = True
 
 SITE_ID = 2
