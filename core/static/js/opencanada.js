@@ -29,7 +29,10 @@ function initForWindow(){
     Sharing.Links.initializeForWindow();
     
 
-    $("main").click(function () {
+    $("main, .main-feature").click(function (e) {
+        if (Menu.isOpen() || Search.Structure.isOpen()){
+            e.preventDefault();
+        }
         Menu.close();
         Search.Structure.closeBox();
         FeatureStyles.MainFeatures.removeNavigationLock();
