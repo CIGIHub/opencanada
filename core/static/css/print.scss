@@ -1,0 +1,36 @@
+@media print{
+
+  .banner,
+  .feature-image,
+  .feature-overlay,
+  .feature-caption,
+  .camera,
+  .editors-pick-link{
+    display: none !important;
+  }
+
+  .overlay[style], .overlay-feature{
+    height: auto !important;
+    margin-top: 0px !important;
+    min-height: 200px;
+    color: black;
+  }
+
+  .narrow-content{
+    margin-left: 0%;
+    margin-right: 0%;
+  }
+
+  .multi-block{
+    img{
+      display: none;
+    }
+    h3{
+      font-size: 21px !important;
+    }
+
+  }
+  .overlay[style], .container .row > div[style] {
+      opacity: 1.0 !important;
+  }
+}
