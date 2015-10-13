@@ -4,6 +4,7 @@ from basic_site.models import UniquelySlugable
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from modelcluster.fields import ParentalKey
+from modelcluster.models import ClusterableModel
 from wagtail.wagtailadmin.edit_handlers import (FieldPanel, InlinePanel,
                                                 MultiFieldPanel)
 from wagtail.wagtailcore.fields import RichTextField
@@ -23,7 +24,7 @@ def get_default_theme():
 
 
 @python_2_unicode_compatible
-class ThemeContent(models.Model):
+class ThemeContent(ClusterableModel):
     name = models.CharField(max_length=255)
     contact_email = models.EmailField(blank=True, null=True, help_text="Only provide if this should be different from the site default email contact address.")
 
