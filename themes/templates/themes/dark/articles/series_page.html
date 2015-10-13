@@ -48,42 +48,7 @@
         </div>
 
         <div class="story">
-            <div class="container-clear-none">
-                {% if self.include_author_block %}
-                    {% include 'articles/includes/author_blurb.html' %}
-                {% endif %}
-            </div>
-            {% for block in self.body %}
-                {% if block.block_type == 'Embed' %}
-                    <div class="container-clear-none">
-                      <section class="block-Embed narrow-content">
-                        <div class="embed-responsive embed-responsive-16by9">
-                          {{ block.value.url|embed:720 }}
-                        </div>
-                      </section>
-                    </div>
-
-                {% elif block.block_type == 'FullBleed' %}
-                    <section class="block-FullBleed">
-                        <div class="container-fluid">
-                            {{ block }}
-                        </div>
-                    </section>
-                {% elif block.block_type == 'Overflow' %}
-                      <section class="block-Overflow">
-                          <div class="container-clear-none">
-                              {{ block }}
-                          </div>
-                      </section>
-                {% else %}
-                    <div class="container-clear-none">
-                        <section class="block-{{ block.block_type }} narrow-content">
-                            {{ block }}
-                        </section>
-                    </div>
-
-                {% endif %}
-            {% endfor %}
+            {% include 'articles/includes/story-content.html' %}
         </div>
 
          <div class="container">

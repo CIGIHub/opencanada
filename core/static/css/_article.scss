@@ -10,7 +10,7 @@
     color: $overlay-text-color;
     a{display:inline-block;
       &:hover{
-        color: $site-primary-color;
+        color: $overlay-link-hover-color;
       }
     }
 

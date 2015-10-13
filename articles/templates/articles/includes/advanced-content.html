@@ -1,0 +1,40 @@
+{% load static article_tags core_tags wagtailcore_tags wagtailembeds_tags wagtailimages_tags %}
+
+{% if self.chapters %}
+    <div class="container">
+        <div class="toc narrow-content">
+            {% if self.table_of_contents_heading %}
+            <h2 id="toc">{{ self.table_of_contents_heading }}</h2>
+            {% endif %}
+            <ul class="fa-ul">
+                {% for chapter in self.chapters %}
+                    <li><i class="fa fa-li fa-chevron-down"></i><a
+                            href="#{{ chapter.value.heading|slugify }}">{{ chapter.value.heading }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    {{ self.chapters }}
+
+{% endif %}
+
+{% if self.citation_links.all %}
+    <div class="container">
+        <div class="block-citations narrow-content">
+            {% if self.citations_heading %}
+            <h2>{{ self.citations_heading }}</h2>
+            {% endif %}
+                {% for citation in self.citation_links.all %}
+                    <div class="citation">{{ citation.text|richtext }}</div>
+                {% endfor %}
+        </div>
+    </div>
+{% endif %}
+
+{% if self.endnote_links.all %}
+     <div class="container">
+       <div class="narrow-content">
+          {% include 'articles/includes/end_notes.html' %}
+        </div>
+    </div>
+{% endif %}

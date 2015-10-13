@@ -37,7 +37,6 @@ $article-block-list-marker-color: $text-link-color;
 $article-block-border-width:3px;
 $article-block-border-color:$text-link-color;
 
-
 $article-quote-border-color: $text-link-color;
 
 $article-toc-border-width: 3px;
@@ -47,22 +46,23 @@ $article-toc-link-color: $text-link-color;
 $article-toc-link-hover-color: $text-color;
 $article-toc-link-underline: underline;
 
-
 $related-title-color: $text-color;
-
 $article-teaser-color: $text-link-color;
 
 $share-link-color: $text-color;
-$share-link-hover-color: $text-link-hover-color;
+$share-link-hover-color: $text-link-color;
 $share-link-hover-underline: underline;
 
 $article-shareable-text-color: $text-link-color;
-$top-link-color: $text-link-color;
 
+$top-link-color: $text-link-color;
 $footer-link-hover-color: $text-link-color;
 
 $primary-topic-color: #000;
 $overlay-text-color: #000;
+$overlay-link-color: #000;
+$overlay-link-hover-color: #fff;
+
 $border-white:0;
 
 $social-border: 1px solid #000;
