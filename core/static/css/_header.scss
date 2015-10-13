@@ -34,12 +34,6 @@ header{
       cursor: pointer;
       padding-right: 15px;
       box-sizing:content-box;
-
-      &.open {
-        .fa-search:before {
-          content:"\f00d";
-        }
-      }
     }
   }
 
