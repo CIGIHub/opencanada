@@ -15,6 +15,7 @@
 }
 
 header{
+	border-bottom: $header-bottom-border;
 	&.transparency {
     	position: absolute;
 	}
@@ -27,6 +28,7 @@ header{
 		border-right: 1px solid #efefef;
 		border-top:1px solid #efefef;
 	}
+
 }
 
 

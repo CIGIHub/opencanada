@@ -8,6 +8,7 @@ $subheading-color: $text-color;
 $article-list-link-color: $text-color;
 
 $header-bg-color: transparent;
+$header-bottom-border: solid 1px #000;
 
 $footer-bg-color: transparent;
 $footer-text-color: $text-color;
@@ -20,8 +21,11 @@ $primary-topic-hover-color: $text-link-color;
 
 $divider-color: $text-link-color;
 
+$contributor-label-color: $text-color;
+
 $blurb-author-link-color: $text-color;
 $blurb-link-color: $text-link-color;
+$blurb-link-hover-color: $text-color;
 $blurb-bio-text-color: $text-link-color;
 $blurb-border: $border-grey !default;
 
