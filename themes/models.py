@@ -23,6 +23,26 @@ def get_default_theme():
 
 
 @python_2_unicode_compatible
+class BackgroundImageBlock(UniquelySlugable):
+    name = models.CharField(max_length=255)
+    image = models.ForeignKey(
+        'images.AttributedImage',
+    )
+    position = models.CharField(max_length=2048, blank=True, null=True, help_text='For example: top center')
+
+    panels = [
+        FieldPanel('name'),
+        ImageChooserPanel('image'),
+        FieldPanel('position'),
+    ]
+
+    def __str__(self):
+        return self.name
+
+register_snippet(BackgroundImageBlock)
+
+
+@python_2_unicode_compatible
 class ThemeContent(models.Model):
     name = models.CharField(max_length=255)
     contact_email = models.EmailField(blank=True, null=True, help_text="Only provide if this should be different from the site default email contact address.")
@@ -33,6 +53,7 @@ class ThemeContent(models.Model):
         InlinePanel('block_links', label="Content Blocks"),
         InlinePanel('follow_links', label="Follow Links"),
         InlinePanel('logo_links', label="Logos"),
+        InlinePanel('backgroundImage_links', label="Background Images"),
     ]
 
     def __str__(self):
@@ -180,3 +201,16 @@ class ContentLogoLink(models.Model):
     )
 
     panels = [SnippetChooserPanel("block", LogoBlock)]
+
+
+class ContentBackgroundImageLink(models.Model):
+    block = models.ForeignKey(
+        "BackgroundImageBlock",
+        related_name='content_links'
+    )
+    theme_content = ParentalKey(
+        "ThemeContent",
+        related_name='backgroundImage_links'
+    )
+
+    panels = [SnippetChooserPanel("block", BackgroundImageBlock)]
