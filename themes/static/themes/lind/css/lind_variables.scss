@@ -1,4 +1,5 @@
 $body-bg-color: #e5f2ff;
+$font-size-base: 17px;
 
 $serif: 'Source Sans Pro', sans-serif;
 $sans-serif: $serif;
@@ -12,6 +13,8 @@ $lighter-grey: #cccccc;
 $text-link-color: $dark-blue;
 $text-link-hover-color: $grey;
 $header-bg-color: $dark-blue;
+
+$site-primary-color: $dark-blue;
 
 $overlay-link-color: #fff;
 $overlay-link-hover-color: $dark-blue;
@@ -49,6 +52,7 @@ $article-end-notes-color: $grey;
 $top-link-color: $dark-blue;
 $divider-color: $dark-blue;
 $topic-link-color: $dark-blue;
+$primary-topic-hover-color: $dark-blue;
 
 $contributor-label-color: $white;
 $related-contributors-color:$grey;
