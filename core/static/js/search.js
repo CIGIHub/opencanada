@@ -32,6 +32,7 @@ var Search = Search || {
                 
                 if (search.hasClass('open')) {
                     search.removeClass('open');
+                    $(".search .button i").removeClass("fa-times").addClass("fa-search");
                 }
             },
             openBox: function() {
@@ -40,6 +41,7 @@ var Search = Search || {
                 if (!(search.hasClass('open'))) {
                     Menu.close();
                     search.addClass('open');
+                    $(".search .button i").removeClass("fa-search").addClass("fa-times");
                 }
             },
             isOpen: function(){
