@@ -6,7 +6,7 @@
       <li>
         <div class="item_content"><a href="{{ typed_page.url }}">{{ typed_page.title }}</a>
          {% if typed_page.authors %}
-           {% include 'articles/includes/article-contributors.html' with authors=typed_page.authors links=False %}
+           {% include 'articles/includes/article-contributors.html' with authors=typed_page.authors links=True %}
          {% endif %}
       </div>
       </li>
