@@ -969,10 +969,15 @@ class Headline(FeatureStyleFields):
 
 
 @python_2_unicode_compatible
-class BackgroundImageBlock(UniquelySlugable):
+class BackgroundImageBlock(Orderable, UniquelySlugable):
     name = models.CharField(max_length=255)
     image = models.ForeignKey(
         'images.AttributedImage',
+    )
+    article = ParentalKey(
+        "ArticlePage",
+        null=True,
+        related_name='background_image_links'
     )
 
     position = models.CharField(
@@ -999,27 +1004,3 @@ class BackgroundImageBlock(UniquelySlugable):
 
     def __str__(self):
         return self.name
-
-register_snippet(BackgroundImageBlock)
-
-
-@python_2_unicode_compatible
-class ArticleBackgroundImageLink(Orderable):
-    background_image = models.ForeignKey(
-        'BackgroundImageBlock',
-        related_name='+'
-    )
-    article = ParentalKey(
-        "ArticlePage",
-        related_name='background_image_links'
-    )
-
-    def __str__(self):
-        return "{} - {}".format(
-            self.article.title,
-            self.background_image
-        )
-
-    panels = [
-        SnippetChooserPanel('background_image', BackgroundImageBlock),
-    ]
