@@ -10,7 +10,7 @@
             {% for item in row %}
                 <div class="col-sm-12 feature-item overlay">
                     <div class="overlay-feature rowheight-1">
-                        {% image item.main_image fill-910x560 as background_image %}
+                        {% image item.main_image fill-910x560-c100 as background_image %}
                         {% if item.editors_pick %}
                             <div class="editors-pick-link"><div class="table"><div class="table-cell"><a href="{% slugurl 'editors-picks' %}" class="article-feature editors-pick">Editor's Pick</a></div></div></div>
                         {% endif %}
