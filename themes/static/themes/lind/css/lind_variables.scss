@@ -13,7 +13,8 @@ $text-link-color: $dark-blue;
 $text-link-hover-color: $grey;
 $header-bg-color: $dark-blue;
 
-$overlay-link-color:$dark-blue;
+$overlay-link-color: #fff;
+$overlay-link-hover-color: $dark-blue;
 $main-border-width: 3px;
 
 $border-grey: solid 1px $dark-blue;
@@ -32,7 +33,7 @@ $article-block-text-color: $dark-blue;
 $article-quote-text-color: $dark-blue;
 $article-shareable-text-color: $dark-blue;
 $article-block-bg-color: transparent;
-$article-block-border-width: $main-border-width; 
+$article-block-border-width: $main-border-width;
 $article-block-border-color: $dark-blue;
 
 $article-quote-border-width: $main-border-width;

@@ -49,95 +49,19 @@
         </div>
 
         <div class="story">
-            <div class="container-clear-none">
-                {% if self.include_author_block %}
-                    {% include 'articles/includes/author_blurb.html' %}
-                {% endif %}
-            </div>
-            {% for block in self.body %}
-                {% if block.block_type == 'Embed' %}
-                    <div class="container-clear-none">
-                      <section class="block-Embed narrow-content">
-                        <div class="embed-responsive embed-responsive-16by9">
-                          {{ block.value.url|embed:720 }}
-                        </div>
-                      </section>
-                    </div>
+          {% include 'articles/includes/story-content.html' %}
+          {% include 'articles/includes/advanced-content.html' %}
 
-                {% elif block.block_type == 'FullBleed' %}
-                    <section class="block-FullBleed">
-                        <div class="container-fluid">
-                            {{ block }}
-                        </div>
-                    </section>
-                {% elif block.block_type == 'Overflow' %}
-                  <section class="block-Overflow">
-                      <div class="container-clear-none">
-                          {{ block }}
-                      </div>
-                  </section>
-                {% else %}
-                    <div class="container-clear-none">
-                        <section class="block-{{ block.block_type }} narrow-content">
-                            {{ block }}
-                        </section>
-                    </div>
-
-                {% endif %}
-            {% endfor %}
-
-            {% if self.chapters %}
-                <div class="container">
-                  <div class="narrow-content">
-                    <div class="toc">
-                        {% if self.table_of_contents_heading %}
-                        <h2 id="toc">{{ self.table_of_contents_heading }}</h2>
-                        {% endif %}
-                        <ul class="fa-ul">
-                            {% for chapter in self.chapters %}
-                                <li><i class="fa fa-li fa-chevron-down"></i><a
-                                        href="#{{ chapter.value.heading|slugify }}">{{ chapter.value.heading }}</a></li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                    {{ self.chapters }}
-                </div>
-              </div>
-            {% endif %}
-
-            {% if self.citation_links.all %}
-                <div class="container">
-                    <div class="block-citations narrow-content">
-                        {% if self.citations_heading %}
-                        <h2>{{ self.citations_heading }}</h2>
-                        {% endif %}
-                            {% for citation in self.citation_links.all %}
-                                <div class="citation">{{ citation.text|richtext }}</div>
-                            {% endfor %}
-                    </div>
-                </div>
-            {% endif %}
-
-
-                {% if self.endnote_links.all %}
-                     <div class="container">
-                       <div class="narrow-content">
-                          {% include 'articles/includes/end_notes.html' %}
-                        </div>
-                    </div>
-                {% endif %}
-
-
-             {% if self.main_image and self.include_caption_in_footer %}
-                 <div class="container">
-                    <div class="feature-caption narrow-content">
-                        {% if self.main_image.credit %}
-                            {{ self.main_image.credit }}
-                        {% endif %}
-                    </div>
-                 </div>
-            {% endif %}
-            <div class="home-link"><a href="/"><img src="{% static 'themes/dark/img/opencanada-mark-white.png' %}"></a></div>
+           {% if self.main_image and self.include_caption_in_footer %}
+               <div class="container">
+                  <div class="feature-caption narrow-content">
+                      {% if self.main_image.credit %}
+                          {{ self.main_image.credit }}
+                      {% endif %}
+                  </div>
+               </div>
+          {% endif %}
+          <div class="home-link"><a href="/"><img src="{% static 'themes/dark/img/opencanada-mark-white.png' %}"></a></div>
         </div>
 
         {% if self.topics %}
