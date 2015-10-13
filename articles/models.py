@@ -577,6 +577,12 @@ class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin
         ),
         MultiFieldPanel(
             [
+                InlinePanel('background_image_links', label="Background Images"),
+            ],
+            heading="Background Images"
+        ),
+        MultiFieldPanel(
+            [
                 FieldPanel('include_author_block'),
                 FieldPanel('number_of_related_articles')
             ],
@@ -960,3 +966,60 @@ class Headline(FeatureStyleFields):
 
     def __str__(self):
         return "{}".format(self.id)
+
+
+@python_2_unicode_compatible
+class BackgroundImageBlock(UniquelySlugable):
+    name = models.CharField(max_length=255)
+    image = models.ForeignKey(
+        'images.AttributedImage',
+    )
+
+    position = models.CharField(
+        max_length=20,
+        default="left top",
+        choices=(
+            ('left top', 'left top'),
+            ('left center', 'left center'),
+            ('left bottom', "left bottom"),
+            ('right top', 'right top'),
+            ('right center', 'right center'),
+            ('right bottom', "right bottom"),
+            ('center top', 'center top'),
+            ('center center', 'center center'),
+            ('center bottom', "center bottom")
+        )
+    )
+
+    panels = [
+        FieldPanel('name'),
+        ImageChooserPanel('image'),
+        FieldPanel('position'),
+    ]
+
+    def __str__(self):
+        return self.name
+
+register_snippet(BackgroundImageBlock)
+
+
+@python_2_unicode_compatible
+class ArticleBackgroundImageLink(Orderable):
+    background_image = models.ForeignKey(
+        'BackgroundImageBlock',
+        related_name='+'
+    )
+    article = ParentalKey(
+        "ArticlePage",
+        related_name='background_image_links'
+    )
+
+    def __str__(self):
+        return "{} - {}".format(
+            self.article.title,
+            self.background_image
+        )
+
+    panels = [
+        SnippetChooserPanel('background_image', BackgroundImageBlock),
+    ]

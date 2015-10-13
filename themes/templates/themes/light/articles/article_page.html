@@ -4,7 +4,13 @@
 {% block body_class %}template-{{ self.get_verbose_name|slugify }} light{% endblock %}
 
 {% block body_style %}
-    background-image:url('{% static 'themes/light/img/footer_bg.png' %}');
+    {% with bg_image=self.background_image_links.all.0 %}
+        {% image bg_image.background_image.image original as background_image %}
+
+        background-image:url('{{ background_image.url  }}');
+        background-position:{{ bg_image.background_image.position  }};
+    {% endwith %}
+    
 {% endblock %}
 
 {% block theme_css %}
