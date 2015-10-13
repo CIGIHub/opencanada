@@ -32,7 +32,6 @@ def editor_js():
             'halloformat': {},
             'hallolists': {},
             'halloreundo': {},
-            'hallolink': {},
             'hallowagtaillink': {},
             'hallorequireparagraphs': {}
         };
