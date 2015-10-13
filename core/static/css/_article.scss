@@ -636,6 +636,7 @@ article {
   .citation{
     color: $article-citation-color;
     margin-bottom: 10px;
+    word-wrap:break-word;
   }
 
   .toc {
