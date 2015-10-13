@@ -18,8 +18,11 @@ $border-grey: solid 1px $text-link-color;
 $topic-link-color: $text-color;
 $divider-color: $text-link-color;
 
+$contributor-label-color: $text-color;
+
 $blurb-author-link-color: $text-color;
 $blurb-link-color: $text-link-color;
+$blurb-link-hover-color: $text-color;
 $blurb-bio-text-color: $text-link-color;
 $blurb-border: $border-grey !default;
 
@@ -31,7 +34,6 @@ $article-block-list-marker-color: $text-link-color;
 $article-block-border-width:3px;
 $article-block-border-color:$text-link-color;
 
-
 $article-quote-border-color: $text-link-color;
 
 $article-toc-border-width: 3px;
@@ -40,7 +42,6 @@ $article-toc-bg-color: transparent;
 $article-toc-link-color: $text-link-color;
 $article-toc-link-hover-color: $text-color;
 $article-toc-link-underline: underline;
-
 
 $related-title-color: $text-color;
 
