@@ -5,7 +5,7 @@
     </li>
     <li class="twitter">
         <div class="count">{% if self.twitter_count > 0 %}{{ self.twitter_count }}{% endif %}</div>
-        <div><a href="https://twitter.com/share?text={{ self.title }}"><i class="fa fa-twitter"></i></a></div>
+        <div><a href="https://twitter.com/share?text={{ self.title }}&url={{ self.full_url|urlencode:"" }}"><i class="fa fa-twitter"></i></a></div>
     </li>
     <li class="print"><div><a href="javascript:window.print()"><i class="fa fa-print"></i></a></div></li>
     <li class="email"><div><a HREF="mailto:?subject={{ self }}&body={{ self.full_url }}"><i class="fa fa-envelope"></i></a></div></li>
