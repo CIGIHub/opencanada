@@ -10,7 +10,7 @@ var Menu = Menu || {
             var menu = $('#main-menu');
             if (menu.hasClass('open')) {
                 menu.removeClass('open');
-                //FeatureStyles.MainFeatures.removeNavigationLock();
+                $("#toggle-mobile").removeClass("open");
             }
         },
         open: function() {
@@ -19,7 +19,7 @@ var Menu = Menu || {
             if (!(menu.hasClass('open'))) {
                 Search.Structure.closeBox();
                 menu.addClass('open');
-                //FeatureStyles.MainFeatures.addNavigationLock();
+                $("#toggle-mobile").addClass("open");
             }
         },
         isOpen: function(){

@@ -51,10 +51,12 @@ var Search = Search || {
             toggleBox: function () {
                 if (Search.Structure.isOpen()) {
                     Search.Structure.closeBox();
+                    $("#search-box-toggle").removeClass("open");
                 }
                 else {
                     Search.Structure.openBox();
                     Search.Structure.focusInput();
+                    $("#search-box-toggle").addClass("open");
                 }
             }
         }
