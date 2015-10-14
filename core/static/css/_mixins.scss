@@ -286,7 +286,7 @@
  .feature-wrapper{
     position: absolute;
     z-index: 10;
-    top: 20%;
+    top: 10%;
     width:100%;
 
     .feature-line{
@@ -294,8 +294,7 @@
       line-height: 125%;
     }
     .feature-text{
-      padding-left:40px;
-      padding-right:40px;
+      padding: 40px 40px 0 40px;
       position: relative;
       max-width: 940px;
       margin: 0 auto;
