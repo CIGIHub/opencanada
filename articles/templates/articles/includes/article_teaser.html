@@ -18,7 +18,7 @@
         <{{ heading }} class="{% if article.editors_pick %} editors-pick{% endif %}"><a href="{{ article.url }}">{{ article.title }}</a></{{ heading }}>
         {% if article.authors %}
             {% spaceless %}
-                {% include 'articles/includes/article-contributors.html' with authors=article.authors date=article.first_published_at %}
+                {% include 'articles/includes/article-contributors.html' with authors=article.authors date=article.first_published_at links=True %}
             {% endspaceless %}
          {% else %}
             <div class="date">{{ article.first_published_at|date:"F j, Y" }}</div>
