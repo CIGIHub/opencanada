@@ -10,7 +10,7 @@ CACHES = {
     }
 }
 
-COMPRESS_URL = 'https://staging-files.opencanada.org/'
+COMPRESS_URL = 'https://{}.s3.amazonaws.com/'.format(AWS_STORAGE_BUCKET_NAME)
 STATIC_URL = 'https://staging-files.opencanada.org/'
 MEDIA_URL = 'https://staging-files.opencanada.org/'
 
