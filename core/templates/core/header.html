@@ -26,13 +26,13 @@
                   <div class="wordmark">
                       {% get_logo logo_slug as logo %}
                       {% get_logo_link logo_slug as logo_link %}
-                      <a href="{{ logo_slug }}">{% image logo original %}</a>
+                      <a href="{{ logo_link }}">{% image logo original %}</a>
                   </div>
                 {% endif %}
                 {% if wordmark_slug %}
                   <div class="tagline">
                     {% get_logo wordmark_slug as tagline_logo %}
-                      <a href="{{ logo_slug }}">{% image tagline_logo original %}</a>
+                      <a href="{{ logo_link }}">{% image tagline_logo original %}</a>
                   </div>
                 {% endif %}
                 <div class="article-title">{{ self.title }}</div>
