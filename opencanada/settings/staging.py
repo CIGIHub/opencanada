@@ -13,6 +13,7 @@ CACHES = {
 COMPRESS_URL = 'https://staging-files.opencanada.org/'
 STATIC_URL = 'https://staging-files.opencanada.org/'
 MEDIA_URL = 'https://staging-files.opencanada.org/'
+AWS_S3_CUSTOM_DOMAIN = 'staging-files.opencanada.org'
 
 IS_PRODUCTION = False
 ADMIN_ENABLED = True
