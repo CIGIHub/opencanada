@@ -16,7 +16,9 @@
                         {% if active_jobs_page %}<li><a href="{% pageurl active_jobs_page %}">Jobs</a></li>{% endif %}
                     </ul>
                     <ul class="toggle-mobile social">
+                        {% get_follow_link "twitter" as twitter_link %}
                         <li><a href="{{ twitter_link }}"><i class="fa fa-twitter"></i> Twitter</a></li>
+                        {% get_follow_link "facebook" as facebook_link %}
                         <li><a href="{{ facebook_link }}"><i class="fa fa-facebook"></i> Facebook</a></li>
                     </ul>
                 </nav>
