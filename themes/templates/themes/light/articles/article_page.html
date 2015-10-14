@@ -10,7 +10,7 @@
         background-image:url('{{ background_image.url  }}');
         background-position:{{ bg_image.position  }};
     {% endwith %}
-    
+
 {% endblock %}
 
 {% block theme_css %}
@@ -25,7 +25,7 @@
 {% endblock %}
 
 {% block header %}
-    {% include 'themes/light/header.html' %}
+    {% include 'core/header.html' with tagline=false logo_slug="opencanada-logo-black" %}
 {% endblock %}
 
 {% block content %}

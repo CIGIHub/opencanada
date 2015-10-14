@@ -14,6 +14,10 @@
 <script type="text/javascript" src="{% static 'themes/light/js/script.js' %}"></script>
 {% endblock %}
 
+{% block header %}
+    {% include 'core/header.html' with tagline=true logo_slug="opencanada-logo-block" %}
+{% endblock %}
+
 {% block content %}
 
     {% if self.main_image and self.include_main_image_overlay %}
