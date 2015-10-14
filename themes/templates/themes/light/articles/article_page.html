@@ -10,7 +10,7 @@
         background-image:url('{{ background_image.url  }}');
         background-position:{{ bg_image.background_image.position  }};
     {% endwith %}
-    
+
 {% endblock %}
 
 {% block theme_css %}
@@ -22,10 +22,6 @@
     FeatureStyles.MainFeatures.setSize({{ self.full_bleed_image_size }});
 </script>
 <script type="text/javascript" src="{% static 'themes/light/js/script.js' %}"></script>
-{% endblock %}
-
-{% block header %}
-    {% include 'themes/light/header.html' %}
 {% endblock %}
 
 {% block content %}
