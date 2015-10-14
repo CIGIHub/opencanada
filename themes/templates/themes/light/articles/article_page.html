@@ -5,10 +5,10 @@
 
 {% block body_style %}
     {% with bg_image=self.background_image_links.all.0 %}
-        {% image bg_image.background_image.image original as background_image %}
+        {% image bg_image.image original as background_image %}
 
         background-image:url('{{ background_image.url  }}');
-        background-position:{{ bg_image.background_image.position  }};
+        background-position:{{ bg_image.position  }};
     {% endwith %}
     
 {% endblock %}
