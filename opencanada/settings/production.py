@@ -20,15 +20,15 @@ WAGTAILSEARCH_BACKENDS = {
 }
 
 AWS_STORAGE_BUCKET_NAME = get_env_variable("AWS_STORAGE_BUCKET_NAME")
-AWS_S3_CUSTOM_DOMAIN = '{}.s3.amazonaws.com'.format(AWS_STORAGE_BUCKET_NAME)
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 COMPRESS_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
-COMPRESS_URL = 'https://{}.s3.amazonaws.com/'.format(AWS_STORAGE_BUCKET_NAME)
-STATIC_URL = 'https://{}.s3.amazonaws.com/'.format(AWS_STORAGE_BUCKET_NAME)
-MEDIA_URL = 'https://{}.s3.amazonaws.com/'.format(AWS_STORAGE_BUCKET_NAME)
+COMPRESS_URL = 'https://files.opencanada.org/'
+STATIC_URL = 'https://files.opencanada.org/'
+MEDIA_URL = 'https://files.opencanada.org/'
+AWS_S3_CUSTOM_DOMAIN = 'files.opencanada.org'
 
 # PostgreSQL (Recommended, but requires the psycopg2 library and Postgresql development headers)
 DATABASES = {
