@@ -22,17 +22,19 @@
                 </nav>
             </div>
             <div class="col-md-4 col-xs-8 logo header-row">
-                <div class="wordmark">
-                    {% get_logo "opencanada-logo" as logo %}
-                    {% get_logo_link "opencanada-logo" as logo_link %}
-                    {% image logo original as opencanada_logo %}
-                    <a href="{{ logo_link }}"><img src="{{ opencanada_logo.url }}"  alt="OpenCanada.org" /></a>
-                </div>
-                <div class="tagline">
-                    {% get_logo "international-affairs-explained" as logo %}
-                    {% image logo original as iae_wordmark %}
-                    <a href="/"><img src="{{ iae_wordmark.url }}"  alt="International Affairs Explained" /></a>
-                </div>
+                {% if logo_slug %}
+                  <div class="wordmark">
+                      {% get_logo logo_slug as logo %}
+                      {% get_logo_link logo_slug as logo_link %}
+                      <a href="{{ logo_slug }}">{% image logo original %}</a>
+                  </div>
+                {% endif %}
+                {% if wordmark_slug %}
+                  <div class="tagline">
+                    {% get_logo wordmark_slug as tagline_logo %}
+                      <a href="{{ logo_slug }}">{% image tagline_logo original %}</a>
+                  </div>
+                {% endif %}
                 <div class="article-title">{{ self.title }}</div>
             </div>
             <div class="col-md-4 col-xs-2 search header-row">
