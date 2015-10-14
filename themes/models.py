@@ -1,6 +1,5 @@
 from __future__ import absolute_import, division, unicode_literals
 
-from basic_site.models import UniquelySlugable
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from modelcluster.fields import ParentalKey
@@ -91,8 +90,9 @@ class ThemeablePage(Page):
 
 
 @python_2_unicode_compatible
-class TextBlock(UniquelySlugable):
+class TextBlock(models.Model):
     name = models.CharField(max_length=255)
+    usage = models.CharField(max_length=255, blank=True, default="")
     heading = models.TextField(blank=True, default="")
     content = RichTextField(blank=True, default="")
 
@@ -100,6 +100,7 @@ class TextBlock(UniquelySlugable):
         FieldPanel('name'),
         FieldPanel('heading'),
         FieldPanel('content'),
+        FieldPanel('usage'),
     ]
 
     def __str__(self):
@@ -109,13 +110,15 @@ register_snippet(TextBlock)
 
 
 @python_2_unicode_compatible
-class FollowLink(UniquelySlugable):
+class FollowLink(models.Model):
     name = models.CharField(max_length=255)
+    usage = models.CharField(max_length=255, blank=True, default="")
     link = models.CharField(max_length=1024)
 
     panels = [
         FieldPanel('name'),
         FieldPanel('link'),
+        FieldPanel('usage'),
     ]
 
     def __str__(self):
@@ -125,8 +128,9 @@ register_snippet(FollowLink)
 
 
 @python_2_unicode_compatible
-class LogoBlock(UniquelySlugable):
+class LogoBlock(models.Model):
     name = models.CharField(max_length=255)
+    usage = models.CharField(max_length=255, blank=True, default="")
     logo = models.ForeignKey(
         'images.AttributedImage',
     )
@@ -136,6 +140,7 @@ class LogoBlock(UniquelySlugable):
         FieldPanel('name'),
         ImageChooserPanel('logo'),
         FieldPanel('link'),
+        FieldPanel('usage'),
     ]
 
     def __str__(self):

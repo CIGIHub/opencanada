@@ -22,16 +22,14 @@
                 </nav>
             </div>
             <div class="col-md-4 col-xs-8 logo header-row">
-                {% if logo_slug %}
                   <div class="wordmark">
-                      {% get_logo logo_slug as logo %}
-                      {% get_logo_link logo_slug as logo_link %}
+                      {% get_logo "main-logo" as logo %}
+                      {% get_logo_link "main-logo" as logo_link %}
                       <a href="{{ logo_link }}">{% image logo original %}</a>
                   </div>
-                {% endif %}
-                {% if wordmark_slug %}
+                {% if tagline %}
                   <div class="tagline">
-                    {% get_logo wordmark_slug as tagline_logo %}
+                    {% get_logo "tagline-logo" as tagline_logo %}
                       <a href="{{ logo_link }}">{% image tagline_logo original %}</a>
                   </div>
                 {% endif %}

@@ -63,21 +63,24 @@
         </div>
         <div class="row">
             <div class="col-xs-4 ">
-                <div class="partner cic">
-                    <a href="/"><img src="{% static 'img/cic-footer-logo.png' %}" alt="CIC Logo" class="img-responsive" ></a>
+                <div class="partner">
+                    {% get_logo "partner-logo-1" as logo %}
+                    {% get_logo_link "partner-logo-1" as logo_link %}
+                    <a href="{{ logo_link }}">{% image logo original %}</a>
                 </div>
             </div>
             <div class="col-xs-4">
-                <div class="partner bgc">
-                    <a href="/"><img src="{% static 'img/bgc-footer-logo.png' %}" alt="Bill Graham Centre Logo" class="img-responsive" ></a>
+                <div class="partner">
+                    {% get_logo "partner-logo-2" as logo %}
+                    {% get_logo_link "partner-logo-2" as logo_link %}
+                    <a href="{{ logo_link }}">{% image logo original %}</a>
                 </div>
             </div>
             <div class="col-xs-4">
-                <div class="partner cigi">
-                    {% get_logo "cigi-logo-black" as logo %}
-                    {% get_logo_link "cigi-logo-black" as logo_link %}
-                    {% image logo original as cigi_logo %}
-                    <a href="{{ logo_link }}"><img src="{{ cigi_logo.url }}" alt="CIGI Logo" class="img-responsive" ></a>
+                <div class="partner">
+                    {% get_logo "partner-logo-3" as logo %}
+                    {% get_logo_link "partner-logo-3" as logo_link %}
+                    <a href="{{ logo_link }}">{% image logo original %}</a>
                 </div>
             </div>
         </div>
