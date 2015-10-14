@@ -7,7 +7,7 @@ register = template.Library()
 
 @register.filter
 def paragraph_markup(text):
-    # new_text = re.sub(r'<p[^>]*>', '<p style=\"-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; margin: 5px 0; font-family: \'Droid Serif\', Georgia, serif; font-size: 16px; line-height: 120%;\">', text, 0)
+    # new_text = re.sub(r'<p[^>]*>', '<p style=\"-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; margin: 5px 0; font-family: \'Libre Baskerville\',Georgia,serif; font-size: 16px; line-height: 120%;\">', text, 0)
     new_text = text.replace('<p>', '').replace('</p>', '')
 
     return new_text
@@ -27,15 +27,23 @@ def base_styles(tag):
                ' border-collapse: collapse; mso-table-lspace: 0pt; ' \
                'mso-table-rspace: 0pt;'
     elif tag == 'td':
-        return '-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; ' \
-               'mso-table-lspace: 0pt; mso-table-rspace: 0pt; text-align:left;'
+        return '-webkit-text-size-adjust: 100%;' \
+               '-ms-text-size-adjust: 100%; ' \
+               'mso-table-lspace: 0pt; mso-table-rspace: 0pt; '\
+               'text-align:left;' \
+               'font-family: \'Libre Baskerville\',Georgia,serif; ' \
+               'font-size: 14px; '\
+               'line-height: 165%; '\
+               'padding: 10px 0;'
     elif tag == 'a':
-        return '-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;'
+        return '-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;'\
+               'color: #bf1e2e;'\
+               'text-decoration:none;'
     elif tag == 'img':
         return 'border: 0; outline: none; text-decoration: none; ' \
                '-ms-interpolation-mode: bicubic;'
     elif tag == 'p':
-        return 'font-family: \'Droid Serif\', Helvetica, Arial, sans-serif; ' \
+        return 'font-family: \'Libre Baskerville\',Georgia,serif; ' \
                '-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;'
     elif tag == 'li':
         return '-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;'
@@ -44,20 +52,19 @@ def base_styles(tag):
     elif tag == 'h1':
         return '-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;'
     elif tag == 'h2':
-        return "font-family: 'Droid Sans', Helvetica, Arial, sans-serif; " \
-               "font-size: 18px;" \
-               "font-weight: 700;" \
-               "line-height: 18px;" \
+        return "font-family: proxima-nova,Helvetica,sans-serif; " \
+               "font-size: 21px;" \
+               "font-weight: 900;" \
+               "line-height: 25px;" \
                "color: #000000;" \
-               "text-transform: uppercase;" \
                "padding: 0px;" \
-               "margin: 0px;" \
-               "text-align: center"
+               "margin: 0px;"
     elif tag == 'wordmark':
         return 'font-family:proxima-nova,Helvetica,sans-serif;' \
                'text-transform:uppercase;' \
                'color: white;' \
                'text-decoration: none;' \
                'font-weight:400;' \
-               'font-size:20px;'
+               'font-size:18px;' \
+               'line-height:18px;'
     return ""
