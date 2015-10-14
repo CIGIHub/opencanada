@@ -47,6 +47,8 @@
         <div class="story">
           {% include 'articles/includes/story-content.html' %}
         </div>
+
+        {% if self.articles %}
         <div class="container">
             <div class="in-the-series">
                  <h2>In the series</h2>
@@ -57,6 +59,7 @@
                 {% endwith %}
             </div>
         </div>
+        {% endif %}
 
         {% if self.topics %}
             <div class="container">
@@ -73,9 +76,11 @@
     </article>
 
     {% block related_articles %}
+        {% if self.number_of_related_articles > 0 %}
         {% with article_count=self.number_of_related_articles %}
             {% include 'articles/includes/related_articles.html'  with heading='h3' image=True%}
         {% endwith %}
+        {% endif %}
     {% endblock %}
 
 {% endblock %}
