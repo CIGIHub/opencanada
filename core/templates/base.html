@@ -61,7 +61,7 @@
 
     </head>
 
-    <body class="{% block body_class %}{% endblock %}" style="{% block body_style %}{% endblock %}" >
+    <body class="{% block body_class %}{% endblock %}" style="{% block body_style %}{% endblock %}"  data-page-url="{{ self.full_url|urlencode }}">
     {% if ADMIN_ENABLED %}
         {% wagtailuserbar %}
     {% endif %}

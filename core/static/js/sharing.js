@@ -50,6 +50,16 @@ var Sharing = Sharing || {
                     social_setup();
                 }
 
+                var sharables = $(".tweet");
+                if (sharables.length > 0){
+                    sharables.click(function(){
+                        var text = $(this).data('text');
+                        var url = $('body').data('page-url');
+                        var share_url = "https://twitter.com/share?text=" + text + "&url=" + url;
+                        window.open(share_url);
+                    });
+                }
+
                 var share_links = $(".share-links");
                 if (share_links.length > 0) {
                     var page_id = share_links.data('page-id');

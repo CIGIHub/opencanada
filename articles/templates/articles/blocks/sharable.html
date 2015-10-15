@@ -1,4 +1,4 @@
 <div class="quote">{{ self }}</div>
-<div class="tweet">
-    <a href="https://twitter.com/share?text={{ self }}"><i class="fa fa-twitter"></i></a>
+<div class="tweet" data-text="{{ self|urlencode }}">
+    <i class="fa fa-twitter"></i>
 </div>
