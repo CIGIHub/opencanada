@@ -728,6 +728,8 @@ article {
   }
   .series-teaser{
     padding-bottom: 20px;
+    font-size: 12px;
+    line-height: 165%;
   }
 }
 
@@ -737,6 +739,13 @@ article {
   }
   .series-title{
     display:inline-block;
+    margin: 0 0 5px 0;
+    font-size: 21px;
+    font-weight: 900;
+    font-family: $sans-serif;
+    p{
+      margin-bottom: 0px;
+    }
     .rich-text{
       display:inline-block;
     }

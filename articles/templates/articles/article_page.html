@@ -80,7 +80,7 @@
                     <div class="series-teaser">
                         <div class="series-title"><a href="{{ series.url }}">{{ series.title }}</a>:
                             {% if series.subtitle %}{{ series.subtitle|richtext }}{% endif %}</div>
-                        {{ series.body|truncatewords_html:80 }}
+                        {{ series.short_description|richtext }}
                     </div>
                     {% block in_the_series %}
                         {% include 'articles/includes/in_the_series.html' %}
