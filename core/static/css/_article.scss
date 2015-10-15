@@ -116,10 +116,6 @@
   }
 }
 
-.series-articles{
-  @include serif-small;
-}
-
 .series-teaser .block-Paragraph{
   margin-left: 0;
   margin-right: 0;
@@ -139,7 +135,6 @@
   margin:20px 15%;
 
   .heading{
-    //margin: 10px 20px;
     text-transform: uppercase;
     font-family: $font-family-sans-serif;
     font-weight: bold;
@@ -728,8 +723,6 @@ article {
   }
   .series-teaser{
     padding-bottom: 20px;
-    font-size: 12px;
-    line-height: 165%;
   }
 }
 
@@ -743,6 +736,12 @@ article {
     font-size: 21px;
     font-weight: 900;
     font-family: $sans-serif;
+    a{
+      color: $article-list-link-color;
+      &:hover{
+        color: $article-list-link-hover-color;
+      }
+    }
     p{
       margin-bottom: 0px;
     }

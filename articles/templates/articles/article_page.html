@@ -78,8 +78,8 @@
                 <h2>Also in the series</h2>
                 {% for series, articles in self.series_articles %}
                     <div class="series-teaser">
-                        <div class="series-title"><a href="{{ series.url }}">{{ series.title }}</a>:
-                            {% if series.subtitle %}{{ series.subtitle|richtext }}{% endif %}</div>
+                        {% spaceless %}<div class="series-title"><a href="{{ series.url }}">{{ series.title }}</a>
+                            {% if series.subtitle %}<span>: </span>{{ series.subtitle|richtext }}{% endif %}</div>{% endspaceless %}
                         {{ series.short_description|richtext }}
                     </div>
                     {% block in_the_series %}

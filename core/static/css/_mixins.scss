@@ -286,7 +286,7 @@
  .feature-wrapper{
     position: absolute;
     z-index: 10;
-    top: 10%;
+    top: 20%;
     width:100%;
 
     .feature-line{
@@ -296,7 +296,7 @@
     .feature-text{
       padding-left: 40px;
       padding-right: 40px;
-      padding-top: 10%;
+      padding-top: 60px;
       position: relative;
       max-width: 940px;
       margin: 0 auto;
@@ -333,6 +333,11 @@
     &:hover{
       cursor: pointer;
       color: $site-primary-color;
+    }
+  }
+  @media(max-width: $screen-md){
+    .feature-wrapper{
+      top: 10%;
     }
   }
     @media(max-width: $screen-sm){
