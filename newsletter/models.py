@@ -1,5 +1,6 @@
 from __future__ import absolute_import, unicode_literals
 
+from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.timezone import now
@@ -95,12 +96,13 @@ class NewsletterPage(ThemeablePage):
 
 @python_2_unicode_compatible
 class NewsletterArticleLink(Orderable, models.Model):
+
     article = models.ForeignKey(
-        "articles.ArticlePage",
+        "wagtailcore.Page",
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
-        related_name='newsletter_links',
+        related_name='+',
         help_text="Link to an internal article"
     )
     override_text = RichTextField(
@@ -140,7 +142,7 @@ class NewsletterExternalArticleLink(Orderable, models.Model):
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
-        related_name='newsletter_links',
+        related_name='+',
         help_text="Link to an external article"
     )
     override_text = RichTextField(
@@ -172,7 +174,7 @@ class NewsletterEventLink(Orderable, models.Model):
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
-        related_name='newsletter_links',
+        related_name='+',
         help_text="Link to an event"
     )
     override_text = RichTextField(
