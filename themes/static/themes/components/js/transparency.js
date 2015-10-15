@@ -2,6 +2,14 @@ jQuery(document).ready(function() {
 
     updateHeaderTransparency();
 
+    /*$('header.notscrolled .wordmark').hover(function(){
+        $(this).css("opacity", 1);
+    },
+    function(){
+        $(this).css("opacity", 0.5);
+    });
+    */
+
     $(window).scroll(function(){
 	    updateHeaderTransparency();
 	});
@@ -26,14 +34,15 @@ jQuery(document).ready(function() {
         $('#toggle-mobile').hide();
         $('#search-box-toggle').hide();
         $('#main-menu').hide();
+        //$('header.notscrolled .wordmark').css("opacity", 0.5);
     }
 
     function transparencyOff() {
         $('header').removeClass("transparency");
-        $('#toggle-mobile').fadeIn(1000);
-        $('#search-box-toggle').fadeIn(1000);
+        $('#toggle-mobile').show();
+        $('#search-box-toggle').show();
         $('#main-menu').show();
-        //$('.wordmark').css("opacity",1);
+        //$('header.notscrolled .wordmark').css("opacity",1);
 
         if ($('#search-box').hasClass("open") && $(window).width() >= breakpoint) {
 
