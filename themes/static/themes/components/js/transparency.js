@@ -33,7 +33,7 @@ jQuery(document).ready(function() {
         $('#toggle-mobile').show();
         $('#search-box-toggle').show();
         $('#main-menu').show();
-        
+
         if ($('#search-box').hasClass("open") && $(window).width() >= breakpoint) {
 
             if ($('header').hasClass('collapsed')) {
