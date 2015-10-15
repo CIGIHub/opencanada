@@ -11,7 +11,7 @@
                     <figure>{% image event.organization.logo fill-120x120 %}</figure>
                 </div>
                 <div class="col-xs-10">
-                    <h3><a href="{{ event.event_website }}">{{ event.title }}</a></h3>
+                    <h3><a href="{{ event.event_link }}">{{ event.title }}</a></h3>
                     <p>{{ event.date }}</p>
                     <p>{{ event.location }}</p>
                     <p>{{ event.body|richtext }}</p>
