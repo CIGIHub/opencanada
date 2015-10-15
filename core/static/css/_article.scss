@@ -554,6 +554,8 @@ article {
 
       img{
         margin: 0 auto 20px;
+        max-height: 80px;
+        width: auto;
       }
     }
 
@@ -592,6 +594,7 @@ article {
     text-align: center;
     img {
       display: inline-block;
+      max-height: 16px;
     }
   }
 
