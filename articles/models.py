@@ -388,6 +388,13 @@ class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin
         on_delete=models.SET_NULL,
         related_name='+'
     )
+    feature_image = models.ForeignKey(
+        'images.AttributedImage',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
     primary_topic = models.ForeignKey(
         'articles.Topic',
         null=True,
@@ -515,6 +522,7 @@ class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin
         FieldPanel('excerpt'),
         InlinePanel('author_links', label="Authors"),
         ImageChooserPanel('main_image'),
+        ImageChooserPanel('feature_image'),
         StreamFieldPanel('body'),
         SnippetChooserPanel('primary_topic', Topic),
         InlinePanel('topic_links', label="Secondary Topics"),
@@ -801,6 +809,13 @@ class SeriesPage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin,
         on_delete=models.SET_NULL,
         related_name='+'
     )
+    feature_image = models.ForeignKey(
+        'images.AttributedImage',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
     primary_topic = models.ForeignKey(
         'articles.Topic',
         null=True,
@@ -897,6 +912,7 @@ class SeriesPage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin,
         FieldPanel('subtitle'),
         FieldPanel('short_description'),
         ImageChooserPanel('main_image'),
+        ImageChooserPanel('feature_image'),
         StreamFieldPanel('body'),
         InlinePanel('related_article_links', label="Articles"),
         SnippetChooserPanel('primary_topic', Topic),
