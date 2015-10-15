@@ -1,0 +1,15 @@
+{% extends "articles/series_page.html" %}
+{% load static article_tags compress core_tags wagtailcore_tags wagtailembeds_tags wagtailimages_tags %}
+
+{% block body_class %}template-{{ self.get_verbose_name|slugify }} transparentHeader {% endblock %}
+
+{% block theme_css %}
+    <link rel="stylesheet" type="text/x-scss" href="{% static 'themes/transparentHeader/css/transparentheader.scss' %}">
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    FeatureStyles.MainFeatures.setSize({{ self.full_bleed_image_size }});
+</script>
+<script type="text/javascript" src="{% static 'themes/components/js/transparency.js' %}"></script>
+{% endblock %}
