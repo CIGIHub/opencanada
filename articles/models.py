@@ -290,6 +290,8 @@ register_snippet(ArticleCategory)
 class Promotable(models.Model):
     sticky = models.BooleanField(default=False)
     sticky_for_type_section = models.BooleanField(default=False)
+    slippery = models.BooleanField(default=False)
+    slippery_for_type_section = models.BooleanField(default=False)
     editors_pick = models.BooleanField(default=False)
 
     class Meta:
@@ -548,6 +550,8 @@ class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin
             [
                 FieldPanel('sticky'),
                 FieldPanel('sticky_for_type_section'),
+                FieldPanel('slippery'),
+                FieldPanel('slippery_for_type_section'),
                 FieldPanel('editors_pick'),
                 FieldPanel('feature_style'),
                 FieldPanel('fullbleed_feature'),
@@ -903,6 +907,8 @@ class SeriesPage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin,
             [
                 FieldPanel('sticky'),
                 FieldPanel('sticky_for_type_section'),
+                FieldPanel('slippery'),
+                FieldPanel('slippery_for_type_section'),
                 FieldPanel('editors_pick'),
                 FieldPanel('feature_style'),
                 FieldPanel('fullbleed_feature'),

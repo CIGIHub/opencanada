@@ -118,7 +118,10 @@ class HomePage(ThemeablePage):
                     models.Q(seriespage__sticky=True) | (models.Q(articlepage__sticky=True)),
                     then=models.Value(1)),
                 default=models.Value(0),
-                output_field=models.IntegerField())).order_by("-sticky", "-first_published_at")
+                output_field=models.IntegerField())
+        ).exclude(
+            models.Q(seriespage__slippery=True) | models.Q(articlepage__slippery=True)
+        ).order_by("-sticky", "-first_published_at")
 
         used = []
         if self.featured_item:
@@ -184,7 +187,10 @@ class HomePage(ThemeablePage):
             sticky_value=models.Case(
                 models.When(models.Q(sticky_for_type_section=True),
                             then=models.Value(1)), default=models.Value(0),
-                output_field=models.IntegerField())).order_by("-sticky_value", "-first_published_at")[:number_of_graphics]
+                output_field=models.IntegerField())
+        ).exclude(
+            slippery_for_type_section=True
+        ).order_by("-sticky_value", "-first_published_at")[:number_of_graphics]
 
         return self.get_rows(self.number_of_rows_of_visualizations, self.number_of_columns_of_visualizations, graphics_list)
 
@@ -194,7 +200,10 @@ class HomePage(ThemeablePage):
         series_list = article_models.SeriesPage.objects.live().annotate(
             sticky_value=models.Case(
                 models.When(models.Q(sticky_for_type_section=True), then=models.Value(1)), default=models.Value(0),
-                output_field=models.IntegerField())).order_by("-sticky_value", "-first_published_at")[:number_of_series]
+                output_field=models.IntegerField())
+        ).exclude(
+            slippery_for_type_section=True
+        ).order_by("-sticky_value", "-first_published_at")[:number_of_series]
 
         return self.get_rows(self.number_of_rows_of_series, 1, series_list)
 
