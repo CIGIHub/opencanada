@@ -852,7 +852,8 @@ class SeriesPage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin,
                 if article_link.article:
                     for author_link in article_link.article.author_links.all():
                         if author_link.author:
-                            author_list.append(author_link.author)
+                            if author_link.author not in author_list:
+                                author_list.append(author_link.author)
         author_list.sort(key=attrgetter('last_name'))
         return author_list
 
