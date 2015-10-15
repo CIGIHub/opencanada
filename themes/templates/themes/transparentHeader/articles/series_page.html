@@ -13,3 +13,7 @@
 </script>
 <script type="text/javascript" src="{% static 'themes/components/js/transparency.js' %}"></script>
 {% endblock %}
+
+{% block header %}
+    {% include 'core/header.html' with tagline=False %}
+{% endblock %}
