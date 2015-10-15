@@ -31,6 +31,14 @@ def column_height(article):
     return article.feature_style.number_of_rows * 280
 
 
+@register.filter()
+def get_feature_image(item):
+    if item.feature_image:
+        return item.feature_image
+    else:
+        return item.main_image
+
+
 @register.assignment_tag()
 def typed_article(page):
     try:
