@@ -96,6 +96,33 @@
         {% endif %}
     </article>
 
+    {% if self.series_articles %}
+        <div class="container">
+            <section class="in-the-series">
+                <h2>Also in the series</h2>
+                {% for series, articles in self.series_articles %}
+                    <div class="series-teaser">
+                        {% spaceless %}<div class="series-title"><a href="{{ series.url }}">{{ series.title }}</a>
+                            {% if series.subtitle %}<span>: </span>{{ series.subtitle|richtext }}{% endif %}</div>{% endspaceless %}
+                        {{ series.short_description|richtext }}
+                    </div>
+                    {% block in_the_series %}
+                        {% include 'articles/includes/in_the_series.html' %}
+                    {% endblock %}
+                {% endfor %}
+            </section>
+        </div>
+    {% endif %}
+
+
+    {% block related_articles %}
+        {% if self.number_of_related_articles > 0 %}
+        {% with article_count=self.number_of_related_articles %}
+            {% include 'articles/includes/related_articles.html' with heading='h3' image=True %}
+        {% endwith %}
+        {% endif %}
+    {% endblock %}
+
 {% endblock %}
 
 {% block footer %}
