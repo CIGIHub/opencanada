@@ -95,12 +95,13 @@ class NewsletterPage(ThemeablePage):
 
 @python_2_unicode_compatible
 class NewsletterArticleLink(Orderable, models.Model):
+
     article = models.ForeignKey(
-        "articles.ArticlePage",
+        "wagtailcore.Page",
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
-        related_name='newsletter_links',
+        related_name='+',
         help_text="Link to an internal article"
     )
     override_text = RichTextField(
@@ -127,7 +128,7 @@ class NewsletterArticleLink(Orderable, models.Model):
         )
 
     panels = [
-        PageChooserPanel("article", 'articles.ArticlePage'),
+        PageChooserPanel("article", ['articles.ArticlePage', 'articles.SeriesPage']),
         FieldPanel("override_text"),
         ImageChooserPanel("override_image"),
     ]
@@ -140,7 +141,7 @@ class NewsletterExternalArticleLink(Orderable, models.Model):
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
-        related_name='newsletter_links',
+        related_name='+',
         help_text="Link to an external article"
     )
     override_text = RichTextField(
@@ -172,7 +173,7 @@ class NewsletterEventLink(Orderable, models.Model):
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
-        related_name='newsletter_links',
+        related_name='+',
         help_text="Link to an event"
     )
     override_text = RichTextField(
