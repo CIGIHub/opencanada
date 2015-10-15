@@ -21,16 +21,16 @@
     margin-bottom: 20px;
 }
 
-@mixin article-title(){
+@mixin article-title($fontsize: 48px){
   h1{
-    font-size: 58px;
+    font-size: $fontsize;
     font-weight: 700;
     line-height: 1.0em;
     margin-bottom: 0.25em;
   }
   @media(max-width: $screen-md){
     h1{
-      font-size: 48px;
+      font-size: 42px;
     }
     .feature-line{
       font-size: 16px;
@@ -38,7 +38,7 @@
   }
   @media(max-width: $screen-sm){
     h1{
-      font-size: 42px;
+      font-size: 34px;
     }
   }
 }
@@ -347,7 +347,7 @@
 }
 
 @mixin fullbleed-overlay{
-  @include article-title;
+  @include article-title($fontsize: 58px);
 
   .feature-line, h2{
     font-size: 18px;
