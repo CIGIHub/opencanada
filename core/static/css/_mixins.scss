@@ -21,7 +21,7 @@
     margin-bottom: 20px;
 }
 
-@mixin article-title($fontsize: 48px){
+@mixin article-title($fontsize: 50px){
   h1{
     font-size: $fontsize;
     font-weight: 700;
@@ -347,6 +347,7 @@
 }
 
 @mixin fullbleed-overlay{
+
   @include article-title($fontsize: 58px);
 
   .feature-line, h2{
