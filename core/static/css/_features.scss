@@ -67,16 +67,14 @@
     }
     .feature-content{
       padding: 10px;
-      font-size: 12px;
-      line-height: 165%;
     }
     .feature-box{
       position: relative;
       border: $row-border;
     }
-    .image-feature, .simple-feature, .external-feature{
+    .image-feature, .simple-feature{
       .feature-box{
-        height: 380px;
+        height: 350px;
       }
     }
     .simple-feature{
@@ -90,6 +88,10 @@
       }
     }
     .external-feature{
+      .feature-box{
+        height: 380px;
+        @include serif-small;
+      }
       figure{
         position: absolute;
         bottom: 0;
