@@ -3,7 +3,7 @@
 <div class="title">
     <div class="type"><a href="{% pageurl self.get_parent %}">{{ self.get_parent.title }}</a></div>
     <h1>{{ self.title }}</h1>
-    <h2>{{ self.subtitle|richtext }}</h2>
+    <div class="subtitle">{{ self.subtitle|richtext }}</div>
     {% if self.authors %}
         {% include 'articles/includes/article-contributors.html' with authors=self.authors extra_classes='series' label='Series Contributors' links=True %}
    {% endif %}
