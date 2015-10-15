@@ -1,6 +1,5 @@
 from __future__ import absolute_import, unicode_literals
 
-from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.timezone import now
@@ -129,7 +128,7 @@ class NewsletterArticleLink(Orderable, models.Model):
         )
 
     panels = [
-        PageChooserPanel("article", 'articles.ArticlePage'),
+        PageChooserPanel("article", ['articles.ArticlePage', 'articles.SeriesPage']),
         FieldPanel("override_text"),
         ImageChooserPanel("override_image"),
     ]
