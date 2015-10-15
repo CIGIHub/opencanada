@@ -22,7 +22,6 @@
             {% image self.main_image fill-1200x630-c100 as image %}
             <meta property="og:image" content="{{ image.url }}" />
         {% endif %}
-
         {% block feedlink %}<link rel="home" type="application/rss+xml" href="/feed/" />{% endblock feedlink %}
 
         {% block webfonts %}
