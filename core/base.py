@@ -52,7 +52,7 @@ class ShareLinksMixin(models.Model):
     def _get_twitter_count(self):
         try:
 
-            urls = ["https://opencanada.org{}".format(self.url), "http://opencanada.org{}".format(self.url)]
+            urls = ["https://opencanada.org{}".format(self.url), "http://opencanada.org{}".format(self.url), "https://www.opencanada.org{}".format(self.url)]
             total_shares = 0
             for page_url in urls:
                 url = 'https://cdn.api.twitter.com/1/urls/count.json?url={}'.format(page_url)
