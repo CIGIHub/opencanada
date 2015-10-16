@@ -1,5 +1,7 @@
 {% load paths %}
-{% load static core_tags wagtailcore_tags wagtailimages_tags %}
+{% load static core_tags wagtailcore_tags wagtailimages_tags theme_tags %}
+{% get_follow_link "twitter" as twitter_link %}
+{% get_follow_link "facebook" as facebook_link %}
 
 <table border="0" cellpadding="0" cellspacing="0" width="100%" style="{% base_styles 'table' %} border-top:3px solid #bf1e2e">
     <tr>
@@ -10,13 +12,12 @@
             </p>
             <p style="{% base_styles 'p' %} padding-bottom: 10px; font-size: 12px; text-align:center; ">
                 <a style="{% base_styles 'a' %}  " href="https://www.opencanada.org/newsletters">Subscribe</a> /
-                <a style="{% base_styles 'a' %} " href="https://twitter.com/opencanada">Follow on Twitter</a> /
-                <a style="{% base_styles 'a' %} " href="https://facebook.com/opencanada">Like on Facebook</a>
+                <a style="{% base_styles 'a' %} " href="{{ twitter_link }}">Follow on Twitter</a> /
+                <a style="{% base_styles 'a' %} " href="{{ facebook_link }}">Like on Facebook</a>
             </p>
     
             <p style="{% base_styles 'p' %}  font-size:12px; padding: 10px 60px 20px; text-align:center;">
-                <em><a style="{% base_styles 'a' %} " href="https://www.opencanada.org/"
-                           target="_blank">OpenCanada.org</a> is a publication of the Canadian International Council, the Center for International Governance Innovation and the Bill Graham Centre for Contemporary International History.</em>
+                <em>{%  get_text_block 'tagline-block' as block%}{{ block }}</em>
             </p>
             <br>
         </td>
