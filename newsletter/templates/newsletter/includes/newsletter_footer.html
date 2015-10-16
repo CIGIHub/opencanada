@@ -17,7 +17,7 @@
             </p>
     
             <p style="{% base_styles 'p' %}  font-size:12px; padding: 10px 60px 20px; text-align:center;">
-                <em>{%  get_text_block 'tagline-block' as block%}{{ block }}</em>
+                <em>{%  get_text_block 'tagline-block' as block%}{{ block.content|richtext }}</em>
             </p>
             <br>
         </td>
