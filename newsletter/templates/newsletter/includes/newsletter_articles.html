@@ -13,14 +13,14 @@
                                     <tr>
                                         <td valign="top" align="center" style="{% base_styles 'td' %} padding-top: 20px; padding-left: 0; padding-bottom: 10px; padding-right: 0; text-align:center;">
                                             <h2 style="{% base_styles 'h2' %} font-size:36px;">
-                                                <a href="{{ article.url }}" target="_blank" style="{% base_styles 'a' %}">{{ article.title }}</a>
+                                                <a href="{{ article.full_url }}" target="_blank" style="{% base_styles 'a' %}">{{ article.title }}</a>
                                             </h2>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td valign="top" align="center" style="{% base_styles 'img' %} padding:0;">
                                             {% image article.main_image width-580 as tmp_photo %}
-                                            <a href="{{ article.url }}" style="{% base_styles 'a' %} text-align:center;" target="_blank">
+                                            <a href="{{ article.full_url }}" style="{% base_styles 'a' %} text-align:center;" target="_blank">
                                                 <img src="{{ tmp_photo.url }}" class="headlineImage" alt="{{ article.main_image.title }}" style="{% base_styles 'img' %}" />
                                             </a>
                                         </td>
@@ -28,9 +28,9 @@
                                     <tr>
                                         <td valign="top" style="{% base_styles 'td' %} " >
                                             {% if article.override_text %}
-                                                {{ article.override_text|paragraph_markup|safe }}
+                                                {{ article.override_text|paragraph_markup|html_cleanup|safe }}
                                             {% else %}
-                                                {{ article.excerpt|safe }}
+                                                {{ article.excerpt|html_cleanup|safe }}
                                         {% endif %}
                                         </td>
                                     </tr>
@@ -76,9 +76,9 @@
                                         <tr>
                                             <td style="{% base_styles 'td' %} padding-top:10px;">
                                                 {% if article.override_text %}
-                                                {{ article.override_text|paragraph_markup|safe }}
+                                                {{ article.override_text|paragraph_markup|html_cleanup|safe }}
                                             {% else %}
-                                                {{ article.excerpt|safe }}
+                                                {{ article.excerpt|html_cleanup|safe }}
                                             {% endif %}
 
                                             </td>
