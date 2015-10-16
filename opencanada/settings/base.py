@@ -90,7 +90,6 @@ INSTALLED_APPS = (
 
     'content_notes',
     'interactives',
-    'basic_site',
     'articles',
     'people',
     'images',

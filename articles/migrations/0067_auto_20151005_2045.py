@@ -11,7 +11,6 @@ class Migration(migrations.Migration):
         ('wagtailcore', '0019_verbose_names_cleanup'),
         ('analytics', '0001_initial'),
         ('content_notes', '0003_auto_20150930_2002'),
-        ('basic_site', '0005_basicstreampage'),
         ('newsletter', '0015_newsletterexternalarticlelink2'),
         ('wagtailforms', '0002_add_verbose_names'),
         ('articles', '0066_assign_theme_to_pages'),
