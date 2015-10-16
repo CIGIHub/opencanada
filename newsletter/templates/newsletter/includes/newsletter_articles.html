@@ -52,12 +52,12 @@
                                 <td valign="top" class="ImageCell" style="{% base_styles 'td' %} padding: 20px">
                                     {% if article.override_image %}
                                         {% image article.override_image circle-80x80 as tmp_photo %}
-                                        <a href="{{ article.url }}" target="_blank" style="{% base_styles 'a' %}">
+                                        <a href="{{ article.full_url }}" target="_blank" style="{% base_styles 'a' %}">
                                             <img src="{{ tmp_photo.url }}" class="articleImage" width="80" height="80" alt="{{ article.main_image.title }}" style="{% base_styles 'img' %} font-size: 12px;" />
                                         </a>
                                     {% else %}
                                         {% image article.main_image circle-80x80 as tmp_photo %}
-                                        <a href="{{ article.url }}" target="_blank" style="{% base_styles 'a' %}">
+                                        <a href="{{ article.full_url }}" target="_blank" style="{% base_styles 'a' %}">
                                             <img src="{{ tmp_photo.url }}" width="80" height="80" alt="{{ article.main_image.title }}" style="{% base_styles 'img' %} font-size: 12px;" />
                                         </a>
                                     {% endif %}
@@ -69,7 +69,7 @@
                                         <tr>
                                             <td style="{% base_styles 'td' %} padding: 0;">
                                                 <h3  style="{% base_styles 'h2' %}">
-                                                <a href="{{ article.url }}" target="_blank" style="{% base_styles 'a' %}">{{ article.title }}</a>
+                                                <a href="{{ article.full_url }}" target="_blank" style="{% base_styles 'a' %}">{{ article.title }}</a>
                                             </h3>
                                             </td>
                                         </tr>
