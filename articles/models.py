@@ -419,12 +419,12 @@ class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin
 
     search_fields = Page.search_fields + (
         index.SearchField('excerpt', partial_match=True),
-        # index.SearchField('body', partial_match=True),
-        # index.SearchField('chapters', partial_match=True),
-        # index.SearchField('get_primary_topic_name', partial_match=True),
-        # index.SearchField('get_category_name', partial_match=True),
-        # index.SearchField('get_topic_names', partial_match=True),
-        # index.SearchField('get_author_names', partial_match=True),
+        index.SearchField('body', partial_match=True),
+        index.SearchField('chapters', partial_match=True),
+        index.SearchField('get_primary_topic_name', partial_match=True),
+        index.SearchField('get_category_name', partial_match=True),
+        index.SearchField('get_topic_names', partial_match=True),
+        index.SearchField('get_author_names', partial_match=True),
     )
 
     def __init__(self, *args, **kwargs):
