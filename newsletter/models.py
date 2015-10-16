@@ -52,9 +52,11 @@ class NewsletterPage(ThemeablePage):
     def articles(self):
         article_list = []
         for article_link in self.article_links.all():
-            article_link.article.override_text = article_link.override_text
-            article_link.article.override_image = article_link.override_image
-            article_list.append(article_link.article)
+            typed_article = article_link.article.content_type.get_object_for_this_type(
+                id=article_link.article.id)
+            typed_article.override_text = article_link.override_text
+            typed_article.override_image = article_link.override_image
+            article_list.append(typed_article)
         return article_list
 
     @property
