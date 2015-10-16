@@ -1,10 +1,12 @@
 import logging
+import re
 from datetime import timedelta
 
 import requests
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import models
 from django.utils import timezone
+from django.utils.text import slugify
 
 logger = logging.getLogger('OpenCanada.CoreBaseModels')
 
@@ -98,3 +100,24 @@ class ShareLinksMixin(models.Model):
 
     class Meta:
         abstract = True
+
+
+class UniquelySlugable(models.Model):
+    slug = models.SlugField(max_length=255, unique=True, blank=True)
+
+    class Meta:
+        abstract = True
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)[:255]
+
+            while type(self).objects.filter(slug=self.slug).exists():
+                match_obj = re.match(r'^(.*)-(\d+)$', self.slug)
+                if match_obj:
+                    next_int = int(match_obj.group(2)) + 1
+                    self.slug = match_obj.group(1) + "-" + str(next_int)
+                else:
+                    self.slug += '-2'
+
+        super(UniquelySlugable, self).save(*args, **kwargs)

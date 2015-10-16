@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% load static core_tags wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
+
+
+{% block content %}
+    <div class="container">
+        <div class='narrow-content'>
+            {% if self.title %}
+                <h1>{{  self.title }}</h1>
+            {% endif %}
+            {% if self.body %}
+            <article>
+                    {{ self.body }}
+            </article>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

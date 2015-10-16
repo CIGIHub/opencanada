@@ -1,6 +1,6 @@
 /**************  About us Page / Stream Pages  **************/
 
-.template-basic-stream-page {
+.template-stream-page {
 	.block-Paragraph, .block-Image, .block-Heading {
 		margin-left:0;
 		margin-right:0;
@@ -10,13 +10,12 @@
 		margin-bottom: 10px;
 	}
 
-	.block-Heading {
-		@include subheading;
-		margin-bottom: 10px;
-	}
-
 	h1 {
 		@include subheading;
+	}
+
+    h2 {
+	  @include subheading(18px);
 	}
 
 }
