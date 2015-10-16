@@ -2,7 +2,6 @@ from __future__ import absolute_import, unicode_literals
 
 import itertools
 
-from basic_site import models as basic_site_models
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.dispatch.dispatcher import receiver
@@ -54,7 +53,6 @@ class HomePage(ThemeablePage):
         article_models.SeriesListPage,
         article_models.TopicListPage,
         people_models.ContributorListPage,
-        basic_site_models.BasicStreamPage,
         newsletter_models.NewsletterListPage,
         event_models.EventListPage,
         article_models.ExternalArticleListPage,
