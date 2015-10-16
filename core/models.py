@@ -10,18 +10,41 @@ from django.utils.encoding import python_2_unicode_compatible
 from django.utils.timezone import now
 from wagtail.wagtailadmin.edit_handlers import (FieldPanel, MultiFieldPanel,
                                                 ObjectList, PageChooserPanel,
+                                                StreamFieldPanel,
                                                 TabbedInterface)
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailcore.signals import page_published
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
+from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.models import register_snippet
 
+from articles import fields as article_fields
 from articles import models as article_models
 from events import models as event_models
 from jobs import models as jobs_models
 from newsletter import models as newsletter_models
 from people import models as people_models
 from themes.models import ThemeablePage
+
+
+class StreamPage(ThemeablePage):
+    body = article_fields.BodyField()
+
+    search_fields = Page.search_fields + (
+        index.SearchField('body'),
+    )
+
+    content_panels = Page.content_panels + [
+        StreamFieldPanel('body')
+    ]
+    style_panels = ThemeablePage.style_panels
+
+    edit_handler = TabbedInterface([
+        ObjectList(content_panels, heading='Content'),
+        ObjectList(style_panels, heading='Page Style Options'),
+        ObjectList(Page.promote_panels, heading='Promote'),
+        ObjectList(Page.settings_panels, heading='Settings', classname="settings"),
+    ])
 
 
 @python_2_unicode_compatible
@@ -36,6 +59,7 @@ class HomePage(ThemeablePage):
         event_models.EventListPage,
         article_models.ExternalArticleListPage,
         jobs_models.JobPostingListPage,
+        StreamPage,
     ]
 
     featured_item = models.ForeignKey(

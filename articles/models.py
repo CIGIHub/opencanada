@@ -4,7 +4,6 @@ import logging
 from itertools import chain
 from operator import attrgetter
 
-from basic_site.models import UniquelySlugable
 from django import forms
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.core.validators import MaxValueValidator, MinValueValidator
@@ -26,7 +25,7 @@ from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 
-from core.base import PaginatedListPageMixin, ShareLinksMixin
+from core.base import PaginatedListPageMixin, ShareLinksMixin, UniquelySlugable
 from people.models import ContributorPage
 from themes.models import ThemeablePage
 
