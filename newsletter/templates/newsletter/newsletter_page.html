@@ -5,14 +5,7 @@
 <html lang="en" style="background-color: #ffffff;">
     {% include "newsletter/includes/newsletter_head.html" %}
     <body style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; height: 100% !important; margin: 0; padding: 0; width: 100% !important; background-color: #ffffff;">
-        <div style="font-size: 0; line-height: 0; width: 0; height: 0; display: none; overflow: hidden;">
-            {% for article in self.articles%}
-                {% if forloop.first %}
-                  {{ article.excerpt }}
-                {% endif %}
-            {% endfor %}
-
-        </div>
+        <div style="font-size: 0; line-height: 0; width: 0; height: 0; display: none; overflow: hidden;">{% for article in self.articles%}{% if forloop.first %}{{ article.excerpt|striptags }}{% endif %}{% endfor %}</div>
         <center>
             <!--[if (gte mso 9)|(IE)]>
             <table><tr><td width="640">

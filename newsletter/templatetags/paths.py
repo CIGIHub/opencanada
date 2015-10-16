@@ -1,5 +1,4 @@
-# import re
-
+from bs4 import BeautifulSoup, Comment
 from django import template
 
 register = template.Library()
@@ -10,6 +9,15 @@ def paragraph_markup(text):
     # new_text = re.sub(r'<p[^>]*>', '<p style=\"-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; margin: 5px 0; font-family: \'Libre Baskerville\',Georgia,serif; font-size: 16px; line-height: 120%;\">', text, 0)
     new_text = text.replace('<p>', '').replace('</p>', '')
 
+    return new_text
+
+
+@register.filter
+def html_cleanup(text):
+    doc = BeautifulSoup(text, "html.parser")
+    comments = doc.findAll(text=lambda text: isinstance(text, Comment))
+    [comment.extract() for comment in comments]
+    new_text = doc
     return new_text
 
 
