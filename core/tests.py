@@ -118,4 +118,5 @@ class HomePageTestCase(TestCase):
         resp = client.get('/feed/')
 
         self.assertEqual(resp.status_code, 200)
-        self.assertIn(b'<title>In Depth Articles - No Topic - Not Live</title>', resp.content)
+        self.assertNotIn(b'<title>In Depth Articles - No Topic - Not Live</title>', resp.content)
+        self.assertIn(b'<title>Test Article 2</title>', resp.content)
