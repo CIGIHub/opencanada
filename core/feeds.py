@@ -52,8 +52,8 @@ class MainFeed(Feed):
     description_template = 'feeds/main/description.html'
 
     def items(self):
-        articles = ArticlePage.objects.order_by('-first_published_at')[:50]
-        series = SeriesPage.objects.order_by('-first_published_at')[:50]
+        articles = ArticlePage.objects.live().order_by('-first_published_at')[:50]
+        series = SeriesPage.objects.live().order_by('-first_published_at')[:50]
 
         return list(reversed(
             sorted(
