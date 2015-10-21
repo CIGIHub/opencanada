@@ -4,6 +4,10 @@ from wagtail.wagtailimages.image_operations import FillOperation
 
 class CircleOperation(FillOperation):
     def run(self, willow, image):
+        if image.width < self.width or image.height < self.height:
+            # unable to process image at all since the putalpha will fail
+            return
+
         super(CircleOperation, self).run(willow, image)
 
         mask_size = (3 * self.width, 3 * self.height)
@@ -48,6 +52,10 @@ class CircleWithRingOperation(FillOperation):
         super(CircleWithRingOperation, self).construct(size, *unprocessed_extra)
 
     def run(self, willow, image):
+        if image.width < self.width or image.height < self.height:
+            # unable to process image at all since the putalpha will fail
+            return
+
         super(CircleWithRingOperation, self).run(willow, image)
         willow.original_format = 'png'
 
