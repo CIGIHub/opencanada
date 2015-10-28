@@ -31,7 +31,12 @@
 	@media (max-width: $screen-xs) {
 		a {
 			border-right:0;
+		  img{
+			display: block;
+			padding-right: 0em;
+		  }
 		}
+
 	}
 }
 
