@@ -355,3 +355,31 @@ class SiteDefaults(models.Model):
         FieldPanel('contact_email'),
     ]
 register_snippet(SiteDefaults)
+
+
+class Project(models.Model):
+    name = models.CharField(max_length=1024)
+    include_badge_in_main_feed = models.BooleanField(default=False)
+    badge_text = models.CharField(max_length=60, blank=True, default="")
+    badge_link = models.ForeignKey(
+        'wagtailcore.Page',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    featured_item = models.ForeignKey(
+        'wagtailcore.Page',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    panels = [
+        FieldPanel('name'),
+        FieldPanel('include_badge_in_main_feed'),
+        FieldPanel('badge_text'),
+        PageChooserPanel('badge_link'),
+    ]
