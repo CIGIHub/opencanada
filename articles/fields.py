@@ -6,6 +6,7 @@ from django.utils.functional import cached_property
 from django.utils.html import format_html
 from wagtail.wagtailcore import blocks
 from wagtail.wagtailcore.fields import StreamField
+from wagtail.wagtaildocs.blocks import DocumentChooserBlock
 from wagtail.wagtailembeds.blocks import EmbedBlock
 from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtailsnippets.blocks import SnippetChooserBlock
@@ -20,6 +21,7 @@ class BodyField(StreamField):
             ('Heading', HeadingBlock()),
             ('Paragraph', ParagraphBlock()),
             ('Image', ImageBlock()),
+            ('Document', DocumentBlock()),
             ('Embed', EmbedBlock(icon="site")),
             ('List', blocks.ListBlock(
                 blocks.RichTextBlock(label="item"), icon="list-ul")
@@ -114,6 +116,14 @@ class ImageBlock(blocks.StructBlock):
     class Meta:
         template = "articles/blocks/image_block.html"
         icon = "image"
+
+
+class DocumentBlock(blocks.StructBlock):
+    document = DocumentChooserBlock()
+
+    class Meta:
+        template = "articles/blocks/document_block.html"
+        icon = 'doc-full-inverse'
 
 
 class ChapterField(StreamField):
