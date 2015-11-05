@@ -82,7 +82,7 @@ class NewsletterPage(ThemeablePage):
         FieldPanel('issue_date'),
         InlinePanel('article_links', label="Articles", help_text='The first article will be the newsletter feature story'),
         InlinePanel('external_article_links', label="External Articles"),
-        InlinePanel('event_links', label="Events"),
+        InlinePanel('event_links', label="Partnered Events"),
     ]
 
     style_panels = ThemeablePage.style_panels
