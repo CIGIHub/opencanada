@@ -1,6 +1,9 @@
 var Sharing = Sharing || {
         Links: {
             initialize: function () {
+                function ga_track(socialNetwork, socialAction, socialTarget) {
+                    window.ga && ga('send', 'social', socialNetwork, socialAction, socialTarget);
+                };
 
                 function social_setup() {
                     window.fbAsyncInit = function () {
@@ -24,6 +27,7 @@ var Sharing = Sharing || {
 
                     $(".facebook-share-link").click(function () {
                         var href = $(this).data('url');
+                        ga_track('facebook', 'share', href);
                         FB.ui(
                             {
                                 method: 'share',
@@ -50,12 +54,17 @@ var Sharing = Sharing || {
                     social_setup();
                 }
 
+                $('.share-links .twitter a').on('click', function(e) {
+                  ga_track('twitter', 'share', $('body').data('page-url'));
+                });
+
                 var sharables = $(".tweet");
                 if (sharables.length > 0){
                     sharables.click(function(){
                         var text = $(this).data('text');
                         var url = $('body').data('page-url');
                         var share_url = "https://twitter.com/share?text=" + text + "&url=" + url;
+                        ga_track('twitter', 'share', url);
                         window.open(share_url);
                     });
                 }
