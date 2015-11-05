@@ -478,16 +478,11 @@ article {
 
 
   .block-Document{
-    float: left;
-    width: 100%;
     margin-bottom: 20px;
+    text-align:center;
 
     .download{
-      clear: left;
-      float: left;
-      position: relative;
-      left: 30%;
-
+      display: inline-block;
       border: solid 1px $download-button-border;
       padding: 5px 10px;
       -webkit-border-radius: 5px;
