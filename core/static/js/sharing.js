@@ -1,3 +1,9 @@
+if (typeof String.prototype.startsWith != 'function') {
+    String.prototype.startsWith = function (prefix) {
+        return this.slice(0, prefix.length) == prefix;
+    };
+}
+
 var Sharing = Sharing || {
         Links: {
             initialize: function () {
@@ -75,6 +81,18 @@ var Sharing = Sharing || {
                       ga_track('twitter', 'share', $('body').data('page-url'));
                     });
                 }
+
+                $('.document-download-link').on('click', function(e) {
+                    window.ga && ga('send', 'event', 'Files', 'download', $(this).attr('href'));
+                });
+
+                $('a').on('click', function(e) {
+                    var href = $(this).attr('href');
+                    if (href[0] == '/' || href[0] == '#' || href.startsWith('mailto:')) {
+                    } else {
+                        window.ga && ga('send', 'event', 'ExternalLinks', 'click', href);
+                    }
+                });
             },
             initializeForWindow: function () {
                 if (($("article").length > 0) && ($(".main-feature").length > 0)) {

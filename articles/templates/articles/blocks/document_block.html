@@ -1,5 +1,1 @@
-<div class="download"><i class="fa fa-cloud-download"></i><a href="{{ self.document.url }}">{{ self.document.title }}</a></div>
-
-{# rough reference of fields/properties/methods on self.document: https://github.com/torchbox/wagtail/blob/stable/1.1.x/wagtail/wagtaildocs/models.py#L22 #}
-
-{# self is a "DocumentBlock" defined in articles/fields.py, no other fields on it... yet! #}
+<div class="download"><i class="fa fa-cloud-download"></i><a href="{{ self.document.url }}" class="document-download-link">{{ self.document.title }}</a></div>
