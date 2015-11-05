@@ -63,7 +63,7 @@ def base_styles(tag):
         return "font-family: proxima-nova,Helvetica,sans-serif; " \
                "font-size: 21px;" \
                "font-weight: 900;" \
-               "line-height: 25px;" \
+               "line-height: 100%;" \
                "color: #000000;" \
                "padding: 0px;" \
                "margin: 0px;"
