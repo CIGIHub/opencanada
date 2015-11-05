@@ -476,7 +476,6 @@ article {
       }
     }
 
-
   .block-Document{
     margin-bottom: 20px;
     text-align:center;
@@ -509,16 +508,7 @@ article {
         }
       }
     }
-    @media(max-width: $screen-sm) {
-      .download{
-        left: 25%;
-      }
-    }
-    @media(max-width: $screen-xs) {
-      .download{
-        left: 20%;
-      }
-    }
+
   }
 
   .block-PullQuote {

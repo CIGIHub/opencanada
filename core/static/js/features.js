@@ -130,25 +130,36 @@ var FeatureStyles = FeatureStyles || {
         RelatedArticles: {
             initialize: function () {
 
-
                 function fadeInContent() {
                     /* Check the location of each desired element */
-                    $('main .container .row > div, main .container-full-bleed .row > div').each( function(i){
-
+                    $('main .container .row , main .container-full-bleed .row ').each( function(i){
                         var windowWidth = $(window).width();
-                        if (windowWidth >= breakpoint && !$(this).hasClass("fadedIn")) {
-                            $(this).css('opacity', 0);
+                        var windowHeight = $(window).height();
+                        var top_of_object = $(this).offset().top; // Get the `top` of this `li`
 
+
+                        // Check if this element is in the interested viewport
+                        if (windowWidth >= breakpoint && !$(this).hasClass("fadedIn")) {
+                            if (top_of_object < windowHeight) {
+                                $(this).css('opacity', '1');
+                                $(this).addClass("fadedIn");
+                            }
+                            else {
+                                $(this).css('opacity', '0');
+                            }
                         }else if (windowWidth < breakpoint) {
                             $(this).css('opacity', 1);
                         }
+
                         var fifth_of_object = $(this).offset().top + $(this).outerHeight() /5;
                         var bottom_of_window = $(window).scrollTop() + $(window).height();
-                        var top_of_object = $(this).offset().top;
 
-                        /* If the object is scrolling to visible in the window, fade it it */
+                        //console.log('top offset: ' + $(this).offset().top);
+                        //console.log('scrolltop: ' + $(window).scrollTop());
+
+                        /* If the object is scrolling to visible in the window, fade it in */
                         if( bottom_of_window > fifth_of_object  || bottom_of_window > top_of_object + 40){
-                            $(this).animate({'opacity':'1'},400);
+                            $(this).animate({'opacity':'1'}, 400);
                             $(this).addClass("fadedIn");
                         }
                     });
@@ -165,7 +176,7 @@ var FeatureStyles = FeatureStyles || {
                 $(window).load(function () {
                     fadeInContent();
                 });
-
+                
                 $(window).resize(function () {
                     fadeInContent();
                 });
