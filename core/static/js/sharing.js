@@ -1,6 +1,9 @@
 var Sharing = Sharing || {
         Links: {
             initialize: function () {
+                function ga_track(socialNetwork, socialAction, socialTarget) {
+                    window.ga && ga('send', 'social', socialNetwork, socialAction, socialTarget);
+                };
 
                 function social_setup() {
                     window.fbAsyncInit = function () {
@@ -8,6 +11,9 @@ var Sharing = Sharing || {
                             appId: '1209700165722055',
                             xfbml: true,
                             version: 'v2.4'
+                        });
+                        FB.Event.subscribe('edge.create', function(targetUrl) {
+                            ga_track('facebook', 'like', targetUrl);
                         });
                     };
 
@@ -56,6 +62,7 @@ var Sharing = Sharing || {
                         var text = $(this).data('text');
                         var url = $('body').data('page-url');
                         var share_url = "https://twitter.com/share?text=" + text + "&url=" + url;
+                        ga_track('twitter', 'share', url);
                         window.open(share_url);
                     });
                 }
@@ -64,6 +71,9 @@ var Sharing = Sharing || {
                 if (share_links.length > 0) {
                     var page_id = share_links.data('page-id');
                     load_share_counts(page_id);
+                    $('.share-links .twitter a').on('click', function(e) {
+                      ga_track('twitter', 'share', $('body').data('page-url'));
+                    });
                 }
             },
             initializeForWindow: function () {
