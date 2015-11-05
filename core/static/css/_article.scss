@@ -476,6 +476,56 @@ article {
       }
     }
 
+
+  .block-Document{
+    float: left;
+    width: 100%;
+    margin-bottom: 20px;
+
+    .download{
+      clear: left;
+      float: left;
+      position: relative;
+      left: 30%;
+
+      border: solid 1px $download-button-border;
+      padding: 5px 10px;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      border-radius: 5px;
+
+      a{
+        font-family: $sans-serif;
+        font-weight: bold;
+      }
+
+      a[href$=".pdf"]:after { content: " (PDF)"; }
+
+      a, i{
+        color: $text-link-color;
+      }
+      i{
+        margin-right: 10px;
+      }
+
+      &:hover{
+        a, i{
+          color: $light-grey;
+        }
+      }
+    }
+    @media(max-width: $screen-sm) {
+      .download{
+        left: 25%;
+      }
+    }
+    @media(max-width: $screen-xs) {
+      .download{
+        left: 20%;
+      }
+    }
+  }
+
   .block-PullQuote {
       display: inline-block;
       width: 33%;
