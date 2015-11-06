@@ -11,6 +11,9 @@
                 </div>
                 <div class="col-xs-10">
                     <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
+                    {% if article.authors %}
+                        {% include 'articles/includes/article-contributors.html' with authors=article.authors links=True %}
+                    {% endif %}
                     {% if article.override_text %}{{ article.override_text|richtext }}{% else %}{{ article.excerpt|richtext }}{% endif %}
                 </div>
             </div>
