@@ -1,3 +1,5 @@
+from bs4 import BeautifulSoup, Comment
+
 from django import template
 from django.db.models import ObjectDoesNotExist
 
@@ -38,3 +40,13 @@ def external_article_image(context, item):
             except ObjectDoesNotExist:
                 pass
     return item.main_image
+
+
+@register.filter
+def html_cleanup(text):
+    doc = BeautifulSoup(text, "html.parser")
+    comments = doc.findAll(text=lambda text: isinstance(text, Comment))
+    [comment.extract() for comment in comments]
+    new_text = doc
+    return new_text
+

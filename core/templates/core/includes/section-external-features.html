@@ -15,9 +15,9 @@
                           <div class=" feature-content">
                             <h3 class="columns-{{ item_row|column_class }}">{{ item.title }}</h3>
                             {% if item.short_description %}
-                              {{ item.short_description|richtext }}
+                              {{ item.short_description }}
                             {% else %}
-                              {{ item.body|truncatewords_html:80|richtext }}
+                              {{ item.body|truncatewords_html:100|richtext|html_cleanup|safe }}
                             {% endif %}
                             <figure>
                               {% external_article_image item as image %}
