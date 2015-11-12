@@ -5,7 +5,7 @@
 
   .main-feature {
     @include article-overlay;
-    @include fullbleed-overlay;
+    @include fullbleed-overlay(800);
 
     color: $overlay-text-color;
     a{display:inline-block;
