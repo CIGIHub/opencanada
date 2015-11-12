@@ -396,7 +396,7 @@ class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin
         related_name='+'
     )
     video_document = models.ForeignKey(
-        'documents.AttributedDocument',
+        'wagtaildocs.Document',
         null=True,
         blank=True,
         on_delete=models.SET_NULL,

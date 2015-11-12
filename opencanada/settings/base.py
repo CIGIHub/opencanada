@@ -93,7 +93,6 @@ INSTALLED_APPS = (
     'articles',
     'people',
     'images',
-    'documents',
     'newsletter',
     'events',
     'jobs',
