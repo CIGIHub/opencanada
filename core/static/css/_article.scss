@@ -752,11 +752,12 @@ article {
 
   h2{
     @include article-list-title;
+    margin-top: 50px;
   }
   h3{
     font-weight: 700;
     font-size: 20px;
-    margin: 1.25em, 0;
+    margin-top: 50px;
     font-family: sans-serif;
   }
 }
