@@ -20,6 +20,7 @@ from wagtail.wagtailadmin.edit_handlers import (FieldPanel, InlinePanel,
                                                 TabbedInterface)
 from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailcore.models import Orderable, Page
+from wagtail.wagtaildocs.edit_handlers import DocumentChooserPanel
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
@@ -394,6 +395,14 @@ class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin
         on_delete=models.SET_NULL,
         related_name='+'
     )
+    video_document = models.ForeignKey(
+        'wagtaildocs.Document',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+
+    )
     primary_topic = models.ForeignKey(
         'articles.Topic',
         null=True,
@@ -522,6 +531,7 @@ class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin
         InlinePanel('author_links', label="Authors"),
         ImageChooserPanel('main_image'),
         ImageChooserPanel('feature_image'),
+        DocumentChooserPanel('video_document'),
         StreamFieldPanel('body'),
         SnippetChooserPanel('primary_topic', Topic),
         InlinePanel('topic_links', label="Secondary Topics"),
