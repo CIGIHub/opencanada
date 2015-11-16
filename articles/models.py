@@ -825,6 +825,14 @@ class SeriesPage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin,
         on_delete=models.SET_NULL,
         related_name='+'
     )
+    video_document = models.ForeignKey(
+        'wagtaildocs.Document',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+
+    )
     primary_topic = models.ForeignKey(
         'articles.Topic',
         null=True,
@@ -922,6 +930,7 @@ class SeriesPage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin,
         FieldPanel('short_description'),
         ImageChooserPanel('main_image'),
         ImageChooserPanel('feature_image'),
+        DocumentChooserPanel('video_document'),
         StreamFieldPanel('body'),
         InlinePanel('related_article_links', label="Articles"),
         SnippetChooserPanel('primary_topic', Topic),
