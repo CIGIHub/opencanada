@@ -9,6 +9,7 @@ var FeatureStyles = FeatureStyles || {
                 }
             },
             initializeForWindow: function () {
+                var Modernizr = window.Modernizr;
                 var bodyTag = $('body');
                 var windowHeight = $(window).height();
 
@@ -34,6 +35,10 @@ var FeatureStyles = FeatureStyles || {
                     }
 
                 }
+                if ( Modernizr.touch ) {
+                    $('video').hide();
+                }
+
             },
             addNavigationLock: function() {
                 $("body").addClass("navigation-lock");

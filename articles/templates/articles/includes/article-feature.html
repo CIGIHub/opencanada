@@ -2,12 +2,18 @@
 
 <div class="container-full-bleed main-feature overlay" style="height: 400px;">
     {% image self.main_image fill-2048x1200-c100 as background_image %}
-    <div class="feature-image" style="background-image: url('{{ background_image.url }}')">
-        <div class="feature-image-overlay"
-             style="background: rgba( {% if self.image_overlay_color.rgb %} {{ self.image_overlay_color.rgb }} {% endif %},
-                     {% if self.opacity %} {{ self.opacity }} {% endif %})">
+        <div class="feature-image fullscreen-bg" {% if not self.video_document %} style="background-image: url('{{ background_image.url }}')" {% endif %}>
+            <div class="feature-image-overlay"
+                 style="background: rgba( {% if self.image_overlay_color.rgb %} {{ self.image_overlay_color.rgb }} {% endif %},
+                         {% if self.opacity %} {{ self.opacity }} {% endif %})">
+            </div>
+            {% if self.video_document %}
+                <video autoplay loop class="fullscreen-bg__video" poster="{{ background_image.url }}" id="bg_vid">
+                    <source src="{{ self.video_document.url }}" type="video/mp4">
+                 </video>
+            {% endif %}
         </div>
-    </div>
+
     <div class="feature-wrapper">
         <div class="feature-text">
             {% include metadata %}
