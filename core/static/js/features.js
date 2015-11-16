@@ -9,7 +9,6 @@ var FeatureStyles = FeatureStyles || {
                 }
             },
             initializeForWindow: function () {
-                var Modernizr = window.Modernizr;
                 var bodyTag = $('body');
                 var windowHeight = $(window).height();
 
@@ -34,9 +33,6 @@ var FeatureStyles = FeatureStyles || {
                         $('.main-feature').css("margin-top", 0 + "px");
                     }
 
-                }
-                if ( Modernizr.touch ) {
-                    $('video').hide();
                 }
 
             },
