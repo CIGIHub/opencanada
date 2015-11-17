@@ -3,7 +3,7 @@
 
 .template-home-page .main-feature{
     @include article-overlay;
-    @include fullbleed-overlay;
+    @include fullbleed-overlay(700);
 
   .scroll{
     position: absolute;

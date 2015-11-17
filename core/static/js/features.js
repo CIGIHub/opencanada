@@ -34,6 +34,7 @@ var FeatureStyles = FeatureStyles || {
                     }
 
                 }
+
             },
             addNavigationLock: function() {
                 $("body").addClass("navigation-lock");
