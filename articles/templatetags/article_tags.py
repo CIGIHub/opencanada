@@ -90,3 +90,49 @@ def romanize(value):
             value -= integer
 
     return result
+
+@register.filter
+def get_video_src(url):
+    import os
+    from urlparse import urlparse, urlunparse
+    from django.conf import settings
+    url_parts = urlparse(url)
+    try:
+        domain = getattr(settings, 'AWS_S3_CUSTOM_DOMAIN')
+        path_parts = os.path.split(url_parts.path)
+        filename = path_parts[-1]
+        url_parts = ('https', domain, os.path.join('documents', filename), '', '', '')
+    except AttributeError:
+        # Assume local path
+        pass
+    return urlunparse(url_parts)
+
+@register.tag
+def value_from_settings(parser, token):
+    bits = token.split_contents()
+    if len(bits) < 2:
+        raise template.TemplateSyntaxError("'%s' takes at least one argument (settings constant to retrieve)" % bits[0])
+    settingsvar = bits[1]
+    settingsvar = settingsvar[1:-1] if settingsvar[0] == '"' else settingsvar
+    asvar = None
+    bits = bits[2:]
+    if len(bits) >= 2 and bits[-2] == 'as':
+        asvar = bits[-1]
+        bits = bits[:-2]
+    if len(bits):
+        raise template.TemplateSyntaxError("'value_from_settings' didn't recognise the arguments '%s'" % ", ".join(bits))
+    return ValueFromSettings(settingsvar, asvar)
+
+class ValueFromSettings(template.Node):
+    def __init__(self, settingsvar, asvar):
+        self.arg = template.Variable(settingsvar)
+        self.asvar = asvar
+
+    def render(self, context):
+        from django.conf import settings
+        ret_val = getattr(settings, str(self.arg), 'http://example.com')
+        if self.asvar:
+            context[self.asvar] = ret_val
+            return ''
+        else:
+            return ret_val
