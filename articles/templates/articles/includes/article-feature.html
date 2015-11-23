@@ -9,7 +9,7 @@
             </div>
             {% if self.video_document %}
                 <video autoplay loop class="fullscreen-bg__video" poster="{{ background_image.url }}" id="bg_vid" {% if self.opacity %}style="opacity:{{ self.opacity }}"{% endif %}>
-                    <source src="https://staging.opencanada.org/static/PoI_InkSplatters_Lights_masked.mp4" type="video/mp4">
+                    <source src="{{ self.video_document.url|get_video_src }}" type="video/mp4">
                  </video>
             {% endif %}
         </div>
