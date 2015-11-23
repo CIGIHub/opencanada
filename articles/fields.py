@@ -260,12 +260,6 @@ class StaticHTMLBlock(blocks.FieldBlock):
         self.field = StaticHTMLField(raw_html=self.raw_html, required=required, help_text=help_text)
         super(StaticHTMLBlock, self).__init__(**kwargs)
 
-    def render_basic(self, value):
-        if self.raw_html is not None:
-            return format_html(self.raw_html)
-        else:
-            return ''
-
 
 class SectionBreakBlock(blocks.StructBlock):
     section_break = StaticHTMLBlock(raw_html='<hr>')
