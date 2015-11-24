@@ -99,7 +99,7 @@ def get_video_src(url):
     from django.conf import settings
     url_parts = urlparse(url)
     try:
-        domain = getattr(settings, 'AWS_S3_CUSTOM_DOMAIN')
+        domain = settings.AWS_S3_CUSTOM_DOMAIN
         path_parts = os.path.split(url_parts.path)
         filename = path_parts[-1]
         url_parts = ('https', domain, os.path.join('documents', filename), '', '', '')
@@ -111,6 +111,10 @@ def get_video_src(url):
 
 @register.tag
 def value_from_settings(parser, token):
+    """
+    This 'pattern' can easily retrieve any setting from DJANGO_SETTINGS;
+    however, using a context processor is probably the 'right' way to do it
+    """
     bits = token.split_contents()
     if len(bits) < 2:
         raise template.TemplateSyntaxError("'%s' takes at least one argument (settings constant to retrieve)" % bits[0])
