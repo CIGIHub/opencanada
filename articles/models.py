@@ -423,6 +423,7 @@ class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin
 
     visualization = models.BooleanField(default=False)
     interview = models.BooleanField(default=False)
+    video = models.BooleanField(default=False)
     number_of_related_articles = models.PositiveSmallIntegerField(default=6,
                                                                   verbose_name="Number of Related Articles to Show")
 
@@ -611,8 +612,9 @@ class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin
         ),
         MultiFieldPanel(
             [
-                FieldPanel('visualization'),
                 FieldPanel('interview'),
+                FieldPanel('video'),
+                FieldPanel('visualization'),
             ],
             heading="Categorization"
         )
