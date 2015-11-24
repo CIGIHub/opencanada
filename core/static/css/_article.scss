@@ -691,8 +691,9 @@ article {
       border-bottom:$article-toc-border-width solid $article-toc-border-color;
 
       margin-left: 0;
-      margin-top:10px;
-      padding:20px 40px;
+      margin-top: 15px;
+      padding: 10px 40px;
+      line-height: 150%;
 
       li {
         a{

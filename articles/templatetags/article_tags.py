@@ -91,6 +91,7 @@ def romanize(value):
 
     return result
 
+
 @register.filter
 def get_video_src(url):
     import os
@@ -107,6 +108,7 @@ def get_video_src(url):
         pass
     return urlunparse(url_parts)
 
+
 @register.tag
 def value_from_settings(parser, token):
     bits = token.split_contents()
@@ -122,6 +124,7 @@ def value_from_settings(parser, token):
     if len(bits):
         raise template.TemplateSyntaxError("'value_from_settings' didn't recognise the arguments '%s'" % ", ".join(bits))
     return ValueFromSettings(settingsvar, asvar)
+
 
 class ValueFromSettings(template.Node):
     def __init__(self, settingsvar, asvar):
