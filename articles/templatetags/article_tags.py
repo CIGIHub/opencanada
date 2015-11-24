@@ -109,12 +109,12 @@ def get_video_src(url):
     return urlunparse(url_parts)
 
 
-"""
-This 'pattern' can easily retrieve any setting from DJANGO_SETTINGS;
-however, using a context processor is probably the 'right' way to do it
-"""
 @register.tag
 def value_from_settings(parser, token):
+    """
+    This 'pattern' can easily retrieve any setting from DJANGO_SETTINGS;
+    however, using a context processor is probably the 'right' way to do it
+    """
     bits = token.split_contents()
     if len(bits) < 2:
         raise template.TemplateSyntaxError("'%s' takes at least one argument (settings constant to retrieve)" % bits[0])
