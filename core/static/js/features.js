@@ -24,9 +24,12 @@ var FeatureStyles = FeatureStyles || {
                     var gap = FeatureStyles.MainFeatures.gap_size.value * windowHeight;
                     var featureHeight = windowHeight - gap;
 
-                    $('.main-feature').css("height", featureHeight + "px");
+
                     if($('video').length){
                         featureHeight = windowWidth * 0.5625;
+                        $('.main-feature').css("height", featureHeight + "px");
+                    }
+                    else{
                         $('.main-feature').css("height", featureHeight + "px");
                     }
 
