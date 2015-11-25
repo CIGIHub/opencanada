@@ -11,6 +11,7 @@ var FeatureStyles = FeatureStyles || {
             initializeForWindow: function () {
                 var bodyTag = $('body');
                 var windowHeight = $(window).height();
+                var windowWidth = $(window).width();
 
                 if ((bodyTag.hasClass('template-home-page')
                     || bodyTag.hasClass('template-article-page')
@@ -24,6 +25,10 @@ var FeatureStyles = FeatureStyles || {
                     var featureHeight = windowHeight - gap;
 
                     $('.main-feature').css("height", featureHeight + "px");
+                    if($('video').length){
+                        featureHeight = windowWidth * 0.5625;
+                        $('.main-feature').css("height", featureHeight + "px");
+                    }
 
                     $('.main-feature').css("margin-top", -1 * $('header').height());
 
