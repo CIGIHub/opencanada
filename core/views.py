@@ -1,11 +1,16 @@
+from django.conf import settings
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.http import Http404, JsonResponse
 from django.shortcuts import render
+
 from wagtail.utils.pagination import paginate
 from wagtail.wagtailadmin.forms import SearchForm
 from wagtail.wagtailadmin.views.chooser import (filter_page_type,
                                                 page_models_from_string,
                                                 shared_context)
 from wagtail.wagtailcore.models import Page
+from wagtail.wagtailsearch.models import Query
+from wagtail.wagtailsearch.views import search
 
 
 def social_share_count(request, page_id):
@@ -23,7 +28,7 @@ def social_share_count(request, page_id):
 # This was taken from wagtailadmin/views/chooser.py. There isn't a clear way to override this behavior.
 # As is this is a maintenance headache, but one which is probably worth it. Check for changes to this
 # function in choose.py when wagtail releases new versions
-def search(request, parent_page_id=None):
+def chooser_search(request, parent_page_id=None):
     # A missing or empty page_type parameter indicates 'all page types' (i.e. descendants of wagtailcore.page)
     page_type_string = request.GET.get('page_type') or 'wagtailcore.page'
 
@@ -55,3 +60,45 @@ def search(request, parent_page_id=None):
             'page_type_string': page_type_string,
         })
     )
+
+
+def site_search(request, template=None, results_per_page=10, path=None):
+    # Get default templates
+    if template is None:
+        if hasattr(settings, 'WAGTAILSEARCH_RESULTS_TEMPLATE'):
+            template = settings.WAGTAILSEARCH_RESULTS_TEMPLATE
+        else:
+            template = 'wagtailsearch/search_results.html'
+
+    # Get query string and page from GET paramters
+    query_string = request.GET.get('q', '')
+    page = request.GET.get('page', request.GET.get('p', 1))
+    if '"' not in query_string:
+        return search(request, template=template, results_per_page=results_per_page, path=path)
+
+    # Special quoted search
+    pages = Page.objects.filter(path__startswith=(path or request.site.root_page.path))
+
+    search_results = pages.search(query_string.replace('"', ''), operator='and')
+
+    # Get query object
+    query = Query.get(query_string)
+
+    # Add hit
+    query.add_hit()
+
+    # Pagination
+    paginator = Paginator(search_results, results_per_page)
+    try:
+        search_results = paginator.page(page)
+    except PageNotAnInteger:
+        search_results = paginator.page(1)
+    except EmptyPage:
+        search_results = paginator.page(paginator.num_pages)
+
+    return render(request, template, dict(
+        query_string=query_string,
+        search_results=search_results,
+        is_ajax=request.is_ajax(),
+        query=query
+    ))
