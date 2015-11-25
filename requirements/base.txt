@@ -1,6 +1,6 @@
 # Minimal requirements
 Django>=1.8,<1.9
-wagtail==1.1
+wagtail==1.2
 requests==2.7.0
 
 # Recommended components (require additional setup):
