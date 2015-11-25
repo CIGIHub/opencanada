@@ -21,8 +21,8 @@ def social_share_count(request, page_id):
 
 
 # This was taken from wagtailadmin/views/chooser.py. There isn't a clear way to override this behavior.
-# As is this is a maintenance headache, but one which is probably worth it. Check for changes to the this
-# function in choose.py has wagtail releases new versions.
+# As is this is a maintenance headache, but one which is probably worth it. Check for changes to this
+# function in choose.py when wagtail releases new versions
 def search(request, parent_page_id=None):
     # A missing or empty page_type parameter indicates 'all page types' (i.e. descendants of wagtailcore.page)
     page_type_string = request.GET.get('page_type') or 'wagtailcore.page'
