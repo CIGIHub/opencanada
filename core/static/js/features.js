@@ -11,6 +11,7 @@ var FeatureStyles = FeatureStyles || {
             initializeForWindow: function () {
                 var bodyTag = $('body');
                 var windowHeight = $(window).height();
+                var windowWidth = $(window).width();
 
                 if ((bodyTag.hasClass('template-home-page')
                     || bodyTag.hasClass('template-article-page')
@@ -22,8 +23,16 @@ var FeatureStyles = FeatureStyles || {
                     var bannerHeight = $('header').height();
                     var gap = FeatureStyles.MainFeatures.gap_size.value * windowHeight;
                     var featureHeight = windowHeight - gap;
+                    console.log('feature height' + featureHeight);
 
-                    $('.main-feature').css("height", featureHeight + "px");
+                    if($('video').length){
+                        featureHeight = windowWidth * 0.5625;
+                        console.log(featureHeight);
+                        $('.main-feature').css("height", featureHeight + "px");
+                    }
+                    else{
+                        $('.main-feature').css("height", featureHeight + "px");
+                    }
 
                     $('.main-feature').css("margin-top", -1 * $('header').height());
 
