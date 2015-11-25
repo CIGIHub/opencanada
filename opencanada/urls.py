@@ -13,6 +13,7 @@ from wagtail.wagtailsearch import urls as wagtailsearch_urls
 from wagtail.wagtailsearch.signal_handlers import register_signal_handlers
 
 from core.feeds import MainFeed
+from core.views import search
 
 register_signal_handlers()
 
@@ -36,6 +37,7 @@ if settings.DEBUG:
     base_urlpatterns += static(settings.MEDIA_URL + 'images/', document_root=os.path.join(settings.MEDIA_ROOT, 'images'))
     base_urlpatterns += [
         url(r'^django-admin/', include(admin.site.urls)),
+        url(r'^admin/choose-page/search/', search, name="wagtailadmin_choose_page_search"),
         url(r'^admin/', include(wagtailadmin_urls)),
         url(r'^500/$', 'django.views.defaults.server_error'),
         url(r'^404/$', TemplateView.as_view(template_name='404.html')),
