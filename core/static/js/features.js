@@ -27,6 +27,7 @@ var FeatureStyles = FeatureStyles || {
 
                     if($('video').length){
                         featureHeight = windowWidth * 0.5625;
+                        console.log(featureHeight);
                         $('.main-feature').css("height", featureHeight + "px");
                     }
                     else{
