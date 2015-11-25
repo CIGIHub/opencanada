@@ -23,7 +23,7 @@ var FeatureStyles = FeatureStyles || {
                     var bannerHeight = $('header').height();
                     var gap = FeatureStyles.MainFeatures.gap_size.value * windowHeight;
                     var featureHeight = windowHeight - gap;
-
+                    console.log('feature height' + featureHeight);
 
                     if($('video').length){
                         featureHeight = windowWidth * 0.5625;
