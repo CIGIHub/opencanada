@@ -2,7 +2,6 @@ from django.conf import settings
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.http import Http404, JsonResponse
 from django.shortcuts import render
-
 from wagtail.utils.pagination import paginate
 from wagtail.wagtailadmin.forms import SearchForm
 from wagtail.wagtailadmin.views.chooser import (filter_page_type,
