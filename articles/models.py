@@ -35,62 +35,9 @@ from . import fields as article_fields
 logger = logging.getLogger('OpenCanada.ArticleModels')
 
 
-@python_2_unicode_compatible
-class Colour(models.Model):
-    name = models.CharField(max_length=100)
-    hex_value = models.CharField(max_length=7)
-
-    def rgb(self):
-        split = (self.hex_value[1:3], self.hex_value[3:5], self.hex_value[5:7])
-        rgb_value = [str(int(x, 16)) for x in split]
-        rgb_string = ', '.join(rgb_value)
-        return rgb_string
-
-    def __str__(self):
-        return self.name
-
-    def save(self, *args, **kwargs):
-        if not self.hex_value.startswith("#"):
-            self.hex_value = "#{}".format(self.hex_value)
-        super(Colour, self).save(*args, **kwargs)
-
-    class Meta:
-        ordering = ['name', ]
-
-
-register_snippet(Colour)
-
-
-@python_2_unicode_compatible
-class FontStyle(models.Model):
-    name = models.CharField(max_length=1024)
-    font_size = models.FloatField(default=1, help_text="The size of the fonts in ems.")
-    line_size = models.FloatField(default=100, help_text="The line height as a percentage.")
-    text_colour = models.ForeignKey(
-        Colour,
-        default=1,
-        null=True,
-        on_delete=models.SET_NULL
-    )
-
-    panels = [
-        FieldPanel('name'),
-        FieldPanel('font_size'),
-        FieldPanel('line_size'),
-        FieldPanel('text_colour'),
-    ]
-
-    def __str__(self):
-        return self.name
-
-
-register_snippet(FontStyle)
-
-
 class ArticleListPage(PaginatedListPageMixin, ThemeablePage):
     subpage_types = ['ArticlePage',
                      ]
-
     articles_per_page = models.IntegerField(default=20)
     counter_field_name = 'articles_per_page'
     counter_context_name = 'articles'
@@ -323,25 +270,20 @@ class FeatureStyleFields(models.Model):
 
     fullbleed_feature = models.BooleanField(default=False)
 
-    image_overlay_color = models.ForeignKey(
-        Colour,
-        default=1,
-        null=True,
-        on_delete=models.SET_NULL
-    )
-
     image_overlay_opacity = models.PositiveIntegerField(
         validators=[MinValueValidator(0), MaxValueValidator(100)],
         default=45,
         help_text="Set the value from 0 (Solid overlay, original image not visible) to 100 (No overlay, original image completely visible)"
     )
 
-    font_style = models.ForeignKey(
-        'articles.FontStyle',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+'
+    title_size = models.CharField(
+        max_length=20,
+        default="medium",
+        choices=(
+            ('small', 'Smaller'),
+            ('medium', 'Medium (default 50px)'),
+            ('large', 'Larger')
+        )
     )
 
     def opacity(self):
@@ -572,15 +514,9 @@ class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin
                 FieldPanel('slippery_for_type_section'),
                 FieldPanel('editors_pick'),
                 FieldPanel('feature_style'),
+                FieldPanel('title_size'),
                 FieldPanel('fullbleed_feature'),
-                MultiFieldPanel(
-                    [
-                        FieldPanel('image_overlay_opacity'),
-                        SnippetChooserPanel('image_overlay_color', Colour),
-                        SnippetChooserPanel("font_style", FontStyle),
-                    ],
-                    heading="Image Overlay Settings"
-                )
+                FieldPanel('image_overlay_opacity'),
             ],
             heading="Featuring Settings"
         ),
@@ -947,15 +883,9 @@ class SeriesPage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin,
                 FieldPanel('slippery_for_type_section'),
                 FieldPanel('editors_pick'),
                 FieldPanel('feature_style'),
+                FieldPanel('title_size'),
                 FieldPanel('fullbleed_feature'),
-                MultiFieldPanel(
-                    [
-                        FieldPanel('image_overlay_opacity'),
-                        SnippetChooserPanel('image_overlay_color', Colour),
-                        SnippetChooserPanel("font_style", FontStyle),
-                    ],
-                    heading="Image Overlay Settings"
-                )
+                FieldPanel('image_overlay_opacity'),
             ],
             heading="Featuring Settings"
         )
