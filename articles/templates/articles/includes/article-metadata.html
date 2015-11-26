@@ -8,8 +8,7 @@
         </div>
     {% endif %}
 
-    <h1 style="color: {{ self.font_style.text_colour.hex_value }}; font-size: {{ self.font_style.font_size }}px; line-height: {{ self.font_style.line_size }}%;">{{ self.title }}</h1>
-
+    <h1 class="{{ self.title_size }}">{{ self.title }}</h1>
     <div class="subtitle">{{ self.excerpt|richtext }}</div>
     {% if self.authors %}
         {% include 'articles/includes/article-contributors.html' with authors=self.authors date=self.first_published_at links=True %}
