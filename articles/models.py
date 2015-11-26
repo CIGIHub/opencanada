@@ -3,7 +3,6 @@ from __future__ import absolute_import, division, unicode_literals
 import logging
 from itertools import chain
 from operator import attrgetter
-
 from django import forms
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.core.validators import MaxValueValidator, MinValueValidator
@@ -26,7 +25,7 @@ from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 
-from core.base import PaginatedListPageMixin, ShareLinksMixin, UniquelySlugable
+from core.base import PaginatedListPageMixin, ShareLinksMixin, UniquelySlugable, VideoDocumentMixin
 from people.models import ContributorPage
 from themes.models import ThemeablePage
 
@@ -364,7 +363,7 @@ class PageLayoutOptions(models.Model):
         abstract = True
 
 
-class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin, PageLayoutOptions):
+class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin, PageLayoutOptions, VideoDocumentMixin):
     excerpt = RichTextField(blank=True, default="")
     body = article_fields.BodyField()
     chapters = article_fields.ChapterField(blank=True, null=True)
@@ -395,14 +394,6 @@ class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin
         on_delete=models.SET_NULL,
         related_name='+'
     )
-    video_document = models.ForeignKey(
-        'wagtaildocs.Document',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+'
-
-    )
     primary_topic = models.ForeignKey(
         'articles.Topic',
         null=True,
@@ -410,7 +401,6 @@ class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin
         on_delete=models.SET_NULL,
         related_name='articles'
     )
-
     category = models.ForeignKey(
         'articles.ArticleCategory',
         related_name='%(class)s',
@@ -808,7 +798,7 @@ class SeriesArticleLink(Orderable, models.Model):
     ]
 
 
-class SeriesPage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin, PageLayoutOptions):
+class SeriesPage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin, PageLayoutOptions, VideoDocumentMixin):
     subtitle = RichTextField(blank=True, default="")
     short_description = RichTextField(blank=True, default="")
     body = article_fields.BodyField(blank=True, default="")
@@ -826,14 +816,6 @@ class SeriesPage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin,
         blank=True,
         on_delete=models.SET_NULL,
         related_name='+'
-    )
-    video_document = models.ForeignKey(
-        'wagtaildocs.Document',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+'
-
     )
     primary_topic = models.ForeignKey(
         'articles.Topic',
