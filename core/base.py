@@ -3,10 +3,13 @@ import re
 from datetime import timedelta
 
 import requests
+import os
+from django.conf import settings
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import models
 from django.utils import timezone
 from django.utils.text import slugify
+from urlparse import urlparse, urlunparse
 
 logger = logging.getLogger('OpenCanada.CoreBaseModels')
 
@@ -97,6 +100,32 @@ class ShareLinksMixin(models.Model):
     @property
     def facebook_count(self):
         return self.cached_facebook_count
+
+    class Meta:
+        abstract = True
+
+
+class VideoDocumentMixin(models.Model):
+    video_document = models.ForeignKey(
+        'wagtaildocs.Document',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    @property
+    def get_video_src(self):
+        url_parts = urlparse(self.video_document.url)
+        try:
+            domain = settings.AWS_S3_CUSTOM_DOMAIN
+            path_parts = os.path.split(url_parts.path)
+            filename = path_parts[-1]
+            url_parts = ('https', domain, os.path.join('documents', filename), '', '', '')
+        except AttributeError:
+            # Assume local path
+            pass
+        return urlunparse(url_parts)
 
     class Meta:
         abstract = True
