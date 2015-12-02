@@ -83,7 +83,7 @@ $blurb-border: 1px solid $blurb-border-color !default;
 $article-block-bg-color: transparent !default;
 $article-block-border-width:3px !default;
 $article-block-border-color:$site-primary-color !default;
-$article-block-text-color: $light-grey !default;
+$article-block-text-color: $text-color !default;
 $article-block-link-color: $site-primary-color !default;
 $article-block-list-marker-color: $grey !default;
 
@@ -95,8 +95,8 @@ $article-quote-text-color: $light-grey !default;
 $article-shareable-text-color: $site-primary-color !default;
 
 $article-toc-bg-color: $article-block-bg-color !default;
-$article-toc-border-width: 0px !default;
-$article-toc-border-color: $article-toc-bg-color !default;
+$article-toc-border-width: 1px !default;
+$article-toc-border-color: $light-grey !default;
 $article-toc-link-color: $text-link-color !default;
 $article-toc-link-hover-color: $text-link-hover-color !default;
 $article-toc-link-underline: none !default;

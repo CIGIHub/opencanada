@@ -9,8 +9,8 @@
         </div>
       </div>
       <div class="feature-wrapper">
-          <div class="feature-text" style="color: {{ self.typed_featured_item.font_style.text_colour.hex_value }}">
-              <h1 style="color: {{ self.typed_featured_item.font_style.text_colour.hex_value }}; font-size: {{ self.typed_featured_item.font_style.font_size }}em; line-height: {{ self.typed_featured_item.font_style.line_size }}%;" href="{{ self.typed_featured_item.url }}">{{ self.typed_featured_item.title }}</h1>
+          <div class="feature-text">
+              <h1 href="{{ self.typed_featured_item.url }}">{{ self.typed_featured_item.title }}</h1>
               {%  if self.typed_featured_item.subtitle %}
                   <div class="feature-line">{{ self.typed_featured_item.subtitle|richtext }}</div>
               {%  elif self.typed_featured_item.excerpt %}
@@ -22,6 +22,6 @@
           </div>
       </div>
     </a>
-    <div class="scroll"><a href="#features" style="color: {{ self.typed_featured_item.font_style.text_colour.hex_value }};"><i class="fa fa-angle-down"></i></a></div>
-    <div class="camera" style="color: {{ self.typed_featured_item.font_style.text_colour.hex_value }};"><i class="fa fa-camera"></i></div>
+    <div class="scroll"><a href="#features"><i class="fa fa-angle-down"></i></a></div>
+    <div class="camera" ><i class="fa fa-camera"></i></div>
 </div>

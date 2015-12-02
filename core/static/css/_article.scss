@@ -528,7 +528,7 @@ article {
       display: inline-block;
       width: 33%;
       float: right;
-      font-size: 28px;
+      font-size: 26px;
       line-height: 130%;
       padding: 20px;
       margin: 10px;
@@ -589,6 +589,22 @@ article {
     }
   }
 
+  .block-SectionBreak {
+    hr {
+      padding: 10px 0;
+      border: none;
+      text-align: center;
+      font-family: FontAwesome;
+      &:after {
+        content: "* * *";
+        display: inline-block;
+        position: relative;
+        top: -0.6em;
+        font-size: 1em;
+      }
+    }
+  }
+  
   .blurb-content{
     float: right;
     font-family: $sans-serif;
@@ -691,8 +707,9 @@ article {
       border-bottom:$article-toc-border-width solid $article-toc-border-color;
 
       margin-left: 0;
-      margin-top:10px;
-      padding:20px 40px;
+      margin-top: 15px;
+      padding: 10px 40px;
+      line-height: 150%;
 
       li {
         a{
@@ -741,10 +758,11 @@ article {
 
 .story{
   .dropcap-start p:first-child:first-letter {
-    font-size: 65px;
-    line-height: 65px;
+    font-weight: 800;
+    font-size: 72px;
+    line-height: 60px;
     margin-right: 10px;
-    margin-top:5px;
+    margin-top: 11px;
     float: left;
     text-transform: uppercase;
   }

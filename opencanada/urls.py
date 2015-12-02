@@ -13,10 +13,12 @@ from wagtail.wagtailsearch import urls as wagtailsearch_urls
 from wagtail.wagtailsearch.signal_handlers import register_signal_handlers
 
 from core.feeds import MainFeed
+from core.views import chooser_search, site_search
 
 register_signal_handlers()
 
 base_urlpatterns = [
+    url(r'^search/$', site_search, name='wagtailsearch_search'),
     url(r'^search/', include(wagtailsearch_urls)),
     url(r'^documents/', include(wagtaildocs_urls)),
     url(r'^', include('favicon.urls')),
@@ -36,6 +38,7 @@ if settings.DEBUG:
     base_urlpatterns += static(settings.MEDIA_URL + 'images/', document_root=os.path.join(settings.MEDIA_ROOT, 'images'))
     base_urlpatterns += [
         url(r'^django-admin/', include(admin.site.urls)),
+        url(r'^admin/choose-page/search/', chooser_search, name="wagtailadmin_choose_page_search"),
         url(r'^admin/', include(wagtailadmin_urls)),
         url(r'^500/$', 'django.views.defaults.server_error'),
         url(r'^404/$', TemplateView.as_view(template_name='404.html')),

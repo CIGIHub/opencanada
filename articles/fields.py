@@ -1,6 +1,8 @@
 from __future__ import absolute_import, unicode_literals
 
 from django.contrib.contenttypes.models import ContentType
+from django.forms import Field
+from django.forms.widgets import Widget
 from django.template.loader import render_to_string
 from django.utils.functional import cached_property
 from django.utils.html import format_html
@@ -34,6 +36,7 @@ class BodyField(StreamField):
             ('ColumnedContent', ColumnarStreamBlock()),
             ('Interactive', InteractiveBlock(Interactive, icon="cogs")),
             ('RelatedItems', RelatedItemsBlock()),
+            ('SectionBreak', SectionBreakBlock()),
         ]
 
         super(BodyField, self).__init__(block_types, **kwargs)
@@ -226,3 +229,41 @@ class CitationBlock(blocks.StructBlock):
 
     class Meta:
         template = "articles/blocks/citation.html"
+
+
+class StaticHTMLInput(Widget):
+    """
+    Need an <input> widget that doesn't actually accept any input
+    """
+    input_type = 'hidden'
+
+    def __init__(self, raw_html=None, **kwargs):
+        self.raw_html = raw_html
+        super(StaticHTMLInput, self).__init__(**kwargs)
+
+    def render(self, name, value, attrs=None):
+        if self.raw_html is not None:
+            return format_html(self.raw_html)
+        else:
+            return ''
+
+
+class StaticHTMLField(Field):
+    def __init__(self, raw_html=None, **kwargs):
+        widget = StaticHTMLInput(raw_html=raw_html)
+        super(StaticHTMLField, self).__init__(widget=widget, **kwargs)
+
+
+class StaticHTMLBlock(blocks.FieldBlock):
+    def __init__(self, raw_html=None, required=False, help_text=None, **kwargs):
+        self.raw_html = raw_html
+        self.field = StaticHTMLField(raw_html=self.raw_html, required=required, help_text=help_text)
+        super(StaticHTMLBlock, self).__init__(**kwargs)
+
+
+class SectionBreakBlock(blocks.StructBlock):
+    section_break = StaticHTMLBlock(raw_html='<hr>')
+
+    class Meta:
+        icon = "code"
+        template = "articles/blocks/section_break.html"

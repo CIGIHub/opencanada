@@ -3,7 +3,6 @@ from __future__ import absolute_import, division, unicode_literals
 import logging
 from itertools import chain
 from operator import attrgetter
-
 from django import forms
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.core.validators import MaxValueValidator, MinValueValidator
@@ -26,7 +25,7 @@ from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 
-from core.base import PaginatedListPageMixin, ShareLinksMixin, UniquelySlugable
+from core.base import PaginatedListPageMixin, ShareLinksMixin, UniquelySlugable, VideoDocumentMixin
 from people.models import ContributorPage
 from themes.models import ThemeablePage
 
@@ -35,62 +34,9 @@ from . import fields as article_fields
 logger = logging.getLogger('OpenCanada.ArticleModels')
 
 
-@python_2_unicode_compatible
-class Colour(models.Model):
-    name = models.CharField(max_length=100)
-    hex_value = models.CharField(max_length=7)
-
-    def rgb(self):
-        split = (self.hex_value[1:3], self.hex_value[3:5], self.hex_value[5:7])
-        rgb_value = [str(int(x, 16)) for x in split]
-        rgb_string = ', '.join(rgb_value)
-        return rgb_string
-
-    def __str__(self):
-        return self.name
-
-    def save(self, *args, **kwargs):
-        if not self.hex_value.startswith("#"):
-            self.hex_value = "#{}".format(self.hex_value)
-        super(Colour, self).save(*args, **kwargs)
-
-    class Meta:
-        ordering = ['name', ]
-
-
-register_snippet(Colour)
-
-
-@python_2_unicode_compatible
-class FontStyle(models.Model):
-    name = models.CharField(max_length=1024)
-    font_size = models.FloatField(default=1, help_text="The size of the fonts in ems.")
-    line_size = models.FloatField(default=100, help_text="The line height as a percentage.")
-    text_colour = models.ForeignKey(
-        Colour,
-        default=1,
-        null=True,
-        on_delete=models.SET_NULL
-    )
-
-    panels = [
-        FieldPanel('name'),
-        FieldPanel('font_size'),
-        FieldPanel('line_size'),
-        FieldPanel('text_colour'),
-    ]
-
-    def __str__(self):
-        return self.name
-
-
-register_snippet(FontStyle)
-
-
 class ArticleListPage(PaginatedListPageMixin, ThemeablePage):
     subpage_types = ['ArticlePage',
                      ]
-
     articles_per_page = models.IntegerField(default=20)
     counter_field_name = 'articles_per_page'
     counter_context_name = 'articles'
@@ -323,25 +269,20 @@ class FeatureStyleFields(models.Model):
 
     fullbleed_feature = models.BooleanField(default=False)
 
-    image_overlay_color = models.ForeignKey(
-        Colour,
-        default=1,
-        null=True,
-        on_delete=models.SET_NULL
-    )
-
     image_overlay_opacity = models.PositiveIntegerField(
         validators=[MinValueValidator(0), MaxValueValidator(100)],
         default=45,
         help_text="Set the value from 0 (Solid overlay, original image not visible) to 100 (No overlay, original image completely visible)"
     )
 
-    font_style = models.ForeignKey(
-        'articles.FontStyle',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+'
+    title_size = models.CharField(
+        max_length=20,
+        default="medium",
+        choices=(
+            ('small', 'Smaller'),
+            ('medium', 'Medium (default 50px)'),
+            ('large', 'Larger')
+        )
     )
 
     def opacity(self):
@@ -364,7 +305,7 @@ class PageLayoutOptions(models.Model):
         abstract = True
 
 
-class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin, PageLayoutOptions):
+class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin, PageLayoutOptions, VideoDocumentMixin):
     excerpt = RichTextField(blank=True, default="")
     body = article_fields.BodyField()
     chapters = article_fields.ChapterField(blank=True, null=True)
@@ -395,14 +336,6 @@ class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin
         on_delete=models.SET_NULL,
         related_name='+'
     )
-    video_document = models.ForeignKey(
-        'wagtaildocs.Document',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+'
-
-    )
     primary_topic = models.ForeignKey(
         'articles.Topic',
         null=True,
@@ -410,7 +343,6 @@ class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin
         on_delete=models.SET_NULL,
         related_name='articles'
     )
-
     category = models.ForeignKey(
         'articles.ArticleCategory',
         related_name='%(class)s',
@@ -423,6 +355,7 @@ class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin
 
     visualization = models.BooleanField(default=False)
     interview = models.BooleanField(default=False)
+    video = models.BooleanField(default=False)
     number_of_related_articles = models.PositiveSmallIntegerField(default=6,
                                                                   verbose_name="Number of Related Articles to Show")
 
@@ -571,15 +504,9 @@ class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin
                 FieldPanel('slippery_for_type_section'),
                 FieldPanel('editors_pick'),
                 FieldPanel('feature_style'),
+                FieldPanel('title_size'),
                 FieldPanel('fullbleed_feature'),
-                MultiFieldPanel(
-                    [
-                        FieldPanel('image_overlay_opacity'),
-                        SnippetChooserPanel('image_overlay_color', Colour),
-                        SnippetChooserPanel("font_style", FontStyle),
-                    ],
-                    heading="Image Overlay Settings"
-                )
+                FieldPanel('image_overlay_opacity'),
             ],
             heading="Featuring Settings"
         ),
@@ -611,8 +538,9 @@ class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin
         ),
         MultiFieldPanel(
             [
-                FieldPanel('visualization'),
                 FieldPanel('interview'),
+                FieldPanel('video'),
+                FieldPanel('visualization'),
             ],
             heading="Categorization"
         )
@@ -806,7 +734,7 @@ class SeriesArticleLink(Orderable, models.Model):
     ]
 
 
-class SeriesPage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin, PageLayoutOptions):
+class SeriesPage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin, PageLayoutOptions, VideoDocumentMixin):
     subtitle = RichTextField(blank=True, default="")
     short_description = RichTextField(blank=True, default="")
     body = article_fields.BodyField(blank=True, default="")
@@ -824,14 +752,6 @@ class SeriesPage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin,
         blank=True,
         on_delete=models.SET_NULL,
         related_name='+'
-    )
-    video_document = models.ForeignKey(
-        'wagtaildocs.Document',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+'
-
     )
     primary_topic = models.ForeignKey(
         'articles.Topic',
@@ -945,15 +865,9 @@ class SeriesPage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin,
                 FieldPanel('slippery_for_type_section'),
                 FieldPanel('editors_pick'),
                 FieldPanel('feature_style'),
+                FieldPanel('title_size'),
                 FieldPanel('fullbleed_feature'),
-                MultiFieldPanel(
-                    [
-                        FieldPanel('image_overlay_opacity'),
-                        SnippetChooserPanel('image_overlay_color', Colour),
-                        SnippetChooserPanel("font_style", FontStyle),
-                    ],
-                    heading="Image Overlay Settings"
-                )
+                FieldPanel('image_overlay_opacity'),
             ],
             heading="Featuring Settings"
         )

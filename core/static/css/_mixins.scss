@@ -22,15 +22,27 @@
 }
 
 @mixin article-title($fontsize: 50px, $fontweight: 800){
-  h1{
+  h1, h1.medium{
     font-size: $fontsize;
     font-weight: $fontweight;
     line-height: 1.0em;
     margin-bottom: 0.25em;
+    &.small{
+      font-size: 40px;
+    }
+    &.large{
+      font-size: 65px;
+    }
   }
   @media(max-width: $screen-md){
     h1{
-      font-size: 42px;
+      font-size: 40px;
+      &.small{
+        font-size: 30px;
+      }
+      &.large{
+        font-size: 50px;
+      }
     }
     .feature-line{
       font-size: 16px;
@@ -38,7 +50,7 @@
   }
   @media(max-width: $screen-sm){
     h1{
-      font-size: 34px;
+      font-size: 30px;
     }
   }
 }
@@ -248,7 +260,7 @@
 }
 
 @mixin article-overlay{
-  min-height: 400px;
+  min-height: 250px;
   position: relative;
   font-family: $sans-serif;
 
