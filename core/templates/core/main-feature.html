@@ -10,7 +10,7 @@
       </div>
       <div class="feature-wrapper">
           <div class="feature-text">
-              <h1 class="{{ self.typed_featured_item.title_size }}" href="{{ self.typed_featured_item.url }}">{{ self.typed_featured_item.title }}</h1>
+              <h1 href="{{ self.typed_featured_item.url }}">{{ self.typed_featured_item.title }}</h1>
               {%  if self.typed_featured_item.subtitle %}
                   <div class="feature-line">{{ self.typed_featured_item.subtitle|richtext }}</div>
               {%  elif self.typed_featured_item.excerpt %}
