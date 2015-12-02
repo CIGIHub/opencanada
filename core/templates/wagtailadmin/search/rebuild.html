@@ -1,7 +1,7 @@
 {% extends  "wagtailadmin/base.html" %}
 {% load gravatar static compress i18n %}
-{% block titletag %}{% trans "Clear Cache" %}{% endblock %}
-{% block bodyclass %}clear-cache{% endblock %}
+{% block titletag %}{% trans "Rebuild Search Index" %}{% endblock %}
+{% block bodyclass %}rebuild_index{% endblock %}
 
 
 {% block content %}
@@ -9,7 +9,7 @@
 
         <div class="row row-flush">
             <div class="left col9">
-                <h1 class="icon icon-cross">{% trans 'Clear Cache' %}</h1>
+                <h1 class="icon icon-cross">{% trans 'Rebuild Search Index' %}</h1>
             </div>
         </div>
     </header>
@@ -18,9 +18,9 @@
           <form id="page-edit-form" method="POST">
               {% csrf_token %}
               <div class=nice-padding">
-                <h2>Clear Cloudflare Cache?</h2>
+                <h2>Rebuild Searchly hosted Elasticsearch Index</h2>
                 <div class="help-block help-critical">
-                  Clearing the cache will remove all pages from Cloudflare caching system.<br>Performace on the site will be temporarily degraded.
+                  Rebuilding to index might take up to a minute and during the rebuild, search might not be available.
                 </div>
                 <input type="submit" value="yes" class="button yes"> <a href="{% url 'wagtailadmin_home' %}" class="button no">no</a>
               </div>
