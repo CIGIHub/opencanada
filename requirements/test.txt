@@ -1,5 +1,7 @@
 -r base.txt
 
+-e git+https://github.com/albertoconnor/wagtail@migrationfix#egg=wagtail
+
 isort==4.0.0
 flake8==2.4.1
 coveralls==0.5
