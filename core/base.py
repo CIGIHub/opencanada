@@ -10,7 +10,7 @@ from django.db import models
 from django.utils import timezone
 from django.utils.text import slugify
 
-from six.moves.urllib import urlparse, urlunparse
+from six.moves.urllib.parse import urlparse, urlunparse
 
 logger = logging.getLogger('OpenCanada.CoreBaseModels')
 
