@@ -8,7 +8,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('wagtaildocs', '0003_add_verbose_names'),
+        ('wagtaildocs', '0001_initial'),
         ('articles', '0075_auto_20151015_2022'),
     ]
 
