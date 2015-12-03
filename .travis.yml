@@ -9,7 +9,7 @@ install:
   - pip install -r requirements/test.txt --use-mirrors
 before_script:
   - flake8 .
-  - isort -c -rc .
+  # - isort -c -rc .
 script:
   - coverage run --source='.' ./manage.py test --settings opencanada.settings.test -v 3 --keepdb
 after_success:
