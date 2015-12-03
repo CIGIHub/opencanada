@@ -10,7 +10,7 @@ install:
 before_script:
   - flake8 .
   - isort -c -rc .
-  - ./manage.py migrate contenttypes --settings opencanada.settings.test -v 3 && bash -c "exit 1"
+  - ./manage.py migrate contenttypes --settings opencanada.settings.test -v 3 || bash -c "exit 0"
 script:
   - coverage run --source='.' ./manage.py test --settings opencanada.settings.test -v 3 --keepdb
 after_success:
