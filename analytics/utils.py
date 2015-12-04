@@ -1,11 +1,11 @@
 from __future__ import absolute_import, division, unicode_literals
 
-import httplib2
 import six
+
+import httplib2
+from analytics.models import Analytics
 from apiclient.discovery import build
 from oauth2client.client import SignedJwtAssertionCredentials
-
-from analytics.models import Analytics
 
 
 def get_service(api_name, api_version, scope, key_file_location, service_account_email):
