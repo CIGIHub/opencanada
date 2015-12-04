@@ -1,10 +1,9 @@
 #!/usr/bin/env python
 import sys
 
-from isort.hooks import git_hook as isort_hook
-
 from flake8.hooks import git_hook as flake8_hook
 from flake8.hooks import get_git_param
+from isort.hooks import git_hook as isort_hook
 
 # `get_git_param` will retrieve configuration from your local git config and
 # then fall back to using the environment variables that the hook has always
