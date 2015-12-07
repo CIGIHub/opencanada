@@ -29,7 +29,7 @@ from wagtail.wagtailsnippets.models import register_snippet
 from core.base import (PaginatedListPageMixin, ShareLinksMixin,
                        UniquelySlugable, VideoDocumentMixin)
 from people.models import ContributorPage
-from themes.models import ThemeablePage
+from themes.models import ThemeablePage, TwitteratiMixin
 
 from . import fields as article_fields
 
@@ -307,7 +307,7 @@ class PageLayoutOptions(models.Model):
         abstract = True
 
 
-class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin, PageLayoutOptions, VideoDocumentMixin):
+class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin, PageLayoutOptions, VideoDocumentMixin, TwitteratiMixin):
     excerpt = RichTextField(blank=True, default="")
     body = article_fields.BodyField()
     chapters = article_fields.ChapterField(blank=True, null=True)

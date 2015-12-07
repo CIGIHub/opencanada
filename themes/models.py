@@ -203,7 +203,7 @@ class TwitterUser(models.Model):
 
 
 @python_2_unicode_compatible
-class TwitteratiCategory(models.Model):
+class TwitteratiMemberCategory(models.Model):
     name = models.CharField(max_length=255)
     description = models.CharField(max_length=255)
 
@@ -211,5 +211,15 @@ class TwitteratiCategory(models.Model):
         return self.name
 
 
-class TwitteratiUser(TwitterUser):
-    category = models.ForeignKey(TwitteratiCategory)
+class TwitteratiMember(TwitterUser):
+    category = models.ForeignKey(TwitteratiMemberCategory)
+
+
+class TwitteratiMixin(object):
+    @property
+    def twitterati_categories(self):
+        return TwitteratiMemberCategory.objects.all()
+
+    @property
+    def twitterati_members(self):
+        return TwitteratiMember.objects.all()
