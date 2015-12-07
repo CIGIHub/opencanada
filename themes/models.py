@@ -186,3 +186,30 @@ class ContentLogoLink(models.Model):
     )
 
     panels = [SnippetChooserPanel("block", LogoBlock)]
+
+
+@python_2_unicode_compatible
+class TwitterUser(models.Model):
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
+    twitter_handle = models.CharField(max_length=16)
+    biography = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.twitter_handle
+
+    class Meta:
+        abstract = True
+
+
+@python_2_unicode_compatible
+class TwitteratiCategory(models.Model):
+    name = models.CharField(max_length=255)
+    description = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
+
+
+class TwitteratiUser(TwitterUser):
+    category = models.ForeignKey(TwitteratiCategory)
