@@ -223,3 +223,24 @@ class TwitteratiMixin(object):
     @property
     def twitterati_members(self):
         return TwitteratiMember.objects.all()
+
+    @property
+    def sorted_twitterati_members(self):
+        return TwitteratiMember.objects.order_by('category', 'first_name')
+
+    @property
+    def sorted_twitterati_members_by_category(self):
+        members = self.sorted_twitterati_members
+        ordered_categories = []
+        members_by_category = {}
+        for member in members:
+            category_name = member.category.name
+            if not members_by_category.has_key(category_name):
+                members_by_category[category_name] = []
+                ordered_categories.append(category_name)
+            members_by_category[category_name].append(member)
+        sorted_members_by_category = []
+        for category_name in ordered_categories:
+            sorted_members_by_category.append(members_by_category[category_name])
+        return sorted_members_by_category
+
