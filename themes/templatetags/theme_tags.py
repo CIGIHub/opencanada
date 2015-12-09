@@ -43,7 +43,7 @@ def get_follow_link(context, usage):
 @register.assignment_tag(takes_context=True)
 def get_logo(context, usage):
     theme = get_theme(context)
-    return theme.content.logo_links.filter(theme_content=theme.content, block__usage=usage).first().block.link
+    return theme.content.logo_links.filter(theme_content=theme.content, block__usage=usage).first().block.logo
 
 
 @register.assignment_tag(takes_context=True)
