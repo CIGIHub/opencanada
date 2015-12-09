@@ -1,5 +1,7 @@
 from __future__ import absolute_import, division, unicode_literals
 
+import json
+
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from modelcluster.fields import ParentalKey
@@ -25,15 +27,28 @@ def get_default_theme():
 @python_2_unicode_compatible
 class ThemeContent(ClusterableModel):
     name = models.CharField(max_length=255)
-    contact_email = models.EmailField(blank=True, null=True, help_text="Only provide if this should be different from the site default email contact address.")
+    contact_email = models.EmailField(blank=True, null=True,
+                                      help_text="Only provide if this should be different from the site default email contact address.")
+    json_file = models.CharField(max_length=255, blank=True, null=True, verbose_name='JSON file',
+                                 help_text="Only provide if you know your template will be filled with the contents of a JSON data file.")
 
     panels = [
         FieldPanel('name'),
         FieldPanel('contact_email'),
+        FieldPanel('json_file'),
         InlinePanel('block_links', label="Content Blocks"),
         InlinePanel('follow_links', label="Follow Links"),
         InlinePanel('logo_links', label="Logos"),
     ]
+
+    @property
+    def json_file_as_object(self):
+        try:
+            with open(self.json_file, 'r') as fp:
+                json_object = json.load(fp)
+        except:
+            json_object = None
+        return json_object
 
     def __str__(self):
         return self.name
@@ -186,61 +201,3 @@ class ContentLogoLink(models.Model):
     )
 
     panels = [SnippetChooserPanel("block", LogoBlock)]
-
-
-@python_2_unicode_compatible
-class TwitterUser(models.Model):
-    first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length=255)
-    twitter_handle = models.CharField(max_length=16)
-    biography = models.CharField(max_length=255)
-
-    def __str__(self):
-        return self.twitter_handle
-
-    class Meta:
-        abstract = True
-
-
-@python_2_unicode_compatible
-class TwitteratiMemberCategory(models.Model):
-    name = models.CharField(max_length=255)
-    description = models.CharField(max_length=255)
-
-    def __str__(self):
-        return self.name
-
-
-class TwitteratiMember(TwitterUser):
-    category = models.ForeignKey(TwitteratiMemberCategory)
-
-
-class TwitteratiMixin(object):
-    @property
-    def twitterati_categories(self):
-        return TwitteratiMemberCategory.objects.all()
-
-    @property
-    def twitterati_members(self):
-        return TwitteratiMember.objects.all()
-
-    @property
-    def sorted_twitterati_members(self):
-        return TwitteratiMember.objects.order_by('category', 'first_name')
-
-    @property
-    def sorted_twitterati_members_by_category(self):
-        members = self.sorted_twitterati_members
-        ordered_categories = []
-        members_by_category = {}
-        for member in members:
-            category_name = member.category.name
-            if not members_by_category.has_key(category_name):
-                members_by_category[category_name] = []
-                ordered_categories.append(category_name)
-            members_by_category[category_name].append(member)
-        sorted_members_by_category = []
-        for category_name in ordered_categories:
-            sorted_members_by_category.append(members_by_category[category_name])
-        return sorted_members_by_category
-
