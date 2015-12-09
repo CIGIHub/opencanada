@@ -15,6 +15,20 @@ from six.moves.urllib.parse import urlparse, urlunparse
 logger = logging.getLogger('OpenCanada.CoreBaseModels')
 
 
+class ArticleBase(object):
+    '''
+    For data common to article-like pages, generally ArticlePage and SeriesPage.
+    TODO: Refactor the VideoDocumentMixin into here eventually.
+    '''
+    project = models.ForeignKey(
+        'wagtailcore.Page',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+
 class PaginatedListPageMixin(object):
     '''
     To use this mixing you need to define counter_field_name as the name of the field with

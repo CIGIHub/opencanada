@@ -58,6 +58,7 @@ class HomePage(ThemeablePage):
         article_models.ExternalArticleListPage,
         jobs_models.JobPostingListPage,
         StreamPage,
+        "ProjectListPage",
     ]
 
     featured_item = models.ForeignKey(
@@ -274,6 +275,26 @@ class HomePage(ThemeablePage):
         ObjectList(Page.promote_panels, heading='Promote'),
         ObjectList(Page.settings_panels, heading='Settings', classname="settings"),
     ])
+
+
+@python_2_unicode_compatible
+class ProjectPage(HomePage):
+    subpage_types = []
+
+    template = 'core/home_page.html'
+
+    def __str__(self):
+        return self.title
+
+
+@python_2_unicode_compatible
+class ProjectListPage(ThemeablePage):
+    subpage_types = [
+        ProjectPage,
+    ]
+
+    def __str__(self):
+        return self.title
 
 
 @receiver(page_published, sender=HomePage)

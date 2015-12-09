@@ -26,7 +26,7 @@ from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 
-from core.base import (PaginatedListPageMixin, ShareLinksMixin,
+from core.base import (ArticleBase, PaginatedListPageMixin, ShareLinksMixin,
                        UniquelySlugable, VideoDocumentMixin)
 from people.models import ContributorPage
 from themes.models import ThemeablePage
@@ -307,7 +307,7 @@ class PageLayoutOptions(models.Model):
         abstract = True
 
 
-class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin, PageLayoutOptions, VideoDocumentMixin):
+class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin, PageLayoutOptions, VideoDocumentMixin, ArticleBase):
     excerpt = RichTextField(blank=True, default="")
     body = article_fields.BodyField()
     chapters = article_fields.ChapterField(blank=True, null=True)
@@ -462,6 +462,7 @@ class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin
         return article_list
 
     content_panels = Page.content_panels + [
+        PageChooserPanel('project', 'core.ProjectPage'),
         FieldPanel('excerpt'),
         InlinePanel('author_links', label="Authors"),
         ImageChooserPanel('main_image'),
