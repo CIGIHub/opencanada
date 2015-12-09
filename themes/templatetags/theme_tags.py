@@ -55,4 +55,4 @@ def get_logo_link(context, usage):
 @register.assignment_tag(takes_context=True)
 def get_json_data(context):
     theme = get_theme(context)
-    return theme.content.json_file_as_object
+    return theme.json_file_as_object

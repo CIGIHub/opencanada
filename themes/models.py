@@ -29,26 +29,14 @@ class ThemeContent(ClusterableModel):
     name = models.CharField(max_length=255)
     contact_email = models.EmailField(blank=True, null=True,
                                       help_text="Only provide if this should be different from the site default email contact address.")
-    json_file = models.CharField(max_length=255, blank=True, null=True, verbose_name='JSON file',
-                                 help_text="Only provide if you know your template will be filled with the contents of a JSON data file.")
 
     panels = [
         FieldPanel('name'),
         FieldPanel('contact_email'),
-        FieldPanel('json_file'),
         InlinePanel('block_links', label="Content Blocks"),
         InlinePanel('follow_links', label="Follow Links"),
         InlinePanel('logo_links', label="Logos"),
     ]
-
-    @property
-    def json_file_as_object(self):
-        try:
-            with open(self.json_file, 'r') as fp:
-                json_object = json.load(fp)
-        except:
-            json_object = None
-        return json_object
 
     def __str__(self):
         return self.name
@@ -62,6 +50,17 @@ class Theme(models.Model):
     folder = models.CharField(max_length=1024, default="themes/default")
     is_default = models.BooleanField(default=False)
     content = models.ForeignKey(ThemeContent, null=True)
+    json_file = models.CharField(max_length=255, blank=True, null=True, verbose_name='JSON file',
+                                 help_text="Only provide if you know your template will be filled with the contents of a JSON data file.")
+
+    @property
+    def json_file_as_object(self):
+        try:
+            with open(self.json_file, 'r') as fp:
+                json_object = json.load(fp)
+        except:
+            json_object = None
+        return json_object
 
     def __str__(self):
         return self.name
@@ -71,6 +70,7 @@ class Theme(models.Model):
         FieldPanel('folder'),
         FieldPanel('is_default'),
         SnippetChooserPanel('content', ThemeContent),
+        FieldPanel('json_file'),
     ]
 
 register_snippet(Theme)
