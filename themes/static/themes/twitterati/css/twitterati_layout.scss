@@ -1,0 +1,159 @@
+
+.category, .twitterati-list li, .twitterati-list h3{
+  font-family: $sans-serif;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 130%;
+  text-transform: uppercase;
+}
+
+.category{
+  text-align: center;
+}
+
+.government{
+    color: $government;
+    border-bottom: solid 5px $government;
+  }
+  .journalism{
+    color: $journalism;
+    border-bottom: solid 5px $journalism;
+  }
+  .thinkers{
+    color: $thinkers;
+    border-bottom: solid 5px $thinkers;
+  }
+
+#slideshow{
+  margin: 0 auto;
+  position: fixed;
+  top: 10%;
+  left: 0;
+  right: 0;
+  z-index: 100;
+
+  ul{
+    padding: 0px;
+    margin: 0px;
+    li{
+      list-style: none;
+    }
+  }
+
+  .slide{
+    color: white;
+    background: black;
+    width: 80%;
+    margin: 0 auto;
+    padding: 40px;
+    .category{
+      width: 50%;
+      margin: 0 auto;
+    }
+    a{
+      color: white;
+    }
+    .twitter-photo{
+      margin-top: 20px;
+      img{
+        margin: auto; 
+        border-radius: 38px;
+        &.government{
+           border: solid 2px $government;
+        }
+        &.journalism{
+           border: solid 2px $journalism;
+        }
+        &.thinkers{
+           border: solid 2px $thinkers;
+        }
+      }
+
+    }
+    h2{
+      border-bottom: none;
+      text-align: center;
+      font-size: 50px;
+      padding-top: 20px;
+      margin-bottom: 0px;
+    }
+    .twitter-handle{
+      line-height: 130%;
+      text-align: center;
+      font-family: $sans-serif;
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 14px;
+    }
+    .bio{
+      margin-top: 20px;
+      line-height: 130%;
+    }
+
+    @media(max-width: $screen-sm){
+      padding: 20px;
+      h2{
+        font-size: 30px;
+        line-height: 130%;
+      }
+      .bio{
+        font-size: 12px;
+      }
+    }
+  }
+
+  .slide-controls{
+    cursor: pointer;
+    padding: 20px;
+    margin: 0px;
+    border-bottom: solid 1px white;
+    font-size: 22px;
+    .next{
+      padding: 10px;
+      text-align: right;
+      &.inactive{
+        color: #666;
+      }
+    }
+    .prev{
+      padding: 10px;
+      text-align: left;
+      &.inactive{
+        color: #666;
+      }
+    }
+    .close-box{
+      padding: 10px;
+      text-align: center;
+    }
+  }
+}
+
+.page-overlay.active{
+  opacity:0.5;
+    background-color:#74f9ee; 
+    width:100%; 
+    height:100%; 
+    z-index:20;
+    top:0; 
+    left:0; 
+    position:fixed; 
+}
+
+.twitterati-list{
+  margin: 40px 0;
+  ul{
+    padding: 0px;
+    margin: 15px 0;
+    li{
+      list-style: none;
+      font-size: 14px;
+      
+      a{
+        color: black;
+        text-transform: uppercase;
+      }
+    }
+    
+  }
+}

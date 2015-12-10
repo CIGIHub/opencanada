@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static article_tags compress core_tags wagtailcore_tags wagtailembeds_tags wagtailimages_tags %}
+{% load static article_tags compress core_tags wagtailcore_tags wagtailembeds_tags wagtailimages_tags theme_tags %}
 
 {% block body_class %}template-{{ self.get_verbose_name|slugify }} light{% endblock %}
 
@@ -15,67 +15,93 @@
 
 {% block theme_css %}
     <link rel="stylesheet" type="text/x-scss" href="{% static 'themes/light/css/light.scss' %}">
+    <link rel="stylesheet" type="text/x-scss" href="{% static 'themes/twitterati/css/twitterati.scss' %}">
 {% endblock %}
 
 {% block extra_js %}
-<script>
-    FeatureStyles.MainFeatures.setSize({{ self.full_bleed_image_size }});
-</script>
-<script type="text/javascript" src="{% static 'themes/components/js/transparency.js' %}"></script>
+    <script>
+        FeatureStyles.MainFeatures.setSize({{ self.full_bleed_image_size }});
+    </script>
+    <script type="text/javascript" src="{% static 'themes/components/js/transparency.js' %}"></script>
+    <script type="text/javascript" src="{% static 'themes/twitterati/js/twitterati.js' %}"></script>
 {% endblock %}
 
+
+
 {% block header %}
+    <div class="page-overlay"></div>
     {% include 'core/header.html' with tagline=False %}
 {% endblock %}
 
 {% block content %}
 
+{% get_json_data as twitterati %}
+
+
     {% if self.main_image and self.include_main_image_overlay %}
-        {% include 'themes/light/articles/article-feature.html' with metadata='articles/includes/article-metadata.html' %}
+        {% include 'articles/includes/article-feature.html' with metadata='articles/includes/article-metadata.html' %}
     {% endif %}
 
     <article id="article-page">
-        <div class="container">
-
-            {% block share_links %}
-                {% include 'articles/includes/share_links.html' %}
-            {% endblock %}
-
-            <div class="narrow-content">
-            {% if not self.include_main_image_overlay or self.include_main_image_overlay and not self.main_image %}
-                {% include 'articles/includes/article-metadata.html' %}
-                {% if self.include_main_image and self.main_image %}
-                    <figure class="main-image">
-                        {% image self.main_image fill-940x627 %}
-                    </figure>
-                    {% if self.main_image.credit %}
-                        <div class="image-credit">
-                            {{ self.main_image.credit }}
-                        </div>
-                    {% endif %}
-                    {% if self.main_image.source %}
-                        <div class="image-source">
-                            {{ self.main_image.source }}
-                        </div>
-                    {% endif %}
-                {% endif %}
-            {% endif %}
+        <section class="block-fullBleed">
+            <div class="container-fluid" id="slideshow">
+                
+                   <ul class="slider">
+                    {% for group in twitterati %}
+                        {% for member in group.members %}
+                            <li id="{{ member.twitter_handle }}">
+                                <div class="slide">
+                                    <div class="category {{ group.category }}">{{ group.category }}</div>
+                                    <div class="slide-controls row">
+                                        <div class="col-xs-4">
+                                            <div class="prev"><i class="fa fa-chevron-left"></i></div>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <div class="close-box"><i class="fa fa-times"></i></div>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <div class="next"><i class="fa fa-chevron-right"></i></div>
+                                        </div>
+                                    </div>
+                                    <div class="twitter-photo"><img class="{{ group.category }}" src="{{ member.profile_image_url }}"></div>
+                                    <h2 class="{{ group.category }}">{{ member.full_name}} </h2>
+                                    <div class="twitter-handle">@{{ member.twitter_handle}} / {{ member.follower_count}}followers</div>
+                                    <div class="bio">
+                                        {{ member.biography|richtext }}
+                                    </div>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    {% endfor %}
+                 </ul>
+                  
             </div>
-        </div>
+        </section>
 
-        <div class="story">
-
-            {% include 'articles/includes/story-content.html' %}
+        <div class="container">
+            <section class="narrow-content twitterati-list">
+                <div class="row">
+                    {% for group in twitterati %}
+                        <div class="col-sm-6">
+                            <h3 class="{{ group.category }}">{{ group.category }}</h3>
+                            <ul>
+                                {% for member in group.members %}
+                                    <li><a href="{{ member.twitter_handle }}">{{ member.full_name }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% if forloop.counter|divisibleby:2 %}</div><div class="row">{% endif %}
+                    {% endfor %}
+                </div>
+                    
+            </section>
 
             <div class="home-link"><a href="/"><img src="{% static 'themes/dark/img/opencanada-mark-white.png' %}"></a></div>
         </div>
 
-        
+
     </article>
 
 {% endblock %}
 
-{% block footer %}
-   {% include 'themes/components/simple_footer.html' %}
-{% endblock %}
 
