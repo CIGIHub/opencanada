@@ -1,6 +1,8 @@
 from __future__ import absolute_import, unicode_literals
 
 from django.contrib.contenttypes.models import ContentType
+from django.core.files.uploadedfile import UploadedFile
+from django.db.models import FileField
 from django.forms import Field
 from django.forms.widgets import Widget
 from django.template.loader import render_to_string
@@ -267,3 +269,13 @@ class SectionBreakBlock(blocks.StructBlock):
     class Meta:
         icon = "code"
         template = "articles/blocks/section_break.html"
+
+
+class WagtailFileField(FileField):
+    '''
+    We override this so that an uploaded file is always saved to storage when saving a draft of a Page
+    '''
+    def save_form_data(self, instance, data):
+        super(WagtailFileField, self).save_form_data(instance, data)
+        if isinstance(data, UploadedFile):
+            super(WagtailFileField, self).pre_save(instance, False)

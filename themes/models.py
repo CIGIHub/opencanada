@@ -50,17 +50,6 @@ class Theme(models.Model):
     folder = models.CharField(max_length=1024, default="themes/default")
     is_default = models.BooleanField(default=False)
     content = models.ForeignKey(ThemeContent, null=True)
-    json_file = models.CharField(max_length=255, blank=True, null=True, verbose_name='JSON file',
-                                 help_text="Only provide if you know your template will be filled with the contents of a JSON data file.")
-
-    @property
-    def json_file_as_object(self):
-        try:
-            with open(self.json_file, 'r') as fp:
-                json_object = json.load(fp)
-        except:
-            json_object = None
-        return json_object
 
     def __str__(self):
         return self.name

@@ -50,9 +50,3 @@ def get_logo(context, usage):
 def get_logo_link(context, usage):
     theme = get_theme(context)
     return theme.content.logo_links.filter(theme_content=theme.content, block__usage=usage).first().block.link
-
-
-@register.assignment_tag(takes_context=True)
-def get_json_data(context):
-    theme = get_theme(context)
-    return theme.json_file_as_object
