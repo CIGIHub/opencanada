@@ -59,7 +59,6 @@ class Theme(models.Model):
         FieldPanel('folder'),
         FieldPanel('is_default'),
         SnippetChooserPanel('content', ThemeContent),
-        FieldPanel('json_file'),
     ]
 
 register_snippet(Theme)
