@@ -363,6 +363,12 @@ class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin
     json_file = article_fields.WagtailFileField(max_length=255, blank=True, null=True, verbose_name='JSON file',
                                  help_text="Only provide if you know your template will be filled with the contents of a JSON data file.")
 
+    @property
+    def get_json_data(self):
+        
+        json_object = json.load(self.json_file)
+        return json_object
+
     search_fields = Page.search_fields + (
         index.SearchField('excerpt', partial_match=True),
         index.SearchField('body', partial_match=True),

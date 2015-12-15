@@ -35,47 +35,44 @@
 
 {% block content %}
 
-{% get_json_data as twitterati %}
-
+    {% get_json_data as twitterati %}
 
     {% if self.main_image and self.include_main_image_overlay %}
-        {% include 'articles/includes/article-feature.html' with metadata='articles/includes/article-metadata.html' %}
+       {% include 'themes/twitterati/articles/article-feature.html' with metadata='articles/includes/article-metadata.html' %}
     {% endif %}
 
     <article id="article-page">
-        <section class="block-fullBleed">
-            <div class="container-fluid" id="slideshow">
-                
-                   <ul class="slider">
-                    {% for group in twitterati %}
-                        {% for member in group.members %}
-                            <li id="{{ member.twitter_handle }}">
+        <section id="slideshow">
+            <ul class="slider">
+                {% for group in twitterati %}
+                    {% for member in group.members %}
+                        <li id="{{ member.twitter_handle }}" class="row">
+                            <div class="close-box"><i class="fa fa-times"></i></div>
+                            <div class="col-xs-1 display-cell">
+                                <div class="prev"><i class="fa fa-chevron-left"></i></div>
+                            </div>
+                            <div class="col-xs-10 display-cell">
                                 <div class="slide">
                                     <div class="category {{ group.category }}">{{ group.category }}</div>
-                                    <div class="slide-controls row">
-                                        <div class="col-xs-4">
-                                            <div class="prev"><i class="fa fa-chevron-left"></i></div>
-                                        </div>
-                                        <div class="col-xs-4">
-                                            <div class="close-box"><i class="fa fa-times"></i></div>
-                                        </div>
-                                        <div class="col-xs-4">
-                                            <div class="next"><i class="fa fa-chevron-right"></i></div>
-                                        </div>
-                                    </div>
                                     <div class="twitter-photo"><img class="{{ group.category }}" src="{{ member.profile_image_url }}"></div>
                                     <h2 class="{{ group.category }}">{{ member.full_name}} </h2>
-                                    <div class="twitter-handle">@{{ member.twitter_handle}} / {{ member.follower_count}}followers</div>
+                                    <div class="twitter-handle"><a href="https://twitter.com/@{{ member.twitter_handle}}">@{{ member.twitter_handle}}</a> / {{ member.follower_count}} followers</div>
                                     <div class="bio">
                                         {{ member.biography|richtext }}
                                     </div>
+                                    <div class="share-this">
+                                        Share this 
+                                        <a class="twitter-share-link" href="https://twitter.com/share?text={{ self.title|urlencode }}&url={{ self.full_url|urlencode:"" }}"><i class="fa fa-twitter-square"></i></a><span class="facebook-share-link" data-url="{{ self.full_url }}"><i class="fa fa-facebook-square"></i></span>
+                                    </div>
                                 </div>
-                            </li>
-                        {% endfor %}
+                            </div>
+                            <div class="col-xs-1 display-cell">
+                                <div class="next"><i class="fa fa-chevron-right"></i></div>
+                            </div>
+                        </li>
                     {% endfor %}
-                 </ul>
-                  
-            </div>
+                {% endfor %}
+             </ul>
         </section>
 
         <div class="container">
@@ -83,10 +80,10 @@
                 <div class="row">
                     {% for group in twitterati %}
                         <div class="col-sm-6">
-                            <h3 class="{{ group.category }}">{{ group.category }}</h3>
+                            <h3 class="{{ group.category }}">{{ group.description }}</h3>
                             <ul>
                                 {% for member in group.members %}
-                                    <li><a href="{{ member.twitter_handle }}">{{ member.full_name }}</a></li>
+                                    <li class="{{ group.category }}-hover"><a href="{{ member.twitter_handle }}">{{ member.full_name }}</a></li>
                                 {% endfor %}
                             </ul>
                         </div>

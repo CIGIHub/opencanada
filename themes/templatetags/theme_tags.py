@@ -50,3 +50,5 @@ def get_logo(context, usage):
 def get_logo_link(context, usage):
     theme = get_theme(context)
     return theme.content.logo_links.filter(theme_content=theme.content, block__usage=usage).first().block.link
+
+
