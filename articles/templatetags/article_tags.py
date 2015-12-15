@@ -1,3 +1,5 @@
+import json
+
 from django import template
 
 from articles.models import (ArticlePage, ExternalArticlePage, SeriesPage,
@@ -90,3 +92,17 @@ def romanize(value):
             value -= integer
 
     return result
+
+
+@register.assignment_tag(takes_context=True)
+def get_json_data(context):
+    try:
+        page = context["self"]
+        article = page.articlepage
+    except ArticlePage.DoesNotExist:
+        pass
+    else:
+        if article.json_file:
+            json_object = json.load(article.json_file)
+            return json_object
+
