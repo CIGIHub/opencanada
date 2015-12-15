@@ -14,6 +14,7 @@ jQuery(document).ready(function() {
 
     function loadSlide(handle){
         $('.slider').show();
+        $('.close-box').show();
         $('li' + handle).addClass('active').fadeIn(800);
         $('.page-overlay').fadeIn(300);
 
@@ -98,6 +99,9 @@ jQuery(document).ready(function() {
                     $('.page-overlay').fadeOut(400);
                     $('.slider li').hide().removeClass('active');
                 });
+                var scrollPosition = $(window).scrollTop();
+                window.location.hash = '';
+                $(window).scrollTop(scrollPosition);
             }
        }
     });
