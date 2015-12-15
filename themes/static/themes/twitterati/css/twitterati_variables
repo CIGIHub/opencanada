@@ -1,0 +1,5 @@
+$sans-serif: proxima-nova, Helvetica, sans-serif !default;
+
+$government: #5e3d7a;
+$journalism: #f74f3d;
+$thinkers: #ffcc33;

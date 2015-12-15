@@ -360,6 +360,8 @@ class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin
     video = models.BooleanField(default=False)
     number_of_related_articles = models.PositiveSmallIntegerField(default=6,
                                                                   verbose_name="Number of Related Articles to Show")
+    json_file = article_fields.WagtailFileField(max_length=255, blank=True, null=True, verbose_name='JSON file',
+                                                help_text="Only provide if you know your template will be filled with the contents of a JSON data file.")
 
     search_fields = Page.search_fields + (
         index.SearchField('excerpt', partial_match=True),
@@ -473,6 +475,7 @@ class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin
     ]
 
     advanced_content_panels = [
+        FieldPanel('json_file'),
         MultiFieldPanel(
             [
                 FieldPanel('table_of_contents_heading'),

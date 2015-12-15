@@ -1,0 +1,225 @@
+
+.category, .twitterati-list li, .twitterati-list h3, .share-this{
+  font-family: $sans-serif;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 130%;
+  text-transform: uppercase;
+}
+
+.government{
+  color: $government;
+  border-bottom: solid 5px $government;
+}
+.journalism{
+  color: $journalism;
+  border-bottom: solid 5px $journalism;
+}
+.thinkers{
+  color: $thinkers;
+  border-bottom: solid 5px $thinkers;
+}
+
+#slideshow{
+  margin: auto;
+  position: fixed;
+  top: 20%;
+  left: 10%;
+  right: 10%;
+  z-index: 100;
+   max-width: 800px;
+  ul{
+    position: absolute;
+    padding: 0px;
+    background: black;
+    display: none;
+    min-height: 400px;
+    
+    li{
+      list-style: none;
+      color: white;
+      &.row{
+        margin: 0px;
+        padding: 40px 0px;
+      }
+    }
+
+    .display-cell{
+        display: table-cell;
+        vertical-align: middle;
+        float: none;
+    }
+  }
+
+  .slide{
+    margin: 0 auto;
+    .category{
+      width: 50%;
+      margin: 0 auto;
+      text-align: center;
+    }
+    a{
+      color: white;
+      &:hover{
+        color: #666;
+      }
+    }
+    .twitter-photo{
+      margin-top: 40px;
+      img{
+        margin: auto; 
+        border-radius: 38px;
+        width: 75px;
+        height: 75px;
+        &.government{
+           border: solid 2px $government;
+        }
+        &.journalism{
+           border: solid 2px $journalism;
+        }
+        &.thinkers{
+           border: solid 2px $thinkers;
+        }
+      }
+
+    }
+    h2{
+      border-bottom: none;
+      text-align: center;
+      font-size: 50px;
+      font-weight: 700;
+      padding-top: 20px;
+      margin-bottom: 0px;
+    }
+    .twitter-handle{
+      line-height: 130%;
+      text-align: center;
+      font-family: $sans-serif;
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 14px;
+    }
+    .bio{
+      margin-top: 20px;
+      line-height: 130%;
+    }
+    .share-this{
+      font-size: 14px;
+      font-weight: normal;
+      text-align: center;
+      padding-top: 30px;
+      .twitter-share-link, .facebook-share-link{
+        margin-left: 10px;
+      }
+      .facebook-share-link{
+        cursor: pointer;
+        &:hover{
+          color: #666;
+        }
+      }
+
+    }
+    @media(max-width: $screen-sm){
+      .category{
+        width: 100%;
+      }
+      h2{
+        font-size: 30px;
+        line-height: 130%;
+      }
+      .bio{
+        font-size: 12px;
+      }
+    }
+  }
+
+  .next, .prev, .close-box{
+    cursor: pointer;
+  }
+
+  .next, .prev{
+    font-size: 22px;
+    padding: 10px;
+    text-align: center;
+    &.inactive{
+      color: #666;
+    }
+  }
+  .close-box{
+    background: white;
+    color: black;
+    position: absolute;
+    top: -10px;
+    right: -15px;
+    border-radius: 40px;
+    font-size: 22px;
+    line-height: 24px;
+    padding: 5px 8px;
+  }
+}
+
+.page-overlay{
+  display: none;
+  opacity:0.5;
+    background-color:#74f9ee; 
+    width:100%; 
+    height:100%; 
+    z-index:20;
+    top:0; 
+    left:0; 
+    position:fixed; 
+}
+
+.twitterati-list{
+  margin-top: 40px;
+  ul{
+    padding: 0px;
+    margin: 15px 0;
+    li{
+      list-style: none;
+      font-size: 14px;
+      a{
+        color: black;
+        text-transform: uppercase;
+        text-indent: -.7em; 
+
+        &:hover::before{
+          float: left;
+          margin-left: -5px;
+          padding-right: 5px;
+          font-family: fontAwesome;
+          content: '•';
+        }
+      }
+      &.government-hover a:hover::before{
+        color: $government;
+        
+      }
+      &.journalism-hover a:hover::before{
+        color: $journalism;
+      }
+      &.thinkers-hover a:hover::before{
+        color: $thinkers;
+      }
+    
+    }
+    
+  }
+}
+
+.share-links{
+  position: absolute;
+  left: -5%;
+  margin-top: 3px;
+  li{
+    list-style: none;
+  }
+  @media(max-width: $screen-sm){
+    left: -3%;
+    margin-top: -30px;
+    li{
+      display: inline-block;
+      margin-right: 10px;
+    }
+  }
+}
