@@ -55,7 +55,6 @@ coverage.xml
 media/
 static
 !*/static/
-*.json
 
 # Sphinx documentation
 docs/_build/
