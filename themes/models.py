@@ -1,7 +1,5 @@
 from __future__ import absolute_import, division, unicode_literals
 
-import json
-
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from modelcluster.fields import ParentalKey

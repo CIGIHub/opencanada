@@ -1,7 +1,7 @@
 import json
 import math
-import tweepy
 
+import tweepy
 from django.conf import settings
 from django.core.files.base import ContentFile
 from django.core.management.base import BaseCommand, CommandError
@@ -15,29 +15,29 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         # Named (optional) arguments
         parser.add_argument('--files',
-            dest='json_files',
-            nargs='+',
-            help='Update the relevant data for Twitterati members in the specified JSON file(s)')
+                            dest='json_files',
+                            nargs='+',
+                            help='Update the relevant data for Twitterati members in the specified JSON file(s)')
 
         parser.add_argument('--key',
-            default=settings.TWITTER_API_CONSUMER_KEY,
-            dest='consumer_key',
-            help='Twitter API Consumer Key; required to authenticate before making API requests')
+                            default=settings.TWITTER_API_CONSUMER_KEY,
+                            dest='consumer_key',
+                            help='Twitter API Consumer Key; required to authenticate before making API requests')
 
         parser.add_argument('--secret',
-            default=settings.TWITTER_API_CONSUMER_SECRET,
-            dest='consumer_secret',
-            help='Twitter API Consumer Secret; required to authenticate before making API requests')
+                            default=settings.TWITTER_API_CONSUMER_SECRET,
+                            dest='consumer_secret',
+                            help='Twitter API Consumer Secret; required to authenticate before making API requests')
 
         parser.add_argument('--token',
-            default=settings.TWITTER_API_ACCESS_TOKEN,
-            dest='access_token',
-            help='Twitter API Access Token; required to authenticate before making API requests')
+                            default=settings.TWITTER_API_ACCESS_TOKEN,
+                            dest='access_token',
+                            help='Twitter API Access Token; required to authenticate before making API requests')
 
         parser.add_argument('--token-secret',
-            default=settings.TWITTER_API_ACCESS_TOKEN_SECRET,
-            dest='access_token_secret',
-            help='Twitter API Access Token Secret; required to authenticate before making API requests')
+                            default=settings.TWITTER_API_ACCESS_TOKEN_SECRET,
+                            dest='access_token_secret',
+                            help='Twitter API Access Token Secret; required to authenticate before making API requests')
 
     def handle(self, *args, **options):
         # Get authentication tokens
@@ -67,10 +67,10 @@ class Command(BaseCommand):
                     self.stdout.write(self.style.WARNING('{}({})'.format(type(e).__name__, e)))
 
     def _format_followers_count(self, count):
-        milli_codes = ['','K','M','B','T']
+        milli_codes = ['', 'K', 'M', 'B', 'T']
         count_as_float = float(count)
         milli_index = max(0, min(len(milli_codes) - 1, int(math.floor(math.log10(abs(count_as_float)) / 3))))
-        return '{:.2f}{}'.format(count_as_float/10**(3*milli_index), milli_codes[milli_index])
+        return '{:.2f}{}'.format(count_as_float / 10 ** (3 * milli_index), milli_codes[milli_index])
 
     def _get_twitter_api(self, consumer_key, consumer_secret, access_token, access_token_secret):
         # Validate authentication keys
@@ -115,8 +115,8 @@ class Command(BaseCommand):
         for user in users:
             formatted_follower_count = self._format_followers_count(user.followers_count)
             twitterati_updates[user.screen_name.lower()] = {
-                'profile_image_url' : user.profile_image_url.replace('_normal', ''),
-                'follower_count' : formatted_follower_count
+                'profile_image_url': user.profile_image_url.replace('_normal', ''),
+                'follower_count': formatted_follower_count
             }
 
         # Go back over members and update data

@@ -361,13 +361,7 @@ class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin
     number_of_related_articles = models.PositiveSmallIntegerField(default=6,
                                                                   verbose_name="Number of Related Articles to Show")
     json_file = article_fields.WagtailFileField(max_length=255, blank=True, null=True, verbose_name='JSON file',
-                                 help_text="Only provide if you know your template will be filled with the contents of a JSON data file.")
-
-    @property
-    def get_json_data(self):
-        
-        json_object = json.load(self.json_file)
-        return json_object
+                                                help_text="Only provide if you know your template will be filled with the contents of a JSON data file.")
 
     search_fields = Page.search_fields + (
         index.SearchField('excerpt', partial_match=True),
