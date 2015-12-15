@@ -105,4 +105,3 @@ def get_json_data(context):
         if article.json_file:
             json_object = json.load(article.json_file)
             return json_object
-
