@@ -223,6 +223,26 @@ except ImproperlyConfigured:
 ANALYTICS_CREDS_PATH = join(PROJECT_ROOT, 'secret')
 ANALYTICS_SERVICE_ACCOUNT_EMAIL = get_env_variable("ANALYTICS_SERVICE_ACCOUNT_EMAIL", required=False)
 
+try:
+    TWITTER_API_CONSUMER_KEY = get_env_variable("TWITTER_API_CONSUMER_KEY")
+except ImproperlyConfigured:
+    TWITTER_API_CONSUMER_KEY = ''
+
+try:
+    TWITTER_API_CONSUMER_SECRET = get_env_variable("TWITTER_API_CONSUMER_SECRET")
+except ImproperlyConfigured:
+    TWITTER_API_CONSUMER_SECRET = ''
+
+try:
+    TWITTER_API_ACCESS_TOKEN = get_env_variable("TWITTER_API_ACCESS_TOKEN")
+except ImproperlyConfigured:
+    TWITTER_API_ACCESS_TOKEN = ''
+
+try:
+    TWITTER_API_ACCESS_TOKEN_SECRET = get_env_variable("TWITTER_API_ACCESS_TOKEN_SECRET")
+except ImproperlyConfigured:
+    TWITTER_API_ACCESS_TOKEN_SECRET = ''
+
 
 IS_PRODUCTION = False
 ADMIN_ENABLED = True
