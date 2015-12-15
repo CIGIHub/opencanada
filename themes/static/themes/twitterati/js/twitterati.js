@@ -78,6 +78,7 @@ jQuery(document).ready(function() {
     });
 
     $('.close-box').click(function(e){
+        $('.close-box').fadeOut(400);
         $('.slider').fadeOut(400,function(){
             $('.page-overlay').fadeOut(400);
             $('.slider li').hide().removeClass('active');
@@ -92,6 +93,7 @@ jQuery(document).ready(function() {
         clickedTarget = $(e.target);
        if($('.page-overlay:visible')){
             if((!(clickedTarget.parents('.slider').length)) && (!(clickedTarget.parents('.twitterati-list').length))){
+                $('.close-box').fadeOut(400);
                 $('.slider').fadeOut(400,function(){
                     $('.page-overlay').fadeOut(400);
                     $('.slider li').hide().removeClass('active');
