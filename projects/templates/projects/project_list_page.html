@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static core_tags wagtailcore_tags wagtailimages_tags article_tags %}
+
+{% block content %}
+<div class="container">
+    <div class="narrow-content">
+        {% if self.title %}
+            <h1>{{  self.title }}</h1>
+        {% endif %}
+
+        {% for project in self.subpages %}
+            <div class="row">
+                <div class="col-sm-12">
+                    <h2><a href="{{ project.url }}">{{ project.title }}</a></h2>
+                    <div class="description">{{ project.description|richtext}}</div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+        
+</div>
+{% endblock %}
