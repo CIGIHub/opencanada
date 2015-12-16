@@ -71,9 +71,7 @@
       width: 75px;
       background-size: cover;
       background-position: center;
-      img{
-        display: none;
-      }
+      
       &.government{
            border: solid 2px $government;
         }
