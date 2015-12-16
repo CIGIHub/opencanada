@@ -29,6 +29,7 @@ from wagtail.wagtailsnippets.models import register_snippet
 from core.base import (PaginatedListPageMixin, ShareLinksMixin,
                        UniquelySlugable, VideoDocumentMixin)
 from people.models import ContributorPage
+from projects.models import ProjectPage
 from themes.models import ThemeablePage
 
 from . import fields as article_fields
@@ -466,6 +467,7 @@ class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin
     content_panels = Page.content_panels + [
         FieldPanel('excerpt'),
         InlinePanel('author_links', label="Authors"),
+        InlinePanel('project_link', label="Project"),
         ImageChooserPanel('main_image'),
         ImageChooserPanel('feature_image'),
         DocumentChooserPanel('video_document'),
@@ -671,6 +673,27 @@ class ArticleAuthorLink(Orderable, models.Model):
 
     panels = [
         PageChooserPanel('author', 'people.ContributorPage'),
+    ]
+
+@python_2_unicode_compatible
+class ArticleProjectLink(models.Model):
+    project = models.ForeignKey(
+        "projects.ProjectPage",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='project_link'
+    )
+    article = ParentalKey(
+        "ArticlePage",
+        related_name='project_link'
+    )
+
+    def __str__(self):
+        return "{}".format(self.project.title)
+
+    panels = [
+        PageChooserPanel('project', 'projects.ProjectPage'),
     ]
 
 
