@@ -23,6 +23,7 @@ from events import models as event_models
 from jobs import models as jobs_models
 from newsletter import models as newsletter_models
 from people import models as people_models
+from projects import models as project_models
 from themes.models import ThemeablePage
 
 
@@ -53,6 +54,7 @@ class HomePage(ThemeablePage):
         article_models.SeriesListPage,
         article_models.TopicListPage,
         people_models.ContributorListPage,
+        project_models.ProjectListPage,
         newsletter_models.NewsletterListPage,
         event_models.EventListPage,
         article_models.ExternalArticleListPage,
