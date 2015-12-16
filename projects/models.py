@@ -15,6 +15,11 @@ from themes.models import ThemeablePage
 class ProjectListPage(ThemeablePage):
     subpage_types = ['ProjectPage']
 
+    @property
+    def subpages(self):
+        subpages = ProjectPage.objects.live().descendant_of(self).order_by('title')
+        return subpages
+
     style_panels = ThemeablePage.style_panels
 
     edit_handler = TabbedInterface([
@@ -39,7 +44,9 @@ class ProjectPage(ThemeablePage):
         return self.search_result_text
 
     def __str__(self):
-        return "{}".format(self.title)
+        return "{}".format(
+            self.title
+        )
 
     content_panels = Page.content_panels + [
         RichTextFieldPanel('description'),
