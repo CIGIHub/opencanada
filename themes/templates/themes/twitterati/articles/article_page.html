@@ -55,9 +55,7 @@
                             <div class="col-xs-10 display-cell">
                                 <div class="slide">
                                     <div class="category {{ group.category }}">{{ group.category }}</div>
-                                    <div class="twitter-photo">
-                                        <img class="{{ group.category }}" src="{{ member.profile_image_url }}">
-                                    </div>
+                                    <div class="twitter-photo {{ group.category }}" style="background-image: url('{{ member.profile_image_url }}')"></div>
                                     <h2 class="{{ group.category }}">{{ member.full_name}} </h2>
                                     <div class="twitter-handle"><a href="https://twitter.com/@{{ member.twitter_handle}}">@{{ member.twitter_handle}}</a> / {{ member.follower_count}} followers</div>
                                     <div class="bio">

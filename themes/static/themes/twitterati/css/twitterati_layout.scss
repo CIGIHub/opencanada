@@ -65,30 +65,38 @@
       }
     }
     .twitter-photo{
-      margin-top: 40px;
+      margin: 30px auto; 
+      border-radius: 38px;
+      height: 75px;
+      width: 75px;
+      background-size: cover;
+      background-position: center;
       img{
-        margin: auto; 
-        border-radius: 38px;
-        width: 75px;
-        height: 75px;
-        &.government{
+        display: none;
+      }
+      &.government{
            border: solid 2px $government;
         }
-        &.journalism{
-           border: solid 2px $journalism;
-        }
-        &.thinkers{
-           border: solid 2px $thinkers;
-        }
+      &.journalism{
+         border: solid 2px $journalism;
       }
-
+      &.thinkers{
+         border: solid 2px $thinkers;
+      }
+      img{
+        &.landscape{
+          background-size:cover;
+  background-repeat:no-repeat;
+  width:250px;
+  height:250px;
+        }
+      } 
     }
     h2{
       border-bottom: none;
       text-align: center;
       font-size: 50px;
       font-weight: 700;
-      padding-top: 20px;
       margin-bottom: 0px;
     }
     .twitter-handle{
