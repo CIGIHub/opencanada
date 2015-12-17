@@ -1,5 +1,6 @@
 from __future__ import absolute_import, division, unicode_literals
 
+
 from django.utils.encoding import python_2_unicode_compatible
 from wagtail.wagtailadmin.edit_handlers import (ObjectList, RichTextFieldPanel,
                                                 TabbedInterface)
@@ -40,6 +41,7 @@ class ProjectPage(ThemeablePage):
         if self.description:
             self.search_result_text = self.description[0:240]
         return self.search_result_text
+
 
     def project_articles(self):
         return self.articlepage_set.live().order_by("-first_published_at")

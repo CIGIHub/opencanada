@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+
 {% load static core_tags wagtailcore_tags wagtailimages_tags %}
 
 {% block content %}
@@ -6,6 +7,7 @@
         <div class="narrow-content">
             <h1>{{ self.title }}</h1>
             <div class="description">{{ self.description|richtext }}</div>
+
                 <h2>Project Articles</h2>
                 {% for article in self.project_articles %}
                     {% include "articles/includes/article_teaser.html" with heading='h3' image=False %}
