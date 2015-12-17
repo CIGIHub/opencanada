@@ -6,6 +6,6 @@ register = template.Library()
 
 
 @register.assignment_tag()
-def related_pages(project_page):
-    articles = ArticlePage.objects.live().filter(project=project_page)
+def project_articles(project_page):
+    articles = ArticlePage.objects.live().filter(project=project_page).order_by("-first_published_at")
     return articles
