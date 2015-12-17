@@ -3,8 +3,8 @@ from __future__ import unicode_literals
 
 from django.db import migrations, models
 import wagtail.wagtailcore.fields
-import django.db.models.deletion
 import themes.models
+import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
@@ -16,10 +16,20 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
+            name='ProjectListPage',
+            fields=[
+                ('page_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='wagtailcore.Page')),
+                ('theme', models.ForeignKey(on_delete=django.db.models.deletion.SET_NULL, default=themes.models.get_default_theme, to='themes.Theme', null=True)),
+            ],
+            options={
+                'abstract': False,
+            },
+            bases=('wagtailcore.page',),
+        ),
+        migrations.CreateModel(
             name='ProjectPage',
             fields=[
                 ('page_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='wagtailcore.Page')),
-                ('name', models.CharField(default='', max_length=255, blank=True)),
                 ('description', wagtail.wagtailcore.fields.RichTextField(default='', blank=True)),
                 ('theme', models.ForeignKey(on_delete=django.db.models.deletion.SET_NULL, default=themes.models.get_default_theme, to='themes.Theme', null=True)),
             ],
