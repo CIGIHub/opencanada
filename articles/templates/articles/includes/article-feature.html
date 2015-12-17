@@ -8,7 +8,7 @@
                          {% if self.opacity %} {{ self.opacity }} {% endif %})">
             </div>
             {% if self.video_document %}
-                <video autoplay loop class="fullscreen-bg__video" poster="{{ background_image.url }}" id="bg_vid" {% if self.opacity %}style="opacity:{{ self.opacity }}"{% endif %}>
+                <video autoplay loop class="fullscreen-bg__video" poster="{{ background_image.url }}" id="bg_vid">
                     <source src="{{ self.get_video_src }}" type="video/mp4">
                  </video>
             {% endif %}
