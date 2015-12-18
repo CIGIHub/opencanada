@@ -31,11 +31,11 @@
 
                     <div>
                     {% if result.specific.search_description %}
-                      {{ result.specific.search_description|safe }}
+                        {{ result.specific.search_description|safe }}
                     {% elif result.specific.body %}
                         {{ result.specific.body|safe|truncatewords_html:80|striptags }}
                     {% elif result.specific.search_result_text %}
-                        {{ result.specific.search_result_text|safe }}
+                        {{ result.specific.search_result_text|richtext|truncatewords_html:80 }}
                     {% endif %}
                     </div>
                 </div>
