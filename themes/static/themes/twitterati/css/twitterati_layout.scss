@@ -213,6 +213,10 @@
   margin-top: 3px;
   li{
     list-style: none;
+    &.facebook:hover{
+      cursor: pointer;
+      color: $overlay-link-hover-color;
+    }
   }
   @media(max-width: $screen-sm){
     left: -3%;
