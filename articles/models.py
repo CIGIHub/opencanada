@@ -363,6 +363,13 @@ class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin
     json_file = article_fields.WagtailFileField(max_length=255, blank=True, null=True, verbose_name='JSON file',
                                                 help_text="Only provide if you know your template will be filled with the contents of a JSON data file.")
 
+    project = models.ForeignKey(
+        "projects.ProjectPage",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+    )
+
     search_fields = Page.search_fields + (
         index.SearchField('excerpt', partial_match=True),
         index.SearchField('body', partial_match=True),
@@ -466,6 +473,7 @@ class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin
     content_panels = Page.content_panels + [
         FieldPanel('excerpt'),
         InlinePanel('author_links', label="Authors"),
+        PageChooserPanel('project'),
         ImageChooserPanel('main_image'),
         ImageChooserPanel('feature_image'),
         DocumentChooserPanel('video_document'),

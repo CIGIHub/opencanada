@@ -97,6 +97,7 @@ INSTALLED_APPS = (
     'events',
     'jobs',
     'analytics',
+    'projects',
 
     'sitemap',
     'robots',
