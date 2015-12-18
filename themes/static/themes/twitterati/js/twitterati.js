@@ -15,7 +15,7 @@ jQuery(document).ready(function() {
     function loadSlide(handle){
         $('.slider').show();
         $('.close-box').show();
-        $('li' + handle).addClass('active').fadeIn(800);
+        $('li' + handle).addClass('active').fadeIn(400);
         $('.page-overlay').fadeIn(300);
 
         changePager(handle);
@@ -50,9 +50,9 @@ jQuery(document).ready(function() {
     $('.next').click(function(e){
 
         if(!$('.next').hasClass('inactive')){
-            $('.slider li.active').fadeOut(800, function(){
+            $('.slider li.active').fadeOut(400, function(){
                 $('.slider li.active').removeClass('active').next().addClass('active');
-                $('.slider li.active').fadeIn(800);
+                $('.slider li.active').fadeIn(400);
                 var handle = $('.slider li.active').attr('id');
                 var selected = '#' + handle;
                 changePager(selected);
@@ -65,9 +65,9 @@ jQuery(document).ready(function() {
    
     $('.prev').click(function(e){
         if(!$('.prev').hasClass('inactive')){
-            $('.slider li.active').fadeOut(800, function(){
+            $('.slider li.active').fadeOut(400, function(){
                 $('.slider li.active').removeClass('active').prev().addClass('active');
-                $('.slider li.active').fadeIn(800);
+                $('.slider li.active').fadeIn(400);
                 var handle = $('.slider li.active').attr('id');
                 var selected = '#' + handle;
                 changePager(selected);
