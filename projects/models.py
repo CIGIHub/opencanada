@@ -42,7 +42,6 @@ class ProjectPage(ThemeablePage):
             self.search_result_text = self.description[0:240]
         return self.search_result_text
 
-
     def project_articles(self):
         return self.articlepage_set.live().order_by("-first_published_at")
 
