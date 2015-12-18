@@ -1,5 +1,9 @@
+import os
+
 from django import template
+from django.conf import settings
 from django.db.models import ObjectDoesNotExist
+from six.moves.urllib.parse import urlparse
 
 from articles.models import Topic
 
@@ -38,3 +42,12 @@ def external_article_image(context, item):
             except ObjectDoesNotExist:
                 pass
     return item.main_image
+
+
+@register.filter
+def media(url):
+    media_url = url
+    url_is_absolute = bool(urlparse(url).netloc)
+    if not url_is_absolute:
+        media_url = os.path.join(settings.MEDIA_URL, url)
+    return media_url

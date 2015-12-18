@@ -35,6 +35,7 @@ if settings.DEBUG:
     from django.views.generic import TemplateView
 
     base_urlpatterns += staticfiles_urlpatterns()
+    base_urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     base_urlpatterns += static(settings.MEDIA_URL + 'images/', document_root=os.path.join(settings.MEDIA_ROOT, 'images'))
     base_urlpatterns += [
         url(r'^django-admin/', include(admin.site.urls)),
