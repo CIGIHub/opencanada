@@ -24,6 +24,25 @@
   border-bottom: solid 5px $organizations;
 }
 
+@media(max-width: $screen-sm){
+  .media{
+    color: $media;
+    border-bottom: solid 2px $media;
+  }
+  .politics{
+    color: $politics;
+    border-bottom: solid 2px $politics;
+  }
+  .advocacy{
+    color: $advocacy;
+    border-bottom: solid 2px $advocacy;
+  }
+  .organizations{
+    color: $organizations;
+    border-bottom: solid 2px $organizations;
+  }
+}
+
 #slideshow{
   margin: auto;
   position: fixed;
@@ -126,6 +145,7 @@
     @media(max-width: $screen-sm){
       .category{
         width: 100%;
+        font-size: 12px;
       }
       .twitter-handle{
         margin-top: 10px;
@@ -135,8 +155,7 @@
         margin: 10px auto;
       }
       h2{
-        font-size: 24px;
-        line-height: 100%;
+        font-size: 20px;
       }
       .bio{
         margin-top: 10px;
@@ -145,6 +164,9 @@
       .share-this {
         font-size: 12px;
         padding-top: 10px;
+        .twitter-share-link, .facebook-share-link{
+          font-size: 16px;
+        }
       }
     }
   }
