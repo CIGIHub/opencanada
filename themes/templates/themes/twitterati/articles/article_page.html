@@ -76,8 +76,14 @@
              </ul>
         </section>
 
+        <div class="story">
+            {% include 'articles/includes/story-content.html' %}
+        </div>
+
         <div class="container">
+
             <section class="narrow-content twitterati-list">
+
                 <div class="row">
                     {% for group in twitterati %}
                         <div class="col-sm-6">
