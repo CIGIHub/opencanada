@@ -53,6 +53,11 @@
       font-size: 30px;
     }
   }
+  @media(max-width: $screen-xs){
+    h1, h1.small, h1.medium, h1.large{
+      font-size: 24px;
+    }
+  }
 }
 
 @mixin article-list-title{
