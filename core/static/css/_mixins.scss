@@ -35,7 +35,7 @@
     }
   }
   @media(max-width: $screen-md){
-    h1{
+    h1, h1.medium{
       font-size: 40px;
       &.small{
         font-size: 30px;
@@ -49,8 +49,13 @@
     }
   }
   @media(max-width: $screen-sm){
-    h1{
+    h1, h1.small, h1.medium, h1.large{
       font-size: 30px;
+    }
+  }
+  @media(max-width: $screen-xs){
+    h1, h1.small, h1.medium, h1.large{
+      font-size: 24px;
     }
   }
 }
@@ -260,7 +265,7 @@
 }
 
 @mixin article-overlay{
-  min-height: 250px;
+  min-height: 400px;
   position: relative;
   font-family: $sans-serif;
 

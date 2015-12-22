@@ -3,6 +3,7 @@ from __future__ import absolute_import, division, unicode_literals
 import logging
 from itertools import chain
 from operator import attrgetter
+
 from django import forms
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.core.validators import MaxValueValidator, MinValueValidator
@@ -25,7 +26,8 @@ from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 
-from core.base import PaginatedListPageMixin, ShareLinksMixin, UniquelySlugable, VideoDocumentMixin
+from core.base import (PaginatedListPageMixin, ShareLinksMixin,
+                       UniquelySlugable, VideoDocumentMixin)
 from people.models import ContributorPage
 from themes.models import ThemeablePage
 
@@ -358,6 +360,15 @@ class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin
     video = models.BooleanField(default=False)
     number_of_related_articles = models.PositiveSmallIntegerField(default=6,
                                                                   verbose_name="Number of Related Articles to Show")
+    json_file = article_fields.WagtailFileField(max_length=255, blank=True, null=True, verbose_name='JSON file',
+                                                help_text="Only provide if you know your template will be filled with the contents of a JSON data file.")
+
+    project = models.ForeignKey(
+        "projects.ProjectPage",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+    )
 
     search_fields = Page.search_fields + (
         index.SearchField('excerpt', partial_match=True),
@@ -462,6 +473,7 @@ class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin
     content_panels = Page.content_panels + [
         FieldPanel('excerpt'),
         InlinePanel('author_links', label="Authors"),
+        PageChooserPanel('project'),
         ImageChooserPanel('main_image'),
         ImageChooserPanel('feature_image'),
         DocumentChooserPanel('video_document'),
@@ -471,6 +483,7 @@ class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin
     ]
 
     advanced_content_panels = [
+        FieldPanel('json_file'),
         MultiFieldPanel(
             [
                 FieldPanel('table_of_contents_heading'),

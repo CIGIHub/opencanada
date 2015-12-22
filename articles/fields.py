@@ -1,6 +1,8 @@
 from __future__ import absolute_import, unicode_literals
 
 from django.contrib.contenttypes.models import ContentType
+from django.core.files.uploadedfile import UploadedFile
+from django.db.models import FileField
 from django.forms import Field
 from django.forms.widgets import Widget
 from django.template.loader import render_to_string
@@ -260,10 +262,38 @@ class StaticHTMLBlock(blocks.FieldBlock):
         self.field = StaticHTMLField(raw_html=self.raw_html, required=required, help_text=help_text)
         super(StaticHTMLBlock, self).__init__(**kwargs)
 
+    def render(self, value):
+        """
+        Return a text rendering of 'value', suitable for display on templates.
+        Note that we override this function so that we can render the raw HTML as this block
+        is just a container; 'value' in this case will always be None
+        """
+        if self.raw_html is not None:
+            return format_html(self.raw_html)
+        else:
+            return ''
+
 
 class SectionBreakBlock(blocks.StructBlock):
     section_break = StaticHTMLBlock(raw_html='<hr>')
 
+    def render(self, value):
+        """
+        Return a text rendering of 'value', suitable for display on templates.
+        Note that we override this function so that we can render the child block as this block
+        is just a container; 'value' in this case will always be None
+        """
+        return self.child_blocks['section_break'].render(value)
+
     class Meta:
         icon = "code"
-        template = "articles/blocks/section_break.html"
+
+
+class WagtailFileField(FileField):
+    '''
+    We override this so that an uploaded file is always saved to storage when saving a draft of a Page
+    '''
+    def save_form_data(self, instance, data):
+        super(WagtailFileField, self).save_form_data(instance, data)
+        if isinstance(data, UploadedFile):
+            super(WagtailFileField, self).pre_save(instance, False)

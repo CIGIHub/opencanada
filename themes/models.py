@@ -25,7 +25,8 @@ def get_default_theme():
 @python_2_unicode_compatible
 class ThemeContent(ClusterableModel):
     name = models.CharField(max_length=255)
-    contact_email = models.EmailField(blank=True, null=True, help_text="Only provide if this should be different from the site default email contact address.")
+    contact_email = models.EmailField(blank=True, null=True,
+                                      help_text="Only provide if this should be different from the site default email contact address.")
 
     panels = [
         FieldPanel('name'),

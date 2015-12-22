@@ -1,11 +1,11 @@
 # Minimal requirements
 Django>=1.8,<1.9
-wagtail==1.2
 requests==2.7.0
 
 # Recommended components (require additional setup):
 elasticsearch==1.1.1
 django-libsass==0.6
+tweepy==3.5.0
 
 # Required for importing data.
 # mysqlclient==1.3.6

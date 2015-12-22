@@ -9,7 +9,7 @@
     margin-right: 3px;
   }
 
-  @include type($text-color);
+  @include type($text-color, 11px);
   a{
     color: $text_color;
   }

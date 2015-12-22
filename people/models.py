@@ -102,7 +102,7 @@ class ContributorPage(ThemeablePage):
         if self.short_bio:
             self.search_result_text = self.short_bio
         else:
-            self.search_result_text = self.long_bio[0:240]
+            self.search_result_text = self.long_bio
         return self.search_result_text
 
     def save(self, *args, **kwargs):

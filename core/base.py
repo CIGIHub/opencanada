@@ -1,15 +1,16 @@
 import logging
+import os
 import re
 from datetime import timedelta
 
 import requests
-import os
 from django.conf import settings
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import models
 from django.utils import timezone
 from django.utils.text import slugify
-from urlparse import urlparse, urlunparse
+
+from six.moves.urllib.parse import urlparse, urlunparse
 
 logger = logging.getLogger('OpenCanada.CoreBaseModels')
 
