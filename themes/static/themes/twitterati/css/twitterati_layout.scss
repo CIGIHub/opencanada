@@ -127,7 +127,10 @@
       .category{
         width: 100%;
       }
-
+      .twitter-handle{
+        margin-top: 10px;
+        font-size: 11px;
+      }
       .twitter-photo{
         margin: 10px auto;
       }
@@ -138,6 +141,10 @@
       .bio{
         margin-top: 10px;
         font-size: 12px;
+      }
+      .share-this {
+        font-size: 12px;
+        padding-top: 10px;
       }
     }
   }
@@ -159,7 +166,7 @@
     background: white;
     color: black;
     position: absolute;
-    z-index: 50;
+    z-index: 1000;
     top: -10px;
     right: -15px;
     border-radius: 40px;
@@ -169,12 +176,14 @@
   }
 
   @media(max-width: $screen-sm){
-    top: 5%;
+    top: 10%;
+    left: 5%;
+    right: 5%;
     ul li.row{
       padding: 20px 0;
     }
     .prev, .next{
-      padding: 5px;
+      padding: 0px;
     }
   }
 }
@@ -182,13 +191,13 @@
 .page-overlay{
   display: none;
   opacity:0.5;
-    background-color:#74f9ee; 
-    width:100%; 
-    height:100%; 
-    z-index:20;
-    top:0; 
-    left:0; 
-    position:fixed; 
+  background-color:#74f9ee;
+  width:100%;
+  height:100%;
+  z-index:20;
+  top:0;
+  left:0;
+  position:fixed;
 }
 
 .twitterati-list{
