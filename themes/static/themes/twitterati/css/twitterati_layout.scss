@@ -169,6 +169,11 @@
         }
       }
     }
+    @media(max-width: 320px){
+      .bio{
+        display: none;
+      }
+    }
   }
 
   .next, .prev, .close-box{
@@ -206,6 +211,12 @@
     }
     .prev, .next{
       padding: 0px;
+    }
+  }
+  @media(max-width: 320px){
+    top: 20%;
+    ul{
+      min-height: 300px;
     }
   }
 }
