@@ -7,17 +7,21 @@
   text-transform: uppercase;
 }
 
-.government{
-  color: $government;
-  border-bottom: solid 5px $government;
+.media{
+  color: $media;
+  border-bottom: solid 5px $media;
 }
-.journalism{
-  color: $journalism;
-  border-bottom: solid 5px $journalism;
+.politics{
+  color: $politics;
+  border-bottom: solid 5px $politics;
 }
-.thinkers{
-  color: $thinkers;
-  border-bottom: solid 5px $thinkers;
+.advocacy{
+  color: $advocacy;
+  border-bottom: solid 5px $advocacy;
+}
+.organizations{
+  color: $organizations;
+  border-bottom: solid 5px $organizations;
 }
 
 #slideshow{
@@ -72,14 +76,17 @@
       background-size: cover;
       background-position: center;
       
-      &.government{
-           border: solid 2px $government;
+      &.media{
+           border: solid 2px $media;
         }
-      &.journalism{
-         border: solid 2px $journalism;
+      &.politics{
+         border: solid 2px $politics;
       }
-      &.thinkers{
-         border: solid 2px $thinkers;
+      &.advocacy{
+         border: solid 2px $advocacy;
+      }
+      &.organizations{
+         border: solid 2px $organizations;
       }
     }
     h2{
@@ -115,17 +122,21 @@
           color: #666;
         }
       }
-
     }
     @media(max-width: $screen-sm){
       .category{
         width: 100%;
       }
+
+      .twitter-photo{
+        margin: 10px auto;
+      }
       h2{
         font-size: 30px;
-        line-height: 130%;
+        line-height: 100%;
       }
       .bio{
+        margin-top: 10px;
         font-size: 12px;
       }
     }
@@ -156,6 +167,16 @@
     line-height: 24px;
     padding: 5px 8px;
   }
+
+  @media(max-width: $screen-sm){
+    top: 5%;
+    ul li.row{
+      padding: 20px 0;
+    }
+    .prev, .next{
+      padding: 5px;
+    }
+  }
 }
 
 .page-overlay{
@@ -175,15 +196,15 @@
   ul{
     padding: 0px;
     margin: 15px 0;
-    li{
+    li {
       list-style: none;
       font-size: 14px;
-      a{
+      a {
         color: black;
         text-transform: uppercase;
-        text-indent: -.7em; 
+        text-indent: -.7em;
 
-        &:hover::before{
+        &:hover::before {
           float: left;
           margin-left: -5px;
           padding-right: 5px;
@@ -191,19 +212,20 @@
           content: '•';
         }
       }
-      &.government-hover a:hover::before{
-        color: $government;
-        
+      &.media-hover a:hover::before {
+        color: $media;
+
       }
-      &.journalism-hover a:hover::before{
-        color: $journalism;
+      &.politics-hover a:hover::before {
+        color: $politics;
       }
-      &.thinkers-hover a:hover::before{
-        color: $thinkers;
+      &.advocacy a:hover::before {
+        color: $advocacy;
       }
-    
+      &.organizations a:hover::before {
+        color: organizations;
+      }
     }
-    
   }
 }
 
@@ -226,4 +248,10 @@
       margin-right: 10px;
     }
   }
+}
+
+@media(max-width: $screen-sm){
+  .template-article-page .main-feature .feature-wrapper .feature-text{
+      padding-top: 100px;
+    }
 }
