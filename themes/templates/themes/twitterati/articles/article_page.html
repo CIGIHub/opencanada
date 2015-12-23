@@ -42,40 +42,6 @@
     {% endif %}
 
     <article id="article-page">
-        <section id="slideshow">
-            <div class="close-box"><i class="fa fa-times"></i></div>
-            <ul class="slider">
-                {% for group in twitterati %}
-                    {% for member in group.members %}
-                        <li id="{{ member.twitter_handle }}" class="row">
-                            
-                            <div class="col-xs-1 display-cell">
-                                <div class="prev"><i class="fa fa-chevron-left"></i></div>
-                            </div>
-                            <div class="col-xs-10 display-cell">
-                                <div class="slide">
-                                    <div class="category {{ group.category }}">{{ group.category }}</div>
-                                    <div class="twitter-photo {{ group.category }}" style="background-image: url('{{ member.profile_image_url|media }}')"></div>
-                                    <h2 class="{{ group.category }}">{{ member.full_name}} </h2>
-                                    <div class="twitter-handle"><a href="https://twitter.com/@{{ member.twitter_handle}}">@{{ member.twitter_handle}}</a> / {{ member.follower_count}} followers</div>
-                                    <div class="bio">
-                                        {{ member.biography|richtext }}
-                                    </div>
-                                    <div class="share-this">
-                                        Share this 
-                                        <a class="twitter-share-link" href="https://twitter.com/share?text={{ self.title|urlencode }}&url={{ self.full_url|add:"#"|add:member.twitter_handle|urlencode }}"><i class="fa fa-twitter-square"></i></a><span class="facebook-share-link" data-url="{{ self.full_url }}{{ "#"|add:member.twitter_handle|urlencode }}"><i class="fa fa-facebook-square"></i></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xs-1 display-cell">
-                                <div class="next"><i class="fa fa-chevron-right"></i></div>
-                            </div>
-                        </li>
-                    {% endfor %}
-                {% endfor %}
-             </ul>
-        </section>
-
         <div class="story">
             {% include 'articles/includes/story-content.html' %}
         </div>
@@ -97,12 +63,45 @@
                     {% if forloop.counter|divisibleby:2 %}</div><div class="row">{% endif %}
                     {% endfor %}
                 </div>
-                    
+
             </section>
 
             <div class="home-link"><a href="/"><img src="{% static 'themes/dark/img/opencanada-mark-white.png' %}"></a></div>
         </div>
 
+        <section id="slideshow">
+            <div class="close-box"><i class="fa fa-times"></i></div>
+            <ul class="slider">
+                {% for group in twitterati %}
+                    {% for member in group.members %}
+                        <li id="{{ member.twitter_handle }}" class="row">
+
+                            <div class="col-xs-1 display-cell">
+                                <div class="prev"><i class="fa fa-chevron-left"></i></div>
+                            </div>
+                            <div class="col-xs-10 display-cell">
+                                <div class="slide">
+                                    <div class="category {{ group.category }}">{{ group.category }}</div>
+                                    <div class="twitter-photo {{ group.category }}" style="background-image: url('{{ member.profile_image_url|media }}')"></div>
+                                    <h2 class="{{ group.category }}">{{ member.full_name}} </h2>
+                                    <div class="twitter-handle"><a href="https://twitter.com/@{{ member.twitter_handle}}">@{{ member.twitter_handle}}</a> / {{ member.follower_count}} followers</div>
+                                    <div class="bio">
+                                        {{ member.biography|richtext }}
+                                    </div>
+                                    <div class="share-this">
+                                        Share this
+                                        <a class="twitter-share-link" href="https://twitter.com/share?text={{ self.title|urlencode }}&url={{ self.full_url|add:"#"|add:member.twitter_handle|urlencode }}"><i class="fa fa-twitter-square"></i></a><span class="facebook-share-link" data-url="{{ self.full_url }}{{ "#"|add:member.twitter_handle|urlencode }}"><i class="fa fa-facebook-square"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-1 display-cell">
+                                <div class="next"><i class="fa fa-chevron-right"></i></div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                {% endfor %}
+             </ul>
+        </section>
 
     </article>
 
