@@ -63,7 +63,7 @@
                                     </div>
                                     <div class="share-this">
                                         Share this 
-                                        <a class="twitter-share-link" href="https://twitter.com/share?text={{ self.title|urlencode }}&url={{ self.full_url|add:"#"|add:member.twitter_handle|urlencode }}"><i class="fa fa-twitter-square"></i></a><span class="facebook-share-link" data-url="{{ self.full_url|add:"#"|add:member.twitter_handle|urlencode }}"><i class="fa fa-facebook-square"></i></span>
+                                        <a class="twitter-share-link" href="https://twitter.com/share?text={{ self.title|urlencode }}&url={{ self.full_url|add:"#"|add:member.twitter_handle|urlencode }}"><i class="fa fa-twitter-square"></i></a><span class="facebook-share-link" data-url="{{ self.full_url }}{{ "#"|add:member.twitter_handle|urlencode }}"><i class="fa fa-facebook-square"></i></span>
                                     </div>
                                 </div>
                             </div>
