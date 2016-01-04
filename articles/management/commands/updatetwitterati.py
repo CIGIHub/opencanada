@@ -129,10 +129,10 @@ class Command(BaseCommand):
         # Extract necessary fields and key them by screen name
         twitterati_updates = {}
         for user in users:
-            formatted_follower_count = self._format_followers_count(user.followers_count)
+            # formatted_follower_count = self._format_followers_count(user.followers_count)
             twitterati_updates[user.screen_name.lower()] = {
                 'profile_image_url': user.profile_image_url.replace('_normal', ''),
-                'follower_count': formatted_follower_count
+                # 'follower_count': formatted_follower_count
             }
 
         # Go back over members and update data
