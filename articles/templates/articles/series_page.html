@@ -24,6 +24,7 @@
 
             {% if not self.include_main_image_overlay or self.include_main_image_overlay and not self.main_image %}
                 <div class="narrow-content">
+
                     {% include 'articles/includes/series-metadata.html' %}
                     {% if self.include_main_image and self.main_image %}
                         <figure class="main-image">
