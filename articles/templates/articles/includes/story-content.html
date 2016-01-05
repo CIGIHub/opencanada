@@ -1,10 +1,12 @@
 {% load static article_tags core_tags wagtailcore_tags wagtailembeds_tags wagtailimages_tags %}
 
-<div class="container-clear-none">
-    {% if self.include_author_block %}
+
+{% if self.include_author_block %}
+    <div class="container-clear-none">
         {% include 'articles/includes/author_blurb.html' %}
-    {% endif %}
-</div>
+    </div>
+{% endif %}
+
 {% for block in self.body %}
 
     {% if block.block_type == 'FullBleed' %}
