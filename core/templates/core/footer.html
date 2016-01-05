@@ -55,6 +55,17 @@
         </div>
         <div class="row partner-row">
             <div class="col-xs-12">
+                <div class="supporter">
+                    {% get_text_block "arctic-deeply-block" as block %}
+                    {{ block.content|richtext }}
+                    {% get_logo "arctic-deeply-logo" as logo %}
+                    {% get_logo_link "arctic-deeply-logo" as logo_link %}
+                    <a href="{{ logo_link }}">{% image logo original %}</a>
+               </div>
+            </div>
+        </div>
+        <div class="row partner-row">
+            <div class="col-xs-12">
                 <div class="partners">
                     {% get_text_block "tagline-block" as block %}
                     {{ block.content|richtext }}
