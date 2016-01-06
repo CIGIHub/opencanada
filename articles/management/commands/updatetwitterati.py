@@ -29,6 +29,11 @@ class Command(BaseCommand):
                             dest='cache_images',
                             help='Update the relevant data for Twitterati members and caches static files like images')
 
+        parser.add_argument('--with-count',
+                            action='store_true',
+                            dest='update_follower_count',
+                            help='Update the follower count for Twitterati members')
+
         parser.add_argument('--key',
                             default=settings.TWITTER_API_CONSUMER_KEY,
                             dest='consumer_key',
@@ -66,7 +71,8 @@ class Command(BaseCommand):
                 json_file = article.json_file
                 json_data = json.load(article.json_file)
                 try:
-                    updated_json_data = self._get_updated_twitterati_data(json_data, twitter_api, article)
+                    updated_json_data = self._get_updated_twitterati_data(json_data, twitter_api, article,
+                                                                          options=options)
                     if options['cache_images']:
                         updated_json_data = self._cache_twitterati_images(json_data, article.theme, json_file.storage)
                     pre_save_name = json_file.name
@@ -107,7 +113,7 @@ class Command(BaseCommand):
         api = tweepy.API(auth)
         return api
 
-    def _get_updated_twitterati_data(self, json_data, twitter_api, context):
+    def _get_updated_twitterati_data(self, json_data, twitter_api, context, options=None):
         # Collect all screen names (twitter handles)
         twitter_handles = []
         try:
@@ -120,6 +126,11 @@ class Command(BaseCommand):
 
         self.stdout.write(self.style.NOTICE("Found {} Twitterati member(s) in '{}'...".format(len(twitter_handles), context)))
 
+        # Parse options
+        update_follower_count = (options is not None) and (options['update_follower_count'])
+        if update_follower_count:
+            self.stdout.write(self.style.NOTICE("Updating follower count..."))
+
         try:
             # API lookup for all users
             users = twitter_api.lookup_users(screen_names=twitter_handles)
@@ -129,11 +140,15 @@ class Command(BaseCommand):
         # Extract necessary fields and key them by screen name
         twitterati_updates = {}
         for user in users:
-            # formatted_follower_count = self._format_followers_count(user.followers_count)
             twitterati_updates[user.screen_name.lower()] = {
                 'profile_image_url': user.profile_image_url.replace('_normal', ''),
-                # 'follower_count': formatted_follower_count
             }
+            if update_follower_count:
+                formatted_follower_count = self._format_followers_count(user.followers_count)
+                twitterati_updates[user.screen_name.lower()].update({
+                    'follower_count': formatted_follower_count
+                })
+
 
         # Go back over members and update data
         for category in json_data:
