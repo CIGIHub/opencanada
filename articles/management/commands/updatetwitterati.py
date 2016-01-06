@@ -149,7 +149,6 @@ class Command(BaseCommand):
                     'follower_count': formatted_follower_count
                 })
 
-
         # Go back over members and update data
         for category in json_data:
             members = category['members']
