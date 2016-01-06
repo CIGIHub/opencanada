@@ -4,7 +4,6 @@ import re
 from datetime import timedelta
 
 import requests
-import simplejson
 from django.conf import settings
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import models
@@ -54,24 +53,6 @@ class ShareLinksMixin(models.Model):
     cached_facebook_count = models.IntegerField(default=0)
     cached_last_updated = models.DateTimeField(blank=True, null=True)
 
-    def _get_twitter_count(self):
-        try:
-            urls = ["https://opencanada.org{}".format(self.url), "http://opencanada.org{}".format(self.url), "https://www.opencanada.org{}".format(self.url)]
-            total_shares = 0
-            for page_url in urls:
-                url = 'https://cdn.api.twitter.com/1/urls/count.json?url={}'.format(page_url)
-                response = requests.get(url, timeout=5)
-                j = response.json()
-                total_shares += j.get('count', 0)
-            return total_shares
-        except requests.exceptions.RequestException:
-            logger.error('There was an error getting the Twitter share count.', exc_info=True, extra={"page": self})
-        except simplejson.JSONDecodeError:
-            logger.error('There was an error parsing the JSON response from Twitter.', exc_info=True,
-                         extra={"page": self, 'twitter_api_url': url})
-        finally:
-            return total_shares
-
     def _get_facebook_count(self):
         try:
             url = 'https://graph.facebook.com/?ids=https://opencanada.org{0},http://opencanada.org{0}'.format(self.url)
@@ -87,10 +68,6 @@ class ShareLinksMixin(models.Model):
 
     def update_cache(self):
         if not self.cached_last_updated or (timezone.now() - self.cached_last_updated) > timedelta(minutes=10):
-            tweet_count = self._get_twitter_count()
-            if tweet_count > 0:
-                self.cached_twitter_count = tweet_count
-
             facebook_count = self._get_facebook_count()
             if facebook_count > 0:
                 self.cached_facebook_count = facebook_count
