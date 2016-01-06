@@ -4,6 +4,7 @@ import re
 from datetime import timedelta
 
 import requests
+import simplejson
 from django.conf import settings
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import models
@@ -55,7 +56,6 @@ class ShareLinksMixin(models.Model):
 
     def _get_twitter_count(self):
         try:
-
             urls = ["https://opencanada.org{}".format(self.url), "http://opencanada.org{}".format(self.url), "https://www.opencanada.org{}".format(self.url)]
             total_shares = 0
             for page_url in urls:
@@ -66,7 +66,11 @@ class ShareLinksMixin(models.Model):
             return total_shares
         except requests.exceptions.RequestException:
             logger.error('There was an error getting the Twitter share count.', exc_info=True, extra={"page": self})
-            return 0
+        except simplejson.JSONDecodeError:
+            logger.error('There was an error parsing the JSON response from Twitter.', exc_info=True,
+                         extra={"page": self, 'twitter_api_url': url})
+        finally:
+            return total_shares
 
     def _get_facebook_count(self):
         try:
