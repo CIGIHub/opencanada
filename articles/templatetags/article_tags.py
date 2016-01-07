@@ -99,9 +99,15 @@ def get_json_data(context):
     try:
         page = context["self"]
         article = page.articlepage
+        # TODO: Revisit this if we upgrade to wagtail >= 1.3
+        # In wagtail <= 1.2 there is no way to determine if we are in preview mode or not
+        if not page.live and article.has_unpublished_changes:
+            article = article.get_latest_revision_as_page()
     except ArticlePage.DoesNotExist:
         pass
     else:
         if article.json_file:
             json_object = json.load(article.json_file)
             return json_object
+        else:
+            return dict()
