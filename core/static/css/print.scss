@@ -1,12 +1,66 @@
 @media print{
 
-  .banner,
+  .banner .menu,
+  .banner .search,
   .feature-image,
   .feature-overlay,
   .feature-caption,
   .camera,
-  .editors-pick-link{
+  .editors-pick-link,
+  .in-the-series,
+  .related-articles,
+  .infobar,
+  .partner-row,
+  .share-links{
     display: none !important;
+  }
+
+  header .logo{
+    width: auto !important;
+    .wordmark{
+      img{
+        filter: invert(50%);
+        -webkit-filter: invert(50%);
+      }
+    }
+  }
+
+
+
+  .main-feature{
+    height: auto !important;
+    min-height: auto !important;
+  }
+
+  .template-article-page,
+  .template-series-page{
+    .main-feature{
+      .feature-wrapper{
+        position: relative;
+        .feature-text{
+          padding-top: 0px;
+        }
+      }
+      .contributors {
+        margin-top: 0px;
+      }
+    }
+  }
+
+  main{
+    padding-top: 0px;
+  }
+
+  a[href]:after {
+    content: " ";
+  }
+
+  article a[href]:after {
+    content: " (" attr(href) ")";
+  }
+
+  article .home-link a[href]:after {
+    content: " ";
   }
 
   .overlay[style], .overlay-feature{
