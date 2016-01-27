@@ -847,6 +847,13 @@ class SeriesPage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin,
             all_topics.sort(key=attrgetter('name'))
         return all_topics
 
+    @property
+    def related_series(self):
+        related_series_list = []
+        if self.project:
+            related_series_list = self.project.get_related_series(self)
+        return related_series_list
+
     def related_articles(self, number):
         articles = []
         if self.primary_topic:

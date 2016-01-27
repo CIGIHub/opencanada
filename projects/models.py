@@ -47,6 +47,9 @@ class ProjectPage(ThemeablePage):
     def project_series(self):
         return self.seriespage_set.filter(live=True).order_by("-first_published_at")
 
+    def get_related_series(self, series_page):
+        return self.seriespage_set.filter(live=True).exclude(pk=series_page.pk).order_by("-first_published_at")
+
     def __str__(self):
         return "{}".format(
             self.title

@@ -62,6 +62,20 @@
         </div>
         {% endif %}
 
+        {%if self.related_series %}
+            <div class="container">
+                <div class="in-the-series">
+                    <h2>Related series</h2>
+                </div>
+            </div>
+            <div class="container-full-bleed">
+                {% for series in self.related_series %}
+                    {% include "articles/includes/series_series_teaser.html" with heading='h3' image=False %}
+                {% endfor %}
+            </div>
+        {% endif %}
+
+
         {% if self.topics %}
             <div class="container">
                 <div class="topics related">
