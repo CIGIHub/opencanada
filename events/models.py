@@ -87,6 +87,13 @@ class EventPage(ThemeablePage):
             self.title
         )
 
+    def __init__(self, *args, **kwargs):
+        super(EventPage, self).__init__(*args, **kwargs)
+        for field in self._meta.fields:
+            if field.name == 'first_published_at':
+                field.editable = True
+                field.blank = True
+
     content_panels = [
         FieldPanel("title"),
         FieldPanel("date"),
@@ -98,9 +105,11 @@ class EventPage(ThemeablePage):
 
     style_panels = ThemeablePage.style_panels
 
+    settings_panels = [FieldPanel('first_published_at'), ] + Page.settings_panels
+
     edit_handler = TabbedInterface([
         ObjectList(content_panels, heading='Content'),
         ObjectList(style_panels, heading='Page Style Options'),
         ObjectList(Page.promote_panels, heading='Promote'),
-        ObjectList(Page.settings_panels, heading='Settings', classname="settings"),
+        ObjectList(settings_panels, heading='Settings', classname="settings"),
     ])
