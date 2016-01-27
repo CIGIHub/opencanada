@@ -14,6 +14,11 @@
                 {% for article in self.project_articles %}
                     {% include "articles/includes/article_teaser.html" with heading='h3' image=False %}
                 {% endfor %}
+                <h2>Project Series</h2>
+                {% for series in self.project_series %}
+                    <!--{% include "articles/includes/series_teaser.html" with heading='h3' image=False %}-->
+                    {{ series.title }}
+                {% endfor %}
          </div>
     </div>
 {% endblock %}
