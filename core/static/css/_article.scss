@@ -136,6 +136,12 @@
     height: 100%;
     margin: auto;
   }
+  &.json-include{
+    margin-bottom: 40px;
+    .article-json-embed{
+      padding-bottom: 40px;
+    }
+  }
 }
 
 .block-Interactive {
@@ -854,5 +860,4 @@ article {
   width: 100%;
   height: 100%;
   margin: auto;
-  padding-bottom: 40px;
 }
