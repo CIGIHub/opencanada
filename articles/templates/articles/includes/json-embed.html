@@ -1,0 +1,16 @@
+{% load static article_tags core_tags wagtailcore_tags wagtailembeds_tags wagtailimages_tags %}
+
+{% if self.json_file %}
+    {% get_json_data as json_include %}
+    <div class="container">
+        <div class="narrow-content block-Embed json-include">
+            {% for item in json_include %}
+                <div style="padding-bottom: 56.25%;" class="responsive-object">
+                    <div class="article-json-embed">
+                        {{ item.blob|safe }}
+                    </div>
+                </div>
+            {%  endfor %}
+        </div>
+    </div>
+{% endif %}

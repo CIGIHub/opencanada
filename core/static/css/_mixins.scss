@@ -377,3 +377,70 @@
     line-height: 125%;
   }
 }
+
+@mixin sharelinks{
+    position: absolute;
+    padding: 0 0 20px 0;
+    margin: 3px 0 0 0;
+    top: 0px;
+
+    @media(max-width: $screen-sm) {
+      position: relative;
+      margin:0px 10% 0;
+      padding-bottom: 0px;
+      li{
+        display: inline-block;
+        margin-right: 5px;
+        div{
+          width: auto;
+          text-align: left;
+          margin: 0px;
+          padding: 10px 10px 0 10px;
+        }
+        i{
+          font-size: 20px;
+        }
+      }
+      li.facebook div{
+        padding-left: 0px;
+      }
+      .count{
+        display: none;
+      }
+    }
+    @media(max-width: $screen-xs) {
+      margin-left: 0px;
+      margin-right:0;
+    }
+
+    &.below-feature {
+      padding-top:20px;
+    }
+
+    div{
+      width: 20px;
+      margin-left: 5px;
+      display:inline-block;
+      color: $share-link-color;
+      span:hover{
+        color: $share-link-hover-color;
+      }
+      a{
+        color: $share-link-color;
+        &:hover{
+          color: $share-link-hover-color;
+        }
+      }
+    }
+    i {
+      cursor: pointer;
+    }
+    .count{
+      color: $light-grey;
+      font-family: $sans-serif;
+    }
+    li{
+      list-style: none;
+      text-align:right;
+    }
+  }
