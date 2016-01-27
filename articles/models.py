@@ -624,6 +624,13 @@ class ExternalArticlePage(Page, FeatureStyleFields, Promotable):
         index.SearchField('source', partial_match=True),
     )
 
+    def __init__(self, *args, **kwargs):
+        super(ExternalArticlePage, self).__init__(*args, **kwargs)
+        for field in self._meta.fields:
+            if field.name == 'first_published_at':
+                field.editable = True
+                field.blank = True
+
     def get_source_name(self):
         if self.source:
             return self.source.name
@@ -636,6 +643,8 @@ class ExternalArticlePage(Page, FeatureStyleFields, Promotable):
         SnippetChooserPanel('source', Source),
         ImageChooserPanel('main_image'),
     ]
+
+    settings_panels = [FieldPanel('first_published_at'), ] + Page.settings_panels
 
 
 @python_2_unicode_compatible
