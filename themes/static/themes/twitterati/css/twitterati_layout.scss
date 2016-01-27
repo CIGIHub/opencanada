@@ -270,27 +270,22 @@
     }
   }
 }
-
 .share-links{
-  position: absolute;
-  left: -5%;
-  margin-top: 3px;
-  li{
-    list-style: none;
-    &.facebook:hover{
-      cursor: pointer;
-      color: $overlay-link-hover-color;
-    }
+  @include sharelinks;
+  top: auto;
+  padding: 0;
+  margin-left: -70px;
+  &.below-feature{
+    padding-top: 2px;
+  }
+  li.facebook i, .count {
+    color: white;
   }
   @media(max-width: $screen-sm){
-    left: -3%;
-    margin-top: -30px;
-    li{
-      display: inline-block;
-      margin-right: 10px;
-    }
+    margin-left: 0px;
   }
 }
+
 
 @media(max-width: $screen-sm){
   .template-article-page .main-feature .feature-wrapper .feature-text{
