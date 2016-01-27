@@ -42,10 +42,10 @@ class ProjectPage(ThemeablePage):
         return self.search_result_text
 
     def project_articles(self):
-        return self.articlepage_set.live().order_by("-first_published_at")
+        return self.articlepage_set.filter(live=True).order_by("-first_published_at")
 
     def project_series(self):
-        return self.seriespage_set.live().order_by("-first_published_at")
+        return self.seriespage_set.filter(live=True).order_by("-first_published_at")
 
     def __str__(self):
         return "{}".format(
