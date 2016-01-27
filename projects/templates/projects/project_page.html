@@ -5,20 +5,26 @@
 {% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
 
 {% block content %}
-    <div class="container">
-        <div class="narrow-content">
-            <h1>{{ self.title }}</h1>
-            <div class="description">{{ self.description|richtext }}</div>
+    <section class="project-page-list">
+        <div class="container">
+            <div class="narrow-content">
+                <h1>{{ self.title }}</h1>
+                <div class="description">{{ self.description|richtext }}</div>
 
                 <h2>Project Articles</h2>
                 {% for article in self.project_articles %}
                     {% include "articles/includes/article_teaser.html" with heading='h3' image=False %}
                 {% endfor %}
                 <h2>Project Series</h2>
-                {% for series in self.project_series %}
-                    <!--{% include "articles/includes/series_teaser.html" with heading='h3' image=False %}-->
-                    {{ series.title }}
-                {% endfor %}
-         </div>
-    </div>
+            </div>
+        </div>
+    </section>
+    <section class="fullbleed-section project-series">
+        <div class="container-full-bleed">
+            {% for series in self.project_series %}
+                {% include "articles/includes/series_series_teaser.html" with heading='h3' image=False %}
+            {% endfor %}
+        </div>
+    </section>
+
 {% endblock %}
