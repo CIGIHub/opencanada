@@ -782,6 +782,12 @@ class SeriesPage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin,
         on_delete=models.SET_NULL,
         related_name='series'
     )
+    project = models.ForeignKey(
+        "projects.ProjectPage",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+    )
 
     search_fields = Page.search_fields + (
         index.SearchField('subtitle', partial_match=True),
@@ -849,6 +855,13 @@ class SeriesPage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin,
             all_topics.sort(key=attrgetter('name'))
         return all_topics
 
+    @property
+    def related_series(self):
+        related_series_list = []
+        if self.project:
+            related_series_list = self.project.get_related_series(self)
+        return related_series_list
+
     def related_articles(self, number):
         articles = []
         if self.primary_topic:
@@ -870,6 +883,7 @@ class SeriesPage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin,
     content_panels = Page.content_panels + [
         FieldPanel('subtitle'),
         FieldPanel('short_description'),
+        PageChooserPanel('project'),
         ImageChooserPanel('main_image'),
         ImageChooserPanel('feature_image'),
         DocumentChooserPanel('video_document'),

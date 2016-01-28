@@ -1,0 +1,18 @@
+{% load  core_tags wagtailcore_tags article_tags wagtailimages_tags %}
+<div class="row">
+    <div class="col-sm-12 feature-item overlay">
+        <div class="overlay-feature">
+            {% image series.main_image fill-3584x560-c100 as background_image %}
+            <a href="{{ series.url }}">
+                <div class="feature-image" style="background-image: url('{{ background_image.url }}')">
+                    <div class="feature-image-overlay"></div>
+                </div>
+                <div class="feature-wrapper">
+                    <div class="feature-text">
+                        <h3>{{ series.title }}</h3>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
