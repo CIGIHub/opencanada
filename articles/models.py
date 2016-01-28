@@ -780,7 +780,6 @@ class SeriesPage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin,
         on_delete=models.SET_NULL,
     )
 
-
     search_fields = Page.search_fields + (
         index.SearchField('subtitle', partial_match=True),
         index.SearchField('body', partial_match=True),
