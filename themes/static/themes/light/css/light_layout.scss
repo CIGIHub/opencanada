@@ -29,6 +29,15 @@ header{
 
 }
 
+.related-series .overlay-feature {
+  h3 {
+	color: white;
+	&:hover, &:focus {
+		color: $overlay-link-hover-color;
+		transition: color 0.5s;
+	}
+  }
+}
 
 footer {
 	.contact {
