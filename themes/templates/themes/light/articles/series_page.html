@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static article_tags compress core_tags wagtailcore_tags wagtailembeds_tags wagtailimages_tags %}
 
-{% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
+{% block body_class %}template-{{ self.get_verbose_name|slugify }} light{% endblock %}
 
 {% block theme_css %}
     <link rel="stylesheet" type="text/x-scss" href="{% static 'themes/light/css/light.scss' %}">
@@ -73,7 +73,7 @@
                     <h2>Related series</h2>
                 </div>
             </div>
-            <div class="container-full-bleed">
+            <div class="container-full-bleed fullbleed-section related-series">
                 {% for series in self.related_series %}
                     {% include "articles/includes/series_series_teaser.html" with heading='h3' image=False %}
                 {% endfor %}
