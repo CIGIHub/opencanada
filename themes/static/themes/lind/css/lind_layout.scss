@@ -74,6 +74,10 @@ article {
 	}
 }
 
+.story .dropcap-start p:first-child:first-letter {
+  line-height: 45px;
+}
+
 .feature-image-overlay {
 	background-color: $blue-overlay !important;
 }
