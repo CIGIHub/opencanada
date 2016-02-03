@@ -244,6 +244,25 @@ try:
 except ImproperlyConfigured:
     TWITTER_API_ACCESS_TOKEN_SECRET = ''
 
+try:
+    GOOGLE_DEVELOPER_CLIENT_ID = get_env_variable("GOOGLE_DEVELOPER_CLIENT_ID")
+except ImproperlyConfigured:
+    GOOGLE_DEVELOPER_CLIENT_ID = ''
+
+try:
+    GOOGLE_DEVELOPER_CLIENT_SECRET = get_env_variable("GOOGLE_DEVELOPER_CLIENT_SECRET")
+except ImproperlyConfigured:
+    GOOGLE_DEVELOPER_CLIENT_SECRET = ''
+
+try:
+    GOOGLE_DEVELOPER_REFRESH_TOKEN = get_env_variable("GOOGLE_DEVELOPER_REFRESH_TOKEN")
+except ImproperlyConfigured:
+    GOOGLE_DEVELOPER_REFRESH_TOKEN = ''
+
+try:
+    GOOGLE_ANALYTICS_PROFILE_ID = get_env_variable("GOOGLE_ANALYTICS_PROFILE_ID")
+except ImproperlyConfigured:
+    GOOGLE_ANALYTICS_PROFILE_ID = ''
 
 IS_PRODUCTION = False
 ADMIN_ENABLED = True
