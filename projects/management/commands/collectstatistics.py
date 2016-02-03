@@ -9,6 +9,7 @@ from django.core.management.base import BaseCommand, CommandError
 from oauth2client import client
 from oauth2client import GOOGLE_REVOKE_URI
 from oauth2client import GOOGLE_TOKEN_URI
+from six.moves import xrange
 
 from projects.models import ProjectPage
 
@@ -119,7 +120,7 @@ class Command(BaseCommand):
         line_values.extend(metrics)
         self.stdout.write(self.style.NOTICE(','.join(line_values)))
         for page_path in statistics:
-            line_values = [u'"{}"'.format(statistics[page_path]['title']),
+            line_values = ['"{}"'.format(statistics[page_path]['title']),
                            page_path,
                            statistics[page_path]['facebook_likes']]
             for metric in metrics:
@@ -127,7 +128,7 @@ class Command(BaseCommand):
                     line_values.append(statistics[page_path][metric])
                 else:
                     line_values.append(0)
-            self.stdout.write(self.style.NOTICE(','.join([unicode(x) for x in line_values])))
+            self.stdout.write(self.style.NOTICE(','.join(['{}'.format(x) for x in line_values])))
 
     def _get_google_analytics_service_object(self, client_id, client_secret, refresh_token):
         # Validate authentication keys
