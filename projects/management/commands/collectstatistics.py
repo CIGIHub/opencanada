@@ -65,39 +65,44 @@ class Command(BaseCommand):
         refresh_token = options['refresh_token']
         service = self._get_google_analytics_service_object(client_id, client_secret, refresh_token)
 
-        # accounts = service.management().accounts().list().execute()
-        # first_account_id = accounts['items'][0]['id']
-        # web_properties = service.management().webproperties().list(accountId=first_account_id).execute()
-        # first_web_property_id = web_properties['items'][0]['id']
-        # profiles = service.management().profiles().list(accountId=first_account_id, webPropertyId=first_web_property_id).execute()
-        # first_profile_id = profiles['items'][0]['id']
-
+        # Get additional query string parameters
         profile_id = options['profile_id']
         metrics = options['metrics']
 
+        # NOTE: If you don't know what profile ID you should use, you can figure it out using the service object
+        # Step 1: Get the account; we use the first (and only) account here, but the logic is the same for multiple accounts
+        # Look for an account with the following properties: {u'kind': u'analytics#account', u'name': u'www.opencanada.org'}
+        accounts = service.management().accounts().list().execute()
+        first_account_id = accounts['items'][0]['id']
+        # Step 2: Get the web properties associated with the account
+        # Look for a web property with the following properties: {u'kind': u'analytics#webproperty', u'name': u'www.opencanada.org'}
+        web_properties = service.management().webproperties().list(accountId=first_account_id).execute()
+        first_web_property_id = web_properties['items'][0]['id']
+        # Step 3: Get the profiles associated with the account and web property of interest
+        # Look for a profile with the following properties: {u'kind': u'analytics#profile', u'name': u'www.opencanada.org'}
+        profiles = service.management().profiles().list(accountId=first_account_id,
+                                                        webPropertyId=first_web_property_id).execute()
+        first_profile_id = profiles['items'][0]['id']
+        if profile_id != first_profile_id:
+            self.stdout.write(self.style.WARNING("Specified profile ID '{}' does not match the expected value of '{}'; queries may fail.".format(profile_id, first_profile_id)))
+
+        # Get data about the pages from DB first
         project_title = options['project']
+        statistics = self._get_statistics_from_database(project_title)
+
+        # Then update that with statistics from Google Analytics
         start_date = options['startdate']
         end_date = options['enddate']
-        statistics = self._get_statistics_from_database(project_title)
-        statistics = self._get_statistics_from_google_analytics(service, profile_id, start_date, end_date, metrics, statistics)
+        statistics = self._get_statistics_from_google_analytics(service, profile_id, start_date, end_date,
+                                                                metrics, statistics)
 
-        metrics = metrics.split(',')
-        line_values = ['title', 'pagePath', 'facebookLikes']
-        line_values.extend(metrics)
-        print ','.join(line_values)
-        for page_path in statistics:
-            line_values = [u'"{}"'.format(statistics[page_path]['title']), page_path, statistics[page_path]['facebook_likes']]
-            for metric in metrics:
-                if metric in statistics[page_path]:
-                    line_values.append(statistics[page_path][metric])
-                else:
-                    line_values.append(0)
-            print ','.join([unicode(x) for x in line_values])
+        # Digest the results
+        self._digest_statistics(statistics, metrics)
 
     def chunks(self, iterable, n):
-        # Yield successive n-sized chunks from iterable.
+        # Yield successive n-sized chunks from iterable
         for i in xrange(0, len(iterable), n):
-            yield iterable[i:i+n]
+            yield iterable[i:i + n]
 
     def valid_date(self, date_string):
         try:
@@ -107,6 +112,22 @@ class Command(BaseCommand):
             raise argparse.ArgumentTypeError(message)
         else:
             return date_string
+
+    def _digest_statistics(self, statistics, metrics):
+        metrics = metrics.split(',')
+        line_values = ['title', 'pagePath', 'facebookLikes']
+        line_values.extend(metrics)
+        self.stdout.write(self.style.NOTICE(','.join(line_values)))
+        for page_path in statistics:
+            line_values = [u'"{}"'.format(statistics[page_path]['title']),
+                           page_path,
+                           statistics[page_path]['facebook_likes']]
+            for metric in metrics:
+                if metric in statistics[page_path]:
+                    line_values.append(statistics[page_path][metric])
+                else:
+                    line_values.append(0)
+            self.stdout.write(self.style.NOTICE(','.join([unicode(x) for x in line_values])))
 
     def _get_google_analytics_service_object(self, client_id, client_secret, refresh_token):
         # Validate authentication keys
@@ -144,7 +165,6 @@ class Command(BaseCommand):
                     'first_published_at': page.first_published_at.strftime('%Y-%m-%d')
                 }
                 statistics[page.url] = page_statistics
-        # statistics = sorted(statistics, key=lambda k: k['first_published_at'])
         return statistics
 
     def _get_statistics_from_google_analytics(self, service, profile_id, start_date, end_date, metrics, json_data):
@@ -159,7 +179,7 @@ class Command(BaseCommand):
                 filters.append('ga:pagePath=={}'.format(page_path))
             filters = ','.join(filters)
             data_query = service.data().ga().get(ids=ids, start_date=start_date, end_date=end_date, metrics=metrics,
-                                           dimensions=dimensions, filters=filters)
+                                                 dimensions=dimensions, filters=filters)
             data = data_query.execute()
             data_rows.extend(data['rows'])
 
