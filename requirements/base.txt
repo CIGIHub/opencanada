@@ -3,7 +3,7 @@ Django>=1.8,<1.9
 requests==2.7.0
 
 # Recommended components (require additional setup):
-elasticsearch==1.1.1
+elasticsearch>=1.0.0,<2.0.0
 django-libsass==0.6
 tweepy==3.5.0
 

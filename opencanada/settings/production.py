@@ -16,6 +16,8 @@ WAGTAILSEARCH_BACKENDS = {
         'URLS': [get_env_variable('ELASTICSEARCH_URL')],
         'INDEX': get_env_variable('ELASTICSEARCH_INDEX'),
         'TIMEOUT': 5000,
+        # This setting will not work as intended with the ElasticSearch provided by http://www.searchly.com/
+        # 'ATOMIC_REBUILD': True,
     },
 }
 
