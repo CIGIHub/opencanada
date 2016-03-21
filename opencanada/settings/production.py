@@ -16,6 +16,7 @@ WAGTAILSEARCH_BACKENDS = {
         'URLS': [get_env_variable('ELASTICSEARCH_URL')],
         'INDEX': get_env_variable('ELASTICSEARCH_INDEX'),
         'TIMEOUT': 5000,
+        'ATOMIC_REBUILD': True,
     },
 }
 
