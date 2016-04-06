@@ -380,13 +380,6 @@ class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin
         index.SearchField('get_author_names', partial_match=True),
     )
 
-    def __init__(self, *args, **kwargs):
-        super(ArticlePage, self).__init__(*args, **kwargs)
-        for field in self._meta.fields:
-            if field.name == 'first_published_at':
-                field.editable = True
-                field.blank = True
-
     def get_primary_topic_name(self):
         if self.primary_topic:
             return self.primary_topic.name
@@ -559,14 +552,12 @@ class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin
         )
     ]
 
-    settings_panels = [FieldPanel('first_published_at'), ] + Page.settings_panels
-
     edit_handler = TabbedInterface([
         ObjectList(content_panels, heading='Content'),
         ObjectList(advanced_content_panels, heading='Advanced Content'),
         ObjectList(style_panels, heading='Page Style Options'),
         ObjectList(promote_panels, heading='Promote'),
-        ObjectList(settings_panels, heading='Settings', classname="settings"),
+        ObjectList(Page.settings_panels, heading='Settings', classname="settings"),
     ])
 
 
@@ -624,13 +615,6 @@ class ExternalArticlePage(Page, FeatureStyleFields, Promotable):
         index.SearchField('source', partial_match=True),
     )
 
-    def __init__(self, *args, **kwargs):
-        super(ExternalArticlePage, self).__init__(*args, **kwargs)
-        for field in self._meta.fields:
-            if field.name == 'first_published_at':
-                field.editable = True
-                field.blank = True
-
     def get_source_name(self):
         if self.source:
             return self.source.name
@@ -643,8 +627,6 @@ class ExternalArticlePage(Page, FeatureStyleFields, Promotable):
         SnippetChooserPanel('source', Source),
         ImageChooserPanel('main_image'),
     ]
-
-    settings_panels = [FieldPanel('first_published_at'), ] + Page.settings_panels
 
 
 @python_2_unicode_compatible
@@ -799,13 +781,6 @@ class SeriesPage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin,
     number_of_related_articles = models.PositiveSmallIntegerField(default=6,
                                                                   verbose_name="Number of Related Articles to Show")
 
-    def __init__(self, *args, **kwargs):
-        super(SeriesPage, self).__init__(*args, **kwargs)
-        for field in self._meta.fields:
-            if field.name == 'first_published_at':
-                field.editable = True
-                field.blank = True
-
     def get_primary_topic_name(self):
         if self.primary_topic:
             return self.primary_topic.name
@@ -927,13 +902,11 @@ class SeriesPage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin,
         )
     ]
 
-    settings_panels = [FieldPanel('first_published_at'), ] + Page.settings_panels
-
     edit_handler = TabbedInterface([
         ObjectList(content_panels, heading='Content'),
         ObjectList(style_panels, heading='Page Style Options'),
         ObjectList(promote_panels, heading='Promote'),
-        ObjectList(settings_panels, heading='Settings', classname="settings"),
+        ObjectList(Page.settings_panels, heading='Settings', classname="settings"),
     ])
 
 
