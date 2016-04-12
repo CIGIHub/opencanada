@@ -1,4 +1,4 @@
-/**************  People/Contributor pages  **************/
+/**************  External Article pages  **************/
 
 #external-article-page {
 	.source {
@@ -9,5 +9,9 @@
 #external-article-list-page{
 	h1 {
 		@include subheading;
+	}
+	img {
+	    border: 1px solid #cccccc;
+	    border-radius: 50%;
 	}
 }

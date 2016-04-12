@@ -186,6 +186,13 @@
       }
     }
   }
+
+  figure img{
+    border-radius: 50%;
+  }
+  figure.with-border img{
+    border: 1px solid #cccccc;
+  }
 }
 .editors-pick-link, .most-popular {
   display: block;

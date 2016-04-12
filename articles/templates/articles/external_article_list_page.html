@@ -11,14 +11,14 @@
                 <div class="col-sm-2">
                 {% spaceless %}
                     <figure>
-                       {% if article.source and article.source.logo %}
-                                {% image article.source.logo rcircle-120x120-rgba_204-w_1 %}
-                            {% else %}
-                                {% get_site_defaults as defaults %}
-                                {% if defaults %}
-                                {% image defaults.default_external_article_source_logo rcircle-120x120-rgba_204-w_1 %}
-                                {% endif %}
+                        {% if article.source and article.source.logo %}
+                            {% image article.source.logo fill-120x120 %}
+                        {% else %}
+                            {% get_site_defaults as defaults %}
+                            {% if defaults %}
+                                {% image defaults.default_external_article_source_logo fill-120x120 %}
                             {% endif %}
+                        {% endif %}
                     </figure>
                 {% endspaceless %}
                 </div>
