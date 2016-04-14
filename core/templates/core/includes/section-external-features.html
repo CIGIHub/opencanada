@@ -1,42 +1,37 @@
 {% load  core_tags wagtailcore_tags article_tags wagtailimages_tags %}
 
 <section class="external-feature-section">
-      <div class="container">
+    <div class="container">
         <h2><a class="read-more" href="{% slugurl more_link_slug %}">{{ heading_text }} <i class="fa fa-angle-right"></i></a></h2>
-      </div>
-      <div class="container multi-block">
-      {% for item_row in item_collection %}
-            <div class="row {% if forloop.last %}last{% endif %}">
-                {% for item in item_row %}
-                    <div class="col-md-{{ item_row|column_class }} col-sm-6 col-xs-12">
-                      <div class="external-feature">
-                      <a href="{{ item.website_link }}">
-                        <div class="feature-box">
-                          <div class=" feature-content">
-                            <h3 class="columns-{{ item_row|column_class }}">{{ item.title }}</h3>
-                            {% if item.short_description %}
-                              {{ item.short_description|richtext }}
-                            {% else %}
-                              {{ item.body|truncatewords_html:80|richtext }}
-                            {% endif %}
-                            <figure>
-                              {% external_article_image item as image %}
-                              {% if image %}
-                                  {% if use_ring %}
-                                      {% image image rcircle-70x70-rgba_204-w_1 %}
-                                  {% else %}
-                                      {% image image circle-70x70 %}
-                                  {% endif %}
-                              {% endif %}
-                          </figure>
-
-                          </div>
-                        </div>
-                      </a>
+    </div>
+    <div class="container multi-block">
+    {% for item_row in item_collection %}
+        <div class="row {% if forloop.last %}last{% endif %}">
+            {% for item in item_row %}
+                <div class="col-md-{{ item_row|column_class }} col-sm-6 col-xs-12">
+                    <div class="external-feature">
+                        <a href="{{ item.website_link }}">
+                            <div class="feature-box">
+                                <div class="feature-content">
+                                    <h3 class="columns-{{ item_row|column_class }}">{{ item.title }}</h3>
+                                    {% if item.short_description %}
+                                        {{ item.short_description|richtext }}
+                                    {% else %}
+                                        {{ item.body|truncatewords_html:80|richtext }}
+                                    {% endif %}
+                                    {% external_article_image item as image %}
+                                    {% if image %}
+                                        <figure class="{% if use_ring %}with-border{% else %}without-border{% endif %}">
+                                            {% image image fill-70x70 %}
+                                        </figure>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </a>
                     </div>
-                    </div>
-                {% endfor %}
-            </div>
-        {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+    {% endfor %}
     </div>
 </section>

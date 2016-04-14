@@ -20,7 +20,7 @@
                 <table border="0" cellpadding="0" cellspacing="0" width="100%"  style="{% base_styles 'table' %}">
                     <tr>
                         <td valign="top" class="ImageCell" style="{% base_styles 'td' %} padding-top: 20px; padding-left: 20px; padding-bottom: 0; padding-right: 20px;">
-                            {% image event.organization.logo rcircle-80x80-rgba_204-w_1 as tmp_photo %}
+                            {% image event.organization.logo circlecrop-80x80-rgba_204-w_1 as tmp_photo %}
                             <a href="{{ event.event_link }}" target="_blank" style="{% base_styles 'a' %}">
                                 <img class="articleImage" style="{% base_styles 'img' %}" width="80" height="80" src="{{ tmp_photo.url }}" alt="{{ event.organization.logo.title }}" style="{% base_styles 'img' %} font-size: 12px;"/>
                             </a>

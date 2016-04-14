@@ -16,7 +16,7 @@
                         <div class="col-sm-{{ row|column_class }}">
                         {% if contributor.first_name and contributor.last_name %}
                             <div class="contributor">
-                                <a href="{{ contributor.url }}">{% image contributor.headshot circle-95x95 %}</a>
+                                <a href="{{ contributor.url }}">{% image contributor.headshot fill-95x95 %}</a>
                                 <div class="name"><a href="{{ contributor.url }}">{{ contributor.first_name }} {{ contributor.last_name }}</a></div>
                                 <div class="title">{{ contributor.short_bio|richtext }}</div>
                             </div>
