@@ -191,7 +191,7 @@
     border-radius: 50%;
   }
   figure.with-border img{
-    border: 1px solid #cccccc;
+    border: $border-very-light-grey;
   }
 }
 .editors-pick-link, .most-popular {

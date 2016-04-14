@@ -19,6 +19,7 @@ class DrawBitmapOperation(AlphaOperation):
         return PillowImage(willow.image)
 
 
+# eg circlecrop-80x80-rgba_255_0_0_1-w_1
 class CircleCropOperation(FillOperation):
     def construct(self, size, *extra):
         self.border_color = (204, 204, 204, 1)

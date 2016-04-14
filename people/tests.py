@@ -6,6 +6,7 @@ from . import models
 
 class ContributorPageTestCase(TestCase):
     fixtures = ["people_test.json", ]
+
     def _copy_values_from_fixture(self, pk, new_contributor):
         # TODO: This is EXTERMELY hacky - we have to re-engineer our tests...
         fixed_contributor = models.ContributorPage.objects.get(pk=pk)
