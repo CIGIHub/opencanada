@@ -1,0 +1,90 @@
+body{
+  background-color: $body-bg-color;
+}
+
+.template-article-page h1.medium{
+  font-family: $header-font;
+}
+
+.contributors{
+  font-weight: bold;
+}
+
+.main-image{
+  border-left: solid 3px $limegreen;
+}
+
+article ul.share-links{
+  position: relative;
+  li{
+    display: inline-block;
+    text-align: left;
+    i{
+      font-size: 25px;
+    }
+    span, a{
+      color: $limegreen;
+    }
+  }
+}
+
+.story{
+  h2, h3{
+    text-align: center;
+    font-family: $header-font;
+  }
+  h2{
+    font-size: 40px;
+    margin-top: 0px;
+    padding-top: 30px;
+  }
+  h3{
+    font-size: 18px;
+    margin-top: 0px;
+    margin-bottom: 20px;
+  }
+}
+
+article .block-PullQuote{
+  border: none;
+  color: $limegreen;
+  font-family: $header-font;
+  padding-top: 0px;
+}
+
+.chapter{
+  background-repeat: no-repeat;
+  background-position: top left;
+  &#james-clark{
+  background-image: url("../img/james-clarkx1.png");
+  }
+}
+
+@media(max-width: $screen-sm){
+
+  article ul.share-links{
+    margin: 0;
+    li{
+      i{
+        font-size: 35px;
+      }
+      div{
+        padding: 0 5px 10px 0;
+      }
+    }
+  }
+
+  .main-image{
+    border: none;
+  }
+
+  .story{
+    h2{
+      font-size: 25px;
+    }
+  }
+
+  .chapter{
+    background-size: 25%;
+  }
+}
