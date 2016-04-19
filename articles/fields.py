@@ -212,8 +212,8 @@ class BodyBlock(SimpleBodyBlock):
 class ChapterBodyBlock(blocks.StructBlock):
     heading = blocks.CharBlock()
     body = BodyBlock(required=False)
-    share_this_chapter = blocks.BooleanBlock(help_text="Check to include share links for this chapter.")
-    tweet_text = blocks.CharBlock(help_text="Tweet to share, including hashtags (if any); if empty the tweet will contain just the URL link to this chapter.", max_length=140)
+    share_this_chapter = blocks.BooleanBlock(help_text="Check to include share links for this chapter for twitter and facebook.", required=False)
+    tweet_text = blocks.CharBlock(help_text="Tweet to share, including hashtags (if any); if empty the tweet will contain just the URL link to this chapter.", max_length=140, required=False)
 
     class Meta:
         template = "articles/blocks/chapter.html"
