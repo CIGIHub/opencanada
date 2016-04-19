@@ -15,8 +15,13 @@
         </div>
     </div>
     {% for chapter in self.chapters %}
-        <a href="{% get_twitter_share_url chapter %}">Tweet Me!</a>
-        {{ chapter }}
+        <div class="chapterblock">
+            {% if chapter.value.share_this_chapter %}
+                <a href="{% get_twitter_share_url chapter %}">Tweet Me!</a>
+                <a href="{% get_chapter_anchor chapter %}">Facebook Me!</a>
+            {% endif %}
+            {{ chapter }}
+        </div>
     {% endfor %}
 
 {% endif %}
