@@ -108,6 +108,7 @@ def get_json_data(context):
             json_object = json.load(article.json_file)
             return json_object
 
+
 @register.filter()
 def romanize(value):
 
@@ -140,35 +141,50 @@ def romanize(value):
 
     return result
 
+
 # Should only be called from a page template not a block template since we expect the context to contain the article
 @register.simple_tag(takes_context=True)
-def get_twitter_share_url(context, chapter):
+def get_chapter_anchor(context, chapter):
     try:
         page = context["self"]
         article = page.articlepage
         block = chapter.value
         chapter_heading = block['heading']
-        tweet_text = block['tweet_text']
+    except ArticlePage.DoesNotExist:
+        anchor = ''
+    else:
+        anchor = '{0}#{1}'.format(article.full_url[:-1], slugify(chapter_heading))
+    return anchor
+
+
+# Should only be called from a page template not a block template since we expect the context to contain the article
+@register.simple_tag(takes_context=True)
+def get_twitter_share_url(context, chapter):
+    try:
+        anchor = get_chapter_anchor(context, chapter)
     except ArticlePage.DoesNotExist:
         twitter_share_url = ''
     else:
+        block = chapter.value
+        tweet_text = block['tweet_text']
         twitter_share_params = []
-        url_anchor = '{0}#{1}'.format(article.full_url[:-1], slugify(chapter_heading))
         text = []
-        hashtags = set([])
+        _hashtags = set([])
         tweet_text_parts = tweet_text.split(' ')
         for word in tweet_text_parts:
             if word[0] == '#':
-                word = word[1:]
-                hashtags.add(word)
+                _hashtags.add(word[1:])
             text.append(word)
         if len(text) > 0:
             text = ' '.join(text)
             twitter_share_params.append('text={0}'.format(urllib.quote_plus(text)))
-        if len(hashtags) > 0:
-            hashtags = ','.join(hashtags)
-            twitter_share_params.append('hashtags={0}'.format(urllib.quote_plus(hashtags)))
-        twitter_share_params.append('url={0}'.format(urllib.quote_plus(url_anchor)))
+        if len(_hashtags) > 0:
+            # You can collect hashtags and pass them along as a separate param...
+            # However, doing so in this manner appends the hashtags to the end of the tweet, which we don't need to do
+            # as the hashtags we want will already be in the tweet_text
+            _hashtags = ','.join(_hashtags)
+            twitter_share_params.append('hashtags={0}'.format(urllib.quote_plus(_hashtags)))
+        twitter_share_params.append('url={0}'.format(urllib.quote_plus(anchor)))
         twitter_share_params = '&amp;'.join(twitter_share_params)
         twitter_share_url = 'https://twitter.com/share?{0}'.format(twitter_share_params)
     return twitter_share_url
