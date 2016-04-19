@@ -14,7 +14,10 @@
             </ul>
         </div>
     </div>
-    {{ self.chapters }}
+    {% for chapter in self.chapters %}
+        <a href="{% get_twitter_share_url chapter %}">Tweet Me!</a>
+        {{ chapter }}
+    {% endfor %}
 
 {% endif %}
 
