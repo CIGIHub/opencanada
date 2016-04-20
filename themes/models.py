@@ -1,13 +1,14 @@
 from __future__ import absolute_import, division, unicode_literals
 
-from .utils import CustomTemplateChecker, TemplateDoesNotExist
+from .blocks import ThemeableStructBlock
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from modelcluster.fields import ParentalKey
 from modelcluster.models import ClusterableModel
+from wagtail.wagtailcore.blocks import StreamBlock
 from wagtail.wagtailadmin.edit_handlers import (FieldPanel, InlinePanel,
                                                 MultiFieldPanel)
-from wagtail.wagtailcore.fields import RichTextField
+from wagtail.wagtailcore.fields import RichTextField, StreamField
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
@@ -74,33 +75,32 @@ class ThemeablePage(Page):
                               on_delete=models.SET_NULL,
                               null=True)
 
+    def __init__(self, *args, **kwargs):
+        super(ThemeablePage, self).__init__(*args, **kwargs)
+        if not self.theme:
+            return
+        # 'Push' the theme down to the blocks, if possible
+        for field in self._meta.fields:
+            # Each StreamField should have a StreamBlock
+            if not isinstance(field, StreamField):
+                continue
+            stream_block = field.stream_block
+            if not isinstance(stream_block, StreamBlock):
+                continue
+            # Assuming that each StreamBlock has an ordered dict of child Blocks
+            ordered_blocks = field.stream_block.child_blocks.values()
+            for block in ordered_blocks:
+                # We only need to set the Theme for blocks that support themes
+                if isinstance(block, ThemeableStructBlock):
+                    block.set_theme(self.theme)
+
     def get_template(self, request, *args, **kwargs):
         original_template = super(ThemeablePage, self).get_template(request, *args, **kwargs)
         if self.theme:
-            self._override_block_templates(self.theme)
             custom_template = "{}/{}".format(self.theme.folder, original_template)
             return custom_template
         else:
             return original_template
-
-    def _override_block_templates(self, theme):
-        if theme:
-            checker = CustomTemplateChecker()
-            iterables = [x for x in self.__dict__.values() if hasattr(x, '__getitem__')]
-            for iterable in iterables:
-                for item in iterable:
-                    if hasattr(item, 'block'):
-                        try:
-                            original_template_name = item.block.meta.template
-                            custom_template_name = "{}/{}".format(theme.folder, original_template_name)
-                            checker.get_absolute_path(custom_template_name)
-                            item.block.meta.template = custom_template_name
-                        except AttributeError:
-                            # Block does not define its own template...
-                            pass
-                        except TemplateDoesNotExist:
-                            # Custom template for the Block does not exist...
-                            pass
 
     style_panels = [
         MultiFieldPanel(

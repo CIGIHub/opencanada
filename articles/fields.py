@@ -17,6 +17,7 @@ from wagtail.wagtailsnippets.blocks import SnippetChooserBlock
 
 from interactives.models import Interactive
 from people.models import ContributorPage
+from themes.blocks import ThemeableStructBlock
 
 
 class BodyField(StreamField):
@@ -209,7 +210,7 @@ class BodyBlock(SimpleBodyBlock):
     ColumnedContent = ColumnarStreamBlock()
 
 
-class ChapterBodyBlock(blocks.StructBlock):
+class ChapterBodyBlock(ThemeableStructBlock):
     heading = blocks.CharBlock()
     body = BodyBlock(required=False)
     share_this_chapter = blocks.BooleanBlock(help_text="Check to include share links for this chapter for twitter and facebook.", required=False)
