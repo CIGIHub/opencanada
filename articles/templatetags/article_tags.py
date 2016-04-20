@@ -165,8 +165,8 @@ def get_twitter_share_url(context, chapter):
     except ArticlePage.DoesNotExist:
         twitter_share_url = ''
     else:
-        block = chapter.value
-        tweet_text = block['tweet_text']
+        stream_field_value = chapter.value
+        tweet_text = stream_field_value['tweet_text']
         twitter_share_params = []
         text = []
         _hashtags = set([])

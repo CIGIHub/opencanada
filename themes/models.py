@@ -1,5 +1,6 @@
 from __future__ import absolute_import, division, unicode_literals
 
+from .utils import CustomTemplateChecker, TemplateDoesNotExist
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from modelcluster.fields import ParentalKey
@@ -76,9 +77,30 @@ class ThemeablePage(Page):
     def get_template(self, request, *args, **kwargs):
         original_template = super(ThemeablePage, self).get_template(request, *args, **kwargs)
         if self.theme:
-            return "{}/{}".format(self.theme.folder, original_template)
+            self._override_block_templates(self.theme)
+            custom_template = "{}/{}".format(self.theme.folder, original_template)
+            return custom_template
         else:
             return original_template
+
+    def _override_block_templates(self, theme):
+        if theme:
+            checker = CustomTemplateChecker()
+            iterables = [x for x in self.__dict__.values() if hasattr(x, '__getitem__')]
+            for iterable in iterables:
+                for item in iterable:
+                    if hasattr(item, 'block'):
+                        try:
+                            original_template_name = item.block.meta.template
+                            custom_template_name = "{}/{}".format(theme.folder, original_template_name)
+                            checker.get_absolute_path(custom_template_name)
+                            item.block.meta.template = custom_template_name
+                        except AttributeError:
+                            # Block does not define its own template...
+                            pass
+                        except TemplateDoesNotExist:
+                            # Custom template for the Block does not exist...
+                            pass
 
     style_panels = [
         MultiFieldPanel(
