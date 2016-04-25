@@ -1,9 +1,11 @@
 # Minimal requirements
 Django>=1.8,<1.9
 requests==2.7.0
+wagtail==1.4.3
 
 # Recommended components (require additional setup):
 elasticsearch>=1.0.0,<2.0.0
+django-compressor==2.0
 django-libsass==0.6
 tweepy==3.5.0
 

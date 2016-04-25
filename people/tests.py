@@ -5,6 +5,16 @@ from . import models
 
 
 class ContributorPageTestCase(TestCase):
+    fixtures = ["people_test.json", ]
+
+    def _copy_values_from_fixture(self, pk, new_contributor):
+        # TODO: This is EXTERMELY hacky - we have to re-engineer our tests...
+        fixed_contributor = models.ContributorPage.objects.get(pk=pk)
+        new_contributor.path = fixed_contributor.path + '1'
+        new_contributor.slug = fixed_contributor.slug
+        new_contributor.title = fixed_contributor.title
+        return new_contributor
+
     # def test_title_from_name(self):
     #     contributor = models.ContributorPage.objects.create(first_name="Bob", last_name="Smith", depth=1)
     #     contributor.save()
@@ -28,21 +38,25 @@ class ContributorPageTestCase(TestCase):
 
     def test_twitter_handle_has_at_when_not_specified(self):
         contributor = models.ContributorPage(first_name="Bob", last_name="Smith", depth=1, twitter_handle="bob")
+        contributor = self._copy_values_from_fixture(12, contributor)
         contributor.save()
         self.assertEqual(contributor.twitter_handle, "@bob")
 
     def test_twitter_handle_has_at_when_specified(self):
         contributor = models.ContributorPage(first_name="Bob", last_name="Smith", depth=1, twitter_handle="@bob")
+        contributor = self._copy_values_from_fixture(12, contributor)
         contributor.save()
         self.assertEqual(contributor.twitter_handle, "@bob")
 
     def test_twitter_handle_not_modified_if_not_specified(self):
         contributor = models.ContributorPage(first_name="Bob", last_name="Smith", depth=1)
+        contributor = self._copy_values_from_fixture(12, contributor)
         contributor.save()
         self.assertEqual(contributor.twitter_handle, "")
 
     def test_display_twitter_handle_does_not_contain_at(self):
         contributor = models.ContributorPage(first_name="Bob", last_name="Smith", depth=1, twitter_handle="@bob")
+        contributor = self._copy_values_from_fixture(12, contributor)
         contributor.save()
         self.assertEqual(contributor.display_twitter_handle, "bob")
 

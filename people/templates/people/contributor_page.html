@@ -5,7 +5,7 @@
     <div class="container">
         <div class="contributor-profile narrow-content">
             {% if self.headshot %}
-                <figure class="headshot">{% image self.headshot circle-280x280 %}</figure>
+                <figure class="headshot">{% image self.headshot fill-280x280 %}</figure>
             {% endif %}
         {% spaceless %}
             <h1>{{ self.title }}{% if self.twitter_handle %} / <a href="https://twitter.com/{{ self.twitter_handle }}">{{ self.twitter_handle }}</a>{% endif %}
