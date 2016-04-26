@@ -28,5 +28,15 @@ jQuery(document).ready(function() {
             $(this).css({'font-size': fontSize+'em', 'line-height' : '130%'});
         });
     }
-    
+
+    // $("a[href*='#']:not([href='#'])").click(function() {
+    //     var target = $(this.hash);
+    //     target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+    //     if (target.length) {
+    //         $('html,body').animate({
+    //             scrollTop: target.offset().top - 150
+    //             }, 1000);
+    //         return false;
+    //     }
+    // });
 });
