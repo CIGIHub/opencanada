@@ -23,6 +23,7 @@
     </script>
     <script type="text/javascript" src="{% static 'themes/components/js/transparency.js' %}"></script>
     <script type="text/javascript" src="{% static 'themes/millennials/js/millennials.js' %}"></script>
+    <script type="text/javascript" src="{% static 'themes/millennials/js/slider.js' %}"></script>
 {% endblock %}
 
 {% block header %}
@@ -34,40 +35,28 @@
     <article id="article-page">
         <div class="container">
             <div class="row">
-                <div class="col-sm-5">
-                    <ul class="share-links" data-page-id="{{ self.id }}">
-                        <li class="twitter">
-                            <div><a href="https://twitter.com/share?text={{ self.title|urlencode }}&url={{ self.full_url|urlencode:"" }}"><i class="fa fa-twitter"></i></a></div>
-                        </li>
-                        <li class="facebook">
-                            <div><span class="facebook-share-link" data-url="{{ self.full_url }}"><i class="fa fa-facebook-square"></i></span></div>
-                            <div class="count">{% if self.facebook_count > 0 %}{{ self.facebook_count }}{% endif %}</div>
-                        </li>
-                    </ul>
-                    {% include 'articles/includes/article-metadata.html' %}
-                    {%  if self.main_image and self.main_image.credit %}
-                        <div class="contributors">
-                            <div class="contributor">Illustrated By: {{ self.main_image.credit }}</div>
-                        </div>
-
-                    {% endif %}
-                </div>
-                <div class="col-sm-7">
-                    {% if self.include_main_image and self.main_image %}
-                        <figure class="main-image">
-                            {% image self.main_image width-500 %}
-                        </figure>
-
-
-                    {% endif %}
-                </div>
+                <ul class="share-links" data-page-id="{{ self.id }}">
+                    <li class="twitter">
+                        <div><a href="https://twitter.com/share?text={{ self.title|urlencode }}&url={{ self.full_url|urlencode:"" }}"><i class="fa fa-twitter"></i></a></div>
+                    </li>
+                    <li class="facebook">
+                        <div><span class="facebook-share-link" data-url="{{ self.full_url }}"><i class="fa fa-facebook-square"></i></span></div>
+                        <div class="count">{% if self.facebook_count > 0 %}{{ self.facebook_count }}{% endif %}</div>
+                    </li>
+                </ul>
+                {% include 'articles/includes/article-metadata.html' %}
+                {%  if self.main_image and self.main_image.credit %}
+                    <div class="contributors">
+                        <div class="contributor">Illustrated By: {{ self.main_image.credit }}</div>
+                    </div>
+                {% endif %}
             </div>
         </div>
 
         <div class="story">
             {% include 'articles/includes/json-embed.html' %}
-            {% include 'articles/includes/story-content.html' %}
-            {% include 'articles/includes/advanced-content.html' %}
+            <div class="body-content">{% include 'articles/includes/story-content.html' %}</div>
+            {% include 'themes/millennials/articles/includes/advanced_content.html' %}
 
             {% if self.main_image and self.include_caption_in_footer %}
                  <div class="container">

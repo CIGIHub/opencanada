@@ -172,7 +172,7 @@ def get_twitter_share_url(context, chapter):
         _hashtags = set([])
         tweet_text_parts = tweet_text.split(' ')
         for word in tweet_text_parts:
-            if word[0] == '#':
+            if len(word) > 0 and word[0] == '#':
                 _hashtags.add(word[1:])
             text.append(word)
         if len(text) > 0:

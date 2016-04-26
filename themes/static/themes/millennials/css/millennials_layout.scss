@@ -4,15 +4,21 @@ body{
 
 .template-article-page h1.medium{
   font-family: $header-font;
+  font-size: 3.5em;
 }
 
 .contributors{
   font-weight: bold;
 }
 
-.main-image{
-  border-left: solid 3px $limegreen;
+.body-content p:last-child{
+  border-bottom: solid 2px limegreen;
 }
+
+hr{
+  border-bottom: solid 2px limegreen;
+}
+
 
 article ul.share-links{
   position: relative;
@@ -20,7 +26,7 @@ article ul.share-links{
     display: inline-block;
     text-align: left;
     i{
-      font-size: 25px;
+      font-size: 1.5em;
     }
     span, a{
       color: $limegreen;
@@ -35,13 +41,17 @@ article ul.share-links{
   }
   h2{
     font-size: 40px;
-    margin-top: 0px;
-    padding-top: 30px;
   }
   h3{
     font-size: 18px;
     margin-top: 0px;
     margin-bottom: 20px;
+  }
+
+  .share-chapter{
+    a{
+      color: $limegreen;
+    }
   }
 }
 
@@ -52,21 +62,79 @@ article .block-PullQuote{
   padding-top: 0px;
 }
 
+.slider{
+
+}
+
 .chapter{
   background-repeat: no-repeat;
-  background-position: top left;
-  &#james-clark{
-  background-image: url("../img/james-clarkx1.png");
+  background-position: -10% 0;
+
+
+}
+
+ul.faces {
+  margin: 0px;
+  padding: 0px;
+  overflow: auto;
+  display: table;
+  li {
+    list-style: none;
+    display: table-cell;
+    float: left;
+
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    transition: all 1s ease;
+
+    a img{
+      display: block;
+      margin: auto;
+    }
+    div{
+      text-align: center;
+      font-size: 0.8em;
+      font-style: $sans-serif;
+    }
+  }
+
+  @for $i from 1 through 20 {
+    $deg: -$i*40;
+    li:nth-of-type(8n + #{$i}) {
+      img{
+        -webkit-filter: sepia(1) saturate(3) hue-rotate(#{$deg}deg) saturate(.6) brightness(1);
+        -moz-filter: sepia(1) saturate(3) hue-rotate(#{$deg}deg) saturate(.6) brightness(1);
+        -ms-filter: sepia(1) saturate(3) hue-rotate(#{$deg}deg) saturate(.6) brightness(1);
+        -o-filter: sepia(1) saturate(3) hue-rotate(#{$deg}deg) saturate(.6) brightness(1);
+        filter: sepia(1) saturate(3) hue-rotate(#{$deg}deg) saturate(.6) brightness(1);
+      }
+    }
+    li:hover{
+      img{
+        -webkit-filter: sepia(1);
+        -moz-filter: sepia(1);
+        -ms-filter: sepia(1);
+        -o-filter: sepia(1);
+        filter: sepia(1);
+      }
+
+    }
   }
 }
 
 @media(max-width: $screen-sm){
 
+  .template-article-page h1.medium{
+    font-size: 1.4em;
+  }
+
   article ul.share-links{
     margin: 0;
     li{
       i{
-        font-size: 35px;
+        font-size: 2.0em;
       }
       div{
         padding: 0 5px 10px 0;
@@ -82,9 +150,12 @@ article .block-PullQuote{
     h2{
       font-size: 25px;
     }
+    .share-chapter{
+      font-size: 2.0em;
+    }
   }
 
   .chapter{
-    background-size: 25%;
+    background-size: 45%;
   }
 }

@@ -1,0 +1,44 @@
+{% load static article_tags core_tags wagtailcore_tags wagtailembeds_tags wagtailimages_tags %}
+
+{% if self.chapters %}
+    <div class="container" id="toc">
+        <div class="row">
+            <ul class="faces">
+                {% for chapter in self.chapters %}
+                    <li><a href="#{{ chapter.value.heading|slugify }}">
+                        <img src="/static/themes/millennials/img/{{ chapter.value.heading|slugify }}-sm.png">
+                        <div>{{ chapter.value.heading }}</div>
+                    </a></li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <section class="block-{{ block.block_type }} narrow-content"><hr></section>
+
+        <div class="row slider">
+            {% for chapter in self.chapters %}
+                <div class="chapter"  id="{{ chapter.value.heading|slugify }}">
+                    {% if chapter.value.share_this_chapter %}
+                        <div class="share-chapter">
+                            <a href="{% get_twitter_share_url chapter %}"><i class="fa fa-twitter"></i></a>
+                            <a href="{% get_chapter_anchor chapter %}"><i class="fa fa-facebook-square"></i></a>
+                        </div>
+                    {% endif %}
+                    {{ chapter }}
+                    <a href="#toc" class="top-link">Back to top</a>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="row">
+            <ul class="pager">
+                {% for chapter in self.chapters %}
+                    <li><a href="#{{ chapter.value.heading|slugify }}">
+                        <img src="/static/themes/millennials/img/{{ chapter.value.heading|slugify }}-sm.png">
+                        <div>{{ chapter.value.heading }}</div>
+                    </a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endif %}
