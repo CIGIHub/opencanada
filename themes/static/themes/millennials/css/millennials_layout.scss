@@ -12,6 +12,7 @@ body{
 }
 
 .body-content p:last-child{
+
   border-bottom: solid 2px $limegreen;
 }
 
@@ -80,6 +81,7 @@ article .block-PullQuote{
   font-family: $header-font;
   padding-top: 0px;
 }
+
 
 ul.faces{
   margin: 0px;
@@ -211,7 +213,6 @@ ul.faces{
 .lynsey-longfield{
     background-image: url("../img/lynsey-longfield.png");
 }
-
 
 @media(max-width: $screen-sm){
 

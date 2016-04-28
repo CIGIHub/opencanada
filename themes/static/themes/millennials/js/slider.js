@@ -1,5 +1,6 @@
 jQuery(document).ready(function() {
 
+
     var chapter = $('.slider .chapter');
     var menuItem = $('#toc li a');
     var pagerItem = $('#nav li a');
@@ -128,8 +129,6 @@ jQuery(document).ready(function() {
         }
 
     });
-
-
 
 
     // function scrollView() {

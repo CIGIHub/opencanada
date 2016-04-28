@@ -1,8 +1,10 @@
 {% load static article_tags core_tags wagtailcore_tags wagtailembeds_tags wagtailimages_tags %}
 
 {% if self.chapters %}
+
     <div class="container">
         <div class="row" id="toc">
+
             <ul class="faces">
                 {% for chapter in self.chapters %}
                     <li><a href="#{{ chapter.value.heading|slugify }}">
@@ -17,8 +19,10 @@
 
         <div class="row slider">
             {% for chapter in self.chapters %}
+
                 <div class="chapter" id="{{ chapter.value.heading|slugify }}">
                     <div class="background-photo {{ chapter.value.heading|slugify }}"></div>
+
                     {% if chapter.value.share_this_chapter %}
                         <div class="share-chapter">
                             <a href="{% get_twitter_share_url chapter %}"><i class="fa fa-twitter"></i></a>
@@ -26,7 +30,9 @@
                         </div>
                     {% endif %}
 
+
                     {{ chapter }}
+
 
                 </div>
             {% endfor %}
@@ -57,6 +63,5 @@
             <a href="#toc">Back to top</a>
         </div>
     </div>
-
 
 {% endif %}
