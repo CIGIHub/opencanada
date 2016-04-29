@@ -4,7 +4,6 @@
 
     <div class="container">
         <div class="row" id="toc">
-
             <ul class="faces">
                 {% for chapter in self.chapters %}
                     <li><a href="#{{ chapter.value.heading|slugify }}">
@@ -30,19 +29,17 @@
                         </div>
                     {% endif %}
 
-
                     {{ chapter }}
-
 
                 </div>
             {% endfor %}
         </div>
 
-        <div class="row" id="nav">
-            <div class="col-xs-2 display-cell">
+        <div class="row narrow-content" id="nav">
+            <div class="col-xs-2">
                 <div class="prev"><i class="fa fa-chevron-left"></i></div>
             </div>
-            <div class="col-xs-6 display-cell">
+            <div class="col-xs-8">
                 <ul class="faces">
                     {% for chapter in self.chapters %}
                         <li><a href="#{{ chapter.value.heading|slugify }}">
@@ -52,7 +49,7 @@
                     {% endfor %}
                 </ul>
             </div>
-            <div class="col-xs-2 display-cell">
+            <div class="col-xs-2">
                 <div class="next"><i class="fa fa-chevron-right"></i></div>
             </div>
         </div>

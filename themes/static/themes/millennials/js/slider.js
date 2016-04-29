@@ -19,13 +19,14 @@ jQuery(document).ready(function() {
         if(hash === '' || hash === '#undefined'){
             hash = menuItem.first().attr('href');
         }
-        loadSlide(hash);
+        $('.slider .chapter' + hash).addClass('active').fadeIn(800);
         setPager(hash);
     }
 
     function getSlide(){
         hash = $(this).attr('href');
         loadSlide(hash);
+        scrollView();
         setPager(hash);
     }
 
@@ -51,9 +52,6 @@ jQuery(document).ready(function() {
                position = index;
            }
         });
-
-        // console.log(selected);
-        // console.log(position);
 
         //set pager for 5 items
         var left = 2;
@@ -90,6 +88,13 @@ jQuery(document).ready(function() {
         };
     }
 
+    function scrollView() {
+      $('html,body').animate({
+          scrollTop: $('.slider').offset().top
+      }, 1000);
+        return false;
+    }
+
     menuItem.on('click tap', getSlide);
     pagerItem.on('click tap', getSlide);
 
@@ -103,7 +108,9 @@ jQuery(document).ready(function() {
             var newHash = $('#nav li:eq(' + nextPosition + ')').children().attr('href');
 
             loadSlide(newHash);
+            scrollView();
             setPager(newHash);
+
 
             if(nextPosition === people){
                 $('.next').addClass('inactive');
@@ -121,22 +128,15 @@ jQuery(document).ready(function() {
             var newHash = $('#nav li:eq(' + nextPosition + ')').children().attr('href');
 
             loadSlide(newHash);
+            scrollView();
             setPager(newHash);
+
 
             if(nextPosition === 0){
                 $('.prev').addClass('inactive');
             }
         }
-
     });
 
-
-    // function scrollView() {
-    //   return this.each(function () {
-    //     $('html, body').animate({
-    //       scrollTop: $(this).offset().top
-    //     }, 1000);
-    //   });
-    // }
 });
 

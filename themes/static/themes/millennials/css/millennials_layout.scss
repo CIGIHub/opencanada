@@ -140,24 +140,17 @@ ul.faces{
   overflow: auto;
   display: table;
   li {
+    min-height: 125px;
     display: table-cell;
     float: left;
   }
 }
 
 #nav{
-  .display-cell{
-    display: table-cell;
-    vertical-align: middle;
-    float: none;
-  }
-
-  .col-xs-6{
-    text-align: center;
-  }
 
   li{
     display: inline-block;
+    vertical-align: top;
 
     img{
       opacity: 0.3;
@@ -174,22 +167,24 @@ ul.faces{
       }
     }
     &:hover{
-        img{
-          opacity: 1;
-        }
+      img{
+        opacity: 1;
       }
     }
+  }
 
-    .prev, .next{
-      .fa{
-        font-size: 2.0em;
-        color: $limegreen;
-      }
+  .col-xs-2{
+    margin-top: 5%;
+  }
+  .prev, .next{
+    .fa{
+      font-size: 2.0em;
+      color: $limegreen;
     }
-    .next{
-      text-align: right;
-    }
-
+  }
+  .next{
+    text-align: right;
+  }
 }
 
 .chapter{
@@ -214,11 +209,8 @@ ul.faces{
     background-image: url("../img/lynsey-longfield.png");
 }
 
-@media(max-width: $screen-sm){
 
-  .template-article-page h1.medium{
-    font-size: 1.4em;
-  }
+@media(max-width: $screen-sm){
 
   article ul.share-links{
     margin: 0;
@@ -247,5 +239,11 @@ ul.faces{
 
   .chapter{
     background-size: 45%;
+  }
+}
+
+@media(max-width: 480px){
+  .template-article-page h1.medium{
+    font-size: 3.0em;
   }
 }
