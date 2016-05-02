@@ -22,6 +22,7 @@
         FeatureStyles.MainFeatures.setSize({{ self.full_bleed_image_size }});
     </script>
     <script type="text/javascript" src="{% static 'themes/components/js/transparency.js' %}"></script>
+    <script type="text/javascript" src="{% static 'themes/millennials/js/letterEffect.js' %}"></script>
     <script type="text/javascript" src="{% static 'themes/millennials/js/millennials.js' %}"></script>
     <script type="text/javascript" src="{% static 'themes/millennials/js/slider.js' %}"></script>
 {% endblock %}
@@ -45,7 +46,15 @@
                             <div class="count">{% if self.facebook_count > 0 %}{{ self.facebook_count }}{% endif %}</div>
                         </li>
                     </ul>
-                    {% include 'articles/includes/article-metadata.html' %}
+
+                    <div class="title">
+                        <h1 class="{{ self.title_size }} colorize">{{ self.title }}</h1>
+                        <div class="subtitle">{{ self.excerpt|richtext }}</div>
+                        {% if self.authors %}
+                            {% include 'articles/includes/article-contributors.html' with authors=self.authors date=self.first_published_at links=True %}
+                        {% endif %}
+                    </div>
+
                     {%  if self.main_image and self.main_image.credit %}
                         <div class="contributors">
                             <div class="contributor">Illustrated By: {{ self.main_image.credit }}</div>

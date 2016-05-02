@@ -15,10 +15,8 @@ jQuery(document).ready(function() {
             var fontSize = 1.0;
             var fontAdjust = 1.0;
 
-            // console.log(blockHeight);
             if(blockHeight > maxHeight){
                 fontAdjust = maxHeight/blockHeight;
-
             }
             if(blockHeight < minHeight ){
                 fontAdjust = minHeight/blockHeight;
@@ -29,14 +27,14 @@ jQuery(document).ready(function() {
         });
     }
 
-    // $("a[href*='#']:not([href='#'])").click(function() {
-    //     var target = $(this.hash);
-    //     target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
-    //     if (target.length) {
-    //         $('html,body').animate({
-    //             scrollTop: target.offset().top - 150
-    //             }, 1000);
-    //         return false;
-    //     }
-    // });
+    $(".colorize").letterEffect({
+                 "effectParam": "color",
+                "effectValues": [ "#196518", "#8c1b1b", "#555f04", "#1b5979", "#944b10" ],
+            "ambientAnimation": true,
+             "ambientstrength": .2,
+                        "time": 1,
+                        "drift": 0.25,
+              "hoverAnimation": true,
+                   "hoverTime": .3
+        });
 });
