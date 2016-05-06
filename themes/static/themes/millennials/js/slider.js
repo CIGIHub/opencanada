@@ -18,6 +18,8 @@
 
         if(hash === '' || hash === '#undefined'){
             hash = menuItem.first().attr('href');
+            $('.prev').addClass('inactive');
+            $('.next').removeClass('inactive');
         }
         $('.slider .chapter' + hash).addClass('active').fadeIn(800);
         setPager(hash);
@@ -41,27 +43,27 @@
     function setPager(hash){
         var selected = null;
         var position = null;
-        pagerListItem.hide();
-        pagerListItem.removeClass('active');
-
-        pagerListItem.each(function(index){
-
-           if($(this).children().attr('href') === hash){
-               $(this).addClass('active').show();
-               selected = $(this);
-               position = index;
-           }
-        });
-
-        //set pager for mobile or non-mobile
         var left = 2;
         var right = 2;
 
-        if(windowWidth < breakpoint){
+        if(windowWidth < xsBreakpoint){
             left = right = 0;
         }
-
-        else{
+        else if(windowWidth < breakpoint){
+            if(position < 1){
+                left = 0;
+                right = 2;
+            }
+            else if(position === people){
+                right = 0;
+                left = 2;
+            }
+            else{
+                left = 1;
+                right = 1;
+            }
+        }
+        else if (windowWidth >= breakpoint){
             if(position < 2){
             left = position;
             right = 4 - position;
@@ -72,8 +74,19 @@
             }
         }
 
-        $(selected).nextAll(':lt(' + right + ')').show();
-        $(selected).prevAll(':lt(' + left + ')').show();
+        pagerListItem.hide();
+        pagerListItem.removeClass('selected').removeClass('active-slide');
+
+        pagerListItem.each(function(index){
+           if($(this).children().attr('href') === hash){
+               $(this).addClass('selected');
+               selected = $(this);
+               position = index;
+           }
+        });
+
+        $(selected).nextAll(':lt(' + right + ')').addClass('active-slide');
+        $(selected).prevAll(':lt(' + left + ')').addClass('active-slide');
 
     }
 
@@ -81,7 +94,7 @@
         var position = null;
 
         pagerListItem.each(function(index){
-           if($(this).hasClass('active')){
+           if($(this).hasClass('selected')){
                hash = $(this).children().attr('href');
                position = index;
            }
@@ -100,15 +113,15 @@
         return false;
     }
 
+    /*  Activate selected slider and set pager */
      $(document).ready(function () {
 
         initPage();
-
         menuItem.on('click tap', getSlide);
         pagerItem.on('click tap', getSlide);
 
-
         $('.next').click(function(e){
+            $('.prev').removeClass('inactive');
 
             if(!($('.next').hasClass('inactive'))){
                 var currentHash = getPagerPosition().pagerHash;
@@ -121,10 +134,12 @@
                 if(nextPosition === people){
                     $('.next').addClass('inactive');
                 }
+
             }
         });
 
          $('.prev').click(function(e){
+             $('.next').removeClass('inactive');
 
             if(!($('.prev').hasClass('inactive'))){
                 var currentHash = getPagerPosition().pagerHash;
