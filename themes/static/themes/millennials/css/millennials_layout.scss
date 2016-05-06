@@ -87,18 +87,21 @@ article .block-PullQuote{
 ul.faces{
   margin: 0px;
   padding: 0px;
+  text-align: center;
 
-  li{
+  li.colour-filter{
     list-style: none;
     font-family: $sans-serif;
+    &:hover{
+       -webkit-filter: sepia(1);
+        -moz-filter: sepia(1);
+        -ms-filter: sepia(1);
+        -o-filter: sepia(1);
+        filter: sepia(1);
+    }
   }
-  a{
-      -webkit-transition: all 1s ease;
-      -moz-transition: all 1s ease;
-      -ms-transition: all 1s ease;
-      -o-transition: all 1s ease;
-      transition: all 1s ease;
 
+  a{
       img {
         display: block;
         margin: auto;
@@ -111,29 +114,6 @@ ul.faces{
         text-align: center;
         color: black;
       }
-  }
-
-  @for $i from 1 through 20 {
-    $deg: -$i*40;
-    li:nth-of-type(8n + #{$i}) {
-      img{
-        -webkit-filter: sepia(1) saturate(3) hue-rotate(#{$deg}deg) saturate(.6) brightness(1);
-        -moz-filter: sepia(1) saturate(3) hue-rotate(#{$deg}deg) saturate(.6) brightness(1);
-        -ms-filter: sepia(1) saturate(3) hue-rotate(#{$deg}deg) saturate(.6) brightness(1);
-        -o-filter: sepia(1) saturate(3) hue-rotate(#{$deg}deg) saturate(.6) brightness(1);
-        filter: sepia(1) saturate(3) hue-rotate(#{$deg}deg) saturate(.6) brightness(1);
-      }
-    }
-    li:hover{
-      img{
-        -webkit-filter: sepia(1);
-        -moz-filter: sepia(1);
-        -ms-filter: sepia(1);
-        -o-filter: sepia(1);
-        filter: sepia(1);
-      }
-
-    }
   }
 }
 
@@ -178,6 +158,7 @@ ul.faces{
     margin-top: 5%;
   }
   .prev, .next{
+    cursor: pointer;
     .fa{
       font-size: 2.0em;
       color: $limegreen;
