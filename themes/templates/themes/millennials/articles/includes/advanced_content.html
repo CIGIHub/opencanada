@@ -16,7 +16,7 @@
 
         <section class="block-{{ block.block_type }} narrow-content"><hr></section>
 
-        <div class="row slider">
+        <div class="row profile">
             {% for chapter in self.chapters %}
 
                 <div class="chapter" id="{{ chapter.value.heading|slugify }}">
@@ -35,23 +35,19 @@
             {% endfor %}
         </div>
 
-        <div class="row narrow-content" id="nav">
-            <div class="col-xs-2">
-                <div class="prev"><i class="fa fa-chevron-left"></i></div>
-            </div>
-            <div class="col-xs-8">
-                <ul class="faces">
-                    {% for chapter in self.chapters %}
-                        <li class="colour-filter"><a href="#{{ chapter.value.heading|slugify }}">
-                            <img src="/static/themes/millennials/img/{{ chapter.value.heading|slugify }}-sm.png">
-                            <div>{{ chapter.value.heading }}</div>
-                        </a></li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <div class="col-xs-2">
-                <div class="next"><i class="fa fa-chevron-right"></i></div>
-            </div>
+        <div class="pager">
+            <div class="prev"><i class="fa fa-chevron-left"></i></div>
+            <div class="next"><i class="fa fa-chevron-right"></i></div>
+        </div>
+        <div id="pager">
+            <ul class="faces">
+                {% for chapter in self.chapters %}
+                    <li class="colour-filter"><a href="#{{ chapter.value.heading|slugify }}">
+                        <img src="/static/themes/millennials/img/{{ chapter.value.heading|slugify }}-sm.png">
+                        <div>{{ chapter.value.heading }}</div>
+                    </a></li>
+                {% endfor %}
+            </ul>
         </div>
 
          <section class="block-{{ block.block_type }} narrow-content"><hr></section>

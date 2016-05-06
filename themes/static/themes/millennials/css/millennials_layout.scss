@@ -130,37 +130,84 @@ ul.faces{
   }
 }
 
-#nav{
-  li{
-    display: inline-block;
-    vertical-align: top;
 
-    img{
-      opacity: 0.3;
-    }
-    a{
-      color: $light-grey;
-    }
-    &.selected{
-      a{
-        color: black;
-      }
-      img{
-        opacity: 1;
-      }
-    }
-    &:hover{
-      img{
-        opacity: 1;
-      }
-    }
 
+//#nav{
+//  li{
+//    display: inline-block;
+//    vertical-align: top;
+//
+//    img{
+//      opacity: 0.3;
+//    }
+//    a{
+//      color: $light-grey;
+//    }
+//    &.selected{
+//      a{
+//        color: black;
+//      }
+//      img{
+//        opacity: 1;
+//      }
+//    }
+//    &:hover{
+//      img{
+//        opacity: 1;
+//      }
+//    }
+//
+//  }
+//
+//  .col-xs-2{
+//    margin-top: 5%;
+//  }
+//  .prev, .next{
+//    cursor: pointer;
+//    .fa{
+//      font-size: 2.0em;
+//      color: $limegreen;
+//    }
+//    &.inactive{
+//      cursor: default;
+//      .fa{
+//        color: silver;
+//      }
+//
+//    }
+//  }
+//  .next{
+//    text-align: right;
+//  }
+//}
+
+#pager{
+    height: 130px;
+    position:relative;
+    overflow:hidden;
+    margin: 0 auto;
+
+  ul.faces{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    li{
+      width:85px;
+      height:100%;
+      float:left;
+      opacity: 0.5;
+      &.selected{
+        opacity: 1.0;
+      }
+    }
   }
+}
 
-  .col-xs-2{
-    margin-top: 5%;
-  }
+.pager{
+  position: relative;
   .prev, .next{
+    position: absolute;
+    top: 55px;
     cursor: pointer;
     .fa{
       font-size: 2.0em;
@@ -171,14 +218,15 @@ ul.faces{
       .fa{
         color: silver;
       }
-
     }
   }
+  .prev{
+    left: 20%;
+  }
   .next{
-    text-align: right;
+    right: 20%;
   }
 }
-
 
 .chapter{
   position: relative;
