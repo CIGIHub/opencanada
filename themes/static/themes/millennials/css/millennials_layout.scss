@@ -85,6 +85,7 @@ article .block-PullQuote{
 
 
 ul.faces{
+  -webkit-transform: translate3d(0, 0, 0);
   margin: 0px;
   padding: 0px;
   text-align: center;
@@ -130,57 +131,6 @@ ul.faces{
   }
 }
 
-
-
-//#nav{
-//  li{
-//    display: inline-block;
-//    vertical-align: top;
-//
-//    img{
-//      opacity: 0.3;
-//    }
-//    a{
-//      color: $light-grey;
-//    }
-//    &.selected{
-//      a{
-//        color: black;
-//      }
-//      img{
-//        opacity: 1;
-//      }
-//    }
-//    &:hover{
-//      img{
-//        opacity: 1;
-//      }
-//    }
-//
-//  }
-//
-//  .col-xs-2{
-//    margin-top: 5%;
-//  }
-//  .prev, .next{
-//    cursor: pointer;
-//    .fa{
-//      font-size: 2.0em;
-//      color: $limegreen;
-//    }
-//    &.inactive{
-//      cursor: default;
-//      .fa{
-//        color: silver;
-//      }
-//
-//    }
-//  }
-//  .next{
-//    text-align: right;
-//  }
-//}
-
 #pager{
     height: 130px;
     position:relative;
@@ -207,7 +157,8 @@ ul.faces{
   position: relative;
   .prev, .next{
     position: absolute;
-    top: 55px;
+    top: 35px;
+    padding: 20px;
     cursor: pointer;
     .fa{
       font-size: 2.0em;
@@ -221,10 +172,12 @@ ul.faces{
     }
   }
   .prev{
-    left: 20%;
+    left: 10%;
+    padding-left: 0;
   }
   .next{
-    right: 20%;
+    right: 10%;
+    padding-right: 0;
   }
 }
 
@@ -242,7 +195,54 @@ ul.faces{
   margin-top: -15%;
   opacity: 0.3;
 }
-
+.peter-wright{
+  background-image: url("../img/peter-wright.png");
+}
+.anne-maryssa_poitras-fortier{
+  background-image: url("../img/anne-maryssa_poitras-fortier.png");
+}
+.rory-morrison{
+  background-image: url("../img/rory-morrison.png");
+}
+.ben-rankin{
+    background-image: url("../img/ben-rankin.png");
+}
+.katharine-cornish{
+    background-image: url("../img/katharine-cornish.png");
+}
+.laurence-beaulieu-morency{
+    background-image: url("../img/laurence-beaulieu-morency.png");
+}
+.neil-krell{
+    background-image: url("../img/neil-krell.png");
+}
+.emma-bell-scollan{
+    background-image: url("../img/emma-bell-scollan.png");
+}
+.madeliene-sourisseau{
+    background-image: url("../img/madeliene-sourisseau.png");
+}
+.nicholas-harper{
+    background-image: url("../img/nicholas-harper.png");
+}
+.chelsea-sayers{
+    background-image: url("../img/chelsea-sayers.png");
+}
+.andrei-marinescu{
+    background-image: url("../img/andrei-marinescu.png");
+}
+.hilary-jensen{
+    background-image: url("../img/hilary-jensen.png");
+}
+.paige-gouin{
+    background-image: url("../img/paige-gouin.png");
+}
+.sean-jellow{
+    background-image: url("../img/sean-jellow.png");
+}
+.ashley-heideman{
+    background-image: url("../img/ashley-heideman.png");
+}
 .james-clark{
     background-image: url("../img/james-clark.png");
 }
@@ -298,6 +298,15 @@ ul.faces{
   .narrow-content{
     margin-left: 0;
     margin-right: 0;
+  }
+
+  .pager{
+    .prev{
+      left: 0%;
+    }
+    .next{
+      right: 0%;
+    }
   }
 }
 

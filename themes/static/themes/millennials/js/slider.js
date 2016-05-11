@@ -1,7 +1,8 @@
 (function ($) {
 
     var breakpoint = 985;
-    var xsBreakpoint = 600;
+    var smBreakpoint = 480;
+    var xsBreakpoint = 320;
     var windowWidth = $(window).width();
 
     var chapter = $('.profile .chapter');
@@ -13,6 +14,7 @@
     var pagerCount = pagerItem.length;
     var pagerItemWidth = pagerItem.width();
     var pagerWidth = pagerItemWidth * 5;
+    var pagerDisplayLimit = 5;
 
     var hash = window.location.hash;
     var menuIndex = 0;
@@ -21,14 +23,13 @@
         chapter.hide();
 
         if(windowWidth < xsBreakpoint){
-            pagerWidth = pagerItemWidth;
+           pagerDisplayLimit = 1;
         }
-        else if(windowWidth < breakpoint){
-            pagerWidth = pagerItemWidth * 3;
+        if(windowWidth < smBreakpoint){
+            pagerDisplayLimit = 3;
         }
-        else{
-            pagerWidth = pagerItemWidth * 5;
-        }
+        pagerWidth = pagerItemWidth * pagerDisplayLimit;
+
         $('#pager').css("width",  + pagerWidth + "px");
         pager.width(pagerCount * pagerItemWidth);
         pager.css("left", "0px");
@@ -60,6 +61,7 @@
 
     function setPager(hash){
         var selected = null;
+        var pagerPosition = null;
 
         pagerItem.removeClass('selected');
 
@@ -70,23 +72,16 @@
                position = index;
            }
         });
+
+        pagerPosition = -(position * pagerItemWidth);
+        $('#pager ul').css({left: pagerPosition});
+
     }
 
-    function getPagerPosition(){
-        var position = null;
+    function positionPager(hash){
 
-        pagerItem.each(function(index){
-           if($(this).hasClass('selected')){
-               hash = $(this).children().attr('href');
-               position = index;
-           }
-        });
-
-        return {
-            pagerHash : hash,
-            pagerIndex : position
-        };
     }
+
 
     function scrollView() {
       $('html,body').animate({
@@ -98,7 +93,7 @@
     /*  Activate selected slider and set pager */
      $(document).ready(function (e) {
 
-        initPage();
+        initPage(windowWidth);
         menuItem.on('click tap', getSlide);
         pagerItemLink.on('click tap', getSlide);
 
