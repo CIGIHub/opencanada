@@ -1,8 +1,8 @@
 (function ($) {
 
     var breakpoint = 985;
-    var smBreakpoint = 480;
-    var xsBreakpoint = 320;
+    var smBreakpoint = 600;
+    var xsBreakpoint = 480;
     var windowWidth = $(window).width();
 
     var chapter = $('.profile .chapter');
@@ -11,77 +11,133 @@
     var pager = $('#pager ul');
     var pagerItem = $('#pager ul li');
     var pagerItemLink = $('#pager ul li a');
+
     var pagerCount = pagerItem.length;
+    var indexCount = pagerCount - 1;
+
     var pagerItemWidth = pagerItem.width();
     var pagerWidth = pagerItemWidth * 5;
+    var fullPagerWidth = pagerCount * pagerItemWidth;
+
     var pagerDisplayLimit = 5;
 
+    var selectedIndex = 0;
+    var selectedItem = null;
     var hash = window.location.hash;
-    var menuIndex = 0;
 
     function initPage(windowWidth){
         chapter.hide();
 
         if(windowWidth < xsBreakpoint){
-           pagerDisplayLimit = 1;
+           pagerDisplayLimit = 2;
         }
-        if(windowWidth < smBreakpoint){
+        else if(windowWidth < smBreakpoint){
             pagerDisplayLimit = 3;
         }
-        pagerWidth = pagerItemWidth * pagerDisplayLimit;
+        else{
+            pagerDisplayLimit = 5;
+        }
 
+        pagerWidth = pagerItemWidth * pagerDisplayLimit;
         $('#pager').css("width",  + pagerWidth + "px");
-        pager.width(pagerCount * pagerItemWidth);
+        pager.width(fullPagerWidth);
         pager.css("left", "0px");
 
         if(hash === '' || hash === '#undefined'){
-            hash = menuItem.first().attr('href');
-            $('.prev').addClass('inactive');
-            $('.next').removeClass('inactive');
+            selectedItem = menuItem.first().attr('href');
+        }
+        else{
+            selectedItem = hash;
         }
 
-        $('.profile .chapter' + hash).addClass('active').fadeIn(800);
-        setPager(hash);
+        loadSlide(selectedItem);
     }
 
     function getSlide(){
-        hash = $(this).attr('href');
-        loadSlide(hash);
+        selectedItem = $(this).attr('href');
+        loadSlide(selectedItem);
         scrollView();
-        setPager(hash);
     }
 
-    function loadSlide(hash){
-        menuIndex = menuItem.index(this);
+    function loadSlide(selectedItem){
         window.location.hash = hash;
+
+        selectedIndex = getSelectedIndex(selectedItem);
+        setPagerPosition(selectedIndex);
+
         $('.profile .chapter').removeClass('active').hide();
-        $('.profile .chapter' + hash).addClass('active').fadeIn(800);
+        $('.profile .chapter' + selectedItem).addClass('active').fadeIn(800);
         return false;
     }
 
-    function setPager(hash){
-        var selected = null;
-        var pagerPosition = null;
+    function getSelectedIndex(selectedItem) {
 
         pagerItem.removeClass('selected');
-
-        pagerItem.each(function(index){
-           if($(this).children().attr('href') === hash){
-               $(this).addClass('selected');
-               selected = $(this);
-               position = index;
-           }
+        pagerItem.each(function (index) {
+            if ($(this).children().attr('href') === selectedItem) {
+                $(this).addClass('selected');
+                selected = $(this);
+                selectedIndex = index;
+            }
         });
+        return selectedIndex;
+    }
 
-        pagerPosition = -(position * pagerItemWidth);
+    function setPagerPosition(selectedIndex){
+        var pagerPosition = 0;
+
+        if(pagerDisplayLimit === 2){
+            if(selectedIndex === indexCount){
+                pagerPosition = -(selectedIndex * pagerItemWidth - pagerItemWidth);
+            }
+            else{
+                pagerPosition = -(selectedIndex * pagerItemWidth);
+            }
+        }
+        else if(pagerDisplayLimit === 3){
+            if(selectedIndex === 0 ){
+                pagerPosition = -(selectedIndex * pagerItemWidth);
+            }
+            else if(selectedIndex === indexCount){
+                pagerPosition = -(selectedIndex * pagerItemWidth - 2 * pagerItemWidth);
+            }
+            else{
+                pagerPosition = -(selectedIndex * pagerItemWidth - pagerItemWidth);
+            }
+        }
+        else if(pagerDisplayLimit === 5){
+            if(selectedIndex < 2 ){
+                pagerPosition = -((selectedIndex * pagerItemWidth) - (selectedIndex * pagerItemWidth));
+            }
+            else if(selectedIndex >  indexCount - 2){
+                pagerPosition = -(selectedIndex * pagerItemWidth - (pagerDisplayLimit - 1 - (indexCount - selectedIndex)) * pagerItemWidth);
+            }
+            else{
+                pagerPosition = -(selectedIndex * pagerItemWidth - 2 * pagerItemWidth);
+            }
+        }
+
         $('#pager ul').css({left: pagerPosition});
+        setPagerArrow();
 
     }
 
-    function positionPager(hash){
+    function setPagerArrow(){
+        var sliderPosition = null;
+        sliderPosition = parseInt(($('#pager ul').css("left")).replace(/px/, ''));
+
+        if(sliderPosition === 0){
+            $('.prev').addClass('inactive');
+        }
+        else if(sliderPosition === (-(fullPagerWidth - pagerDisplayLimit * pagerItemWidth))){
+            $('.next').addClass('inactive');
+        }
+        else{
+            $('.prev').removeClass('inactive');
+            $('.next').removeClass('inactive');
+        }
 
     }
-
 
     function scrollView() {
       $('html,body').animate({
@@ -97,27 +153,18 @@
         menuItem.on('click tap', getSlide);
         pagerItemLink.on('click tap', getSlide);
 
-
         $('.prev').click(function () {
-            $('.next').removeClass('inactive');
-
+            setPagerArrow();
             if(!($('.prev').hasClass('inactive'))) {
                 $('#pager ul').animate({left: '+=' + pagerItemWidth}, 500);
-                if($('#pager ul').css("left") === "-85px"){
-                    $('.prev').addClass('inactive');
-                }
+
             }
         });
 
         $('.next').click(function () {
-
-            $('.prev').removeClass('inactive');
+            setPagerArrow();
             if(!($('.next').hasClass('inactive'))){
                 $('#pager ul').animate({left: '-='+pagerItemWidth}, 500);
-                console.log($('#pager ul').css("left"));
-                if($('#pager ul').css("left") === "-255px"){
-                    $('.next').addClass('inactive');
-                }
 
             }
         });
