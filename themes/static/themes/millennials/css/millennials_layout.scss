@@ -215,6 +215,7 @@ ul.faces{
   -o-transition: opacity .5s ease-out;
 }
 .reveal{
+  display: block;
     position: absolute;
     margin-top: 60%;
     margin-left: 0%;
@@ -325,6 +326,10 @@ ul.faces{
     background-position: center;
     opacity: 0.8;
     margin: 0 auto -2%;
+  }
+
+  .reveal{
+    display: none;
   }
 
   .narrow-content{
