@@ -23,8 +23,6 @@
 
     var selectedIndex = 0;
     var selectedItem = null;
-    var hash = window.location.hash;
-
     var animating = false;
 
     function initPage(windowWidth){
@@ -45,30 +43,29 @@
         pager.width(fullPagerWidth);
         pager.css("left", "0px");
 
-        if(hash === '' || hash === '#undefined'){
+        if(window.location.hash === '' || window.location.hash === '#undefined'){
             selectedItem = menuItem.first().attr('href');
         }
         else{
-            selectedItem = hash;
+            selectedItem = window.location.hash;
         }
-
         loadSlide(selectedItem);
     }
 
     function getSlide(){
+
         selectedItem = $(this).attr('href');
         loadSlide(selectedItem);
         scrollView($('.profile'));
     }
 
     function loadSlide(selectedItem){
-        window.location.hash = hash;
 
+        chapter.removeClass('active').hide();
+        $('.profile .chapter' + selectedItem).addClass('active').fadeIn(800);
         selectedIndex = getSelectedIndex(selectedItem);
         setPagerPosition(selectedIndex);
-
-        $('.profile .chapter').removeClass('active').hide();
-        $('.profile .chapter' + selectedItem).addClass('active').fadeIn(800);
+        window.location.hash = selectedItem;
         return false;
     }
 
@@ -151,8 +148,9 @@
      $(document).ready(function (e) {
 
         initPage(windowWidth);
+
         menuItem.on('click tap', getSlide);
-        pagerItemLink.on('click tap', getSlide);
+        pagerItemLink.on('click', getSlide);
 
          $('.top-link').click(function(){
              scrollView($('.story'));
