@@ -45,7 +45,7 @@
         pager.width(fullPagerWidth);
         pager.css("left", "0px");
 
-        if(hash === '' || hash === '#undefined' || hash === '#toc'){
+        if(hash === '' || hash === '#undefined'){
             selectedItem = menuItem.first().attr('href');
         }
         else{
@@ -58,7 +58,7 @@
     function getSlide(){
         selectedItem = $(this).attr('href');
         loadSlide(selectedItem);
-        scrollView();
+        scrollView($('.profile'));
     }
 
     function loadSlide(selectedItem){
@@ -140,9 +140,9 @@
         }
     }
 
-    function scrollView() {
+    function scrollView(target) {
       $('html,body').animate({
-          scrollTop: $('.profile').offset().top
+          scrollTop: target.offset().top
       }, 1000);
         return false;
     }
@@ -153,8 +153,14 @@
         initPage(windowWidth);
         menuItem.on('click tap', getSlide);
         pagerItemLink.on('click tap', getSlide);
+
+         $('.top-link').click(function(){
+             scrollView($('.story'));
+         })
+
     });
 
+    //control pager
     $(document).on("click", ".next", function () {
         if(parseInt(pager.css("left")) >= -fullPagerWidth + (pagerDisplayLimit + 1)*85) {
             animating = true;
@@ -177,7 +183,7 @@
         }
     });
 
-
+    //reset variables on window resize
     $(window).resize(function() {
         windowWidth = $(window).width();
         initPage(windowWidth);
