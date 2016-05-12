@@ -67,6 +67,16 @@ article ul.share-links{
     margin-top: 0px;
     margin-bottom: 20px;
   }
+  h4{
+    font-family: $header-font;
+    text-transform: capitalize;
+    font-weight: bold;
+    font-size: 1.3em;
+    margin-bottom: 0.5em;
+    &::after{
+      content: ':';
+    }
+  }
 
   .share-chapter{
     a{
@@ -185,6 +195,10 @@ ul.faces{
 .chapter{
   position: relative;
   margin-top: 15%;
+  h3 span{
+    color: $limegreen;
+    font-size: 1.2em;
+  }
 }
 
 .background-photo{
@@ -192,10 +206,29 @@ ul.faces{
   height: 150%;
   position: absolute;
   background-repeat: no-repeat;
-  margin-left: -50%;
+  margin-left: -35%;
   margin-top: -15%;
   opacity: 0.3;
+  transition: opacity .5s ease-out;
+  -moz-transition: opacity .5s ease-out;
+  -webkit-transition: opacity .5s ease-out;
+  -o-transition: opacity .5s ease-out;
 }
+.reveal{
+    position: absolute;
+    margin-top: 60%;
+    margin-left: 0%;
+    padding: 10px;
+    border: solid 2px $silver;
+    width: 42px;
+    font-size: 1.5em;
+    color: $silver;
+
+    &:hover{
+      cursor: pointer;
+    }
+  }
+
 .peter-wright{
   background-image: url("../img/peter-wright.png");
 }

@@ -22,7 +22,7 @@
 
                 <div class="chapter" id="{{ chapter.value.heading|slugify }}">
                     <div class="background-photo {{ chapter.value.heading|slugify }}"></div>
-
+                    <div class="reveal"><i class="fa fa-expand" aria-hidden="true"></i></div>
                     {% if chapter.value.share_this_chapter %}
                         <div class="share-chapter">
                             <a href="{% get_twitter_share_url chapter %}"><i class="fa fa-twitter"></i></a>

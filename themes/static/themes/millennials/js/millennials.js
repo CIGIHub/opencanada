@@ -27,6 +27,26 @@ jQuery(document).ready(function() {
         });
     }
 
+    if($('.chapter h3').length){
+        $('.chapter h3').each(function(){
+            var originalText = $(this).text();
+            if (originalText.indexOf(":") >= 0){
+                var pieces = originalText.split(":");
+                var newText = pieces[0] + '<span class="label">' + pieces[1] + '</span>';
+                $(this).html(newText);
+            }
+        });
+    }
+    
+    if($('.reveal').length){
+        $(".reveal").mouseenter(function() {
+		 $(".background-photo").css('opacity', '1.0');
+        }).mouseleave(function () {
+		 $(".background-photo").css('opacity', '0.3');
+	 });
+    }
+
+
     $(".colorize").letterEffect({
                  "effectParam": "color",
                 "effectValues": [ "#196518", "#8c1b1b", "#555f04", "#1b5979", "#944b10" ],
