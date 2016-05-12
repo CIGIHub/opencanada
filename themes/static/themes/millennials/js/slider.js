@@ -25,6 +25,8 @@
     var selectedItem = null;
     var hash = window.location.hash;
 
+    var animating = false;
+
     function initPage(windowWidth){
         chapter.hide();
 
@@ -43,7 +45,7 @@
         pager.width(fullPagerWidth);
         pager.css("left", "0px");
 
-        if(hash === '' || hash === '#undefined'){
+        if(hash === '' || hash === '#undefined' || hash === '#toc'){
             selectedItem = menuItem.first().attr('href');
         }
         else{
@@ -126,7 +128,7 @@
         var sliderPosition = null;
         sliderPosition = parseInt(($('#pager ul').css("left")).replace(/px/, ''));
 
-        if(sliderPosition === 0){
+        if(sliderPosition >= 0){
             $('.prev').addClass('inactive');
         }
         else if(sliderPosition === (-(fullPagerWidth - pagerDisplayLimit * pagerItemWidth))){
@@ -136,7 +138,6 @@
             $('.prev').removeClass('inactive');
             $('.next').removeClass('inactive');
         }
-
     }
 
     function scrollView() {
@@ -152,24 +153,30 @@
         initPage(windowWidth);
         menuItem.on('click tap', getSlide);
         pagerItemLink.on('click tap', getSlide);
-
-        $('.prev').click(function () {
-            setPagerArrow();
-            if(!($('.prev').hasClass('inactive'))) {
-                $('#pager ul').animate({left: '+=' + pagerItemWidth}, 500);
-
-            }
-        });
-
-        $('.next').click(function () {
-            setPagerArrow();
-            if(!($('.next').hasClass('inactive'))){
-                $('#pager ul').animate({left: '-='+pagerItemWidth}, 500);
-
-            }
-        });
-
     });
+
+    $(document).on("click", ".next", function () {
+        if(parseInt(pager.css("left")) >= -fullPagerWidth + (pagerDisplayLimit + 1)*85) {
+            animating = true;
+            pager.animate({left: '-='+pagerItemWidth}, 500, function(){ animating = false;});
+        }
+        setPagerArrow();
+    });
+
+    $(document).on("click", ".prev", function () {
+        if(parseInt(pager.css("left")) < 0) {
+           animating = true;
+           pager.stop().animate({left: '+=' + pagerItemWidth}, 500, function(){ animating = false;});
+        }
+        setPagerArrow();
+    });
+
+    $(".next, .prev").click(function () {
+        if (animating) {
+            return false;
+        }
+    });
+
 
     $(window).resize(function() {
         windowWidth = $(window).width();
