@@ -55,6 +55,7 @@
 
         selectedItem = $(this).attr('href');
         loadSlide(selectedItem);
+        window.location.hash = selectedItem;
         scrollView($('.profile'));
     }
 
@@ -64,7 +65,7 @@
         $('.profile .chapter' + selectedItem).addClass('active').stop(true, true).fadeIn(800);
         selectedIndex = getSelectedIndex(selectedItem);
         setPagerPosition(selectedIndex);
-        window.location.hash = selectedItem;
+
         return false;
     }
 
@@ -152,7 +153,7 @@
         pagerItemLink.on('click', getSlide);
 
          $('.top-link').click(function(){
-             scrollView($('.story'));
+             scrollView($('#article-page'));
          })
 
     });
@@ -163,16 +164,17 @@
         if(parseInt(pager.css("left")) >= -fullPagerWidth + (pagerDisplayLimit + 1)*85) {
             left = parseInt(pager.css("left")) - 85;
             pager.css('left', left);
+            setPagerArrow();
         }
-        setPagerArrow();
+
     });
 
     $(document).on("click", ".prev", function () {
         if(parseInt(pager.css("left")) < 0) {
             left = parseInt(pager.css("left")) + 85;
             pager.css('left', left);
+            setPagerArrow();
         }
-        setPagerArrow();
     });
 
     //reset variables on window resize

@@ -1,10 +1,12 @@
 jQuery(document).ready(function() {
+    var windowWidth = null;
 
     $(window).on('load resize', function(){
-        var windowWidth = $(window).width();
+        windowWidth = $(window).width();
         if($('.quote').length && windowWidth > 992){
             quoteSize();
         }
+
     });
 
     function quoteSize(){
@@ -47,14 +49,14 @@ jQuery(document).ready(function() {
     }
 
 
-    // $(".colorize").letterEffect({
-    //              "effectParam": "color",
-    //             "effectValues": [ "#196518", "#8c1b1b", "#555f04", "#1b5979", "#944b10" ],
-    //         "ambientAnimation": true,
-    //          "ambientstrength": .2,
-    //                     "time": 1,
-    //                     "drift": 0.25,
-    //           "hoverAnimation": true,
-    //                "hoverTime": .3
-    //     });
+// $(".colorize").letterEffect({
+        //          "effectParam": "color",
+        //         "effectValues": [ "#196518", "#8c1b1b", "#555f04", "#1b5979", "#944b10" ],
+        //     "ambientAnimation": true,
+        //      "ambientstrength": .2,
+        //                 "time": 1,
+        //                 "drift": 0.25,
+        //       "hoverAnimation": true,
+        //            "hoverTime": .3
+        // });
 });

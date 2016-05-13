@@ -129,8 +129,11 @@ ul.faces{
 }
 
 #toc ul{
+
   &.faces{
-    width: 100%;
+    overflow: auto;
+    margin-left: 2%;
+
   }
 
   li {
@@ -174,7 +177,7 @@ ul.faces{
   .prev, .next{
     position: absolute;
     top: 35px;
-    padding: 20px;
+    padding: 20px 50px;
     cursor: pointer;
     .fa{
       font-size: 2.0em;
@@ -189,11 +192,11 @@ ul.faces{
   }
   .prev{
     left: 10%;
-    padding-left: 0;
+    padding-left: 20px;
   }
   .next{
     right: 10%;
-    padding-right: 0;
+    padding-right: 20px;
   }
 }
 
@@ -309,6 +312,10 @@ ul.faces{
     border: none;
   }
 
+  #toc ul.faces{
+    margin-left: 7%;
+  }
+
   .story{
     h2{
       font-size: 25px;
@@ -355,5 +362,8 @@ ul.faces{
 @media(max-width: 480px){
   .template-article-page h1.medium{
     font-size: 3.0em;
+  }
+  #toc ul.faces{
+    margin-left: 3%;
   }
 }
