@@ -1,6 +1,6 @@
 (function ($) {
 
-    var breakpoint = 985;
+    var lgBreakpoint = 1000;
     var smBreakpoint = 600;
     var xsBreakpoint = 480;
     var windowWidth = $(window).width();
@@ -32,6 +32,9 @@
         }
         else if(windowWidth < smBreakpoint){
             pagerDisplayLimit = 3;
+        }
+        else if(windowWidth < breakpoint){
+            pagerDisplayLimit = 5;
         }
         else{
             pagerDisplayLimit = 7;
