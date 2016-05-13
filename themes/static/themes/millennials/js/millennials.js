@@ -1,6 +1,6 @@
 jQuery(document).ready(function() {
-    var windowWidth = null;
 
+    var windowWidth = $(window).width();
     $(window).on('load resize', function(){
         windowWidth = $(window).width();
         if($('.quote').length && windowWidth > 992){
@@ -47,16 +47,18 @@ jQuery(document).ready(function() {
 		 $(".background-photo").css('opacity', '0.3');
 	 });
     }
+    
+    if(windowWidth > 600 ){
+        $(".colorize").letterEffect({
+                 "effectParam": "color",
+                "effectValues": [ "#196518", "#8c1b1b", "#555f04", "#1b5979", "#944b10" ],
+            "ambientAnimation": true,
+             "ambientstrength": .2,
+                        "time": 1,
+                        "drift": 0.25,
+              "hoverAnimation": true,
+                   "hoverTime": .3
+        });
+    }
 
-
-// $(".colorize").letterEffect({
-        //          "effectParam": "color",
-        //         "effectValues": [ "#196518", "#8c1b1b", "#555f04", "#1b5979", "#944b10" ],
-        //     "ambientAnimation": true,
-        //      "ambientstrength": .2,
-        //                 "time": 1,
-        //                 "drift": 0.25,
-        //       "hoverAnimation": true,
-        //            "hoverTime": .3
-        // });
 });
