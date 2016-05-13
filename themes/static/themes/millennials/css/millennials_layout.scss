@@ -96,7 +96,6 @@ article .block-PullQuote{
 
 
 ul.faces{
-  -webkit-transform: translate3d(0, 0, 0);
   margin: 0px;
   padding: 0px;
   text-align: center;
@@ -149,6 +148,11 @@ ul.faces{
     margin: 0 auto;
 
   ul.faces{
+    -webkit-transform: translate3d(0,0,0);
+        -webkit-transition: all 0.5s linear;
+        transform: translate3d(0,0,0);
+        transition: all 0.5s linear;
+
     width: 100%;
     height: 100%;
     position: absolute;
