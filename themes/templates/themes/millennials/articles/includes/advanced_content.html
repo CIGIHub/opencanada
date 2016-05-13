@@ -7,7 +7,9 @@
                 <ul class="faces">
                     {% for chapter in self.chapters %}
                         <li class="colour-filter"><a href="#{{ chapter.value.heading|slugify }}">
-                            <img src="/static/themes/millennials/img/{{ chapter.value.heading|slugify }}-sm.png">
+
+                            <img src="{% static "/static/themes/millennials/img/" %}{{ chapter.value.heading|slugify }}-sm.png">
+{#                            <img src="/static/themes/millennials/img/{{ chapter.value.heading|slugify }}-sm.png">#}
                             <div>{{ chapter.value.heading }}</div>
                         </a></li>
                     {% endfor %}
@@ -44,7 +46,7 @@
             <ul class="faces">
                 {% for chapter in self.chapters %}
                     <li class="colour-filter"><a href="#{{ chapter.value.heading|slugify }}">
-                        <img src="/static/themes/millennials/img/{{ chapter.value.heading|slugify }}-sm.png">
+                        <img src="{% static "/static/themes/millennials/img/" %}{{ chapter.value.heading|slugify }}-sm.png">
                         <div>{{ chapter.value.heading }}</div>
                     </a></li>
                 {% endfor %}
