@@ -69,50 +69,22 @@
             <div class="body-content">{% include 'articles/includes/story-content.html' %}</div>
             {% include 'themes/millennials/articles/includes/advanced_content.html' %}
 
-            {% if self.main_image and self.include_caption_in_footer %}
-                 <div class="container">
-                    <div class="feature-caption narrow-content">
-                        {% if self.main_image.credit %}
-                            {{ self.main_image.credit }}
-                        {% endif %}
-                    </div>
-                 </div>
-            {% endif %}
-
-            <div class="home-link"><a href="/"><img src="{% static 'themes/dark/img/opencanada-mark-white.png' %}"></a></div>
         </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 credits">
 
-        {% if self.topics %}
-            <div class="container">
-                <div class="topics related narrow-content">
-                    <div class="topic-label"><i class="fa fa-tags"></i> Topics:</div>
-                    <ul class="list-inline">
-                        {% for topic in self.topics %}
-                            <li><a href="{% topic_url topic %}">{{ topic }}</a></li>
-                        {% endfor %}
-                    </ul>
+                    <p><span>Credits</span><br/>
+                        Illustrator: Garth Laidlaw<br/>
+                        Development: Natasha Scott, Alex Myciak<br/>
+                        Interaction Design: Frank Flitton<br/>
+                        Design: Som Tsoi</p>
                 </div>
             </div>
-        {% endif %}
+        </div>
     </article>
 
-    {% if self.series_articles %}
-        <div class="container">
-            <section class="in-the-series">
-                <h2>Also in the series</h2>
-                {% for series, articles in self.series_articles %}
-                    <div class="series-teaser">
-                        {% spaceless %}<div class="series-title"><a href="{{ series.url }}">{{ series.title }}</a>
-                            {% if series.subtitle %}<span>: </span>{{ series.subtitle|richtext }}{% endif %}</div>{% endspaceless %}
-                        {{ series.short_description|richtext }}
-                    </div>
-                    {% block in_the_series %}
-                        {% include 'articles/includes/in_the_series.html' %}
-                    {% endblock %}
-                {% endfor %}
-            </section>
-        </div>
-    {% endif %}
+
 
 {% endblock %}
 

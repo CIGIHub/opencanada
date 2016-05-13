@@ -12,7 +12,7 @@ body{
 }
 
 .body-content p:last-child{
-
+  margin-bottom: 10px;
   border-bottom: solid 2px $limegreen;
 }
 
@@ -133,6 +133,7 @@ ul.faces{
   &.faces{
     overflow: auto;
     margin-left: 2%;
+    margin-top: 20px;
 
   }
 
@@ -204,19 +205,18 @@ ul.faces{
   position: relative;
   margin-top: 15%;
   h3 span{
-    color: $limegreen;
     font-size: 1.2em;
   }
 }
 
 .background-photo{
-  width: 100%;
+  width: 80%;
   height: 100%;
   position: absolute;
   background-repeat: no-repeat;
   margin-left: -35%;
   margin-top: -15%;
-  opacity: 0.3;
+  opacity: 0.15;
   transition: opacity .5s ease-out;
   -moz-transition: opacity .5s ease-out;
   -webkit-transition: opacity .5s ease-out;
@@ -228,10 +228,10 @@ ul.faces{
     margin-top: 60%;
     margin-left: 0%;
     padding: 10px;
-    border: solid 2px $silver;
+    border: solid 2px $limegreen;
     width: 42px;
     font-size: 1.5em;
-    color: $silver;
+    color: $limegreen;
 
     &:hover{
       cursor: pointer;
@@ -293,6 +293,16 @@ ul.faces{
     background-image: url("../img/lynsey-longfield.png");
 }
 
+.credits{
+  text-align: center;
+  color: $tapa;
+  font-size: 0.7em;
+  line-height: 130%;
+  font-family: $sans-serif;
+  span{
+    font-weight:bold;
+  }
+}
 
 @media(max-width: $screen-sm){
 

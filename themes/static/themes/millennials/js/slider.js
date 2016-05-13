@@ -16,10 +16,10 @@
     var indexCount = pagerCount - 1;
 
     var pagerItemWidth = pagerItem.width();
-    var pagerWidth = pagerItemWidth * 5;
+    var pagerWidth = pagerItemWidth * 7;
     var fullPagerWidth = pagerCount * pagerItemWidth;
 
-    var pagerDisplayLimit = 5;
+    var pagerDisplayLimit = 7;
 
     var selectedIndex = 0;
     var selectedItem = null;
@@ -34,7 +34,7 @@
             pagerDisplayLimit = 3;
         }
         else{
-            pagerDisplayLimit = 5;
+            pagerDisplayLimit = 7;
         }
 
         pagerWidth = pagerItemWidth * pagerDisplayLimit;
@@ -162,7 +162,7 @@
     $(document).on("click", ".next", function () {
 
         if(parseInt(pager.css("left")) >= -fullPagerWidth + (pagerDisplayLimit + 1)*85) {
-            left = parseInt(pager.css("left")) - 85;
+            left = parseInt(pager.css("left")) - 85*pagerDisplayLimit;
             pager.css('left', left);
             setPagerArrow();
         }
@@ -171,7 +171,7 @@
 
     $(document).on("click", ".prev", function () {
         if(parseInt(pager.css("left")) < 0) {
-            left = parseInt(pager.css("left")) + 85;
+            left = parseInt(pager.css("left")) + 85*pagerDisplayLimit;
             pager.css('left', left);
             setPagerArrow();
         }
