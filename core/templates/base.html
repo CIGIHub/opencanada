@@ -31,6 +31,17 @@
             <meta property="og:image:height" content="288" />
         {% endif %}
 
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+        {% compress css %}
+            {% block theme_css %}
+                <link rel="stylesheet" type="text/x-scss" href="{% static 'css/opencanada.scss' %}">
+            {% endblock %}
+            {% block print_css %}
+                    <link rel="stylesheet" type="text/x-scss" media="print" href="{% static 'css/print.scss' %}">
+                {% endblock %}
+        {% endcompress %}
+    
         {% block feedlink %}<link rel="home" type="application/rss+xml" href="/feed/" />{% endblock feedlink %}
     </head>
 
@@ -69,16 +80,6 @@
     {% endblock %}
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-
-    {% compress css %}
-        {% block theme_css %}
-            <link rel="stylesheet" type="text/x-scss" href="{% static 'css/opencanada.scss' %}">
-        {% endblock %}
-        {% block print_css %}
-                <link rel="stylesheet" type="text/x-scss" media="print" href="{% static 'css/print.scss' %}">
-            {% endblock %}
-    {% endcompress %}
 
     {% block extra_css %}
 
