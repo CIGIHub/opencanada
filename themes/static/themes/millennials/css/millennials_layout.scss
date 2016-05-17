@@ -1,0 +1,383 @@
+body{
+  background-color: $body-bg-color;
+}
+
+.template-article-page h1.medium{
+  font-family: $header-font;
+  font-size: 3.5em;
+}
+
+.contributors{
+  font-weight: bold;
+}
+
+.body-content p:last-child{
+  margin-bottom: 10px;
+  border-bottom: solid 2px $limegreen;
+}
+
+hr{
+  border-bottom: solid 2px $limegreen;
+}
+
+.home-link{
+  display: none;
+}
+
+article .top-link{
+  text-align: center;
+  font-weight: 700;
+  margin: 0;
+  a{
+    color: black;
+  }
+  .fa{
+    font-size: 2.5em;
+    color: $limegreen;
+  }
+  &:after{
+    content: none;
+  }
+}
+
+article ul.share-links{
+  position: relative;
+  li{
+    display: inline-block;
+    text-align: left;
+    i{
+      font-size: 1.5em;
+    }
+    span, a{
+      color: $limegreen;
+    }
+  }
+}
+
+.story{
+  h2, h3{
+    text-align: center;
+    font-family: $header-font;
+  }
+  h2{
+    font-size: 40px;
+  }
+  h3{
+    font-size: 18px;
+    margin-top: 0px;
+    margin-bottom: 20px;
+  }
+  h4{
+    font-family: $header-font;
+    text-transform: capitalize;
+    font-weight: bold;
+    font-size: 1.3em;
+    margin-bottom: 0.5em;
+    &::after{
+      content: ':';
+    }
+  }
+
+  .share-chapter{
+    a{
+      color: $limegreen;
+    }
+  }
+}
+
+article .block-PullQuote{
+  border: none;
+  color: $limegreen;
+  font-family: $header-font;
+  font-weight: 700;
+  padding-top: 0px;
+}
+
+
+
+ul.faces{
+  margin: 0px;
+  padding: 0px;
+  text-align: center;
+
+  li.colour-filter{
+    list-style: none;
+    font-family: $sans-serif;
+    &:hover{
+       -webkit-filter: sepia(1);
+        -moz-filter: sepia(1);
+        -ms-filter: sepia(1);
+        -o-filter: sepia(1);
+        filter: sepia(1);
+    }
+  }
+
+  a{
+      img {
+        display: block;
+        margin: auto;
+      }
+      div {
+        font-size: 0.8em;
+        margin: 0 10%;
+        font-weight: 700;
+        line-height: 100%;
+        text-align: center;
+        color: black;
+      }
+  }
+}
+
+#toc ul{
+
+  &.faces{
+    overflow: auto;
+    margin-left: 2%;
+    margin-top: 20px;
+
+  }
+
+  li {
+    min-height: 150px;
+    width: 100px;
+    display: table-cell;
+    float: left;
+  }
+}
+
+#pager{
+    height: 130px;
+    position:relative;
+    overflow:hidden;
+    margin: 0 auto;
+
+  ul.faces{
+    -webkit-transform: translate3d(0,0,0);
+        -webkit-transition: all 0.5s linear;
+        transform: translate3d(0,0,0);
+        transition: all 0.5s linear;
+
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    li{
+      width:85px;
+      height:100%;
+      display: block;
+      float:left;
+      opacity: 0.5;
+      &.selected{
+        opacity: 1.0;
+      }
+    }
+  }
+}
+
+.pager{
+  position: relative;
+  .prev, .next{
+    position: absolute;
+    top: 35px;
+    padding: 20px 50px;
+    cursor: pointer;
+    .fa{
+      font-size: 2.0em;
+      color: $limegreen;
+    }
+    &.inactive{
+      cursor: default;
+      .fa{
+        color: silver;
+      }
+    }
+  }
+  .prev{
+    left: 10%;
+    padding-left: 20px;
+  }
+  .next{
+    right: 10%;
+    padding-right: 20px;
+  }
+}
+
+.chapter{
+  position: relative;
+  margin-top: 8%;
+  h3 span{
+    font-size: 1.2em;
+  }
+}
+
+.background-photo{
+  z-index: -100;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-repeat: no-repeat;
+  margin-left: -35%;
+  margin-top: -15%;
+  opacity: 0.15;
+  transition: opacity .5s ease-out;
+  -moz-transition: opacity .5s ease-out;
+  -webkit-transition: opacity .5s ease-out;
+  -o-transition: opacity .5s ease-out;
+}
+.reveal{
+  display: block;
+    position: absolute;
+    margin-top: 60%;
+    margin-left: 0%;
+    padding: 10px;
+    border: solid 2px $limegreen;
+    width: 42px;
+    font-size: 1.5em;
+    color: $limegreen;
+
+    &:hover{
+      cursor: pointer;
+    }
+  }
+
+.peter-wright{
+  background-image: url("../img/peter-wright.png");
+}
+.anne-maryssa-poitras-fortier{
+  background-image: url("../img/anne-maryssa_poitras-fortier.png");
+}
+.rory-morrison{
+  background-image: url("../img/rory-morrison.png");
+}
+.ben-rankin{
+    background-image: url("../img/ben-rankin.png");
+}
+.katharine-cornish{
+    background-image: url("../img/katharine-cornish.png");
+}
+.laurence-beaulieu-morency{
+    background-image: url("../img/laurence-beaulieu-morency.png");
+}
+.neil-krell{
+    background-image: url("../img/neil-krell.png");
+}
+.emma-bell-scollan{
+    background-image: url("../img/emma-bell-scollan.png");
+}
+.madeleine-sourisseau{
+    background-image: url("../img/madeleine-sourisseau.png");
+}
+.nicholas-harper{
+    background-image: url("../img/nicholas-harper.png");
+}
+.chelsea-sayers{
+    background-image: url("../img/chelsea-sayers.png");
+}
+.andrei-marinescu{
+    background-image: url("../img/andrei-marinescu.png");
+}
+.hilary-jensen{
+    background-image: url("../img/hilary-jensen.png");
+}
+.paige-gouin{
+    background-image: url("../img/paige-gouin.png");
+}
+.sean-jellow{
+    background-image: url("../img/sean-jellow.png");
+}
+.ashley-heideman{
+    background-image: url("../img/ashley-heideman.png");
+}
+.james-clark{
+    background-image: url("../img/james-clark.png");
+}
+.lynsey-longfield{
+    background-image: url("../img/lynsey-longfield.png");
+}
+
+.credits{
+  text-align: center;
+  color: $tapa;
+  font-size: 0.7em;
+  line-height: 130%;
+  font-family: $sans-serif;
+  span{
+    font-weight:bold;
+  }
+}
+
+@media(max-width: $screen-sm){
+
+  article ul.share-links{
+    margin: 0;
+    li{
+      i{
+        font-size: 2.0em;
+      }
+      div{
+        padding: 0 5px 10px 0;
+      }
+    }
+  }
+
+  .main-image{
+    border: none;
+  }
+
+
+  .story{
+    h2{
+      font-size: 25px;
+    }
+    .share-chapter{
+      font-size: 2.0em;
+    }
+  }
+
+  .chapter{
+    margin-top: 0;
+  }
+
+  .background-photo{
+    width: 100%;
+    height: 500px;
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: 400px 500px;
+    background-position: center;
+    opacity: 0.8;
+    margin: 0 auto -2%;
+  }
+
+  .reveal{
+    display: none;
+  }
+
+  .narrow-content{
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .pager{
+    .prev{
+      left: 0%;
+    }
+    .next{
+      right: 0%;
+    }
+  }
+}
+
+@media(max-width: 480px){
+  .template-article-page h1.medium{
+    font-size: 3.0em;
+  }
+  #toc ul.faces{
+    margin-left: 8%;
+  }
+}
+
+@media(max-width: 320px){
+  #toc ul.faces{
+    margin-left: 3%;
+  }
+}

@@ -1,0 +1,301 @@
+/* ==========================================================================
+   Black, White and Color Filters CSS
+   ========================================================================== */
+
+/* ==========================================================================
+   Transition time set up
+   ========================================================================== */
+
+.colour-filter {
+   -webkit-transition: all 1s ease;
+   -moz-transition:    all 1s ease;
+   -ms-transition:     all 1s ease;
+   -o-transition:      all 1s ease;
+   transition:         all 1s ease;
+}
+
+/* ==========================================================================
+   Sequence of colours
+   ========================================================================== */
+
+.colour-filter:nth-of-type(8n+1), .colour-filter.pink {
+    -webkit-filter: sepia(1) saturate(3) hue-rotate(-60deg) saturate(.6) brightness(1);
+       -moz-filter: sepia(1) saturate(3) hue-rotate(-60deg) saturate(.6) brightness(1);
+        -ms-filter: sepia(1) saturate(3) hue-rotate(-60deg) saturate(.6) brightness(1);
+         -o-filter: sepia(1) saturate(3) hue-rotate(-60deg) saturate(.6) brightness(1);
+            filter: sepia(1) saturate(3) hue-rotate(-60deg) saturate(.6) brightness(1);
+}
+
+.colour-filter:nth-of-type(8n+1):hover, .colour-filter.pink {
+    -webkit-filter: sepia(1) saturate(3) hue-rotate(-60deg) saturate(.6) brightness(1.1);
+       -moz-filter: sepia(1) saturate(3) hue-rotate(-60deg) saturate(.6) brightness(1.1);
+        -ms-filter: sepia(1) saturate(3) hue-rotate(-60deg) saturate(.6) brightness(1.1);
+         -o-filter: sepia(1) saturate(3) hue-rotate(-60deg) saturate(.6) brightness(1.1);
+            filter: sepia(1) saturate(3) hue-rotate(-60deg) saturate(.6) brightness(1.1);
+}
+
+.colour-filter:nth-of-type(8n+2), .colour-filter.blue {
+    -webkit-filter: sepia(1) saturate(3) hue-rotate(-185deg) saturate(.6) brightness(1);
+       -moz-filter: sepia(1) saturate(3) hue-rotate(-185deg) saturate(.6) brightness(1);
+        -ms-filter: sepia(1) saturate(3) hue-rotate(-185deg) saturate(.6) brightness(1);
+         -o-filter: sepia(1) saturate(3) hue-rotate(-185deg) saturate(.6) brightness(1);
+            filter: sepia(1) saturate(3) hue-rotate(-185deg) saturate(.6) brightness(1);
+}
+
+.colour-filter:nth-of-type(8n+2):hover, .colour-filter.blue {
+    -webkit-filter: sepia(1) saturate(3) hue-rotate(-185deg) saturate(.6) brightness(1.1);
+       -moz-filter: sepia(1) saturate(3) hue-rotate(-185deg) saturate(.6) brightness(1.1);
+        -ms-filter: sepia(1) saturate(3) hue-rotate(-185deg) saturate(.6) brightness(1.1);
+         -o-filter: sepia(1) saturate(3) hue-rotate(-185deg) saturate(.6) brightness(1.1);
+            filter: sepia(1) saturate(3) hue-rotate(-185deg) saturate(.6) brightness(1.1);
+}
+
+.colour-filter:nth-of-type(8n+3), .colour-filter.cyan {
+    -webkit-filter: sepia(1) saturate(3) hue-rotate(-205deg) saturate(.4) brightness(1);
+       -moz-filter: sepia(1) saturate(3) hue-rotate(-205deg) saturate(.4) brightness(1);
+        -ms-filter: sepia(1) saturate(3) hue-rotate(-205deg) saturate(.4) brightness(1);
+         -o-filter: sepia(1) saturate(3) hue-rotate(-205deg) saturate(.4) brightness(1);
+            filter: sepia(1) saturate(3) hue-rotate(-205deg) saturate(.4) brightness(1);
+}
+
+.colour-filter:nth-of-type(8n+3):hover, .colour-filter.cyan {
+    -webkit-filter: sepia(1) saturate(3) hue-rotate(-205deg) saturate(.4) brightness(1.1);
+       -moz-filter: sepia(1) saturate(3) hue-rotate(-205deg) saturate(.4) brightness(1.1);
+        -ms-filter: sepia(1) saturate(3) hue-rotate(-205deg) saturate(.4) brightness(1.1);
+         -o-filter: sepia(1) saturate(3) hue-rotate(-205deg) saturate(.4) brightness(1.1);
+            filter: sepia(1) saturate(3) hue-rotate(-205deg) saturate(.4) brightness(1.1);
+}
+
+.colour-filter:nth-of-type(8n+4), .colour-filter.green {
+    -webkit-filter: sepia(1) saturate(3) hue-rotate(40deg) saturate(.6) brightness(1);
+       -moz-filter: sepia(1) saturate(3) hue-rotate(40deg) saturate(.6) brightness(1);
+        -ms-filter: sepia(1) saturate(3) hue-rotate(40deg) saturate(.6) brightness(1);
+         -o-filter: sepia(1) saturate(3) hue-rotate(40deg) saturate(.6) brightness(1);
+            filter: sepia(1) saturate(3) hue-rotate(40deg) saturate(.6) brightness(1);
+}
+
+.colour-filter:nth-of-type(8n+4):hover, .colour-filter.green {
+    -webkit-filter: sepia(1) saturate(3) hue-rotate(40deg) saturate(.6) brightness(1.1);
+       -moz-filter: sepia(1) saturate(3) hue-rotate(40deg) saturate(.6) brightness(1.1);
+        -ms-filter: sepia(1) saturate(3) hue-rotate(40deg) saturate(.6) brightness(1.1);
+         -o-filter: sepia(1) saturate(3) hue-rotate(40deg) saturate(.6) brightness(1.1);
+            filter: sepia(1) saturate(3) hue-rotate(40deg) saturate(.6) brightness(1.1);
+}
+
+.colour-filter:nth-of-type(8n+5), .colour-filter.yellow {
+    -webkit-filter: sepia(1) saturate(3) hue-rotate(-30deg) saturate(.6) brightness(1);
+       -moz-filter: sepia(1) saturate(3) hue-rotate(-30deg) saturate(.6) brightness(1);
+        -ms-filter: sepia(1) saturate(3) hue-rotate(-30deg) saturate(.6) brightness(1);
+         -o-filter: sepia(1) saturate(3) hue-rotate(-30deg) saturate(.6) brightness(1);
+            filter: sepia(1) saturate(3) hue-rotate(-30deg) saturate(.6) brightness(1);
+}
+
+.colour-filter:nth-of-type(8n+5):hover, .colour-filter.yellow {
+    -webkit-filter: sepia(1) saturate(3) hue-rotate(-30deg) saturate(.6) brightness(1.1);
+       -moz-filter: sepia(1) saturate(3) hue-rotate(-30deg) saturate(.6) brightness(1.1);
+        -ms-filter: sepia(1) saturate(3) hue-rotate(-30deg) saturate(.6) brightness(1.1);
+         -o-filter: sepia(1) saturate(3) hue-rotate(-30deg) saturate(.6) brightness(1.1);
+            filter: sepia(1) saturate(3) hue-rotate(-30deg) saturate(.6) brightness(1.1);
+}
+
+.colour-filter:nth-of-type(8n+6), .colour-filter.purple {
+    -webkit-filter: sepia(1) saturate(3) hue-rotate(-140deg) saturate(0.4) brightness(1);
+       -moz-filter: sepia(1) saturate(3) hue-rotate(-140deg) saturate(0.4) brightness(1);
+        -ms-filter: sepia(1) saturate(3) hue-rotate(-140deg) saturate(0.4) brightness(1);
+         -o-filter: sepia(1) saturate(3) hue-rotate(-140deg) saturate(0.4) brightness(1);
+            filter: sepia(1) saturate(3) hue-rotate(-140deg) saturate(0.4) brightness(1);
+}
+
+.colour-filter:nth-of-type(8n+6):hover, .colour-filter.purple {
+    -webkit-filter: sepia(1) saturate(3) hue-rotate(-140deg) saturate(0.4) brightness(1.1);
+       -moz-filter: sepia(1) saturate(3) hue-rotate(-140deg) saturate(0.4) brightness(1.1);
+        -ms-filter: sepia(1) saturate(3) hue-rotate(-140deg) saturate(0.4) brightness(1.1);
+         -o-filter: sepia(1) saturate(3) hue-rotate(-140deg) saturate(0.4) brightness(1.1);
+            filter: sepia(1) saturate(3) hue-rotate(-140deg) saturate(0.4) brightness(1.1);
+}
+
+.colour-filter:nth-of-type(8n+7), .colour-filter.orange {
+    -webkit-filter: sepia(1) saturate(3) hue-rotate(-40deg) saturate(0.7) brightness(1);
+       -moz-filter: sepia(1) saturate(3) hue-rotate(-40deg) saturate(0.7) brightness(1);
+        -ms-filter: sepia(1) saturate(3) hue-rotate(-40deg) saturate(0.7) brightness(1);
+         -o-filter: sepia(1) saturate(3) hue-rotate(-40deg) saturate(0.7) brightness(1);
+            filter: sepia(1) saturate(3) hue-rotate(-40deg) saturate(0.7) brightness(1);
+}
+
+.colour-filter:nth-of-type(8n+7):hover, .colour-filter.orange {
+    -webkit-filter: sepia(1) saturate(3) hue-rotate(-40deg) saturate(0.7) brightness(1.1);
+       -moz-filter: sepia(1) saturate(3) hue-rotate(-40deg) saturate(0.7) brightness(1.1);
+        -ms-filter: sepia(1) saturate(3) hue-rotate(-40deg) saturate(0.7) brightness(1.1);
+         -o-filter: sepia(1) saturate(3) hue-rotate(-40deg) saturate(0.7) brightness(1.1);
+            filter: sepia(1) saturate(3) hue-rotate(-40deg) saturate(0.7) brightness(1.1);
+}
+
+.colour-filter:nth-of-type(8n+8), .colour-filter.grey {
+    -webkit-filter: sepia(1) saturate(3) hue-rotate(-140deg) saturate(0) brightness(1);
+       -moz-filter: sepia(1) saturate(3) hue-rotate(-140deg) saturate(0) brightness(1);
+        -ms-filter: sepia(1) saturate(3) hue-rotate(-140deg) saturate(0) brightness(1);
+         -o-filter: sepia(1) saturate(3) hue-rotate(-140deg) saturate(0) brightness(1);
+            filter: sepia(1) saturate(3) hue-rotate(-140deg) saturate(0) brightness(1);
+}
+
+.colour-filter:nth-of-type(8n+8):hover, .colour-filter.grey {
+    -webkit-filter: sepia(1) saturate(3) hue-rotate(-140deg) saturate(0) brightness(1.1);
+       -moz-filter: sepia(1) saturate(3) hue-rotate(-140deg) saturate(0) brightness(1.1);
+        -ms-filter: sepia(1) saturate(3) hue-rotate(-140deg) saturate(0) brightness(1.1);
+         -o-filter: sepia(1) saturate(3) hue-rotate(-140deg) saturate(0) brightness(1.1);
+            filter: sepia(1) saturate(3) hue-rotate(-140deg) saturate(0) brightness(1.1);
+}
+
+/* ==========================================================================
+   Colour Overides of colours
+   ========================================================================== */
+
+.colour-filter.pink {
+    -webkit-filter: sepia(1) saturate(3) hue-rotate(-60deg) saturate(.6) brightness(1);
+       -moz-filter: sepia(1) saturate(3) hue-rotate(-60deg) saturate(.6) brightness(1);
+        -ms-filter: sepia(1) saturate(3) hue-rotate(-60deg) saturate(.6) brightness(1);
+         -o-filter: sepia(1) saturate(3) hue-rotate(-60deg) saturate(.6) brightness(1);
+            filter: sepia(1) saturate(3) hue-rotate(-60deg) saturate(.6) brightness(1);
+}
+
+.colour-filter.pink:hover {
+    -webkit-filter: sepia(1) saturate(3) hue-rotate(-60deg) saturate(.6) brightness(1.1);
+       -moz-filter: sepia(1) saturate(3) hue-rotate(-60deg) saturate(.6) brightness(1.1);
+        -ms-filter: sepia(1) saturate(3) hue-rotate(-60deg) saturate(.6) brightness(1.1);
+         -o-filter: sepia(1) saturate(3) hue-rotate(-60deg) saturate(.6) brightness(1.1);
+            filter: sepia(1) saturate(3) hue-rotate(-60deg) saturate(.6) brightness(1.1);
+}
+
+.colour-filter.blue {
+    -webkit-filter: sepia(1) saturate(3) hue-rotate(-185deg) saturate(.6) brightness(1);
+       -moz-filter: sepia(1) saturate(3) hue-rotate(-185deg) saturate(.6) brightness(1);
+        -ms-filter: sepia(1) saturate(3) hue-rotate(-185deg) saturate(.6) brightness(1);
+         -o-filter: sepia(1) saturate(3) hue-rotate(-185deg) saturate(.6) brightness(1);
+            filter: sepia(1) saturate(3) hue-rotate(-185deg) saturate(.6) brightness(1);
+}
+
+
+.colour-filter.blue:hover {
+    -webkit-filter: sepia(1) saturate(3) hue-rotate(-185deg) saturate(.6) brightness(1.1);
+       -moz-filter: sepia(1) saturate(3) hue-rotate(-185deg) saturate(.6) brightness(1.1);
+        -ms-filter: sepia(1) saturate(3) hue-rotate(-185deg) saturate(.6) brightness(1.1);
+         -o-filter: sepia(1) saturate(3) hue-rotate(-185deg) saturate(.6) brightness(1.1);
+            filter: sepia(1) saturate(3) hue-rotate(-185deg) saturate(.6) brightness(1.1);
+}
+
+.colour-filter.cyan {
+    -webkit-filter: sepia(1) saturate(3) hue-rotate(-205deg) saturate(.4) brightness(1);
+       -moz-filter: sepia(1) saturate(3) hue-rotate(-205deg) saturate(.4) brightness(1);
+        -ms-filter: sepia(1) saturate(3) hue-rotate(-205deg) saturate(.4) brightness(1);
+         -o-filter: sepia(1) saturate(3) hue-rotate(-205deg) saturate(.4) brightness(1);
+            filter: sepia(1) saturate(3) hue-rotate(-205deg) saturate(.4) brightness(1);
+}
+
+
+.colour-filter.cyan:hover {
+    -webkit-filter: sepia(1) saturate(3) hue-rotate(-205deg) saturate(.4) brightness(1.1);
+       -moz-filter: sepia(1) saturate(3) hue-rotate(-205deg) saturate(.4) brightness(1.1);
+        -ms-filter: sepia(1) saturate(3) hue-rotate(-205deg) saturate(.4) brightness(1.1);
+         -o-filter: sepia(1) saturate(3) hue-rotate(-205deg) saturate(.4) brightness(1.1);
+            filter: sepia(1) saturate(3) hue-rotate(-205deg) saturate(.4) brightness(1.1);
+}
+.colour-filter.green {
+    -webkit-filter: sepia(1) saturate(3) hue-rotate(40deg) saturate(.6) brightness(1);
+       -moz-filter: sepia(1) saturate(3) hue-rotate(40deg) saturate(.6) brightness(1);
+        -ms-filter: sepia(1) saturate(3) hue-rotate(40deg) saturate(.6) brightness(1);
+         -o-filter: sepia(1) saturate(3) hue-rotate(40deg) saturate(.6) brightness(1);
+            filter: sepia(1) saturate(3) hue-rotate(40deg) saturate(.6) brightness(1);
+}
+
+.colour-filter.green:hover {
+    -webkit-filter: sepia(1) saturate(3) hue-rotate(40deg) saturate(.6) brightness(1.1);
+       -moz-filter: sepia(1) saturate(3) hue-rotate(40deg) saturate(.6) brightness(1.1);
+        -ms-filter: sepia(1) saturate(3) hue-rotate(40deg) saturate(.6) brightness(1.1);
+         -o-filter: sepia(1) saturate(3) hue-rotate(40deg) saturate(.6) brightness(1.1);
+            filter: sepia(1) saturate(3) hue-rotate(40deg) saturate(.6) brightness(1.1);
+}
+
+.colour-filter.yellow {
+    -webkit-filter: sepia(1) saturate(3) hue-rotate(-30deg) saturate(.6) brightness(1);
+       -moz-filter: sepia(1) saturate(3) hue-rotate(-30deg) saturate(.6) brightness(1);
+        -ms-filter: sepia(1) saturate(3) hue-rotate(-30deg) saturate(.6) brightness(1);
+         -o-filter: sepia(1) saturate(3) hue-rotate(-30deg) saturate(.6) brightness(1);
+            filter: sepia(1) saturate(3) hue-rotate(-30deg) saturate(.6) brightness(1);
+}
+
+.colour-filter.yellow:hover {
+    -webkit-filter: sepia(1) saturate(3) hue-rotate(-30deg) saturate(.6) brightness(1.1);
+       -moz-filter: sepia(1) saturate(3) hue-rotate(-30deg) saturate(.6) brightness(1.1);
+        -ms-filter: sepia(1) saturate(3) hue-rotate(-30deg) saturate(.6) brightness(1.1);
+         -o-filter: sepia(1) saturate(3) hue-rotate(-30deg) saturate(.6) brightness(1.1);
+            filter: sepia(1) saturate(3) hue-rotate(-30deg) saturate(.6) brightness(1.1);
+}
+.colour-filter.purple {
+    -webkit-filter: sepia(1) saturate(3) hue-rotate(-140deg) saturate(0.4) brightness(1);
+       -moz-filter: sepia(1) saturate(3) hue-rotate(-140deg) saturate(0.4) brightness(1);
+        -ms-filter: sepia(1) saturate(3) hue-rotate(-140deg) saturate(0.4) brightness(1);
+         -o-filter: sepia(1) saturate(3) hue-rotate(-140deg) saturate(0.4) brightness(1);
+            filter: sepia(1) saturate(3) hue-rotate(-140deg) saturate(0.4) brightness(1);
+}
+
+.colour-filter.purple:hover {
+    -webkit-filter: sepia(1) saturate(3) hue-rotate(-140deg) saturate(0.4) brightness(1.1);
+       -moz-filter: sepia(1) saturate(3) hue-rotate(-140deg) saturate(0.4) brightness(1.1);
+        -ms-filter: sepia(1) saturate(3) hue-rotate(-140deg) saturate(0.4) brightness(1.1);
+         -o-filter: sepia(1) saturate(3) hue-rotate(-140deg) saturate(0.4) brightness(1.1);
+            filter: sepia(1) saturate(3) hue-rotate(-140deg) saturate(0.4) brightness(1.1);
+}
+.colour-filter.orange {
+    -webkit-filter: sepia(1) saturate(3) hue-rotate(-40deg) saturate(0.7) brightness(1);
+       -moz-filter: sepia(1) saturate(3) hue-rotate(-40deg) saturate(0.7) brightness(1);
+        -ms-filter: sepia(1) saturate(3) hue-rotate(-40deg) saturate(0.7) brightness(1);
+         -o-filter: sepia(1) saturate(3) hue-rotate(-40deg) saturate(0.7) brightness(1);
+            filter: sepia(1) saturate(3) hue-rotate(-40deg) saturate(0.7) brightness(1);
+}
+
+
+.colour-filter.orange:hover {
+    -webkit-filter: sepia(1) saturate(3) hue-rotate(-40deg) saturate(0.7) brightness(1.1);
+       -moz-filter: sepia(1) saturate(3) hue-rotate(-40deg) saturate(0.7) brightness(1.1);
+        -ms-filter: sepia(1) saturate(3) hue-rotate(-40deg) saturate(0.7) brightness(1.1);
+         -o-filter: sepia(1) saturate(3) hue-rotate(-40deg) saturate(0.7) brightness(1.1);
+            filter: sepia(1) saturate(3) hue-rotate(-40deg) saturate(0.7) brightness(1.1);
+}
+
+.colour-filter.grey {
+    -webkit-filter: sepia(1) saturate(3) hue-rotate(-140deg) saturate(0) brightness(1);
+       -moz-filter: sepia(1) saturate(3) hue-rotate(-140deg) saturate(0) brightness(1);
+        -ms-filter: sepia(1) saturate(3) hue-rotate(-140deg) saturate(0) brightness(1);
+         -o-filter: sepia(1) saturate(3) hue-rotate(-140deg) saturate(0) brightness(1);
+            filter: sepia(1) saturate(3) hue-rotate(-140deg) saturate(0) brightness(1);
+}
+
+.colour-filter.grey:hover {
+    -webkit-filter: sepia(1) saturate(3) hue-rotate(-140deg) saturate(0) brightness(1.1);
+       -moz-filter: sepia(1) saturate(3) hue-rotate(-140deg) saturate(0) brightness(1.1);
+        -ms-filter: sepia(1) saturate(3) hue-rotate(-140deg) saturate(0) brightness(1.1);
+         -o-filter: sepia(1) saturate(3) hue-rotate(-140deg) saturate(0) brightness(1.1);
+            filter: sepia(1) saturate(3) hue-rotate(-140deg) saturate(0) brightness(1.1);
+}
+
+/* ==========================================================================
+   Remove BW filters
+   ========================================================================== */
+
+.colour-filter.none {
+    -webkit-filter: sepia(0) saturate(1) hue-rotate(0deg) saturate(1) brightness(1);
+       -moz-filter: sepia(0) saturate(1) hue-rotate(0deg) saturate(1) brightness(1);
+        -ms-filter: sepia(0) saturate(1) hue-rotate(0deg) saturate(1) brightness(1);
+         -o-filter: sepia(0) saturate(1) hue-rotate(0deg) saturate(1) brightness(1);
+            filter: sepia(0) saturate(1) hue-rotate(0deg) saturate(1) brightness(1);
+}
+
+.colour-filter.none:hover {
+    -webkit-filter: sepia(0) saturate(1) hue-rotate(0deg) saturate(1) brightness(1.1);
+       -moz-filter: sepia(0) saturate(1) hue-rotate(0deg) saturate(1) brightness(1.1);
+        -ms-filter: sepia(0) saturate(1) hue-rotate(0deg) saturate(1) brightness(1.1);
+         -o-filter: sepia(0) saturate(1) hue-rotate(0deg) saturate(1) brightness(1.1);
+            filter: sepia(0) saturate(1) hue-rotate(0deg) saturate(1) brightness(1.1);
+}
+
+

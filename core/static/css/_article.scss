@@ -676,20 +676,6 @@ article {
     }
   }
 
-  // .toc h2, h2.chapter-heading {
-    // margin-top: 2em;
-    // font-family: $sans-serif;
-    // font-size: 20px;
-    // font-weight: 500;
-  // }
-
-  // .chapter h3 {
-  //   font-family: $sans-serif;
-  //   font-size: 18px;
-  //   margin:1.25em 0;
-  //   font-weight: 700;
-  // }
-
   .modal-link {
     color: $text-link-color;
   }
@@ -717,6 +703,9 @@ article {
   h2{
     @include article-list-title;
     margin-top: 50px;
+    &.chapter-heading{
+      margin-top: 10px;
+    }
   }
   h3{
     font-weight: 700;
@@ -724,6 +713,22 @@ article {
     margin-top: 50px;
     font-family: sans-serif;
   }
+
+  .share-chapter{
+    text-align: center;
+    font-size: 1.5em;
+    a{
+      color: $share-link-color;
+      &:hover{
+        color: $share-link-hover-color;
+      }
+    }
+  }
+
+  .chapterblock{
+    margin-top: 40px;
+  }
+
 }
 .in-the-series, .related-articles, .newsletter-list{
   color: $article-teaser-color;

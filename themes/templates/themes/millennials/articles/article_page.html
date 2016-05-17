@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% load static article_tags compress core_tags wagtailcore_tags wagtailembeds_tags wagtailimages_tags %}
+
+{% block body_class %}template-{{ self.get_verbose_name|slugify }} light{% endblock %}
+
+{% block body_style %}
+    {% with bg_image=self.background_image_links.all.0 %}
+        {% image bg_image.image original as background_image %}
+
+        background-image:url('{{ background_image.url  }}');
+        background-position:{{ bg_image.position  }};
+    {% endwith %}
+
+{% endblock %}
+
+{% block theme_css %}
+    <link rel="stylesheet" type="text/x-scss" href="{% static 'themes/millennials/css/millennials.scss' %}">
+{% endblock %}
+
+{% block extra_js %}
+    <script>
+        FeatureStyles.MainFeatures.setSize({{ self.full_bleed_image_size }});
+    </script>
+    <script type="text/javascript" src="{% static 'themes/components/js/transparency.js' %}"></script>
+    <script type="text/javascript" src="{% static 'themes/millennials/js/letterEffect.js' %}"></script>
+    <script type="text/javascript" src="{% static 'themes/millennials/js/millennials.js' %}"></script>
+    <script type="text/javascript" src="{% static 'themes/millennials/js/slider.js' %}"></script>
+{% endblock %}
+
+{% block header %}
+    {% include 'core/header.html' with tagline=False %}
+{% endblock %}
+
+{% block content %}
+
+    <article id="article-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <ul class="share-links" data-page-id="{{ self.id }}">
+                        <li class="twitter">
+                            <div><a href="https://twitter.com/share?text={{ self.title|urlencode }}&url={{ self.full_url|urlencode:"" }}"><i class="fa fa-twitter"></i></a></div>
+                        </li>
+                        <li class="facebook">
+                            <div><span class="facebook-share-link" data-url="{{ self.full_url }}"><i class="fa fa-facebook-square"></i></span></div>
+                            <div class="count">{% if self.facebook_count > 0 %}{{ self.facebook_count }}{% endif %}</div>
+                        </li>
+                    </ul>
+
+                    <div class="title">
+                        <h1 class="{{ self.title_size }} colorize">{{ self.title }}</h1>
+                        <div class="subtitle">{{ self.excerpt|richtext }}</div>
+                        {% if self.authors %}
+                            {% include 'articles/includes/article-contributors.html' with authors=self.authors date=self.first_published_at links=True %}
+                        {% endif %}
+                    </div>
+
+                    {%  if self.main_image and self.main_image.credit %}
+                        <div class="contributors">
+                            <div class="contributor">Illustrated By: {{ self.main_image.credit }}</div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="story">
+            {% include 'articles/includes/json-embed.html' %}
+            <div class="body-content">{% include 'articles/includes/story-content.html' %}</div>
+            {% include 'themes/millennials/articles/includes/advanced_content.html' %}
+
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 credits">
+
+                    <p>
+                        Illustrator: Garth Laidlaw<br/>
+                        Development: Natasha Scott, Alex Myciak<br/>
+                        Interaction Design: Frank Flitton<br/>
+                        Design: Som Tsoi</p>
+                </div>
+            </div>
+        </div>
+    </article>
+
+
+
+{% endblock %}
+
+{% block footer %}
+   {% include 'themes/components/simple_footer.html' %}
+{% endblock %}
