@@ -107,7 +107,7 @@ def get_json_data(context):
         if article.json_file:
             json_object = json.load(article.json_file)
             return json_object
-        
+
 
 # Should only be called from a page template not a block template since we expect the context to contain the article
 @register.simple_tag(takes_context=True)
