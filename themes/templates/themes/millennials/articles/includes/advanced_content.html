@@ -26,7 +26,7 @@
                     {% if chapter.value.share_this_chapter %}
                         <div class="share-chapter">
                             <a href="{% get_twitter_share_url chapter %}"><i class="fa fa-twitter"></i></a>
-                            <a href="{% get_chapter_anchor chapter %}"><i class="fa fa-facebook-square"></i></a>
+                            <span class="facebook-share-link" data-url="{% get_chapter_anchor chapter %}"><i class="fa fa-facebook-square"></i></span>
                         </div>
                     {% endif %}
 
