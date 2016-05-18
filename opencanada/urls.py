@@ -10,12 +10,10 @@ from wagtail.wagtailadmin import urls as wagtailadmin_urls
 from wagtail.wagtailcore import urls as wagtail_urls
 from wagtail.wagtaildocs import urls as wagtaildocs_urls
 from wagtail.wagtailsearch import urls as wagtailsearch_urls
-from wagtail.wagtailsearch.signal_handlers import register_signal_handlers
 
 from core.feeds import MainFeed
 from core.views import chooser_search, site_search
 
-register_signal_handlers()
 
 base_urlpatterns = [
     url(r'^search/$', site_search, name='wagtailsearch_search'),

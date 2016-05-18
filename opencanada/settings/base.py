@@ -80,7 +80,9 @@ INSTALLED_APPS = (
     'wagtail.wagtailsites',
     'wagtail.wagtailimages',
     'wagtail.wagtailembeds',
-    'wagtail.wagtailsearch',
+    # Overriding wagtailsearch default app registration to register slightly different signal handlers.
+    'core.apps.CustomWagtailSearchAppConfig',
+    # 'wagtail.wagtailsearch',
     'wagtail.wagtailredirects',
     'wagtail.wagtailforms',
     'wagtail.contrib.wagtailstyleguide',
