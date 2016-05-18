@@ -2,11 +2,11 @@
 
 # For coverage and PEP8 linting
 coverage>=3.7.0
-flake8==2.4.1
+flake8==2.5.4
 
 # Required for running the tests
 mock>=1.0.0
 
-isort==4.0.0
+isort==4.2.5
 
 git+ssh://git@github.com/OpenCanada/wagtail-interactives-content.git
