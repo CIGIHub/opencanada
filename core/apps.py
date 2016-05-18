@@ -9,7 +9,9 @@ from wagtail.wagtailsearch.signal_handlers import (get_indexed_instance,
 def post_save_signal_handler(instance, **kwargs):
     update_fields = kwargs.get('update_fields')
 
-    if 'cached_last_updated' in update_fields and 'cached_facebook_count' in update_fields:
+    social_fields = frozenset(('cached_facebook_count', 'cached_last_updated'))
+
+    if update_fields == social_fields:
         return  # Don't update the search index if we are just updating facebook page counts
 
     indexed_instance = get_indexed_instance(instance)
