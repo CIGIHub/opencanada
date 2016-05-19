@@ -73,7 +73,7 @@ class ShareLinksMixin(models.Model):
                 self.cached_facebook_count = facebook_count
 
             self.cached_last_updated = timezone.now()
-            self.save()
+            self.save(update_fields=('cached_facebook_count', 'cached_last_updated'))
 
     @property
     def twitter_count(self):
