@@ -297,10 +297,6 @@ def on_publish(**kwargs):
         opacity = featured_item.image_overlay_opacity
     else:
         opacity = 50
-    if hasattr(featured_item, 'font_style'):
-        font = featured_item.font_style
-    else:
-        font = None
 
     headline = article_models.Headline.objects.filter(
         containing_page=instance).order_by('-start_date')[:1].first()
@@ -315,13 +311,11 @@ def on_publish(**kwargs):
                 feature_style=style,
                 image_overlay_color=color,
                 image_overlay_opacity=opacity,
-                font_style=font
             )
         else:
             headline.feature_style = style
             headline.image_overlay_color = color
             headline.image_overlay_opacity = opacity
-            headline.font_style = font
 
     else:
         if instance.featured_item:
@@ -331,7 +325,6 @@ def on_publish(**kwargs):
                 feature_style=style,
                 image_overlay_color=color,
                 image_overlay_opacity=opacity,
-                font_style=font
             )
 
 
