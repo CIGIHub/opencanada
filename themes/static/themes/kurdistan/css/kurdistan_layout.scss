@@ -1,0 +1,69 @@
+.container-full-bleed.overlay{
+ 
+    .feature-wrapper{
+       a{
+            color: $overlay-text-color;
+            &:hover{
+                color: $text-link-hover-color;
+            }
+        }
+       .contributors, .contributor-label{
+         color: $overlay-text-color;
+         margin-top: 2%;
+         font-weight: 700;
+         font-size: 1.0em;
+        }
+
+    }
+
+    ul.share-links{
+       margin-left: -20px;
+       margin-bottom: 0px;
+       padding: 0px;
+       li{
+           	list-style: none;
+            display: inline-block;
+            padding: 10px;
+            font-size: 1.8em;
+            text-align: center;
+        }
+        .facebook-share-link:hover, a:hover{
+            color: $text-link-hover-color;
+        }
+
+    }
+    :after{
+     	clear: both;
+    }
+    .feature-text{
+        padding-top: 30%;
+    }
+}
+
+.story h2 {
+  font-size: 42px;
+  margin: 30px auto;
+  border-bottom: solid 1px #333;
+  width: 150px;
+}
+
+article .block-PullQuote{
+  color: $text-link-color;
+  border: none;
+  font-family: "Proxima Nova Condensed";
+  font-size: 1.8em;
+  line-height: 110%;
+}
+
+@media(max-width: $screen-sm){
+
+    .container-full-bleed.overlay{
+ 
+        .feature-wrapper{
+            .contributors{
+                margin-left: -5px;
+                font-size: 0.9em;
+            }
+        }
+    }
+}
