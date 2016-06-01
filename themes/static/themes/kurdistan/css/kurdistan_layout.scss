@@ -1,5 +1,5 @@
-.container-full-bleed.overlay{
- 
+.template-article-page .main-feature{
+
     .feature-wrapper{
        a{
             color: $overlay-text-color;
@@ -14,6 +14,9 @@
          font-size: 1.0em;
         }
 
+      .feature-text{
+        padding-top: 30%;
+      }
     }
 
     ul.share-links{
@@ -35,9 +38,7 @@
     :after{
      	clear: both;
     }
-    .feature-text{
-        padding-top: 30%;
-    }
+    
 }
 
 .story h2 {
@@ -57,13 +58,16 @@ article .block-PullQuote{
 
 @media(max-width: $screen-sm){
 
-    .container-full-bleed.overlay{
- 
-        .feature-wrapper{
-            .contributors{
-                margin-left: -5px;
-                font-size: 0.9em;
-            }
-        }
-    }
+  .container-full-bleed.overlay{
+
+      .feature-wrapper{
+          .contributors{
+              margin-left: -5px;
+              font-size: 0.9em;
+          }
+      }
+  }
+  .story h2 {
+    font-size: 22px;
+  }
 }
