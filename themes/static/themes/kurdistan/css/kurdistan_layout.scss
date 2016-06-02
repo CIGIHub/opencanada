@@ -51,7 +51,7 @@
 
 h1{
   opacity: 0;
-  transition: opacity 2000ms ease-in-out;
+  transition: all 2000ms ease-in-out;
   &.in-view{
     opacity: 1;
   }
@@ -59,7 +59,8 @@ h1{
 
 ul.share-links, h1, .contributors{
   opacity: 0;
-  transition: opacity 1000ms ease-in-out;
+  transition: all 1000ms ease-in-out;
+
   &.in-view{
     opacity: 1;
   }
