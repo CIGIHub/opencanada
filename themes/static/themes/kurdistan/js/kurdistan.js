@@ -13,13 +13,17 @@ jQuery(document).ready(function() {
             "width": windowWidth,
             "height": featureHeight
         });
+
+        setTimeout(clouds, 1000);
     
     });
 
-    $(window).on('scroll', function(){
+    function clouds(){
+
         $(".right-cloud").addClass('in-view');
         $(".left-cloud").addClass('in-view');
-    });
+
+    }
 
 });
 
