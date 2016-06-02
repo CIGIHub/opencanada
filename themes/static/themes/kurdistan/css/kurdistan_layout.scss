@@ -42,21 +42,22 @@
     
 }
 
-.story h2 {
-  font-size: 42px;
-  text-align: center;
-  margin: 30px auto;
-  border-bottom: solid 1px #333;
-  width: 150px;
+h1{
+  opacity: 0;
+  transition: opacity 2000ms ease-in-out;
+  &.in-view{
+    opacity: 1;
+  }
 }
 
-article .block-PullQuote{
-  color: $text-link-color;
-  border: none;
-  font-family: "Proxima Nova Condensed";
-  font-size: 1.8em;
-  line-height: 110%;
+ul.share-links, h1, .contributors{
+  opacity: 0;
+  transition: opacity 1000ms ease-in-out;
+  &.in-view{
+    opacity: 1;
+  }
 }
+
 
 .right-cloud, .left-cloud {
   position: absolute;
@@ -84,6 +85,23 @@ article .block-PullQuote{
   -ms-transform: translate3d(-250px, -50px, 0px);
   transform: translate3d(-250px, -50px, 0px);
   
+}
+
+
+.story h2 {
+  font-size: 42px;
+  text-align: center;
+  margin: 30px auto;
+  border-bottom: solid 1px #333;
+  width: 150px;
+}
+
+article .block-PullQuote{
+  color: $text-link-color;
+  border: none;
+  font-family: "Proxima Nova Condensed";
+  font-size: 1.8em;
+  line-height: 110%;
 }
 
 @media(max-width: $screen-sm){

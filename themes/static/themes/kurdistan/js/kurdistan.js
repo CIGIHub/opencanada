@@ -15,14 +15,19 @@ jQuery(document).ready(function() {
         });
 
         setTimeout(clouds, 1000);
+        setTimeout(header, 2000);
+        setTimeout(text, 3000);
     
     });
 
     function clouds(){
-
-        $(".right-cloud").addClass('in-view');
-        $(".left-cloud").addClass('in-view');
-
+        $(".right-cloud, .left-cloud").addClass('in-view');
+    }
+    function header(){
+        $("h1").addClass('in-view');
+    }
+    function text(){
+        $(".contributors, ul.share-links").addClass('in-view');
     }
 
 });
