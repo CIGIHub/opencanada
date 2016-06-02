@@ -14,20 +14,25 @@ jQuery(document).ready(function() {
             "height": featureHeight
         });
 
-        setTimeout(clouds, 1000);
-        setTimeout(header, 2000);
-        setTimeout(text, 3000);
+        setTimeout(clouds, 800);
+        setTimeout(textUp, 1500);
+        setTimeout(header, 2500);
+        setTimeout(text, 4000);
+       
     
     });
 
     function clouds(){
-        $(".right-cloud, .left-cloud").addClass('in-view');
+        $(".right-cloud, .left-cloud").addClass("in-view");
+    }
+    function textUp(){
+        $(".feature-wrapper").addClass("in-view");
     }
     function header(){
-        $("h1").addClass('in-view');
+        $("h1").addClass("in-view");
     }
     function text(){
-        $(".contributors, ul.share-links").addClass('in-view');
+        $(".contributors, ul.share-links").addClass("in-view");
     }
 
 });

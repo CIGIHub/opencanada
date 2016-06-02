@@ -2,6 +2,13 @@
   overflow: hidden;
 
     .feature-wrapper{
+      top: 400px;
+      transition: all 2000ms linear;
+      &.in-view{
+        top: 200px;
+        transform: translate3d(0px, -200px, 0px);
+      }
+
        a{
             color: $overlay-text-color;
             &:hover{
