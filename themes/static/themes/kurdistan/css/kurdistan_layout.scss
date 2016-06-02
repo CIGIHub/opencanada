@@ -118,4 +118,23 @@ article .block-PullQuote{
   .story h2 {
     font-size: 26px;
   }
+
+  .right-cloud.in-view {
+    opacity: 0.8;
+    -moz-transform: translate3d(90px, -40px, 0px);
+    -webkit-transform: translate3d(90px, -40px, 0px);
+    -o-transform: translate3d(90px, -40px, 0px);
+    -ms-transform: translate3d(90px, -40px, 0px);
+    transform: translate3d(90px, -40px, 0px);
+  }
+
+  .left-cloud.in-view {
+    opacity: 0.8;
+    -moz-transform: translate3d(-130px, -20px, 0px);
+    -webkit-transform: translate3d(-130px, -20px, 0px);
+    -o-transform: translate3d(-130px, -20px, 0px);
+    -ms-transform: translate3d(-130px, -20px, 0px);
+    transform: translate3d(-130px, -20px, 0px);
+    
+  }
 }
