@@ -82,10 +82,14 @@ class CircleCropOperation(FillOperation):
             if self.border_width > 0:
                 draw = ImageDraw.Draw(pillow_image)
                 # We need this first ellipse which won't actually be a closed circle since we are using 'outline'...
-                draw.ellipse((0, 0) + (width, height), outline=self.border_color)
+                _border_color = self.border_color
+                if draw.im.mode == 'L':
+                    # 'L' implies the image is grayscale so providing (r, g, b[, alpha]) doesn't make any sense as there is one channel; it's expecting an integer
+                    _border_color = self.border_color[0]
+                draw.ellipse((0, 0) + (width, height), outline=_border_color)
                 # Move in 1 pixel and draw another ellipse for each pixel of width
                 for i in range(self.border_width):
-                    draw.ellipse((i + 1, i + 1) + (width - i - 1, height - i - 1), outline=self.border_color)
+                    draw.ellipse((i + 1, i + 1) + (width - i - 1, height - i - 1), outline=_border_color)
                 del draw
         # pillow_image.save('masked.{0}'.format(original_format))
 
