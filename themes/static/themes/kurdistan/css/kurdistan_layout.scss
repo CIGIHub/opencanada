@@ -10,10 +10,10 @@
       }
 
        a{
-            color: $overlay-text-color;
-            &:hover{
-                color: $text-link-hover-color;
-            }
+          color: $overlay-text-color;
+          &:hover{
+              color: $text-link-hover-color;
+          }
         }
        .contributors, .contributor-label{
          color: $overlay-text-color;
@@ -66,8 +66,8 @@ ul.share-links, h1, .contributors{
   }
 }
 
-
 .right-cloud, .left-cloud {
+  display: block;
   position: absolute;
   opacity: 1;
   -moz-transition: all 2000ms linear;
@@ -95,7 +95,6 @@ ul.share-links, h1, .contributors{
   
 }
 
-
 .story h2 {
   font-size: 42px;
   text-align: center;
@@ -112,8 +111,44 @@ article .block-PullQuote{
   line-height: 110%;
 }
 
-@media(max-width: $screen-sm){
+.no-js{
+   .template-article-page .main-feature{
 
+    .feature-text{
+      padding-top: 0px;
+    }
+
+    ul.share-links, h1, .contributors{
+      transition: none;
+      opacity: 1;
+    }
+    .feature-wrapper{
+      transition: none;
+      top: 0;
+    }
+  }
+  .right-cloud, .left-cloud {
+      display: none;
+    }
+}
+
+@media(max-width: $screen-sm){
+  .template-article-page .main-feature{
+
+    ul.share-links, h1, .contributors{
+      transition: none;
+      opacity: 1;
+    }
+    .feature-wrapper{
+      transition: none;
+      top: 0;
+    }
+  }
+
+  .right-cloud, .left-cloud {
+    display: none;
+  }
+ 
   .container-full-bleed.overlay{
 
       .feature-wrapper{
@@ -127,22 +162,4 @@ article .block-PullQuote{
     font-size: 26px;
   }
 
-  .right-cloud.in-view {
-    opacity: 0.8;
-    -moz-transform: translate3d(90px, -40px, 0px);
-    -webkit-transform: translate3d(90px, -40px, 0px);
-    -o-transform: translate3d(90px, -40px, 0px);
-    -ms-transform: translate3d(90px, -40px, 0px);
-    transform: translate3d(90px, -40px, 0px);
-  }
-
-  .left-cloud.in-view {
-    opacity: 0.8;
-    -moz-transform: translate3d(-130px, -20px, 0px);
-    -webkit-transform: translate3d(-130px, -20px, 0px);
-    -o-transform: translate3d(-130px, -20px, 0px);
-    -ms-transform: translate3d(-130px, -20px, 0px);
-    transform: translate3d(-130px, -20px, 0px);
-    
-  }
 }

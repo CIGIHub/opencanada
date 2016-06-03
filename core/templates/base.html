@@ -105,6 +105,10 @@
 
     {% endblock %}
 
+    <script>
+            document.getElementsByTagName("html")[0].className =
+            document.getElementsByTagName("html")[0].className.replace( /(?:^|\s)no-js(?!\S)/g , 'js' );
+    </script>
     <script type="text/javascript">
             setTimeout(function(){var a=document.createElement("script");
             var b=document.getElementsByTagName("script")[0];
