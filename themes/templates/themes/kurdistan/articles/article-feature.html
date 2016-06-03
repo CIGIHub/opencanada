@@ -1,10 +1,8 @@
 {% load static article_tags core_tags wagtailcore_tags wagtailembeds_tags wagtailimages_tags %}
 
-<div class="container-full-bleed overlay main-feature" style="height: 400px;">
+<div class="container-full-bleed overlay main-feature">
     <div class="feature-image-overlay" {% if self.opacity %} style="opacity:{{ self.opacity }} {% endif %}"></div>
-    <div class="feature-image fullscreen-bg">
-        <img src="{% static 'themes/kurdistan/img/kurdistan-bg.png' %}">
-    </div>
+    <div class="feature-image fullscreen-bg" style="background-image: url('{% static 'themes/kurdistan/img/kurdistan-bg.png' %}')"></div>
     <div class="right-cloud">
         <img src="{% static 'themes/kurdistan/img/kurdistan-cloud-right.png' %}">
     </div>

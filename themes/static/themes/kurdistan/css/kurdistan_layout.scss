@@ -68,6 +68,9 @@ ul.share-links, h1, .contributors{
   }
 }
 
+.foreground{
+  display: block;
+}
 .right-cloud, .left-cloud {
   display: block;
   position: absolute;
@@ -129,7 +132,7 @@ article .block-PullQuote{
       top: 0;
     }
   }
-  .right-cloud, .left-cloud {
+  .right-cloud, .left-cloud, .foreground{
       display: none;
     }
 }
@@ -146,7 +149,7 @@ article .block-PullQuote{
     }
   }
 
-  .right-cloud, .left-cloud {
+  .right-cloud, .left-cloud, .foreground{
     display: none;
   }
  
