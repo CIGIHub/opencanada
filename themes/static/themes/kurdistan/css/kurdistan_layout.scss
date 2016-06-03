@@ -2,9 +2,11 @@
   overflow: hidden;
 
     .feature-wrapper{
+      opacity: 0;
       top: 400px;
       transition: all 2000ms linear;
       &.in-view{
+        opacity: 1;
         top: 200px;
         transform: translate3d(0px, -200px, 0px);
       }
@@ -78,20 +80,20 @@ ul.share-links, h1, .contributors{
 }
 .right-cloud.in-view {
   opacity: 0.8;
-  -moz-transform: translate3d(190px, -50px, 0px);
-  -webkit-transform: translate3d(190px, -50px, 0px);
-  -o-transform: translate3d(190px, -50px, 0px);
-  -ms-transform: translate3d(190px, -50px, 0px);
-  transform: translate3d(190px, -50px, 0px);
+  -moz-transform: translate3d(150px, -30px, 0px);
+  -webkit-transform: translate3d(150px, -30px, 0px);
+  -o-transform: translate3d(1150px, -30px, 0px);
+  -ms-transform: translate3d(150px, -30px, 0px);
+  transform: translate3d(150px, -30px, 0px);
 }
 
 .left-cloud.in-view {
   opacity: 0.8;
-  -moz-transform: translate3d(-190px, -50px, 0px);
-  -webkit-transform: translate3d(-190px, -50px, 0px);
-  -o-transform: translate3d(-190px, -50px, 0px);
-  -ms-transform: translate3d(-190px, -50px, 0px);
-  transform: translate3d(-190px, -50px, 0px);
+  -moz-transform: translate3d(-150px, -30px, 0px);
+  -webkit-transform: translate3d(-150px, -30px, 0px);
+  -o-transform: translate3d(-150px, -30px, 0px);
+  -ms-transform: translate3d(-150px, -30px, 0px);
+  transform: translate3d(-150px, -30px, 0px);
   
 }
 
@@ -135,12 +137,11 @@ article .block-PullQuote{
 @media(max-width: $screen-sm){
   .template-article-page .main-feature{
 
-    ul.share-links, h1, .contributors{
+    ul.share-links, h1, .contributors, .feature-wrapper{
       transition: none;
       opacity: 1;
     }
     .feature-wrapper{
-      transition: none;
       top: 0;
     }
   }

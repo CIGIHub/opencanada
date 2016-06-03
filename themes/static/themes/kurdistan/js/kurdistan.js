@@ -27,6 +27,7 @@ jQuery(document).ready(function() {
         $(".right-cloud, .left-cloud").addClass("in-view");
     }
     function textUp(){
+        //$(".feature-wrapper").show();
         $(".feature-wrapper").addClass("in-view");
     }
     function header(){
