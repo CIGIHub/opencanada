@@ -25,7 +25,7 @@
                             {% else %}
                                 {% get_site_defaults as defaults %}
                                 {% if defaults %}
-                                {% image defaults.default_external_article_source_logo circlecrop-80x80-rgba_204-w_1 as tmp_photo %}
+                                    {% image defaults.default_external_article_source_logo circlecrop-80x80-rgba_204-w_1 as tmp_photo %}
                                 {% endif %}
                             {% endif %}
                                <a href="{{ article.website_link }}" target="_blank" style="{% base_styles 'a' %}">
