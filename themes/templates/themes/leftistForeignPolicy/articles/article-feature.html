@@ -1,0 +1,25 @@
+{% load static article_tags core_tags wagtailcore_tags wagtailembeds_tags wagtailimages_tags %}
+
+<div class="container-full-bleed leftist-feature"> 
+    <div class="col-xs-5 col-lg-4 feature-block">
+        <img src="{% static 'themes/leftistForeignPolicy/img/left_foreign_policy_feature.png' %}">  
+    </div>
+    <div class="col-xs-7 col-lg-8 feature-block">
+     
+        <div class="feature-text"> 
+             <div class="title">{% spaceless %}<h1 class="{{ self.title_size }}">{{ self.title }}</h1>  {% endspaceless %}</div> 
+            <ul class="share-links"> 
+                <li class="twitter"> 
+                    <div class="count">{% if self.twitter_count > 0 %}{{ self.twitter_count }}{% endif %}</div> 
+                    <a href="https://twitter.com/share?text={{ self.title|urlencode }}&url={{ self.full_url|urlencode:"" }}"><i class="fa fa-twitter"></i></a>
+                </li> 
+                <li class="facebook"> 
+                    <div class="count">{% if self.facebook_count > 0 %}{{ self.facebook_count }}{% endif %}</div> 
+                    <span class="facebook-share-link" data-url="{{ self.full_url }}"><i class="fa fa-facebook-square"></i></span>
+                </li> 
+            </ul>  
+        </div> 
+    </div>
+</div>
+<div class="clear"></div>
+<div></div>

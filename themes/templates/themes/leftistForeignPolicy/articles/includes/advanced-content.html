@@ -1,0 +1,17 @@
+{% load static article_tags core_tags wagtailcore_tags wagtailembeds_tags wagtailimages_tags %}
+
+{% if self.chapters %}
+   
+    {% for chapter in self.chapters %}
+        <div class="chapterblock">
+            {% if chapter.value.share_this_chapter %}
+                <div class="share-chapter">
+                    <a href="{% get_twitter_share_url chapter %}"><i class="fa fa-twitter"></i></a>
+                    <a href="{% get_chapter_anchor chapter %}"><i class="fa fa-facebook-square"></i></a>
+                </div>
+            {% endif %}
+            {{ chapter }}
+        </div>
+    {% endfor %}
+
+{% endif %}
