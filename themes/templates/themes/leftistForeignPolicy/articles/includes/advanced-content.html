@@ -3,7 +3,7 @@
 {% if self.chapters %}
    
     {% for chapter in self.chapters %}
-        <div class="chapterblock">
+        <div class="chapterblock" id="{{ chapter.value.heading|slugify }}">
             {% if chapter.value.share_this_chapter %}
                 <div class="share-chapter">
                     <a href="{% get_twitter_share_url chapter %}"><i class="fa fa-twitter"></i></a>

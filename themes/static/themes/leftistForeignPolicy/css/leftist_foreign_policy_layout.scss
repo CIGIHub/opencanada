@@ -5,12 +5,13 @@
   position: relative;
 
   	.feature-right, .feature-left{
-  		position: absolute;
+  		float: left;
   		width: 50%;
   	}
 
   	.feature-right{
   		z-index: 100;
+  		position: absolute;
   		background-color: $leftist_blue;
   		left: 50%;
   		transition: all 2000ms linear;

@@ -8,7 +8,7 @@
      
         <div class="feature-text"> 
              <div class="title">{% spaceless %}<h1 class="{{ self.title_size }}">{{ self.title }}</h1>  {% endspaceless %}</div> 
-            <ul class="share-links"> 
+            <ul class="share-links" data-page-id="{{ self.id }}"> 
                 <li class="twitter"> 
                     <div class="count">{% if self.twitter_count > 0 %}{{ self.twitter_count }}{% endif %}</div> 
                     <a href="https://twitter.com/share?text={{ self.title|urlencode }}&url={{ self.full_url|urlencode:"" }}"><i class="fa fa-twitter"></i></a>
