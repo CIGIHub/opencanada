@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load static article_tags core_tags wagtailcore_tags wagtailembeds_tags wagtailimages_tags theme_tags %}
+
+{% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
+
+{% block theme_css %}
+    <link rel="stylesheet" type="text/x-scss" href="{% static 'themes/light/css/light.scss' %}">
+    <link rel="stylesheet" type="text/x-scss" href="{% static 'themes/leftistForeignPolicy/css/leftist_foreign_policy.scss' %}">
+{% endblock %}
+
+{% block extra_js %}
+    <script>
+        FeatureStyles.MainFeatures.setSize({{ self.full_bleed_image_size }});
+    </script>
+    <script type="text/javascript" src="{% static 'themes/components/js/transparency.js' %}"></script>
+    <script type="text/javascript" src="{% static 'themes/leftistForeignPolicy/js/leftist_foreign_policy.js' %}"></script>
+{% endblock %}
+
+{% block header %}
+    {% include 'core/header.html' with tagline=False %}
+{% endblock %}
+
+{% block content %}
+
+    {% if self.main_image and self.include_main_image_overlay %}
+       {% include 'themes/leftistForeignPolicy/articles/article-feature.html' %}
+    {% endif %}
+
+    <article id="article-page">
+
+        <div class="story">
+           
+            {% if self.chapters %}
+            <div class="table-of-contents">
+                <div class="narrow-content">
+                        {% if self.table_of_contents_heading %}
+                        <h2 id="toc">Contributors</h2>
+                        {% endif %}
+                        <ul>
+                            {% for chapter in self.chapters %}
+                                <li><a href="#{{ chapter.value.heading|slugify }}">
+                                    {% with chapter.value.heading|split_string:"/" as headings %}
+                                        {{ headings|last }}
+                                    {% endwith %}
+                                </a></li>
+                            {% endfor %}
+                        </ul>
+                    
+                </div>
+            </div>
+            {% endif %}
+          
+            {% include 'articles/includes/story-content.html' %}
+            {% include 'themes/leftistForeignPolicy/articles/includes/advanced-content.html' %}
+         
+            <div class="home-link"><a href="/"><img src="{% static 'img/opencanada-mark.png' %}"></a></div>
+        </div>
+
+        {% if self.topics %}
+            <div class="container">
+                <div class="topics related narrow-content">
+                    <div class="topic-label"><i class="fa fa-tags"></i> Topics:</div>
+                    <ul class="list-inline">
+                        {% for topic in self.topics %}
+                            <li><a href="{% topic_url topic %}">{{ topic }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        {% endif %}
+    </article>
+
+
+{% endblock %}
+
+{% block footer %}
+   {% include 'themes/components/simple_footer.html' %}
+{% endblock %}
