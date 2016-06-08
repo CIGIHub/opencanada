@@ -32,7 +32,7 @@
  		}
  		h1{
  			font-family: $serif;
- 			font-size: 35px;
+ 			font-size: 45px;
  			line-height: 120%;
  			text-transform: uppercase;
  			width: 60%;
@@ -63,11 +63,11 @@
  	}	
 }
 
-article .block-PullQuote {
+article .block-PullQuote, article .block-Sharable {
 	border: none;
 	color: $leftist_blue;
 	font-family: $sans-serif;
-	padding: 0px;
+	padding: 0 15px
 }
 
 .narrow-content{
@@ -78,10 +78,9 @@ article .block-PullQuote {
 
 	h2{
 		font-family: $serif;
-		font-size: 16px;
-		font-weight: normal;
-		text-decoration: underline;
-		text-transform: uppercase;
+		font-size: 22px;
+		font-weight: bold;
+		color: $leftist_blue;
 		margin-bottom: 20px;
 
 	}
@@ -93,15 +92,19 @@ article .block-PullQuote {
 
 		h2{
 			margin-top: 0px;
-			text-decoration: none;
+			// font-weight: normal;
+			font-size: 16px;
+			color: black;
+			font-family: $sans-serif;
 		}
 		ul{
 			padding: 0px;
 			margin: 0px;
+			font-family: $sans-serif;
 			li{
 				list-style: none;
 				a{
-					color: $text-color;
+					color: $leftist_blue;
 					text-indent: -1.3em;
 					&:hover::before {
 			          float: left;
@@ -137,6 +140,7 @@ article .block-PullQuote {
 				font-size: 22px;
 				width: 100%;
 			}
+			
 			ul.share-links{
  				li{	
 	 				font-size: 22px;
@@ -146,6 +150,9 @@ article .block-PullQuote {
 	}
 
 	.story{
+		h2{
+			font-size: 18px;
+		}
 		.table-of-contents{
 	
 			margin: 15px;
