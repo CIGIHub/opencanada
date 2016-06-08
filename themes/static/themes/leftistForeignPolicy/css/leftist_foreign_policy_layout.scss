@@ -88,8 +88,8 @@ article .block-PullQuote {
 	}
 
 	.table-of-contents{
+		width: 25%;
 
-		padding: 0 20px 20px 50px;
 		h2{
 			margin-top: 0px;
 			text-decoration: none;
@@ -149,6 +149,7 @@ article .block-PullQuote {
 	.story{
 		.table-of-contents{
 			padding: 15px;
+			width: auto;
 		}
 	}
 
