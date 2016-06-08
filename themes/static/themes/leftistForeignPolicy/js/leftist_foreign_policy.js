@@ -13,10 +13,24 @@ jQuery(document).ready(function() {
     	featureHeight = $('.leftist-feature').height();
      	$('.feature-right').css("height", featureHeight);  	
 
+     	setTableOfContents(windowWidth);
+
     });
 
 	$(window).on('scroll', function(){
 
+		setTableOfContents(windowWidth);
+	
+    	if($('body').scrollTop() > (featureHeight/4) ){
+    		$('.feature-right').addClass('slide-left');
+    	}
+    	if($('body').scrollTop() < (100) ){
+    		$('.feature-right').removeClass('slide-left');
+    	}
+
+	});
+
+	function setTableOfContents(windowWidth){
 		if(windowWidth > 768){
 
     		if($('body').scrollTop() >= (featureHeight - 100)){
@@ -41,15 +55,7 @@ jQuery(document).ready(function() {
 	    			"float": "none"
 	    		});
     	}
-	
-    	if($('body').scrollTop() > (featureHeight/4) ){
-    		$('.feature-right').addClass('slide-left');
-    	}
-    	if($('body').scrollTop() < (100) ){
-    		$('.feature-right').removeClass('slide-left');
-    	}
-
-	});
+	}
 
 });
 
