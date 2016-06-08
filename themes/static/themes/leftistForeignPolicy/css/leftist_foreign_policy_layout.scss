@@ -1,0 +1,157 @@
+.template-article-page .leftist-feature{
+  background-color: $leftist_blue;
+  overflow: auto;
+  margin-top: -120px;
+  position: relative;
+
+  	.feature-right, .feature-left{
+
+  		float: left;
+  		width: 50%;
+  	}
+
+  	.feature-right{
+  		z-index: 100;
+  		position: absolute;
+  		background-color: $leftist_blue;
+  		left: 50%;
+  		transition: all 2000ms linear;
+  		&.slide-left{
+  			left: 0%;
+  			transform: translate3d(0px, 0px, 0px);
+  		}
+  	}
+  	
+ 	.feature-text{
+ 		margin-left: 10%;
+ 		.title{
+ 			padding-top: 15%;
+	 		width: 70%;
+	 		border-bottom: solid 2px black;
+	 		padding-bottom: 10px;
+	 		margin-bottom: 20px;
+ 		}
+ 		h1{
+ 			font-family: $serif;
+ 			font-size: 45px;
+ 			line-height: 120%;
+ 			text-transform: uppercase;
+ 			width: 60%;
+ 			span{
+ 				color: white;
+ 			}
+
+ 		}
+ 		ul.share-links{
+ 			padding: 0px;
+ 			margin: 0px;
+ 			line-height: 0px;
+ 			li{
+ 				list-style: none;
+	 			float: left;
+	 			font-size: 32px;
+	 			padding: 5px;
+ 			}
+ 			a{
+ 				color: black;
+ 			}
+ 			.facebook-share-link:hover, a:hover{
+ 				color: $overlay-link-hover-color;
+ 				cursor: pointer;
+ 				transition: color 0.5s;
+ 			}
+	 	}
+ 	}	
+}
+
+article .block-PullQuote {
+	border: none;
+	color: $leftist_blue;
+	font-family: $sans-serif;
+	padding: 0px;
+}
+
+.narrow-content{
+	margin-left: 25%;
+}
+
+.story{
+
+	h2{
+		font-family: $serif;
+		font-size: 16px;
+		font-weight: normal;
+		text-decoration: underline;
+		text-transform: uppercase;
+		margin-bottom: 20px;
+
+	}
+
+	.table-of-contents{
+
+		padding: 0 20px 20px 50px;
+		h2{
+			margin-top: 0px;
+			text-decoration: none;
+		}
+		ul{
+			padding: 0px;
+			margin: 0px;
+			li{
+				list-style: none;
+				a{
+					color: $text-color;
+					text-indent: -1.3em;
+					&:hover::before {
+			          float: left;
+			          margin-left: -5px;
+			          padding-right: 5px;
+			          font-family: fontAwesome;
+			          content: '•';
+			          color: $leftist_blue;
+			          font-size: 3em;
+			        }
+				}
+			}
+			
+		}
+	}
+}
+
+@media(max-width: $screen-sm){
+	.narrow-content{
+		margin: 0px;
+	}
+
+	.template-article-page .leftist-feature{
+		margin-top: -70px;
+		.feature-text{
+
+			.title{
+				margin-top: 10%;
+				width: 80%;
+				padding-bottom: 0px;
+				padding-right: 5%;
+				margin-bottom: 5px;
+			}
+			h1{
+				font-size: 22px;
+				width: 100%;
+			}
+			ul.share-links{
+ 				li{	
+	 				font-size: 22px;
+	 			}
+	 		}
+		}
+	}
+
+	.story{
+		.table-of-contents{
+			padding: 15px;
+		}
+	}
+
+}
+
+
