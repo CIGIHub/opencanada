@@ -6,6 +6,7 @@ jQuery(document).ready(function() {
     //wrap the work 'leftist' to apply styling
 	$('.leftist-feature h1').html($('.leftist-feature h1').html().replace(/(Leftist)/g,'<span>$1</span>'));
 
+
     $(window).on('load resize', function(){
 
     	windowWidth = $(window).width();
@@ -17,6 +18,7 @@ jQuery(document).ready(function() {
 	$(window).on('scroll', function(){
 
 		if(windowWidth > 768){
+
     		if($('body').scrollTop() >= (featureHeight - 100)){
 	    		$('.table-of-contents').css({
 	    			"position": "fixed",
@@ -39,15 +41,15 @@ jQuery(document).ready(function() {
 	    			"float": "none"
 	    		});
     	}
-
+	
     	if($('body').scrollTop() > (featureHeight/4) ){
     		$('.feature-right').addClass('slide-left');
     	}
     	if($('body').scrollTop() < (100) ){
     		$('.feature-right').removeClass('slide-left');
     	}
-	
+
 	});
-	
+
 });
 
