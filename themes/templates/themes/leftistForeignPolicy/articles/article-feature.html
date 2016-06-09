@@ -8,10 +8,12 @@
             <div class="title">{% spaceless %}<h1 class="{{ self.title_size }}">{{ self.title }}</h1> {% endspaceless %}</div> 
             <ul class="share-links" data-page-id="{{ self.id }}">
                 <li class="twitter">
+                    
                     <a href="https://twitter.com/share?text={{ self.title|urlencode }}&url={{ self.full_url|urlencode:"" }}"><i class="fa fa-twitter"></i></a>
                 </li>
                 <li class="facebook">
-                    <span class="facebook-share-link" data-url="{{ self.full_url }}"><i class="fa fa-facebook-square"></i></span>
+                    <div><span class="facebook-share-link" data-url="{{ self.full_url }}"><i class="fa fa-facebook-square"></i></span></div>
+                    <div class="count"><!-- {% if self.facebook_count > 0 %}{{ self.facebook_count }}{% endif %} -->42</div>
                 </li>
             </ul>
         </div>

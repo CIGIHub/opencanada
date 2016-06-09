@@ -39,27 +39,29 @@
  			span{
  				color: $body-bg-color;
  			}
-
  		}
+
  		ul.share-links{
- 			padding: 0px;
- 			margin: 0px;
- 			line-height: 0px;
+ 			@include sharelinks;
+ 			position: relative;
  			li{
- 				list-style: none;
-	 			float: left;
-	 			font-size: 32px;
-	 			padding: 5px;
+ 				display:inline-block;
+ 				font-size: 32px;
+ 				a{
+ 					color: black;
+ 				}
+ 				.count{
+ 					margin-left: 10px;
+ 					font-size: 22px;
+ 					color: $body-bg-color;
+ 				}
+	 			.facebook-share-link:hover, a:hover{
+	 				color: $overlay-link-hover-color;
+	 				cursor: pointer;
+	 				transition: color 0.5s;
+	 			}
  			}
- 			a{
- 				color: black;
- 			}
- 			.facebook-share-link:hover, a:hover{
- 				color: $overlay-link-hover-color;
- 				cursor: pointer;
- 				transition: color 0.5s;
- 			}
-	 	}
+ 		}
  	}	
 }
 
@@ -82,7 +84,6 @@ article .block-PullQuote, article .block-Sharable {
 		font-weight: bold;
 		color: $leftist_blue;
 		margin-bottom: 20px;
-
 	}
 
 	.table-of-contents{
