@@ -44,6 +44,7 @@
         .facebook-share-link:hover, a:hover{
             color: $text-link-hover-color;
             transition: color 0.5s;
+            cursor: pointer;
         }
 
     }
