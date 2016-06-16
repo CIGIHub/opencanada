@@ -75,13 +75,13 @@ class Command(BaseCommand):
                 '{} must be a file which contains your api key.'.format(key_file_location)
             )
 
-        scope = ['https://www.googleapis.com/auth/analytics.readonly']
+        scopes = ['https://www.googleapis.com/auth/analytics.readonly']
         service_account_email = get_service_account_email()
 
         service = utils.get_service(
             'analytics',
             'v3',
-            scope,
+            scopes,
             key_file_location,
             service_account_email
         )
