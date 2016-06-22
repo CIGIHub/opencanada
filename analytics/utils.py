@@ -5,10 +5,10 @@ import six
 
 from analytics.models import Analytics
 from apiclient.discovery import build
-from oauth2client.client import SignedJwtAssertionCredentials
+from oauth2client.service_account import ServiceAccountCredentials
 
 
-def get_service(api_name, api_version, scope, key_file_location, service_account_email):
+def get_service(api_name, api_version, scopes, key_file_location, service_account_email):
     """Get a service that communicates to a Google API.
 
     Args:
@@ -22,13 +22,10 @@ def get_service(api_name, api_version, scope, key_file_location, service_account
     A service that is connected to the specified API.
     """
 
-    with open(key_file_location, 'rb') as f:
-        key = f.read()
-
-    credentials = SignedJwtAssertionCredentials(
+    credentials = ServiceAccountCredentials.from_p12_keyfile(
         service_account_email,
-        key,
-        scope=scope
+        key_file_location,
+        scopes=scopes
     )
 
     http = credentials.authorize(httplib2.Http())
