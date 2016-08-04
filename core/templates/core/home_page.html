@@ -53,7 +53,7 @@
                             {% image article.main_image fill-910x560 as background_image %}
 
                             <div class="feature-image" style="background-image: url('{{ background_image.url }}')">
-                                <div class="feature-image-overlay" style="background: rgba( {{ article.image_overlay_color.rgb }}, {{ article.opacity }} )"></div>
+                                <div class="feature-image-overlay" style="opacity: {{ article.opacity }};"></div>
                             </div>
                             <div class="feature-wrapper">
                                 <div class="feature-text {% if article.editors_pick or article == self.most_popular_article  %} article-feature{% endif %}" style="color: {{ article.font_style.text_colour.hex_value }};">

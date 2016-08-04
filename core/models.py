@@ -289,10 +289,6 @@ def on_publish(**kwargs):
         style = featured_item.feature_style
     else:
         style = "simple"
-    if hasattr(featured_item, 'image_overlay_color'):
-        color = featured_item.image_overlay_color
-    else:
-        color = None
     if hasattr(featured_item, 'image_overlay_opacity'):
         opacity = featured_item.image_overlay_opacity
     else:
@@ -309,12 +305,10 @@ def on_publish(**kwargs):
                 containing_page=instance,
                 featured_item=featured_item,
                 feature_style=style,
-                image_overlay_color=color,
                 image_overlay_opacity=opacity,
             )
         else:
             headline.feature_style = style
-            headline.image_overlay_color = color
             headline.image_overlay_opacity = opacity
 
     else:
@@ -323,7 +317,6 @@ def on_publish(**kwargs):
                 containing_page=instance,
                 featured_item=featured_item,
                 feature_style=style,
-                image_overlay_color=color,
                 image_overlay_opacity=opacity,
             )
 
