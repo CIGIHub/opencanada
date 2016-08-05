@@ -19,7 +19,7 @@
                         {% endif %}
                         <a href="{{ item.url }}">
                           <div class="feature-image" style="background-image: url('{{ background_image.url }}')">
-                              <div class="feature-image-overlay" style="background: rgba( {{ item.image_overlay_color.rgb }}, {{ item.opacity }} )"></div>
+                              <div class="feature-image-overlay" style="opacity: {{ item.opacity }};"></div>
                           </div>
                           <div class="feature-wrapper">
                               <div class="feature-text {% if item.editors_pick or article == self.most_popular_article  %} article-feature{% endif %}" style="color: {{ item.font_style.text_colour.hex_value }};">
