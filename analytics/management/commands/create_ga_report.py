@@ -8,6 +8,7 @@ from django.core.management.base import BaseCommand
 from analytics import utils
 from articles.models import ArticlePage, SeriesPage
 
+
 class Command(BaseCommand):
     # usage = 'PYTHONIOENCODING=utf-8 python manage.py create_ga_report 2015-08-01 2016-08-01 > opencanadareport.tsv'
     help = 'Create a report containing Google Analytics for series and articles'
@@ -25,8 +26,6 @@ class Command(BaseCommand):
         # Optional arguments
         parser.add_argument('--dimensions',
                             default='ga:pagePath',
-                            # default='ga:pagePath,ga:sourceMedium',
-                            # default='ga:pagePath,ga:source,ga:medium',
                             dest='dimensions',
                             help='The data dimensions to use when querying for specified metrics, such as page path')
 
@@ -95,8 +94,9 @@ class Command(BaseCommand):
 
     def _print_statistics(self, db_statistics_by_page_url, ga_statistics_by_page_url, other_ga_stats_by_page_url):
         header_row = ['Title', 'URL', 'Published Date', 'Days Published', 'Parent Page', 'Category', 'Type',
-                      'Word Count', 'Pageviews (PV)', 'Unique Pageviews (UPV)', 'Avg. Time on Page', 'facebook PV',
-                      'facebook UPV', 'twitter PV', 'twitter UPV', 'direct PV', 'direct UPV', 'google PV', 'google UPV']
+                      'Word Count', 'Pageviews (PV)', 'Unique Pageviews (UPV)', 'Avg. Time on Page (in seconds)',
+                      'facebook PV', 'facebook UPV', 'twitter PV', 'twitter UPV', 'direct PV', 'direct UPV',
+                      'google PV', 'google UPV']
         print '\t'.join([x for x in header_row])
         for url in db_statistics_by_page_url.keys():
             page_data = db_statistics_by_page_url[url]
@@ -199,18 +199,15 @@ class Command(BaseCommand):
         texts = []
         for body_block in body:
             if isinstance(body_block.value, dict):
-                if body_block.value.has_key('body'):
+                if 'body' in body_block.value:
                     text = '\n'.join(self._get_body_text(body_block.value['body'], text_keys))
                 else:
                     for key in text_keys:
-                        if body_block.value.has_key(key):
+                        if key in body_block.value:
                             try:
                                 text = body_block.value[key].source
                             except AttributeError:
                                 text = body_block.value[key]
-                            except TypeError:
-                                import pdb; pdb.set_trace()
-                                i = 1
                     for key in body_block.value.keys():
                         if key not in ['body', 'expandable', 'heading_level', 'image', 'include_border', 'label', 'placement', 'text', 'use_dropcap']:
                             raise KeyError("'{}' not in the list of expected keys for a StreamField".format(key))
@@ -321,7 +318,7 @@ class Command(BaseCommand):
         data_dict = {}
         for row in data_rows:
             url = row[0]
-            if not data_dict.has_key(url):
+            if url not in data_dict:
                 data_dict[url] = []
             data_dict[url].append(row[1:])
 
