@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 
 import argparse
 import re
+import six
 from datetime import datetime
 from django.core.management.base import BaseCommand
 
@@ -75,29 +76,32 @@ class Command(BaseCommand):
         db_statistics_by_page_url = self._get_statistics_from_database(start_date, end_date)
 
         # Get data with statistics from Google Analytics
-        ga_statistics, other_ga_stats = self._get_statistics_from_google_analytics(service, profile_id,
-                                                                                   start_date, end_date,
-                                                                                   dimensions, metrics,
-                                                                                   other_dimensions, other_filters)
+        ga_statistics, other_ga_stats = self._get_statistics_from_google_analytics(
+            service,
+            profile_id,
+            start_date,
+            end_date,
+            dimensions,
+            metrics,
+            other_dimensions,
+            other_filters
+        )
 
         # Merge the statistics from the different data sources and print them
-        self._print_statistics(db_statistics_by_page_url, ga_statistics, other_ga_stats)
+        final_statistics = self._merge_statistics(db_statistics_by_page_url, ga_statistics, other_ga_stats)
+        self._print_statistics(final_statistics)
 
     def valid_date(self, date_string):
         try:
-            datetime.strptime(date_string, "%Y-%m-%d")
+            datetime.strptime(date_string, '%Y-%m-%d')
         except ValueError:
             message = "Not a valid date: '{0}'.".format(date_string)
             raise argparse.ArgumentTypeError(message)
         else:
             return date_string
 
-    def _print_statistics(self, db_statistics_by_page_url, ga_statistics_by_page_url, other_ga_stats_by_page_url):
-        header_row = ['Title', 'URL', 'Published Date', 'Days Published', 'Parent Page', 'Category', 'Type',
-                      'Word Count', 'Pageviews (PV)', 'Unique Pageviews (UPV)', 'Avg. Time on Page (in seconds)',
-                      'facebook PV', 'facebook UPV', 'twitter PV', 'twitter UPV', 'direct PV', 'direct UPV',
-                      'google PV', 'google UPV']
-        print '\t'.join([x for x in header_row])
+    def _merge_statistics(self, db_statistics_by_page_url, ga_statistics_by_page_url, other_ga_stats_by_page_url):
+        final_statistics = []
         for url in db_statistics_by_page_url.keys():
             page_data = db_statistics_by_page_url[url]
             data_row = self._format_page_data_for_output(page_data)
@@ -105,7 +109,34 @@ class Command(BaseCommand):
             assert len(ga_statistics) == 1
             other_statistics = other_ga_stats_by_page_url[url]
             data_row.extend(self._format_ga_data_for_output(ga_statistics[0], other_statistics))
-            print '\t'.join([x for x in data_row])
+            final_statistics.append(data_row)
+        return final_statistics
+
+    def _print_statistics(self, final_statistics):
+        header_row = [
+            'Title',
+            'URL',
+            'Published Date',
+            'Days Published',
+            'Parent Page',
+            'Category',
+            'Type',
+            'Word Count',
+            'Pageviews (PV)',
+            'Unique Pageviews (UPV)',
+            'Avg. Time on Page (in seconds)',
+            'facebook PV',
+            'facebook UPV',
+            'twitter PV',
+            'twitter UPV',
+            'direct PV',
+            'direct UPV',
+            'google PV',
+            'google UPV'
+        ]
+        self.stdout.write('\t'.join([x for x in header_row]))
+        for data_row in final_statistics:
+            self.stdout.write('\t'.join([x for x in data_row]))
 
     def _format_page_data_for_output(self, page_data):
         output = []
@@ -113,7 +144,7 @@ class Command(BaseCommand):
         output.append(page_data['url'])
         published_date = page_data['published_date'].strftime('%Y-%m-%d')
         output.append(published_date)
-        output.append(unicode(page_data['days_published']))
+        output.append(six.text_type(page_data['days_published']))
         output.append(page_data['parent_page'])
         output.append(page_data['category'])
         types = []
@@ -125,27 +156,27 @@ class Command(BaseCommand):
             types.append('Visualization')
         output.append(','.join(types))
         word_count = sum([x for x in page_data['word_count_by_type'].values()])
-        output.append(unicode(word_count))
+        output.append(six.text_type(word_count))
         return output
 
     def _format_ga_data_for_output(self, ga_statistics, other_statistics):
         # TODO: Here is the perfect example of why this Command isn't generic enough...
-        output = [unicode(x) for x in ga_statistics]
-        json_data = {
-            'facebook': [0, 0],
-            'twitter': [0, 0],
-            'direct': [0, 0],
-            'google': [0, 0]
-        }
+        output = [six.text_type(x) for x in ga_statistics]
+        json_data = dict(
+            facebook=[0, 0],
+            twitter=[0, 0],
+            direct=[0, 0],
+            google=[0, 0]
+        )
         for key in json_data.keys():
             filtered_stats = [x for x in other_statistics if key in x[0]]
             for stats in filtered_stats:
                 json_data[key][0] += int(stats[1])
                 json_data[key][1] += int(stats[2])
-        output.extend(unicode(x) for x in json_data['facebook'])
-        output.extend(unicode(x) for x in json_data['twitter'])
-        output.extend(unicode(x) for x in json_data['direct'])
-        output.extend(unicode(x) for x in json_data['google'])
+        output.extend(six.text_type(x) for x in json_data['facebook'])
+        output.extend(six.text_type(x) for x in json_data['twitter'])
+        output.extend(six.text_type(x) for x in json_data['direct'])
+        output.extend(six.text_type(x) for x in json_data['google'])
         return output
 
     def _calculate_days_published(self, published_date, end_date):
@@ -156,7 +187,7 @@ class Command(BaseCommand):
     # TODO: Investigate the possibility of simply extending all of our models/snippets/etc. with a Mixin that provides
     # a word_count function...
     def _calculate_word_count_by_type(self, page):
-        types_to_ignore = [u'Embed', u'FullBleed', u'Image', u'Overflow', u'SectionBreak', u'Sharable']
+        types_to_ignore = ['Embed', 'FullBleed', 'Image', 'Overflow', 'SectionBreak', 'Sharable']
         word_count_stats = {}
         # Generic 'body'...
         if page.body:
@@ -167,24 +198,21 @@ class Command(BaseCommand):
                 if type not in word_count_stats:
                     word_count_stats[type] = 0
                 value = data['value']
-                try:
-                    text = value['text']
-                except KeyError:
-                    word_count_stats[type] += 1
-                    continue
-                except TypeError:
+                if isinstance(value, six.string_types):
                     text = value
-                # 'List' type...
-                if isinstance(text, list):
-                    text = '\n'.join(text)
+                elif isinstance(value, list):
+                    # 'List' type...
+                    text = '\n'.join(value)
+                else:
+                    try:
+                        text = value['text']
+                    except KeyError:
+                        word_count_stats[type] += 1
+                        continue
                 words = self._get_words(text)
                 word_count_stats[type] += len(words)
         # 'Chapters'...
-        try:
-            chapters = page.chapters
-        except AttributeError:
-            chapters = []
-        if len(chapters) > 0:
+        if hasattr(page, 'chapters') and len(page.chapters) > 0:
             type = 'ChapterBody'
             text_keys = ['label', 'text']
             word_count_stats[type] = 0
@@ -204,9 +232,9 @@ class Command(BaseCommand):
                 else:
                     for key in text_keys:
                         if key in body_block.value:
-                            try:
+                            if hasattr(body_block.value[key], 'source'):
                                 text = body_block.value[key].source
-                            except AttributeError:
+                            else:
                                 text = body_block.value[key]
                     for key in body_block.value.keys():
                         if key not in ['body', 'expandable', 'heading_level', 'image', 'include_border', 'label', 'placement', 'text', 'use_dropcap']:
@@ -214,9 +242,9 @@ class Command(BaseCommand):
             elif isinstance(body_block.value, list):
                 text = '\n'.join([x.source for x in body_block.value])
             else:
-                try:
+                if hasattr(body_block.value, 'source'):
                     text = body_block.value.source
-                except AttributeError:
+                else:
                     text = body_block.value
             texts.append(text)
         return texts
@@ -233,41 +261,42 @@ class Command(BaseCommand):
 
     def _get_statistics_from_database(self, start_date, end_date):
         data_table = {}
-        articles_of_interest = ArticlePage.objects.filter(first_published_at__range=['2015-08-01', '2016-08-01'])
+        articles_of_interest = ArticlePage.objects.filter(first_published_at__range=[start_date, end_date])
         end_date_as_datetime = datetime.strptime(end_date, "%Y-%m-%d")
+        # TODO: "[...] you could have SeriesPage ArticlesPage support this interface you want them to have with a series
+        # of properties and then just a polymorphic dictionary of objects based on url" - amjoconn
         for article in articles_of_interest:
-            data_row = {}
-            data_row['title'] = article.title
-            data_row['url'] = article.url
-            data_row['published_date'] = article.first_published_at
-            data_row['days_published'] = self._calculate_days_published(data_row['published_date'], end_date_as_datetime)
-            data_row['parent_page'] = article.get_parent().title
-            data_row['category'] = article.category.name
-            data_row['is_video'] = article.video
-            data_row['is_interview'] = article.interview
-            data_row['is_visualization'] = article.visualization
-            data_row['word_count_by_type'] = self._calculate_word_count_by_type(article)
-            data_table[data_row['url']] = data_row
+            data_row = dict(
+                title=article.title,
+                url=article.url,
+                published_date=article.first_published_at,
+                days_published=self._calculate_days_published(article.first_published_at, end_date_as_datetime),
+                parent_page=article.get_parent().title,
+                category=article.category.name,
+                is_video=article.video,
+                is_interview=article.interview,
+                is_visualization=article.visualization,
+                word_count_by_type=self._calculate_word_count_by_type(article)
+            )
+            assert article.url not in data_table
+            data_table[article.url] = data_row
 
-        series_of_interests = SeriesPage.objects.filter(first_published_at__range=['2015-08-01', '2016-08-01'])
+        series_of_interests = SeriesPage.objects.filter(first_published_at__range=[start_date, end_date])
         for series in series_of_interests:
-            data_row = {}
-            data_row['title'] = series.title
-            data_row['url'] = series.url
-            data_row['published_date'] = series.first_published_at
-            data_row['days_published'] = self._calculate_days_published(data_row['published_date'], end_date_as_datetime)
-            data_row['parent_page'] = series.get_parent().title
-            data_row['category'] = ''
-            data_row['is_video'] = False
-            data_row['is_interview'] = False
-            data_row['is_visualization'] = False
-            data_row['word_count_by_type'] = self._calculate_word_count_by_type(series)
-            data_table[data_row['url']] = data_row
-
-        all_types = set([])
-        for k, v in data_table.iteritems():
-            word_count_stats = v['word_count_by_type']
-            all_types.update(word_count_stats.keys())
+            data_row = dict(
+                title=series.title,
+                url=series.url,
+                published_date=series.first_published_at,
+                days_published=self._calculate_days_published(series.first_published_at, end_date_as_datetime),
+                parent_page=series.get_parent().title,
+                category='',
+                is_video=False,
+                is_interview=False,
+                is_visualization=False,
+                word_count_by_type=self._calculate_word_count_by_type(series)
+            )
+            assert series.url not in data_table
+            data_table[series.url] = data_row
 
         return data_table
 
@@ -286,14 +315,28 @@ class Command(BaseCommand):
             'ga:pagePath!~^/topics/*',
         ]
         filters = ';'.join(filters)
-        base_data_dict = self._get_google_analytics_keyed_by_url(service, profile_id, start_date, end_date, dimensions,
-                                                                 metrics, filters)
+        base_data_dict = self._get_google_analytics_keyed_by_url(
+            service,
+            profile_id,
+            start_date,
+            end_date,
+            dimensions,
+            metrics,
+            filters
+        )
 
         # Perform another query with the addition of the other dimensions
         dimensions = ','.join([dimensions, other_dimensions])
         filters = ';'.join([filters, other_filters])
-        other_data_dict = self._get_google_analytics_keyed_by_url(service, profile_id, start_date, end_date, dimensions,
-                                                                  metrics, filters)
+        other_data_dict = self._get_google_analytics_keyed_by_url(
+            service,
+            profile_id,
+            start_date,
+            end_date,
+            dimensions,
+            metrics,
+            filters
+        )
 
         return base_data_dict, other_data_dict
 
@@ -305,9 +348,16 @@ class Command(BaseCommand):
         data_rows = []
         start_index = 1
         while True:
-            data_query = service.data().ga().get(ids=ids, start_date=start_date, end_date=end_date, metrics=metrics,
-                                                 dimensions=dimensions, filters=filters, start_index=start_index,
-                                                 max_results=max_results)
+            data_query = service.data().ga().get(
+                ids=ids,
+                start_date=start_date,
+                end_date=end_date,
+                metrics=metrics,
+                dimensions=dimensions,
+                filters=filters,
+                start_index=start_index,
+                max_results=max_results
+            )
             data = data_query.execute()
             data_rows.extend(data['rows'])
             total_rows = int(data['totalResults'])
