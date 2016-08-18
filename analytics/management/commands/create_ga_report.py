@@ -256,7 +256,7 @@ class Command(BaseCommand):
         # Strip HTML tags
         pattern = '<.*?>'
         text, replacements = re.subn(pattern, '', text, flags=re.DOTALL)
-        words = re.findall(ur'\w+', text.replace(u'\xa0', ' ').encode('utf-8'))
+        words = re.findall(r'\w+', text.replace('\xa0', ' ').encode('utf-8'))
         return words
 
     def _get_statistics_from_database(self, start_date, end_date):
