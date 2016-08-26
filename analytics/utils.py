@@ -1,11 +1,52 @@
 from __future__ import absolute_import, division, unicode_literals
 
 import httplib2
+import os
 import six
 
 from analytics.models import Analytics
 from apiclient.discovery import build
+from django.conf import settings
+from django.core.exceptions import ImproperlyConfigured
 from oauth2client.service_account import ServiceAccountCredentials
+
+
+def get_creds_path():
+    message = 'Setting ANALYTICS_CREDS_PATH must be defined, exist and be a directory.'
+    try:
+        path = getattr(settings, 'ANALYTICS_CREDS_PATH')
+    except AttributeError:
+        raise ImproperlyConfigured(message)
+
+    if not os.path.isdir(path):
+        raise ImproperlyConfigured(message)
+
+    return path
+
+
+def get_service_account_email():
+    message = 'Setting ANALYTICS_SERVICE_ACCOUNT_EMAIL must be defined and non empty'
+    try:
+        email = getattr(settings, 'ANALYTICS_SERVICE_ACCOUNT_EMAIL')
+    except AttributeError:
+        raise ImproperlyConfigured(message)
+
+    if email is None or email == '':
+        raise ImproperlyConfigured(message)
+
+    return email
+
+
+def get_key_file_location():
+    creds_path = get_creds_path()
+    key_file_location = os.path.join(creds_path, 'open-canada-analytics.p12')
+
+    if not os.path.isfile(key_file_location):
+        raise ImproperlyConfigured(
+            '{} must be a file which contains your api key.'.format(key_file_location)
+        )
+
+    return key_file_location
 
 
 def get_service(api_name, api_version, scopes, key_file_location, service_account_email):
