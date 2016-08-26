@@ -54,17 +54,71 @@ class ShareLinksMixin(models.Model):
     cached_last_updated = models.DateTimeField(blank=True, null=True)
 
     def _get_facebook_count(self):
+        """
+        Get the latest Facebook Share Count from https://graph.facebook.com
+
+        Content:
+            example_json_response = {
+               "https://opencanada.org/features/five-issues-should-decide-future-internet/": {
+                  "og_object": {
+                     "id": "1330184950343806",
+                     "description": "With a new report on online governance out, we look at the\nconsiderations...
+                     "title": "Five issues that should decide the future of the Internet",
+                     "type": "article",
+                     "updated_time": "2016-08-23T03:20:45+0000"
+                  },
+                  "share": {
+                     "comment_count": 0,
+                     "share_count": 87
+                  },
+                  "id": "https://opencanada.org/features/five-issues-should-decide-future-internet/"
+               },
+               "http://opencanada.org/features/five-issues-should-decide-future-internet/": {
+                  "og_object": {
+                     "id": "1330184950343806",
+                     "description": "With a new report on online governance out, we look at the\nconsiderations...
+                     "title": "Five issues that should decide the future of the Internet",
+                     "type": "article",
+                     "updated_time": "2016-08-23T03:20:45+0000"
+                  },
+                  "share": {
+                     "comment_count": 0,
+                     "share_count": 87
+                  },
+                  "id": "http://opencanada.org/features/five-issues-should-decide-future-internet/"
+               }
+            }
+        """
+        # TODO: Note that the same og_object is returned for both https and http, which begs the question, why do both?
+        url = 'https://graph.facebook.com/?ids=https://opencanada.org{0},http://opencanada.org{0}'.format(self.url)
+        total_shares = 0
         try:
-            url = 'https://graph.facebook.com/?ids=https://opencanada.org{0},http://opencanada.org{0}'.format(self.url)
             response = requests.get(url, timeout=5)
-            j = response.json()
-            total_shares = 0
-            for key, values in j.iteritems():
-                total_shares += values.get('shares', 0)
-            return total_shares
         except requests.exceptions.RequestException:
-            logger.error('There was an error getting the Facebook share count.', exc_info=True, extra={"page": self})
-            return 0
+            logger.error(
+                'There was an error getting the Facebook share count.',
+                exc_info=True,
+                extra={"page": self}
+            )
+            return total_shares
+        try:
+            json_response = response.json()
+        except ValueError:
+            # To be Python 3.x compatible...
+            #   * json raises a ValueError instead of JSONDecodeError
+            #   * simplejson raises JSONDecodeError, but that is a subclass of ValueError
+            logger.error(
+                'There was an error decoding the JSON from the request to Facebook.',
+                exc_info=True,
+                extra={"page": self}
+            )
+            return total_shares
+        for key, values in json_response.iteritems():
+            share_json = values.get('share', {})
+            facebook_share_count = share_json.get('share_count', 0)
+            if facebook_share_count > total_shares:
+                total_shares = facebook_share_count
+        return total_shares
 
     def update_cache(self):
         if not self.cached_last_updated or (timezone.now() - self.cached_last_updated) > timedelta(minutes=10):
