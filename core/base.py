@@ -54,7 +54,8 @@ class ShareLinksMixin(models.Model):
     cached_last_updated = models.DateTimeField(blank=True, null=True)
 
     def _get_facebook_count(self):
-        """Get the latest Facebook Share Count from https://graph.facebook.com
+        """
+        Get the latest Facebook Share Count from https://graph.facebook.com
 
         Content:
             example_json_response = {
