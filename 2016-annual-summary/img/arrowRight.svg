@@ -1,0 +1,19 @@
+
+<svg width="33px" height="22px" viewBox="740 2782 33 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 40.1 (33804) - http://www.bohemiancoding.com/sketch -->
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polyline id="path-1" points="18.3333333 3.66666667 18.3333333 18.3333333 3.66666667 18.3333333"></polyline>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="14.6666667" height="14.6666667" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <polyline id="path-3" points="18.3333333 14.6666667 18.3333333 29.3333333 3.66666667 29.3333333"></polyline>
+        <mask id="mask-4" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="14.6666667" height="14.6666667" fill="white">
+            <use xlink:href="#path-3"></use>
+        </mask>
+    </defs>
+    <g id="Down-Arrow" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(756.500000, 2793.000000) rotate(-90.000000) translate(-756.500000, -2793.000000) translate(745.500000, 2776.500000)">
+        <use id="Rectangle-5" stroke="#FFFFFF" mask="url(#mask-2)" stroke-width="10" transform="translate(11.000000, 11.000000) rotate(45.000000) translate(-11.000000, -11.000000) " xlink:href="#path-1"></use>
+        <use id="Rectangle-5" stroke="#FFFFFF" mask="url(#mask-4)" stroke-width="10" transform="translate(11.000000, 22.000000) rotate(45.000000) translate(-11.000000, -22.000000) " xlink:href="#path-3"></use>
+    </g>
+</svg>

@@ -24,7 +24,7 @@
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <nav class="navbar transparent navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -33,7 +33,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Project name</a>
+          <a class="navbar-brand" href="/"><img src="https://files.opencanada.org/images/opencanada-logo.original.png" alt="OpenCanada.org"></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <form class="navbar-form navbar-right" role="form">
@@ -50,21 +50,98 @@
     </nav>
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
-      <div class="container">
-        <h1>Hello, world!</h1>
-        <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+    <section class="full cover" id="top">
+      <img class="cover" src="img/coverImage.jpg" alt="">
+      <div class="container half">
+        <div class="row">
+          <div class="col-md-3 col-sm-4 col-xs-6 wow fadeIn col-xs-offset-1">
+            <a href="#note">
+              <h1>A Year in<br>Review</h1>
+              <img class="animated infinite pulse" src="img/arrowDown.svg" alt="">
+            </a>
+          </div>
+        </div>  
       </div>
-    </div>
+    </section>
 
-    <div class="container">
+    <div class="body">
+    
+    <section class="full test" id="note">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 col-sm-offset-1 wow fadeInLeft">
+            <h2>Editor In Chief's Note</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4 col-md-offset-2">
+            <p>It is a long established fact <a href="#top">that a reader</a> will become distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters.</p>
+            <p>It is a long established fact <a href="#top">that a reader</a> will become distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters.</p>
+          </div>
+           <div class="col-md-4">
+            <p>It is a long established fact <a href="#top">that a reader</a> will become distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters.</p>
+            <p>It is a long established fact <a href="#top">that a reader</a> will become distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters.</p>
+            <p>It is a long established fact <a href="#top">that a reader</a> will become distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters.</p>
+            <br>
+            <img src="img/signature.svg" alt="Editor's signature"><br><br>
+            Taylor Owen
+          </div>
+        </div>
+        <div class="row">
+          <hr>
+        </div>
+      </div>
+    </section>
+    
+    <section class="full story test" id="story1">
+     <img src="https://files.opencanada.org/images/kurdistan-main-image.original.2e16d0ba.fill-910x604.jpg" alt="" class="cover">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-5 col-sm-5 col-sm-offset-1 wow fadeInLeft">
+            <h2>Out Of Iraq’s Ashes, Kurdistan Grows</h2>
+            <ul class="authors">
+              <li>
+                <h3>
+                  <small class="uppercase">Author</small>
+                  Author Name
+                  <small>@AuthorName</small>
+                </h3>
+              </li>
+              <li>
+                <h3>
+                  <small class="uppercase">Author</small>
+                  Author Name
+                  <small>@AuthorName</small>
+                </h3>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-4 col-sm-4 col-sm-offset-1 wow fadeIn">
+            <p>It is a long established fact will become distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters.</p>
+            <p>It is a long established fact will become distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters.</p>
+            <p>It is a long established fact will become distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters.</p>
+            <p>It is a long established fact will become distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters.</p>
+            <p>It is a long established fact will become distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters.</p>
+            <p>&nbsp;<br></p>
+            <p>
+              <a href="#top" class="arrow wow fadeIn">
+                <img class="animated infinite pulse" src="img/arrowRight.svg" alt="">
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    </div>    
+
+    <div class="container wow fadeIn">
       <!-- Example row of columns -->
       <div class="row">
         <div class="col-md-4">
           <h2>Heading</h2>
           <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+          <p><a class="btn btn-default" href="#top" role="button">View details &raquo;</a></p>
         </div>
         <div class="col-md-4">
           <h2>Heading</h2>
@@ -80,7 +157,7 @@
 
       <hr>
 
-      <footer>
+      <footer class="wow fadeIn">
         <p>&copy; Company 2015</p>
       </footer>
     </div> <!-- /container -->        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
