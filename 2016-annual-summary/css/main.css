@@ -40,6 +40,7 @@ hr {
   margin: 0 auto;
   border-top: 1px dotted #ffffff;
   margin-top: 34px;
+  margin-bottom: 34px;
 }
 .story ul {
   display: inline-block;
@@ -58,16 +59,29 @@ hr {
   width: 100%;
   font-size: 13px;
   line-height: 18px;
+  font-weight: 300;
 }
 /* ==========================================================================
    Typography
    ========================================================================== */
+h1,
+h2,
+h3,
+h4 {
+  font-family: proxima-nova, Helvetica, sans-serif;
+}
+p {
+  font-family: "EB Garamond", Georgia, serif;
+  font-size: 13px;
+  font-weight: 300;
+}
 h1 {
   font-size: 34px;
   line-height: 34px;
 }
 h2 {
   position: relative;
+  margin-top: 0;
   padding-bottom: 36px;
   margin-bottom: 40px;
 }
@@ -76,8 +90,8 @@ h2::after {
   position: absolute;
   bottom: 0;
   left: 0;
-  height: 10px;
-  width: 200px;
+  height: 8px;
+  width: 150px;
   background: #bf1e2e;
 }
 a,
@@ -131,6 +145,9 @@ a:visited:hover {
 /* ==========================================================================
    Cover
    ========================================================================== */
+.cover {
+  background-color: #000000;
+}
 .cover .container {
   padding-top: 50vh;
   z-index: 1;
@@ -153,18 +170,22 @@ img.cover {
   width: 100vw;
   height: 100vh;
   object-fit: cover;
-  z-index: -3;
-  position: absolute;
+  z-index: 0;
+  position: fixed;
   top: 0;
+}
+section {
+  overflow: hidden;
+  position: relative;
 }
 section::after {
   content: " ";
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1;
+  z-index: 2;
   background-color: rgba(0, 0, 0, 0);
   background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0)), to(#000000));
   background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0), #000000);
@@ -181,8 +202,72 @@ section::after {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -2;
+  z-index: 1;
   background-color: rgba(6, 33, 81, 0.7);
+}
+.full .container {
+  z-index: 99999;
+  position: relative;
+}
+.z-19 {
+  z-index: 19;
+}
+.z-18 {
+  z-index: 18;
+}
+.z-17 {
+  z-index: 17;
+}
+.z-16 {
+  z-index: 16;
+}
+.z-15 {
+  z-index: 15;
+}
+.z-14 {
+  z-index: 14;
+}
+.z-13 {
+  z-index: 13;
+}
+.z-12 {
+  z-index: 12;
+}
+.z-11 {
+  z-index: 11;
+}
+.z-10 {
+  z-index: 10;
+}
+.z-9 {
+  z-index: 9;
+}
+.z-8 {
+  z-index: 8;
+}
+.z-7 {
+  z-index: 7;
+}
+.z-6 {
+  z-index: 6;
+}
+.z-5 {
+  z-index: 5;
+}
+.z-4 {
+  z-index: 4;
+}
+.z-3 {
+  z-index: 3;
+}
+.z-2 {
+  z-index: 2;
+}
+.z-1 {
+  z-index: 1;
+}
+.z-0 {
+  z-index: 0;
 }
 a:hover img {
   -webkit-animation-play-state: paused;

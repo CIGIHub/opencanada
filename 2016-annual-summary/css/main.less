@@ -62,6 +62,7 @@ hr {
    margin: 0 auto;
    border-top: 1px dotted @white;
    margin-top: 34px;
+   margin-bottom: 34px;
 }
 
 .story {
@@ -80,6 +81,7 @@ hr {
             width: 100%;
             font-size: 13px;
             line-height: 18px;
+            font-weight: 300;
          }
       }
    }
@@ -89,6 +91,16 @@ hr {
    Typography
    ========================================================================== */
 
+h1, h2, h3, h4 {
+   font-family: proxima-nova, Helvetica, sans-serif;
+}
+
+p {
+   font-family: "EB Garamond", Georgia, serif;
+   font-size: 13px;
+   font-weight: 300;
+}
+
 h1 {
    font-size: 34px;
    line-height: 34px; 
@@ -96,6 +108,7 @@ h1 {
 
 h2 {
    position: relative;
+   margin-top: 0;
    padding-bottom: 36px;
    margin-bottom: 40px;
    &::after {
@@ -103,8 +116,8 @@ h2 {
       position: absolute;
       bottom: 0;
       left: 0;
-      height: 10px;
-      width: 200px;
+      height: 8px;
+      width: 150px;
       background: @red;
    }
 }
@@ -162,6 +175,7 @@ a, a:focus, a:visited {
 //   background-image: url(../img/coverImage.jpg);
 //   background-position: center center;
 //   background-size: 100%;
+   background-color: @black;
    .container {
       padding-top: 50vh;
       z-index: 1;
@@ -183,20 +197,25 @@ img.cover {
    width: 100vw;
    height: 100vh;
    object-fit: cover;
-   z-index: -3;
-   position: absolute;
+   z-index: 0;
+   position: fixed;
    top: 0;
+//   transform: translate3d(0,0,0);
 }
 
 section {
+//      transform: translate3d(0,0,0);
+      overflow: hidden;
+      position: relative;
+   
       &::after {
       content: " ";
-      position: absolute;
+      position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: -1;
+      z-index: 2;
 
       .gradient (rgba(0,0,0,0), rgba(0,0,0,1));
    }
@@ -210,10 +229,34 @@ section {
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: -2;
+      z-index: 1;
       background-color: @blue;
    }
 }
+
+.full {
+   .container {
+      z-index: 99999;
+      position: relative;
+   }
+}
+
+.generate-z-index(20);
+
+.generate-z-index(@n, @i: 1) when (@i =< @n) {
+   @c: (@n - @i);
+  .z-@{c} {
+    z-index: (@c);
+  }
+  .generate-z-index(@n, (@i + 1));
+}
+
+//.generate-z-index(@n, @i: 1) when (@i =< @n) {
+//  .z-@{i} {
+//    z-index: ( 0 - @i);
+//  }
+//  .generate-z-index(@n, (@i + 1));
+//}
 
 a {
    &:hover {
