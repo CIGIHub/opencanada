@@ -23,6 +23,13 @@ wow.init();
 
 
 var scrollingSpeed = 1.5*1000;
+var startDate = $("section:nth-of-type(1)").data("date");
+
+$(window).load(function() {
+      $('.counter').html( startDate );
+});
+
+var lastDate, nextDate = $("section:nth-of-type(2)").data("date");
 
 $(function() {
 
@@ -30,19 +37,26 @@ $(function() {
 		section:"section",
 		setHeights: false,
 		sectionName : false,
-		scrollSpeed: scrollingSpeed,
-		after:function(i) { // i is section number
+		scrollSpeed: 1500,
+		before:function(i) { // i is section number
+			var d = i+1; 		// play nice with nth-of-type
+			var nextDate = $("section:nth-of-type("+[d]+")").data("date");
 			
-			// alert(i);
+//			alert("i="+i+",d="+d);
+			
+			if (d == 1) {
+				lastDate = startDate;
+			};
 			$('.counter').countTo({
-				from: 50,
-				to: 2500,
+				from: lastDate,
+				to: nextDate,
 				speed: scrollingSpeed,
-				refreshInterval: 50,
+				refreshInterval: 100,
 				onComplete: function(value) {
 					console.debug(this);
 				}
 			});
+			var lastDate = nextDate;
 		}
 	});
 
