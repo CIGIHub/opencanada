@@ -68,6 +68,12 @@ $(function() {
 		scrollSpeed: scrollingSpeed,
 		before:function(i) { // i is section number
 			countScroll(i); // play nice with nth-of-type
+			$('.date').removeClass( "fadeOutDown" );
+			$('.date').addClass( "animated fadeOutUp" );
+		},
+		after: function() {
+			$('.date').removeClass( "fadeOutUp" );	
+			$('.date').addClass( "animated fadeInDown" );	
 		}
 	});
 
