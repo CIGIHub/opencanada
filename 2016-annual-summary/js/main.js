@@ -21,14 +21,28 @@ wow.init();
 ////    $(this).addClass("z-"+[c]);
 //});
 
+
+var scrollingSpeed = 1.5*1000;
+
 $(function() {
 
 	$.scrollify({
 		section:"section",
 		setHeights: false,
 		sectionName : false,
-		after:function(i) {
-
+		scrollSpeed: scrollingSpeed,
+		after:function(i) { // i is section number
+			
+			// alert(i);
+			$('.counter').countTo({
+				from: 50,
+				to: 2500,
+				speed: scrollingSpeed,
+				refreshInterval: 50,
+				onComplete: function(value) {
+					console.debug(this);
+				}
+			});
 		}
 	});
 
