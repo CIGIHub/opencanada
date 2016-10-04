@@ -160,7 +160,26 @@ a, a:focus, a:visited {
    }
 }
 
+.navbar-header {
+   width: 100%;
+   text-align: center;
+   
+   .navbar-brand {
+      text-align: center;
+      display: inline-block;
+      float: none;
+      
+      img {
+         width: 250px;
+         margin: 20px 0px;
+      }
+   }
+}
 
+.navbar-toggle {
+   border: 0;
+   margin: 27px 0px;
+}
 
 /* ==========================================================================
    Cover
@@ -243,6 +262,10 @@ section {
    }
 }
 
+/* ==========================================================================
+   Stacking
+   ========================================================================== */
+
 .generate-z-index(20);
 
 .generate-z-index(@n, @i: 1) when (@i =< @n) {
@@ -259,6 +282,10 @@ section {
 //  }
 //  .generate-z-index(@n, (@i + 1));
 //}
+
+/* ==========================================================================
+   Animation Assist
+   ========================================================================== */
 
 a {
    &:hover {
