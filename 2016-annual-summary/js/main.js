@@ -44,7 +44,7 @@ function countScroll(d) {
 		var lastDate = startDate;
 	};
 
-	alert("next " + nextDate + " | last " + lastDate);
+//	alert("next " + nextDate + " | last " + lastDate);
 
 	$('.counter').countTo({
 		from: nextDate,
