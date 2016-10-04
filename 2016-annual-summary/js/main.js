@@ -78,3 +78,18 @@ $(function() {
 	});
 
 });
+
+$("#header-2").hide(); // hide the fixed navbar initially
+
+var topofDiv = $("section:nth-of-type(1)").offset().top; //gets offset of header
+var height = $("section:nth-of-type(1)").outerHeight(); //gets height of header
+
+$(".dateContainer").hide();
+$(window).scroll(function(){
+    if($(window).scrollTop() > (topofDiv + height)){
+       $(".dateContainer").show();
+    }
+    else{
+       $(".dateContainer").hide();
+    }
+});
