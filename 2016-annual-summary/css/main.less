@@ -21,7 +21,7 @@
 
 body {
 //   background: @black;
-   padding-bottom: 200px;
+//   padding-bottom: 200px;
    color: @white;
 }
 
@@ -52,26 +52,30 @@ hr {
    margin: 0 auto;
    border-top: 1px dotted @white;
    margin-top: 34px;
-   margin-bottom: 34px;
+   margin-bottom: 200px;
 }
 
 .story {
+   padding-bottom: 10vh;
    ul {
       display: inline-block;
       padding-left: 0;
       list-style: none;
       margin-bottom: 1em;
       h3 {
-         font-size: 21px;
+         font-size: 18px;
          line-height: 18px;
-         letter-spacing: 1.2pt;
+         letter-spacing: 1.4pt;
          small {
             display: block;
             color: @white;
             width: 100%;
-            font-size: 13px;
+            font-size: 8px;
             line-height: 18px;
             font-weight: 300;
+            a {
+               color: @white;
+            }
          }
       }
    }
@@ -222,11 +226,16 @@ a, a:focus, a:visited {
 section {
       overflow: hidden;
       position: static; 
-      transform: translate3d(0,0,0);
+//      transform: translate3d(0,0,0);
       background-attachment: fixed;
       background-position: center center;
       background-size: cover;
       background-repeat: no-repeat;
+      position: relative;
+      
+   * {
+      z-index: 6;
+   }
    
       &::after {
       content: " "; 
@@ -235,13 +244,16 @@ section {
       left: 0; 
       width: 100%;
       height: 100%;
-      z-index: -1;
+      z-index: 3;
 
       .gradient (rgba(0,0,0,0), rgba(0,0,0,1));
    }
 }
 
 .story {
+   @media only screen and (max-width : 768px) {
+   padding-top: 120px;
+    }
    background-color: @transparent;
       &::before {
       content: " ";
@@ -250,7 +262,7 @@ section {
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: -2;
+      z-index: 2;
       background-color: @blue;
    }
 }
@@ -312,18 +324,29 @@ a {
    ========================================================================== */
 
 .counter {
-   position: fixed;
-   top: 20;
-   left: 30;
+   position: absolute;
+   top: -20px;
+   left: -90000px;
    z-index: 99999;
    color: aqua;
+   display: none;
+   
 }
-.date {
+.dateContainer {
    position: fixed;
-   top: 80px;
-   left: 30px;
+   width: 100vw;
+   display: block;
+   top: 89px;
    z-index: 99999;
-   color: sandybrown;
+   color: @white;
+   text-transform: uppercase;
+   font-size: 13px;
+   letter-spacing: 2pt;
+   @media only screen and (min-width : 768px) {
+      top: auto;
+      bottom: 19vh;
+      font-size: 21px;
+   }
 }
 
 /* ==========================================================================
