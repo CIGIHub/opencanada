@@ -25,11 +25,39 @@ wow.init();
 var scrollingSpeed = 1.5*1000;
 var startDate = $("section:nth-of-type(1)").data("date");
 
+
 $(window).load(function() {
-      $('.counter').html( startDate );
+		$('.counter').html( startDate );
 });
 
-var lastDate, nextDate = $("section:nth-of-type(2)").data("date");
+$('.counter').bind("DOMSubtreeModified",function(){
+	var dateInput = $(".counter").text();
+	var datePrint = moment(dateInput, "x").format("MMMM DD YYYY"); // Oct 4th 16; 
+	$('.date').text(datePrint);
+});
+
+function countScroll(d) {
+    var nextDate = $("section:nth-of-type("+[d+1]+")").data("date");
+    var prevDate = $("section:nth-of-type("+[d+0]+")").data("date");
+						
+	if (d === 1) {
+		var lastDate = startDate;
+	};
+
+	alert("next " + nextDate + " | last " + lastDate);
+
+	$('.counter').countTo({
+		from: nextDate,
+		to: prevDate,
+		speed: scrollingSpeed,
+		refreshInterval: 50,
+		onComplete: function(value) {
+			console.debug(this);
+			var lastDate = nextDate; 
+		}
+	});
+	var lastDate = nextDate;             // The function returns the product of p1 and p2
+}
 
 $(function() {
 
@@ -37,26 +65,9 @@ $(function() {
 		section:"section",
 		setHeights: false,
 		sectionName : false,
-		scrollSpeed: 1500,
+		scrollSpeed: scrollingSpeed,
 		before:function(i) { // i is section number
-			var d = i+1; 		// play nice with nth-of-type
-			var nextDate = $("section:nth-of-type("+[d]+")").data("date");
-			
-//			alert("i="+i+",d="+d);
-			
-			if (d == 1) {
-				lastDate = startDate;
-			};
-			$('.counter').countTo({
-				from: lastDate,
-				to: nextDate,
-				speed: scrollingSpeed,
-				refreshInterval: 100,
-				onComplete: function(value) {
-					console.debug(this);
-				}
-			});
-			var lastDate = nextDate;
+			countScroll(i); // play nice with nth-of-type
 		}
 	});
 
