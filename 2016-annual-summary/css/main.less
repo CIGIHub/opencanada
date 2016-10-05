@@ -6,6 +6,9 @@
 @black: rgba(0,0,0,1);
 @white: rgba(255, 255, 255, 1);
 @white50: rgba(255, 255, 255, 0.5);
+@white50: rgba(255, 255, 255, 0.5);
+@gray: rgba(155, 155, 155, 1);
+@grey: @gray;
 @red: rgba(191, 30, 46, 1);
 @blue: rgba(6, 33, 81,.7);
 
@@ -122,6 +125,12 @@ h2 {
    margin-top: 0;
    padding-bottom: 36px;
    margin-bottom: 40px;
+   
+    @media only screen and (max-width : 768px) {      
+      padding-bottom: 21px;
+      margin-bottom: 25px;
+    }
+   
    &::after {
       content: " ";
       position: absolute;
@@ -224,6 +233,26 @@ a, a:focus, a:visited {
             
          }
       }  
+   }
+   .bottom {
+      position: absolute;
+      width: 100%;
+      bottom: 0;
+      a {
+         width: 89%;
+         h2 {
+            &::after {
+               width: 100%;
+            }
+         }
+      }
+      .grey {
+         h2 {
+            &::after {
+               background: @grey !important;
+            }
+         }
+      }
    }
 }
 
