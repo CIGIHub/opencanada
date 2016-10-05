@@ -9,6 +9,10 @@ wow = new WOW(
 )
 wow.init();
 
+$(document).ready(function() {
+	$('#sticky-navigation').scrollspy();
+});
+
 
 //var sections = $("body").find("img.cover").length;
 //var sections = sections + 10;
@@ -32,7 +36,7 @@ $(window).load(function() {
 
 $('.counter').bind("DOMSubtreeModified",function(){
 	var dateInput = $(".counter").text();
-	var datePrint = moment(dateInput, "x").format("MMMM DD YYYY"); // Oct 4th 16; 
+	var datePrint = moment(dateInput, "x").format("MMMM DD, YYYY"); // Oct 4th 16; 
 	$('.date').text(datePrint);
 });
 
@@ -52,7 +56,7 @@ function countScroll(d) {
 		speed: scrollingSpeed,
 		refreshInterval: 50,
 		onComplete: function(value) {
-			console.debug(this);
+//			console.debug(this);
 			var lastDate = nextDate; 
 		}
 	});
@@ -93,3 +97,116 @@ $(window).scroll(function(){
        $(".dateContainer").hide();
     }
 });
+
+
+
+// 2 Way wowjs http://stackoverflow.com/questions/33187211/wow-js-repeat-animation-every-time-you-scroll-up-or-down
+
+var $window           = $(window),
+  	win_height_padded = $window.height() * 1.1,
+  	isTouch           = Modernizr.touch;
+
+$window.on('scroll', revealOnScroll);
+
+
+//$(function() {
+//
+//  var $window           = $(window),
+//      win_height_padded = $window.height() * 0.9,
+//      isTouch           = Modernizr.touch;
+//
+//  if (isTouch) { $('.revealOnScroll').addClass('animated'); }
+//
+//  $window.on('scroll', revealOnScroll);
+//
+//  function revealOnScroll() {
+//    var scrolled = $window.scrollTop(),
+//        win_height_padded = $window.height() * 1.1;
+//
+//    // Showed...
+//    $(".revealOnScroll:not(.animated)").each(function () {
+//      var $this     = $(this),
+//          offsetTop = $this.offset().top;
+//
+//      if (scrolled + win_height_padded > offsetTop) {
+//        if ($this.data('timeout')) {
+//          window.setTimeout(function(){
+//            $this.addClass('animated ' + $this.data('animation'));
+//          }, parseInt($this.data('timeout'),10));
+//        } else {
+//          $this.addClass('animated ' + $this.data('animation'));
+//        }
+//      }
+//    });
+//    // Hidden...
+//   $(".revealOnScroll.animated").each(function (index) {
+//      var $this     = $(this),
+//          offsetTop = $this.offset().top;
+//      if (scrolled + win_height_padded < offsetTop) {
+//        $(this).removeClass('animated fadeInUp flipInX lightSpeedIn');
+//      }
+//    });
+//  }
+//
+//  revealOnScroll();
+//});
+
+$(function() {
+
+  var $window           = $(window),
+      win_height_padded = $window.height() * 1.1,
+      isTouch           = Modernizr.touch;
+
+  if (isTouch) { $('.revealOnScroll').addClass('animated'); }
+
+  $window.on('scroll', revealOnScroll);
+
+  function revealOnScroll() {
+    var scrolled = $window.scrollTop(),
+        win_height_padded = $window.height() * 1.1;
+
+    // Showed...
+    $(".revealOnScroll:not(.animated)").each(function () {
+      var $this     = $(this),
+          offsetTop = $this.offset().top;
+
+      if (scrolled + win_height_padded > offsetTop) {
+        if ($this.data('timeout')) {
+          window.setTimeout(function(){
+            $this.addClass('animated ' + $this.data('animation'));
+          }, parseInt($this.data('timeout'),10));
+        } else {
+          $this.addClass('animated ' + $this.data('animation'));
+        }
+      }
+    });
+    // Hidden...
+   $(".revealOnScroll.animated").each(function (index) {
+      var $this     = $(this),
+          offsetTop = $this.offset().top;
+      if (scrolled + win_height_padded < offsetTop) {
+        $(this).removeClass('animated fadeInUp flipInX lightSpeedIn')
+      }
+    });
+  }
+
+  revealOnScroll();
+});
+
+//function revealOnScroll() {
+//    var scrolled = $window.scrollTop();
+//    $(".revealOnScroll:not(.animated)").each(function () {
+//      var $this     = $(this),
+//          offsetTop = $this.offset().top;
+//
+//      if (scrolled + win_height_padded > offsetTop) {
+//        if ($this.data('timeout')) {
+//          window.setTimeout(function(){
+//            $this.addClass('animated ' + $this.data('animation'));
+//          }, parseInt($this.data('timeout'),10));
+//        } else {
+//          $this.addClass('animated ' + $this.data('animation'));
+//        }
+//      }
+//    });
+//};

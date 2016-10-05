@@ -48,7 +48,7 @@ body {
 }
 
 hr {
-   width: 45%;
+   width: 100%;
    margin: 0 auto;
    border-top: 1px dotted @white;
    margin-top: 34px;
@@ -57,6 +57,12 @@ hr {
 
 .story {
    padding-bottom: 10vh;
+   @media only screen and (min-width : 768px) {
+      padding-bottom: 20vh;
+   }
+   @media only screen and (min-width : 992px) {
+      padding-bottom: 0px;
+   }
    ul {
       display: inline-block;
       padding-left: 0;
@@ -172,10 +178,11 @@ a, a:focus, a:visited {
       text-align: center;
       display: inline-block;
       float: none;
+      margin-left: 0;
       
       img {
          width: 250px;
-         margin: 20px 0px;
+         margin: 13px 0px;
       }
    }
 }
@@ -226,7 +233,7 @@ a, a:focus, a:visited {
 section {
       overflow: hidden;
       position: static; 
-//      transform: translate3d(0,0,0);
+      transform: translate3d(0,0,0);
       background-attachment: fixed;
       background-position: center center;
       background-size: cover;
@@ -343,9 +350,21 @@ a {
    font-size: 13px;
    letter-spacing: 2pt;
    @media only screen and (min-width : 768px) {
-      top: auto;
-      bottom: 19vh;
+      top: 68vh;
+//      bottom: 19vh;
       font-size: 21px;
+   }
+}
+
+.number {
+   position: fixed;
+   display: block;
+   height: 30px;
+   z-index: 10;
+   top: 29px;
+   width: 100vw;
+   .container {
+      padding-top: 0;
    }
 }
 
@@ -359,4 +378,12 @@ a {
 
 #story1 {
    background-image: url(https://files.opencanada.org/images/kurdistan-main-image.original.2e16d0ba.fill-910x604.jpg);
+}
+
+#story2 {
+   background-image: url(https://files.opencanada.org/images/opencanada_project1_illustration-s.2e16d0ba.fill-910x604.jpg);
+}
+
+#story3 {
+   background-image: url(https://files.opencanada.org/images/lori9.4ed7f830.fill-910x604.jpg);
 }
