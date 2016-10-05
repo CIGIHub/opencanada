@@ -12,14 +12,15 @@
 @test: rgba(198, 149, 17, 0.29);
 @test: rgba(198, 149, 17, 0);
 
-@import (css) "animate.css";
+@import (css) "aos.css";
+@import (css) "animateAssist.css";
 @import (reference) "mixins.less";
 
 /* ==========================================================================
    Structure
    ========================================================================== */
 
-body {
+body { 
 //   background: @black;
 //   padding-bottom: 200px;
    color: @white;
@@ -52,7 +53,7 @@ hr {
    margin: 0 auto;
    border-top: 1px dotted @white;
    margin-top: 34px;
-   margin-bottom: 200px;
+   margin-bottom: 150px;
 }
 
 .story {
@@ -89,6 +90,12 @@ hr {
 
 .black {
    background: @black;
+}
+
+*, *:before, *:after { 
+   -moz-box-sizing: border-box; 
+   -webkit-box-sizing: border-box; 
+   box-sizing: border-box; 
 }
 
 /* ==========================================================================
@@ -349,6 +356,7 @@ a {
    text-transform: uppercase;
    font-size: 13px;
    letter-spacing: 2pt;
+   display: none;
    @media only screen and (min-width : 768px) {
       top: 68vh;
 //      bottom: 19vh;
@@ -367,6 +375,7 @@ a {
       padding-top: 0;
    }
 }
+
 
 /* ==========================================================================
    Images

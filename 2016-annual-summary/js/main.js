@@ -25,6 +25,14 @@
 ////    $(this).addClass("z-"+[c]);
 //});
 
+AOS.init({
+  startEvent: 'DOMContentLoaded',
+  offset: 200,
+  duration: 1200,
+  easing: 'ease',
+  delay: 100
+});
+
 
 var scrollingSpeed = 1.5*1000;
 var startDate = $("section:nth-of-type(1)").data("date");
