@@ -60,13 +60,13 @@ hr {
 }
 
 .story {
-   padding-bottom: 10vh;
-   @media only screen and (min-width : 768px) {
-      padding-bottom: 20vh;
-   }
-   @media only screen and (min-width : 992px) {
-      padding-bottom: 0px;
-   }
+//   padding-bottom: 10vh;
+//   @media only screen and (min-width : 768px) {
+//      padding-bottom: 20vh;
+//   }
+//   @media only screen and (min-width : 992px) {
+//      padding-bottom: 0px;
+//   }
    ul {
       display: inline-block;
       padding-left: 0;
@@ -171,6 +171,12 @@ a, a:focus, a:visited {
       }
    }
 }
+//.scrollable {
+//   overflow-y: scroll;
+//   height: auto;
+//   transform: translate3d(0,0,0);
+//   position: relative;
+//}
 
 /* ==========================================================================
    Navigation
@@ -241,6 +247,10 @@ a, a:focus, a:visited {
       a {
          width: 89%;
          h2 {
+            @media only screen and (max-width : 480px) {
+               font-size: 21px;
+             }
+            
             &::after {
                width: 100%;
             }
