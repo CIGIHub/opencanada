@@ -1,17 +1,17 @@
-wow = new WOW(
-    {
-		  boxClass:     'wow',      
-		  animateClass: 'animated', 
-		  offset:       50,          
-		  mobile:       true,       
-		  live:         true
-	}
-)
-wow.init();
-
-$(document).ready(function() {
-	$('#sticky-navigation').scrollspy();
-});
+//wow = new WOW(
+//    {
+//		  boxClass:     'wow',      
+//		  animateClass: 'animated', 
+//		  offset:       0,          
+//		  mobile:       true,       
+//		  live:         true
+//	}
+//)
+//wow.init();
+//
+//$(document).ready(function() {
+//	$('#sticky-navigation').scrollspy();
+//});
 
 
 //var sections = $("body").find("img.cover").length;
@@ -100,19 +100,12 @@ $(window).scroll(function(){
 
 
 
-// 2 Way wowjs http://stackoverflow.com/questions/33187211/wow-js-repeat-animation-every-time-you-scroll-up-or-down
-
-var $window           = $(window),
-  	win_height_padded = $window.height() * 1.1,
-  	isTouch           = Modernizr.touch;
-
-$window.on('scroll', revealOnScroll);
-
-
+//// 2 Way wowjs http://stackoverflow.com/questions/33187211/wow-js-repeat-animation-every-time-you-scroll-up-or-down
+//
 //$(function() {
 //
 //  var $window           = $(window),
-//      win_height_padded = $window.height() * 0.9,
+//      win_height_padded = $window.height() * 1.1,
 //      isTouch           = Modernizr.touch;
 //
 //  if (isTouch) { $('.revealOnScroll').addClass('animated'); }
@@ -143,70 +136,10 @@ $window.on('scroll', revealOnScroll);
 //      var $this     = $(this),
 //          offsetTop = $this.offset().top;
 //      if (scrolled + win_height_padded < offsetTop) {
-//        $(this).removeClass('animated fadeInUp flipInX lightSpeedIn');
+//        $(this).removeClass('animated fadeInUp flipInX lightSpeedIn')
 //      }
 //    });
 //  }
 //
 //  revealOnScroll();
 //});
-
-$(function() {
-
-  var $window           = $(window),
-      win_height_padded = $window.height() * 1.1,
-      isTouch           = Modernizr.touch;
-
-  if (isTouch) { $('.revealOnScroll').addClass('animated'); }
-
-  $window.on('scroll', revealOnScroll);
-
-  function revealOnScroll() {
-    var scrolled = $window.scrollTop(),
-        win_height_padded = $window.height() * 1.1;
-
-    // Showed...
-    $(".revealOnScroll:not(.animated)").each(function () {
-      var $this     = $(this),
-          offsetTop = $this.offset().top;
-
-      if (scrolled + win_height_padded > offsetTop) {
-        if ($this.data('timeout')) {
-          window.setTimeout(function(){
-            $this.addClass('animated ' + $this.data('animation'));
-          }, parseInt($this.data('timeout'),10));
-        } else {
-          $this.addClass('animated ' + $this.data('animation'));
-        }
-      }
-    });
-    // Hidden...
-   $(".revealOnScroll.animated").each(function (index) {
-      var $this     = $(this),
-          offsetTop = $this.offset().top;
-      if (scrolled + win_height_padded < offsetTop) {
-        $(this).removeClass('animated fadeInUp flipInX lightSpeedIn')
-      }
-    });
-  }
-
-  revealOnScroll();
-});
-
-//function revealOnScroll() {
-//    var scrolled = $window.scrollTop();
-//    $(".revealOnScroll:not(.animated)").each(function () {
-//      var $this     = $(this),
-//          offsetTop = $this.offset().top;
-//
-//      if (scrolled + win_height_padded > offsetTop) {
-//        if ($this.data('timeout')) {
-//          window.setTimeout(function(){
-//            $this.addClass('animated ' + $this.data('animation'));
-//          }, parseInt($this.data('timeout'),10));
-//        } else {
-//          $this.addClass('animated ' + $this.data('animation'));
-//        }
-//      }
-//    });
-//};
