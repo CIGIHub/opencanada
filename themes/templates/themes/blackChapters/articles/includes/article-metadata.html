@@ -1,0 +1,20 @@
+{% load static article_tags core_tags wagtailcore_tags wagtailembeds_tags wagtailimages_tags %}
+
+<div class="metadata">
+    <div class="title">
+        {% if self.primary_topic %}
+            <div class="primary-topic">
+                <i class="fa fa-tags"></i>
+                <a href="{% topic_url self.primary_topic %}">{{ self.primary_topic.name }}</a>
+            </div>
+        {% endif %}
+
+        <h1 class="{{ self.title_size }}">{{ self.title }}</h1>
+    </div>
+    <div class="subtitle">{{ self.excerpt|richtext }}</div>
+    {% if self.authors %}
+        {% include 'themes/blackChapters/articles/includes/article-contributors.html' with authors=self.authors date=self.first_published_at links=True %}
+    {% endif %}
+
+    {% include 'themes/blackChapters/articles/includes/share_links.html' %}
+</div>
