@@ -1,0 +1,76 @@
+{% load theme_tags wagtailimages_tags wagtailcore_tags static core_tags jobs_tags %}
+{% get_active_posting_page as active_jobs_page %}
+<div class="readingbar"></div>
+<header role="banner">
+    <div class="banner container-fluid">
+        <div class="row">
+            <div class="chapters-logo header-row">
+                  <div class="wordmark">
+                      {% get_logo "main-logo" as logo %}
+                      {% get_logo_link "main-logo" as logo_link %}
+                      <a href="{{ logo_link }}">{% image logo original %}</a>
+                  </div>
+                {% if tagline %}
+                  <div class="tagline">
+                    {% get_logo "tagline-logo" as tagline_logo %}
+                      <a href="{{ logo_link }}">{% image tagline_logo original %}</a>
+                  </div>
+                {% endif %}
+            </div>
+            <div class="chapters header-row">
+                <span class="hidden-md hidden-lg">Reading:</span>
+                <div class="article-title">{{ self.title }}</div>
+                <div class="chapter-links toggle-mobile hidden-sm hidden-xs">
+                    <span class="separator">:</span>
+                    <ul>
+                        {% for chapter in self.chapters %}
+                        <li><a href="#{{ chapter.value.heading|slugify }}">{{ chapter.value.heading }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            {% comment %}<div class="col-md-4 col-xs-2 search header-row">
+                <div class="button" data-target="search-box" id="search-box-toggle"><i class="fa fa-search"></i></div>
+            </div>{% endcomment %}
+        </div>
+    </div>
+</header>
+<div id="search-box">
+    <div class="container">
+        <form action="{% url 'wagtailsearch_search' %}"  method="get">
+            <div class="row">
+                <div class="col-xs-12 search-form">
+                    <div class="input-group">
+                        <input type="text" name="q" value=""/>
+                        <i class="fa fa-times-circle clear-button"></i>
+                        <button type="submit" class="search-button">Search <i class="fa fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="search-suggestions">
+            <ul>
+                {% suggested_searches 3 as search_topics %}
+                {% for topic in search_topics %}
+                    <li><a href="{% url 'wagtailsearch_search' %}?q={{ topic|search_string }}">{{ topic }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+<div id="mobile-chapter-links" class="hidden-lg hidden-md">
+    <span class="fa-stack fa-2x toggle-mobile-chapters">
+        <i class="fa fa-circle fa-stack-2x" aria-hidden="true"></i>
+        <i class="fa fa-list fa-stack-1x" aria-hidden="true"></i>
+    </span>
+
+    <div class="chapter-links">
+        <ul>
+        {% for chapter in self.chapters %}
+            <li class="mobile-chapter-link">
+                <a href="#{{ chapter.value.heading|slugify }}">{{ chapter.value.heading }}</a>
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+</div>

@@ -17,7 +17,7 @@ $container-large-desktop: 940px;
 $screen-md-min: 992px;
 $screen-tiny-max: 360px;
 $grid-float-breakpoint: $screen-md-min;
-$breakpoint: 1000px !default; //to match the javascript breakpoint variable.
+$breakpoint: 10000px; //to match the javascript breakpoint variable.
 
 //borders
 $border-black: solid 1px $black;
