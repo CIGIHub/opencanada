@@ -37,29 +37,6 @@
 
 
     <article id="article-page">
-        {% comment %}
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12">
-                    <ul class="share-links" data-page-id="{{ self.id }}">
-                        <li class="twitter">
-                            <div><a href="https://twitter.com/share?text={{ self.title|urlencode }}&url={{ self.full_url|urlencode:"" }}"><i class="fa fa-twitter"></i></a></div>
-                        </li>
-                        <li class="facebook">
-                            <div><span class="facebook-share-link" data-url="{{ self.full_url }}"><i class="fa fa-facebook-square"></i></span></div>
-                            <div class="count">{% if self.facebook_count > 0 %}{{ self.facebook_count }}{% endif %}</div>
-                        </li>
-                    </ul>
-
-                    {%  if self.main_image and self.main_image.credit and False %}
-                        <div class="contributors">
-                            <div class="contributor">Illustrated By: {{ self.main_image.credit }}</div>
-                        </div>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-        {% endcomment %}
 
         <div class="story">
             {% include 'articles/includes/json-embed.html' %}
@@ -67,12 +44,6 @@
 
         </div>
     </article>
-
-<p>Lorem ipsum dolor sit amet, urna hymenaeos faucibus mauris, aenean commodo consectetuer id nunc vestibulum dolor, inceptos nunc interdum, pede facilisis elit orci. Platea ut consectetuer et lorem nulla in. Ullamcorper neque dolores leo, mauris eget lobortis in. Maecenas purus posuere ultrices amet, mauris vitae cursus mi sagittis viverra a, neque suspendisse, lacinia blandit ligula hendrerit. Eget dolor enim morbi euismod in magna, sodales orci est mi gravida sagittis sit, nam volutpat lorem maecenas parturient suspendisse, vel ut tellus tellus sed sem. Nulla posuere eget integer sed, convallis wisi turpis, elit vestibulum suspendisse metus, commodo voluptatum quis.</p>
-<p>Pellentesque donec amet ullamcorper, amet neque, et nisl felis ut, sit hendrerit, faucibus tincidunt. Eu porttitor tincidunt, a velit pharetra, est quisque, ipsum magnis aliquam rutrum a sed, sollicitudin sollicitudin diam placerat. Turpis ultricies nonummy faucibus pulvinar, pulvinar metus nulla id, nulla eget suscipit pellentesque amet est accumsan, pulvinar quis. Duis facilisi suspendisse, felis ligula, sagittis leo porta, etiam massa mi aliquet. Quis placerat arcu elit praesent. Leo libero. Rhoncus a. Posuere tortor vivamus fusce urna, risus conubia augue mi turpis, pede ipsum arcu molestie at, eu suscipit nulla. Arcu et etiam dictumst, euismod blandit per.</p>
-<p>Pede vestibulum ante consectetuer tristique dictum sapien. Dui diam erat. Rhoncus mi risus, justo at eu nullam nec, nulla et fermentum maecenas id in in, beatae mi vivamus fermentum sed, id tempor magnis. Vehicula euismod, suscipit et mauris risus in in, taciti curabitur donec tempus magna integer mauris. Vivamus potenti ultrices sed eget erat, nunc viverra pede nec amet, aliquet varius wisi, non ante purus lacinia nibh in nec, augue hendrerit adipiscing orci.</p>
-<p>Nibh accumsan ante, sit per gravida blandit leo, ante quam. Tortor vitae eu nulla vitae vestibulum, vehicula est sapien dignissim velit, euismod sed nulla vestibulum sit, mauris amet sed volutpat orci semper, imperdiet sit volutpat. Etiam fermentum, consequat diam pellentesque sollicitudin sed netus, a semper et conubia id enim. Duis dui cursus aliquam eget, aliquam erat eu dignissim non nec, imperdiet libero nec. Hymenaeos torquent aliquam mollis est pellentesque ipsum. Eget aliquam dui eu etiam rhoncus porttitor, a sed voluptates ut dolor, cum gravida venenatis commodo, a tincidunt enim viverra eget, velit fringilla suscipit.</p>
-
 
 {% endblock %}
 
