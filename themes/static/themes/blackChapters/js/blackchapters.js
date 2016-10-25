@@ -35,13 +35,13 @@ jQuery(document).ready(function() {
         });
     }
     
-    if($('.reveal').length){
-        $(".reveal").mouseenter(function() {
-		 $(".background-photo").css('opacity', '1.0');
-        }).mouseleave(function () {
-		 $(".background-photo").css('opacity', '0.3');
-	 });
-    }
+    // if($('.reveal').length){
+    //     $(".reveal").mouseenter(function() {
+	// 	 $(".background-photo").css('opacity', '1.0');
+    //     }).mouseleave(function () {
+	// 	 $(".background-photo").css('opacity', '0.3');
+	//  });
+    // }
 
     function updateReadingBar() {
         var s = $(window).scrollTop(); // Current scroll mark
@@ -85,7 +85,7 @@ jQuery(document).ready(function() {
           if (item.length) { return item; }
         });
     
-    console.log(menuItems);
+    //console.log(menuItems);
 
     // Bind click handler to menu items
     // so we can get a fancy scroll animation

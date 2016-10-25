@@ -1,27 +1,7 @@
 body{
   background-color: $body-bg-color;
-}
+  font-family: $font;
 
-.template-article-page h1.medium{
-  font-family: $header-font;
-  font-size: 3.5em;
-}
-
-.contributors{
-  font-weight: bold;
-}
-
-.body-content p:last-child{
-  margin-bottom: 10px;
-  border-bottom: solid 2px $limegreen;
-}
-
-hr{
-  border-bottom: solid 2px $limegreen;
-}
-
-.home-link{
-  display: none;
 }
 
 .readingbar {
@@ -88,11 +68,19 @@ hr{
   }
 }
 
+.template-article-page h1.medium{
+  padding: 0 20%;
+  line-height: 120%;
+}
+.contributors,
+.date{
+  font-size: 1em;
+}
+
 .feature-text {
-  font-family: $header-font;
   background-color: $feature-background;
   text-align: center;
-  margin-top: -25px;
+  margin-top: -50px;
 
   .metadata {
     margin-top: 30px;
@@ -104,24 +92,27 @@ hr{
     .contributor-label {
       color: inherit;
     }
-  
     .title {
       text-transform: uppercase;
     }
 
-    .share-links {
+    .share-links{
+      .facebook:hover{
+        cursor: pointer;
+      }
+      .facebook, a{
+        color: $black;
+        &:hover{
+          color: $active-color;
+        }
+      }
+      font-size: 1.5em;
       list-style-type: none;
       padding: 0;
-
-      .fa-square {
-        color: #000;
-      }
-
       li {
         display: inline;
       }
     }
-
   }
 }
 
@@ -221,37 +212,32 @@ article ul.share-links{
 }
 
 .story{
-  h2, h3{
+
+  .heading-wrapper{
     text-align: center;
-    font-family: $header-font;
   }
   h2{
-    font-size: 40px;
-    text-decoration: underline;
+    font-size: 1em;
+    font-weight: normal;
+    text-transform: uppercase;
+    border-bottom: solid 1px $beige;
     margin-bottom: 0.7em;
+    display: inline-block;
   }
-  h3{
-    font-size: 18px;
-    margin-top: 0px;
-    margin-bottom: 20px;
-  }
-  h4{
-    font-family: $header-font;
-    text-transform: capitalize;
-    font-weight: bold;
-    font-size: 1.3em;
-    margin-bottom: 0.5em;
-    &::after{
-      content: ':';
-    }
-  }
-
-  .share-chapter{
-    a, span{
-      color: $limegreen;
-    }
-  }
-
+  // h3{
+  //   font-size: 18px;
+  //   margin-top: 0px;
+  //   margin-bottom: 20px;
+  // }
+  // h4{
+  //   text-transform: capitalize;
+  //   font-weight: bold;
+  //   font-size: 1.3em;
+  //   margin-bottom: 0.5em;
+  //   &::after{
+  //     content: ':';
+  //   }
+  // }
 
   // Ensures that chapter headings aren't covered due to fixed header
   .chapterblock:before {
@@ -266,7 +252,6 @@ article ul.share-links{
 article .block-PullQuote{
   border: none;
   color: $limegreen;
-  font-family: $header-font;
   font-weight: 700;
   padding-top: 0px;
 }
