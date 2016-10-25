@@ -1,16 +1,12 @@
 <ul class="share-links" data-page-id="{{ self.id }}">
     <li class="facebook">
-        <span class="facebook-share-link fa-stack" data-url="{{ self.full_url }}">
-            <i class="fa fa-square fa-stack-2x"></i>
-            <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+        <span class="facebook-share-link" data-url="{{ self.full_url }}">
+            <i class="fa fa-facebook-square"></i>
         </span>
     </li>
     <li class="twitter">
         <a href="https://twitter.com/share?text={{ self.title|urlencode }}&url={{ self.full_url|urlencode:"" }}">
-            <span class="fa-stack">
-                <i class="fa fa-square fa-stack-2x"></i>
-                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-            </span>
+            <i class="fa fa-twitter-square"></i>
         </a>
     </li>
 </ul>

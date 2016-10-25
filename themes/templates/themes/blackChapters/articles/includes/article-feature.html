@@ -4,23 +4,10 @@
     {% image self.main_image fill-2048x1200-c100 as background_image %}
     <div class="feature-image fullscreen-bg" {% if not self.video_document %} style="background-image: url('{{ background_image.url }}')" {% endif %}>
         <div class="feature-image-overlay" {% if self.opacity %} style="opacity:{{ self.opacity }} {% endif %}"></div>
-        {% if self.video_document %}
-            <video autoplay loop class="fullscreen-bg__video" poster="{{ background_image.url }}" id="bg_vid">
-                <source src="{{ self.get_video_src }}" type="video/mp4">
-             </video>
-        {% endif %}
     </div>
 </div>
-{% if not self.include_caption_in_footer %}
-<div class="feature-caption">
-    {% if self.main_image.credit  %}
-        {{ self.main_image.credit }}
-    {% endif %}
+<div class="row">
+    <div class="feature-text col-sm-8 col-sm-offset-2">
+        {% include metadata %}
+    </div>
 </div>
-{% endif %}
-
-<div class="feature-text col-sm-8 col-sm-offset-2">
-    {% include metadata %}
-</div>
-
-<div class="clear"></div>

@@ -1,17 +1,7 @@
 {% extends "base.html" %}
 {% load static article_tags compress core_tags wagtailcore_tags wagtailembeds_tags wagtailimages_tags %}
 
-{% block body_class %}template-{{ self.get_verbose_name|slugify }} light{% endblock %}
-
-{% block body_style %}
-    {% with bg_image=self.background_image_links.all.0 %}
-        {% image bg_image.image original as background_image %}
-
-        background-image:url('{{ background_image.url  }}');
-        background-position:{{ bg_image.position  }};
-    {% endwith %}
-
-{% endblock %}
+{% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
 
 {% block theme_css %}
     <link rel="stylesheet" type="text/x-scss" href="{% static 'themes/blackChapters/css/blackchapters.scss' %}">
@@ -35,13 +25,10 @@
         {% include 'themes/blackChapters/articles/includes/article-feature.html' with metadata='themes/blackChapters/articles/includes/article-metadata.html' %}
     {% endif %}
 
-
     <article id="article-page">
-
         <div class="story">
-            {% include 'articles/includes/json-embed.html' %}
+            {% include 'themes/blackChapters/articles/includes/story-content.html' %}
             {% include 'themes/blackChapters/articles/includes/advanced_content.html' %}
-
         </div>
     </article>
 
