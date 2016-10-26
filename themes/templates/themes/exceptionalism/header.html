@@ -19,15 +19,13 @@
             </div>
             <div class="chapters header-row">
                 <span class="reading">Reading:</span>
-                <div class="article-title">{{ self.title }}</div>
-                <div id="mobile-chapter-menu ">
+                <div class="title">{{ self.title }}<span class="separator"> : </span></div>
+                <div id="mobile-chapter-menu">
                     <div class="toggle-chapter-menu">
-                        <i class="fa fa-close" aria-hidden="true"></i>
-                        <i class="fa fa-list" aria-hidden="true"></i>
+                        <i class="fa fa-chevron-down" aria-hidden="true"></i>
                     </div>
                 </div>
                 <div class="chapter-links toggle-mobile">
-                    <span class="separator">:</span>
                     <ul>
                         {% for chapter in self.chapters %}
                         <li><a href="#{{ chapter.value.heading|slugify }}">{{ chapter.value.heading }}</a></li>

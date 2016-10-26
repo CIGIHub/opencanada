@@ -3,7 +3,8 @@ body{
   font-family: $font;
 }
 
-.readingbar {
+/**** reading progress bar  ****/
+.readingbar{
   z-index: 9999;
   width: 0%;
   height: $reading-bar-height;
@@ -13,53 +14,107 @@ body{
   background-color: $reading-bar-color;
 }
 
-#mobile-chapter-links {
-  position: fixed;
-  right: 1em;
-  width: auto;
-  top: 6em;
-  z-index: 9999;
+header.collapsed .wordmark{
+  display: block;
+}
 
-  i.fa-list {
+.reading, #mobile-chapter-menu{
+  display: none;
+}
+
+.opencanada-logo{
+  // padding: 0 20px;
+  display: inline;
+  float: left;
+
+  img {
+      max-height: 18px;
+      width: auto;
+      display: block;
+  }
+}
+
+.chapters {
+  display: inline;
+  float: right;
+  text-transform: uppercase;
+  text-align: right;
+  .title {
     display: inline-block;
-    color: #b51e3a;
+    font-weight: bold;
   }
 
-  i.fa-circle {
-    color: $header-bg-color;
-  }
+  .chapter-links{
+    display: inline;
 
-  .chapter-links {
-    width: 100px;
-    display: none;
-    background-color: $header-bg-color;
-    border-radius: 10px;
-    position: fixed;
-    right: 0.8em;
-    top: 10em;
-
-    ul {
+    ul{
       list-style-type: none;
       padding: 0;
       margin: 0;
+      display: inline;
 
-      .mobile-chapter-link {
-        text-align: center;
-        border-bottom: 1px solid $active-color;
-        line-height: 4rem;
-
-        &:last-child {
-            border-bottom: none;
+      li{
+        display: inline;
+        margin: 0 10px;
+        a{
+          color: $header-link-color;
         }
-
-        a {
-          padding: 0 20px;
-        }
-
+        a:hover,
         &.active {
-          a {
-            border-left: 2px solid $header-text-color;
-            border-right: 2px solid $header-text-color;
+          border-bottom: 2px solid $active-color;
+        }
+        &:last-child{
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}
+
+@media(max-width: $screen-md){
+  .reading, #mobile-chapter-menu{
+    display: inline-block;
+  }
+  #mobile-chapter-menu{
+    cursor: pointer;
+    margin-left: 5px;
+  }
+  .chapters,
+  .title{
+    font-size: 12px;
+  }
+  .separator{
+    display: none;
+  }
+  .opencanada-logo{
+    margin-left: 20px;
+    img{
+      height: 12px;
+      margin: 7px 0;
+    }
+  }
+  .chapters{
+    margin-right: 10px;
+    .chapter-links{
+      display: none;
+      position: absolute;
+      background: $red;
+      right: 0;
+      top: 55px;
+      ul{
+        display: block;
+        li{
+          display: block;
+          text-align: left;
+          margin: 10px 20px;
+          font-size: 14px;
+          &:last-child{
+            margin: 10px 20px;
+          }
+          a:hover,
+          a:focus,
+          &.active {
+            border-bottom: 2px solid black;
           }
         }
       }
@@ -67,6 +122,73 @@ body{
   }
 }
 
+@media(max-width: $screen-sm){
+  .reading{
+    display: none;
+  }
+  .opencanada-logo{
+    img{
+      height: 9px;
+    }
+  }
+  
+}
+
+// #mobile-chapter-links {
+//   position: fixed;
+//   right: 1em;
+//   width: auto;
+//   top: 6em;
+//   z-index: 9999;
+
+//   i.fa-list {
+//     display: inline-block;
+//     color: #b51e3a;
+//   }
+
+//   i.fa-circle {
+//     color: $header-bg-color;
+//   }
+
+//   .chapter-links {
+//     width: 100px;
+//     display: none;
+//     background-color: $header-bg-color;
+//     border-radius: 10px;
+//     position: fixed;
+//     right: 0.8em;
+//     top: 10em;
+
+//     ul {
+//       list-style-type: none;
+//       padding: 0;
+//       margin: 0;
+
+//       .mobile-chapter-link {
+//         text-align: center;
+//         border-bottom: 1px solid $active-color;
+//         line-height: 4rem;
+
+//         &:last-child {
+//             border-bottom: none;
+//         }
+
+//         a {
+//           padding: 0 20px;
+//         }
+
+//         &.active {
+//           a {
+//             border-left: 2px solid $header-text-color;
+//             border-right: 2px solid $header-text-color;
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
+
+/**** feature text area ****/
 .template-article-page h1.medium{
   padding: 0 20%;
   line-height: 120%;
@@ -78,140 +200,80 @@ body{
 
 .feature-text {
   background-color: $feature-background;
+  width: 70%;
+  margin: -70px auto 0 auto;
   text-align: center;
-  margin-top: -50px;
 
-  .metadata {
-    margin-top: 30px;
-    margin-bottom: 30px;
-
-    .date {
-      display: block;
-    }
-    .contributor-label {
-      color: inherit;
-    }
-    .title {
-      text-transform: uppercase;
-    }
-
-    .share-links{
-      .facebook:hover{
-        cursor: pointer;
-      }
-      .facebook, a{
-        color: $black;
-        &:hover{
-          color: $active-color;
-        }
-      }
-      font-size: 1.5em;
-      list-style-type: none;
-      padding: 0;
-      li {
-        display: inline;
-      }
-    }
+  .metadata{
+    padding: 20px 0;
   }
-}
-
-header {
-  min-height: 70px;
-
-  .banner {
-    padding-top: 25px;
+  .date {
+    display: block;
   }
-
-  .chapters-logo {
-    padding: 0 20px;
-    display: inline;
-    float: left;
-
-    .wordmark {
-      line-height: 1em;
-
-      img {
-        max-height: 18px;
-        width: auto;
-        display: block;
-
-      }
-    }
+  .contributor-label {
+    color: inherit;
   }
-
-  .chapters {
-    display: inline;
-    float: right;
+  .title {
     text-transform: uppercase;
-    text-align: right;
-    margin-right: 10px;
-
-    .article-title {
-      display: inline-block !important;
-      font-weight: bold;
+  }
+  .share-links{
+    .facebook:hover{
+      cursor: pointer;
     }
-
-    .chapter-links{
-      display: inline;
-
-      ul {
-        list-style-type: none;
-        padding-left: 0px;
-        margin-right: 10px;
-        margin-bottom: 0;
-        display: inline;
-  
-        li {
-          display: inline;
-
-          margin-right: 10px;
-  
-          a {
-            color: $header-text-color;
-          }
-
-          &.active {
-            border-bottom: 2px solid $active-color;
-          }
-        }
+    .facebook, a{
+      color: $black;
+      &:hover{
+        color: $active-color;
       }
     }
-  }
-}
-
-
-article .top-link{
-  text-align: center;
-  font-weight: 700;
-  margin: 0;
-  a{
-    color: black;
-  }
-  .fa{
-    font-size: 2.5em;
-    color: $limegreen;
-  }
-  &:after{
-    content: none;
-  }
-}
-
-article ul.share-links{
-  position: relative;
-  li{
-    display: inline-block;
-    text-align: left;
-    i{
-      font-size: 1.5em;
-    }
-    span, a{
-      color: $limegreen;
+    font-size: 1.5em;
+    list-style-type: none;
+    padding: 0;
+    li {
+      display: inline;
     }
   }
 }
+
+@media(max-width: $screen-sm){
+  .feature-text {
+    width: 100%;
+  }
+}
+
+
+
+// article .top-link{
+//   text-align: center;
+//   font-weight: 700;
+//   margin: 0;
+//   a{
+//     color: black;
+//   }
+//   .fa{
+//     font-size: 2.5em;
+//     color: $limegreen;
+//   }
+//   &:after{
+//     content: none;
+//   }
+// }
+
+// article ul.share-links{
+//   position: relative;
+//   li{
+//     display: inline-block;
+//     text-align: left;
+//     i{
+//       font-size: 1.5em;
+//     }
+//     span, a{
+//       color: $limegreen;
+//     }
+//   }
+// }
 
 .story{
-
   .heading-wrapper{
     text-align: center;
   }
@@ -239,143 +301,138 @@ article ul.share-links{
   // }
 
   // Ensures that chapter headings aren't covered due to fixed header
-  .chapterblock:before {
-    display: block; 
-    content: " "; 
-    height: 71px;
-    margin-top: -71px;    
-    visibility: hidden; 
-  }
+  // .chapterblock:before {
+  //   display: block; 
+  //   content: " "; 
+  //   height: 71px;
+  //   margin-top: -71px;    
+  //   visibility: hidden; 
+  // }
 }
 
-article .block-PullQuote{
-  border: none;
-  color: $limegreen;
-  font-weight: 700;
-  padding-top: 0px;
-}
+// article .block-PullQuote{
+//   border: none;
+//   color: $limegreen;
+//   font-weight: 700;
+//   padding-top: 0px;
+// }
 
-.chapter{
-  position: relative;
-  margin-top: 8%;
-  h3 span{
-    font-size: 1.2em;
-  }
-}
+// .chapter{
+//   position: relative;
+//   margin-top: 8%;
+//   h3 span{
+//     font-size: 1.2em;
+//   }
+// }
 
-.narrow-content{
-  margin-left: 10%;
-  margin-right: 10%;
+// .narrow-content{
+//   margin-left: 10%;
+//   margin-right: 10%;
 
-  &.block-Image {
-    margin-left: 2%;
-    margin-right: 2%;
-  }
-}
+//   &.block-Image {
+//     margin-left: 2%;
+//     margin-right: 2%;
+//   }
+// }
 
-.background-photo{
-  z-index: -100;
-  width: 100%;
-  height: 110%;
-  position: absolute;
-  background-repeat: no-repeat;
-  margin-left: -35%;
-  margin-top: -15%;
-  opacity: 0.15;
-  transition: opacity .5s ease-out;
-  -moz-transition: opacity .5s ease-out;
-  -webkit-transition: opacity .5s ease-out;
-  -o-transition: opacity .5s ease-out;
-}
-.reveal{
-  display: block;
-    position: absolute;
-    margin-top: 60%;
-    margin-left: 0%;
-    padding: 10px;
-    border: solid 2px $limegreen;
-    width: 42px;
-    font-size: 1.5em;
-    color: $limegreen;
+// .background-photo{
+//   z-index: -100;
+//   width: 100%;
+//   height: 110%;
+//   position: absolute;
+//   background-repeat: no-repeat;
+//   margin-left: -35%;
+//   margin-top: -15%;
+//   opacity: 0.15;
+//   transition: opacity .5s ease-out;
+//   -moz-transition: opacity .5s ease-out;
+//   -webkit-transition: opacity .5s ease-out;
+//   -o-transition: opacity .5s ease-out;
+// }
+// .reveal{
+//   display: block;
+//     position: absolute;
+//     margin-top: 60%;
+//     margin-left: 0%;
+//     padding: 10px;
+//     border: solid 2px $limegreen;
+//     width: 42px;
+//     font-size: 1.5em;
+//     color: $limegreen;
 
-    &:hover{
-      cursor: pointer;
-    }
-  }
+//     &:hover{
+//       cursor: pointer;
+//     }
+//   }
 
-.credits{
-  text-align: center;
-  color: $tapa;
-  font-size: 0.7em;
-  line-height: 130%;
-  font-family: $sans-serif;
-  span{
-    font-weight:bold;
-  }
-}
+// .credits{
+//   text-align: center;
+//   color: $tapa;
+//   font-size: 0.7em;
+//   line-height: 130%;
+//   font-family: $sans-serif;
+//   span{
+//     font-weight:bold;
+//   }
+// }
 
-@media(max-width: $screen-sm){
+// @media(max-width: $screen-sm){
 
-  article ul.share-links{
-    margin: 0;
-    li{
-      i{
-        font-size: 2.0em;
-      }
-      div{
-        padding: 0 5px 10px 0;
-      }
-    }
-  }
+//   article ul.share-links{
+//     margin: 0;
+//     li{
+//       i{
+//         font-size: 2.0em;
+//       }
+//       div{
+//         padding: 0 5px 10px 0;
+//       }
+//     }
+//   }
 
-  .main-image{
-    border: none;
-  }
+//   .main-image{
+//     border: none;
+//   }
 
 
-  .story{
-    h2{
-      font-size: 25px;
-      text-decoration: underline;
-      margin-bottom: 0.7em;
-    }
-    .share-chapter{
-      font-size: 2.0em;
-    }
-  }
+//   .story{
+//     h2{
+//       font-size: 25px;
+//       text-decoration: underline;
+//       margin-bottom: 0.7em;
+//     }
+//     .share-chapter{
+//       font-size: 2.0em;
+//     }
+//   }
 
-  .chapter{
-    margin-top: 0;
-  }
+//   .chapter{
+//     margin-top: 0;
+//   }
 
-  .background-photo{
-    width: 100%;
-    height: 500px;
-    position: relative;
-    background-repeat: no-repeat;
-    background-size: 400px 500px;
-    background-position: center;
-    opacity: 0.8;
-    margin: 0 auto -2%;
-  }
+//   .background-photo{
+//     width: 100%;
+//     height: 500px;
+//     position: relative;
+//     background-repeat: no-repeat;
+//     background-size: 400px 500px;
+//     background-position: center;
+//     opacity: 0.8;
+//     margin: 0 auto -2%;
+//   }
 
-  .reveal{
-    display: none;
-  }
+//   .reveal{
+//     display: none;
+//   }
 
-  .narrow-content{
-    margin-left: 10%;
-    margin-right: 10%;
+//   .narrow-content{
+//     margin-left: 10%;
+//     margin-right: 10%;
 
-    &.block-Image {
-      margin-left: 5%;
-      margin-right: 5%;
-    }
-  }
-}
+//     &.block-Image {
+//       margin-left: 5%;
+//       margin-right: 5%;
+//     }
+//   }
+// }
 
-@media(max-width: 480px){
-  .template-article-page h1.medium{
-    font-size: 3.0em;
-  }
-}
