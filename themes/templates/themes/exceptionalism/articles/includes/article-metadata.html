@@ -13,8 +13,8 @@
     </div>
     <div class="subtitle">{{ self.excerpt|richtext }}</div>
     {% if self.authors %}
-        {% include 'themes/blackChapters/articles/includes/article-contributors.html' with authors=self.authors date=self.first_published_at links=True %}
+        {% include 'themes/exceptionalism/articles/includes/article-contributors.html' with authors=self.authors date=self.first_published_at links=True %}
     {% endif %}
 
-    {% include 'themes/blackChapters/articles/includes/share_links.html' %}
+    {% include 'themes/exceptionalism/articles/includes/share_links.html' %}
 </div>

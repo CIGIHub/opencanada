@@ -4,8 +4,8 @@
 <header role="banner">
     <div class="banner container-fluid">
         <div class="row">
-            <div class="chapters-logo header-row">
-                  <div class="wordmark">
+            <div class="opencanada-logo header-row">
+                  <div class="wordmark keepwordmark">
                       {% get_logo "main-logo" as logo %}
                       {% get_logo_link "main-logo" as logo_link %}
                       <a href="{{ logo_link }}">{% image logo original %}</a>
@@ -18,9 +18,15 @@
                 {% endif %}
             </div>
             <div class="chapters header-row">
-                <span class="hidden-md hidden-lg">Reading:</span>
+                <span class="reading">Reading:</span>
                 <div class="article-title">{{ self.title }}</div>
-                <div class="chapter-links toggle-mobile hidden-sm hidden-xs">
+                <div id="mobile-chapter-menu ">
+                    <div class="toggle-chapter-menu">
+                        <i class="fa fa-close" aria-hidden="true"></i>
+                        <i class="fa fa-list" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="chapter-links toggle-mobile">
                     <span class="separator">:</span>
                     <ul>
                         {% for chapter in self.chapters %}
@@ -28,27 +34,10 @@
                         {% endfor %}
                     </ul>
                 </div>
+                
             </div>
-            {% comment %}<div class="col-md-4 col-xs-2 search header-row">
-                <div class="button" data-target="search-box" id="search-box-toggle"><i class="fa fa-search"></i></div>
-            </div>{% endcomment %}
         </div>
     </div>
 </header>
 
-<div id="mobile-chapter-links" class="hidden-lg hidden-md">
-    <span class="fa-stack fa-2x toggle-mobile-chapters">
-        <i class="fa fa-circle fa-stack-2x" aria-hidden="true"></i>
-        <i class="fa fa-list fa-stack-1x" aria-hidden="true"></i>
-    </span>
 
-    <div class="chapter-links">
-        <ul>
-        {% for chapter in self.chapters %}
-            <li class="mobile-chapter-link">
-                <a href="#{{ chapter.value.heading|slugify }}">{{ chapter.value.heading }}</a>
-            </li>
-        {% endfor %}
-        </ul>
-    </div>
-</div>

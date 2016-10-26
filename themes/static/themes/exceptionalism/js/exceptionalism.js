@@ -11,8 +11,9 @@ jQuery(document).ready(function() {
 
     });
 
-    $('#mobile-chapter-links').click(function(e) {
-        $('#mobile-chapter-links .chapter-links').slideToggle();
+    $('#mobile-chapter-menu').click(function(e) {
+        console.log("menu");
+        $('.chapter-links').slideToggle();
     });
 
     function quoteSize(){
@@ -57,7 +58,7 @@ jQuery(document).ready(function() {
 
     function updateActiveMenuItem() {
        // Get container scroll position
-       var fromTop = $(this).scrollTop()+chapterMenuHeight;
+       var fromTop = $(this).scrollTop() + chapterMenuHeight;
     
        // Get id of current scroll item
        var cur = scrollItems.map(function(){
@@ -87,8 +88,7 @@ jQuery(document).ready(function() {
     
     //console.log(menuItems);
 
-    // Bind click handler to menu items
-    // so we can get a fancy scroll animation
+    // Bind click handler to menu items to scroll down to chapter on page
     menuItems.click(function(e){
       var href = $(this).attr("href"),
           offsetTop = href === "#" ? 0 : $(href).offset().top-chapterMenuHeight+1;
