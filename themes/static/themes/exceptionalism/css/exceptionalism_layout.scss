@@ -182,79 +182,56 @@ header.collapsed .wordmark{
 
 /*** related materials ***/
 .block-RelatedItems{
+  margin: 0;
   .heading{
+    float: left;
     background: black;
     width: 50px;
     height: 50px;
     border-radius: 50px;
-    text-indent: -10000px;
     color: white;
-    
+    &.no-float{
+      float: none;
+    }
+    .fa-bars{
+      font-size: 1.5em;
+      padding: 17px 18px;
+    }
   }
-  // background: black;
-  // position: absolute;
-  // z-index: 100;
-  // width: 50px;
-  // height: 50px;
-  // margin: 0;
-  // border-radius: 50px;
-  // top: 50px;
-
-  // .heading{
-  //   text-indent: -10000px;
-  // }
-  // ul.item_list{
-  //   display: none;
-  //   position: absolute;
-  //   border: none;
-  //   padding: 0;
-  //   top: -50px;
-
-  //   li .item_content{
-  //     background: black;
-  //     width: 77.1%;
-  //     margin-left: 9.8%;
-      
-  //     a{
-  //       display: block;
-  //       color: white;
-  //       padding: 10px;
-  //       margin: 0 20px;
-  //       border-bottom: solid 1px $red;
-  //       &:hover{
-  //         color: $beige;
-  //       }
-  //     }
-  //   } 
-  //   li:first-child .item_content{
-  //     padding-top: 10px;
-  //   }
-  //   li:last-child .item_content{
-  //     padding-bottom: 10px;
-  //   }
-  //   li:last-child .item_content a{
-  //     border-bottom: none;
-  //   }
-  // }
-  // &:before{
-  //   color: white;
-  //   content: '\f0c9';
-  //   font-family: FontAwesome;
-  //   font-size: 20px;
-  //   line-height: 2.6;
-  //   margin-left: 17px;
-  //   cursor: pointer;
-  // }
+  ul.item_list{
+      display: none;
+      width: 80%;
+      margin: 0 10%;
+      margin-top: -30px;
+      background-color: black;
+      border: none;
+      li .item_content{
+        text-align: center;
+        width: 90%;
+        border-bottom: solid 1px $red;
+        a{
+          color: white; 
+          &:hover{
+            color: $beige;
+          }
+        }
+      }
+      li:last-child .item_content{
+        border-bottom: none;
+      }
+  }
 }
 @media(max-width: $screen-sm){  
   .block-RelatedItems{
-    position: relative;
-    left: 45%;
-    top: 0;
+    .heading{
+      float: none;
+      margin: 0 auto;
+    }
     ul.item_list{
-      top: 60px;
+      margin-top: 10px;
     }
   }
+  
 }
 
 /**** footer  *****/
