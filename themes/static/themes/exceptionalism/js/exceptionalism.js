@@ -31,6 +31,10 @@ jQuery(document).ready(function() {
     });
 
     $('.block-RelatedItems').click(function(e){
+        if(('.block-RelatedItems .heading').length){
+            console.log('here');
+        }
+        $('.block-RelatedItems .heading').append( "<p>Test</p>" );
         $('ul.item_list').addClass('container');
         $('ul.item_list').slideToggle();
     });
