@@ -30,6 +30,15 @@ jQuery(document).ready(function() {
         $('.fa').toggleClass('fa-chevron-down fa-chevron-up');
     });
 
+    $('.block-RelatedItems').click(function(e){
+        if(('.block-RelatedItems .heading').length){
+            console.log('here');
+        }
+        $('.block-RelatedItems .heading').append( "<p>Test</p>" );
+        $('ul.item_list').addClass('container');
+        $('ul.item_list').slideToggle();
+    });
+
     function quoteSize(){
         $('.quote').each(function (index, value){
             var blockHeight = $(this).height();
