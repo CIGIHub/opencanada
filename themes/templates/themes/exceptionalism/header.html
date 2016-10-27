@@ -1,0 +1,41 @@
+{% load theme_tags wagtailimages_tags wagtailcore_tags static core_tags jobs_tags %}
+{% get_active_posting_page as active_jobs_page %}
+<div class="readingbar"></div>
+<header role="banner">
+    <div class="banner container-fluid">
+        <div class="row">
+            <div class="opencanada-logo header-row">
+                  <div class="wordmark keepwordmark">
+                      {% get_logo "main-logo" as logo %}
+                      {% get_logo_link "main-logo" as logo_link %}
+                      <a href="{{ logo_link }}">{% image logo original %}</a>
+                  </div>
+                {% if tagline %}
+                  <div class="tagline">
+                    {% get_logo "tagline-logo" as tagline_logo %}
+                      <a href="{{ logo_link }}">{% image tagline_logo original %}</a>
+                  </div>
+                {% endif %}
+            </div>
+            <div class="chapters header-row">
+                <span class="reading">Reading:</span>
+                <div class="title">{{ self.title }}<span class="separator"> : </span></div>
+                <div id="mobile-chapter-menu">
+                    <div class="toggle-chapter-menu">
+                        <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="chapter-links toggle-mobile">
+                    <ul>
+                        {% for chapter in self.chapters %}
+                        <li><a href="#{{ chapter.value.heading|slugify }}">{{ chapter.value.heading }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</header>
+
+

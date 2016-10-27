@@ -14,24 +14,3 @@
     {% endfor %}
 
 {% endif %}
-
-{% if self.citation_links.all %}
-    <div class="container">
-        <div class="block-citations narrow-content">
-            {% if self.citations_heading %}
-            <h2>{{ self.citations_heading }}</h2>
-            {% endif %}
-                {% for citation in self.citation_links.all %}
-                    <div class="citation">{{ citation.text|richtext }}</div>
-                {% endfor %}
-        </div>
-    </div>
-{% endif %}
-
-{% if self.endnote_links.all %}
-     <div class="container">
-       <div class="narrow-content">
-          {% include 'articles/includes/end_notes.html' %}
-        </div>
-    </div>
-{% endif %}

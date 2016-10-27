@@ -4,15 +4,30 @@ jQuery(document).ready(function() {
     $(window).on('load resize', function(){
         updateReadingBar();
         updateActiveMenuItem();
-        windowWidth = $(window).width();
-        if($('.quote').length && windowWidth > 992){
-            quoteSize();
-        }
 
+        windowWidth = $(window).width();
+        if(windowWidth > 998){
+            if($('.quote').length){
+                quoteSize();
+            }
+            if($('.chapter-links').length){
+                $('.chapter-links').css('display','inline-block');
+                if($('.chapter-links').hasClass('open')){
+                    $('.chapter-links').removeClass('open');
+                    $('.fa').toggleClass('fa-chevron-down fa-chevron-up');
+                }
+            }
+        }
+        if(windowWidth < 998){
+            if($('.chapter-links').length && (!($('.chapter-links').hasClass('open')))){
+                $('.chapter-links').css('display', 'none');
+            }
+        }
     });
 
-    $('#mobile-chapter-links').click(function(e) {
-        $('#mobile-chapter-links .chapter-links').slideToggle();
+    $('#mobile-chapter-menu').click(function(e) {
+        $('.chapter-links').slideToggle().toggleClass('open');
+        $('.fa').toggleClass('fa-chevron-down fa-chevron-up');
     });
 
     function quoteSize(){
@@ -35,13 +50,13 @@ jQuery(document).ready(function() {
         });
     }
     
-    if($('.reveal').length){
-        $(".reveal").mouseenter(function() {
-		 $(".background-photo").css('opacity', '1.0');
-        }).mouseleave(function () {
-		 $(".background-photo").css('opacity', '0.3');
-	 });
-    }
+    // if($('.reveal').length){
+    //     $(".reveal").mouseenter(function() {
+	// 	 $(".background-photo").css('opacity', '1.0');
+    //     }).mouseleave(function () {
+	// 	 $(".background-photo").css('opacity', '0.3');
+	//  });
+    // }
 
     function updateReadingBar() {
         var s = $(window).scrollTop(); // Current scroll mark
@@ -57,7 +72,7 @@ jQuery(document).ready(function() {
 
     function updateActiveMenuItem() {
        // Get container scroll position
-       var fromTop = $(this).scrollTop()+chapterMenuHeight;
+       var fromTop = $(this).scrollTop() + chapterMenuHeight;
     
        // Get id of current scroll item
        var cur = scrollItems.map(function(){
@@ -85,10 +100,9 @@ jQuery(document).ready(function() {
           if (item.length) { return item; }
         });
     
-    console.log(menuItems);
+    //console.log(menuItems);
 
-    // Bind click handler to menu items
-    // so we can get a fancy scroll animation
+    // Bind click handler to menu items to scroll down to chapter on page
     menuItems.click(function(e){
       var href = $(this).attr("href"),
           offsetTop = href === "#" ? 0 : $(href).offset().top-chapterMenuHeight+1;
