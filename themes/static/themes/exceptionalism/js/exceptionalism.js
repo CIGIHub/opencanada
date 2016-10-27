@@ -30,6 +30,11 @@ jQuery(document).ready(function() {
         $('.fa').toggleClass('fa-chevron-down fa-chevron-up');
     });
 
+    $('.block-RelatedItems').click(function(e){
+        $('ul.item_list').addClass('container');
+        $('ul.item_list').slideToggle();
+    });
+
     function quoteSize(){
         $('.quote').each(function (index, value){
             var blockHeight = $(this).height();
