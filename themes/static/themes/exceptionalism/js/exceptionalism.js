@@ -30,6 +30,14 @@ jQuery(document).ready(function() {
         $('.fa').toggleClass('fa-chevron-down fa-chevron-up');
     });
 
+    if($('.block-RelatedItems').length){
+        $('.block-RelatedItems .heading').append( '<i class="fa fa-bars">' );
+        $('.block-RelatedItems').click(function(e){
+            $('.block-RelatedItems .heading').toggleClass('no-float');
+            $('ul.item_list').slideToggle();
+        });
+    }
+    
     function quoteSize(){
         $('.quote').each(function (index, value){
             var blockHeight = $(this).height();
