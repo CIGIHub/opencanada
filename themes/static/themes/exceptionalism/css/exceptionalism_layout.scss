@@ -189,6 +189,7 @@ article .top-link{
     z-index: 200;
     position: absolute;
     left: 10%;
+    top: -10px;
     background: black;
     width: 50px;
     height: 50px;
@@ -196,7 +197,7 @@ article .top-link{
     color: white;
     &.fixed{
       position: fixed;
-      top: 200px;
+      top: 210px;
     }
     .fa{
       padding: 17px 19px;

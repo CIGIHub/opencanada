@@ -41,6 +41,7 @@ jQuery(document).ready(function() {
         $('.related-content-menu').click(function(e){
             $('.block-RelatedItems').slideToggle();
             $('.block-RelatedItems').closest('.container-clear-none').addClass('open');
+            $('.related-content-menu i').toggleClass('fa-close fa-bars');
         });
     }
     
@@ -51,7 +52,7 @@ jQuery(document).ready(function() {
             $('.related-content-menu').addClass('fixed');
             $('.container-clear-none.open').addClass('fixed');
         }
-        if(windowPosition < 500){
+        if(windowPosition < 550){
             $('.related-content-menu').removeClass('fixed');
             $('.container-clear-none.open').removeClass('fixed');
         }
