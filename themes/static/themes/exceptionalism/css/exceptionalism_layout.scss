@@ -140,6 +140,9 @@ header.collapsed .wordmark{
   line-height: 120%;
 }
 
+article .top-link{
+  display: none;
+}
 .feature-text {
   background-color: $feature-background;
   margin-top: -50px;

@@ -26,6 +26,10 @@ jQuery(document).ready(function() {
         }
     });
 
+    if($('.chapter-heading').length){
+        $('.chapter-heading').wrap('<div class="container-clear-none heading-wrapper"></div>');
+    }
+
     $('#mobile-chapter-menu').click(function(e) {
         $('.chapter-links').slideToggle().toggleClass('open');
         $('.fa').toggleClass('fa-chevron-down fa-chevron-up');
