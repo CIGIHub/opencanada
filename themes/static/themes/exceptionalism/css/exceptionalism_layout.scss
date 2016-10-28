@@ -201,14 +201,18 @@ header.collapsed .wordmark{
 }
 
 .container-clear-none.open{
+   z-index: 100;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
+  &.fixed{
+      position: fixed;
+      top: 200px;
+    }
 }
 
 .block-RelatedItems{
   display: none;
-  z-index: 100;
   background: black;
   margin: 0 10%;
 
