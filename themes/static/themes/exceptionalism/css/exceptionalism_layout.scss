@@ -139,15 +139,19 @@ header.collapsed .wordmark{
   padding: 0 20%;
   line-height: 120%;
 }
-.contributors,
-.date{
-  font-size: 1em;
-}
 
+article .top-link{
+  display: none;
+}
 .feature-text {
   background-color: $feature-background;
   margin-top: -50px;
   text-align: center;
+
+  .contributors,
+  .date{
+    font-size: 1em;
+  }
 
   .metadata{
     padding: 20px 0;
@@ -181,33 +185,48 @@ header.collapsed .wordmark{
 }
 
 /*** related materials ***/
-.block-RelatedItems{
-  margin: 0;
-  .heading{
-    float: left;
+.related-content-menu{
+    z-index: 200;
+    position: absolute;
+    left: 10%;
+    top: -10px;
     background: black;
     width: 50px;
     height: 50px;
     border-radius: 50px;
     color: white;
-    &.no-float{
-      float: none;
+    &.fixed{
+      position: fixed;
+      top: 210px;
     }
-    .fa-bars{
-      font-size: 1.5em;
-      padding: 17px 18px;
+    .fa{
+      padding: 17px 19px;
     }
+}
+
+.container-clear-none.open{
+   z-index: 100;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  &.fixed{
+      position: fixed;
+      top: 200px;
+    }
+}
+
+.block-RelatedItems{
+  display: none;
+  background: black;
+  margin: 0 10%;
+
+  .heading{
+    text-align: center;
+    color: white;
   }
   ul.item_list{
-      display: none;
-      width: 80%;
-      margin: 0 10%;
-      margin-top: -30px;
-      background-color: black;
       border: none;
       li .item_content{
-        text-align: center;
-        width: 90%;
         border-bottom: solid 1px $red;
         a{
           color: white; 
@@ -221,17 +240,20 @@ header.collapsed .wordmark{
       }
   }
 }
-@media(max-width: $screen-sm){  
+@media(max-width: $screen-sm){
+  .container-clear-none.open{
+    width: 80%;
+  }
+  .related-content-menu{
+    left: 0;
+  }
   .block-RelatedItems{
-    .heading{
-      float: none;
-      margin: 0 auto;
-    }
     ul.item_list{
-      margin-top: 10px;
+      li .item_content{
+        padding: 5px 20px;
+      }
     }
   }
-  
 }
 
 /**** footer  *****/
