@@ -6,6 +6,7 @@ jQuery(document).ready(function() {
         updateActiveMenuItem();
 
         windowWidth = $(window).width();
+       
         if(windowWidth > 998){
             if($('.quote').length){
                 quoteSize();
@@ -30,14 +31,25 @@ jQuery(document).ready(function() {
         $('.fa').toggleClass('fa-chevron-down fa-chevron-up');
     });
 
-    if($('.block-RelatedItems').length){
-        $('.block-RelatedItems .heading').append( '<i class="fa fa-bars">' );
-        $('.block-RelatedItems').click(function(e){
-            $('.block-RelatedItems .heading').toggleClass('no-float');
-            $('ul.item_list').slideToggle();
+    if($('.block-RelatedItems').length){       
+        $('.story').before( '<div class="related-content-menu"><i class="fa fa-bars"></div>' ); 
+        $('.related-content-menu').click(function(e){
+            $('.block-RelatedItems').slideToggle();
+            $('.block-RelatedItems').closest('.container-clear-none').addClass('open');
         });
     }
     
+    function setRelatedMenu(){
+        var fromTop = $('.related-content-menu').offset().top - $(window).scrollTop() - 200;
+        var windowPosition = $(window).scrollTop();
+        if(fromTop <= 0){
+            $('.related-content-menu').addClass('fixed');
+        }
+        if(windowPosition < 500){
+            $('.related-content-menu').removeClass('fixed');
+        }
+    }
+
     function quoteSize(){
         $('.quote').each(function (index, value){
             var blockHeight = $(this).height();
@@ -57,14 +69,6 @@ jQuery(document).ready(function() {
             $(this).css({'font-size': fontSize+'em', 'line-height' : '130%'});
         });
     }
-    
-    // if($('.reveal').length){
-    //     $(".reveal").mouseenter(function() {
-	// 	 $(".background-photo").css('opacity', '1.0');
-    //     }).mouseleave(function () {
-	// 	 $(".background-photo").css('opacity', '0.3');
-	//  });
-    // }
 
     function updateReadingBar() {
         var s = $(window).scrollTop(); // Current scroll mark
@@ -78,6 +82,7 @@ jQuery(document).ready(function() {
         $('.readingbar').width(scrollPercent + '%');
     }
 
+    /*** update selected chapter in header menu on scroll */
     function updateActiveMenuItem() {
        // Get container scroll position
        var fromTop = $(this).scrollTop() + chapterMenuHeight;
@@ -96,7 +101,6 @@ jQuery(document).ready(function() {
          .end().filter("[href='#"+id+"']").parent().addClass("active");
     }
 
-
     // Keeping track of position in article to update active page in menu
     var chapterMenu = $(".chapter-links ul"),
         chapterMenuHeight = chapterMenu.outerHeight(),
@@ -107,8 +111,6 @@ jQuery(document).ready(function() {
           var item = $($(this).attr("href"));
           if (item.length) { return item; }
         });
-    
-    //console.log(menuItems);
 
     // Bind click handler to menu items to scroll down to chapter on page
     menuItems.click(function(e){
@@ -120,10 +122,11 @@ jQuery(document).ready(function() {
       e.preventDefault();
     });
 
-    // Bind to scroll
+// Bind to scroll
     $(window).scroll(function(){
        updateReadingBar();
        updateActiveMenuItem();
+       setRelatedMenu();
     });
 
 });
