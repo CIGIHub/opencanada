@@ -46,7 +46,8 @@ jQuery(document).ready(function() {
     }
     
     function setRelatedMenu(){
-        var fromTop = $('.related-content-menu').offset().top - $(window).scrollTop() - 200;
+        var fromTop = $('.related-content-menu').offset().top - $(window).scrollTop();
+        console.log($(window).scrollTop());
         var windowPosition = $(window).scrollTop();
         if(fromTop <= 0){
             $('.related-content-menu').addClass('fixed');
