@@ -1,18 +1,19 @@
 from __future__ import absolute_import, division, unicode_literals
 
-from .blocks import ThemeableStructBlock
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from modelcluster.fields import ParentalKey
 from modelcluster.models import ClusterableModel
-from wagtail.wagtailcore.blocks import StreamBlock
 from wagtail.wagtailadmin.edit_handlers import (FieldPanel, InlinePanel,
                                                 MultiFieldPanel)
+from wagtail.wagtailcore.blocks import StreamBlock
 from wagtail.wagtailcore.fields import RichTextField, StreamField
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
+
+from .blocks import ThemeableStructBlock
 
 
 def get_default_theme_object():
@@ -75,24 +76,24 @@ class ThemeablePage(Page):
                               on_delete=models.SET_NULL,
                               null=True)
 
-    def __init__(self, *args, **kwargs):
-        super(ThemeablePage, self).__init__(*args, **kwargs)
-        if not self.theme:
-            return
-        # 'Push' the theme down to the blocks, if possible
-        for field in self._meta.fields:
-            # Each StreamField should have a StreamBlock
-            if not isinstance(field, StreamField):
-                continue
-            stream_block = field.stream_block
-            if not isinstance(stream_block, StreamBlock):
-                continue
-            # Assuming that each StreamBlock has an ordered dict of child Blocks
-            ordered_blocks = field.stream_block.child_blocks.values()
-            for block in ordered_blocks:
-                # We only need to set the Theme for blocks that support themes
-                if isinstance(block, ThemeableStructBlock):
-                    block.set_theme(self.theme)
+    def serve(self, request, *args, **kwargs):
+        if self.theme:
+            # If a theme is set, 'Push' the theme down to the blocks, if possible
+            for field in self._meta.fields:
+                # Each StreamField should have a StreamBlock
+                if not isinstance(field, StreamField):
+                    continue
+                stream_block = field.stream_block
+                if not isinstance(stream_block, StreamBlock):
+                    continue
+                # Assuming that each StreamBlock has an ordered dict of child Blocks
+                ordered_blocks = field.stream_block.child_blocks.values()
+                for block in ordered_blocks:
+                    # We only need to set the Theme for blocks that support themes
+                    if isinstance(block, ThemeableStructBlock):
+                        block.set_theme(self.theme)
+
+        return super(ThemeablePage, self).serve(request, *args, **kwargs)
 
     def get_template(self, request, *args, **kwargs):
         original_template = super(ThemeablePage, self).get_template(request, *args, **kwargs)
