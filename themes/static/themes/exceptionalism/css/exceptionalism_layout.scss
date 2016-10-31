@@ -23,12 +23,12 @@ header.collapsed .wordmark{
 }
 
 .opencanada-logo{
-  // padding: 0 20px;
   display: inline;
   float: left;
 
   img {
-      max-height: 18px;
+      max-height: 12px;
+      margin: 6px 0;
       width: auto;
       display: block;
   }
@@ -189,15 +189,15 @@ article .top-link{
     z-index: 200;
     position: absolute;
     left: 10%;
-    top: -10px;
     background: black;
     width: 50px;
     height: 50px;
     border-radius: 50px;
     color: white;
+    cursor: pointer;
     &.fixed{
       position: fixed;
-      top: 210px;
+      top: 200px;
     }
     .fa{
       padding: 17px 19px;
@@ -205,7 +205,8 @@ article .top-link{
 }
 
 .container-clear-none.open{
-   z-index: 100;
+  z-index: 100;
+  width: 60%;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
@@ -219,7 +220,7 @@ article .top-link{
   display: none;
   background: black;
   margin: 0 10%;
-
+  padding: 20px 0 10px 0;
   .heading{
     text-align: center;
     color: white;
@@ -245,7 +246,7 @@ article .top-link{
     width: 80%;
   }
   .related-content-menu{
-    left: 0;
+    left: 15px;
   }
   .block-RelatedItems{
     ul.item_list{
