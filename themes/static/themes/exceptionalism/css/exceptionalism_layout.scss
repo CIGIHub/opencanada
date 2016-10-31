@@ -206,7 +206,6 @@ article .top-link{
 
 .container-clear-none.open{
   z-index: 100;
-  width: 60%;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
@@ -219,7 +218,8 @@ article .top-link{
 .block-RelatedItems{
   display: none;
   background: black;
-  margin: 0 10%;
+  width: 60%;
+  margin: 0 auto;
   padding: 20px 0 10px 0;
   .heading{
     text-align: center;
@@ -249,6 +249,8 @@ article .top-link{
     left: 15px;
   }
   .block-RelatedItems{
+    width: 100%;
+    
     ul.item_list{
       li .item_content{
         padding: 5px 20px;
