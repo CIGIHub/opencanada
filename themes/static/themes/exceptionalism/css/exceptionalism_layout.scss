@@ -131,7 +131,6 @@ header.collapsed .wordmark{
       height: 9px;
     }
   }
-  
 }
 
 /**** feature text area ****/
@@ -140,9 +139,6 @@ header.collapsed .wordmark{
   line-height: 120%;
 }
 
-article .top-link{
-  display: none;
-}
 .feature-text {
   background-color: $feature-background;
   margin-top: -50px;
@@ -214,30 +210,68 @@ article .top-link{
       top: 200px;
     }
 }
+.story{
+  .heading-wrapper{
+    text-align: center;
+  }
+  h2{
+    font-size: 1em;
+    font-weight: normal;
+    text-transform: uppercase;
+    border-bottom: solid 1px $beige;
+    margin-bottom: 0.7em;
+    display: inline-block;
+  }
+}
 
-.block-RelatedItems{
+.story .block-RelatedItems{
   display: none;
   background: black;
-  width: 60%;
+  width: 70%;
   margin: 0 auto;
   padding: 20px 0 10px 0;
+  .intro{
+    width: 75%;
+  }
+}
+
+.block-RelatedItems{
+  color: $light-beige;
   .heading{
     text-align: center;
-    color: white;
+    text-transform: capitalize;
+    font-weight: normal;
+    font-size: 1.5em;
+    padding-bottom: 1em;
+  }
+  .intro{
+    margin: 0 auto;
+    font-size: 0.8em;
+    line-height: 150%;
+    font-style: italic;
   }
   ul.item_list{
       border: none;
+      text-align: center;
       li .item_content{
-        border-bottom: solid 1px $red;
+        padding: 25px 0;
+        .contributor-label{
+          display: none;
+        }
         a{
+          font-weight: bold;
           color: white; 
           &:hover{
-            color: $beige;
+            color: $red;
           }
         }
-      }
-      li:last-child .item_content{
-        border-bottom: none;
+        .contributors a{
+          color: white;
+          font-weight: normal;
+          &:hover{
+            color: $red;
+          }
+        }
       }
   }
 }
@@ -253,6 +287,7 @@ article .top-link{
     
     ul.item_list{
       li .item_content{
+        width: 100%;
         padding: 5px 20px;
       }
     }
@@ -261,19 +296,9 @@ article .top-link{
 
 /**** footer  *****/
 footer{
-  background-color: $body-bg-color;
-}
-
-.story{
-  .heading-wrapper{
-    text-align: center;
-  }
-  h2{
-    font-size: 1em;
-    font-weight: normal;
-    text-transform: uppercase;
-    border-bottom: solid 1px $beige;
-    margin-bottom: 0.7em;
-    display: inline-block;
+  background-color: $black;
+  .block-RelatedItems{
+    padding-top: 60px;
+    
   }
 }

@@ -155,7 +155,7 @@ class InteractiveBlock(SnippetChooserBlock):
             return self.render_basic(value)
 
 
-class RelatedItemsBlock(blocks.StructBlock):
+class RelatedItemsBlock(ThemeableStructBlock):
     heading = blocks.CharBlock(default="Related")
     items = blocks.ListBlock(blocks.PageChooserBlock(label="item"))
 
