@@ -1,0 +1,328 @@
+body{
+  background-color: $body-bg-color;
+  font-family: $font;
+}
+
+/**** reading progress bar  ****/
+.readingbar{
+  z-index: 9999;
+  width: 0%;
+  height: $reading-bar-height;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: $reading-bar-color;
+}
+
+header.collapsed .wordmark{
+  display: block;
+}
+
+.reading, #mobile-chapter-menu{
+  display: none;
+}
+
+.opencanada-logo{
+  display: inline;
+  float: left;
+
+  img {
+      max-height: 12px;
+      margin: 6px 0;
+      width: auto;
+      display: block;
+  }
+}
+
+.chapters {
+  display: inline;
+  float: right;
+  text-transform: uppercase;
+  text-align: right;
+  .title {
+    display: inline-block;
+    font-weight: bold;
+    a{
+      color: white;
+      &:hover{
+        color: $beige;
+      }
+    }
+  }
+
+  .chapter-links{
+    display: inline;
+
+    ul{
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      display: inline;
+
+      li{
+        display: inline;
+        margin: 0 10px;
+        a{
+          color: $header-link-color;
+        }
+        a:hover,
+        &.active {
+          border-bottom: 2px solid $active-color;
+        }
+        &:last-child{
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}
+
+@media(max-width: $screen-md){
+  .reading, #mobile-chapter-menu{
+    display: inline-block;
+  }
+  #mobile-chapter-menu{
+    cursor: pointer;
+    margin-left: 5px;
+  }
+  .chapters,
+  .title{
+    font-size: 12px;
+  }
+  .separator{
+    display: none;
+  }
+  .opencanada-logo{
+    margin-left: 20px;
+    img{
+      height: 12px;
+      margin: 7px 0;
+    }
+  }
+  .chapters{
+    margin-right: 10px;
+    .chapter-links{
+      display: none;
+      position: absolute;
+      background: $red;
+      right: 0;
+      top: 55px;
+      ul{
+        display: block;
+        li{
+          display: block;
+          text-align: left;
+          margin: 10px 20px;
+          font-size: 14px;
+          &:last-child{
+            margin: 10px 20px;
+          }
+          a:hover,
+          a:focus,
+          &.active {
+            border-bottom: 2px solid black;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media(max-width: $screen-sm){  
+  .reading{
+    display: none;
+  }
+  .opencanada-logo{
+    img{
+      height: 9px;
+    }
+  }
+}
+
+/**** feature text area ****/
+.template-article-page h1.medium{
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.feature-text {
+  background-color: $feature-background;
+  margin-top: -50px;
+  text-align: center;
+
+  .subtitle{
+    text-align: left;
+  }
+
+  .contributors,
+  .date{
+    font-size: 1em;
+  }
+  .metadata{
+    padding: 20px 10%;
+  }
+  .date {
+    display: block;
+  }
+  .contributor-label {
+    color: inherit;
+  }
+  .share-links{
+    .facebook:hover{
+      cursor: pointer;
+    }
+    .facebook, a{
+      color: $black;
+      &:hover{
+        color: $active-color;
+      }
+    }
+    font-size: 1.5em;
+    list-style-type: none;
+    padding: 0;
+    li {
+      display: inline;
+    }
+  }
+}
+
+article .block-Quote{
+  color: $text-link-color;
+  line-height: 180%;
+}
+
+/*** related materials ***/
+.related-content-menu{
+    z-index: 200;
+    position: absolute;
+    left: 10%;
+    background: black;
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    color: white;
+    cursor: pointer;
+    &.fixed{
+      position: fixed;
+      top: 200px;
+    }
+    .fa{
+      padding: 17px 19px;
+    }
+}
+
+.container-clear-none.open{
+  z-index: 100;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  &.fixed{
+      position: fixed;
+      top: 200px;
+    }
+}
+
+.story{
+  .heading-wrapper{
+    text-align: center;
+  }
+  h2{
+    font-size: 1em;
+    font-weight: 900;
+    text-transform: uppercase;
+    border-bottom: solid 1px $beige;
+    margin-bottom: 0.7em;
+    display: inline-block;
+  }
+}
+
+.story .block-RelatedItems{
+  display: none;
+  background: black;
+  width: 70%;
+  margin: 0 auto;
+  padding: 20px 0 10px 0;
+  .intro{
+    width: 75%;
+  }
+}
+
+.image-source{
+  margin-top: 5px;
+  font-size: 10px;
+  line-height: 125%;
+  font-family: proxima-nova, Helvetica, sans-serif;
+  color: $text-link-color; 
+}
+
+.chapterblock p{
+  font-size: 1.13333em;
+}
+
+.block-RelatedItems{
+  color: $light-beige;
+  .heading{
+    text-align: center;
+    text-transform: capitalize;
+    font-weight: normal;
+    font-size: 1.5em;
+    padding-bottom: 1em;
+  }
+  .intro{
+    margin: 0 auto;
+    font-size: 0.8em;
+    line-height: 150%;
+    font-style: italic;
+  }
+  ul.item_list{
+      border: none;
+      text-align: center;
+      li .item_content{
+        padding: 25px 0;
+        .contributor-label{
+          display: none;
+        }
+        a{
+          font-weight: bold;
+          color: white; 
+          &:hover{
+            color: $red;
+          }
+        }
+        .contributors a{
+          color: white;
+          font-weight: normal;
+          &:hover{
+            color: $red;
+          }
+        }
+      }
+  }
+}
+@media(max-width: $screen-sm){
+  .container-clear-none.open{
+    width: 80%;
+  }
+  .related-content-menu{
+    left: 15px;
+  }
+  .block-RelatedItems{
+    width: 100%;
+    
+    ul.item_list{
+      li .item_content{
+        width: 100%;
+        padding: 5px 20px;
+      }
+    }
+  }
+}
+
+/**** footer  *****/
+footer{
+  background-color: $black;
+  .block-RelatedItems{
+    padding-top: 60px;
+    
+  }
+}

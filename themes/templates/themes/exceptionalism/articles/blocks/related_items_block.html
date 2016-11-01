@@ -1,0 +1,15 @@
+{% load article_tags %}
+<div class="heading">{{ self.heading }}</div>
+<div class="intro">Why has Canada largely escaped the angry polarization that has characterized the 2016 U.S. presidential campaign? Why does it have Trudeau, while the United States has Trump? Stephen Marche argues the answer lies, in part, with Canadians’ preference for affecting change within the established system, rather than outside of it, and in their deeply entrenched support of multiculturalism. We asked four political commentators to respond.</div>
+<ul class="item_list">
+    {% for page in self.items %}
+        {% typed_article page as typed_page %}
+      <li>
+        <div class="item_content"><a href="{{ typed_page.url }}">{{ typed_page.title }}</a>
+         {% if typed_page.authors %}
+           {% include 'articles/includes/article-contributors.html' with authors=typed_page.authors links=True %}
+         {% endif %}
+      </div>
+      </li>
+    {% endfor %}
+</ul>

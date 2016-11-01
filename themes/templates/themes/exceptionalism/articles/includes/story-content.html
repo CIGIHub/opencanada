@@ -1,0 +1,23 @@
+{% load static article_tags core_tags wagtailcore_tags wagtailembeds_tags wagtailimages_tags %}
+
+{% for block in self.body %}
+    {% if block.block_type == 'FullBleed' %}
+        <section class="block-FullBleed">
+            <div class="container-fluid">
+                {{ block }}
+            </div>
+        </section>
+    {% elif block.block_type == 'Overflow' %}
+      <section class="block-Overflow">
+          <div class="container-clear-none">
+              {{ block }}
+          </div>
+      </section>
+    {% else %}
+        <div class="container-clear-none">
+            <section class="block-{{ block.block_type }} narrow-content">
+                {{ block }}
+            </section>
+        </div>
+    {% endif %}
+{% endfor %}
