@@ -42,6 +42,12 @@ header.collapsed .wordmark{
   .title {
     display: inline-block;
     font-weight: bold;
+    a{
+      color: white;
+      &:hover{
+        color: $beige;
+      }
+    }
   }
 
   .chapter-links{
@@ -135,8 +141,8 @@ header.collapsed .wordmark{
 
 /**** feature text area ****/
 .template-article-page h1.medium{
-  padding: 0 20%;
-  line-height: 120%;
+  font-weight: 900;
+  text-transform: uppercase;
 }
 
 .feature-text {
@@ -144,22 +150,22 @@ header.collapsed .wordmark{
   margin-top: -50px;
   text-align: center;
 
+  .subtitle{
+    text-align: left;
+  }
+
   .contributors,
   .date{
     font-size: 1em;
   }
-
   .metadata{
-    padding: 20px 0;
+    padding: 20px 10%;
   }
   .date {
     display: block;
   }
   .contributor-label {
     color: inherit;
-  }
-  .title {
-    text-transform: uppercase;
   }
   .share-links{
     .facebook:hover{
@@ -178,6 +184,11 @@ header.collapsed .wordmark{
       display: inline;
     }
   }
+}
+
+article .block-Quote{
+  color: $text-link-color;
+  line-height: 180%;
 }
 
 /*** related materials ***/
@@ -217,7 +228,7 @@ header.collapsed .wordmark{
   }
   h2{
     font-size: 1em;
-    font-weight: normal;
+    font-weight: 900;
     text-transform: uppercase;
     border-bottom: solid 1px $beige;
     margin-bottom: 0.7em;
@@ -234,6 +245,14 @@ header.collapsed .wordmark{
   .intro{
     width: 75%;
   }
+}
+
+.image-source{
+  margin-top: 5px;
+  font-size: 10px;
+  line-height: 125%;
+  font-family: proxima-nova, Helvetica, sans-serif;
+  color: $text-link-color; 
 }
 
 .chapterblock p{

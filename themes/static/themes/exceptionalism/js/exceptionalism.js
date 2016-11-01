@@ -23,6 +23,10 @@ jQuery(document).ready(function() {
         }
     });
 
+    if($('.feature-image-overlay').length){
+        $('.feature-image-overlay').css('opacity', '0');
+    }
+
     $('#mobile-chapter-menu').click(function(e) {
         $('.chapter-links').slideToggle().toggleClass('open');
         $('.fa').toggleClass('fa-chevron-down fa-chevron-up');

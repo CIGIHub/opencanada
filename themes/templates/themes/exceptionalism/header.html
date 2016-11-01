@@ -19,13 +19,16 @@
             </div>
             <div class="chapters header-row">
                 <span class="reading">Reading:</span>
-                <div class="title">{{ self.title }}<span class="separator"> : </span></div>
+                <div class="title"><a href="/features/canadian-exceptionalism">Canadian Exceptionalism</a></div>
                 <div id="mobile-chapter-menu">
                     <div class="toggle-chapter-menu">
                         <i class="fa fa-chevron-down" aria-hidden="true"></i>
                     </div>
                 </div>
                 <div class="chapter-links toggle-mobile">
+                    {% if self.chapters %}
+                        <span class="separator"> : </span>
+                    {% endif %}
                     <ul>
                         {% for chapter in self.chapters %}
                         <li><a href="#{{ chapter.value.heading|slugify }}">{{ chapter.value.heading }}</a></li>
