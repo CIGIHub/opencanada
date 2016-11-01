@@ -128,4 +128,15 @@ jQuery(document).ready(function() {
        unsetRelatedMenu();
     });
 
+//close related items menu if body is clicked
+    $(window).click(function(e) { 
+        if(!$(e.target).closest('.story .block-RelatedItems').length && !$(e.target).closest('.related-content-menu').length) {
+            if($('.story .block-RelatedItems').is(":visible")) {
+                $('.story .block-RelatedItems').slideToggle();
+                $('.related-content-menu i').toggleClass('fa-close fa-bars');
+
+            }
+        }        
+    });
+
 });
