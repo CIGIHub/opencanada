@@ -8,11 +8,13 @@
 {% endblock %}
 
 {% block extra_js %}
-    <script>
-        FeatureStyles.MainFeatures.setSize({{ self.full_bleed_image_size }});
-    </script>
-    <script type="text/javascript" src="{% static 'themes/components/js/transparency.js' %}"></script>
-    <script type="text/javascript" src="{% static 'themes/exceptionalism/js/exceptionalism.js' %}"></script>
+    {% compress js %}
+        <script>
+            FeatureStyles.MainFeatures.setSize({{ self.full_bleed_image_size }});
+        </script>
+        <script type="text/javascript" src="{% static 'themes/components/js/transparency.js' %}"></script>
+        <script type="text/javascript" src="{% static 'themes/exceptionalism/js/exceptionalism.js' %}"></script>
+    {% endcompress %}
 {% endblock %}
 
 {% block header %}
@@ -37,6 +39,14 @@
 
 {% block footer %}
     <footer>
-        {% include 'themes/exceptionalism/articles/blocks/related_items_block.html' %}
+        {% for block in self.body %}
+            {% if block.block_type == 'RelatedItems' %}
+                <div class="container-clear-none">
+                    <section class="block-{{ block.block_type }} narrow-content">
+                        {{ block }}
+                    </section>
+                </div>
+            {% endif %}
+        {% endfor %}
    </footer>
 {% endblock %}
