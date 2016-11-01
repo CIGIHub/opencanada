@@ -27,7 +27,31 @@
         {% include 'themes/exceptionalism/articles/includes/article-feature.html' with metadata='themes/exceptionalism/articles/includes/article-metadata.html' %}
     {% endif %}
 
+    
     <article id="article-page">
+        {% if not self.include_main_image_overlay or self.include_main_image_overlay and not self.main_image %}
+            <div class="container">
+                <div class="narrow-content">
+                    {% include 'articles/includes/article-metadata.html' %}
+                    {% if self.include_main_image and self.main_image %}
+                        <figure class="main-image">
+                            {% image self.main_image fill-940x627 %}
+                        </figure>
+                        {% if self.main_image.credit %}
+                            <div class="image-credit">
+                                {{ self.main_image.credit }}
+                            </div>
+                        {% endif %}
+                        {% if self.main_image.source %}
+                            <div class="image-source">
+                                {{ self.main_image.source }}
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+        
         <div class="story">
             {% include 'articles/includes/json-embed.html' %}
             {% include 'themes/exceptionalism/articles/includes/story-content.html' %}
