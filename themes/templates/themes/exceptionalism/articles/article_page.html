@@ -11,8 +11,10 @@
         <script>
             FeatureStyles.MainFeatures.setSize({{ self.full_bleed_image_size }});
         </script>
+        {% compress js %}
         <script type="text/javascript" src="{% static 'themes/components/js/transparency.js' %}"></script>
         <script type="text/javascript" src="{% static 'themes/exceptionalism/js/exceptionalism.js' %}"></script>
+        {% endcompress %}
 {% endblock %}
 
 {% block header %}
