@@ -261,8 +261,8 @@ article .block-Quote{
 
 .block-RelatedItems{
   color: $light-beige;
+  text-align: center;
   .heading{
-    text-align: center;
     text-transform: capitalize;
     font-weight: normal;
     font-size: 1.5em;
@@ -276,7 +276,6 @@ article .block-Quote{
   }
   ul.item_list{
       border: none;
-      text-align: center;
       li .item_content{
         padding: 25px 0;
         .contributor-label{
@@ -304,10 +303,10 @@ article .block-Quote{
     width: 80%;
   }
   .related-content-menu{
-    left: 15px;
+    display: none;
   }
   .block-RelatedItems{
-    width: 100%;
+    width: auto;
     
     ul.item_list{
       li .item_content{
