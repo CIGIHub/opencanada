@@ -4,7 +4,6 @@ jQuery(document).ready(function() {
     $(window).on('load resize', function(){
         updateReadingBar();
         updateActiveMenuItem();
-
         windowWidth = $(window).width();
        
         if(windowWidth > 998){
@@ -19,6 +18,12 @@ jQuery(document).ready(function() {
         if(windowWidth < 998){
             if($('.chapter-links').length && (!($('.chapter-links').hasClass('open')))){
                 $('.chapter-links').css('display', 'none');
+            }
+        }
+        if(windowWidth < 768){
+            if($('.story .block-RelatedItems').is(':visible')){
+                $('.story .block-RelatedItems').hide();
+                $('.related-content-menu i').toggleClass('fa-close fa-bars');
             }
         }
     });
