@@ -38,7 +38,7 @@ jQuery(document).ready(function() {
     });
 
     if($('.story .block-RelatedItems').length){       
-        $('.story').before( '<div class="related-content-menu"><i class="fa fa-bars"></div>' );
+        $('.story').before( '<div class="related-content-menu"><div class="button"><i class="fa fa-bars"></i></div>Rebuttals</div>' );
         setRelatedMenu();
         $('.related-content-menu').click(function(e){
             $('.story .block-RelatedItems').slideToggle();

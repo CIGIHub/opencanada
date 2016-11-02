@@ -196,12 +196,18 @@ article .block-Quote{
     z-index: 200;
     position: absolute;
     left: 10%;
-    background: black;
-    width: 50px;
-    height: 50px;
-    border-radius: 50px;
-    color: white;
+    width: 90px;
+    font-weight: 900;
+    text-transform: uppercase;
     cursor: pointer;
+    .button{
+      margin: 0 auto;
+      background: black;
+      width: 50px;
+      height: 50px;
+      border-radius: 50px;
+      color: white;
+    }
     &.fixed{
       position: fixed;
       top: 200px;
@@ -209,6 +215,18 @@ article .block-Quote{
     .fa{
       padding: 17px 19px;
     }
+}
+
+
+@media(max-width: 1200px){
+  .related-content-menu{
+    left: 5%;
+  }
+}
+@media(max-width: 1050px){
+  .related-content-menu{
+    left: 10px;
+  }
 }
 
 .container-clear-none.open{
