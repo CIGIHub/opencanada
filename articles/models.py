@@ -471,7 +471,7 @@ class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin
         ImageChooserPanel('feature_image'),
         DocumentChooserPanel('video_document'),
         StreamFieldPanel('body'),
-        SnippetChooserPanel('primary_topic', Topic),
+        SnippetChooserPanel('primary_topic'),
         InlinePanel('topic_links', label="Secondary Topics"),
     ]
 
@@ -624,7 +624,7 @@ class ExternalArticlePage(Page, FeatureStyleFields, Promotable):
     content_panels = Page.content_panels + [
         FieldPanel("body"),
         FieldPanel("website_link"),
-        SnippetChooserPanel('source', Source),
+        SnippetChooserPanel('source'),
         ImageChooserPanel('main_image'),
     ]
 
@@ -647,7 +647,7 @@ class ArticleTopicLink(models.Model):
         )
 
     panels = [
-        SnippetChooserPanel('topic', Topic),
+        SnippetChooserPanel('topic'),
     ]
 
 
@@ -864,7 +864,7 @@ class SeriesPage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin,
         DocumentChooserPanel('video_document'),
         StreamFieldPanel('body'),
         InlinePanel('related_article_links', label="Articles"),
-        SnippetChooserPanel('primary_topic', Topic),
+        SnippetChooserPanel('primary_topic'),
     ]
 
     promote_panels = Page.promote_panels + [
