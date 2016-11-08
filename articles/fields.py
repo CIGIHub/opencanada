@@ -91,7 +91,7 @@ class ContributorChooser(blocks.ChooserBlock):
         from wagtail.wagtailadmin.widgets import AdminPageChooser
         return AdminPageChooser(content_type=ContentType.objects.get_for_model(ContributorPage))
 
-    def render_basic(self, value):
+    def render_basic(self, value, context=None):
         if value:
             return format_html('<a href="{0}">{1}</a>', value.url, value.title)
         else:
@@ -142,7 +142,7 @@ class ChapterField(StreamField):
 
 
 class InteractiveBlock(SnippetChooserBlock):
-    def render(self, value):
+    def render(self, value, context=None):
         """
         Return a text rendering of 'value', suitable for display on templates. By default, this will
         use a template if a 'template' property is specified on the block, and fall back on render_basic
@@ -265,7 +265,7 @@ class StaticHTMLBlock(blocks.FieldBlock):
         self.field = StaticHTMLField(raw_html=self.raw_html, required=required, help_text=help_text)
         super(StaticHTMLBlock, self).__init__(**kwargs)
 
-    def render(self, value):
+    def render(self, value, context=None):
         """
         Return a text rendering of 'value', suitable for display on templates.
         Note that we override this function so that we can render the raw HTML as this block
@@ -280,7 +280,7 @@ class StaticHTMLBlock(blocks.FieldBlock):
 class SectionBreakBlock(blocks.StructBlock):
     section_break = StaticHTMLBlock(raw_html='<hr>')
 
-    def render(self, value):
+    def render(self, value, context=None):
         """
         Return a text rendering of 'value', suitable for display on templates.
         Note that we override this function so that we can render the child block as this block
