@@ -20,6 +20,14 @@
 @import (reference) "mixins.less";
 
 /* ==========================================================================
+   Webfonts
+   ========================================================================== */
+
+@import (less) "../fonts/SanFranciscoText-Light/styles.less";
+
+@fontStack: "SF-Light", Helvetica, sans-serif;
+
+/* ==========================================================================
    Structure
    ========================================================================== */
 
@@ -106,11 +114,11 @@ hr {
    ========================================================================== */
 
 h1, h2, h3, h4 {
-   font-family: proxima-nova, Helvetica, sans-serif;
+   font-family: @fontStack;
 }
 
 p {
-   font-family: "EB Garamond", Georgia, serif;
+   font-family: @fontStack;
    font-size: 13px;
    font-weight: 300;
 }
@@ -136,8 +144,8 @@ h2 {
       position: absolute;
       bottom: 0;
       left: 0;
-      height: 8px;
-      width: 150px;
+      height: 4px;
+      width: 120px;
       background: @red;
    }
 }
