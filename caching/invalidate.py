@@ -106,7 +106,7 @@ def cloudflare_purge_all():
 
     cloudflare_request(
         requests.delete,
-        '/zones/{ZONE_ID}/purge_cache',
+        '/zones/{ZONEID}/purge_cache',
         data,
     )
 
@@ -125,7 +125,7 @@ def cloudflare_purge_urls(urls):
 
         cloudflare_request(
             requests.delete,
-            '/zones/{ZONE_ID}/purge_cache',
+            '/zones/{ZONEID}/purge_cache',
             data,
         )
 

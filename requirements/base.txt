@@ -1,7 +1,11 @@
 # Minimal requirements
 Django>=1.8,<1.9
-requests==2.10.0
-wagtail==1.7
+requests==2.12.0
+
+# Using our own branch until https://github.com/torchbox/wagtail/pull/3161 or similar is merged into wagtail
+# wagtail==1.7
+git+git://github.com/albertoconnor/wagtail.git#egg=wagtail
+
 
 # Recommended components (require additional setup):
 elasticsearch>=1.0.0,<2.0.0
