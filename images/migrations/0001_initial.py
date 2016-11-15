@@ -2,8 +2,8 @@
 from __future__ import unicode_literals
 
 import taggit.managers
-import wagtail.wagtailadmin.taggable
 import wagtail.wagtailimages.models
+import wagtail.wagtailsearch.index
 from django.conf import settings
 from django.db import migrations, models
 
@@ -39,7 +39,7 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
             },
-            bases=(models.Model, wagtail.wagtailadmin.taggable.TagSearchable),
+            bases=(models.Model, wagtail.wagtailsearch.index.Indexed),
         ),
         migrations.CreateModel(
             name='AttributedRendition',

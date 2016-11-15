@@ -93,7 +93,7 @@ class EventPage(ThemeablePage):
         FieldPanel("location"),
         FieldPanel("event_link"),
         FieldPanel("body"),
-        SnippetChooserPanel('organization', Organization),
+        SnippetChooserPanel('organization'),
     ]
 
     style_panels = ThemeablePage.style_panels

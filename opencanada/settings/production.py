@@ -67,7 +67,7 @@ WAGTAILFRONTENDCACHE = {
         'BACKEND': 'wagtail.contrib.wagtailfrontendcache.backends.CloudflareBackend',
         'EMAIL': get_env_variable('CLOUDFLARE_EMAIL'),
         'TOKEN': get_env_variable('CLOUDFLARE_TOKEN'),
-        'ZONE_ID': get_env_variable('CLOUDFLARE_ZONE_ID'),
+        'ZONEID': get_env_variable('CLOUDFLARE_ZONE_ID'),
     },
 }
 

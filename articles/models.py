@@ -370,7 +370,7 @@ class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin
         on_delete=models.SET_NULL,
     )
 
-    search_fields = Page.search_fields + (
+    search_fields = Page.search_fields + [
         index.SearchField('excerpt', partial_match=True),
         index.SearchField('body', partial_match=True),
         index.SearchField('chapters', partial_match=True),
@@ -378,7 +378,7 @@ class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin
         index.SearchField('get_category_name', partial_match=True),
         index.SearchField('get_topic_names', partial_match=True),
         index.SearchField('get_author_names', partial_match=True),
-    )
+    ]
 
     def get_primary_topic_name(self):
         if self.primary_topic:
@@ -471,7 +471,7 @@ class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin
         ImageChooserPanel('feature_image'),
         DocumentChooserPanel('video_document'),
         StreamFieldPanel('body'),
-        SnippetChooserPanel('primary_topic', Topic),
+        SnippetChooserPanel('primary_topic'),
         InlinePanel('topic_links', label="Secondary Topics"),
     ]
 
@@ -610,10 +610,10 @@ class ExternalArticlePage(Page, FeatureStyleFields, Promotable):
             self.title
         )
 
-    search_fields = Page.search_fields + (
+    search_fields = Page.search_fields + [
         index.SearchField('body', partial_match=True),
         index.SearchField('source', partial_match=True),
-    )
+    ]
 
     def get_source_name(self):
         if self.source:
@@ -624,7 +624,7 @@ class ExternalArticlePage(Page, FeatureStyleFields, Promotable):
     content_panels = Page.content_panels + [
         FieldPanel("body"),
         FieldPanel("website_link"),
-        SnippetChooserPanel('source', Source),
+        SnippetChooserPanel('source'),
         ImageChooserPanel('main_image'),
     ]
 
@@ -647,7 +647,7 @@ class ArticleTopicLink(models.Model):
         )
 
     panels = [
-        SnippetChooserPanel('topic', Topic),
+        SnippetChooserPanel('topic'),
     ]
 
 
@@ -771,12 +771,12 @@ class SeriesPage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin,
         on_delete=models.SET_NULL,
     )
 
-    search_fields = Page.search_fields + (
+    search_fields = Page.search_fields + [
         index.SearchField('subtitle', partial_match=True),
         index.SearchField('body', partial_match=True),
         index.SearchField('get_primary_topic_name', partial_match=True),
         index.SearchField('get_topic_names', partial_match=True),
-    )
+    ]
 
     number_of_related_articles = models.PositiveSmallIntegerField(default=6,
                                                                   verbose_name="Number of Related Articles to Show")
@@ -864,7 +864,7 @@ class SeriesPage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin,
         DocumentChooserPanel('video_document'),
         StreamFieldPanel('body'),
         InlinePanel('related_article_links', label="Articles"),
-        SnippetChooserPanel('primary_topic', Topic),
+        SnippetChooserPanel('primary_topic'),
     ]
 
     promote_panels = Page.promote_panels + [

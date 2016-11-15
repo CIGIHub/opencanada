@@ -90,13 +90,13 @@ class ContributorPage(ThemeablePage):
     )
     featured = models.BooleanField(default=False)
 
-    search_fields = Page.search_fields + (
+    search_fields = Page.search_fields + [
         index.SearchField('first_name', partial_match=True),
         index.SearchField('last_name', partial_match=True),
         index.SearchField('twitter_handle', partial_match=True),
         index.SearchField('short_bio', partial_match=True),
         index.SearchField('long_bio', partial_match=True),
-    )
+    ]
 
     def search_result_text(self):
         if self.short_bio:

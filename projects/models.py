@@ -32,9 +32,9 @@ class ProjectListPage(ThemeablePage):
 class ProjectPage(ThemeablePage):
     description = RichTextField(blank=True, default="")
 
-    search_fields = Page.search_fields + (
+    search_fields = Page.search_fields + [
         index.SearchField('description', partial_match=True),
-    )
+    ]
 
     def search_result_text(self):
         if self.description:
