@@ -6,6 +6,8 @@ from .base import *
 DEBUG = False
 TEMPLATE_DEBUG = False
 
+ALLOWED_HOSTS = [get_env_variable('ALLOWED_HOSTS')]
+
 # Compress static files offline
 # http://django-compressor.readthedocs.org/en/latest/settings/#django.conf.settings.COMPRESS_OFFLINE
 COMPRESS_OFFLINE = True
