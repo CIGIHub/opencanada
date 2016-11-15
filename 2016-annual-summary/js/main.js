@@ -67,11 +67,13 @@ $(function() {
 });
 
 var topofDiv = $("section:nth-of-type(1)").offset().top; //gets offset of header
+var topofDiv2 = $("section:nth-of-type(3)").offset().top; //gets offset of header
+var hideDate = $("#note").offset().top + $("#note").outerHeight() - 80; //gets offset of header
 var height = $("section:nth-of-type(1)").outerHeight() + 20; //gets height of header
 
 $(".dateContainer").hide();
 $(window).scroll(function(){
-    if($(window).scrollTop() > (topofDiv + height)){
+    if($(window).scrollTop() > (hideDate)){
        $(".dateContainer").show();
     }
     else{
@@ -80,26 +82,3 @@ $(window).scroll(function(){
 });
 
 
-//var selScrollable = 'section';
-//// Uses document because document will be topmost level in bubbling
-//$(document).on('touchmove',function(e){
-//  e.preventDefault();
-//});
-//// Uses body because jQuery on events are called off of the element they are
-//// added to, so bubbling would not work if we used document instead.
-//$('body').on('touchstart', selScrollable, function(e) {
-//  if (e.currentTarget.scrollTop === 0) {
-//    e.currentTarget.scrollTop = 1;
-//  } else if (e.currentTarget.scrollHeight === e.currentTarget.scrollTop + e.currentTarget.offsetHeight) {
-//    e.currentTarget.scrollTop -= 1;
-//  }
-//});
-//// Stops preventDefault from being called on document if it sees a scrollable div
-//$('body').on('touchmove', selScrollable, function(e) {
-//  e.stopPropagation();
-//});
-
- // Disable overscroll / viewport moving on everything but scrollable divs
-// $('body').on('touchmove', function (e) {
-//         if (!$('section').has($(e.target)).length) e.preventDefault();
-// });
