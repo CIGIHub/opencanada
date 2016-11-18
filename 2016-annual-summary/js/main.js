@@ -34,7 +34,8 @@ var counterFn = debounce(function() {
 	var dateInput = $(".counter").text();
 	var datePrint = moment(dateInput, "x").format("MMMM DD, YYYY"); // Oct 4th 16; 
 	$('.date').text(datePrint);
-}, 10);
+	console.log(datePrint);
+}, 15);
 
 $('.counter').bind("DOMSubtreeModified",counterFn);
 
@@ -161,3 +162,24 @@ $( ".mNav-menu ul a" ).each(function() {
   		$( ".mNav-menu" ).toggleClass( "closed" );
 	});
 });
+
+
+var scrollCkeckFn = debounce(function() {
+	$(window).scroll(function() {
+
+		var scrollTop     = $(this).scrollTop(),
+		elementOffset = $.scrollify.current().offset().top,
+		distance      = (elementOffset - scrollTop)*-1;
+
+		if (distance > 40) {
+				$('.date').removeClass( "fadeOutDown" );
+				$('.date').addClass( "animated fadeOutUp" );
+		} else if (distance < 40 || distance > 20 ) {
+				$('.date').removeClass( "fadeOutUp" );	
+				$('.date').addClass( "animated fadeInDown" );	
+		}
+//		console.log("scroll "+distance)
+	});
+}, 100);
+
+scrollCkeckFn();
