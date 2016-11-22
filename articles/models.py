@@ -370,6 +370,14 @@ class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin
         on_delete=models.SET_NULL,
     )
 
+    response_to = models.ForeignKey(
+        'self',
+        on_delete=models.SET_NULL,
+        related_name='responses',
+        null=True,
+        blank=True,
+    )
+
     search_fields = Page.search_fields + [
         index.SearchField('excerpt', partial_match=True),
         index.SearchField('body', partial_match=True),
