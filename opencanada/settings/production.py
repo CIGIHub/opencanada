@@ -6,13 +6,15 @@ from .base import *
 DEBUG = False
 TEMPLATE_DEBUG = False
 
+ALLOWED_HOSTS = [get_env_variable('ALLOWED_HOSTS')]
+
 # Compress static files offline
 # http://django-compressor.readthedocs.org/en/latest/settings/#django.conf.settings.COMPRESS_OFFLINE
 COMPRESS_OFFLINE = True
 
 WAGTAILSEARCH_BACKENDS = {
     'default': {
-        'BACKEND': 'wagtail.wagtailsearch.backends.elasticsearch.ElasticSearch',
+        'BACKEND': 'wagtail.wagtailsearch.backends.elasticsearch',
         'INDEX': get_env_variable('ELASTICSEARCH_INDEX'),
         'TIMEOUT': 5000,
         # This setting will not work as intended with the ElasticSearch provided by http://www.searchly.com/
@@ -67,7 +69,7 @@ WAGTAILFRONTENDCACHE = {
         'BACKEND': 'wagtail.contrib.wagtailfrontendcache.backends.CloudflareBackend',
         'EMAIL': get_env_variable('CLOUDFLARE_EMAIL'),
         'TOKEN': get_env_variable('CLOUDFLARE_TOKEN'),
-        'ZONE_ID': get_env_variable('CLOUDFLARE_ZONE_ID'),
+        'ZONEID': get_env_variable('CLOUDFLARE_ZONE_ID'),
     },
 }
 

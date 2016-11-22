@@ -59,7 +59,7 @@ class Theme(models.Model):
         FieldPanel('name'),
         FieldPanel('folder'),
         FieldPanel('is_default'),
-        SnippetChooserPanel('content', ThemeContent),
+        SnippetChooserPanel('content'),
     ]
 
 register_snippet(Theme)
@@ -106,7 +106,7 @@ class ThemeablePage(Page):
     style_panels = [
         MultiFieldPanel(
             [
-                SnippetChooserPanel('theme', Theme),
+                SnippetChooserPanel('theme'),
             ],
             heading="Theme"
         ),
@@ -183,7 +183,7 @@ class ContentBlockLink(models.Model):
         related_name='block_links'
     )
 
-    panels = [SnippetChooserPanel("block", TextBlock)]
+    panels = [SnippetChooserPanel("block")]
 
 
 class ContentFollowLink(models.Model):
@@ -196,7 +196,7 @@ class ContentFollowLink(models.Model):
         related_name='follow_links'
     )
 
-    panels = [SnippetChooserPanel("block", FollowLink)]
+    panels = [SnippetChooserPanel("block")]
 
 
 class ContentLogoLink(models.Model):
@@ -209,4 +209,4 @@ class ContentLogoLink(models.Model):
         related_name='logo_links'
     )
 
-    panels = [SnippetChooserPanel("block", LogoBlock)]
+    panels = [SnippetChooserPanel("block")]

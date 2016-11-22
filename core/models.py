@@ -30,9 +30,9 @@ from themes.models import ThemeablePage
 class StreamPage(ThemeablePage):
     body = article_fields.BodyField()
 
-    search_fields = Page.search_fields + (
+    search_fields = Page.search_fields + [
         index.SearchField('body'),
-    )
+    ]
 
     content_panels = Page.content_panels + [
         StreamFieldPanel('body')
