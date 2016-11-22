@@ -49,13 +49,13 @@ class CircleCropOperation(FillOperation):
 
         super(CircleCropOperation, self).construct(size, *unprocessed_extra)
 
-    def run(self, willow, image):
+    def run(self, willow, image, env):
         # Note that `image` here is the database model of the Image, not the actual image
         if image.width < self.width or image.height < self.height:
             # unable to process image at all since the putalpha will fail
             return
 
-        willow = super(CircleCropOperation, self).run(willow, image)
+        willow = super(CircleCropOperation, self).run(willow, image, env)
         with image.get_willow_image() as willow_image:
             original_format = willow_image.format_name
 
