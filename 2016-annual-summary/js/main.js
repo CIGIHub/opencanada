@@ -13,6 +13,8 @@ function debounce(func, wait, immediate) {
 	};
 };
 
+var click_event = $.support.touch ? "tap" : "click";
+
 AOS.init({
 //  startEvent: 'DOMContentLoaded',
   offset: 200,
@@ -21,10 +23,10 @@ AOS.init({
   delay: 100
 });
 
+// Counter on scroll 
 
 var scrollingSpeed = 1.5*1000;
 var startDate = $("section:nth-of-type(1)").data("date");
-
 
 $(window).load(function() {
 		$('.counter').html( startDate );
@@ -34,7 +36,7 @@ var counterFn = debounce(function() {
 	var dateInput = $(".counter").text();
 	var datePrint = moment(dateInput, "x").format("MMMM DD, YYYY"); // Oct 4th 16; 
 	$('.date').text(datePrint);
-	console.log(datePrint);
+//	console.log(datePrint);
 }, 15);
 
 $('.counter').bind("DOMSubtreeModified",counterFn);
@@ -42,7 +44,7 @@ $('.counter').bind("DOMSubtreeModified",counterFn);
 var dd;
 function countScroll(d) {
 	
-	console.log(d);
+//	console.log(d);
 	
     var nextDate = $("section:nth-of-type("+[d+1]+")").data("date");
     var prevDate = $("section:nth-of-type("+[d+0]+")").data("date");
@@ -79,6 +81,8 @@ function countScroll(d) {
 	
 }
 
+// Scroll Params
+
 $(function() {
 
 	$.scrollify({
@@ -96,10 +100,15 @@ $(function() {
 		after: function() {
 			$('.date').removeClass( "fadeOutUp" );	
 			$('.date').addClass( "animated fadeInDown" );	
+		},
+		afterResize:function() {
+			$.scrollify.current()
 		}
 	});
 
 });
+
+// Show hide date
 
 var topofDiv = $("section:nth-of-type(1)").offset().top; //gets offset of header
 var topofDiv2 = $("section:nth-of-type(3)").offset().top; //gets offset of header
@@ -116,6 +125,7 @@ $(window).scroll(function(){
     }
 });
 
+// BG image effect
 
 $('.bgTrigger').each(function() {
 	$( this ).hover(
@@ -126,10 +136,16 @@ $('.bgTrigger').each(function() {
   });
 });
 
+// Build direction nav
+
+$("section:nth-of-type(1) a").on(click_event, this, function(e) {
+	$.scrollify.next();
+});
+
 var n = $( ".story" ).length;
 $('.aTotal').html(n);
 
-$(".aNext").click(function(e) {
+$(".aNext").on(click_event, this, function(e) {
     e.preventDefault();
     $.scrollify.setOptions({
         scrollSpeed: 2500,
@@ -137,7 +153,7 @@ $(".aNext").click(function(e) {
     $.scrollify.next();
 });
 
-$(".aBack").click(function(e) {
+$(".aBack").on(click_event, this, function(e) {
     e.preventDefault();
     $.scrollify.setOptions({
         scrollSpeed: 2500,
@@ -145,24 +161,32 @@ $(".aBack").click(function(e) {
     $.scrollify.previous();
 });
 
+// Build Nav + Story IDs, 2 pages before first story
+
 $('section').each(function( i ) {
+	if( i >= 1 ){
+		$( this ).attr( "id", "story" + [i-1] );
+	}
 	var Title = $( "section:nth-of-type("+[i+1]+")" ).find('h2').text();
 	var navString = "<li><a href='"+ '#' + this.id +"'><span>"+ [i-1] +".</span> <h2>" + Title + "</h2></a></li>";
 	if( i >= 1 ){
-	$( ".mNav-menu ul" ).append( navString );
+		$( ".mNav-menu ul" ).append( navString );
 	}
 });
 
-$( ".mNav" ).click(function() {
+// Animate menu
+
+$( ".mNav" ).on(click_event, this, function() {
   $( ".mNav-menu" ).toggleClass( "closed" );
 });
 
 $( ".mNav-menu ul a" ).each(function() {
-	$(this).click(function() {
+	$(this).on(click_event, this, function() {
   		$( ".mNav-menu" ).toggleClass( "closed" );
 	});
 });
 
+// Fade out date on scroll
 
 var scrollCkeckFn = debounce(function() {
 	$(window).scroll(function() {
