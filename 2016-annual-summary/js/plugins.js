@@ -4327,7 +4327,8 @@ $(function() {
             function updateTimer() {
                 value += increment;
                 loopCount++;
-                $(_this).html(value.toFixed(options.decimals));
+                $(_this).html(value);
+//                $(_this).html(value.toFixed(options.decimals));
 
                 if (typeof(options.onUpdate) == 'function') {
                     options.onUpdate.call(_this, value);

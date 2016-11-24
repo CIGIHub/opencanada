@@ -113,12 +113,17 @@ $(function() {
 var topofDiv = $("section:nth-of-type(1)").offset().top; //gets offset of header
 var topofDiv2 = $("section:nth-of-type(3)").offset().top; //gets offset of header
 var hideDate = $("#note").offset().top + $("#note").outerHeight() - 80; //gets offset of header
-var height = $("section:nth-of-type(1)").outerHeight() + 0; //gets height of header
+var height = $("section:nth-of-type(1)").outerHeight(); //gets height of header
+var contribHeight = $(".contrib").offset().top - 100; //gets height of contrib section
 
 $(".dateContainer").hide();
 $(window).scroll(function(){
+	contribHeight = $(".contrib").offset().top - 10;
     if($(window).scrollTop() > (hideDate)){
        $(".dateContainer").show();
+    }else if($(window).scrollTop() > contribHeight){
+       $(".dateContainer").hide();
+		console.log("hide");
     }
     else{
        $(".dateContainer").hide();
@@ -143,7 +148,7 @@ $("section:nth-of-type(1) a").on(click_event, this, function(e) {
 });
 
 var n = $( ".story" ).length;
-$('.aTotal').html(n);
+$('.aTotal').html(n-1);
 
 $(".aNext").on(click_event, this, function(e) {
     e.preventDefault();
@@ -178,11 +183,13 @@ $('section').each(function( i ) {
 
 $( ".mNav" ).on(click_event, this, function() {
   $( ".mNav-menu" ).toggleClass( "closed" );
+  $( this ).toggleClass( "hover" );
 });
 
 $( ".mNav-menu ul a" ).each(function() {
 	$(this).on(click_event, this, function() {
   		$( ".mNav-menu" ).toggleClass( "closed" );
+		$( this ).toggleClass( "hover" );
 	});
 });
 
@@ -201,7 +208,13 @@ var scrollCkeckFn = debounce(function() {
 		} else if (distance < 40 || distance > 20 ) {
 				$('.date').removeClass( "fadeOutUp" );	
 				$('.date').addClass( "animated fadeInDown" );	
-		}
+		} 
+		
+		if ( $.scrollify.current().hasClass( "contrib" )) {
+			$('.date').addClass("hide")
+		} else (
+			$('.date').removeClass("hide")
+		)
 //		console.log("scroll "+distance)
 	});
 }, 100);

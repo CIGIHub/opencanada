@@ -238,6 +238,68 @@ a, a:focus, a:visited {
    margin: 27px 0px;
 }
 
+//.navbar-brand-mobile {
+//   z-index: 999;
+//   float: right;
+//   height: 2.5em;
+//   width: 2.8em;
+//   display: block;
+//   position: absolute;
+//   top: 1em;
+//   right: 0;
+//   background: @transparent;
+//   padding: 0.5em;
+//   
+//   .line0, .line1, .line2 {
+//      position: absolute;
+//      width: 2.3em;
+//      height: 1px;
+//      background: @white;
+//      top: 0;
+//      left: -2.3em;
+//      transform: translateX(0em);
+//      opacity: 0;
+//      transition: 0.5s all ease;
+//      
+//   }
+//   .line1 {
+//      opacity: 1;
+//      top: 0em;
+//      height: 2.18em;
+//      border-radius: 50%;
+//      background: @transparent;
+//      border: 8px solid @white;
+//      transform: translateX(2.3em) rotate(180deg);
+//      transition: 0.75s all ease;
+//   }
+//   .line2 {
+//      top: 1.9em;
+//      transition: 0.5s 0.25s all ease;
+//   }
+//   
+//   &:hover, &.hover {
+//      .line0 {
+//         opacity: 1;
+//         transform: translateX(2.3em);
+//
+//      }
+//      .line1 {
+//         opacity: 1;
+//         top: 0.95em;
+//         height: 0.05em;
+//         border-radius: 0%;
+//         background: @white;
+//         border: 0px solid @transparent;
+//         transform: translateX(2.3em) rotate(0deg);
+//      }
+//      .line2 {
+//         opacity: 1;
+//         transform: translateX(2.3em);
+//      }
+//   }
+//
+//}
+
 .navbar-brand-mobile {
    z-index: 999;
    float: right;
@@ -253,48 +315,57 @@ a, a:focus, a:visited {
    .line0, .line1, .line2 {
       position: absolute;
       width: 2.3em;
-      height: 0.1em;
+      height: 1px;
       background: @white;
       top: 0;
       left: -2.3em;
-      transform: translateX(0em);
-      opacity: 0;
+      transform: translateX(2.3em)translateY((0));
+      opacity: 1;
       transition: 0.5s all ease;
       
    }
    .line1 {
       opacity: 1;
-      top: 0em;
-      height: 2.18em;
-      border-radius: 50%;
-      background: @transparent;
-      border: 8px solid @white;
-      transform: translateX(2.3em) rotate(180deg);
-      transition: 0.75s all ease;
+      top: 0.95em;
+      height: 0.05em;
+      border-radius: 0%;
+      background: @white;
+      border: 0px solid @transparent;
+      transform: translateX(2.3em) rotate(0deg);
    }
    .line2 {
-      top: 1.9em;
-      transition: 0.5s 0.25s all ease;
+      top: 0;
+      transform: translateX(2.3em)translateY(1.9em);
+      transition: 0.5s 0.1s all ease;
    }
    
-   &:hover {
+   &:hover, &.hover {
       .line0 {
+         width: 1.8em;
          opacity: 1;
-         transform: translateX(2.3em);
+         transform: 
+            translateX(2.55em)
+            translateY(1.1em)
+            rotate(45deg);
 
       }
       .line1 {
          opacity: 1;
-         top: 0.95em;
-         height: 0.05em;
-         border-radius: 0%;
-         background: @white;
-         border: 0px solid @transparent;
-         transform: translateX(2.3em) rotate(0deg);
+         top: 0em;
+         height: 2.18em;
+         border-radius: 50%;
+         background: @transparent;
+         border: 1px solid @white;
+         transform: translateX(2.3em) rotate(180deg);
+         transition: 0.75s all ease;
       }
       .line2 {
+         width: 1.8em;
          opacity: 1;
-         transform: translateX(2.3em);
+         transform: 
+            translateX(2.55em)
+            translateY(1.1em)
+            rotate(-45deg);
       }
    }
 
@@ -435,13 +506,13 @@ section {
       position: static; 
       transform: translate3d(0,0,0);
       background-position: center center;
-      background-attachment: fixed;
       background-position: 50% 50%;
       background-size: cover;
       background-repeat: no-repeat;
       position: relative;
       transition: 1s all ease;
       height: auto;
+   @media only screen and (min-width : 992px)  {background-attachment: fixed;}
       
    * {
       z-index: 6;
@@ -484,6 +555,11 @@ section {
       }             
    }
    
+}
+
+span.bgTrigger {
+   padding: 5px;
+   padding-left: 0;
 }
 
 .full {
@@ -567,6 +643,9 @@ a {
 //      bottom: 19vh;
       font-size: 21px;
    }
+}
+.date.hide {
+   display: none;
 }
 
 .number {
@@ -658,6 +737,9 @@ a {
    }
    
 }
+.body .hoverArrow {
+   margin-bottom: 30vh;
+}
 .paging {
    * {
       display: inline-block;
@@ -738,5 +820,29 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', end
 }
 
 #story3 {
+   background-image: url(https://files.opencanada.org/images/lori9.4ed7f830.fill-910x604.jpg);
+}
+
+#story4 {
+   background-image: url(https://files.opencanada.org/images/kurdistan-main-image.original.2e16d0ba.fill-910x604.jpg);
+}
+
+#story5 {
+   background-image: url(https://files.opencanada.org/images/opencanada_project1_illustration-s.2e16d0ba.fill-910x604.jpg);
+}
+
+#story6 {
+   background-image: url(https://files.opencanada.org/images/lori9.4ed7f830.fill-910x604.jpg);
+}
+
+#story7 {
+   background-image: url(https://files.opencanada.org/images/kurdistan-main-image.original.2e16d0ba.fill-910x604.jpg);
+}
+
+#story8 {
+   background-image: url(https://files.opencanada.org/images/opencanada_project1_illustration-s.2e16d0ba.fill-910x604.jpg);
+}
+
+#story9 {
    background-image: url(https://files.opencanada.org/images/lori9.4ed7f830.fill-910x604.jpg);
 }
