@@ -17,14 +17,12 @@ def create_themes(apps, schema_editor):
 
     about_block = TextBlock.objects.create(
         name='About Block',
-        slug='about-block',
         heading='About',
         content='Open Canada is a Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. quis nostrud exercitation.'
     )
 
     masthead_block = TextBlock.objects.create(
         name='Masthead Block',
-        slug='masthead-block',
         heading='Masthead',
         content="""<p><a href="https://twitter.com/taylor_owen">@Taylor Owen</a> / Editor-in-Chief</p>
                 <p><a href="https://twitter.com/eva_sita">@Eva Salinas</a> / Managing Editor</p>
@@ -33,46 +31,39 @@ def create_themes(apps, schema_editor):
 
     newsletter_block = TextBlock.objects.create(
         name='Newsletter Block',
-        slug='newsletter-block',
         heading='Weekly Newsletter',
         content=""
     )
 
     follow_block = TextBlock.objects.create(
         name='Follow Block',
-        slug='follow-block',
         heading='Follow',
         content=""
     )
 
     tagline_block = TextBlock.objects.create(
         name='Tagline Block',
-        slug='tagline-block',
         heading='',
         content="OpenCanada.org is a publication of the Canadian International Council, the Centre for International Governance Innovation and the Bill Graham Centre"
     )
 
     twitter = FollowLink.objects.create(
         name="Twitter",
-        slug="twitter",
         link="https://twitter.com/opencanada"
     )
 
     facebook = FollowLink.objects.create(
         name="Facebook",
-        slug="facebook",
         link="https://facebook.com/opencanada"
     )
 
     google_plus = FollowLink.objects.create(
         name="Google Plus",
-        slug="google-plus",
         link="#"
     )
 
     rss_feed = FollowLink.objects.create(
         name="RSS Feed",
-        slug="rss-feed",
         link="/feed/"
     )
 
