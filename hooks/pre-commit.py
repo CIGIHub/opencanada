@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 import sys
 
-from isort.hooks import git_hook as isort_hook
-
 from flake8.hooks import git_hook as flake8_hook
 from flake8.hooks import get_git_param
 
@@ -18,11 +16,6 @@ LAZY = get_git_param('FLAKE8_LAZY', False)
 
 if __name__ == '__main__':
     result = 0
-    isort_result = isort_hook(strict=True)
-
-    if isort_result:
-        sys.stdout.writelines('Run `isort -rc .` from the repository root directory to sort imports.')
-        result = 1
 
     flake8_result = flake8_hook(
         complexity=COMPLEXITY,
