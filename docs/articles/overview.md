@@ -41,8 +41,38 @@ the themeing mechanism.
 Similar to Series Articles, but without the special container page and
 the need for that container to live under indepths.
 
-There is a `ManyToMany` relationship between `ArticlePage` and itself
-where an given article will have a collection of response articles.
+There is a wagtail style faux many to many relationship between
+`ArticlePage` and itself where an given article will have a collection
+of response articles. The model for this relationship is
+`ResponseArticleLink`.
+
+The thorugh table gives an article the following attributes.
+`response_to_links` which is a related query set of
+`ResponseArticleLinks` where the `response_to` attribute is the article
+this article is a response to. This should either be empty or only
+contain 1 article. See the `response_to` property below.
+`response_links` is a related query set of `ResponseArticleLinks` where
+the `response` attribute one of the articles which is a response to this
+article.
+
+In addition to these default attributes provided by the relationship
+between the models, the `ArticlePage` model definte two properties and
+a method to make working with related articles easier.
+
+`is_response` return True if this article is a response to something and
+False if not. This inturn calls `response_to`, which is one reason
+`response_to` caches the result.
+
+`response_to` get the one article this article is a response to if it
+exists, or is None. Note: if for some reason an article become a
+response to multiple articles, a warning is emitted which should appear
+on Sentry, and only the first article is returned. What first means is
+poorly defined, but probably related to published date. `response_to` is
+cached per request.
+
+`responses()` a method which return the list of all articles which are a
+response to this article. This doesn't return a queryset, it returns the
+list of responses already loaded into memory.
 
 An article can access it responses through the `responses` manager, and
 an article can use the `is_response` property to detect if it is a
@@ -53,12 +83,12 @@ Here is some example template code:
 
 ```
 {% if self.is_response %}
-<h3>Response to <a href="{{ self.reponse_to.url }}">{{
-self.reponse_to.title }}</a><h3>
+<h3>Response to <a href="{{ self.response_to.url }}">{{
+self.response_to.title }}</a><h3>
 <p>Read other responses:</p>
 <ul>
-  {% for response in self.reponse_to.response.all() %}
-    <li><a href="{{ reponse.url }}"></a>{{ response.title }}</li>
+  {% for response in self.response_to.responses %}
+    <li><a href="{{ response.url }}"></a>{{ response.title }}</li>
   {% endfor %}
 </ul>
 {% endif %}

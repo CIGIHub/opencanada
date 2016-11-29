@@ -307,6 +307,25 @@ class PageLayoutOptions(models.Model):
         abstract = True
 
 
+class ResponseArticleLink(Orderable, models.Model):
+    response = models.ForeignKey(
+        "ArticlePage",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='response_to_links'
+    )
+
+    response_to = ParentalKey(
+        "ArticlePage",
+        related_name='response_links'
+    )
+
+    panels = [
+        PageChooserPanel("response"),
+    ]
+
+
 class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin, PageLayoutOptions, VideoDocumentMixin):
     excerpt = RichTextField(blank=True, default="")
     body = article_fields.BodyField()
@@ -370,13 +389,7 @@ class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin
         on_delete=models.SET_NULL,
     )
 
-    response_to = models.ForeignKey(
-        'self',
-        on_delete=models.SET_NULL,
-        related_name='responses',
-        null=True,
-        blank=True,
-    )
+    _response_to = False
 
     search_fields = Page.search_fields + [
         index.SearchField('excerpt', partial_match=True),
@@ -434,6 +447,30 @@ class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin
             all_topics.sort(key=attrgetter('name'))
         return all_topics
 
+    @property
+    def response_to(self):
+        if self._response_to is False:
+            response_to_count = self.response_to_links.count()
+            if response_to_count > 1:
+                logger.warning(
+                    'ArticlePage(pk={0}) appears to be a response to multiple articles. Only the first one is being returned.'.format(
+                        self.pk
+                    )
+                )
+            if response_to_count != 0:
+                self._response_to = self.response_to_links.first().response_to
+            else:
+                self._response_to = None
+
+        return self._response_to
+
+    @property
+    def is_response(self):
+        return self.response_to is not None
+
+    def responses(self):
+        return [link.response for link in self.response_links.all()]
+
     def related_articles(self, number):
         included = [self.id]
         article_list = []
@@ -481,6 +518,7 @@ class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin
         StreamFieldPanel('body'),
         SnippetChooserPanel('primary_topic'),
         InlinePanel('topic_links', label="Secondary Topics"),
+        InlinePanel('response_links', label="Responses"),
     ]
 
     advanced_content_panels = [
