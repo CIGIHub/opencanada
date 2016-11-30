@@ -1,0 +1,70 @@
+{% load theme_tags wagtailimages_tags wagtailcore_tags static core_tags %}
+<header role="banner">
+    <div class="banner container-fluid">
+        <div class="row">
+            <div class="opencanada-logo header-row">
+                  <div class="wordmark keepwordmark">
+                      {% get_logo "main-logo" as logo %}
+                      {% get_logo_link "main-logo" as logo_link %}
+                      <a href="{{ logo_link }}">{% image logo original %}</a>
+                  </div>
+                {% if tagline %}
+                  <div class="tagline">
+                    {% get_logo "tagline-logo" as tagline_logo %}
+                      <a href="{{ logo_link }}">{% image tagline_logo original %}</a>
+                  </div>
+                {% endif %}
+            </div>
+            <div class="chapters header-row">
+                <span class="reading">Reading:</span>
+                <div class="title"><a href="/features/canadian-exceptionalism">Canadian Exceptionalism</a></div>
+                <div id="mobile-chapter-menu">
+                    <div class="toggle-chapter-menu">
+                        <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="chapter-links toggle-mobile">
+                    {% if self.chapters %}
+                        <span class="separator"> : </span>
+                    {% endif %}
+                    <ul>
+                        {% for chapter in self.chapters %}
+                        <li><a href="#{{ chapter.value.heading|slugify }}">{{ chapter.value.heading }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</header>
+
+<header>
+    <div class="mNav-menu">
+    <div class="container">
+      <div class="col-sm-10 col-sm-offset-1">
+        <ul></ul>
+      </div>
+    </div>
+  </div>
+  <div class="counter">100</div>
+  <nav class="navbar transparent navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <div class="col-md-4 col-sm-offset-1 col-sx-12 paging">no.&ensp;
+          <a class="aBack" href="#">
+            <div class="hoverArrow">&nbsp;</div>
+          </a>&ensp;
+          <div class="aCurrent">2</div>&ensp;/&ensp;
+          <div class="aTotal">Total</div>&ensp;
+          <a class="aNext" href="#">
+            <div class="hoverArrow">&nbsp;</div>
+          </a>
+        </div>
+        <a class="navbar-brand hidden-sm hidden-xs" href="/"><img src="https://files.opencanada.org/images/opencanada-logo.original.png" alt="OpenCanada.org"></a> <span class="navbar-brand-mobile mNav"><span class="line0"></span>        <span class="line1"></span> <span class="line2"></span></span>
+      </div>
+    </div>
+  </nav>
+</header>
+
+
