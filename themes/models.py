@@ -77,17 +77,24 @@ class ThemeablePage(Page):
                               null=True)
 
     def serve(self, request, *args, **kwargs):
+        from articles.fields import ChapterField
         if self.theme:
             # If a theme is set, 'Push' the theme down to the blocks, if possible
             for field in self._meta.fields:
-                # Each StreamField should have a StreamBlock
-                if not isinstance(field, StreamField):
+                # Each StreamField and ChapterField should have a StreamBlock
+                if not isinstance(field, StreamField) and not isinstance(field, ChapterField):
                     continue
+
                 stream_block = field.stream_block
                 if not isinstance(stream_block, StreamBlock):
                     continue
-                # Assuming that each StreamBlock has an ordered dict of child Blocks
-                ordered_blocks = field.stream_block.child_blocks.values()
+
+                if isinstance(field, ChapterField):
+                    ordered_blocks = stream_block.child_blocks.values()
+                    ordered_blocks += stream_block.child_blocks['chapter'].child_blocks['body'].child_blocks.values()
+                else:
+                    # Assuming that each StreamBlock has an ordered dict of child Blocks
+                    ordered_blocks = stream_block.child_blocks.values()
                 for block in ordered_blocks:
                     # We only need to set the Theme for blocks that support themes
                     if isinstance(block, ThemeableStructBlock):
