@@ -32,12 +32,17 @@ p {
    font-weight: 300;
 }
 
-.template-article-page .main-feature h1{
-  font-size: 2.5em;
-  line-height: 1.25em;
-  font-weight: 500;
-  max-width: 250px;
-}
+.template-series-page .main-feature{
+  h1{
+    font-size: 2.5em;
+    line-height: 1.25em;
+    font-weight: 500;
+    max-width: 250px;
+  }
+  a:hover{
+    color: $white;
+  }
+} 
 
 .story h2 {
    font-size: 2em;
@@ -448,7 +453,7 @@ header{
 }
 
 
-.section-content {
+section {
       overflow: hidden;
       position: static; 
       transform: translate3d(0,0,0);
@@ -459,9 +464,9 @@ header{
       position: relative;
       transition: 1s all ease;
       height: auto;
-   @media only screen and (min-width : 992px)  {
-	   background-attachment: fixed;
-	}
+      @media only screen and (min-width : 992px)  {
+	      background-attachment: fixed;
+	    }
       
    * {
       z-index: 6;
@@ -475,8 +480,8 @@ header{
       width: 100%;
       height: 100%;
       z-index: 3;
-      gradient: rgba(0,0,0,0), rgba(0,0,0,1);
-      transition: 0.5s all ease;
+      @include gradient(rgba(0,0,0,0), rgba(0,0,0,1));
+      @include transition(0.5s all ease);
    }
 }
 
@@ -495,7 +500,7 @@ header{
   //     z-index: 2;
   //     background-color: $blue;
   //     transition: 0.5s all ease;
-  //  }
+ //  }
    @media only screen and (max-width : 480px) {
       .hoverArrow {
          margin-bottom: 50vh;

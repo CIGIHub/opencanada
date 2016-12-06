@@ -5,3 +5,14 @@
 	-o-transition:      $transition;  
 	transition:         $transition;  
 }
+
+@mixin gradient ($startColor: rgba(0,0,0,0.75), $endColor: rgba(0,0,0,0.25)) {
+  background-color: $startColor;
+  background: -webkit-gradient(linear, left top, left bottom, from($startColor), to($endColor));
+  background: -webkit-linear-gradient(top, $startColor, $endColor);
+  background: -moz-linear-gradient(top, $startColor, $endColor);
+  background: -ms-linear-gradient(top, $startColor, $endColor);
+  -ms-filter: e("gradient(start=$ieStartColor,end=$ieEndColor)");
+  background: -o-linear-gradient(top, $startColor, $endColor);
+  background: -linear-gradient(top, $startColor, $endColor);
+}
