@@ -1,0 +1,24 @@
+{% load article_tags wagtailimages_tags %}
+
+{% for page in self.items %}
+    {% typed_article page as typed_page %}
+      {% image typed_page.main_image fill-2048x1200-c100 as background_image %}
+
+		<div class="section-content" style="background-image: url('{{ background_image.url }}')">
+       		<div class="container">
+         		<div class="row">
+           			<div class="col-md-5 col-sm-5 col-sm-offset-1" data-aos="fade-right">
+              			<h2><a href="{{ typed_page.url }}">{{ typed_page.title }}</a></h2>
+						{% if typed_page.authors %}
+							{% include 'articles/includes/article-contributors.html' with authors=typed_page.authors links=True %}
+						{% endif %}
+            		</div>
+            		<div class="col-md-4 col-sm-4" data-aos="fade-up" data-aos-offset="-800">
+              			{{ typed_page.excerpt|striptags }}
+            		</div>
+            	</div>
+        	</div>
+      	</div>
+  
+{% endfor %}
+

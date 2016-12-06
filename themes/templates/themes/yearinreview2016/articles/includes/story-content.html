@@ -1,0 +1,7 @@
+{% load static article_tags core_tags wagtailcore_tags wagtailembeds_tags wagtailimages_tags %}
+
+{% for block in self.body %}
+    <section id="story{{ forloop.counter }}" class="block-{{ block.block_type }} full story body">
+        {{ block }}
+    </section>
+{% endfor %}

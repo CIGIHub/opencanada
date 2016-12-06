@@ -1,36 +1,33 @@
 {% load theme_tags wagtailimages_tags wagtailcore_tags static core_tags %}
 
-<header>
-    <div class="mNav-menu">
-    <div class="container">
-      <div class="col-sm-10 col-sm-offset-1">
-        <ul></ul>
-      </div>
-    </div>
-  </div>
-  <div class="counter">100</div>
-  <nav class="navbar transparent navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container">
-      <div class="navbar-header">
-        <div class="col-md-4 col-sm-offset-1 col-sx-12 paging">no.&ensp;
-          <a class="aBack" href="#">
-            <div class="hoverArrow">&nbsp;</div>
-          </a>&ensp;
-          <div class="aCurrent">2</div>&ensp;/&ensp;
+<header role="banner">
+    <div class="banner container-fluid">
+        <div class="row">
+            <div class="col-md-3 col-xs-2 paging header-row">
+              no.&ensp;
+              <a class="aBack" href="#"><div class="hoverArrow">&nbsp;</div></a>&ensp;
+            <div class="aCurrent">2</div>&ensp;/&ensp;
           <div class="aTotal">Total</div>&ensp;
           <a class="aNext" href="#">
             <div class="hoverArrow">&nbsp;</div>
           </a>
+            </div>
+
+            <div class="col-md-6 col-xs-8 logo header-row">
+                  <div class="wordmark">
+                      {% get_logo "main-logo" as logo %}
+                      {% get_logo_link "main-logo" as logo_link %}
+                      <a href="{{ logo_link }}">{% image logo original %}</a>
+                  </div>
+            </div>
+            <div class="col-md-3 col-xs-2 header-row">
+                <span class="navbar-brand-mobile mNav">
+                  <span class="line0"></span>
+                  <span class="line1"></span>
+                  <span class="line2"></span>
+                </span>
+            </div>
         </div>
-        <a  class="navbar-brand hidden-sm hidden-xs" href="{{ logo_link }}">{% image logo original %}</a>
-        <span class="navbar-brand-mobile mNav">
-          <span class="line0"></span>
-          <span class="line1"></span>
-          <span class="line2"></span>
-        </span>
-      </div>
     </div>
-  </nav>
 </header>
-
-
+<div class="counter">100</div>
