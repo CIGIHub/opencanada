@@ -1,15 +1,12 @@
 {% load static article_tags core_tags wagtailcore_tags wagtailembeds_tags wagtailimages_tags %}
 
-<div class="container-full-bleed main-feature overlay" style="height: 400px;">
-    {% image self.main_image fill-2048x1200-c100 as background_image %}
-        <div class="feature-image fullscreen-bg" {% if not self.video_document %} style="background-image: url('{{ background_image.url }}')" {% endif %}>
-            <div class="feature-image-overlay" {% if self.opacity %} style="opacity:{{ self.opacity }} {% endif %}"></div>
-        </div>
-    <div class="feature-wrapper">
-        <div class="feature-text">
-             <a href="#intro"><h1>{{ self.title }}</h1><span class="rot90 bgTrigger"><div class="hoverArrow">&nbsp;</div></span></a>
+{% image self.main_image fill-2048x1200-c100 as background_image %}
+<section style="background-image: url('{{ background_image.url }}')" class="full story body">
+    <div class="container main-feature">
+        <div class="feature-wrapper">
+            <div class="feature-text">
+                <a href="#intro"><h1>{{ self.title }}</h1><span class="rot90 bgTrigger"><div class="hoverArrow">&nbsp;</div></span></a>
+            </div>
         </div>
     </div>
-
-</div>
-<div class="clear"></div>
+</section>

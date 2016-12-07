@@ -26,21 +26,30 @@ body {
    font-family: $fontStack;
 }
 
+main{
+  margin-top: -130px;
+}
+
 p {
    font-size: 14px;
    line-height: 21px;
    font-weight: 300;
 }
 
-.template-series-page .main-feature{
+.template-article-page .main-feature{
   h1{
     font-size: 2.5em;
     line-height: 1.25em;
     font-weight: 500;
     max-width: 250px;
+    padding-top: 45vh;
   }
+ 
   a:hover{
     color: $white;
+    h1{
+      color: $white;
+    }
   }
 } 
 
@@ -311,8 +320,9 @@ header{
    Editor's Note
    ========================================================================== */
 
-.intro {
+#intro {
    padding-top: 20vh;
+   
     a {
         display: inline-block;
         transition: all 550ms ease;
@@ -360,13 +370,15 @@ header{
       min-height: 95vh;
       position: relative;
       padding-top: 5vh;
-      &.half {
-         padding-top: 45vh;
-      }
    }
 }
 
+article .story{
+  margin: 0;
+}
+
 .story {
+  
    ul {
       display: inline-block;
       padding-left: 0;
@@ -411,46 +423,46 @@ header{
    ========================================================================== */
 
 
-.cover {
+// .cover {
 
-   .container {
-      padding-top: 50vh;
-      z-index: 5;
+//    .container {
+//       padding-top: 50vh;
+//       z-index: 5;
       
-      a {
-         color: $white;
-         transform: translateY(1em);
+//       a {
+//          color: $white;
+//          transform: translateY(1em);
          
-         &:hover {
-            border-bottom: 1px dotted $transparent;
+//          &:hover {
+//             border-bottom: 1px dotted $transparent;
             
-         }
-      }  
-   }
-   .bottom {
-      position: absolute;
-      width: 100%;
-      bottom: 0;
-      a {
-         width: 89%;
-         h2 {
-            @media only screen and (max-width : 480px) {
-               font-size: 21px;
-             }
-            &::after {
-               width: 100%;
-            }
-         }
-      }
-      .grey {
-         h2 {
-            &::after {
-               background: $grey !important;
-            }
-         }
-      }
-   }
-}
+//          }
+//       }  
+//    }
+//    .bottom {
+//       position: absolute;
+//       width: 100%;
+//       bottom: 0;
+//       a {
+//          width: 89%;
+//          h2 {
+//             @media only screen and (max-width : 480px) {
+//                font-size: 21px;
+//              }
+//             &::after {
+//                width: 100%;
+//             }
+//          }
+//       }
+//       .grey {
+//          h2 {
+//             &::after {
+//                background: $grey !important;
+//             }
+//          }
+//       }
+//    }
+// }
 
 
 section {
@@ -464,6 +476,7 @@ section {
       position: relative;
       transition: 1s all ease;
       height: auto;
+      padding-top: 20vh;
       @media only screen and (min-width : 992px)  {
 	      background-attachment: fixed;
 	    }
@@ -500,7 +513,7 @@ section {
   //     z-index: 2;
   //     background-color: $blue;
   //     transition: 0.5s all ease;
- //  }
+  // }
    @media only screen and (max-width : 480px) {
       .hoverArrow {
          margin-bottom: 50vh;
