@@ -234,12 +234,12 @@ article .toc ul{
    ========================================================================== */
 
 .paging {
+    display: none;
    * {
       display: inline-block;
    }
    text-align: left;
    transition: 1s all ease;
-   display: block;
    position: relative;
    z-index: 2;
    .hoverArrow {
@@ -262,9 +262,9 @@ article .toc ul{
    a:hover {
       border-bottom: 1px $transparent solid;
    }
-   &.show {
-      opacity: 1;
-   }
+  //  &.show {
+  //     opacity: 1;
+  //  }
   //  @media(max-width: $screen-md){
   //    .no{
   //      display: none;
@@ -337,7 +337,7 @@ section {
     background-size: cover;
     background-repeat: no-repeat;
     position: relative;
-    transition: 1s all ease;
+    // transition: 1s all ease;
     height: auto;
     
     @media only screen and (min-width : 992px)  {
