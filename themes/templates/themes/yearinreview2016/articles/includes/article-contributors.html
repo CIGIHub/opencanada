@@ -1,0 +1,14 @@
+{% spaceless %}
+        <div class="contributors {{ extra_classes }}">
+            {% for author in authors %}
+                {% if links == True  %}
+                  <div class="contributor"><a href="{{ author.url }}">{{ author.full_name }}</a></div>
+                {% else %}
+                  <div class="contributor">{{ author.full_name }}</div>
+                {% endif %}
+            {% endfor %}
+            {% if date %}
+               <span> / </span><div class="date">{{ date|date:"F j, Y" }}</div>
+            {% endif %}
+        </div>
+{% endspaceless %}

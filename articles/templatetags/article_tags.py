@@ -160,6 +160,7 @@ def get_twitter_share_url(context, chapter):
 @register.simple_tag(takes_context=False)
 def page_preview(page):
     content = ''
+
     for b in page.body:
         content += b.render()
         if len(content) > 500:

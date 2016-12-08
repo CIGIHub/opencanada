@@ -3,24 +3,21 @@
 <header role="banner">
     <div class="banner container-fluid">
         <div class="row">
-            <div class="col-md-3 col-xs-2 paging header-row">
-              no.&ensp;
-              <a class="aBack" href="#"><div class="hoverArrow">&nbsp;</div></a>&ensp;
-            <div class="aCurrent">2</div>&ensp;/&ensp;
-          <div class="aTotal">Total</div>&ensp;
-          <a class="aNext" href="#">
-            <div class="hoverArrow">&nbsp;</div>
-          </a>
+            <div class="col-xs-3 paging header-row">
+                <div class="no">no.&ensp;</div>
+                <a class="aBack" href="#"><div class="hoverArrow">&nbsp;</div></a>
+                <div class="aCurrent">2</div>/<div class="aTotal">15</div>
+                <a class="aNext" href="#"><div class="hoverArrow">&nbsp;</div></a>
             </div>
 
-            <div class="col-md-6 col-xs-8 logo header-row">
+            <div class="col-xs-6 logo header-row">
                   <div class="wordmark">
                       {% get_logo "main-logo" as logo %}
                       {% get_logo_link "main-logo" as logo_link %}
                       <a href="{{ logo_link }}">{% image logo original %}</a>
                   </div>
             </div>
-            <div class="col-md-3 col-xs-2 header-row">
+            <div class="col-xs-3 header-row">
                 <span class="navbar-brand-mobile mNav">
                   <span class="line0"></span>
                   <span class="line1"></span>

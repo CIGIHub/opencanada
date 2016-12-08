@@ -33,14 +33,16 @@
             {% include 'themes/yearinreview2016/articles/includes/advanced-content.html' %}
 
             <!-- Contributors -->
-            <div class="container">
-                <h2>Contributors</h2>
-                <ul>
-                    {% for group in yearinreview %}
-                        <li><a href="{{ group.contributor_url }}"> {{ group.full_name }}</a></li>   
-                    {% endfor %}
-                </ul>
-            </div>
+            <section id="contributors" class="full story body">
+                <div class="container">
+                    <h2>Contributors</h2>
+                    <div class="contributors">
+                        {% for group in yearinreview %}
+                            <div class="contributor"><a href="{{ group.contributor_url }}"> {{ group.full_name }}</a></div>   
+                        {% endfor %}
+                    </div>
+                </div>
+            </section>
 
     </article>
 

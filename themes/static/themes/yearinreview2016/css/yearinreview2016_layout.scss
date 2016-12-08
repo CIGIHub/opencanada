@@ -24,10 +24,12 @@ $fontStack: "SF-Light", Helvetica, sans-serif;
 
 body {
    font-family: $fontStack;
+   background: #fff;
 }
 
 main{
   margin-top: -130px;
+  padding: 0;
 }
 
 p {
@@ -36,8 +38,9 @@ p {
    font-weight: 300;
 }
 
-.template-article-page .main-feature{
+.feature{
   h1{
+    color: $white;
     font-size: 2.5em;
     line-height: 1.25em;
     font-weight: 500;
@@ -45,12 +48,6 @@ p {
     padding-top: 45vh;
   }
  
-  a:hover{
-    color: $white;
-    h1{
-      color: $white;
-    }
-  }
 } 
 
 .story h2 {
@@ -102,46 +99,21 @@ header{
   &.collapsed .logo{
     width: 50%;
   }
+  .logo .wordmark{
+    line-height: auto;
+  }
+
+  @media(max-width: $screen-md){
+    .header-row{
+      text-align: center;
+    }
+  }
 }
+
 
 /* ==========================================================================
    Navigation
    ========================================================================== */
-
-// .navbar.transparent {
-//    background: $transparent;
-//    border: none;
-
-//    .navbar-inverse .navbar-inner {
-//       background: $transparent;
-//    }
-// }
-
-// .navbar-header {
-//    width: 100%;
-//    text-align: center;
-//    position: relative;
-   
-//    .navbar-brand {
-//       z-index: 4;
-//       text-align: center;
-//       display: inline-block;
-//       float: none;
-//       margin-left: -30% !important;
-//       position: absolute;
-//       top: -0.5em;
-      
-//       img {
-//          width: 250px;
-//          margin: 13px 0px;
-//       }
-//    }
-// }
-
-// .navbar-toggle {
-//    border: 0;
-//    margin: 27px 0px;
-// }
 
 .navbar-brand-mobile {
    z-index: 999;
@@ -153,7 +125,7 @@ header{
    .line0, .line1, .line2 {
       background: $white;
       position: absolute;
-      width: 2.3em;
+      width: 100%;
       height: 1px;
       top: 0;
       left: -2.3em;
@@ -206,12 +178,20 @@ header{
             rotate(-45deg);
       }
    }
+   @media(max-width: $screen-md){
+     right: auto;
+   }
+
 }
 
 
 /* ==========================================================================
    Overlay Menu
    ========================================================================== */
+
+article .toc ul{
+  border: none;
+}
 
 .mNav-menu {
    background: rgba(0,0,0,0.85);
@@ -222,7 +202,7 @@ header{
    top: -100vh;
    left: 0; 
    z-index: -99;
-   padding-top: 5em;
+   padding-top: 15em;
    overflow-y: scroll;
    transform: translateY(100vh);
    opacity: 0;
@@ -234,51 +214,19 @@ header{
       opacity: 1;
       z-index: 99;
    }
-   
-   li {
-      display: list-item;
-      height: 5vh;
-      overflow-y: hidden;
-      width: 120%;
-      @media only screen and (max-width : 768px) {
-         width: 100%;             
+ 
+    li {
+      &:hover{
+        color: $red;
       }
-      position: relative;
-      margin-left: -15px;
-      &::after {
-         content: " ";
-         height: 100%;
-         width: 40%;
-         background: linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);
-         right: 0;
-         top: 0;
-         position: absolute;
+      a{
+        display: block;
+        color: $grey;
+        &:hover{
+          color: $white;
+        }
       }
-      a {
-         display: inline;
-         color: $gray;
-         span {
-            display: inline;
-            width: 2em;
-            margin-right: 15px;
-         }
-         h2 {
-            display: inline;
-            font-size: 2vh;
-            line-height: 5vh;
-            letter-spacing: 0.1em;
-         }
-      }
-      &:hover {
-         a {
-            color: $white;
-            border-bottom: 1px solid $transparent;
-            span {
-               color: $red;
-            }
-         }
-      }
-   }
+    }
 }
 
 /* ==========================================================================
@@ -290,9 +238,7 @@ header{
       display: inline-block;
    }
    text-align: left;
-  //  opacity: 0;
    transition: 1s all ease;
-  // margin: 13px 0px;
    display: block;
    position: relative;
    z-index: 2;
@@ -307,12 +253,143 @@ header{
       transform: rotate(180deg);
       top: -.3em;
    }
+   .aCurrent{
+     padding-right: 0.2em;
+   }
+   .aTotal{
+     padding-left: 0.2em;
+   }
    a:hover {
       border-bottom: 1px $transparent solid;
    }
    &.show {
       opacity: 1;
    }
+  //  @media(max-width: $screen-md){
+  //    .no{
+  //      display: none;
+  //    }
+  //  }
+  //  @media(max-width: $screen-xs){
+  //    .aCurrent, .aTotal{
+  //      display: none;
+  //    }
+  //  }
+}
+
+/* ==========================================================================
+   Structure
+   ========================================================================== */
+
+.full {
+   height: 100%;
+   min-height: 100vh;
+   display: block;
+   
+   .container {
+      min-height: 75vh;
+      position: relative;
+      padding-top: 20vh;
+      padding-bottom: 5vh
+   }
+}
+
+article .story{
+  margin: 0;
+}
+
+.story {
+   .contributors {
+      font-size: 1.125em;
+      line-height: 1.25em;
+      letter-spacing: 1.4pt; 
+      .contributor:after{
+        content:'\00A0\2022\00A0';
+      }
+      .contributor:last-child{
+        &:after{
+          content: '';
+        }
+      }
+      a {
+        display: inline-block;
+        transition: all 550ms ease;
+        transform: translateY(0.125em);
+        margin-top: -0.125em;
+        &:hover {
+          transform: translateY(0em);
+          border-bottom: 1px dotted $red;
+        }
+    }
+   }
+     
+   div.container > div > div.col-md-4.col-sm-4.aos-init.aos-animate > a:hover {
+      border-bottom: 0 solid transparent;
+   }
+}
+
+section {
+    overflow: hidden;
+    position: static; 
+    transform: translate3d(0,0,0);
+    background-position: center center;
+    background-position: 50% 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    transition: 1s all ease;
+    height: auto;
+    
+    @media only screen and (min-width : 992px)  {
+      background-attachment: fixed;
+    }
+      
+   * {
+      z-index: 6;
+   }
+   
+    &::after {
+      content: " "; 
+      position: absolute;
+      top: 0;
+      left: 0; 
+      width: 100%;
+      height: 100%;
+      z-index: 3;
+      @include gradient(rgba(0,0,0,0), rgba(0,0,0,1));
+      @include transition(0.5s all ease);
+   }
+}
+
+.story{
+   @media only screen and (max-width : 768px) {
+    padding-top: 120px;
+    }
+   background-color: $transparent;
+   &::before {
+      content: " ";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      background-color: $blue;
+      transition: 0.5s all ease;
+  }
+  &.feature::before{
+    background: none;
+  }
+   @media only screen and (max-width : 480px) {
+      .hoverArrow {
+         margin-bottom: 50vh;
+      }             
+   }
+}
+
+span.bgTrigger {
+   padding: 5px;
+   padding-left: 0;
 }
 
 
@@ -321,8 +398,7 @@ header{
    ========================================================================== */
 
 #intro {
-   padding-top: 20vh;
-   
+  
     a {
         display: inline-block;
         transition: all 550ms ease;
@@ -335,6 +411,10 @@ header{
         &::after {
           content: " §";
         }
+    }
+
+    &.story::before{
+      background-color: #000;
     }
 
     hr {
@@ -356,183 +436,6 @@ header{
   margin: 0;
 }
 
-/* ==========================================================================
-   Structure
-   ========================================================================== */
-
-
-.full {
-   height: 100%;
-   min-height: 100vh;
-   display: block;
-   
-   .container {
-      min-height: 95vh;
-      position: relative;
-      padding-top: 5vh;
-   }
-}
-
-article .story{
-  margin: 0;
-}
-
-.story {
-  
-   ul {
-      display: inline-block;
-      padding-left: 0;
-      list-style: none;
-      margin-bottom: 1em;
-      li {
-         display: inline-block;
-         h3 {
-            font-size: 1.125em;
-            line-height: 1.25em;
-            letter-spacing: 1.4pt;
-            &::after {
-               content:'\00A0\2022\00A0';
-            }
-         }
-         &:last-child {
-            h3::after {
-               content: " ";
-            }
-         }
-      }
-   }
-     
-   div.container > div > div.col-md-4.col-sm-4.aos-init.aos-animate > a:hover {
-      border-bottom: 0 solid transparent;
-   }
-}
-
-.black {
-   background: $black;
-}
-
-*, *:before, *:after { 
-   -moz-box-sizing: border-box; 
-   -webkit-box-sizing: border-box; 
-   box-sizing: border-box; 
-}
-
-
-/* ==========================================================================
-   Cover
-   ========================================================================== */
-
-
-// .cover {
-
-//    .container {
-//       padding-top: 50vh;
-//       z-index: 5;
-      
-//       a {
-//          color: $white;
-//          transform: translateY(1em);
-         
-//          &:hover {
-//             border-bottom: 1px dotted $transparent;
-            
-//          }
-//       }  
-//    }
-//    .bottom {
-//       position: absolute;
-//       width: 100%;
-//       bottom: 0;
-//       a {
-//          width: 89%;
-//          h2 {
-//             @media only screen and (max-width : 480px) {
-//                font-size: 21px;
-//              }
-//             &::after {
-//                width: 100%;
-//             }
-//          }
-//       }
-//       .grey {
-//          h2 {
-//             &::after {
-//                background: $grey !important;
-//             }
-//          }
-//       }
-//    }
-// }
-
-
-section {
-      overflow: hidden;
-      position: static; 
-      transform: translate3d(0,0,0);
-      background-position: center center;
-      background-position: 50% 50%;
-      background-size: cover;
-      background-repeat: no-repeat;
-      position: relative;
-      transition: 1s all ease;
-      height: auto;
-      padding-top: 20vh;
-      @media only screen and (min-width : 992px)  {
-	      background-attachment: fixed;
-	    }
-      
-   * {
-      z-index: 6;
-   }
-   
-      &::after {
-      content: " "; 
-      position: absolute;
-      top: 0;
-      left: 0; 
-      width: 100%;
-      height: 100%;
-      z-index: 3;
-      @include gradient(rgba(0,0,0,0), rgba(0,0,0,1));
-      @include transition(0.5s all ease);
-   }
-}
-
-.story {
-   @media only screen and (max-width : 768px) {
-   padding-top: 120px;
-    }
-  //  background-color: $transparent;
-  //     &::before {
-  //     content: " ";
-  //     position: absolute;
-  //     top: 0;
-  //     left: 0;
-  //     width: 100%;
-  //     height: 100%;
-  //     z-index: 2;
-  //     background-color: $blue;
-  //     transition: 0.5s all ease;
-  // }
-   @media only screen and (max-width : 480px) {
-      .hoverArrow {
-         margin-bottom: 50vh;
-      }             
-   }
-   
-}
-
-span.bgTrigger {
-   padding: 5px;
-   padding-left: 0;
-}
-
-.full {
-   .container {
-      z-index: 999;
-      position: relative;
-   }
-}
 
 /* ==========================================================================
    Stacking

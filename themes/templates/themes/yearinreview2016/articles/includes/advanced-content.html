@@ -1,25 +1,23 @@
 {% load static article_tags core_tags wagtailcore_tags wagtailembeds_tags wagtailimages_tags %}
 
 {% if self.chapters %}
-    <div class="container">
-        <div class="toc narrow-content">
-            {% if self.table_of_contents_heading %}
-            <h2 id="toc">{{ self.table_of_contents_heading }}</h2>
-            {% endif %}
-            <ul class="fa-ul">
-                <li><i class="fa fa-li fa-chevron-down"></i><a href="#note">Editor in Chief's Note</a></li>
-                {% for chapter in self.chapters %}
-                    <li><i class="fa fa-li fa-chevron-down"></i><a
-                            href="#{{ chapter.value.heading|slugify }}">{{ chapter.value.heading }}</a></li>
-                {% endfor %}
-                <li><i class="fa fa-li fa-chevron-down"></i><a href="#contributors">Contributors</a></li>
-            </ul>
+    <div class="mNav-menu">
+        <div class="container">
+            <div class="toc narrow-content">
+                <ol>
+                    <li><a href="#intro">Editor in Chief's Note</a></li>
+                    {% for chapter in self.chapters %}
+                        <li><a href="#{{ chapter.value.heading|slugify }}">{{ chapter.value.heading }}</a></li>
+                    {% endfor %}
+                    <li><a href="#contributors">Contributors</a></li>
+                </ol>
+            </div>
         </div>
     </div>
-    
+        
     {% for chapter in self.chapters %}
-    <section class="story{{ forloop.counter }} full story body">
-        {{ chapter }}
-    </section>
+        <div class="story{{ forloop.counter }}">
+            {{ chapter }}
+        </div>
     {% endfor %}
 {% endif %}
