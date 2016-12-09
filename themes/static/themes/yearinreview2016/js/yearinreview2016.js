@@ -56,26 +56,6 @@ jQuery(document).ready(function() {
 
     }
 
-    //check if the item is in the viewport
-    $.fn.isOnScreen = function(){
-        
-        var win = $(window);
-        
-        var viewport = {
-            top : win.scrollTop(),
-            left : win.scrollLeft()
-        };
-        viewport.right = viewport.left + win.width();
-        viewport.bottom = viewport.top + win.height();
-        
-        var bounds = this.offset();
-        bounds.right = bounds.left + this.outerWidth();
-        bounds.bottom = bounds.top + this.outerHeight();
-        
-        return (!(viewport.right < bounds.left || viewport.left > bounds.right || viewport.bottom < bounds.top || viewport.top > bounds.bottom));
-        
-    };
-
     //scroll to next section based on body class
     $(function() {
         $.scrollify({
@@ -93,14 +73,6 @@ jQuery(document).ready(function() {
             },
         });
     });
-
-    // Animate feature text when section is in viewport
-    if($("section").isOnScreen){
-        $("section .fade-righ").addClass("in-view");
-    }
-    else{
-         $("section .fade-right").removeClass("in-view");
-    }
 
     // Activate menu
     $( ".mNav" ).on('touchstart click', this, function() {
@@ -124,10 +96,10 @@ jQuery(document).ready(function() {
         $.scrollify.previous();
     });
 
-    // Click to go to next section
-    // $("section:nth-of-type(1)").on('touchstart click', this, function(e) {
-	//     $.scrollify.next();
-    // });
+    // Click touchstart scroll from feature to body
+    $("section.feature").on('touchstart click', this, function(e) {
+	    $.scrollify.next();
+    });
 
 }); 
 
@@ -137,22 +109,17 @@ $(window).load(function() {
     $('.aTotal').html(numberOfSections - 2);
     $('.aCurrent').html( '0' );
 
+   //animate in main title
     $('section.feature .fade-right').addClass('in-view');   
-
 
 });
 
+//add class to meta content & title to allow it scroll in from the left.
 $(window).scroll(function(){
-     var windowTop = Math.max($('body').scrollTop(), $('html').scrollTop());
+    var windowTop = Math.max($('body').scrollTop(), $('html').scrollTop());
     
     $('section').each(function (index) {
-      
-
-      console.log('windowtop: ' + windowTop);
-        console.log('index: ' + index + ' section position: ' + $(this).position().top);
         if (windowTop > ($(this).position().top)){
-            
-            //console.log(index);            
             $('section .fade-right').removeClass('in-view');
             $('section:eq(' + index + ') .fade-right').addClass('in-view');
         }
