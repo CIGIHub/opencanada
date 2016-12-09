@@ -16,8 +16,6 @@
     </div>
         
     {% for chapter in self.chapters %}
-        <div class="story{{ forloop.counter }}">
-            {{ chapter }}
-        </div>
+        {{ chapter }}
     {% endfor %}
 {% endif %}

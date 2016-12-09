@@ -1,5 +1,6 @@
 import json
 import urllib
+import re
 
 from django import template
 from django.utils.text import Truncator, slugify
@@ -163,6 +164,8 @@ def page_preview(page):
 
     for b in page.body:
         content += b.render()
+        content = re.sub("<[^<]+?>", "", content)
+
         if len(content) > 500:
             break
 

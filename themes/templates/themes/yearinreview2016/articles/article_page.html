@@ -13,6 +13,8 @@
 </script>
 
 <script type="text/javascript" src="{% static 'themes/yearinreview2016/js/jquery.scrollify.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'themes/yearinreview2016/js/moment.js' %}"></script>
+<script type="text/javascript" src="{% static 'themes/yearinreview2016/js/countTo.js' %}"></script>
 <script type="text/javascript" src="{% static 'themes/components/js/transparency.js' %}"></script>
 <script type="text/javascript" src="{% static 'themes/yearinreview2016/js/yearinreview2016.js' %}"></script>
 
@@ -28,7 +30,6 @@
     {% if self.main_image and self.include_main_image_overlay %}
         {% include 'themes/yearinreview2016/articles/includes/article-feature.html' with metadata='articles/includes/article-metadata.html' %}
     {% endif %}
-
     <article id="article-page">
 
             <!-- Articles -->
