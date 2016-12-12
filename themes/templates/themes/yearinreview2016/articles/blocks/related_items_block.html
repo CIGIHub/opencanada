@@ -15,7 +15,9 @@
 						<div class="article-date">{{ typed_page.first_published_at|date:"F j, Y" }}</div>
             		</div>
             		<div class="col-md-4 col-sm-4">
-              			{% page_preview typed_page %}
+						<div class="summary">
+              				{% page_preview typed_page %}
+						</div>
 						<div class="view-article">
 							<a href="{{ typed_page.url }}">
 								<span class="bgTrigger"><div class="hoverArrow">&nbsp;</div></span>

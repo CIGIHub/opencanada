@@ -43,10 +43,10 @@ jQuery(document).ready(function() {
         dd = sectionNo - 1;
        
         if (dd >= 0) {
-            $('.paging').fadeIn();
+            $('.paging').addClass('display');
         };	
         if (dd <= -1) {
-            $('.paging').fadeOut();
+            $('.paging').removeClass('display');
         };
         if (dd == -1) {
             dd = dd+1;
@@ -110,7 +110,7 @@ $(window).load(function() {
     $('.aCurrent').html( '0' );
 
    //animate in main title
-    $('section.feature .fade-right').addClass('in-view');   
+    $('section.feature .fade-right').addClass('in-view');  
 
 });
 

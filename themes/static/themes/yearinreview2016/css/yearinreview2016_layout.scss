@@ -45,6 +45,10 @@ p {
     font-weight: 500;
     max-width: 250px;
     padding-top: 45vh;
+    @media(max-width: $screen-md){
+      padding-top: 0;
+    }
+
 } 
 
 .story h2 {
@@ -97,12 +101,18 @@ header{
     width: 50%;
   }
   .logo .wordmark{
-    line-height: auto;
+    line-height: 2.0em;
   }
 
   @media(max-width: $screen-md){
     .header-row{
       text-align: center;
+    }
+    .banner{
+      padding-top: 10px;
+    }
+    .logo .wordmark{
+      line-height: 1.0em;
     }
   }
 }
@@ -114,8 +124,8 @@ header{
 
 .navbar-brand-mobile {
    z-index: 999;
-   height: 2.5em;
-   width: 2.5em;
+   height: 2.1em;
+   width: 2.1em;
    position: absolute;
    right: 0;
    
@@ -125,25 +135,25 @@ header{
       width: 100%;
       height: 1px;
       top: 0;
-      left: -2.3em;
-      transform: translateX(2.3em)translateY((0));
+      left: -1.8em;
+      transform: translateX(1.8em)translateY((0));
       opacity: 1;
       transition: 0.5s all ease;
    }
    .line1 {
       opacity: 1;
-      top: 0.95em;
+      top: 0.65em;
       height: 0.05em;
       border-radius: 0%;
       background: $white;
       border: 0px solid $transparent;
-      transform: translateX(2.3em) rotate(0deg);
+      transform: translateX(1.8em) rotate(0deg);
    }
-   .line2 {
-      top: 0;
-      transform: translateX(2.3em)translateY(1.9em);
-      transition: 0.5s 0.1s all ease;
-   }
+    .line2 {
+       top: 0;
+       transform: translateX(1.8em)translateY(1.4em);
+  //     transition: 0.5s 0.1s all ease;
+    }
    
    &:hover, &.hover {
      cursor: pointer;
@@ -151,7 +161,7 @@ header{
          width: 1.8em;
          opacity: 1;
          transform: 
-            translateX(2.55em)
+            translateX(2.0em)
             translateY(1.1em)
             rotate(45deg);
 
@@ -163,14 +173,14 @@ header{
          border-radius: 50%;
          background: $transparent;
          border: 1px solid $white;
-         transform: translateX(2.3em) rotate(180deg);
+         transform: translateX(1.8em) rotate(180deg);
          transition: 0.75s all ease;
       }
       .line2 {
          width: 1.8em;
          opacity: 1;
          transform: 
-            translateX(2.55em)
+            translateX(2.0em)
             translateY(1.1em)
             rotate(-45deg);
       }
@@ -232,13 +242,22 @@ article .toc ul{
 
 .paging {
     display: none;
-   * {
-      display: inline-block;
+   &.display{
+     display: block;
+     @media(max-width: $screen-sm){
+        display: none;
+     }
    }
+   
    text-align: left;
    transition: 1s all ease;
    position: relative;
    z-index: 2;
+
+   * {
+      display: inline-block;
+   }
+
    .hoverArrow {
       border: 1px solid $transparent;
    }
@@ -259,19 +278,6 @@ article .toc ul{
    a:hover {
       border-bottom: 1px $transparent solid;
    }
-  //  &.show {
-  //     opacity: 1;
-  //  }
-  //  @media(max-width: $screen-md){
-  //    .no{
-  //      display: none;
-  //    }
-  //  }
-  //  @media(max-width: $screen-xs){
-  //    .aCurrent, .aTotal{
-  //      display: none;
-  //    }
-  //  }
 }
 
 /* ==========================================================================
@@ -289,6 +295,14 @@ article .toc ul{
       padding-top: 20vh;
       padding-bottom: 5vh
    }
+   @media(max-width: $screen-sm){
+     .container{
+        min-height: 75vh;
+        padding-top: 0;
+        padding-bottom: 1em;
+     }
+   }
+
 }
 
 article .story{
@@ -313,7 +327,6 @@ article .story{
     transform: translate3d(150px, 0px, 0px);
   }
 }
-
 
 .story {
     .view-article{
@@ -354,6 +367,11 @@ article .story{
      
    div.container > div > div.col-md-4.col-sm-4.aos-init.aos-animate > a:hover {
       border-bottom: 0 solid transparent;
+   }
+   @media(max-width: $screen-sm){
+     .summary{
+       padding: 1em 0;
+     }
    }
 }
 
