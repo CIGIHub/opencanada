@@ -59,6 +59,10 @@ p {
    margin-bottom: 0.5em;
    line-height: 1.25em;
    font-weight: 500;
+
+   a{
+     color: $white;
+   }
    
     @media only screen and (max-width : 768px) {      
       padding-bottom: 21px;
@@ -73,17 +77,6 @@ p {
       height: 4px;
       width: 120px;
       background: $red;
-   }
-}
-
-a, a:focus, a:visited {
-   display: inline-block;
-   color: $red;
-   outline: none;
-   text-decoration: none;
-   &:hover {
-     color: $red;
-     text-decoration: none;
    }
 }
 
@@ -448,10 +441,12 @@ span.bgTrigger {
   
     a {
         display: inline-block;
+        color: $red;
         transition: all 550ms ease;
         transform: translateY(0.125em);
         margin-top: -0.125em;
         &:hover {
+          color: $red;
           transform: translateY(0em);
           border-bottom: 1px dotted $red;
         }
