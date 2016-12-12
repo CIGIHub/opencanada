@@ -1,0 +1,19 @@
+$body-bg-color: #000;
+
+$text-color: #fff;
+$text-link-color: #929191;
+
+/* ==========================================================================
+   Webfonts
+   ========================================================================== */
+
+@import "../fonts/SanFranciscoText-Light/styles.css";
+$fontStack: "SF-Light", Helvetica, sans-serif;
+
+$transparent: rgba(0,0,0,0);
+$white: rgba(255, 255, 255, 1);
+$white50: rgba(255, 255, 255, 0.5);
+$gray: rgba(155, 155, 155, 1);
+$grey: $gray;
+$red: rgba(191, 30, 46, 1);
+$blue: rgba(6, 33, 81, 0.7);

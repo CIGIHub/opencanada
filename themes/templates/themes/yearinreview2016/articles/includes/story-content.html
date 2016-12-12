@@ -1,0 +1,11 @@
+{% load static article_tags core_tags wagtailcore_tags wagtailembeds_tags wagtailimages_tags %}
+
+<section id="intro" class="full story body" data-date="1451624400">
+    <div class="container">
+        <div class="narrow-content">
+            {% for block in self.body %}
+                {{ block }}
+            {% endfor %}
+        </div>
+    </div>
+</section>

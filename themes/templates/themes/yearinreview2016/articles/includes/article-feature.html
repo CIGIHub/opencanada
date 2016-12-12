@@ -1,0 +1,12 @@
+{% load static article_tags core_tags wagtailcore_tags wagtailembeds_tags wagtailimages_tags %}
+
+{% image self.main_image original as background_image %}
+<section style="background-image: url('{{ background_image.url }}')" class="full story body feature" data-date="1451624400">
+    <div class="container">
+        <div class="feature-wrapper fade-right">
+            <div class="feature-text">
+                <a href="#intro"><h1>{{ self.title }}</h1><span class="rot90 bgTrigger"><div class="hoverArrow">&nbsp;</div></span></a>
+            </div>
+        </div>
+    </div>
+</section>
