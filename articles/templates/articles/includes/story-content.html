@@ -11,19 +11,19 @@
     {% if block.block_type == 'FullBleed' %}
         <section class="block-FullBleed">
             <div class="container-fluid">
-                {{ block }}
+                {% include_block block %}
             </div>
         </section>
     {% elif block.block_type == 'Overflow' %}
       <section class="block-Overflow">
           <div class="container-clear-none">
-              {{ block }}
+              {% include_block block %}
           </div>
       </section>
     {% else %}
         <div class="container-clear-none">
             <section class="block-{{ block.block_type }} narrow-content">
-                {{ block }}
+                {% include_block block %}
             </section>
         </div>
 
