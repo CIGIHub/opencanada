@@ -1,4 +1,4 @@
-{% load article_tags %}
+{% load article_tags wagtailcore_tags %}
 <div class="row">
    {% for block in self.body %}
     <div class="col-lg-{{ self.body.stream_data|column_class }}">
