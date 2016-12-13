@@ -77,6 +77,7 @@ function scrollToSection(){
             section : "section",
             sectionName: false,
             setHeights: false,
+            overflowScroll: true,
             before:function(sectionNo) { 
                 countScroll(sectionNo);
                 $('.date').removeClass( "fadeOutDown" );

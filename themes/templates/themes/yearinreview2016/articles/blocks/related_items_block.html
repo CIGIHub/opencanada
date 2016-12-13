@@ -7,12 +7,14 @@
 		<section style="background-image: url('{{ background_image.url }}')" class="full story body" data-date="{{ typed_page.first_published_at|date:"U" }}">
        		<div class="container">
          		<div class="row">
-           			<div class="col-md-5 col-sm-5 col-sm-offset-1 fade-right">
-              			<h2><a href="{{ typed_page.url }}">{{ typed_page.title }}</a></h2>
-						{% if typed_page.authors %}
-							{% include 'themes/yearinreview2016/articles/includes/article-contributors.html' with authors=typed_page.authors links=True %}
-						{% endif %}
-						<div class="article-date">{{ typed_page.first_published_at|date:"F j, Y" }}</div>
+           			<div class="col-md-5 col-sm-5 col-sm-offset-1">
+						<div class="fade-right">
+							<h2><a href="{{ typed_page.url }}">{{ typed_page.title }}</a></h2>
+							{% if typed_page.authors %}
+								{% include 'themes/yearinreview2016/articles/includes/article-contributors.html' with authors=typed_page.authors links=True %}
+							{% endif %}
+							<div class="article-date">{{ typed_page.first_published_at|date:"F j, Y" }}</div>
+						</div>
             		</div>
             		<div class="col-md-4 col-sm-4">
 						<div class="summary">
