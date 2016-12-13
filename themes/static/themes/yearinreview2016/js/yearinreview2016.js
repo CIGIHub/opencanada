@@ -1,4 +1,5 @@
-jQuery(document).ready(function() {
+    
+    var windowWidth = null;
 
     var dd;
     var startDate = 1451624400;
@@ -56,7 +57,21 @@ jQuery(document).ready(function() {
 
     }
 
-    //scroll to next section based on body class
+// Activate menu
+    $( ".mNav" ).on('click', this, function() {
+        $( ".mNav-menu" ).toggleClass( "closed" );
+        $( this ).toggleClass( "hover" );
+    });
+
+    $( ".mNav-menu ol a" ).each(function() {
+        $(this).on('click', this, function() {
+            $( ".mNav-menu" ).toggleClass( "closed" );
+            $( ".mNav" ).toggleClass( "hover" );
+        });
+    });
+
+function scrollToSection(){
+//scroll to next section based on body class
     $(function() {
         $.scrollify({
             section : "section",
@@ -74,44 +89,49 @@ jQuery(document).ready(function() {
         });
     });
 
-    // Activate menu
-    $( ".mNav" ).on('touchstart click', this, function() {
-        $( ".mNav-menu" ).toggleClass( "closed" );
-        $( this ).toggleClass( "hover" );
-    });
-
-    $( ".mNav-menu ol a" ).each(function() {
-        $(this).on('touchstart click', this, function() {
-            $( ".mNav-menu" ).toggleClass( "closed" );
-            $( this ).toggleClass( "hover" );
-        });
-    });
-
     //Navigate with pager
-    $(".aNext").on('touchstart click', this, function(e) {
+    $(".aNext").on('click', this, function(e) {
         $.scrollify.next();
     });
 
-    $(".aBack").on('touchstart click', this, function(e) {
+    $(".aBack").on('click', this, function(e) {
         $.scrollify.previous();
     });
 
     // Click touchstart scroll from feature to body
-    $("section.feature").on('touchstart click', this, function(e) {
+    $("section.feature").on('click', this, function(e) {
 	    $.scrollify.next();
     });
 
-}); 
+}
+    
 
 $(window).load(function() {
+
+    windowWidth = $(window).width();
+
+    if(windowWidth > 480){
+        scrollToSection();
+    }
+
     //get the number of sections and set total in counter
     var numberOfSections = $( "section" ).length;
     $('.aTotal').html(numberOfSections - 2);
     $('.aCurrent').html( '0' );
 
-   //animate in main title
-    $('section.feature .fade-right').addClass('in-view');  
+    if($("#intro").length){
+        $("#intro h2").addClass("fade-right");
+    } 
 
+    $('section.feature .fade-right').addClass('in-view'); 
+    
+});
+
+$(window).resize(function() {
+    windowWidth = $(window).width();
+    if(windowWidth > 480){
+        scrollToSection();
+    }
 });
 
 //add class to meta content & title to allow it scroll in from the left.
