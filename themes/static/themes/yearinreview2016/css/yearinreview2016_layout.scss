@@ -345,6 +345,7 @@ article .story{
         transition: all 550ms ease;
         transform: translateY(0.125em);
         margin-top: -0.125em;
+        border-bottom: 1px solid $transparent;
         &:hover {
           transform: translateY(0em);
           border-bottom: 1px dotted $red;
