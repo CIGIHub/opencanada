@@ -1,0 +1,7 @@
+{% load static article_tags core_tags wagtailcore_tags wagtailembeds_tags wagtailimages_tags %}
+
+<div class="chapter" id="{{ self.heading|slugify }}">
+    {% for block in self.body %} 
+        {% include_block block %}
+    {% endfor %}
+</div>

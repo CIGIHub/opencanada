@@ -1,0 +1,18 @@
+<div class="container-clear-none">
+  <section class="block-RelatedItems narrow-content">
+    <div class="heading"><a href="{{ response_to.url }}">{{ response_to.title }}</a></div>
+    <div class="intro">Is Canada an exception? We asked four commentators to respond.</div>
+    <ul class="item_list">
+      {% for response in responses %}
+        <li>
+          <div class="item_content">
+            <a href="{{ response.url }}"> {{ response.title }}</a>
+            {% if response.authors %}
+              {% include 'articles/includes/article-contributors.html' with authors=response.authors links=True %}
+            {% endif %}
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  </section>
+</div>

@@ -285,6 +285,13 @@ article .block-Quote{
     font-weight: normal;
     font-size: 1.5em;
     padding-bottom: 1em;
+    a{
+      font-weight: bold;
+      color: white; 
+      &:hover{
+        color: $red;
+      }
+    }
   }
   .intro{
     margin: 0 auto;

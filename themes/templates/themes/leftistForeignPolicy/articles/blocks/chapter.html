@@ -1,6 +1,5 @@
 {% load static article_tags core_tags wagtailcore_tags wagtailembeds_tags wagtailimages_tags %}
 
-
   <div class="container-clear-none">
     <h2 class="chapter-heading narrow-content">{{ self.heading }}</h2>
   </div>
@@ -17,19 +16,19 @@
      {% elif block.block_type == 'FullBleed' %}
          <section class="block-FullBleed">
              <div class="container-fluid">
-                 {{ block }}
+                 {% include_block block %}
              </div>
          </section>
      {% elif block.block_type == 'Overflow' %}
        <section class="block-Overflow">
            <div class="container-clear-none">
-               {{ block }}
+               {% include_block block %}
            </div>
        </section>
      {% else %}
          <div class="container-clear-none">
              <section class="block-{{ block.block_type }} narrow-content">
-                 {{ block }}
+                 {% include_block block %}
              </section>
          </div>
 

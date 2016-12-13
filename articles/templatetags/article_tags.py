@@ -1,8 +1,9 @@
 import json
 import urllib
+import re
 
 from django import template
-from django.utils.text import slugify
+from django.utils.text import Truncator, slugify
 
 from articles.models import (ArticlePage, ExternalArticlePage, SeriesPage,
                              TopicListPage)
@@ -155,3 +156,17 @@ def get_twitter_share_url(context, chapter):
         twitter_share_params = '&amp;'.join(twitter_share_params)
         twitter_share_url = 'https://twitter.com/share?{0}'.format(twitter_share_params)
     return twitter_share_url
+
+
+@register.simple_tag(takes_context=False)
+def page_preview(page):
+    content = ''
+
+    for b in page.body:
+        content += b.render()
+        content = re.sub("<[^<]+?>", "", content)
+
+        if len(content) > 500:
+            break
+
+    return Truncator(content).chars(500, html=True)

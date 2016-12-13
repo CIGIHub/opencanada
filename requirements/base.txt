@@ -1,6 +1,6 @@
 # Minimal requirements
 Django>=1.8,<1.9
-requests==2.12.0
+requests==2.12.3
 
 # Using our own branch until https://github.com/torchbox/wagtail/pull/3161 or similar is merged into wagtail
 # wagtail==1.7
@@ -16,14 +16,12 @@ tweepy==3.5.0
 # Required for importing data.
 # mysqlclient==1.3.6
 
-# django-favicon==0.1.1 Pypi version doesn't support Python 3
 django-favicon==0.1.2
-# git+git://github.com/hobarrera/django-favicon.git@95435d28f7a235a438670e79d54c61af08bd0004#egg=favicon
 django-robots==1.1
 django-dotenv==1.4.1
 
-raven==5.17.0
-psycopg2==2.6.1
+raven==5.32.0
+psycopg2==2.6.2
 google-api-python-client==1.4.1
 
-django-overextends==0.4.1
+django-overextends==0.4.2

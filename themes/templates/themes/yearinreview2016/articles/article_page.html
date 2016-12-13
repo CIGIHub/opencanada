@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load static article_tags compress core_tags wagtailcore_tags wagtailembeds_tags wagtailimages_tags %}
+
+{% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
+
+{% block theme_css %}
+    <link rel="stylesheet" type="text/x-scss" href="{% static 'themes/yearinreview2016/css/yearinreview2016.scss' %}">
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    FeatureStyles.MainFeatures.setSize({{ self.full_bleed_image_size }});
+</script>
+
+<script type="text/javascript" src="{% static 'themes/components/js/jquery.scrollify.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'themes/yearinreview2016/js/moment.js' %}"></script>
+<script type="text/javascript" src="{% static 'themes/yearinreview2016/js/countTo.js' %}"></script>
+<script type="text/javascript" src="{% static 'themes/components/js/transparency.js' %}"></script>
+<script type="text/javascript" src="{% static 'themes/yearinreview2016/js/yearinreview2016.js' %}"></script>
+
+{% endblock %}
+
+{% block header %}
+    {% include 'themes/yearinreview2016/header.html' with tagline=False %}
+{% endblock %}
+
+{% block content %}
+    {% get_json_data as yearinreview %}
+    
+    {% if self.main_image and self.include_main_image_overlay %}
+        {% include 'themes/yearinreview2016/articles/includes/article-feature.html' with metadata='articles/includes/article-metadata.html' %}
+    {% endif %}
+    <article id="article-page">
+
+            <!-- Articles -->
+            {% include 'themes/yearinreview2016/articles/includes/story-content.html' %}
+            {% include 'themes/yearinreview2016/articles/includes/advanced-content.html' %}
+
+            <!-- Contributors -->
+            <section id="contributors" class="full story body">
+                <div class="container">
+                    <h2 class="fade-right">Contributors</h2>
+                    <div class="contributors">
+                        {% for group in yearinreview %}
+                            <div class="contributor"><a href="{{ group.contributor_url }}"> {{ group.full_name }}</a></div>   
+                        {% endfor %}
+                    </div>
+                </div>
+            </section>
+
+    </article>
+
+{% endblock %}
+
+{% block footer %}
+   {% include 'themes/components/simple_footer.html' %}
+{% endblock %}

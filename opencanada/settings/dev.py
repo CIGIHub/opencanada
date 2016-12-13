@@ -5,6 +5,8 @@ from .base import *
 DEBUG = True
 TEMPLATE_DEBUG = True
 
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '172.31.9.139']
+
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 IS_PRODUCTION = False

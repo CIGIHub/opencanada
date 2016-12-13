@@ -26,8 +26,6 @@
     {% if self.main_image and self.include_main_image_overlay %}
         {% include 'themes/exceptionalism/articles/includes/article-feature.html' with metadata='themes/exceptionalism/articles/includes/article-metadata.html' %}
     {% endif %}
-
-    
     <article id="article-page">
         {% if not self.include_main_image_overlay or self.include_main_image_overlay and not self.main_image %}
             <div class="container">
@@ -51,10 +49,15 @@
                 </div>
             </div>
         {% endif %}
-        
         <div class="story">
             {% include 'articles/includes/json-embed.html' %}
+            {% if self.responses %}
+              {% include 'themes/exceptionalism/articles/includes/responses.html' with responses=self.responses response_to=self %}
+            {% else %}
+              {% include 'themes/exceptionalism/articles/includes/responses.html' with responses=self.response_to.responses response_to=self.response_to %}
+            {% endif %}
             {% include 'themes/exceptionalism/articles/includes/story-content.html' %}
+
             {% include 'themes/exceptionalism/articles/includes/advanced_content.html' %}
         </div>
     </article>
@@ -63,14 +66,10 @@
 
 {% block footer %}
     <footer>
-        {% for block in self.body %}
-            {% if block.block_type == 'RelatedItems' %}
-                <div class="container-clear-none">
-                    <section class="block-{{ block.block_type }} narrow-content">
-                        {{ block }}
-                    </section>
-                </div>
-            {% endif %}
-        {% endfor %}
+      {% if self.responses %}
+        {% include 'themes/exceptionalism/articles/includes/responses.html' with responses=self.responses response_to=self %}
+      {% else %}
+        {% include 'themes/exceptionalism/articles/includes/responses.html' with responses=self.response_to.responses response_to=self.response_to %}
+      {% endif %}
    </footer>
 {% endblock %}
