@@ -4,7 +4,7 @@
     <div class="mNav-menu">
         <div class="container">
             <div class="toc narrow-content">
-                <ol>
+                <ol start="0">
                     <li><a href="#intro">Editor in Chief's Note</a></li>
                     {% for chapter in self.chapters %}
                         <li><a href="#{{ chapter.value.heading|slugify }}">{{ chapter.value.heading }}</a></li>
