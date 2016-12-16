@@ -69,7 +69,18 @@ function scrollToSection(){
     });
 
 }
-    
+
+// BG image effect
+
+$('.bgTrigger').each(function() {
+	$( this ).hover(
+  function() {
+    $( this ).closest('section').addClass( "zoomImage" );
+  }, function() {
+    $( this ).closest('section').removeClass( "zoomImage" );
+  });
+});
+
 
 $(window).load(function() {
 
@@ -101,11 +112,11 @@ $(window).resize(function() {
 
 //add class to meta content & title to allow it scroll in from the left.
 $(window).scroll(function(){
-    var windowTop = Math.max($('body').scrollTop(), $('html').scrollTop());
-    
+    var windowTop = $(window).scrollTop();
+    $("section .fade-right").removeClass('in-view');
+
     $('section').each(function (index) {
         if (windowTop > ($(this).position().top)){
-            $('section .fade-right').removeClass('in-view');
             $('section:eq(' + index + ') .fade-right').addClass('in-view');
         }
     });
