@@ -44,11 +44,6 @@ p {
     line-height: 1.25em;
     font-weight: 500;
     max-width: 250px;
-    padding-top: 45vh;
-    @media(max-width: $screen-md){
-      padding-top:45vh;
-    }
-
 } 
 
 .story h2 {
@@ -110,6 +105,33 @@ header{
   }
 }
 
+.feature-text{
+  padding-top: 45vh;
+  @media(max-width: $screen-md){
+    padding-top:45vh;
+  }
+  ul.share-links{
+    padding: 0;
+    margin: 0;
+    li{
+      display: inline-block;
+      padding: 5px;
+      &::first-child{
+        padding-left: 0;
+      }
+      i{
+        transition: color 0.5s ease;
+        color: $grey;
+      }
+      &:hover{
+        cursor: pointer;
+        i{
+          color: $red;
+        }
+      }
+    }
+  }
+}
 
 /* ==========================================================================
    Navigation
@@ -213,6 +235,7 @@ header{
    }
 
 }
+
 
 
 /* ==========================================================================
@@ -331,8 +354,6 @@ article .story{
    .article-date{
         text-transform: uppercase;
         padding-top: 3em;
-        font-size: 1.4em;
-        font-weight: 800;
         letter-spacing: 2px;
       }
      
@@ -489,7 +510,7 @@ span.bgTrigger {
    }
 
    &::before {
-      width: 1.75em;
+      width: 1.3em;
       height: 1px;
       background: $transparent;
       position: absolute;
@@ -512,17 +533,17 @@ span.bgTrigger {
         left: 0em;
         top: 0em;
         content: " ";
-        transform: translateX(1.35em) translateY(0.65em) rotate(45deg);
+        transform: translateX(1.0em) translateY(0.65em) rotate(45deg);
       }
       &::before {
-         width: 1.75em;
+         width: 1.3em;
          height: 1px;
          background: $white;
          position: absolute;
          left: -2em;
          top: 0.9em;
          content: " ";
-         transform: translateX(2.1em);
+         transform: translateX(2.25em);
       }
    }
 }
