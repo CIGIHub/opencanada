@@ -203,7 +203,7 @@ header{
    @media(max-width: $screen-md){
       right: auto;
       
-      height: 1.3em;
+      height: 1.5em;
       width: 1.5em;
       .line1 {
         opacity: 1;
@@ -214,21 +214,21 @@ header{
       }
       &:hover, &.hover {
         .line0 {
-          width: 1.2em;
+          width: 1em;
           transform:
-            translateX(2.0em)
-            translateY(0.6em)
+            translateX(2.05em)
+            translateY(0.7em)
             rotate(45deg);
         }
         .line1 {
-          height: 1.3em;
+          height: 1.5em;
           transform: translateX(1.8em) rotate(180deg);
         }
         .line2 {
-          width: 1.2em;
+          width: 1em;
           transform: 
-            translateX(2.0em)
-            translateY(0.6em)
+            translateX(2.05em)
+            translateY(0.7em)
             rotate(-45deg);
         }
       }
@@ -310,7 +310,7 @@ article .story{
 
 .fade-right{
   opacity: 0;
-  transition: opacity 1000ms ease-in-out;
+  transition: opacity 600ms ease-in-out;
   
   &.in-view{
     opacity: 1;
