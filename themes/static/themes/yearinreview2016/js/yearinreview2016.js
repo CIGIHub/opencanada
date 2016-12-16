@@ -1,44 +1,8 @@
     
     var windowWidth = null;
-
     var dd;
-    var startDate = 1451624400;
-    $('.counter').html( startDate );
-    
+
     function countScroll(sectionNo) {	
-
-        //move date
-        var nextDate;
-        var prevDate;
-
-            //console.log("section: " + sectionNo);
-            nextItem = sectionNo + 1;
-            
-            nextDate = $("section:nth-of-type("+ nextItem +")").data("date") * 1000;
-            prevDate = $("section:nth-of-type("+ sectionNo +")").data("date") * 1000;
-                        
-        if (sectionNo === 2) {
-            var lastDate = startDate;
-        };
-        //console.log("lastDate: " + lastDate);
-
-        $('.counter').countTo({
-        	from: nextDate,
-        	to: prevDate,
-        	speed: 1100,
-        	refreshInterval: 50,
-        	onComplete: function(value) {
-        		//var lastDate = nextDate; 
-                //console.log(this);
-        	}
-        });
-
-        var dateInput = $(".counter").text();
-	    var datePrint = moment(dateInput, "x").format("MMMM DD, YYYY"); // Oct 4th 16; 
-	    //$('.date').text(datePrint);
-        //console.log(datePrint);
-
-        var lastDate = nextDate;
 
         //get section Number and only display pager once past the feature item
         dd = sectionNo - 1;
@@ -105,7 +69,18 @@ function scrollToSection(){
     });
 
 }
-    
+
+// BG image effect
+
+$('.bgTrigger').each(function() {
+	$( this ).hover(
+  function() {
+    $( this ).closest('section').addClass( "zoomImage" );
+  }, function() {
+    $( this ).closest('section').removeClass( "zoomImage" );
+  });
+});
+
 
 $(window).load(function() {
 
@@ -137,11 +112,11 @@ $(window).resize(function() {
 
 //add class to meta content & title to allow it scroll in from the left.
 $(window).scroll(function(){
-    var windowTop = Math.max($('body').scrollTop(), $('html').scrollTop());
-    
+    var windowTop = $(window).scrollTop();
+    $("section .fade-right").removeClass('in-view');
+
     $('section').each(function (index) {
         if (windowTop > ($(this).position().top)){
-            $('section .fade-right').removeClass('in-view');
             $('section:eq(' + index + ') .fade-right').addClass('in-view');
         }
     });
