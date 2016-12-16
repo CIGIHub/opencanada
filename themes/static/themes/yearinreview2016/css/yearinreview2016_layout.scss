@@ -249,6 +249,7 @@ article .toc ol{
 
    * {
       display: inline-block;
+      line-height: 100%;
    }
 
    .hoverArrow {
@@ -422,11 +423,6 @@ section {
   &.feature::before{
     background: none;
   }
-  //  @media only screen and (max-width : 480px) {
-  //     .hoverArrow {
-  //        margin-bottom: 50vh;
-  //     }             
-  //  }
 }
 
 span.bgTrigger {
@@ -480,91 +476,6 @@ span.bgTrigger {
   margin: 0;
 }
 
-
-/* ==========================================================================
-   Stacking
-   ========================================================================== */
-
-// .generate-z-index(20);
-
-// .generate-z-index($n, $i: 1) when ($i =< $n) {
-//    $c: ($n - $i);
-//   .z-${c} {
-//     z-index: ($c);
-//   }
-//   .generate-z-index($n, ($i + 1));
-// } 
- 
-/* ==========================================================================
-   Animation Assist
-   ========================================================================== */
-
-// a {
-//    &:hover {
-//       img {
-//          -webkit-animation-play-state: paused; /* Chrome, Safari, Opera */
-//          -moz-animation-play-state: paused; /* Chrome, Safari, Opera */
-//          animation-play-state: paused;
-//       }
-//    }
-// }  
-
-// .arrow {
-//    &:hover {
-//       text-decoration: none;
-//       border-bottom: 1px $transparent solid; 
-//    }
-//    &::after {
-//       content: " " !important;
-//    }
-// }
-
-/* ==========================================================================
-   Counter & Dates
-   ========================================================================== */
-
-.counter {
-   position: absolute;
-   top: -20px;
-   left: -90000px;
-   z-index: 999;
-   color: aqua;
-   display: none;
-   
-}
-.dateContainer {
-   position: fixed;
-   width: 100vw;
-   display: block;
-   top: 89px;
-   z-index: 9;
-   color: $white;
-   text-transform: uppercase;
-   font-size: 13px;
-   letter-spacing: 2pt;
-   display: none;
-   @media only screen and (min-width : 768px) {
-      top: 68vh;
-      font-size: 21px;
-   }
-}
-
-.date.hide {
-   display: none;
-}
-
-.number {
-   position: fixed;
-   display: block;
-   height: 30px;
-   z-index: 10;
-   top: 29px;
-   width: 100vw;
-   opacity: 0;
-   .container {
-      padding-top: 0;
-   }
-} 
 
 /* ==========================================================================
    Arrows
@@ -641,42 +552,5 @@ span.bgTrigger {
       }
    }
 }
-// .body .hoverArrow {
-//    margin-bottom: 30vh;
-// }
 
-/* ==========================================================================
-   Mobile
-   ========================================================================== */
 
-// @media only screen and (max-width : 768px) {
-//    .navbar.navbar-fixed-top, navbar.navbar-transparent {
-//       /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+100&1+0,0+100;Neutral+Density */
-// background: -moz-linear-gradient(top,  rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%); /* FF3.6-15 */
-// background: -webkit-linear-gradient(top,  rgba(0,0,0,1) 0%,rgba(0,0,0,0) 100%); /* Chrome10-25,Safari5.1-6 */
-// background: linear-gradient(to bottom,  rgba(0,0,0,1) 0%,rgba(0,0,0,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-// filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
-      
-//    }            
-// }
- 
-/* ==========================================================================
-   Images
-   ========================================================================== */
-
-// .zoomImage {
-//    background-position: 50% 55%;
-//    @media only screen and (max-width : 480px) {
-//                background-position: 50% 65%;
-//              }
-// }
-// .story.zoomImage {
-//    background-position: 70% 30%;
-
-//    &::before {
-//       background-color: rgba(15, 27, 47, 0.87);
-//    }
-//    &::after {
-//       top: 10em;
-//    }
-// }
