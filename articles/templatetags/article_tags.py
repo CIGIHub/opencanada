@@ -1,6 +1,6 @@
 import json
-import urllib
 import re
+import urllib
 
 from django import template
 from django.utils.text import Truncator, slugify
@@ -162,7 +162,7 @@ def get_twitter_share_url(context, chapter):
 def page_preview(page):
     content = ''
 
-    for b in page.body:
+    for b in page.get_content():
         content += b.render()
         content = re.sub("<[^<]+?>", "", content)
 
