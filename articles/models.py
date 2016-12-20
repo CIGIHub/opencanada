@@ -471,6 +471,17 @@ class ArticlePage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin
     def responses(self):
         return [link.response for link in self.response_links.all()]
 
+    def get_content(self):
+        '''
+        A generic and generative interface for getting all the content block for an article,
+        including advanced content such as chapters.
+        '''
+        for block in self.body:
+            yield block
+        for chapter in self.chapters:
+            for block in chapter.value['body']:
+                yield block
+
     def related_articles(self, number):
         included = [self.id]
         article_list = []
@@ -882,6 +893,14 @@ class SeriesPage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin,
         if self.project:
             related_series_list = self.project.get_related_series(self)
         return related_series_list
+
+    def get_content(self):
+        '''
+        A generic and generative interface for getting all the content block for an article,
+        including advanced content such as chapters.
+        '''
+        for block in self.body:
+            yield block
 
     def related_articles(self, number):
         articles = []
