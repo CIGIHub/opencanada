@@ -1,7 +1,6 @@
 import json
 import math
 import os
-
 from io import BytesIO
 
 import requests
@@ -18,28 +17,17 @@ class Command(BaseCommand):
     help = 'Update the relevant data for Twitterati members in all articles that serve an uploaded JSON file'
 
     def add_arguments(self, parser):
-        # Named (optional) arguments
-        parser.add_argument('--files',
-                            dest='json_files',
-                            nargs='+',
-                            help='Update the relevant data for Twitterati members in the specified JSON file(s)')
+        parser.add_argument(
+            'slug',
+            help='The slug of the article you want to initialize or update'
+        )
 
-        parser.add_argument('--cache',
-                            action='store_true',
-                            dest='cache_images',
-                            help='Update the relevant data for Twitterati members and caches static files like images')
-
-        parser.add_argument('--with-count',
-                            action='store_true',
-                            dest='update_follower_count',
-                            help='Update the follower count for Twitterati members')
-
-        parser.add_argument('--key',
+        parser.add_argument('--consumerkey',
                             default=settings.TWITTER_API_CONSUMER_KEY,
                             dest='consumer_key',
                             help='Twitter API Consumer Key; required to authenticate before making API requests')
 
-        parser.add_argument('--secret',
+        parser.add_argument('--consumersecret',
                             default=settings.TWITTER_API_CONSUMER_SECRET,
                             dest='consumer_secret',
                             help='Twitter API Consumer Secret; required to authenticate before making API requests')
@@ -55,6 +43,11 @@ class Command(BaseCommand):
                             help='Twitter API Access Token Secret; required to authenticate before making API requests')
 
     def handle(self, *args, **options):
+        try:
+            article = ArticlePage.objects.get(slug=options['slug'])
+        except ArticlePage.DoesNotExist:
+            raise CommandError('Cannot find article with slug {}.'.format(options['slug']))
+
         # Get authentication tokens
         consumer_key = options['consumer_key']
         consumer_secret = options['consumer_secret']
@@ -62,28 +55,24 @@ class Command(BaseCommand):
         access_token_secret = options['access_token_secret']
         twitter_api = self._get_twitter_api(consumer_key, consumer_secret, access_token, access_token_secret)
 
-        if not options['json_files'] is None:
-            raise NotImplementedError('Not implemented yet...')
-        else:
-            # Working from the assumption that the article(s) we want to update have been published
-            matching_articles = ArticlePage.objects.exclude(json_file__isnull=True).exclude(json_file__exact='')
-            for article in matching_articles:
-                json_file = article.json_file
-                json_data = json.load(article.json_file)
-                try:
-                    updated_json_data = self._get_updated_twitterati_data(json_data, twitter_api, article,
-                                                                          options=options)
-                    if options['cache_images']:
-                        updated_json_data = self._cache_twitterati_images(json_data, article.theme, json_file.storage)
-                    pre_save_name = json_file.name
-                    # Remove previous file since we will replace it with an updated one
-                    json_file.storage.delete(pre_save_name)
-                    # Save the new contents to a file with the same name as the one uploaded to the article
-                    json_file.save(pre_save_name, ContentFile(json.dumps(updated_json_data, indent=4)))
-                    self.stdout.write(self.style.NOTICE("Updated JSON file belonging to '{}'...".format(article)))
-                except (tweepy.TweepError, ValueError) as e:
-                    # Ignore exceptions and continue
-                    self.stdout.write(self.style.WARNING('{}({})'.format(type(e).__name__, e)))
+        json_file = article.json_file
+        json_data = json.load(article.json_file)
+        try:
+            updated_json_data = self._get_updated_twitterati_data(
+                json_data,
+                twitter_api,
+                article
+            )
+
+            updated_json_data = self._cache_twitterati_images(json_data, article.theme, json_file.storage)
+
+            pre_save_name = json_file.name
+            json_file.save(pre_save_name, ContentFile(json.dumps(updated_json_data, indent=4)))
+
+            self.stdout.write(self.style.NOTICE("Updated JSON file belonging to '{}'...".format(article)))
+        except (tweepy.TweepError, ValueError) as e:
+            # Ignore exceptions and continue
+            self.stdout.write(self.style.WARNING('{}({})'.format(type(e).__name__, e)))
 
     def _format_followers_count(self, count):
         # It's ok to re-format the count as a float with .0f since you can't have partial followers no rounding will occur
@@ -113,49 +102,28 @@ class Command(BaseCommand):
         api = tweepy.API(auth)
         return api
 
-    def _get_updated_twitterati_data(self, json_data, twitter_api, context, options=None):
-        # Collect all screen names (twitter handles)
-        twitter_handles = []
-        try:
-            for category in json_data:
-                members = category['members']
-                twitter_handles.extend([member['twitter_handle'] for member in members])
-        except:
-            # JSON objects do not correspond to the expected model for Twitterati members
-            raise ValueError('Could not parse JSON into expected structure for Twitterati members')
-
-        self.stdout.write(self.style.NOTICE("Found {} Twitterati member(s) in '{}'...".format(len(twitter_handles), context)))
-
-        # Parse options
-        update_follower_count = (options is not None) and (options['update_follower_count'])
-        if update_follower_count:
-            self.stdout.write(self.style.NOTICE("Updating follower count..."))
-
-        try:
-            # API lookup for all users
-            users = twitter_api.lookup_users(screen_names=twitter_handles)
-        except tweepy.TweepError as e:
-            raise e
-
-        # Extract necessary fields and key them by screen name
-        twitterati_updates = {}
-        for user in users:
-            twitterati_updates[user.screen_name.lower()] = {
-                'profile_image_url': user.profile_image_url.replace('_normal', ''),
-            }
-            if update_follower_count:
-                formatted_follower_count = self._format_followers_count(user.followers_count)
-                twitterati_updates[user.screen_name.lower()].update({
-                    'follower_count': formatted_follower_count
-                })
-
-        # Go back over members and update data
+    def _get_updated_twitterati_data(self, json_data, twitter_api, context):
         for category in json_data:
             members = category['members']
+            twitter_handles = [member['twitter_handle'] for member in members]
+
+            users = twitter_api.lookup_users(screen_names=twitter_handles)
+
+            twitterati_updates = {}
+            for user in users:
+                formatted_follower_count = self._format_followers_count(user.followers_count)
+                twitterati_updates[user.screen_name.lower()] = {
+                    'profile_image_url': user.profile_image_url.replace('_normal', ''),
+                    'follower_count': formatted_follower_count
+                }
+
             for member in members:
                 key = member['twitter_handle'].lower()
-                updates = twitterati_updates[key]
-                member.update(updates)
+                updates = twitterati_updates.get(key)
+                if updates:
+                    member.update(updates)
+                else:
+                    self.stdout.write(self.style.WARNING("Mismatched screen name? {}".format(key)))
 
         return json_data
 
