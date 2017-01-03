@@ -2,7 +2,6 @@
 Django>=1.8,<1.9
 requests==2.12.3
 
-# Using our own branch until https://github.com/torchbox/wagtail/pull/3161 or similar is merged into wagtail
 wagtail==1.8
 
 # Recommended components (require additional setup):
