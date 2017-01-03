@@ -3,8 +3,7 @@ Django>=1.8,<1.9
 requests==2.12.3
 
 # Using our own branch until https://github.com/torchbox/wagtail/pull/3161 or similar is merged into wagtail
-# wagtail==1.8
-git+git://github.com/albertoconnor/wagtail.git@deploy#egg=wagtail
+wagtail==1.8
 
 # Recommended components (require additional setup):
 elasticsearch>=1.0.0,<2.0.0
