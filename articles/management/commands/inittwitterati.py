@@ -23,6 +23,12 @@ class Command(BaseCommand):
             help='Formatted CSV file to initialize the json data. See the docs.'
         )
 
+        parser.add_argument(
+            '--print',
+            action='store_true',
+            help='Print result to standard out instead of saving it to an article',
+        )
+
     def handle(self, *args, **options):
         if not os.path.isfile(options['csvfile']):
             raise CommandError('Cannot find file {}.'.format(options['csvfile']))
@@ -57,10 +63,16 @@ class Command(BaseCommand):
             )
 
         json_data = [by_category[key] for key in by_category]
-        content_file = ContentFile(json.dumps(json_data, indent=4))
+        content = json.dumps(json_data, indent=4)
 
-        article.json_file.save(
-            '{}.json'.format(article.slug),
-            content_file
-        )
-        self.stdout.write("Updated JSON file belonging to '{}'...".format(article))
+        if options['print']:
+            self.stdout.write(content)
+
+        else:
+            content_file = ContentFile(content)
+
+            article.json_file.save(
+                '{}.json'.format(article.slug),
+                content_file
+            )
+            self.stdout.write("Updated JSON file belonging to '{}'...".format(article))

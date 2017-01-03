@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.db import migrations, models
-import wagtail.wagtailcore.fields
 import modelcluster.fields
+import wagtail.wagtailcore.fields
+from django.db import migrations, models
 
 
 def create_themes(apps, schema_editor):
@@ -168,7 +168,6 @@ class Migration(migrations.Migration):
             name='FollowLink',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('slug', models.SlugField(unique=True, max_length=255, blank=True)),
                 ('name', models.CharField(max_length=255)),
                 ('link', models.CharField(max_length=1024)),
             ],
@@ -180,7 +179,6 @@ class Migration(migrations.Migration):
             name='TextBlock',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('slug', models.SlugField(unique=True, max_length=255, blank=True)),
                 ('name', models.CharField(max_length=255)),
                 ('heading', models.TextField(default='', blank=True)),
                 ('content', wagtail.wagtailcore.fields.RichTextField(default='', blank=True)),
@@ -193,7 +191,6 @@ class Migration(migrations.Migration):
             name='LogoBlock',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('slug', models.SlugField(unique=True, max_length=255, blank=True)),
                 ('name', models.CharField(max_length=255)),
                 ('logo', models.ForeignKey(to='images.AttributedImage')),
             ],
@@ -223,55 +220,12 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
-            name='ContentMenuLink',
-            fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-            ],
-        ),
-        migrations.CreateModel(
-            name='Menu',
-            fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('slug', models.SlugField(unique=True, max_length=255, blank=True)),
-                ('name', models.CharField(max_length=255)),
-            ],
-            options={
-                'abstract': False,
-            },
-        ),
-        migrations.CreateModel(
-            name='MenuItem',
-            fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('label', models.TextField()),
-                ('link', models.TextField()),
-            ],
-        ),
-        migrations.CreateModel(
-            name='MenuItemLink',
-            fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('item', models.ForeignKey(related_name='menu_links', to='themes.MenuItem')),
-                ('menu', modelcluster.fields.ParentalKey(related_name='item_links', to='themes.Menu')),
-            ],
-        ),
-        migrations.CreateModel(
             name='ThemeContent',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('name', models.CharField(max_length=255)),
                 ('contact_email', models.EmailField(help_text='Only provide if this should be different from the site default email contact address.', max_length=254, null=True, blank=True)),
             ],
-        ),
-        migrations.AddField(
-            model_name='contentmenulink',
-            name='menu',
-            field=models.ForeignKey(related_name='content_links', to='themes.Menu'),
-        ),
-        migrations.AddField(
-            model_name='contentmenulink',
-            name='theme_content',
-            field=models.ForeignKey(related_name='menu_links', to='themes.ThemeContent'),
         ),
         migrations.AddField(
             model_name='contentlogolink',
@@ -292,35 +246,6 @@ class Migration(migrations.Migration):
             model_name='theme',
             name='content',
             field=models.ForeignKey(to='themes.ThemeContent', null=True),
-        ),
-
-        migrations.RemoveField(
-            model_name='contentmenulink',
-            name='menu',
-        ),
-        migrations.RemoveField(
-            model_name='contentmenulink',
-            name='theme_content',
-        ),
-        migrations.RemoveField(
-            model_name='menuitemlink',
-            name='item',
-        ),
-        migrations.RemoveField(
-            model_name='menuitemlink',
-            name='menu',
-        ),
-        migrations.DeleteModel(
-            name='ContentMenuLink',
-        ),
-        migrations.DeleteModel(
-            name='Menu',
-        ),
-        migrations.DeleteModel(
-            name='MenuItem',
-        ),
-        migrations.DeleteModel(
-            name='MenuItemLink',
         ),
         migrations.AddField(
             model_name='logoblock',
@@ -356,18 +281,6 @@ class Migration(migrations.Migration):
             model_name='contentlogolink',
             name='theme_content',
             field=modelcluster.fields.ParentalKey(related_name='logo_links', to='themes.ThemeContent'),
-        ),
-        migrations.RemoveField(
-            model_name='followlink',
-            name='slug',
-        ),
-        migrations.RemoveField(
-            model_name='logoblock',
-            name='slug',
-        ),
-        migrations.RemoveField(
-            model_name='textblock',
-            name='slug',
         ),
         migrations.AddField(
             model_name='followlink',
