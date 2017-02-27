@@ -29,10 +29,16 @@ class ThemeableStructBlock(StructBlock):
         if template:
             if self.theme:
                 theme_template = "{}/{}".format(self.theme.folder, template)
+
+                if context is None:
+                    new_context = self.get_context(value)
+                else:
+                    new_context = self.get_context(value, parent_context=dict(context))
+
                 try:
-                    return render_to_string(theme_template, self.get_context(value))
+                    return render_to_string(theme_template, new_context)
                 except TemplateDoesNotExist:
                     # Template for the Block does not exist in the Theme...
-                    return render_to_string(template, self.get_context(value))
+                    return render_to_string(template, new_context)
         else:
             return self.render_basic(value)
