@@ -1,7 +1,6 @@
 from __future__ import absolute_import, unicode_literals
 
-from django.template.base import TemplateDoesNotExist
-from django.template.loader import render_to_string
+from django.template.loader import TemplateDoesNotExist, render_to_string
 from wagtail.wagtailcore.blocks import StructBlock
 
 # unicode_literals ensures that any render / __str__ methods returning HTML via calls to mark_safe / format_html

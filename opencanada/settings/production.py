@@ -112,6 +112,11 @@ LOGGING = {
         }
     },
     'loggers': {
+        'django.template': {
+            'level': 'WARNING',
+            'handlers': ['console', 'sentry'],
+            'propagate': False,
+        },
         'django.db.backends': {
             'level': 'ERROR',
             'handlers': ['console'],
