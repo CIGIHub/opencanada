@@ -51,3 +51,12 @@ def media(url):
     if not url_is_absolute:
         media_url = os.path.join(settings.MEDIA_URL, url)
     return media_url
+
+
+@register.filter
+def error(v):
+    '''
+    Warrning, for testing purposes only
+    '''
+    error_value = 1 / 0
+    return error_value

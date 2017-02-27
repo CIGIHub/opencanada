@@ -2,7 +2,7 @@ from __future__ import absolute_import, unicode_literals
 
 from .base import *
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '172.31.9.139']
@@ -44,6 +44,11 @@ LOGGING = {
         }
     },
     'loggers': {
+        'django.template': {
+            'level': 'WARNING',
+            'handlers': ['console'],
+            'propagate': False,
+        },
         'django.db.backends': {
             'level': 'ERROR',
             'handlers': ['console'],

@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
-from django.http import Http404, JsonResponse
+from django.http import Http404, HttpResponse, JsonResponse
 from django.shortcuts import render
 from wagtail.utils.pagination import paginate
 from wagtail.wagtailadmin.forms import SearchForm
@@ -101,3 +101,11 @@ def site_search(request, template=None, results_per_page=10, path=None):
         is_ajax=request.is_ajax(),
         query=query
     ))
+
+
+def template_error(request):
+    from django.template import Template, Context
+
+    template = Template("This is for testing template {% include 'template_error.html' %}")
+    content = template.render(Context(dict(foo="bar")))
+    return HttpResponse(content)

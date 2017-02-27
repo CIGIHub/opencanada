@@ -12,7 +12,7 @@ from wagtail.wagtaildocs import urls as wagtaildocs_urls
 from wagtail.wagtailsearch import urls as wagtailsearch_urls
 
 from core.feeds import MainFeed
-from core.views import chooser_search, site_search
+from core.views import chooser_search, site_search, template_error
 
 
 base_urlpatterns = [
@@ -21,10 +21,11 @@ base_urlpatterns = [
     url(r'^documents/', include(wagtaildocs_urls)),
     url(r'^', include('favicon.urls')),
     url(r'^', include('sitemap.urls')),
-    url(r'^feed/', MainFeed(), name='main_feed'),
-    url(r'^error/', lambda r: 1 / 0, name='error'),
+    url(r'^feed/$', MainFeed(), name='main_feed'),
+    url(r'^error/$', lambda r: 1 / 0, name='error'),
+    url(r'^template_error/$', template_error, name='template_error'),
     url(r'^core/', include('core.urls', namespace='core')),
-    url(r'^robots\.txt$', include('robots.urls')),
+    url(r'^robots\.txt', include('robots.urls')),
 ]
 
 
