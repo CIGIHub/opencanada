@@ -3,7 +3,7 @@ python:
   - "3.4"
   - "2.7"
 env:
-  - DJANGO=1.8.1
+  - DJANGO=1.9.12
 install:
   - pip install -q Django==$DJANGO --use-mirrors
   - pip install -r requirements/test.txt --use-mirrors
