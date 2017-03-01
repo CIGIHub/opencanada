@@ -44,7 +44,7 @@ def get_feature_image(item):
         return item.main_image
 
 
-@register.assignment_tag()
+@register.simple_tag()
 def typed_article(page):
     try:
         return page.articlepage
@@ -97,7 +97,7 @@ def romanize(value):
     return result
 
 
-@register.assignment_tag(takes_context=True)
+@register.simple_tag(takes_context=True)
 def get_json_data(context):
     try:
         page = context["self"]

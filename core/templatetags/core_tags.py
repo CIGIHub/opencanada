@@ -10,7 +10,7 @@ from articles.models import Topic
 register = template.Library()
 
 
-@register.assignment_tag
+@register.simple_tag
 def suggested_searches(number_of_suggestions):
     search_suggestions = Topic.objects.all().order_by('article_links__article__first_published_at')[:number_of_suggestions]
 
@@ -22,7 +22,7 @@ def search_string(topic):
     return topic.name.replace(" ", "+")
 
 
-@register.assignment_tag(takes_context=True)
+@register.simple_tag(takes_context=True)
 def get_site_defaults(context):
     try:
         return context['request'].site.default_settings
@@ -30,7 +30,7 @@ def get_site_defaults(context):
         return None
 
 
-@register.assignment_tag(takes_context=True)
+@register.simple_tag(takes_context=True)
 def external_article_image(context, item):
     if hasattr(item, "source"):
         if item.source and item.source.logo:
