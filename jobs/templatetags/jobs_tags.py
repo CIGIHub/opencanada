@@ -6,7 +6,7 @@ from jobs.models import JobPostingListPage
 register = template.Library()
 
 
-@register.assignment_tag(takes_context=True)
+@register.simple_tag(takes_context=True)
 def get_active_posting_page(context):
     try:
         root = context['request'].site.root_page
