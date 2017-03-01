@@ -6,6 +6,7 @@ env:
   - DJANGO=1.9.12
 install:
   - pip install -q Django==$DJANGO --use-mirrors
+  - pip install -q six
   - pip install -r requirements/test.txt --use-mirrors
 before_script:
   - flake8 .
