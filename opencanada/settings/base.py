@@ -13,7 +13,6 @@ from __future__ import absolute_import, unicode_literals
 from os import environ
 from os.path import abspath, dirname, join
 
-from django.conf import global_settings
 from django.core.exceptions import ImproperlyConfigured
 
 _variable_prefix = "OPEN_CANADA_"
@@ -180,14 +179,27 @@ COMPRESS_PRECOMPILERS = (
 
 
 # Template configuration
-
-
-TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + [
-    'django.template.context_processors.request',
-    'core.context_processors.settings_context',
-    'themes.context_processors.default_theme_context',
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.debug',
+                'django.template.context_processors.i18n',
+                'django.template.context_processors.media',
+                'django.template.context_processors.static',
+                'django.template.context_processors.tz',
+                'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.request',
+                'core.context_processors.settings_context',
+                'themes.context_processors.default_theme_context',
+            ],
+        },
+    },
 ]
-
 
 # Wagtail settings
 
