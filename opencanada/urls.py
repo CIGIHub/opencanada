@@ -14,7 +14,6 @@ from wagtail.wagtailsearch import urls as wagtailsearch_urls
 from core.feeds import MainFeed
 from core.views import chooser_search, site_search, template_error
 
-
 base_urlpatterns = [
     url(r'^search/$', site_search, name='wagtailsearch_search'),
     url(r'^search/', include(wagtailsearch_urls)),
