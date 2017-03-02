@@ -102,7 +102,7 @@ LOGGING = {
     },
     'handlers': {
         'sentry': {
-            'level': 'ERROR',
+            'level': 'WARNING',
             'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
         },
         'console': {
@@ -114,7 +114,7 @@ LOGGING = {
     'loggers': {
         'django.template': {
             'level': 'WARNING',
-            'handlers': ['console', 'sentry'],
+            'handlers': ['sentry', 'console'],
             'propagate': False,
         },
         'django.db.backends': {
