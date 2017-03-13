@@ -63,7 +63,8 @@ class NewsletterPage(ThemeablePage):
     def external_articles(self):
         external_article_list = []
         for article_link in self.external_article_links.all():
-            article_link.external_article.override_text = article_link.override_text
+            if article_link.external_article is not None:
+                article_link.external_article.override_text = article_link.override_text
             external_article_list.append(article_link.external_article)
         return external_article_list
 
