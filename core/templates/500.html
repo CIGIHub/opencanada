@@ -8,10 +8,207 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <title>Internal server error</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+        <style>
+          * { box-sizing: border-box; }
+          body {
+              background: #fff;
+              color: #333;
+              font-family: "Libre Baskerville", Georgia, serif;
+              font-weight: 300;
+              line-height: 165%;
+              height: auto;
+              padding-top: 50px;
+              margin: 0;
+              padding-top: 58px;
+              display: flex;
+              min-height: 100vh;
+              flex-direction: column;
+          }
+          header {
+              position: fixed;
+              top: 0;
+              width: 100%;
+              z-index: 500;
+              min-height: 49px;
+              color: #fff;
+              background: #bf1e2e;
+              transition: height 0.3s, background 1s;
+          }
+          header.notscrolled {
+              background: #bf1e2e;
+              transition: background 1s;
+          }
+          header .banner {
+              padding-top: 20px;
+              padding-bottom: 20px;
+              margin-left: 0;
+              margin-right: 0;
+              padding-left: 15px;
+              padding-right: 15px;
+          }
+          .container-fluid:before, .template-home-page:before, .container-fluid:after, .template-home-page:after {
+              content: " ";
+              display: table;
+          }
+          .row:before, .row:after {
+              content: " ";
+              display: table;
+          }
+          .row {
+              margin-left: -15px;
+              margin-right: -15px;
+          }
+          .row:after {
+              clear: both;
+          }
+          header .menu {
+              text-align: left;
+              font-size: 18px;
+              line-height: 1em;
+              width: 10%;
+              padding: 0;
+              float: left;
+          }
+          header .logo {
+              width: 80%;
+              text-align: center;
+              padding: 0 20px;
+              float: left;
+          }
+          img {
+              max-width: 100%;
+              height: auto;
+          }
+          header .logo .wordmark {
+              line-height: 1em;
+          }
+          header .logo .wordmark img {
+              max-height: 18px;
+              width: auto;
+              display: inline;
+          }
+          header .search {
+              text-align: right;
+              font-size: 18px;
+              line-height: 1em;
+              width: 10%;
+              padding: 0;
+              float: left;
+          }
+          header .search #search-box-toggle {
+              width: 25px;
+              float: right;
+              cursor: pointer;
+              padding-right: 15px;
+              box-sizing: content-box;
+          }
+          main {
+              padding-bottom: 40px;
+              padding-top: 40px;
+              flex: 1;
+          }
+          .container {
+              margin-right: auto;
+              margin-left: auto;
+              padding-left: 15px;
+              padding-right: 15px;
+          }
+          @media (min-width: 992px) {
+              .container {
+                  width: 970px;
+              }
+              main {
+                  padding-bottom: 60px;
+                  padding-top: 60px;
+              }
+          }
+          h1, h2, h3, h4 {
+              font-family: "proxima-nova", Helvetica, sans-serif;
+              margin-top: 0px;
+              margin-bottom: 5px;
+          }
+          h1, .h1 {
+              font-size: 39px;
+              font-weight: 500;
+              line-height: 1.1;
+              color: inherit;
+          }
+          h2 {
+              font-size: 22px;
+              font-weight: 900;
+              color: #000;
+              line-height: 1.1;
+          }
+          .contact {
+              margin: 0 auto;
+              max-width: 550px;
+              text-align: center;
+          }
+          footer {
+              color: #000000;
+              font-family: proxima-nova, Helvetica, sans-serif;
+              background: #ffffff;
+              font-size: 14px;
+              line-height: 120%;
+          }
+          footer .contact {
+              padding: 20px;
+              text-transform: uppercase;
+          }
+          a {
+              color: #bf1e2e;
+              text-decoration: none;
+              transition: color 0.25s;
+          }
+          a:hover {
+              color: #000000;
+          }
+
+          footer a {
+              color: #000000;
+          }
+          footer a:hover {
+              color: #a5a5a5;
+          }
+        </style>
     </head>
     <body>
-        <h1>Internal server error</h1>
+      <header role="banner" class="notscrolled">
+          <div class="banner container-fluid">
+              <div class="row">
+                  <div class="col-md-4 col-xs-2 menu header-row">&nbsp;
+                  </div>
+                  <div class="col-md-4 col-xs-8 logo header-row">
+                        <div class="wordmark">
+                            <a href="/"><img alt="OpenCanada Logo" height="36" src="/media/images/opencanada-logo.original.png" width="528"></a>
+                        </div>
+                  </div>
+                  <div class="col-md-4 col-xs-2 search header-row">
+                      <div class="button" data-target="search-box" id="search-box-toggle"><i class="fa fa-search"></i></div>
+                  </div>
+              </div>
+          </div>
+      </header>
 
-        <h2>Sorry, there seems to be an error. Please try again soon.</h2>
+      <main style="">
+        <div class="container">
+          <h1>Internal server error</h1>
+          <h2>Sorry, there was an unexpected error.</h2>
+          <p>An error report is being sent to us and we will work to fix it as soon as possible.</p>
+          <p>If you require any assistance, contact us at <a href="mailto:info@opencanada.org">info@opencanada.org</a>.
+        </div>
+      </main>
+      <footer role="contentinfo">
+        <div class="container">
+          <div class="contact">
+              Copyright © 2017 Open Canada, All rights reserved.<br>
+              <a href="mailto:info@opencanada.org">info@opencanada.org</a>
+          </div>
+        </div>
+      </footer>
     </body>
 </html>
+
+
+
