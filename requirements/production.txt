@@ -1,5 +1,7 @@
 -r base.txt
 
+elasticsearch>=1.0.0,<2.0.0
+
 django-storages==1.1.8
 boto==2.38.0
 
