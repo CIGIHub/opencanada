@@ -1,3 +1,4 @@
 -r production.txt
+elasticsearch>=2.0.0,<3.0.0
 
 git+ssh://git@github.com/OpenCanada/wagtail-interactives-content.git

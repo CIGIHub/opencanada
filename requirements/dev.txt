@@ -1,5 +1,7 @@
 -r base.txt
 
+elasticsearch>=2.0.0,<3.0.0
+
 # For coverage and PEP8 linting
 coverage>=3.7.0
 flake8==2.5.4
