@@ -14,7 +14,7 @@ COMPRESS_OFFLINE = True
 
 WAGTAILSEARCH_BACKENDS = {
     'default': {
-        'BACKEND': 'wagtail.wagtailsearch.backends.elasticsearch',
+        'BACKEND': 'wagtail.wagtailsearch.backends.elasticsearch2',
         'INDEX': get_env_variable('ELASTICSEARCH_INDEX'),
         'TIMEOUT': 5000,
         # This setting will not work as intended with the ElasticSearch provided by http://www.searchly.com/
