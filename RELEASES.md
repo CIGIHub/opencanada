@@ -1,3 +1,7 @@
+April 7, 2017 -- 1.5.0
+
+* Migrate to elasticsearch 1.x to 2.x using searchly.
+
 March 30, 2017 -- 1.4.1
 
 * Hide Facebook counts on default template if less than 500.
