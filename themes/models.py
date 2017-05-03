@@ -1,5 +1,7 @@
 from __future__ import absolute_import, division, unicode_literals
 
+import itertools
+
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from modelcluster.fields import ParentalKey
@@ -90,8 +92,10 @@ class ThemeablePage(Page):
                     continue
 
                 if isinstance(field, ChapterField):
-                    ordered_blocks = stream_block.child_blocks.values()
-                    ordered_blocks += stream_block.child_blocks['chapter'].child_blocks['body'].child_blocks.values()
+                    ordered_blocks = itertools.chain(
+                        stream_block.child_blocks.values(),
+                        stream_block.child_blocks['chapter'].child_blocks['body'].child_blocks.values()
+                    )
                 else:
                     # Assuming that each StreamBlock has an ordered dict of child Blocks
                     ordered_blocks = stream_block.child_blocks.values()
