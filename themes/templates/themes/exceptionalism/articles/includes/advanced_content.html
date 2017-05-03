@@ -9,7 +9,7 @@
                     <a href="{% get_chapter_anchor chapter %}"><i class="fa fa-facebook-square"></i></a>
                 </div>
             {% endif %}
-            {{ chapter }}
+            {% include_block chapter %}
         </div>
     {% endfor %}
 
