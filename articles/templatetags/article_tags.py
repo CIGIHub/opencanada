@@ -28,7 +28,7 @@ def topic_url(context, topic):
 @register.filter()
 def column_class(row):
     number_of_items = len(row)
-    return 12 / number_of_items
+    return str(12 // number_of_items)
 
 
 @register.filter()

@@ -25,14 +25,14 @@
 
         {% for row in self.articles %}
             {% for article in row %}
-                {% if article.fullbleed_feature == True and row|column_class == 12 %}
+                {% if article.fullbleed_feature == True and row|column_class == "12" %}
                     <div class="container-full-bleed">
-                {% elif row|column_class == 12 %}
+                {% elif row|column_class == "12" %}
                     <div class="container full-width">
                 {% endif %}
             {% endfor %}
 
-            {% if row|column_class == 4 %}
+            {% if row|column_class == "4" %}
                 <div class="container multi-block">
             {% endif %}
 
