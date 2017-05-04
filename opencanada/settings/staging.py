@@ -12,6 +12,13 @@ CACHES = {
     }
 }
 
+# Explicitly use database
+WAGTAILSEARCH_BACKENDS = {
+    'default': {
+        'BACKEND': 'wagtail.wagtailsearch.backends.db',
+    }
+}
+
 COMPRESS_URL = 'https://staging-files.opencanada.org/'
 STATIC_URL = 'https://staging-files.opencanada.org/'
 MEDIA_URL = 'https://staging-files.opencanada.org/'

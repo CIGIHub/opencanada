@@ -15,6 +15,13 @@ INSTALLED_APPS = INSTALLED_APPS + (
     'interactives_content',
 )
 
+# Explicitly use database
+WAGTAILSEARCH_BACKENDS = {
+    'default': {
+        'BACKEND': 'wagtail.wagtailsearch.backends.db',
+    }
+}
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
