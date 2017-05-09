@@ -4,13 +4,11 @@ from __future__ import unicode_literals
 import django.db.models.deletion
 from django.db import migrations, models
 
-import themes.models
-
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('themes', '0006_create_themes'),
+        ('themes', '0003_auto_20170502_1814'),
         ('core', '0017_sitedefaults_contact_email'),
     ]
 
@@ -18,7 +16,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='homepage',
             name='theme',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.SET_NULL, default=themes.models.get_default_theme, to='themes.Theme', null=True),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.SET_NULL, default=None, to='themes.Theme', null=True),
         ),
         migrations.AlterField(
             model_name='sitedefaults',

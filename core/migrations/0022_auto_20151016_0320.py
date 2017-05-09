@@ -4,13 +4,11 @@ from __future__ import unicode_literals
 import django.db.models.deletion
 from django.db import migrations, models
 
-import themes.models
-
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('themes', '0016_auto_20151014_2016'),
+        ('themes', '0003_auto_20170502_1814'),
         ('wagtailcore', '0019_verbose_names_cleanup'),
         ('core', '0021_streampage'),
     ]
@@ -29,6 +27,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='streampage',
             name='theme',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.SET_NULL, default=themes.models.get_default_theme, to='themes.Theme', null=True),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.SET_NULL, default=None, to='themes.Theme', null=True),
         ),
     ]

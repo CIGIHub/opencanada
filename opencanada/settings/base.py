@@ -67,7 +67,7 @@ INSTALLED_APPS = (
     'overextends',
 
     'core',
-    'themes',
+    'greyjay.themes',
 
     'wagtail.wagtailcore',
     'wagtail.wagtailadmin',
@@ -88,14 +88,14 @@ INSTALLED_APPS = (
 
     'content_notes',
     'interactives',
-    'articles',
-    'people',
-    'images',
-    'newsletter',
-    'events',
-    'jobs',
+    'greyjay.articles',
+    'greyjay.people',
+    'greyjay.images',
+    'greyjay.newsletter',
+    'greyjay.events',
+    'greyjay.jobs',
     'analytics',
-    'projects',
+    'greyjay.projects',
 
     'sitemap',
     'robots',
@@ -196,7 +196,6 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.request',
                 'core.context_processors.settings_context',
-                'themes.context_processors.default_theme_context',
             ],
         },
     },
