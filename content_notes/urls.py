@@ -8,5 +8,5 @@ urlpatterns = [
     url(r'^choose/$', chooser.choose, name='choose'),
     url(r'^choose/(\d+)/$', chooser.chosen, name='chosen'),
 
-    url(r'^/$', endnotes.list, name='list'),
+    url(r'^$', endnotes.list, name='list'),
 ]
