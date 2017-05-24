@@ -1,0 +1,8 @@
+{% load static article_tags core_tags wagtailcore_tags wagtailembeds_tags wagtailimages_tags %}
+    <div class="title">
+        <h1 class="{{ self.title_size }}">{{ self.title }}</h1>
+    </div>
+    {% if self.authors %}
+        {% include 'themes/maplewashing/articles/includes/article-contributors.html' with authors=self.authors date=self.first_published_at links=True %}
+    {% endif %}
+</div>

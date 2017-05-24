@@ -1,0 +1,15 @@
+{% load article_tags %}
+<div class="heading">{{ self.heading }}</div>
+<div class="intro">Is Canada an exception? We asked four commentators to respond.</div>
+<ul class="item_list">
+    {% for page in self.items %}
+        {% typed_article page as typed_page %}
+      <li>
+        <div class="item_content"><a href="{{ typed_page.url }}">{{ typed_page.title }}</a>
+         {% if typed_page.authors %}
+           {% include 'articles/includes/article-contributors.html' with authors=typed_page.authors links=True %}
+         {% endif %}
+      </div>
+      </li>
+    {% endfor %}
+</ul>
