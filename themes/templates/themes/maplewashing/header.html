@@ -4,12 +4,14 @@
 <header role="banner">
     <div class="banner container-fluid">
         <div class="row">
-            <div class="col-md-4 col-xs-2 menu header-row">
+            <div class="menu header-row">
               <div class="toggle-mobile social">
-              {% include 'themes/exceptionalism/articles/includes/share_links.html' %}
+                <div class="hidden-sm hidden-xs">
+                  {% include 'themes/maplewashing/articles/includes/share_links.html' %}
+                </div>
               </div>
             </div>
-            <div class="col-md-4 col-xs-8 logo header-row">
+            <div class="logo header-row">
                   <div class="wordmark">
                       {% get_logo "main-logo" as logo %}
                       {% get_logo_link "main-logo" as logo_link %}
