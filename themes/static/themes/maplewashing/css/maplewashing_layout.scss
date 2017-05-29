@@ -329,16 +329,24 @@ article .block-SectionBreak hr {
   padding: 20px 0;
   font-family: inherit;
   margin: 4em 0px;
-  background: no-repeat center url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADYAAAAYCAYAAACx4w6bAAAABGdBTUEAALGPC/xhBQAAAetJREFUWAntlUEvA0EUx9/brgZxccCpEqkITkgagpS2iQRHtokPwNXZASUSTuJOODigG+HgJmh6EDTBVUSED+DUJmS787yV7rGJdPcdmnQus29n573/b/4zs2hG+1bBQzOyz2sepped6lWXTgCpstn/NyAC5lWX9j/t1fdVDazaPKs5Vm2O6dKCz+LDYcu21lGDfeMmd2XGIglFZOhacHPm+vZDqr44GENdElAHELYxxBURLAFBwlbWOMfdUmDiZ4wQVv7EE8VPY0MjRBRzYiIU+f+5CyUKdj4RCYW7+k8AcYN/uFhU9hEX1pw4mbk/vpgebXaF+N2LgZ3GhwZ+fujz7eWxwPbMsHDFPoUQ0eZ4yhyP5Av57690YrDXbygnnxgYKAqWBNexQx38bJdi3p3Yww42/sUKGkrvfe3EwOyW9pyGeiwYCHYGAOdYdcBxi8+Yjgjzzntn3BibfPKVqJRMDCxpmraRucsQFZsUqEOupyHBslOX9+SehcVWZxxTKQ79b2JgrlRL0S5f8U28/d5nMw9b3L/yGasHmw7cbyR6cTDUcZEvxBxpsMNbkW953Ga424AGCxJAbk5MR/v4HFfektlnrHx2+ZledYk7Vl667EgNTHZ9/c9ec8z/NZXNqPOVlpItUVl2r7p+ARvpltz7fvo7AAAAAElFTkSuQmCC');
+  //background: no-repeat center url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADYAAAAYCAYAAACx4w6bAAAABGdBTUEAALGPC/xhBQAAAetJREFUWAntlUEvA0EUx9/brgZxccCpEqkITkgagpS2iQRHtokPwNXZASUSTuJOODigG+HgJmh6EDTBVUSED+DUJmS787yV7rGJdPcdmnQus29n573/b/4zs2hG+1bBQzOyz2sepped6lWXTgCpstn/NyAC5lWX9j/t1fdVDazaPKs5Vm2O6dKCz+LDYcu21lGDfeMmd2XGIglFZOhacHPm+vZDqr44GENdElAHELYxxBURLAFBwlbWOMfdUmDiZ4wQVv7EE8VPY0MjRBRzYiIU+f+5CyUKdj4RCYW7+k8AcYN/uFhU9hEX1pw4mbk/vpgebXaF+N2LgZ3GhwZ+fujz7eWxwPbMsHDFPoUQ0eZ4yhyP5Av57690YrDXbygnnxgYKAqWBNexQx38bJdi3p3Yww42/sUKGkrvfe3EwOyW9pyGeiwYCHYGAOdYdcBxi8+Yjgjzzntn3BibfPKVqJRMDCxpmraRucsQFZsUqEOupyHBslOX9+SehcVWZxxTKQ79b2JgrlRL0S5f8U28/d5nMw9b3L/yGasHmw7cbyR6cTDUcZEvxBxpsMNbkW953Ga424AGCxJAbk5MR/v4HFfektlnrHx2+ZledYk7Vl667EgNTHZ9/c9ec8z/NZXNqPOVlpItUVl2r7p+ARvpltz7fvo7AAAAAElFTkSuQmCC');
 }
 
 article .block-SectionBreak hr:after {
-  content: "";
+  content: "\2588 \f069 \2588";
 }
 
 article .block-Image {
   margin-top: 1em;
   margin-bottom: 2.5em;
+}
+
+article .block-Sharable, article .block-Quote {
+  border-left: solid 3px $active-color;
+}
+
+article .block-Sharable {
+  color: $active-color;
 }
 
 /*** related materials ***/
