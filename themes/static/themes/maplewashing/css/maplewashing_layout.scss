@@ -317,11 +317,11 @@ article .block-Quote{
 }
 
 article .block-PullQuote {
-  border: solid 5px $active-color;
+  border: solid 3px $active-color;
   display: block;
   width: inherit;
   float: none;
-  font-size: 28px;
+  font-size: 1.5em;
   letter-spacing: 2px;
   line-height: 130%;
   padding: 5px 10px;
@@ -415,9 +415,10 @@ article .block-Sharable {
   h2{
     color: $active-color;
     font-size: 1.3em;
+    letter-spacing: 2px;
     font-weight: 900;
     text-transform: uppercase;
-    border: 2px solid $active-color;
+    border: 3px solid $active-color;
     margin-bottom: 0.7em;
     display: inline-block;
     line-height: 0.8;
