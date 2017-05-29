@@ -166,6 +166,62 @@ class RelatedItemsBlock(ThemeableStructBlock):
         template = "articles/blocks/related_items_block.html"
 
 
+class StaticHTMLInput(Widget):
+    """
+    Need an <input> widget that doesn't actually accept any input
+    """
+    input_type = 'hidden'
+
+    def __init__(self, raw_html=None, **kwargs):
+        self.raw_html = raw_html
+        super(StaticHTMLInput, self).__init__(**kwargs)
+
+    def render(self, name, value, attrs=None):
+        if self.raw_html is not None:
+            return format_html(self.raw_html)
+        else:
+            return ''
+
+
+class StaticHTMLField(Field):
+    def __init__(self, raw_html=None, **kwargs):
+        widget = StaticHTMLInput(raw_html=raw_html)
+        super(StaticHTMLField, self).__init__(widget=widget, **kwargs)
+
+
+class StaticHTMLBlock(blocks.FieldBlock):
+    def __init__(self, raw_html=None, required=False, help_text=None, **kwargs):
+        self.raw_html = raw_html
+        self.field = StaticHTMLField(raw_html=self.raw_html, required=required, help_text=help_text)
+        super(StaticHTMLBlock, self).__init__(**kwargs)
+
+    def render(self, value, context=None):
+        """
+        Return a text rendering of 'value', suitable for display on templates.
+        Note that we override this function so that we can render the raw HTML as this block
+        is just a container; 'value' in this case will always be None
+        """
+        if self.raw_html is not None:
+            return format_html(self.raw_html)
+        else:
+            return ''
+
+
+class SectionBreakBlock(blocks.StructBlock):
+    section_break = StaticHTMLBlock(raw_html='<hr>')
+
+    def render(self, value, context=None):
+        """
+        Return a text rendering of 'value', suitable for display on templates.
+        Note that we override this function so that we can render the child block as this block
+        is just a container; 'value' in this case will always be None
+        """
+        return self.child_blocks['section_break'].render(value)
+
+    class Meta:
+        icon = "code"
+
+
 class SimpleBodyBlock(blocks.StreamBlock):
     Heading = HeadingBlock()
     Paragraph = ParagraphBlock()
@@ -177,6 +233,7 @@ class SimpleBodyBlock(blocks.StreamBlock):
     Quote = SimpleQuoteBlock()
     Interactive = InteractiveBlock(Interactive)
     RelatedItems = RelatedItemsBlock()
+    SectionBreak = SectionBreakBlock()
 
 
 class ColumnarStreamBlock(blocks.StructBlock):
@@ -234,62 +291,6 @@ class CitationBlock(blocks.StructBlock):
 
     class Meta:
         template = "articles/blocks/citation.html"
-
-
-class StaticHTMLInput(Widget):
-    """
-    Need an <input> widget that doesn't actually accept any input
-    """
-    input_type = 'hidden'
-
-    def __init__(self, raw_html=None, **kwargs):
-        self.raw_html = raw_html
-        super(StaticHTMLInput, self).__init__(**kwargs)
-
-    def render(self, name, value, attrs=None):
-        if self.raw_html is not None:
-            return format_html(self.raw_html)
-        else:
-            return ''
-
-
-class StaticHTMLField(Field):
-    def __init__(self, raw_html=None, **kwargs):
-        widget = StaticHTMLInput(raw_html=raw_html)
-        super(StaticHTMLField, self).__init__(widget=widget, **kwargs)
-
-
-class StaticHTMLBlock(blocks.FieldBlock):
-    def __init__(self, raw_html=None, required=False, help_text=None, **kwargs):
-        self.raw_html = raw_html
-        self.field = StaticHTMLField(raw_html=self.raw_html, required=required, help_text=help_text)
-        super(StaticHTMLBlock, self).__init__(**kwargs)
-
-    def render(self, value, context=None):
-        """
-        Return a text rendering of 'value', suitable for display on templates.
-        Note that we override this function so that we can render the raw HTML as this block
-        is just a container; 'value' in this case will always be None
-        """
-        if self.raw_html is not None:
-            return format_html(self.raw_html)
-        else:
-            return ''
-
-
-class SectionBreakBlock(blocks.StructBlock):
-    section_break = StaticHTMLBlock(raw_html='<hr>')
-
-    def render(self, value, context=None):
-        """
-        Return a text rendering of 'value', suitable for display on templates.
-        Note that we override this function so that we can render the child block as this block
-        is just a container; 'value' in this case will always be None
-        """
-        return self.child_blocks['section_break'].render(value)
-
-    class Meta:
-        icon = "code"
 
 
 class WagtailFileField(FileField):
