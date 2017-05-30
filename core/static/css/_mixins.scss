@@ -276,8 +276,7 @@
     &:hover, &:focus{
       color: $overlay-link-color;
       h3, h1{
-        color: $light-grey;
-        transition:color 0.5s;
+        color: $overlay-link-color;
       }
     }
   }

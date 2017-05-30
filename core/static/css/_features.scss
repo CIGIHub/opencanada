@@ -256,8 +256,7 @@
     &:hover, &:focus{
       color: $overlay-link-color;
       h3{
-        color: $overlay-link-hover-color;
-        transition:color 0.5s;
+        color: $overlay-link-color;
       }
     }
   }

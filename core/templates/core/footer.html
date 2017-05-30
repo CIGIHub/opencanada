@@ -55,17 +55,6 @@
         </div>
         <div class="row partner-row">
             <div class="col-xs-12">
-                <div class="supporter">
-                    {% get_text_block "arctic-deeply-block" as block %}
-                    {{ block.content|richtext }}
-                    {% get_logo "arctic-deeply-logo" as logo %}
-                    {% get_logo_link "arctic-deeply-logo" as logo_link %}
-                    <a href="{{ logo_link }}">{% image logo original %}</a>
-               </div>
-            </div>
-        </div>
-        <div class="row partner-row">
-            <div class="col-xs-12">
                 <div class="partners">
                     {% get_text_block "tagline-block" as block %}
                     {{ block.content|richtext }}
@@ -73,22 +62,8 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-xs-4 ">
-                <div class="partner">
-                    {% get_logo "partner-logo-1" as logo %}
-                    {% get_logo_link "partner-logo-1" as logo_link %}
-                    <a href="{{ logo_link }}">{% image logo original %}</a>
-                </div>
-            </div>
-            <div class="col-xs-4">
-                <div class="partner">
-                    {% get_logo "partner-logo-2" as logo %}
-                    {% get_logo_link "partner-logo-2" as logo_link %}
-                    <a href="{{ logo_link }}">{% image logo original %}</a>
-                </div>
-            </div>
-            <div class="col-xs-4">
-                <div class="partner">
+            <div class="col-xs-12">
+              <div class="partner">
                     {% get_logo "partner-logo-3" as logo %}
                     {% get_logo_link "partner-logo-3" as logo_link %}
                     <a href="{{ logo_link }}">{% image logo original %}</a>
