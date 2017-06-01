@@ -425,6 +425,14 @@ article .block-Sharable {
     padding: 0px 2px;
     padding-top: 3px
   }
+  a {
+    color: $active-color;
+    &:hover {
+      color: $text-color;
+      text-decoration: none;
+      transition: color 0.25s;
+    }
+  }
 }
 
 .story .block-RelatedItems{
