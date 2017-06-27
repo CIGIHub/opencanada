@@ -145,6 +145,16 @@ ul.faces{
   }
 }
 
+.article-canadas-future-foreign-policymakers-2017-meet-millennials-making-mark-international-affairs #toc ul li {
+  width: 92px;
+}
+
+.article-canadas-future-foreign-policymakers-2017-meet-millennials-making-mark-international-affairs #toc ul li.spacer-2017 {
+  width: 46px;
+}
+
+
+
 #pager{
     height: 130px;
     position:relative;
@@ -305,8 +315,19 @@ ul.faces{
   }
 }
 
-@media(max-width: $screen-sm){
+@media(max-width: 992px){
 
+  .article-canadas-future-foreign-policymakers-2017-meet-millennials-making-mark-international-affairs #toc ul li {
+    width: 90px;
+  }
+
+  .article-canadas-future-foreign-policymakers-2017-meet-millennials-making-mark-international-affairs #toc ul li.spacer-2017 {
+    width: 0px;
+  }
+
+}
+
+@media(max-width: $screen-sm){
   article ul.share-links{
     margin: 0;
     li{

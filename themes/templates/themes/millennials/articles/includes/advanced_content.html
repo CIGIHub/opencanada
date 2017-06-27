@@ -5,6 +5,12 @@
     <div class="container">
         <div class="row" id="toc">
                 <ul class="faces">
+                    {% if self.slug == 'canadas-future-foreign-policymakers-2017-meet-millennials-making-mark-international-affairs' %}
+                      <li class="colour-filter spacer-2017">
+                        <div>&nbsp;</div>
+                      </li>
+                    {% endif %}
+
                     {% for chapter in self.chapters %}
                         <li class="colour-filter"><a href="#{{ chapter.value.heading|slugify }}">
                             <img src="{% static 'themes/millennials/img/' %}{{ chapter.value.heading|slugify }}-sm.png">
