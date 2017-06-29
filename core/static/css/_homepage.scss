@@ -76,3 +76,9 @@
     @include subheading;
   }
 }
+
+@media(min-width: 992px) {
+  .template-home-page .feature-box img {
+    height: 195px;
+  }
+}
