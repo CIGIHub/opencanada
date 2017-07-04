@@ -4,7 +4,6 @@ from .base import *
 
 # Disable debug mode
 DEBUG = False
-TEMPLATE_DEBUG = False
 
 ALLOWED_HOSTS = [get_env_variable('ALLOWED_HOSTS')]
 
