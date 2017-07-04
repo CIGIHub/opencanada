@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% load static article_tags compress core_tags wagtailcore_tags wagtailembeds_tags wagtailimages_tags %}
+
+{% block body_class %}template-{{ self.get_verbose_name|slugify }} light{% endblock %}
+
+{% block body_style %}
+    {% with bg_image=self.background_image_links.all.0 %}
+        {% image bg_image.image original as background_image %}
+
+        background-image:url('{{ background_image.url  }}');
+        background-position:{{ bg_image.position  }};
+    {% endwith %}
+
+{% endblock %}
+
+{% block theme_css %}
+    <link rel="stylesheet" type="text/x-scss" href="{% static 'themes/theWatchers/css/the_watchers.scss' %}">
+{% endblock %}
+
+{% block extra_js %}
+    <script>
+        FeatureStyles.MainFeatures.setSize( {{ self.full_bleed_image_size }} );
+    </script>
+    <script type="text/javascript" src="{% static 'themes/components/js/transparency.js' %}"></script>
+    <script type="text/javascript" src="{% static 'themes/theWatchers/js/the_watchers.js' %}"></script>
+
+{% endblock %}
+
+{% block header %}
+    {% include 'core/header.html' with tagline=False %}
+{% endblock %}
+
+{% block content %}
+
+    {% if self.main_image and self.include_main_image_overlay %}
+        {% include 'themes/theWatchers/articles/includes/article-feature.html' with metadata='themes/theWatchers/articles/includes/article-metadata.html' %}
+    {% endif %}
+
+    <article id="article-page">
+    
+        <div class="story">
+            <div class="stats">
+                <p><img src="{% static 'themes/theWatchers/img/rcmp_icon.png' %}">  
+                RCMP<br />
+                Royal Canadian Mounted Police<br />
+                est. February 1, 1920<br />
+                Employees: 28,461 (2015)<br />
+                Budget: 234B</p>
+                <p><img src="{% static 'themes/theWatchers/img/rcmp_icon.png' %}">
+                RCMP<br />
+                Royal Canadian Mounted Police<br />
+                est. February 1, 1920<br />
+                Employees: 28,461 (2015)<br />
+                Budget: 234B</p>
+                <p><img src="{% static 'themes/theWatchers/img/rcmp_icon.png' %}">
+                RCMP<br />
+                Royal Canadian Mounted Police<br />
+                est. February 1, 1920<br />
+                Employees: 28,461 (2015)<br />
+                Budget: 234B</p>
+            </div>
+            {% include 'articles/includes/json-embed.html' %}
+            {% include 'articles/includes/story-content.html' %}
+            {% include 'articles/includes/advanced-content.html' %}
+
+        </div>
+
+        {% if self.topics %}
+            <div class="container">
+                <div class="topics related narrow-content">
+                    <div class="topic-label"><i class="fa fa-tags"></i> Topics:</div>
+                    <ul class="list-inline">
+                        {% for topic in self.topics %}
+                            <li><a href="{% topic_url topic %}">{{ topic }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        {% endif %}
+    </article>
+
+{% endblock %}
+
+{% block footer %}
+   {% include 'themes/components/simple_footer.html' %}
+{% endblock %}
