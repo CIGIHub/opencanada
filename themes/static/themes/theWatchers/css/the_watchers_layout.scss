@@ -110,7 +110,7 @@ ul.share-links{
 	img{
 		margin: 0 auto;
 	}
-	@media(max-width: $screen-sm-max) {
+	@media(max-width: $screen-sm-max + 50) {
 		float: none;
 		width: 95%;
 		p{
