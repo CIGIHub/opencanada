@@ -1,0 +1,9 @@
+<ul class="share-links" data-page-id="{{ self.id }}">
+    <li class="twitter">
+        <div><a href="https://twitter.com/share?text={{ self.title|urlencode }}&url={{ self.full_url|urlencode:"" }}"><i class="fa fa-twitter"></i></a></div>
+    </li>
+    <li class="facebook">
+        {% if self.facebook_count > 499 %}<div class="count">{{ self.facebook_count }}</div>{% endif %}
+        <div><span class="facebook-share-link" data-url="{{ self.full_url }}"><i class="fa fa-facebook-square"></i></span></div>
+    </li>
+</ul>
