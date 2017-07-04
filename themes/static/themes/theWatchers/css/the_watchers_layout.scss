@@ -13,14 +13,26 @@
 	text-align: center;
 }
 
+.template-article-page .main-feature h1.medium{
+	font-size: 90px;
+	@media(max-width: $screen-sm-max) {
+		font-size: 45px;
+		margin-top: 0.25em;
+	}
+}
+
 .template-article-page .main-feature .contributors,
 .template-article-page .main-feature .contributor-label
 {
 	color: $white;
 	font-weight: bold;
 	margin-top: 0;
+	font-size: 18px;
 	.contributor-label{
 		color: $white;
+	}
+	@media(max-width: $screen-sm-max){
+		font-size: 14px;
 	}
 }
 
@@ -37,6 +49,9 @@
 }
 .template-article-page .main-feature .feature-wrapper{
 	top: 40%;
+	@media(max-width: $screen-sm-max){
+		top: 30%;
+	}
 }
 
 .template-article-page .main-feature .feature-wrapper .feature-text{
@@ -48,6 +63,10 @@
 	color: $watchers_red;
 	font-size: 2.5em;
 	margin-bottom: 20px;
+	@media(max-width: $screen-sm-max){
+		font-size: 2em;
+		margin-bottom: 15px;
+	}
 }
 
 article .block-PullQuote{
@@ -61,12 +80,19 @@ ul.share-links{
 	@include sharelinks;
 	text-align: center;
 	position: relative;
-	font-size: 1.6em;
+	
 	li{
-		display:inline-block;
+		display: inline-block;
+		i{
+			font-size: 2.4em;
+			@media(max-width: $screen-sm-max){
+				font-size: 1.6em;
+			}
+		}
 	}
 	div{
 		color: $white;
+		width: 40px;
 	}
 }
 
@@ -84,11 +110,11 @@ ul.share-links{
 	img{
 		margin: 0 auto;
 	}
-	@media(max-width: $screen-sm-max) {
+	@media(max-width: $screen-sm-max + 50) {
 		float: none;
-		width: 100%;
+		width: 95%;
 		p{
-			width: 30%;
+			width: 32%;
 			display: inline-block;
 		}
 	}
