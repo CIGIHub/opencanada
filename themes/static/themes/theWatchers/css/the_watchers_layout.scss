@@ -30,6 +30,9 @@
 	}
 	@media(max-width: $screen-sm-max) {
 		min-height: auto;
+		video{
+			display: none;
+		}
 	}
 }
 .template-article-page .main-feature .feature-wrapper{
