@@ -8,6 +8,9 @@ register = template.Library()
 
 @register.simple_tag(takes_context=True)
 def get_active_posting_page(context):
+    if 'page' not in context:
+        return None
+
     try:
         root = context['page'].get_root()
         listing_pages = JobPostingListPage.objects.descendant_of(root)
