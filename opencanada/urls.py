@@ -46,6 +46,11 @@ if settings.DEBUG:
         url(r'^403/$', TemplateView.as_view(template_name='403.html')),
     ]
 
+    # import debug_toolbar
+    # base_urlpatterns = [
+    #     url(r'^__debug__/', include(debug_toolbar.urls)),
+    # ] + base_urlpatterns
+
 urlpatterns = base_urlpatterns + [
     url(r'', include(wagtail_urls)),
 ]
