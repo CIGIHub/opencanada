@@ -14,6 +14,17 @@ INSTALLED_APPS = INSTALLED_APPS + (
     'interactives_content',
 )
 
+# To use the Django Debug Toolbar, make sure you pip install it and then uncomment the follow:
+# see root urls.py as well
+
+# INSTALLED_APPS = INSTALLED_APPS + (
+#     'debug_toolbar',
+# )
+
+# MIDDLEWARE_CLASSES = MIDDLEWARE_CLASSES[:2] + ('debug_toolbar.middleware.DebugToolbarMiddleware',) + MIDDLEWARE_CLASSES[2:]
+
+# INTERNAL_IPS = ['127.0.0.1']
+
 # Explicitly use database
 WAGTAILSEARCH_BACKENDS = {
     'default': {
