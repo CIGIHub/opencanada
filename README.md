@@ -19,6 +19,9 @@ OPEN_CANADA_BASE_URL - Base URL to use when referring to full URLs within the
 Wagtail admin backend. e.g. in notification emails. Don't include '/admin' or 
 a trailing slash.
 
+You can put them in a `.env` file beside manage.py. We use
+[django-dotenv](https://pypi.python.org/pypi/django-dotenv/1.4.1)
+
 ## Migrations
 Run any migrations required
 

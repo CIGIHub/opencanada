@@ -41,6 +41,8 @@ SECRET_KEY = get_env_variable('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# In Django 1.10 it defaults to 1000, this isn't enough for wagtail.
+DATA_UPLOAD_MAX_NUMBER_FIELDS = None
 
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
