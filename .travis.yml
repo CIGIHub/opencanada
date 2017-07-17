@@ -1,9 +1,9 @@
 language: python
 python:
-  - "3.4"
+  - "3.6"
   - "2.7"
 env:
-  - DJANGO=1.9.12
+  - DJANGO=1.11.3
 install:
   - pip install -q Django==$DJANGO --use-mirrors
   - pip install -q six
