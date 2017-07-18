@@ -5,9 +5,9 @@ python:
 env:
   - DJANGO=1.11.3
 install:
-  - pip install -q Django==$DJANGO --use-mirrors
+  - pip install -q Django==$DJANGO
   - pip install -q six
-  - pip install -r requirements/test.txt --use-mirrors
+  - pip install -r requirements/test.txt
 before_script:
   - flake8 .
 #  - isort -c -rc .
