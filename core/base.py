@@ -4,6 +4,8 @@ import re
 from datetime import timedelta
 
 import requests
+import six
+
 from django.conf import settings
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import models
@@ -113,7 +115,7 @@ class ShareLinksMixin(models.Model):
                 extra={"page": self}
             )
             return total_shares
-        for key, values in json_response.iteritems():
+        for key, values in six.iteritems(json_response):
             share_json = values.get('share', {})
             facebook_share_count = share_json.get('share_count', 0)
             if facebook_share_count > total_shares:
