@@ -92,6 +92,8 @@ class HomePage(ThemeablePage):
         current_set = []
         while rows > 0:
             row, height = self._fill_row(columns, article_list, used, rows)
+            if height == 0:
+                break
             current_set.append(row)
             rows = rows - height
 
@@ -101,7 +103,7 @@ class HomePage(ThemeablePage):
         if columns == 0 or not article_list:
             return [], 0
 
-        for article in article_list.all():
+        for article in article_list:
             typed_article = article.content_type.get_object_for_this_type(
                 id=article.id)
             if typed_article.feature_style.number_of_columns <= columns \
@@ -146,6 +148,8 @@ class HomePage(ThemeablePage):
         ).exclude(
             models.Q(seriespage__slippery=True) | models.Q(articlepage__slippery=True)
         ).order_by("-sticky", "-first_published_at")
+
+        articles = list(articles[:42])
 
         used = []
         if self.featured_item:

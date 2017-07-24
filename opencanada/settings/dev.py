@@ -14,6 +14,17 @@ INSTALLED_APPS = INSTALLED_APPS + (
     'interactives_content',
 )
 
+# To use the Django Debug Toolbar, make sure you pip install it and then uncomment the follow:
+# see root urls.py as well
+
+# INSTALLED_APPS = INSTALLED_APPS + (
+#     'debug_toolbar',
+# )
+
+# MIDDLEWARE_CLASSES = MIDDLEWARE_CLASSES[:2] + ('debug_toolbar.middleware.DebugToolbarMiddleware',) + MIDDLEWARE_CLASSES[2:]
+
+# INTERNAL_IPS = ['127.0.0.1']
+
 # Explicitly use database
 WAGTAILSEARCH_BACKENDS = {
     'default': {
@@ -41,15 +52,29 @@ LOGGING = {
             'format': '%(levelname)s %(asctime)s %(module)s '
                       '%(process)d %(thread)d %(message)s'
         },
+        'django.server': {
+            '()': 'django.utils.log.ServerFormatter',
+            'format': '[%(server_time)s] %(message)s',
+        },
     },
     'handlers': {
         'console': {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
             'formatter': 'verbose'
-        }
+        },
+        'django.server': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'formatter': 'django.server',
+        },
     },
     'loggers': {
+        'django.server': {
+            'handlers': ['django.server'],
+            'level': 'INFO',
+            'propagate': False,
+        },
         'django.template': {
             'level': 'WARNING',
             'handlers': ['console'],

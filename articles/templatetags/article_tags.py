@@ -1,9 +1,9 @@
 import json
 import re
-import urllib
 
 from django import template
 from django.utils.text import Truncator, slugify
+from six.moves.urllib_parse import quote_plus
 
 from articles.models import (ArticlePage, ExternalArticlePage, SeriesPage,
                              TopicListPage)
@@ -28,7 +28,7 @@ def topic_url(context, topic):
 @register.filter()
 def column_class(row):
     number_of_items = len(row)
-    return 12 / number_of_items
+    return str(12 // number_of_items)
 
 
 @register.filter()
@@ -145,14 +145,14 @@ def get_twitter_share_url(context, chapter):
             text.append(word)
         if len(text) > 0:
             text = ' '.join(text)
-            twitter_share_params.append('text={0}'.format(urllib.quote_plus(text)))
+            twitter_share_params.append('text={0}'.format(quote_plus(text)))
         if len(_hashtags) > 0:
             # You can collect hashtags and pass them along as a separate param...
             # However, doing so in this manner appends the hashtags to the end of the tweet, which we don't need to do
             # as the hashtags we want will already be in the tweet_text
             _hashtags = ','.join(_hashtags)
-            twitter_share_params.append('hashtags={0}'.format(urllib.quote_plus(_hashtags)))
-        twitter_share_params.append('url={0}'.format(urllib.quote_plus(anchor)))
+            twitter_share_params.append('hashtags={0}'.format(quote_plus(_hashtags)))
+        twitter_share_params.append('url={0}'.format(quote_plus(anchor)))
         twitter_share_params = '&amp;'.join(twitter_share_params)
         twitter_share_url = 'https://twitter.com/share?{0}'.format(twitter_share_params)
     return twitter_share_url
