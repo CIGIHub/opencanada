@@ -2,11 +2,13 @@
 [![Build Status](https://travis-ci.org/OpenCanada/website.svg?branch=master)](https://travis-ci.org/OpenCanada/website)
 [![Coverage Status](https://coveralls.io/repos/OpenCanada/website/badge.svg?branch=master)](https://coveralls.io/r/OpenCanada/website?branch=master)
 
-The opencanada.org website source
+The opencanada.org website source.
+
+Use Python 3.6+ and Django 1.11.x for best results.
 
 
 ## Setup
-  -  Set up a virtualenv for the project
+  -  Set up a virtualenv for the project (python3 -m venv opencanada)
   -  Install the appropriate requirements
     -  for development: `pip install -r requirements/dev.txt`
 
