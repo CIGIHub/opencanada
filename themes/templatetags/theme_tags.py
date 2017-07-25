@@ -13,7 +13,7 @@ def get_contact_email(context):
         try:
             defaults = context['request'].site.default_settings
             return defaults.contact_email
-        except ObjectDoesNotExist:
+        except (ObjectDoesNotExist, AttributeError):
             return ""
 
     return email
