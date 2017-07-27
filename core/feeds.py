@@ -9,7 +9,7 @@ from django.contrib.syndication.views import Feed
 from django.core.urlresolvers import reverse_lazy
 from django.utils.feedgenerator import Rss201rev2Feed
 
-from articles.models import ArticlePage, SeriesPage
+from greyjay.articles.models import ArticlePage, SeriesPage
 
 
 # Based on http://www.mechanicalgirl.com/post/customizing-django-rss-feed/

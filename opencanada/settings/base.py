@@ -67,7 +67,7 @@ INSTALLED_APPS = (
     'overextends',
 
     'core',
-    'themes',
+    'greyjay.themes',
 
     'wagtail.wagtailcore',
     'wagtail.wagtailadmin',
@@ -86,16 +86,16 @@ INSTALLED_APPS = (
 
     'favicon',
 
-    'content_notes',
+    'greyjay.content_notes',
     'interactives',
-    'articles',
-    'people',
-    'images',
-    'newsletter',
-    'events',
-    'jobs',
+    'greyjay.articles',
+    'greyjay.people',
+    'greyjay.images',
+    'greyjay.newsletter',
+    'greyjay.events',
+    'greyjay.jobs',
     'analytics',
-    'projects',
+    'greyjay.projects',
 
     'sitemap',
     'robots',

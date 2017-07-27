@@ -4,6 +4,8 @@ requests==2.13.0
 
 wagtail==1.10.1
 
+-e git+git://github.com/CIGIHub/greyjay.git#egg=greyjay
+
 # Recommended components (require additional setup):
 django-compressor==2.1.1
 django-libsass==0.6

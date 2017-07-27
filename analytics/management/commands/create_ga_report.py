@@ -2,12 +2,14 @@ from __future__ import unicode_literals
 
 import argparse
 import re
-import six
 from datetime import datetime
+
+import six
+
 from django.core.management.base import BaseCommand
 
 from analytics import utils
-from articles.models import ArticlePage, SeriesPage
+from gregjay.articles.models import ArticlePage, SeriesPage
 
 
 class Command(BaseCommand):

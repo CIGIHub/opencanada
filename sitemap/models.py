@@ -1,14 +1,21 @@
 from django.contrib.sitemaps import Sitemap
 from django.utils.timezone import datetime, get_default_timezone, make_aware
 
-from articles.models import (ArticleListPage, ArticlePage,
-                             ExternalArticleListPage, SeriesListPage,
-                             SeriesPage, Topic, TopicListPage)
 from core.models import HomePage
-from events.models import EventListPage, EventPage
-from jobs.models import JobPostingListPage, JobPostingPage
-from newsletter.models import NewsletterListPage, NewsletterPage
-from people.models import ContributorListPage, ContributorPage
+
+from gregjay.articles.models import (
+    ArticleListPage,
+    ArticlePage,
+    ExternalArticleListPage,
+    SeriesListPage,
+    SeriesPage,
+    Topic,
+    TopicListPage
+)
+from gregjay.events.models import EventListPage, EventPage
+from gregjay.jobs.models import JobPostingListPage, JobPostingPage
+from gregjay.newsletter.models import NewsletterListPage, NewsletterPage
+from gregjay.people.models import ContributorListPage, ContributorPage
 
 
 class HomePageSitemap(Sitemap):
