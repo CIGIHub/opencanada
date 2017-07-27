@@ -22,7 +22,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('core', '0019_set_contact_email'),
-        ('themes', '0006_create_themes'),
+        ('themes', '0001_initial'),
     ]
 
     operations = [

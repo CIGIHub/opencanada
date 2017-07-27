@@ -2,7 +2,7 @@ from __future__ import absolute_import, unicode_literals
 
 from django.test import Client, TestCase
 
-from gregjay.articles.models import ArticlePage, SeriesPage
+from greyjay.articles.models import ArticlePage, SeriesPage
 
 from .models import HomePage
 

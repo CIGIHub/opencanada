@@ -5,7 +5,7 @@ from django.conf import settings
 from django.db.models import ObjectDoesNotExist
 from six.moves.urllib.parse import urlparse
 
-from gregjay.articles.models import Topic
+from greyjay.articles.models import Topic
 
 register = template.Library()
 

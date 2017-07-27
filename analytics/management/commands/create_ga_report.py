@@ -9,7 +9,7 @@ import six
 from django.core.management.base import BaseCommand
 
 from analytics import utils
-from gregjay.articles.models import ArticlePage, SeriesPage
+from greyjay.articles.models import ArticlePage, SeriesPage
 
 
 class Command(BaseCommand):

@@ -3,7 +3,7 @@ from django.utils.timezone import datetime, get_default_timezone, make_aware
 
 from core.models import HomePage
 
-from gregjay.articles.models import (
+from greyjay.articles.models import (
     ArticleListPage,
     ArticlePage,
     ExternalArticleListPage,
@@ -12,10 +12,10 @@ from gregjay.articles.models import (
     Topic,
     TopicListPage
 )
-from gregjay.events.models import EventListPage, EventPage
-from gregjay.jobs.models import JobPostingListPage, JobPostingPage
-from gregjay.newsletter.models import NewsletterListPage, NewsletterPage
-from gregjay.people.models import ContributorListPage, ContributorPage
+from greyjay.events.models import EventListPage, EventPage
+from greyjay.jobs.models import JobPostingListPage, JobPostingPage
+from greyjay.newsletter.models import NewsletterListPage, NewsletterPage
+from greyjay.people.models import ContributorListPage, ContributorPage
 
 
 class HomePageSitemap(Sitemap):

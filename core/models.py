@@ -17,14 +17,14 @@ from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.models import register_snippet
 
-from gregjay.articles import fields as article_fields
-from gregjay.articles import models as article_models
-from gregjay.events import models as event_models
-from gregjay.jobs import models as jobs_models
-from gregjay.newsletter import models as newsletter_models
-from gregjay.people import models as people_models
-from gregjay.projects import models as project_models
-from gregjay.themes.models import ThemeablePage
+from greyjay.articles import fields as article_fields
+from greyjay.articles import models as article_models
+from greyjay.events import models as event_models
+from greyjay.jobs import models as jobs_models
+from greyjay.newsletter import models as newsletter_models
+from greyjay.people import models as people_models
+from greyjay.projects import models as project_models
+from greyjay.themes.models import ThemeablePage
 
 
 class StreamPage(ThemeablePage):
