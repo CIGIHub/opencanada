@@ -1,0 +1,58 @@
+$body-bg-color: #ffffff;
+$font-size-base: 18px;
+
+$serif: 'Source Sans Pro', sans-serif;
+$sans-serif: $serif;
+
+$white: #fff;
+$text-color: #000;
+$dark-blue: #002045;
+$blue-overlay: rgba(0,152,253,0.45);
+$grey: #666666;
+$lighter-grey: #cccccc;
+$text-link-color: $dark-blue;
+$text-link-hover-color: $grey;
+$header-bg-color: $dark-blue;
+
+$site-primary-color: $dark-blue;
+
+$overlay-link-color: #fff;
+$overlay-link-hover-color: $dark-blue;
+$main-border-width: 3px;
+
+$border-grey: solid 1px $dark-blue;
+
+$blurb-author-link-color: $dark-blue;
+$blurb-link-color: $dark-blue;
+$blurb-bio-text-color: $text-color;
+$blurb-border: $border-grey;
+
+
+$footer-bg-color: $body-bg-color;
+$footer-link-hover-color: $text-link-color;
+
+$article-quote-border-color: $dark-blue;
+$article-block-text-color: $dark-blue;
+$article-quote-text-color: $dark-blue;
+$article-shareable-text-color: $dark-blue;
+$article-block-bg-color: transparent;
+$article-block-border-width: $main-border-width;
+$article-block-border-color: $dark-blue;
+
+$article-quote-border-width: $main-border-width;
+
+$article-toc-border-width: $main-border-width;
+$article-toc-border-color: $dark-blue;
+
+$related-title-color: $dark-blue;
+
+$article-citation-color: $grey;
+$article-end-notes-color: $grey;
+
+$top-link-color: $dark-blue;
+$divider-color: $dark-blue;
+$topic-link-color: $dark-blue;
+$primary-topic-hover-color: $dark-blue;
+
+$contributor-label-color: $white;
+$related-contributors-color:$grey;

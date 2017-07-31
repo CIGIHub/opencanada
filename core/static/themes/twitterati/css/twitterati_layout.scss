@@ -1,0 +1,294 @@
+
+.category, .twitterati-list li, .twitterati-list h3, .share-this{
+  font-family: $sans-serif;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 130%;
+  text-transform: uppercase;
+}
+
+.media{
+  color: $media;
+  border-bottom: solid 5px $media;
+}
+.politics{
+  color: $politics;
+  border-bottom: solid 5px $politics;
+}
+.advocacy{
+  color: $advocacy;
+  border-bottom: solid 5px $advocacy;
+}
+.organizations{
+  color: $organizations;
+  border-bottom: solid 5px $organizations;
+}
+
+@media(max-width: $screen-sm){
+  .media{
+    color: $media;
+    border-bottom: solid 2px $media;
+  }
+  .politics{
+    color: $politics;
+    border-bottom: solid 2px $politics;
+  }
+  .advocacy{
+    color: $advocacy;
+    border-bottom: solid 2px $advocacy;
+  }
+  .organizations{
+    color: $organizations;
+    border-bottom: solid 2px $organizations;
+  }
+}
+
+#slideshow{
+  margin: auto;
+  position: fixed;
+  top: 20%;
+  left: 10%;
+  right: 10%;
+  z-index: 100;
+   max-width: 800px;
+  ul{
+    position: absolute;
+    padding: 0px;
+    background: black;
+    display: none;
+    min-height: 400px;
+    
+    li{
+      list-style: none;
+      color: white;
+      &.row{
+        margin: 0px;
+        padding: 40px 0px;
+      }
+    }
+
+    .display-cell{
+        display: table-cell;
+        vertical-align: middle;
+        float: none;
+    }
+  }
+
+  .slide{
+    margin: 0 auto;
+    .category{
+      width: 50%;
+      margin: 0 auto;
+      text-align: center;
+    }
+    a{
+      color: white;
+      &:hover{
+        color: #666;
+      }
+    }
+    .twitter-photo{
+      margin: 30px auto; 
+      border-radius: 38px;
+      height: 75px;
+      width: 75px;
+      background-size: cover;
+      background-position: center;
+      
+      &.media{
+           border: solid 2px $media;
+        }
+      &.politics{
+         border: solid 2px $politics;
+      }
+      &.advocacy{
+         border: solid 2px $advocacy;
+      }
+      &.organizations{
+         border: solid 2px $organizations;
+      }
+    }
+    h2{
+      border-bottom: none;
+      text-align: center;
+      font-size: 50px;
+      font-weight: 700;
+      margin-bottom: 0px;
+    }
+    .twitter-handle{
+      line-height: 130%;
+      text-align: center;
+      font-family: $sans-serif;
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 14px;
+    }
+    .bio{
+      margin-top: 20px;
+      line-height: 130%;
+    }
+    .share-this{
+      font-size: 14px;
+      font-weight: normal;
+      text-align: center;
+      padding-top: 30px;
+      .twitter-share-link, .facebook-share-link{
+        margin-left: 10px;
+      }
+      .facebook-share-link{
+        cursor: pointer;
+        &:hover{
+          color: #666;
+        }
+      }
+    }
+    @media(max-width: $screen-sm){
+      .category{
+        width: 100%;
+        font-size: 12px;
+      }
+      .twitter-handle{
+        margin-top: 10px;
+        font-size: 11px;
+      }
+      .twitter-photo{
+        margin: 10px auto;
+      }
+      h2{
+        font-size: 20px;
+      }
+      .bio{
+        margin-top: 10px;
+        font-size: 12px;
+      }
+      .share-this {
+        font-size: 12px;
+        padding-top: 10px;
+        .twitter-share-link, .facebook-share-link{
+          font-size: 16px;
+        }
+      }
+    }
+    @media(max-width: 320px){
+      .bio{
+        display: none;
+      }
+    }
+  }
+
+  .next, .prev, .close-box{
+    cursor: pointer;
+  }
+
+  .next, .prev{
+    font-size: 22px;
+    padding: 10px;
+    text-align: center;
+    &.inactive{
+      color: #666;
+    }
+  }
+  .close-box{
+    display: none;
+    background: white;
+    color: black;
+    position: absolute;
+    z-index: 1000;
+    top: -10px;
+    right: -15px;
+    border-radius: 40px;
+    font-size: 22px;
+    line-height: 24px;
+    padding: 5px 8px;
+  }
+
+  @media(max-width: $screen-sm){
+    top: 10%;
+    left: 5%;
+    right: 5%;
+    ul li.row{
+      padding: 20px 0;
+    }
+    .prev, .next{
+      padding: 0px;
+    }
+  }
+  @media(max-width: 320px){
+    top: 20%;
+    ul{
+      min-height: 300px;
+    }
+  }
+}
+
+.page-overlay{
+  display: none;
+  opacity:0.5;
+  background-color:#74f9ee;
+  width:100%;
+  height:100%;
+  z-index:20;
+  top:0;
+  left:0;
+  position:fixed;
+}
+
+.twitterati-list{
+  margin-top: 20px;
+  ul{
+    padding: 0px;
+    margin: 15px 0;
+    li {
+      list-style: none;
+      font-size: 14px;
+      a {
+        color: black;
+        text-transform: uppercase;
+        text-indent: -.7em;
+
+        &:hover::before {
+          float: left;
+          margin-left: -5px;
+          padding-right: 5px;
+          font-family: fontAwesome;
+          content: '•';
+        }
+      }
+      &.media-hover a:hover::before {
+        color: $media;
+
+      }
+      &.politics-hover a:hover::before {
+        color: $politics;
+      }
+      &.advocacy a:hover::before {
+        color: $advocacy;
+      }
+      &.organizations a:hover::before {
+        color: organizations;
+      }
+    }
+  }
+}
+.share-links{
+  @include sharelinks;
+  top: auto;
+  padding: 0;
+  margin-left: -70px;
+  &.below-feature{
+    padding-top: 2px;
+  }
+  li.facebook i, .count {
+    color: white;
+  }
+  @media(max-width: $screen-sm){
+    margin-left: 0px;
+  }
+}
+
+
+@media(max-width: $screen-sm){
+  .template-article-page .main-feature .feature-wrapper .feature-text{
+      padding-top: 100px;
+    }
+}
