@@ -15,7 +15,7 @@
   color: $politics;
   border-bottom: solid 5px $politics;
 }
-.advocacy{
+.advocacy, .advocacy\/academia {
   color: $advocacy;
   border-bottom: solid 5px $advocacy;
 }
@@ -57,7 +57,7 @@
     background: black;
     display: none;
     min-height: 400px;
-    
+
     li{
       list-style: none;
       color: white;
@@ -88,13 +88,13 @@
       }
     }
     .twitter-photo{
-      margin: 30px auto; 
+      margin: 30px auto;
       border-radius: 38px;
       height: 75px;
       width: 75px;
       background-size: cover;
       background-position: center;
-      
+
       &.media{
            border: solid 2px $media;
         }
