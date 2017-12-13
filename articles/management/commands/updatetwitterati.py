@@ -146,20 +146,21 @@ class Command(BaseCommand):
                 relative_path = os.path.join(folder, 'img', filename)
                 if not storage.exists(relative_path):
                     self.stdout.write(self.style.NOTICE("Attempting to download image file '{}'...".format(relative_path)))
-                    response = requests.get(image_url, stream=True)
-                    if response.status_code == 200:
-                        buffer = BytesIO()
-                        for chunk in response:
-                            buffer.write(chunk)
-                        fp = File(buffer, filename)
-                        storage.save(relative_path, fp)
-                        # Only update the image_url if we successfully saved the file to storage
-                        new_image_url = relative_path
-                        self.stdout.write(self.style.NOTICE("Image file downloaded to '{}'...".format(relative_path)))
-                    else:
-                        # Could not retrieve file from URL, so do not change it
-                        new_image_url = image_url
-                        self.stdout.write(self.style.WARNING("Could not download image file '{}'!".format(relative_path)))
+                    if image_url:
+                        response = requests.get(image_url, stream=True)
+                        if response.status_code == 200:
+                            buffer = BytesIO()
+                            for chunk in response:
+                                buffer.write(chunk)
+                            fp = File(buffer, filename)
+                            storage.save(relative_path, fp)
+                            # Only update the image_url if we successfully saved the file to storage
+                            new_image_url = relative_path
+                            self.stdout.write(self.style.NOTICE("Image file downloaded to '{}'...".format(relative_path)))
+                        else:
+                            # Could not retrieve file from URL, so do not change it
+                            new_image_url = image_url
+                            self.stdout.write(self.style.WARNING("Could not download image file '{}'!".format(relative_path)))
                 else:
                     # File is already there, so change the URL to reference it
                     new_image_url = relative_path
