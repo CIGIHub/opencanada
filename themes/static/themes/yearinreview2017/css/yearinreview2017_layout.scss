@@ -1,0 +1,615 @@
+/* ==========================================================================
+   Variables
+   ========================================================================== */
+
+$transparent: rgba(0,0,0,0);
+$black: rgba(0,0,0,1);
+$white: rgba(255, 255, 255, 1);
+$white50: rgba(255, 255, 255, 0.5);
+$gray: rgba(155, 155, 155, 1);
+$grey: $gray;
+$red: rgba(191, 30, 46, 1);
+$blue: rgba(6, 33, 81, 0.7);
+
+/* ==========================================================================
+   Webfonts
+   ========================================================================== */
+
+@import "../fonts/SanFranciscoText-Light/styles.css";
+$fontStack: "SF-Light", Helvetica, sans-serif;
+
+/* ==========================================================================
+   Typography
+   ========================================================================== */
+
+body {
+   font-family: $fontStack;
+   background: #fff;
+}
+
+main{
+  margin-top: -130px;
+  padding: 0;
+}
+
+p {
+   font-size: 14px;
+   line-height: 21px;
+   font-weight: 300;
+}
+
+.feature h1{
+    color: $white;
+    font-size: 2.5em;
+    line-height: 1.25em;
+    font-weight: 500;
+    max-width: 250px;
+}
+
+.story h2 {
+   font-size: 2em;
+   position: relative;
+   margin-top: 0;
+   padding-bottom: 1em;
+   margin-bottom: 0.5em;
+   line-height: 1.0em;
+   font-weight: 500;
+
+   a{
+     color: $white;
+   }
+
+    @media only screen and (max-width : 768px) {
+      padding-bottom: 21px;
+      margin-bottom: 25px;
+    }
+
+   &::after {
+      content: " ";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 4px;
+      width: 120px;
+      background: $red;
+   }
+}
+
+header{
+  background: transparent;
+  &.collapsed .wordmark{
+    display: block;
+  }
+  &.scrolled,
+  &.notscrolled{
+    background: transparent;
+  }
+  .logo,
+  &.collapsed .logo{
+    width: 50%;
+  }
+  .logo .wordmark{
+    line-height: 2.0em;
+  }
+
+  @media(max-width: $screen-md){
+    .header-row{
+      text-align: center;
+    }
+    .banner{
+      padding-top: 10px;
+    }
+    .logo .wordmark{
+      line-height: 1.0em;
+    }
+  }
+}
+
+.feature-text{
+  padding-top: 45vh;
+  @media(max-width: $screen-md){
+    padding-top:45vh;
+  }
+  ul.share-links{
+    padding: 0;
+    margin: 0;
+    li{
+      display: inline-block;
+      padding: 5px;
+      &::first-child{
+        padding-left: 0;
+      }
+      i{
+        transition: color 0.5s ease;
+        color: $grey;
+      }
+      &:hover{
+        cursor: pointer;
+        i{
+          color: $red;
+        }
+      }
+    }
+  }
+}
+
+/* ==========================================================================
+   Navigation
+   ========================================================================== */
+
+.navbar-brand-mobile {
+   z-index: 999;
+   height: 2.1em;
+   width: 2.1em;
+   position: absolute;
+   right: 0;
+
+   .line0, .line1, .line2 {
+      background: $white;
+      position: absolute;
+      width: 100%;
+      height: 1px;
+      top: 0;
+      left: -1.8em;
+      transform: translateX(1.8em)translateY((0));
+      opacity: 1;
+      transition: 0.5s all ease;
+   }
+   .line1 {
+      opacity: 1;
+      top: 0.65em;
+      height: 0.05em;
+      border-radius: 0%;
+      background: $white;
+      border: 0px solid $transparent;
+      transform: translateX(1.8em) rotate(0deg);
+   }
+    .line2 {
+     //  top: 0;
+       transform: translateX(1.8em)translateY(1.4em);
+       transition: 0.5s 0.1s all ease;
+    }
+
+   &:hover, &.hover {
+     cursor: pointer;
+      .line0 {
+         width: 1.6em;
+         opacity: 1;
+         transform:
+            translateX(2.0em)
+            translateY(1.1em)
+            rotate(45deg);
+
+      }
+      .line1 {
+         opacity: 1;
+         top: 0em;
+         height: 2.18em;
+         border-radius: 50%;
+         background: $transparent;
+         border: 1px solid $white;
+         transform: translateX(1.8em) rotate(180deg);
+         transition: 0.75s all ease;
+      }
+      .line2 {
+         width: 1.6em;
+         opacity: 1;
+         transform:
+            translateX(2.0em)
+            translateY(1.1em)
+            rotate(-45deg);
+      }
+   }
+   @media(max-width: $screen-md){
+      right: auto;
+
+      height: 1.5em;
+      width: 1.5em;
+      .line1 {
+        opacity: 1;
+        top: 0.6em;
+      }
+      .line2 {
+        transform: translateX(1.8em)translateY(1.2em);
+      }
+      &:hover, &.hover {
+        .line0 {
+          width: 1em;
+          transform:
+            translateX(2.05em)
+            translateY(0.7em)
+            rotate(45deg);
+        }
+        .line1 {
+          height: 1.5em;
+          transform: translateX(1.8em) rotate(180deg);
+        }
+        .line2 {
+          width: 1em;
+          transform:
+            translateX(2.05em)
+            translateY(0.7em)
+            rotate(-45deg);
+        }
+      }
+   }
+
+}
+
+
+
+/* ==========================================================================
+   Overlay Menu
+   ========================================================================== */
+
+article .toc ol{
+  border: none;
+}
+
+.mNav-menu {
+   background: rgba(0,0,0,0.85);
+   height: 100vh;
+   width: 100vw;
+   position: fixed;
+   display: block;
+   top: -100vh;
+   left: 0;
+   z-index: -99;
+   padding-top: 15em;
+   overflow-y: scroll;
+   transform: translateY(100vh);
+   opacity: 0;
+
+   transition: 1s all ease;
+
+   &.closed {
+      transform: translateY(100vh);
+      opacity: 1;
+      z-index: 99;
+   }
+
+    li {
+      &:hover{
+        color: $red;
+      }
+      a{
+        display: block;
+        color: $grey;
+        &:hover{
+          color: $white;
+        }
+      }
+    }
+}
+
+/* ==========================================================================
+   Structure
+   ========================================================================== */
+
+.full {
+  height: 100%;
+  min-height: 105vh;
+  display: block;
+
+   .container {
+      position: relative;
+      padding-top: 20vh;
+      padding-bottom: 5vh
+   }
+   @media(max-width: $screen-sm){
+     .container{
+        padding-top: 0;
+        padding-bottom: 1em;
+     }
+   }
+}
+
+article .story{
+  margin: 0;
+}
+
+.fade-right{
+  opacity: 0;
+  transition: opacity 600ms ease-in-out;
+
+  &.in-view{
+    opacity: 1;
+  }
+}
+
+.story {
+    .view-article{
+      padding-top: 3em;
+    }
+    img.richtext-image{
+      max-width: 50%;
+    }
+
+   .contributors {
+      font-size: 1.125em;
+      line-height: 1.25em;
+      letter-spacing: 1.4pt;
+      text-transform: capitalize;
+      font-weight: 500;
+      .contributor:after{
+        content:'\00A0\2022\00A0';
+      }
+      .contributor:last-child{
+        &:after{
+          content: '';
+        }
+      }
+      a {
+        display: inline-block;
+        transition: all 550ms ease;
+        transform: translateY(0.125em);
+        margin-top: -0.125em;
+        border-bottom: 1px solid $transparent;
+        &:hover {
+          transform: translateY(0em);
+          border-bottom: 1px dotted $red;
+        }
+      }
+   }
+   .article-date{
+        text-transform: uppercase;
+        padding-top: 3em;
+        letter-spacing: 2px;
+      }
+
+   div.container > div > div.col-md-4.col-sm-4.aos-init.aos-animate > a:hover {
+      border-bottom: 0 solid transparent;
+   }
+   @media(max-width: $screen-sm){
+     .summary, .view-article{
+       padding: 1em 0;
+     }
+   }
+}
+
+section {
+    overflow: hidden;
+    position: static;
+    transform: translate3d(0,0,0);
+    background-position: center center;
+    background-position: 50% 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    // transition: 1s all ease;
+    height: auto;
+
+    @media only screen and (min-width : 992px)  {
+      background-attachment: fixed;
+    }
+
+   * {
+      z-index: 6;
+   }
+
+    &::after {
+      content: " ";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 3;
+      @include gradient(rgba(0,0,0,0), rgba(0,0,0,0));
+      @include transition(0.5s all ease);
+   }
+}
+
+.story{
+   @media only screen and (max-width : 768px) {
+    padding-top: 120px;
+    }
+   background-color: $transparent;
+   &::before {
+      content: " ";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      background-color: $blue;
+      transition: 0.5s all ease;
+  }
+  &.feature::before{
+    background: none;
+  }
+}
+
+span.bgTrigger {
+   padding: 5px;
+   padding-left: 0;
+}
+
+
+/* ==========================================================================
+   Editor's Note
+   ========================================================================== */
+
+#intro {
+
+    a {
+        display: inline-block;
+        color: $red;
+        transition: all 550ms ease;
+        transform: translateY(0.125em);
+        margin-top: -0.125em;
+        &:hover {
+          color: $red;
+          transform: translateY(0em);
+          border-bottom: 1px dotted $red;
+        }
+        &::after {
+          content: " §";
+        }
+    }
+
+    &.story::before{
+      background-color: #1c1c1c;
+    }
+
+    hr {
+      width: 100%;
+      margin: 0 auto;
+      border-top: 1px dotted $white;
+      margin-top: 34px;
+      margin-bottom: 150px;
+    }
+
+}
+
+
+/* ==========================================================================
+   Articles
+   ========================================================================== */
+
+.block-RelatedItems{
+  margin: 0;
+}
+
+/* ==========================================================================
+   Arrows
+   ========================================================================== */
+
+.rot90 {
+   transform: rotate(0deg);
+   display: inline-block;
+   transition: 0.5s 0.25s all ease;
+   &:hover{
+      transform: rotate(90deg);
+   }
+}
+
+.hoverArrow {
+   clear: both;
+   display: block;
+   border: 1px solid $white;
+   width: 2em;
+   height: 2em;
+   border-radius: 50%;
+   position: relative;
+   transition: 1s all ease;
+
+   &::after {
+      width: 0.55em;
+      height: 0.55em;
+      border: 1px solid $white;
+      border-left: 0;
+      border-bottom: 0;
+      position: absolute;
+      left: -0.1em;
+      top: 0em;
+      content: " ";
+      transform: translateX(0.65em) translateY(0.65em) rotate(45deg);
+      transition: 0.5s all ease;
+   }
+
+   &::before {
+      width: 1.3em;
+      height: 1px;
+      background: $transparent;
+      position: absolute;
+      left: -2em;
+      top: 0.9em;
+      content: " ";
+      transform: translateX(0em);
+      transition: 0.5s all ease;
+   }
+
+   &:hover {
+      //border: 1px solid $transparent;
+      &::after {
+        width: 0.55em;
+        height: 0.55em;
+        border: 1px solid $white;
+        border-left: 0;
+        border-bottom: 0;
+        position: absolute;
+        left: 0em;
+        top: 0em;
+        content: " ";
+        transform: translateX(1.0em) translateY(0.65em) rotate(45deg);
+      }
+      &::before {
+         width: 1.3em;
+         height: 1px;
+         background: $white;
+         position: absolute;
+         left: -2em;
+         top: 0.9em;
+         content: " ";
+         transform: translateX(2.25em);
+      }
+   }
+}
+/* ==========================================================================
+   Pager
+   ========================================================================== */
+
+.paging {
+    display: none;
+    &.display{
+     display: block;
+     @media(max-width: $screen-sm){
+        display: none;
+     }
+   }
+
+   text-align: left;
+   transition: 1s all ease;
+   position: relative;
+   z-index: 2;
+
+   * {
+      display: inline-block;
+      line-height: 100%;
+   }
+
+   .hoverArrow {
+      border: 1px solid $transparent;
+   }
+   .aNext {
+      position: relative;
+      top: -0.5em;
+   }
+   .aBack {
+      position: relative;
+      transform: rotate(180deg);
+      top: -0.5em;
+   }
+   .aCurrent{
+     padding-right: 0.2em;
+   }
+   .aTotal{
+     padding-left: 0.2em;
+   }
+   a:hover {
+      border-bottom: 1px $transparent solid;
+   }
+}
+
+/* ==========================================================================
+   Images
+   ========================================================================== */
+
+.zoomImage {
+   background-position: 50% 55%;
+   @media only screen and (max-width : 480px) {
+               background-position: 50% 65%;
+             }
+}
+.story.zoomImage {
+   background-position: 70% 30%;
+
+  //  &::before {
+  //     background-color: rgba(15, 27, 47, 0.87);
+  //  }
+   &::after {
+      top: 10em;
+   }
+}
