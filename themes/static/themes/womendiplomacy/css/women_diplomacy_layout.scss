@@ -1,0 +1,94 @@
+.template-article-page{
+  	
+ 	.heading{
+		width: 50%;
+		margin-left: 5em;
+		
+ 		h1{
+			 font-size: 8em;
+			 width: 50%;
+			 right: 0;
+ 		}
+
+ 		ul.share-links{
+ 			@include sharelinks;
+			 position: relative;
+			 list-style-type: none;
+ 			li{
+ 				display:inline-block;
+ 				font-size: 32px;
+ 				a{
+ 					color: black;
+ 				}
+ 				.count{
+ 					margin-left: 10px;
+ 					font-size: 22px;
+ 					color: $body-bg-color;
+ 				}
+	 			.facebook-share-link:hover, a:hover{
+	 				color: $overlay-link-hover-color;
+	 				cursor: pointer;
+	 				transition: color 0.5s;
+	 			}
+ 			}
+ 		}
+ 	}	
+}
+
+article .block-PullQuote, article .block-Sharable {
+	border: none;
+	color: blue;
+	font-family: $sans-serif;
+	padding: 0 15px
+}
+
+.story{
+
+	width: 70%;
+	margin: auto;
+	h2{
+		font-family: $serif;
+		font-size: 22px;
+		font-weight: bold;
+		color: blue;
+		margin-bottom: 20px;
+	}
+
+	.table-of-contents{
+		width: 25%;
+		padding-bottom: 0px;
+		border-bottom: none;
+
+		h2{
+			margin-top: 0px;
+			// font-weight: normal;
+			font-size: 16px;
+			color: black;
+			font-family: $sans-serif;
+		}
+		ul{
+			padding: 0px;
+			margin: 0px;
+			font-family: $sans-serif;
+			li{
+				list-style: none;
+				a{
+					color: blue;
+					text-indent: -1.3em;
+					&:hover::before {
+			          float: left;
+			          margin-left: -5px;
+			          padding-right: 5px;
+			          font-family: fontAwesome;
+			          content: '•';
+			          color: blue;
+			          font-size: 3em;
+			        }
+				}
+			}
+			
+		}
+	}
+}
+
+

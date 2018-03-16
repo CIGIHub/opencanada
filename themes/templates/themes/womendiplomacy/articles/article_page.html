@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load static article_tags core_tags wagtailcore_tags wagtailembeds_tags wagtailimages_tags theme_tags %}
+
+{% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
+
+{% block theme_css %}
+    <link rel="stylesheet" type="text/x-scss" href="{% static 'themes/dark/css/dark.scss' %}">
+    <link rel="stylesheet" type="text/x-scss" href="{% static 'themes/womendiplomacy/css/women_diplomacy.scss' %}">
+{% endblock %}
+
+{% block extra_js %}
+    <script>
+        FeatureStyles.MainFeatures.setSize({{ self.full_bleed_image_size }});
+    </script>
+{% endblock %}
+
+{% block content %}
+
+    <article id="article-page">
+<div class="heading">
+     <ul class="share-links" data-page-id="{{ self.id }}">
+                <li class="twitter">
+                    
+                    <a href="https://twitter.com/share?text={{ self.title|urlencode }}&url={{ self.full_url|urlencode:"" }}"><i class="fa fa-twitter"></i></a>
+                </li>
+                <li class="facebook">
+                    <div><span class="facebook-share-link" data-url="{{ self.full_url }}"><i class="fa fa-facebook-square"></i></span></div>
+                </li>
+            </ul>
+             <div class="title">{% spaceless %}<h1>{{ self.title }}</h1> {% endspaceless %}</div> 
+</div>
+        <div class="story">
+          
+            {% include 'articles/includes/story-content.html' %}
+         
+            <div class="home-link"><a href="/"><img src="{% static 'img/opencanada-mark.png' %}"></a></div>
+        </div>
+
+        {% if self.topics %}
+            <div class="container">
+                <div class="topics related">
+                    <div class="topic-label"><i class="fa fa-tags"></i> Topics:</div>
+                    <ul class="list-inline">
+                        {% for topic in self.topics %}
+                            <li><a href="{% topic_url topic %}">{{ topic }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        {% endif %}
+    </article>
+
+
+{% endblock %}
+
+{% block footer %}
+   {% include 'themes/components/simple_footer.html' %}
+{% endblock %}
