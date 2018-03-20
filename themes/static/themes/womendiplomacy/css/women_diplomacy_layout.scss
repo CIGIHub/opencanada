@@ -1,13 +1,15 @@
 .template-article-page{
 
 	.background-cover {
-		background-image: url('../img/OC_FS-cover.jpg');
+		//background-image: url('../img/background-top.jpg');
 		top: -85px;
 		left: 0;
 		position: relative;
 		z-index: 0;
 		width: 100%;
-		height: 100%;
+		//height: 4012px;
+		//background-repeat: no-repeat;
+		//background-size: 100% auto;
 	}
 
 	header {
@@ -18,13 +20,19 @@
 		width: 50%;
 		padding-left: 10%;
 		color: $diplomacy-grey;
-		//position: absolute;
-		top: 2rem;
+		position: absolute;
+		top: 25vh;
 		left: 0;
 		z-index: 1;
 		
+		.subtitle {
+			font-size: 5rem;
+			font-weight: 600;
+		}
+
  		h1{
-			 font-size: 8em;
+			 font-size: 9em;
+			 font-weight:900;
  		}
 
  		ul.share-links{
@@ -60,7 +68,6 @@ border: none;
 color: $diplomacy-grey;
 position: relative;
 z-index: 2;
-margin-top: 5rem;
 margin-bottom: 5rem;
 	&:before {
 		content: '';
@@ -111,9 +118,15 @@ z-index:-1;
 }
 }
 
-.story{
+article .story{
+	background-image: url('../img/bottom-background.jpg');
 	z-index: 1;
 	color: $diplomacy-grey;
+	position:relative;
+	margin-top: 0;
+	top: -86px;
+	background-repeat: no-repeat;
+		background-size: 100%;
 	.dropcap-start {
 		p:first-of-type:first-letter {
 			background: linear-gradient(top, rgba(218,121,107,1) 0%, rgba(218,121,107,1) 92%, rgba(0,0,0,0) 93%,  rgba(0,0,0,0) 96%, rgba(218,121,107,1) 97%, rgba(218,121,107,1) 100%);

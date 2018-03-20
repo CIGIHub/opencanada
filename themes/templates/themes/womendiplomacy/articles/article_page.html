@@ -17,7 +17,7 @@
 {% block content %}
  
     <article id="article-page">
-  
+<img class="background-cover" src="{% static 'themes/womendiplomacy/img/background-top.jpg' %}">
 <div class="heading">
      <ul class="share-links" data-page-id="{{ self.id }}">
                 <li class="twitter">
@@ -28,8 +28,12 @@
                     <div><span class="facebook-share-link" data-url="{{ self.full_url }}"><i class="fa fa-facebook-square"></i></span></div>
                 </li>
             </ul>
-             <div class="title">{% spaceless %}<h1>{{ self.title }}</h1> {% endspaceless %}</div> 
+             <div class="title">{% spaceless %}<h1>{{ self.title }}:</h1>{% endspaceless %}</div>
+             <div class="subtitle">{{ self.excerpt|richtext }}</div>
+             
+              
 </div>
+
 
         <div class="story">
             {% include 'articles/includes/story-content.html' %}
