@@ -1,13 +1,30 @@
 .template-article-page{
-  	
+
+	.background-cover {
+		background-image: url('../img/OC_FS-cover.jpg');
+		top: -85px;
+		left: 0;
+		position: relative;
+		z-index: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+	header {
+		background: black;
+		color: white;
+	}
  	.heading{
 		width: 50%;
-		margin-left: 5em;
+		padding-left: 10%;
+		color: $diplomacy-grey;
+		//position: absolute;
+		top: 2rem;
+		left: 0;
+		z-index: 1;
 		
  		h1{
 			 font-size: 8em;
-			 width: 50%;
-			 right: 0;
  		}
 
  		ul.share-links{
@@ -17,76 +34,93 @@
  			li{
  				display:inline-block;
  				font-size: 32px;
- 				a{
- 					color: black;
+ 				a, i{
+					 color: $diplomacy-grey;
+					 &:hover {
+						color: black;
+						cursor: pointer;
+						transition: color 0.5s;
+					 }
  				}
- 				.count{
- 					margin-left: 10px;
- 					font-size: 22px;
- 					color: $body-bg-color;
- 				}
-	 			.facebook-share-link:hover, a:hover{
-	 				color: $overlay-link-hover-color;
-	 				cursor: pointer;
-	 				transition: color 0.5s;
-	 			}
  			}
  		}
  	}	
 }
 
-article .block-PullQuote, article .block-Sharable {
-	border: none;
-	color: blue;
-	font-family: $sans-serif;
-	padding: 0 15px
+article .block-PullQuote {
+	font-family: "Georgia";
+	font-size: 36px;
+	padding:5px 20%;
+	margin: auto;
+	font-weight: bold;
+font-style: italic;
+width: 100%;
+float: none;
+border: none;
+color: $diplomacy-grey;
+position: relative;
+z-index: 2;
+margin-top: 5rem;
+margin-bottom: 5rem;
+	&:before {
+		content: '';
+		position: absolute;
+		height: 100%;
+		width: 30px;
+		top: 0;
+		left: 19.5%;
+		background: $diplomacy-red;
+		z-index: -1;
+	}
+}
+
+article .block-Quote {
+	font-family: "Georgia";
+	font-size: 28px;
+	padding-left: 20%;
+	padding-right: 20%;
+	margin: auto;
+	font-weight: bold;
+font-style: italic;
+width: 100%;
+float: none;
+border: none;
+color: $diplomacy-grey;
+position: relative;
+z-index:2;
+line-height: 130%;
+margin-top: 5rem;
+margin-bottom: 5rem;
+&:before {
+	content:'“';
+	font-size: 150px;
+	position: absolute;
+	color: $diplomacy-red;
+	left: 17%;
+	top: 30px;
+z-index:-1;
+}
+&:after {
+	content:'';
+	height:5px;
+	width:10%;
+	left: 21%;
+	position: absolute;
+	bottom: -10px;
+	background: $diplomacy-red;
+}
 }
 
 .story{
-
-	width: 70%;
-	margin: auto;
-	h2{
-		font-family: $serif;
-		font-size: 22px;
-		font-weight: bold;
-		color: blue;
-		margin-bottom: 20px;
-	}
-
-	.table-of-contents{
-		width: 25%;
-		padding-bottom: 0px;
-		border-bottom: none;
-
-		h2{
-			margin-top: 0px;
-			// font-weight: normal;
-			font-size: 16px;
-			color: black;
-			font-family: $sans-serif;
-		}
-		ul{
-			padding: 0px;
-			margin: 0px;
-			font-family: $sans-serif;
-			li{
-				list-style: none;
-				a{
-					color: blue;
-					text-indent: -1.3em;
-					&:hover::before {
-			          float: left;
-			          margin-left: -5px;
-			          padding-right: 5px;
-			          font-family: fontAwesome;
-			          content: '•';
-			          color: blue;
-			          font-size: 3em;
-			        }
-				}
-			}
-			
+	z-index: 1;
+	color: $diplomacy-grey;
+	.dropcap-start {
+		p:first-of-type:first-letter {
+			background: linear-gradient(top, rgba(218,121,107,1) 0%, rgba(218,121,107,1) 92%, rgba(0,0,0,0) 93%,  rgba(0,0,0,0) 96%, rgba(218,121,107,1) 97%, rgba(218,121,107,1) 100%);
+			background: -webkit-linear-gradient(top, rgba(218,121,107,1) 0%, rgba(218,121,107,1) 92%, rgba(0,0,0,0) 93%, rgba(0,0,0,0) 96%, rgba(218,121,107,1) 97%, rgba(218,121,107,1) 100%);
+			background: -moz-linear-gradient(top, rgba(218,121,107,1) 0%, rgba(218,121,107,1) 92%, rgba(0,0,0,0) 93%, rgba(0,0,0,0) 96%, rgba(218,121,107,1) 97%, rgba(218,121,107,1) 100%);
+			background: -o-linear-gradient(top, rgba(218,121,107,1) 0%, rgba(218,121,107,1) 92%, rgba(0,0,0,0) 93%, rgba(0,0,0,0) 96%, rgba(218,121,107,1) 97%, rgba(218,121,107,1) 100%);
+			padding: 1rem;
 		}
 	}
 }

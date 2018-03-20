@@ -10,13 +10,14 @@
 
 {% block extra_js %}
     <script>
-        FeatureStyles.MainFeatures.setSize({{ self.full_bleed_image_size }});
+       {# FeatureStyles.MainFeatures.setSize({{ self.full_bleed_image_size }}); #}
     </script>
 {% endblock %}
 
 {% block content %}
-
+ 
     <article id="article-page">
+  
 <div class="heading">
      <ul class="share-links" data-page-id="{{ self.id }}">
                 <li class="twitter">
@@ -29,25 +30,13 @@
             </ul>
              <div class="title">{% spaceless %}<h1>{{ self.title }}</h1> {% endspaceless %}</div> 
 </div>
+
         <div class="story">
-          
             {% include 'articles/includes/story-content.html' %}
          
             <div class="home-link"><a href="/"><img src="{% static 'img/opencanada-mark.png' %}"></a></div>
         </div>
 
-        {% if self.topics %}
-            <div class="container">
-                <div class="topics related">
-                    <div class="topic-label"><i class="fa fa-tags"></i> Topics:</div>
-                    <ul class="list-inline">
-                        {% for topic in self.topics %}
-                            <li><a href="{% topic_url topic %}">{{ topic }}</a></li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
-        {% endif %}
     </article>
 
 
