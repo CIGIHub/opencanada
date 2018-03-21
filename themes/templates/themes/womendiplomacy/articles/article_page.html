@@ -4,48 +4,53 @@
 {% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
 
 {% block theme_css %}
-    <link rel="stylesheet" type="text/x-scss" href="{% static 'themes/dark/css/dark.scss' %}">
+    <link rel="stylesheet" type="text/x-scss" href="{% static 'themes/light/css/light.scss' %}">
     <link rel="stylesheet" type="text/x-scss" href="{% static 'themes/womendiplomacy/css/women_diplomacy.scss' %}">
 {% endblock %}
 
 {% block extra_js %}
-    <script>
-       {# FeatureStyles.MainFeatures.setSize({{ self.full_bleed_image_size }}); #}
-    </script>
+   <script type="text/javascript" src="{% static 'themes/womendiplomacy/js/women_diplomacy.js' %}"></script>
 {% endblock %}
 
 {% block content %}
  
-    <article id="article-page">
-<img class="background-cover" src="{% static 'themes/womendiplomacy/img/background-top.jpg' %}">
-<div class="heading">
-     <ul class="share-links" data-page-id="{{ self.id }}">
-                <li class="twitter">
-                    
-                    <a href="https://twitter.com/share?text={{ self.title|urlencode }}&url={{ self.full_url|urlencode:"" }}"><i class="fa fa-twitter"></i></a>
-                </li>
-                <li class="facebook">
-                    <div><span class="facebook-share-link" data-url="{{ self.full_url }}"><i class="fa fa-facebook-square"></i></span></div>
-                </li>
-            </ul>
-             <div class="title">{% spaceless %}<h1>{{ self.title }}:</h1>{% endspaceless %}</div>
-             <div class="subtitle">{{ self.excerpt|richtext }}</div>
-             
-              
-</div>
+<article id="article-page">
 
+    <img class="background-cover" src="{% static 'themes/womendiplomacy/img/background-top.jpg' %}">
 
-        <div class="story">
-            {% include 'articles/includes/story-content.html' %}
-         
-            <div class="home-link"><a href="/"><img src="{% static 'img/opencanada-mark.png' %}"></a></div>
+    <div class="heading">
+
+        <ul class="share-links" data-page-id="{{ self.id }}">
+            <li class="twitter">
+
+                <a href="https://twitter.com/share?text={{ self.title|urlencode }}&url={{ self.full_url|urlencode:" " }}">
+                    <i class="fa fa-twitter"></i>
+                </a>
+            </li>
+            <li class="facebook">
+                <div>
+                    <span class="facebook-share-link" data-url="{{ self.full_url }}">
+                        <i class="fa fa-facebook-square"></i></span></div>
+            </li>
+        </ul>
+
+        <div class="title">
+            {% spaceless %}
+                <h1>{{ self.title }}:</h1>
+            {% endspaceless %}
         </div>
 
-    </article>
+        <div class="subtitle">{{ self.excerpt|richtext }}</div>
 
+    </div>
 
-{% endblock %}
+    <div class="story">
+        {% include 'articles/includes/story-content.html' %}
+        <div class="home-link">
+            <a href="/"><img src="{% static 'img/opencanada-mark.png' %}"></a>
+        </div>
+    </div>
 
-{% block footer %}
-   {% include 'themes/components/simple_footer.html' %}
+</article>
+
 {% endblock %}
