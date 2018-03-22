@@ -34,6 +34,10 @@
             font-weight: 900;
         }
 
+        .contributors {
+            font-size: 14px;
+        }
+
         ul.share-links {
             @include sharelinks;
             position: relative;

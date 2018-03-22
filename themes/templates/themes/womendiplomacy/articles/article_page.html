@@ -33,15 +33,7 @@
                         <i class="fa fa-facebook-square"></i></span></div>
             </li>
         </ul>
-
-        <div class="title">
-            {% spaceless %}
-                <h1>{{ self.title }}:</h1>
-            {% endspaceless %}
-        </div>
-
-        <div class="subtitle">{{ self.excerpt|richtext }}</div>
-
+        {% include 'articles/includes/article-metadata.html' %}
     </div>
 
     <div class="story">
