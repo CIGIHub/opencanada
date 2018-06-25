@@ -10,6 +10,11 @@
                         <div>&nbsp;</div>
                       </li>
                     {% endif %}
+                    {% if self.slug == 'canadas-future-foreign-policymakers-2018-meet-millennials-making-mark-international-affairs' %}
+                      <li class="colour-filter spacer-2018">
+                        <div>&nbsp;</div>
+                      </li>
+                    {% endif %}
 
                     {% for chapter in self.chapters %}
                         <li class="colour-filter"><a href="#{{ chapter.value.heading|slugify }}">
