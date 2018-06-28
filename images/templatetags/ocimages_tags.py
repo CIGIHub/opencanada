@@ -5,7 +5,7 @@ import re
 
 from django import template
 from django.conf import settings
-from wagtail.wagtailimages.templatetags.wagtailimages_tags import ImageNode
+from wagtail.images.templatetags.wagtailimages_tags import ImageNode
 
 register = template.Library()
 allowed_filter_pattern = re.compile("^[A-Za-z0-9_\-\.]+$")

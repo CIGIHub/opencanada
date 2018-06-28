@@ -3,8 +3,8 @@ from __future__ import absolute_import
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.utils.html import format_html, format_html_join
-from wagtail.wagtailcore import hooks
-from wagtail.wagtailcore.whitelist import attribute_rule
+from wagtail.core import hooks
+from wagtail.core.whitelist import attribute_rule
 
 
 @hooks.register('construct_whitelister_element_rules')

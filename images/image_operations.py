@@ -1,5 +1,5 @@
 from PIL import Image, ImageDraw
-from wagtail.wagtailimages.image_operations import FillOperation
+from wagtail.images.image_operations import FillOperation
 from willow.plugins.pillow import PillowImage
 
 

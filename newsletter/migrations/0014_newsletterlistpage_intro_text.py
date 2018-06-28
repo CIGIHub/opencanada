@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-import wagtail.wagtailcore.fields
+import wagtail.core.fields
 from django.db import migrations, models
 
 
@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='newsletterlistpage',
             name='intro_text',
-            field=wagtail.wagtailcore.fields.RichTextField(default=1),
+            field=wagtail.core.fields.RichTextField(default=1),
             preserve_default=False,
         ),
     ]

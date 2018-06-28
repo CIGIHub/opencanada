@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 import modelcluster.fields
-import wagtail.wagtailcore.fields
+import wagtail.core.fields
 from django.db import migrations, models
 
 
@@ -181,7 +181,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('name', models.CharField(max_length=255)),
                 ('heading', models.TextField(default='', blank=True)),
-                ('content', wagtail.wagtailcore.fields.RichTextField(default='', blank=True)),
+                ('content', wagtail.core.fields.RichTextField(default='', blank=True)),
             ],
             options={
                 'abstract': False,

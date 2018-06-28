@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import migrations, models
-import wagtail.wagtailcore.fields
+import wagtail.core.fields
 
 import themes.models
 import django.db.models.deletion
@@ -32,7 +32,7 @@ class Migration(migrations.Migration):
             name='ProjectPage',
             fields=[
                 ('page_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='wagtailcore.Page')),
-                ('description', wagtail.wagtailcore.fields.RichTextField(default='', blank=True)),
+                ('description', wagtail.core.fields.RichTextField(default='', blank=True)),
                 ('theme', models.ForeignKey(on_delete=django.db.models.deletion.SET_NULL, default=themes.models.get_default_theme, to='themes.Theme', null=True)),
             ],
             options={
