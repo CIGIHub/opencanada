@@ -327,11 +327,16 @@ def on_publish(**kwargs):
 
 @python_2_unicode_compatible
 class SiteDefaults(models.Model):
-    site = models.OneToOneField('wagtailcore.Site',
-                                related_name='default_settings', unique=True)
+    site = models.OneToOneField(
+        'wagtailcore.Site',
+        related_name='default_settings',
+        unique=True,
+        on_delete=models.CASCADE
+    )
     default_external_article_source_logo = models.ForeignKey(
         'images.AttributedImage',
-        related_name='+'
+        related_name='+',
+        on_delete=models.CASCADE
     )
     contact_email = models.EmailField(blank=True, default="")
 

@@ -52,7 +52,7 @@ class Theme(models.Model):
     name = models.CharField(max_length=1024)
     folder = models.CharField(max_length=1024, default="themes/default")
     is_default = models.BooleanField(default=False)
-    content = models.ForeignKey(ThemeContent, null=True)
+    content = models.ForeignKey(ThemeContent, null=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -168,6 +168,7 @@ class LogoBlock(models.Model):
     usage = models.CharField(max_length=255, blank=True, default="")
     logo = models.ForeignKey(
         'images.AttributedImage',
+        on_delete=models.CASCADE
     )
     link = models.CharField(max_length=2048, blank=True, null=True)
 
@@ -187,7 +188,8 @@ register_snippet(LogoBlock)
 class ContentBlockLink(models.Model):
     block = models.ForeignKey(
         "TextBlock",
-        related_name='content_links'
+        related_name='content_links',
+        on_delete=models.CASCADE
     )
     theme_content = ParentalKey(
         "ThemeContent",
@@ -200,7 +202,8 @@ class ContentBlockLink(models.Model):
 class ContentFollowLink(models.Model):
     block = models.ForeignKey(
         "FollowLink",
-        related_name='content_links'
+        related_name='content_links',
+        on_delete=models.CASCADE
     )
     theme_content = ParentalKey(
         "ThemeContent",
@@ -213,7 +216,8 @@ class ContentFollowLink(models.Model):
 class ContentLogoLink(models.Model):
     block = models.ForeignKey(
         "LogoBlock",
-        related_name='content_links'
+        related_name='content_links',
+        on_delete=models.CASCADE
     )
     theme_content = ParentalKey(
         "ThemeContent",

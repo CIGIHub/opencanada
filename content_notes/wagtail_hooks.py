@@ -1,7 +1,7 @@
 
 from django.conf import settings
 from django.conf.urls import include, url
-from django.core import urlresolvers
+from django.urls import reverse
 from django.utils.html import format_html
 from wagtail.core import hooks
 from wagtail.core.whitelist import attribute_rule
@@ -36,7 +36,7 @@ def editor_js():
                        settings.STATIC_URL,
                        'content_notes/js/end-note-chooser.js',
                        'content_notes/js/hallo-endnotelink-plugin.js',
-                       urlresolvers.reverse('content_notes:choose')
+                       reverse('content_notes:choose')
                        )
 
 
