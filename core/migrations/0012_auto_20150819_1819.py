@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import migrations, models
-
+import django.db.models.deletion
 
 class Migration(migrations.Migration):
 
@@ -18,6 +18,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='sitedefaults',
             name='site',
-            field=models.OneToOneField(related_name='default_settings', to='wagtailcore.Site'),
+            field=models.OneToOneField(related_name='default_settings', to='wagtailcore.Site', on_delete=django.db.models.deletion.CASCADE),
         ),
     ]

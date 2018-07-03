@@ -6,7 +6,7 @@ import datetime
 import modelcluster.fields
 from django.db import migrations, models
 from django.utils.timezone import utc
-
+import django.db.models.deletion
 
 class Migration(migrations.Migration):
 
@@ -36,7 +36,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='newsletterexternalarticlelink',
             name='externalarticle_ptr',
-            field=models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, default=1, serialize=False, to='articles.ExternalArticlePage'),
+            field=models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, default=1, serialize=False, to='articles.ExternalArticlePage', on_delete=django.db.models.deletion.CASCADE),
             preserve_default=False,
         ),
         migrations.AddField(

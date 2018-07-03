@@ -2,8 +2,8 @@
 from __future__ import unicode_literals
 
 import wagtail.contrib.routable_page.models
+import django.db.models.deletion
 from django.db import migrations, models
-
 
 class Migration(migrations.Migration):
 
@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='TopicListPage',
             fields=[
-                ('page_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='wagtailcore.Page')),
+                ('page_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='wagtailcore.Page', on_delete=django.db.models.deletion.CASCADE)),
             ],
             options={
                 'abstract': False,

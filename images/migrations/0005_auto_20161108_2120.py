@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import migrations, models
-
+import django.db.models.deletion
 
 class Migration(migrations.Migration):
 
@@ -19,6 +19,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='attributedrendition',
             name='filter',
-            field=models.ForeignKey(related_name='+', blank=True, to='wagtailimages.Filter', null=True),
+            field=models.ForeignKey(related_name='+', blank=True, to='wagtailimages.Filter', null=True, on_delete=django.db.models.deletion.CASCADE),
         ),
     ]

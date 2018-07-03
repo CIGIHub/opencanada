@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import migrations, models
-
+import django.db.models.deletion
 
 class Migration(migrations.Migration):
 
@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
                 ('slug', models.SlugField(unique=True, max_length=255, blank=True)),
                 ('name', models.CharField(max_length=255)),
                 ('position', models.TextField(blank=True, null=True, choices=[('left top', 'left top'), ('left center', 'left center'), ('left bottom', 'left bottom'), ('right top', 'right top'), ('right center', 'right center'), ('right bottom', 'right bottom'), ('center top', 'center top'), ('center center', 'center center'), ('center bottom', 'center bottom')])),
-                ('image', models.ForeignKey(to='images.AttributedImage')),
+                ('image', models.ForeignKey(to='images.AttributedImage', on_delete=django.db.models.deletion.CASCADE)),
             ],
             options={
                 'abstract': False,
@@ -28,6 +28,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='articlebackgroundimagelink',
             name='background_image',
-            field=models.ForeignKey(related_name='+', to='articles.BackgroundImageBlock'),
+            field=models.ForeignKey(related_name='+', to='articles.BackgroundImageBlock', on_delete=django.db.models.deletion.CASCADE),
         ),
     ]

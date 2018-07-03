@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 import modelcluster.fields
 import wagtail.core.fields
 from django.db import migrations, models
-
+import django.db.models.deletion
 
 def create_themes(apps, schema_editor):
     Theme = apps.get_model("themes", "Theme")
@@ -192,7 +192,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('name', models.CharField(max_length=255)),
-                ('logo', models.ForeignKey(to='images.AttributedImage')),
+                ('logo', models.ForeignKey(to='images.AttributedImage', on_delete=django.db.models.deletion.CASCADE)),
             ],
             options={
                 'abstract': False,
@@ -202,21 +202,21 @@ class Migration(migrations.Migration):
             name='ContentBlockLink',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('block', models.ForeignKey(related_name='content_links', to='themes.TextBlock')),
+                ('block', models.ForeignKey(related_name='content_links', to='themes.TextBlock', on_delete=django.db.models.deletion.CASCADE)),
             ],
         ),
         migrations.CreateModel(
             name='ContentFollowLink',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('block', models.ForeignKey(related_name='content_links', to='themes.FollowLink')),
+                ('block', models.ForeignKey(related_name='content_links', to='themes.FollowLink', on_delete=django.db.models.deletion.CASCADE)),
             ],
         ),
         migrations.CreateModel(
             name='ContentLogoLink',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('block', models.ForeignKey(related_name='content_links', to='themes.LogoBlock')),
+                ('block', models.ForeignKey(related_name='content_links', to='themes.LogoBlock', on_delete=django.db.models.deletion.CASCADE)),
             ],
         ),
         migrations.CreateModel(
@@ -230,22 +230,22 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='contentlogolink',
             name='theme_content',
-            field=models.ForeignKey(related_name='logo_links', to='themes.ThemeContent'),
+            field=models.ForeignKey(related_name='logo_links', to='themes.ThemeContent', on_delete=django.db.models.deletion.CASCADE),
         ),
         migrations.AddField(
             model_name='contentfollowlink',
             name='theme_content',
-            field=models.ForeignKey(related_name='follow_links', to='themes.ThemeContent'),
+            field=models.ForeignKey(related_name='follow_links', to='themes.ThemeContent', on_delete=django.db.models.deletion.CASCADE),
         ),
         migrations.AddField(
             model_name='contentblocklink',
             name='theme_content',
-            field=models.ForeignKey(related_name='block_links', to='themes.ThemeContent'),
+            field=models.ForeignKey(related_name='block_links', to='themes.ThemeContent', on_delete=django.db.models.deletion.CASCADE),
         ),
         migrations.AddField(
             model_name='theme',
             name='content',
-            field=models.ForeignKey(to='themes.ThemeContent', null=True),
+            field=models.ForeignKey(to='themes.ThemeContent', null=True, on_delete=django.db.models.deletion.CASCADE),
         ),
         migrations.AddField(
             model_name='logoblock',

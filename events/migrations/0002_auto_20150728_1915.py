@@ -4,7 +4,6 @@ from __future__ import unicode_literals
 import django.db.models.deletion
 from django.db import migrations, models
 
-
 class Migration(migrations.Migration):
 
     dependencies = [
@@ -16,7 +15,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='EventListPage',
             fields=[
-                ('page_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='wagtailcore.Page')),
+                ('page_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='wagtailcore.Page', on_delete=django.db.models.deletion.CASCADE)),
             ],
             options={
                 'abstract': False,
@@ -26,7 +25,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='EventPage',
             fields=[
-                ('page_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='wagtailcore.Page')),
+                ('page_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='wagtailcore.Page', on_delete=django.db.models.deletion.CASCADE)),
                 ('date', models.DateTimeField(verbose_name='Event Date')),
                 ('location', models.CharField(max_length=255)),
                 ('event_link', models.URLField(max_length=255)),
