@@ -1,7 +1,6 @@
 
 from django.conf import settings
-from django.conf.urls import include, url
-from django.urls import reverse
+from django.urls import include, re_path, reverse
 from django.utils.html import format_html
 from wagtail.core import hooks
 from wagtail.core.whitelist import attribute_rule
@@ -12,7 +11,7 @@ from . import urls
 @hooks.register('register_admin_urls')
 def register_admin_urls():
     return [
-        url(r'^content_notes/', include(urls, namespace='content_notes')),
+        re_path(r'^content_notes/', include(urls, namespace='content_notes')),
     ]
 
 

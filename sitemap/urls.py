@@ -1,4 +1,4 @@
-from django.conf.urls import url
+from django.urls import re_path
 from django.contrib.sitemaps.views import sitemap
 
 from . import models
@@ -22,6 +22,6 @@ sitemaps = {
 }
 
 urlpatterns = [
-    url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps},
+    re_path(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps},
         name='django.contrib.sitemaps.views.sitemap')
 ]

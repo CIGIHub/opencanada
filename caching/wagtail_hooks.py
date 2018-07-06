@@ -1,6 +1,5 @@
-from django.conf.urls import url
 from django.contrib import messages
-from django.urls import reverse
+from django.urls import re_path, reverse
 from django.shortcuts import redirect, render
 from wagtail.admin.menu import MenuItem
 from wagtail.core import hooks
@@ -23,7 +22,7 @@ def clear_cache_view(request):
 @hooks.register('register_admin_urls')
 def urlconf_time():
     return [
-        url(r'^clear_cache/$', clear_cache_view, name='admin_clear_cache'),
+        re_path(r'^clear_cache/$', clear_cache_view, name='admin_clear_cache'),
     ]
 
 
