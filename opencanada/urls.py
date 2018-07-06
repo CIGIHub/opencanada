@@ -26,7 +26,6 @@ base_urlpatterns = [
     url(r'^error/$', lambda r: 1 / 0, name='error'),
     url(r'^template_error/$', template_error, name='template_error'),
     url(r'^core/', include('core.urls', namespace='core')),
-    url(r'^robots\.txt', include('robots.urls')),
 ]
 
 

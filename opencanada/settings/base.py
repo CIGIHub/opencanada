@@ -98,7 +98,6 @@ INSTALLED_APPS = (
     'projects',
 
     'sitemap',
-    'robots',
 )
 
 MIDDLEWARE_CLASSES = (
