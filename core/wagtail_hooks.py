@@ -1,7 +1,7 @@
 from __future__ import absolute_import
 
 from django.conf import settings
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.utils.html import format_html, format_html_join
 from wagtail.core import hooks
 from wagtail.core.whitelist import attribute_rule

@@ -6,7 +6,7 @@ from operator import attrgetter
 from django.conf import settings
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.contrib.syndication.views import Feed
-from django.core.urlresolvers import reverse_lazy
+from django.urls import reverse_lazy
 from django.utils.feedgenerator import Rss201rev2Feed
 
 from articles.models import ArticlePage, SeriesPage
