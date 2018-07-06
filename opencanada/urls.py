@@ -3,7 +3,7 @@ from __future__ import absolute_import, unicode_literals
 import os
 
 from django.conf import settings
-from django.urls import include, re_path
+from django.urls import include, path, re_path
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.views.defaults import server_error
@@ -25,7 +25,7 @@ base_urlpatterns = [
     re_path(r'^feed/$', MainFeed(), name='main_feed'),
     re_path(r'^error/$', lambda r: 1 / 0, name='error'),
     re_path(r'^template_error/$', template_error, name='template_error'),
-    re_path(r'^core/', include('core.urls', namespace='core')),
+    re_path(r'^core/', include('core.urls')),
 ]
 
 
@@ -37,7 +37,7 @@ if settings.DEBUG:
     base_urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     base_urlpatterns += static(settings.MEDIA_URL + 'images/', document_root=os.path.join(settings.MEDIA_ROOT, 'images'))
     base_urlpatterns += [
-        re_path(r'^django-admin/', include(admin.site.urls)),
+        path('django-admin/', admin.site.urls),
         re_path(r'^admin/choose-page/search/', chooser_search, name="wagtailadmin_choose_page_search"),
         re_path(r'^admin/', include(wagtailadmin_urls)),
         re_path(r'^500/$', server_error),

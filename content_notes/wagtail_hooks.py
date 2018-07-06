@@ -11,7 +11,7 @@ from . import urls
 @hooks.register('register_admin_urls')
 def register_admin_urls():
     return [
-        re_path(r'^content_notes/', include(urls, namespace='content_notes')),
+        re_path(r'^content_notes/', include(urls)),
     ]
 
 
