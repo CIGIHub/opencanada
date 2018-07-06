@@ -18,7 +18,11 @@ class AttributedImage(AbstractImage):
 
 
 class AttributedRendition(AbstractRendition):
-    image = models.ForeignKey(AttributedImage, related_name='renditions')
+    image = models.ForeignKey(
+        AttributedImage,
+        related_name='renditions',
+        on_delete=models.SET_NULL
+    )
 
     class Meta:
         unique_together = (

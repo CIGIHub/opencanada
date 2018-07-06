@@ -6,7 +6,7 @@ from django.utils.encoding import python_2_unicode_compatible
 
 @python_2_unicode_compatible
 class Analytics(models.Model):
-    page = models.OneToOneField('wagtailcore.Page')
+    page = models.OneToOneField('wagtailcore.Page', on_delete=models.CASCADE)
     last_period_views = models.PositiveIntegerField(default=0)
 
     class Meta:

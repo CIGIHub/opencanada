@@ -690,7 +690,8 @@ class ExternalArticlePage(Page, FeatureStyleFields, Promotable):
 class ArticleTopicLink(models.Model):
     topic = models.ForeignKey(
         "Topic",
-        related_name='article_links'
+        related_name='article_links',
+        on_delete=models.CASCADE
     )
     article = ParentalKey(
         "ArticlePage",
@@ -979,7 +980,8 @@ class SeriesPage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin,
 class Headline(FeatureStyleFields):
     containing_page = models.ForeignKey(
         'wagtailcore.Page',
-        related_name='historic_headlines'
+        related_name='historic_headlines',
+        on_delete=models.SET_NULL
     )
 
     featured_item = models.ForeignKey(
@@ -1002,6 +1004,7 @@ class BackgroundImageBlock(Orderable, UniquelySlugable):
     name = models.CharField(max_length=255)
     image = models.ForeignKey(
         'images.AttributedImage',
+        on_delete=models.SET_NULL
     )
     article = ParentalKey(
         "ArticlePage",
