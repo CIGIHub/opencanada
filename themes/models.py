@@ -174,7 +174,7 @@ class LogoBlock(models.Model):
     usage = models.CharField(max_length=255, blank=True, default="")
     logo = models.ForeignKey(
         'images.AttributedImage',
-        on_delete=models.SET_NULL
+        on_delete=models.CASCADE
     )
     link = models.CharField(max_length=2048, blank=True, null=True)
 

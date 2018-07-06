@@ -336,7 +336,7 @@ class SiteDefaults(models.Model):
     default_external_article_source_logo = models.ForeignKey(
         'images.AttributedImage',
         related_name='+',
-        on_delete=models.SET_NULL
+        on_delete=models.CASCADE
     )
     contact_email = models.EmailField(blank=True, default="")
 

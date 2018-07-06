@@ -981,7 +981,7 @@ class Headline(FeatureStyleFields):
     containing_page = models.ForeignKey(
         'wagtailcore.Page',
         related_name='historic_headlines',
-        on_delete=models.SET_NULL
+        on_delete=models.CASCADE
     )
 
     featured_item = models.ForeignKey(
@@ -1004,7 +1004,7 @@ class BackgroundImageBlock(Orderable, UniquelySlugable):
     name = models.CharField(max_length=255)
     image = models.ForeignKey(
         'images.AttributedImage',
-        on_delete=models.SET_NULL
+        on_delete=models.CASCADE
     )
     article = ParentalKey(
         "ArticlePage",
