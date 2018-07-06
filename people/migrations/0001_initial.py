@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 import django.db.models.deletion
-import wagtail.wagtailcore.blocks
+import wagtail.core.blocks
 from django.db import migrations, models
 
 import people.fields

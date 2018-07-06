@@ -8,12 +8,12 @@ from django.forms.widgets import Widget
 from django.template.loader import render_to_string
 from django.utils.functional import cached_property
 from django.utils.html import format_html
-from wagtail.wagtailcore import blocks
-from wagtail.wagtailcore.fields import StreamField
-from wagtail.wagtaildocs.blocks import DocumentChooserBlock
-from wagtail.wagtailembeds.blocks import EmbedBlock
-from wagtail.wagtailimages.blocks import ImageChooserBlock
-from wagtail.wagtailsnippets.blocks import SnippetChooserBlock
+from wagtail.core import blocks
+from wagtail.core.fields import StreamField
+from wagtail.documents.blocks import DocumentChooserBlock
+from wagtail.embeds.blocks import EmbedBlock
+from wagtail.images.blocks import ImageChooserBlock
+from wagtail.snippets.blocks import SnippetChooserBlock
 
 from interactives.models import Interactive
 from people.models import ContributorPage
@@ -88,7 +88,7 @@ class ContributorChooser(blocks.ChooserBlock):
 
     @cached_property
     def widget(self):
-        from wagtail.wagtailadmin.widgets import AdminPageChooser
+        from wagtail.admin.widgets import AdminPageChooser
         return AdminPageChooser(content_type=ContentType.objects.get_for_model(ContributorPage))
 
     def render_basic(self, value, context=None):

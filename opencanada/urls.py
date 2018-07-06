@@ -8,10 +8,10 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.views.defaults import server_error
 
-from wagtail.wagtailadmin import urls as wagtailadmin_urls
-from wagtail.wagtailcore import urls as wagtail_urls
-from wagtail.wagtaildocs import urls as wagtaildocs_urls
-from wagtail.wagtailsearch import urls as wagtailsearch_urls
+from wagtail.admin import urls as wagtailadmin_urls
+from wagtail.core import urls as wagtail_urls
+from wagtail.documents import urls as wagtaildocs_urls
+from wagtail.search import urls as wagtailsearch_urls
 
 from core.feeds import MainFeed
 from core.views import chooser_search, site_search, template_error

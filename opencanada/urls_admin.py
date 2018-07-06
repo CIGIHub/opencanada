@@ -2,8 +2,8 @@ from __future__ import absolute_import, unicode_literals
 
 from django.conf.urls import include, url
 from django.contrib import admin
-from wagtail.wagtailadmin import urls as wagtailadmin_urls
-from wagtail.wagtailcore import urls as wagtail_urls
+from wagtail.admin import urls as wagtailadmin_urls
+from wagtail.core import urls as wagtail_urls
 
 from core.views import chooser_search
 

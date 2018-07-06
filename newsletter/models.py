@@ -4,12 +4,12 @@ from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.timezone import now
 from modelcluster.fields import ParentalKey
-from wagtail.wagtailadmin.edit_handlers import (FieldPanel, InlinePanel,
+from wagtail.admin.edit_handlers import (FieldPanel, InlinePanel,
                                                 ObjectList, PageChooserPanel,
                                                 TabbedInterface)
-from wagtail.wagtailcore.fields import RichTextField
-from wagtail.wagtailcore.models import Orderable, Page
-from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
+from wagtail.core.fields import RichTextField
+from wagtail.core.models import Orderable, Page
+from wagtail.images.edit_handlers import ImageChooserPanel
 
 from themes.models import ThemeablePage
 

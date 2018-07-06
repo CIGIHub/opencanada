@@ -1,8 +1,8 @@
 from __future__ import absolute_import, unicode_literals
 
 from django.contrib import admin
-from wagtail.wagtailcore.models import PageRevision
-from wagtail.wagtailembeds.models import Embed
+from wagtail.core.models import PageRevision
+from wagtail.embeds.models import Embed
 
 from . import models
 

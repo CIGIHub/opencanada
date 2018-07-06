@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-import wagtail.contrib.wagtailroutablepage.models
+import wagtail.contrib.routable_page.models
 from django.db import migrations, models
 
 
@@ -21,7 +21,7 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
             },
-            bases=(wagtail.contrib.wagtailroutablepage.models.RoutablePageMixin, 'wagtailcore.page'),
+            bases=(wagtail.contrib.routable_page.models.RoutablePageMixin, 'wagtailcore.page'),
         ),
         migrations.AddField(
             model_name='topic',

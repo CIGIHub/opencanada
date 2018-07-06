@@ -1,9 +1,9 @@
 from django.db import models
-from wagtail.wagtailadmin.edit_handlers import (FieldPanel, ObjectList,
+from wagtail.admin.edit_handlers import (FieldPanel, ObjectList,
                                                 RichTextFieldPanel,
                                                 TabbedInterface)
-from wagtail.wagtailcore.fields import RichTextField
-from wagtail.wagtailcore.models import Page
+from wagtail.core.fields import RichTextField
+from wagtail.core.models import Page
 
 from core.base import PaginatedListPageMixin, ShareLinksMixin
 from themes.models import ThemeablePage

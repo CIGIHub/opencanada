@@ -13,7 +13,7 @@ COMPRESS_OFFLINE = True
 
 WAGTAILSEARCH_BACKENDS = {
     'default': {
-        'BACKEND': 'wagtail.wagtailsearch.backends.elasticsearch2',
+        'BACKEND': 'wagtail.search.backends.elasticsearch2',
         'INDEX': get_env_variable('ELASTICSEARCH_INDEX'),
         'TIMEOUT': 5000,
         # This setting will not work as intended with the ElasticSearch provided by http://www.searchly.com/
@@ -57,7 +57,7 @@ RAVEN_CONFIG = {
 }
 
 INSTALLED_APPS = INSTALLED_APPS + (
-    'wagtail.contrib.wagtailfrontendcache',
+    'wagtail.contrib.frontend_cache',
     'raven.contrib.django.raven_compat',
     'interactives_content',
     'caching',
@@ -65,7 +65,7 @@ INSTALLED_APPS = INSTALLED_APPS + (
 
 WAGTAILFRONTENDCACHE = {
     'cloudflare': {
-        'BACKEND': 'wagtail.contrib.wagtailfrontendcache.backends.CloudflareBackend',
+        'BACKEND': 'wagtail.contrib.frontend_cache.backends.CloudflareBackend',
         'EMAIL': get_env_variable('CLOUDFLARE_EMAIL'),
         'TOKEN': get_env_variable('CLOUDFLARE_TOKEN'),
         'ZONEID': get_env_variable('CLOUDFLARE_ZONE_ID'),

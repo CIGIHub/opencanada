@@ -7,9 +7,9 @@ from django.db import models
 from django.forms.widgets import HiddenInput
 from django.utils.encoding import python_2_unicode_compatible
 from modelcluster.fields import ParentalKey
-from wagtail.wagtailadmin.edit_handlers import FieldPanel, RichTextFieldPanel
-from wagtail.wagtailcore.fields import RichTextField
-from wagtail.wagtailcore.models import Orderable
+from wagtail.admin.edit_handlers import FieldPanel, RichTextFieldPanel
+from wagtail.core.fields import RichTextField
+from wagtail.core.models import Orderable
 
 logger = logging.getLogger('OpenCanada.ArticleModels')
 
