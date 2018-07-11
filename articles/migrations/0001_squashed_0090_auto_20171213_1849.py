@@ -16,16 +16,201 @@ import wagtail.wagtaildocs.blocks
 import wagtail.wagtailembeds.blocks
 import wagtail.wagtailimages.blocks
 
+def create_pages_0003(apps, schema_editor):
+    Page = apps.get_model("wagtailcore", "Page")
+    SeriesListPage = apps.get_model("articles", "SeriesListPage")
+    ArticleListPage = apps.get_model("articles", "ArticleListPage")
+    home_page = Page.objects.get(slug="home")
+    ContentType = apps.get_model("contenttypes", "ContentType")
+
+    article_list_page_content_type, created = ContentType.objects.get_or_create(
+        model='articlelistpage',
+        app_label='articles'
+    )
+    # Create features page
+    features_page = ArticleListPage.objects.create(
+        title="Features",
+        slug='features',
+        content_type_id=article_list_page_content_type.pk,
+        path='000100010001',
+        depth=3,
+        numchild=0,
+        url_path='/home/features/',
+    )
+    home_page.numchild += 1
+
+    series_list_page_content_type, created = ContentType.objects.get_or_create(
+        model='serieslistpage',
+        app_label='articles'
+    )
+
+    # Create indepth page
+    SeriesListPage.objects.create(
+        title="In Depth",
+        slug='indepth',
+        content_type_id=series_list_page_content_type.pk,
+        path='000100010002',
+        depth=3,
+        numchild=0,
+        url_path='/home/indepth/',
+    )
+
+    home_page.numchild += 1
+    home_page.save()
+
+def create_pages_0006(apps, schema_editor):
+    Page = apps.get_model("wagtailcore", "Page")
+    TopicListPage = apps.get_model("articles", "TopicListPage")
+    home_page = Page.objects.get(slug="home")
+    ContentType = apps.get_model("contenttypes", "ContentType")
+
+    topic_list_page_content_type, created = ContentType.objects.get_or_create(
+        model='topiclistpage',
+        app_label='articles'
+    )
+    # Create topics page
+    topics_page = TopicListPage.objects.create(
+        title="Topics",
+        slug='topics',
+        content_type_id=topic_list_page_content_type.pk,
+        path='000100010004',
+        depth=3,
+        numchild=0,
+        url_path='/home/topics/',
+    )
+    home_page.numchild += 1
+    home_page.save()
+
+def create_categories_0008(apps, schema_editor):
+    ArticleCategory = apps.get_model("articles", "ArticleCategory")
+
+    # Create default categories
+    ArticleCategory.objects.create(
+        name="Feature",
+        slug='feature',
+    )
+    ArticleCategory.objects.create(
+        name="Roundtable Blog Post",
+        slug='roundtable-blog-post',
+    )
+    ArticleCategory.objects.create(
+        name="Dispatch Blog Post",
+        slug='dispatch-blog-post',
+    )
+    ArticleCategory.objects.create(
+        name="Commentary",
+        slug='commentary',
+    )
+    ArticleCategory.objects.create(
+        name="Essay",
+        slug='essay',
+    )
+    ArticleCategory.objects.create(
+        name="Infographic",
+        slug='infographic',
+    )
+    ArticleCategory.objects.create(
+        name="Interview",
+        slug='interview',
+    )
+    ArticleCategory.objects.create(
+        name="Explainer",
+        slug='explainer',
+    )
+    ArticleCategory.objects.create(
+        name="Rapid Response",
+        slug='rapid-response',
+    )
+
+def create_colours_0016(apps, schema_editor):
+    Colour = apps.get_model("articles", "Colour")
+
+    Colour.objects.create(
+        name="Black",
+        hex_value="#000000"
+    )
+
+    Colour.objects.create(
+        name="White",
+        hex_value="#FFFFFF"
+    )
+
+def create_styles_0022(apps, schema_editor):
+    FeatureStyle = apps.get_model("articles", "FeatureStyle")
+
+    FeatureStyle.objects.create(
+        name="Single Column - Text Only",
+        number_of_columns=1,
+        number_of_rows=1,
+        include_image=False,
+        overlay_text=False
+    )
+
+    FeatureStyle.objects.create(
+        name="Single Column - Text and Image",
+        number_of_columns=1,
+        number_of_rows=1,
+        include_image=True,
+        overlay_text=False
+    )
+
+    FeatureStyle.objects.create(
+        name="Full Width - Text overlayed on image",
+        number_of_columns=3,
+        number_of_rows=1,
+        include_image=True,
+        overlay_text=True
+    )
+
+    FeatureStyle.objects.create(
+        name="Full Width - Double Height - Text overlayed on image",
+        number_of_columns=3,
+        number_of_rows=2,
+        include_image=True,
+        overlay_text=True
+    )
+
+def set_themes_0066(apps, schema_editor):
+    Theme = apps.get_model("themes", "Theme")
+
+    default_theme = Theme.objects.get(is_default=True)
+
+    page_types = ['ArticleListPage', 'ExternalArticleListPage', 'SeriesListPage', 'TopicListPage']
+
+    for page_type in page_types:
+        page_model = apps.get_model('articles', page_type)
+        pages = page_model.objects.all()
+
+        for page in pages:
+            page.theme_id = default_theme.id
+            page.save()
+
+def set_themes_0068(apps, schema_editor):
+    Theme = apps.get_model("themes", "Theme")
+
+    default_theme = Theme.objects.get(is_default=True)
+
+    page_types = ['ArticlePage', 'SeriesPage']
+
+    for page_type in page_types:
+        page_model = apps.get_model('articles', page_type)
+        pages = page_model.objects.all()
+
+        for page in pages:
+            if not page.theme:
+                page.theme_id = default_theme.id
+                page.save()
+
 # Functions from the following migrations need manual copying.
 # Move them and any dependencies into this file, then update the
 # RunPython operations to refer to the local versions:
-# articles.migrations.0003_initial_pages
-# articles.migrations.0006_create_topics_page
-# articles.migrations.0008_create_categories
-# articles.migrations.0016_create_colours
-# articles.migrations.0022_create_feature_styles
-# articles.migrations.0066_assign_theme_to_pages
-# articles.migrations.0068_auto_20151006_2148
+# articles.migrations.0003_initial_pages - create_pages_0003
+# articles.migrations.0006_create_topics_page - create_pages_0006
+# articles.migrations.0008_create_categories - create_categories_0008
+# articles.migrations.0016_create_colours - create_colours_0016
+# articles.migrations.0022_create_feature_styles - create_styles_0022
+# articles.migrations.0066_assign_theme_to_pages - set_themes_0066
+# articles.migrations.0068_auto_20151006_2148 - set_themes_0068
 
 class Migration(migrations.Migration):
 
@@ -172,7 +357,7 @@ class Migration(migrations.Migration):
             field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='article_links', to='people.ContributorPage'),
         ),
         migrations.RunPython(
-            code=articles.migrations.0003_initial_pages.create_pages,
+            code=create_pages_0003,
         ),
         migrations.CreateModel(
             name='Headline',
@@ -200,7 +385,7 @@ class Migration(migrations.Migration):
             field=models.SlugField(blank=True, max_length=255, unique=True),
         ),
         migrations.RunPython(
-            code=articles.migrations.0006_create_topics_page.create_pages,
+            code=create_pages_0006,
         ),
         migrations.CreateModel(
             name='ArticleCategory',
@@ -220,7 +405,7 @@ class Migration(migrations.Migration):
             preserve_default=False,
         ),
         migrations.RunPython(
-            code=articles.migrations.0008_create_categories.create_categories,
+            code=create_categories_0008,
         ),
         migrations.AlterModelOptions(
             name='articlecategory',
@@ -260,7 +445,7 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.RunPython(
-            code=articles.migrations.0016_create_colours.create_colours,
+            code=create_colours_0016,
         ),
         migrations.CreateModel(
             name='FontStyle',
@@ -343,7 +528,7 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.RunPython(
-            code=articles.migrations.0022_create_feature_styles.create_styles,
+            code=create_styles_0022,
         ),
         migrations.AddField(
             model_name='articlepage',
@@ -703,7 +888,7 @@ class Migration(migrations.Migration):
             field=models.ForeignKey(default=themes.models.get_default_theme, null=True, on_delete=django.db.models.deletion.SET_NULL, to='themes.Theme'),
         ),
         migrations.RunPython(
-            code=articles.migrations.0066_assign_theme_to_pages.set_themes,
+            code=set_themes_0066,
         ),
         migrations.RemoveField(
             model_name='chapteredarticlepage',
@@ -713,7 +898,7 @@ class Migration(migrations.Migration):
             name='ChapteredArticlePage',
         ),
         migrations.RunPython(
-            code=articles.migrations.0068_auto_20151006_2148.set_themes,
+            code=set_themes_0068,
         ),
         migrations.CreateModel(
             name='BackgroundImageBlock',
