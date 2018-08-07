@@ -5,7 +5,7 @@
         <div class="feature-image fullscreen-bg" {% if not self.video_document %} style="background-image: url('{{ background_image.url }}')" {% endif %}>
             <div class="feature-image-overlay" {% if self.opacity %} style="opacity:{{ self.opacity }} {% endif %}"></div>
             {% if self.video_document %}
-                <video autoplay loop class="fullscreen-bg__video" poster="{{ background_image.url }}" id="bg_vid">
+                <video autoplay loop class="fullscreen-bg__video" poster="{{ background_image.url }}" id="bg_vid" muted>
                     <source src="{{ self.get_video_src }}" type="video/mp4">
                 </video>
             {% endif %}
