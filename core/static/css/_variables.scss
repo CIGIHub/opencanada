@@ -9,7 +9,6 @@ $very-light-grey: #cccccc;
 $mid-grey: #d6d6d6;
 $background-grey: #f3f0f0;
 
-
 $site-primary-color: #bf1e2e;
 
 //screen settings
@@ -27,7 +26,6 @@ $border-white: solid 1px $white !default;
 $border-light-grey: solid 1px $mid-grey;
 $border-very-light-grey: solid 1px $very-light-grey;
 $social-border: $border-white !default;
-
 
 //body font
 $body-bg-color: #fff !default;
@@ -59,7 +57,7 @@ $header-link-hover-color: #000 !default;
 //text colors
 $heading-color: #000 !default;
 $subheading-color: #999999 !default;
-$article-list-link-color: #000!default;
+$article-list-link-color: #000 !default;
 $article-list-link-hover-color: $light-grey !default;
 
 $caption-color: #929191 !default;
@@ -84,8 +82,8 @@ $blurb-border-color: $grey !default;
 $blurb-border: 1px solid $blurb-border-color !default;
 
 $article-block-bg-color: transparent !default;
-$article-block-border-width:3px !default;
-$article-block-border-color:$site-primary-color !default;
+$article-block-border-width: 3px !default;
+$article-block-border-color: $site-primary-color !default;
 $article-block-text-color: $text-color !default;
 $article-block-link-color: $site-primary-color !default;
 $article-block-list-marker-color: $grey !default;
@@ -105,11 +103,11 @@ $article-toc-link-hover-color: $text-link-hover-color !default;
 $article-toc-link-underline: none !default;
 $article-teaser-color: $text-color !default;
 
-$article-citation-color:$light-grey !default;
-$article-end-notes-color:$light-grey !default;
+$article-citation-color: $light-grey !default;
+$article-end-notes-color: $light-grey !default;
 
 $contributor-label-color: $caption-color !default;
-$related-contributors-color:$light-grey !default;
+$related-contributors-color: $light-grey !default;
 $related-contributors-hover-color: $text-color !default;
 $related-title-color: $site-primary-color !default;
 $related-title-hover-color: $text-color !default;
@@ -129,7 +127,7 @@ $main-menu-color: #fff !default;
 
 //bootstrap overrides
 $input-border-focus: $site-primary-color !default;
-$font-family-sans-serif:  $sans-serif;
+$font-family-sans-serif: $sans-serif;
 $font-family-serif: $serif;
 $pager-hover-bg: $black;
 
