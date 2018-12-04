@@ -21,4 +21,4 @@ raven==6.0.0
 psycopg2==2.7.6.1
 google-api-python-client==1.4.1
 
-django-overextends==0.4.2
+django-overextends==0.4.3
