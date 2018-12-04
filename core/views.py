@@ -3,13 +3,13 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.http import Http404, HttpResponse, JsonResponse
 from django.shortcuts import render
 from wagtail.utils.pagination import paginate
-from wagtail.wagtailadmin.forms import SearchForm
-from wagtail.wagtailadmin.views.chooser import (filter_page_type,
+from wagtail.admin.forms import SearchForm
+from wagtail.admin.views.chooser import (filter_page_type,
                                                 page_models_from_string,
                                                 shared_context)
-from wagtail.wagtailcore.models import Page
-from wagtail.wagtailsearch.models import Query
-from wagtail.wagtailsearch.views import search
+from wagtail.core.models import Page
+from wagtail.search.models import Query
+from wagtail.search.views import search
 
 
 def social_share_count(request, page_id):

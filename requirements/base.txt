@@ -2,7 +2,7 @@
 Django>=1.11,<2.0
 requests==2.13.0
 
-wagtail==1.13.1
+wagtail==2.0.1
 
 # Recommended components (require additional setup):
 django-compressor==2.1.1

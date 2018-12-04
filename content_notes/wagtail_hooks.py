@@ -3,8 +3,8 @@ from django.conf import settings
 from django.conf.urls import include, url
 from django.core import urlresolvers
 from django.utils.html import format_html
-from wagtail.wagtailcore import hooks
-from wagtail.wagtailcore.whitelist import attribute_rule
+from wagtail.core import hooks
+from wagtail.core.whitelist import attribute_rule
 
 from . import urls
 

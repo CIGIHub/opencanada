@@ -1,7 +1,7 @@
 from __future__ import absolute_import, unicode_literals
 
 from django.db import models
-from wagtail.wagtailimages.models import (AbstractImage, AbstractRendition,
+from wagtail.images.models import (AbstractImage, AbstractRendition,
                                           Image)
 
 
