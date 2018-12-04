@@ -1,6 +1,6 @@
 from django.conf.urls import url
 from django.contrib import messages
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.shortcuts import redirect, render
 from wagtail.admin.menu import MenuItem
 from wagtail.core import hooks

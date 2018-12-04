@@ -18,6 +18,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='sitedefaults',
             name='site',
-            field=models.OneToOneField(related_name='default_settings', to='wagtailcore.Site'),
+            field=models.OneToOneField(related_name='default_settings', to='wagtailcore.Site', on_delete=models.deletion.CASCADE),
         ),
     ]

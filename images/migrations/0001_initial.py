@@ -34,7 +34,7 @@ class Migration(migrations.Migration):
                 ('source', models.CharField(default='', max_length=1024, blank=True)),
                 ('usage_restrictions', models.TextField(default='', blank=True)),
                 ('tags', taggit.managers.TaggableManager(to='taggit.Tag', through='taggit.TaggedItem', blank=True, help_text=None, verbose_name='Tags')),
-                ('uploaded_by_user', models.ForeignKey(blank=True, editable=False, to=settings.AUTH_USER_MODEL, null=True, verbose_name='Uploaded by user')),
+                ('uploaded_by_user', models.ForeignKey(blank=True, editable=False, to=settings.AUTH_USER_MODEL, on_delete=models.deletion.SET_NULL, null=True, verbose_name='Uploaded by user')),
             ],
             options={
                 'abstract': False,
@@ -49,8 +49,8 @@ class Migration(migrations.Migration):
                 ('width', models.IntegerField(editable=False)),
                 ('height', models.IntegerField(editable=False)),
                 ('focal_point_key', models.CharField(default='', max_length=255, editable=False, blank=True)),
-                ('filter', models.ForeignKey(related_name='+', to='wagtailimages.Filter')),
-                ('image', models.ForeignKey(related_name='renditions', to='images.AttributedImage')),
+                ('filter', models.ForeignKey(related_name='+', to='wagtailimages.Filter', on_delete=models.deletion.SET_NULL)),
+                ('image', models.ForeignKey(related_name='renditions', to='images.AttributedImage', on_delete=models.deletion.CASCADE)),
             ],
         ),
         migrations.AlterUniqueTogether(

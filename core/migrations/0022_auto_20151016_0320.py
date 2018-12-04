@@ -23,7 +23,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='streampage',
             name='page_ptr',
-            field=models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, default=1, serialize=False, to='wagtailcore.Page'),
+            field=models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, default=1, serialize=False, to='wagtailcore.Page', on_delete=django.db.models.deletion.CASCADE),
             preserve_default=False,
         ),
         migrations.AddField(

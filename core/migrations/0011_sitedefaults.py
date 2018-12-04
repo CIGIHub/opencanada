@@ -17,8 +17,8 @@ class Migration(migrations.Migration):
             name='SiteDefaults',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('default_external_article_source_logo', models.ForeignKey(related_name='+', to='images.AttributedImage')),
-                ('site', models.OneToOneField(related_name='+', to='wagtailcore.Site')),
+                ('default_external_article_source_logo', models.ForeignKey(related_name='+', to='images.AttributedImage', on_delete=models.deletion.CASCADE)),
+                ('site', models.OneToOneField(related_name='+', to='wagtailcore.Site', on_delete=models.deletion.CASCADE)),
             ],
         ),
     ]

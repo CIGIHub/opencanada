@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='attributedimage',
             name='collection',
-            field=models.ForeignKey(related_name='+', default=wagtail.core.models.get_root_collection_id, verbose_name='collection', to='wagtailcore.Collection'),
+            field=models.ForeignKey(related_name='+', default=wagtail.core.models.get_root_collection_id, verbose_name='collection', to='wagtailcore.Collection', on_delete=django.db.models.deletion.CASCADE),
         ),
         migrations.AlterField(
             model_name='attributedimage',

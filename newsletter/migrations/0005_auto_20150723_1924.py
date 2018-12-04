@@ -36,7 +36,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='newsletterexternalarticlelink',
             name='externalarticle_ptr',
-            field=models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, default=1, serialize=False, to='articles.ExternalArticlePage'),
+            field=models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, default=1, serialize=False, to='articles.ExternalArticlePage', on_delete=models.deletion.SET_NULL),
             preserve_default=False,
         ),
         migrations.AddField(

@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('article', modelcluster.fields.ParentalKey(related_name='background_image_links', to='articles.ArticlePage')),
-                ('background_image', models.ForeignKey(related_name='+', to='images.AttributedImage')),
+                ('background_image', models.ForeignKey(related_name='+', on_delete=models.deletion.SET_NULL, to='images.AttributedImage')),
             ],
         ),
     ]
