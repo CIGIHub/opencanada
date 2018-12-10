@@ -13,26 +13,21 @@ ALLOWED_HOSTS = ['*'] # TODO: Fix this
 # http://django-compressor.readthedocs.org/en/latest/settings/#django.conf.settings.COMPRESS_OFFLINE
 COMPRESS_OFFLINE = True
 
-# WAGTAILSEARCH_BACKENDS = {
-#     'default': {
-#         'BACKEND': 'wagtail.search.backends.elasticsearch2',
-#         'INDEX': get_env_variable('ELASTICSEARCH_INDEX'),
-#         'TIMEOUT': 5000,
-#         # This setting will not work as intended with the ElasticSearch provided by http://www.searchly.com/
-#         # 'ATOMIC_REBUILD': True,
-#         'HOSTS': [{
-#             'host': get_env_variable('ELASTICSEARCH_HOST'),
-#             'port': get_env_variable('ELASTICSEARCH_PORT'),
-#             'http_auth': (get_env_variable('ELASTICSEARCH_USER'), get_env_variable('ELASTICSEARCH_PASSWORD')),
-#             'use_ssl': True,
-#             'verify_certs': False,
-#         }]
-#     },
-# }
 WAGTAILSEARCH_BACKENDS = {
     'default': {
-        'BACKEND': 'wagtail.search.backends.db',
-    }
+        'BACKEND': 'wagtail.search.backends.elasticsearch2',
+        'INDEX': get_env_variable('ELASTICSEARCH_INDEX'),
+        'TIMEOUT': 5000,
+        # This setting will not work as intended with the ElasticSearch provided by http://www.searchly.com/
+        # 'ATOMIC_REBUILD': True,
+        'HOSTS': [{
+            'host': get_env_variable('ELASTICSEARCH_HOST'),
+            'port': get_env_variable('ELASTICSEARCH_PORT'),
+            'http_auth': (get_env_variable('ELASTICSEARCH_USER'), get_env_variable('ELASTICSEARCH_PASSWORD')),
+            'use_ssl': True,
+            'verify_certs': False,
+        }]
+    },
 }
 
 AWS_STORAGE_BUCKET_NAME = get_env_variable("AWS_STORAGE_BUCKET_NAME")
@@ -60,16 +55,16 @@ AWS_S3_CUSTOM_DOMAIN = 'files.opencanada.org'
 #     }
 # }
 
-# RAVEN_CONFIG = {
-#     'dsn': get_env_variable('RAVEN_DSN'),
-# }
+RAVEN_CONFIG = {
+    'dsn': get_env_variable('RAVEN_DSN'),
+}
 
-# INSTALLED_APPS = INSTALLED_APPS + (
-    # 'wagtail.contrib.frontend_cache',
-    # 'raven.contrib.django.raven_compat',
+INSTALLED_APPS = INSTALLED_APPS + (
+    'wagtail.contrib.frontend_cache',
+    'raven.contrib.django.raven_compat',
     # 'interactives_content',
-    # 'caching',
-# )
+    'caching',
+)
 
 # WAGTAILFRONTENDCACHE = {
 #     'cloudflare': {
@@ -82,15 +77,15 @@ AWS_S3_CUSTOM_DOMAIN = 'files.opencanada.org'
 
 FAVICON_PATH = STATIC_URL + 'img/favicon.png'
 
-# CACHES = {
-#     'default': {
-#         'BACKEND': 'django_redis.cache.RedisCache',
-#         'LOCATION': get_env_variable('REDIS_CACHE_ENDPOINT'),
-#         'OPTIONS': {
-#             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-#         }
-#     }
-# }
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': get_env_variable('REDIS_CACHE_ENDPOINT'),
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        }
+    }
+}
 
 IS_PRODUCTION = True
 
