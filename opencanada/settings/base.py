@@ -64,7 +64,6 @@ INSTALLED_APPS = (
     'compressor',
     'taggit',
     'modelcluster',
-    'overextends',
 
     'core',
     'themes',
@@ -184,7 +183,6 @@ TEMPLATES = [
         'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
-            'builtins': ['overextends.templatetags.overextends_tags'],
             'context_processors': [
                 'django.contrib.auth.context_processors.auth',
                 'django.template.context_processors.debug',
