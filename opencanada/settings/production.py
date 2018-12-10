@@ -35,11 +35,11 @@ WAGTAILSEARCH_BACKENDS = {
     }
 }
 
-# AWS_STORAGE_BUCKET_NAME = get_env_variable("AWS_STORAGE_BUCKET_NAME")
+AWS_STORAGE_BUCKET_NAME = get_env_variable("AWS_STORAGE_BUCKET_NAME")
 
-# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-# STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-# COMPRESS_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+COMPRESS_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
 COMPRESS_URL = 'https://files.opencanada.org/'
 STATIC_URL = 'https://files.opencanada.org/'
