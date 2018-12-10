@@ -1,11 +1,13 @@
 from __future__ import absolute_import, unicode_literals
 
 from .base import *
+import django_heroku
 
 # Disable debug mode
 DEBUG = False
 
-ALLOWED_HOSTS = [get_env_variable('ALLOWED_HOSTS')]
+# ALLOWED_HOSTS = [get_env_variable('ALLOWED_HOSTS')]
+ALLOWED_HOSTS = ['*'] # TODO: Fix this
 
 # Compress static files offline
 # http://django-compressor.readthedocs.org/en/latest/settings/#django.conf.settings.COMPRESS_OFFLINE
@@ -40,17 +42,18 @@ MEDIA_URL = 'https://files.opencanada.org/'
 AWS_S3_CUSTOM_DOMAIN = 'files.opencanada.org'
 
 # PostgreSQL (Recommended, but requires the psycopg2 library and Postgresql development headers)
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': get_env_variable('DB_NAME'),
-        'USER': get_env_variable('DB_USER'),
-        'PASSWORD': get_env_variable('DB_PASSWORD'),
-        'HOST': get_env_variable('DB_HOST'),
-        'PORT': get_env_variable('DB_PORT'),
-        'CONN_MAX_AGE': 600,
-    }
-}
+# TODO: Remove this
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': get_env_variable('DB_NAME'),
+#         'USER': get_env_variable('DB_USER'),
+#         'PASSWORD': get_env_variable('DB_PASSWORD'),
+#         'HOST': get_env_variable('DB_HOST'),
+#         'PORT': get_env_variable('DB_PORT'),
+#         'CONN_MAX_AGE': 600,
+#     }
+# }
 
 RAVEN_CONFIG = {
     'dsn': get_env_variable('RAVEN_DSN'),
@@ -135,3 +138,5 @@ LOGGING = {
 }
 
 ADMIN_ENABLED = False
+
+django_heroku.settings(locals())
