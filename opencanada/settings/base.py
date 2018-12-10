@@ -231,53 +231,53 @@ WAGTAILIMAGES_IMAGE_MODEL = 'images.AttributedImage'
 SERVER_EMAIL = "no-reply@opencanada.org"
 DEFAULT_FROM_EMAIL = "no-reply@opencanada.org"
 
-# try:
-#     GOOGLE_ANALYTICS_PROPERTY_ID = get_env_variable("GOOGLE_ANALYTICS_PROPERTY_ID")
-# except ImproperlyConfigured:
-#     GOOGLE_ANALYTICS_PROPERTY_ID = ''
-#
-# ANALYTICS_CREDS_PATH = join(PROJECT_ROOT, 'secret')
-# ANALYTICS_SERVICE_ACCOUNT_EMAIL = get_env_variable("ANALYTICS_SERVICE_ACCOUNT_EMAIL", required=False)
-#
-# try:
-#     TWITTER_API_CONSUMER_KEY = get_env_variable("TWITTER_API_CONSUMER_KEY")
-# except ImproperlyConfigured:
-#     TWITTER_API_CONSUMER_KEY = ''
-#
-# try:
-#     TWITTER_API_CONSUMER_SECRET = get_env_variable("TWITTER_API_CONSUMER_SECRET")
-# except ImproperlyConfigured:
-#     TWITTER_API_CONSUMER_SECRET = ''
-#
-# try:
-#     TWITTER_API_ACCESS_TOKEN = get_env_variable("TWITTER_API_ACCESS_TOKEN")
-# except ImproperlyConfigured:
-#     TWITTER_API_ACCESS_TOKEN = ''
-#
-# try:
-#     TWITTER_API_ACCESS_TOKEN_SECRET = get_env_variable("TWITTER_API_ACCESS_TOKEN_SECRET")
-# except ImproperlyConfigured:
-#     TWITTER_API_ACCESS_TOKEN_SECRET = ''
-#
-# try:
-#     GOOGLE_DEVELOPER_CLIENT_ID = get_env_variable("GOOGLE_DEVELOPER_CLIENT_ID")
-# except ImproperlyConfigured:
-#     GOOGLE_DEVELOPER_CLIENT_ID = ''
-#
-# try:
-#     GOOGLE_DEVELOPER_CLIENT_SECRET = get_env_variable("GOOGLE_DEVELOPER_CLIENT_SECRET")
-# except ImproperlyConfigured:
-#     GOOGLE_DEVELOPER_CLIENT_SECRET = ''
-#
-# try:
-#     GOOGLE_DEVELOPER_REFRESH_TOKEN = get_env_variable("GOOGLE_DEVELOPER_REFRESH_TOKEN")
-# except ImproperlyConfigured:
-#     GOOGLE_DEVELOPER_REFRESH_TOKEN = ''
-#
-# try:
-#     GOOGLE_ANALYTICS_PROFILE_ID = get_env_variable("GOOGLE_ANALYTICS_PROFILE_ID")
-# except ImproperlyConfigured:
-#     GOOGLE_ANALYTICS_PROFILE_ID = ''
+try:
+    GOOGLE_ANALYTICS_PROPERTY_ID = get_env_variable("GOOGLE_ANALYTICS_PROPERTY_ID")
+except ImproperlyConfigured:
+    GOOGLE_ANALYTICS_PROPERTY_ID = ''
+
+ANALYTICS_CREDS_PATH = join(PROJECT_ROOT, 'secret')
+ANALYTICS_SERVICE_ACCOUNT_EMAIL = get_env_variable("ANALYTICS_SERVICE_ACCOUNT_EMAIL", required=False)
+
+try:
+    TWITTER_API_CONSUMER_KEY = get_env_variable("TWITTER_API_CONSUMER_KEY")
+except ImproperlyConfigured:
+    TWITTER_API_CONSUMER_KEY = ''
+
+try:
+    TWITTER_API_CONSUMER_SECRET = get_env_variable("TWITTER_API_CONSUMER_SECRET")
+except ImproperlyConfigured:
+    TWITTER_API_CONSUMER_SECRET = ''
+
+try:
+    TWITTER_API_ACCESS_TOKEN = get_env_variable("TWITTER_API_ACCESS_TOKEN")
+except ImproperlyConfigured:
+    TWITTER_API_ACCESS_TOKEN = ''
+
+try:
+    TWITTER_API_ACCESS_TOKEN_SECRET = get_env_variable("TWITTER_API_ACCESS_TOKEN_SECRET")
+except ImproperlyConfigured:
+    TWITTER_API_ACCESS_TOKEN_SECRET = ''
+
+try:
+    GOOGLE_DEVELOPER_CLIENT_ID = get_env_variable("GOOGLE_DEVELOPER_CLIENT_ID")
+except ImproperlyConfigured:
+    GOOGLE_DEVELOPER_CLIENT_ID = ''
+
+try:
+    GOOGLE_DEVELOPER_CLIENT_SECRET = get_env_variable("GOOGLE_DEVELOPER_CLIENT_SECRET")
+except ImproperlyConfigured:
+    GOOGLE_DEVELOPER_CLIENT_SECRET = ''
+
+try:
+    GOOGLE_DEVELOPER_REFRESH_TOKEN = get_env_variable("GOOGLE_DEVELOPER_REFRESH_TOKEN")
+except ImproperlyConfigured:
+    GOOGLE_DEVELOPER_REFRESH_TOKEN = ''
+
+try:
+    GOOGLE_ANALYTICS_PROFILE_ID = get_env_variable("GOOGLE_ANALYTICS_PROFILE_ID")
+except ImproperlyConfigured:
+    GOOGLE_ANALYTICS_PROFILE_ID = ''
 
 IS_PRODUCTION = False
 ADMIN_ENABLED = True
