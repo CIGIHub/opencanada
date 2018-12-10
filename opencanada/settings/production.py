@@ -59,12 +59,12 @@ AWS_S3_CUSTOM_DOMAIN = 'files.opencanada.org'
 #     'dsn': get_env_variable('RAVEN_DSN'),
 # }
 
-INSTALLED_APPS = INSTALLED_APPS + (
-    'wagtail.contrib.frontend_cache',
-    'raven.contrib.django.raven_compat',
+# INSTALLED_APPS = INSTALLED_APPS + (
+    # 'wagtail.contrib.frontend_cache',
+    # 'raven.contrib.django.raven_compat',
     # 'interactives_content',
-    'caching',
-)
+    # 'caching',
+# )
 
 # WAGTAILFRONTENDCACHE = {
 #     'cloudflare': {
@@ -89,54 +89,54 @@ FAVICON_PATH = STATIC_URL + 'img/favicon.png'
 
 IS_PRODUCTION = True
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': True,
-    'root': {
-        'level': 'WARNING',
-        'handlers': ['sentry'],
-    },
-    'formatters': {
-        'verbose': {
-            'format': '%(levelname)s %(asctime)s %(module)s '
-                      '%(process)d %(thread)d %(message)s'
-        },
-    },
-    'handlers': {
-        'sentry': {
-            'level': 'WARNING',
-            'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
-        },
-        'console': {
-            'level': 'DEBUG',
-            'class': 'logging.StreamHandler',
-            'formatter': 'verbose'
-        }
-    },
-    'loggers': {
-        'django.template': {
-            'level': 'WARNING',
-            'handlers': ['sentry', 'console'],
-            'propagate': False,
-        },
-        'django.db.backends': {
-            'level': 'ERROR',
-            'handlers': ['console'],
-            'propagate': False,
-        },
-        'raven': {
-            'level': 'DEBUG',
-            'handlers': ['console'],
-            'propagate': False,
-        },
-        'sentry.errors': {
-            'level': 'DEBUG',
-            'handlers': ['console'],
-            'propagate': False,
-        },
-    },
-}
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': True,
+#     'root': {
+#         'level': 'WARNING',
+#         'handlers': ['sentry'],
+#     },
+#     'formatters': {
+#         'verbose': {
+#             'format': '%(levelname)s %(asctime)s %(module)s '
+#                       '%(process)d %(thread)d %(message)s'
+#         },
+#     },
+#     'handlers': {
+#         'sentry': {
+#             'level': 'WARNING',
+#             'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
+#         },
+#         'console': {
+#             'level': 'DEBUG',
+#             'class': 'logging.StreamHandler',
+#             'formatter': 'verbose'
+#         }
+#     },
+#     'loggers': {
+#         'django.template': {
+#             'level': 'WARNING',
+#             'handlers': ['sentry', 'console'],
+#             'propagate': False,
+#         },
+#         'django.db.backends': {
+#             'level': 'ERROR',
+#             'handlers': ['console'],
+#             'propagate': False,
+#         },
+#         'raven': {
+#             'level': 'DEBUG',
+#             'handlers': ['console'],
+#             'propagate': False,
+#         },
+#         'sentry.errors': {
+#             'level': 'DEBUG',
+#             'handlers': ['console'],
+#             'propagate': False,
+#         },
+#     },
+# }
 
-ADMIN_ENABLED = False
+# ADMIN_ENABLED = False
 
 django_heroku.settings(locals())
