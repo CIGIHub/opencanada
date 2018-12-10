@@ -62,7 +62,7 @@ AWS_S3_CUSTOM_DOMAIN = 'files.opencanada.org'
 INSTALLED_APPS = INSTALLED_APPS + (
     'wagtail.contrib.frontend_cache',
     'raven.contrib.django.raven_compat',
-    'interactives_content',
+    # 'interactives_content',
     'caching',
 )
 
