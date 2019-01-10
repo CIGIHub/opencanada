@@ -82,15 +82,15 @@ INSTALLED_APPS = INSTALLED_APPS + (
 
 FAVICON_PATH = STATIC_URL + 'img/favicon.png'
 
-CACHES = {
-    'default': {
-        'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': get_env_variable('REDIS_CACHE_ENDPOINT'),
-        'OPTIONS': {
-            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-        }
-    }
-}
+# CACHES = {
+#     'default': {
+#         'BACKEND': 'django_redis.cache.RedisCache',
+#         'LOCATION': get_env_variable('REDIS_CACHE_ENDPOINT'),
+#         'OPTIONS': {
+#             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+#         }
+#     }
+# }
 
 IS_PRODUCTION = True
 
