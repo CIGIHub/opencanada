@@ -6,9 +6,6 @@ import django_heroku
 # Disable debug mode
 DEBUG = False
 
-# ALLOWED_HOSTS = [get_env_variable('ALLOWED_HOSTS')]
-ALLOWED_HOSTS = ['opencanada-test.herokuapp.com'] # TODO: Fix this
-
 # Compress static files offline
 # http://django-compressor.readthedocs.org/en/latest/settings/#django.conf.settings.COMPRESS_OFFLINE
 COMPRESS_OFFLINE = True
@@ -200,5 +197,8 @@ LOGGING = {
 }
 
 # ADMIN_ENABLED = False
+
+# ALLOWED_HOSTS = [get_env_variable('ALLOWED_HOSTS')]
+ALLOWED_HOSTS = ['opencanada-test.herokuapp.com'] # TODO: Fix this
 
 django_heroku.settings(locals())
