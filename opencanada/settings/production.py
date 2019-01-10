@@ -35,16 +35,16 @@ WAGTAILSEARCH_BACKENDS = {
     }
 }
 
-AWS_STORAGE_BUCKET_NAME = get_env_variable("AWS_STORAGE_BUCKET_NAME")
-
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-COMPRESS_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-
-COMPRESS_URL = 'https://files.opencanada.org/'
-STATIC_URL = 'https://files.opencanada.org/'
-MEDIA_URL = 'https://files.opencanada.org/'
-AWS_S3_CUSTOM_DOMAIN = 'files.opencanada.org'
+# AWS_STORAGE_BUCKET_NAME = get_env_variable("AWS_STORAGE_BUCKET_NAME")
+#
+# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+# STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+# COMPRESS_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+#
+# COMPRESS_URL = 'https://files.opencanada.org/'
+# STATIC_URL = 'https://files.opencanada.org/'
+# MEDIA_URL = 'https://files.opencanada.org/'
+# AWS_S3_CUSTOM_DOMAIN = 'files.opencanada.org'
 
 # PostgreSQL (Recommended, but requires the psycopg2 library and Postgresql development headers)
 # TODO: Remove this
