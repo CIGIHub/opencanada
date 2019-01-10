@@ -8,7 +8,7 @@ DEBUG = False
 
 # Compress static files offline
 # http://django-compressor.readthedocs.org/en/latest/settings/#django.conf.settings.COMPRESS_OFFLINE
-COMPRESS_OFFLINE = True
+# COMPRESS_OFFLINE = True
 
 # WAGTAILSEARCH_BACKENDS = {
 #     'default': {

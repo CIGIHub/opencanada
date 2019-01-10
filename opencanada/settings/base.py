@@ -176,7 +176,7 @@ COMPRESS_PRECOMPILERS = (
     ('text/x-scss', 'django_libsass.SassCompiler'),
 )
 
-# COMPRESS_ENABLED = True
+COMPRESS_ENABLED = True
 
 
 # Template configuration
