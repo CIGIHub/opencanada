@@ -60,13 +60,13 @@ WAGTAILSEARCH_BACKENDS = {
 #     }
 # }
 
-RAVEN_CONFIG = {
-    'dsn': get_env_variable('RAVEN_DSN'),
-}
+# RAVEN_CONFIG = {
+#     'dsn': get_env_variable('RAVEN_DSN'),
+# }
 
 INSTALLED_APPS = INSTALLED_APPS + (
     'wagtail.contrib.frontend_cache',
-    'raven.contrib.django.raven_compat',
+    # 'raven.contrib.django.raven_compat',
     # 'interactives_content',
     'caching',
 )
@@ -186,16 +186,16 @@ LOGGING = {
             'handlers': ['console'],
             'propagate': False,
         },
-        'raven': {
-            'level': 'DEBUG',
-            'handlers': ['console'],
-            'propagate': False,
-        },
-        'sentry.errors': {
-            'level': 'DEBUG',
-            'handlers': ['console'],
-            'propagate': False,
-        },
+        # 'raven': {
+        #     'level': 'DEBUG',
+        #     'handlers': ['console'],
+        #     'propagate': False,
+        # },
+        # 'sentry.errors': {
+        #     'level': 'DEBUG',
+        #     'handlers': ['console'],
+        #     'propagate': False,
+        # },
     },
 }
 
