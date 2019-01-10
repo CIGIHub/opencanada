@@ -4,7 +4,7 @@ from .base import *
 import django_heroku
 
 # Disable debug mode
-DEBUG = False
+DEBUG = True
 
 # ALLOWED_HOSTS = [get_env_variable('ALLOWED_HOSTS')]
 ALLOWED_HOSTS = ['opencanada-test.herokuapp.com'] # TODO: Fix this
