@@ -2,7 +2,7 @@ from __future__ import absolute_import, unicode_literals
 
 from .production import *
 
-ALLOWED_HOSTS = [get_env_variable('ALLOWED_HOSTS')]
+# ALLOWED_HOSTS = [get_env_variable('ALLOWED_HOSTS')]
 
 ROOT_URLCONF = 'opencanada.urls_admin'
 
