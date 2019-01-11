@@ -39,7 +39,7 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 COMPRESS_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 #
-# COMPRESS_URL = 'https://heroku-files.opencanada.org/'
+COMPRESS_URL = 'https://heroku-files.opencanada.org/'
 STATIC_URL = 'https://heroku-files.opencanada.org/'
 MEDIA_URL = 'https://heroku-files.opencanada.org/'
 AWS_S3_CUSTOM_DOMAIN = 'heroku-files.opencanada.org'
