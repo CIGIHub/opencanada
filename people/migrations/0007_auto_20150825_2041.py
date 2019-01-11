@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-import wagtail.wagtailcore.fields
+import wagtail.core.fields
 from django.db import migrations, models
 
 
@@ -19,6 +19,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='contributorpage',
             name='long_bio',
-            field=wagtail.wagtailcore.fields.RichTextField(default='', blank=True),
+            field=wagtail.core.fields.RichTextField(default='', blank=True),
         ),
     ]

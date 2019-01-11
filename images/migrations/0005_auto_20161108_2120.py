@@ -19,6 +19,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='attributedrendition',
             name='filter',
-            field=models.ForeignKey(related_name='+', blank=True, to='wagtailimages.Filter', null=True),
+            field=models.ForeignKey(related_name='+', blank=True, to='wagtailimages.Filter', on_delete=models.deletion.SET_NULL, null=True),
         ),
     ]

@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 import django.db.models.deletion
 import modelcluster.fields
-import wagtail.wagtailcore.fields
+import wagtail.core.fields
 from django.db import migrations, models
 
 
@@ -26,7 +26,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='newsletterexternalarticlelink',
             name='override_text',
-            field=wagtail.wagtailcore.fields.RichTextField(default='', help_text='Text to describe article.', blank=True),
+            field=wagtail.core.fields.RichTextField(default='', help_text='Text to describe article.', blank=True),
         ),
         migrations.AddField(
             model_name='newsletterexternalarticlelink',

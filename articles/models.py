@@ -12,19 +12,19 @@ from django.db.models import Count
 from django.shortcuts import get_object_or_404, render
 from django.utils.encoding import python_2_unicode_compatible
 from modelcluster.fields import ParentalKey
-from wagtail.contrib.wagtailroutablepage.models import RoutablePageMixin, route
-from wagtail.wagtailadmin.edit_handlers import (FieldPanel, InlinePanel,
+from wagtail.contrib.routable_page.models import RoutablePageMixin, route
+from wagtail.admin.edit_handlers import (FieldPanel, InlinePanel,
                                                 MultiFieldPanel, ObjectList,
                                                 PageChooserPanel,
                                                 StreamFieldPanel,
                                                 TabbedInterface)
-from wagtail.wagtailcore.fields import RichTextField
-from wagtail.wagtailcore.models import Orderable, Page
-from wagtail.wagtaildocs.edit_handlers import DocumentChooserPanel
-from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
-from wagtail.wagtailsearch import index
-from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
-from wagtail.wagtailsnippets.models import register_snippet
+from wagtail.core.fields import RichTextField
+from wagtail.core.models import Orderable, Page
+from wagtail.documents.edit_handlers import DocumentChooserPanel
+from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.search import index
+from wagtail.snippets.edit_handlers import SnippetChooserPanel
+from wagtail.snippets.models import register_snippet
 
 from core.base import (PaginatedListPageMixin, ShareLinksMixin,
                        UniquelySlugable, VideoDocumentMixin)
@@ -690,7 +690,8 @@ class ExternalArticlePage(Page, FeatureStyleFields, Promotable):
 class ArticleTopicLink(models.Model):
     topic = models.ForeignKey(
         "Topic",
-        related_name='article_links'
+        related_name='article_links',
+        on_delete=models.CASCADE
     )
     article = ParentalKey(
         "ArticlePage",
@@ -979,7 +980,8 @@ class SeriesPage(ThemeablePage, FeatureStyleFields, Promotable, ShareLinksMixin,
 class Headline(FeatureStyleFields):
     containing_page = models.ForeignKey(
         'wagtailcore.Page',
-        related_name='historic_headlines'
+        related_name='historic_headlines',
+        on_delete=models.CASCADE
     )
 
     featured_item = models.ForeignKey(
@@ -1002,6 +1004,7 @@ class BackgroundImageBlock(Orderable, UniquelySlugable):
     name = models.CharField(max_length=255)
     image = models.ForeignKey(
         'images.AttributedImage',
+        on_delete=models.CASCADE
     )
     article = ParentalKey(
         "ArticlePage",

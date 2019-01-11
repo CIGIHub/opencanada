@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-import wagtail.wagtailcore.blocks
-import wagtail.wagtailcore.fields
+import wagtail.core.blocks
+import wagtail.core.fields
 from django.db import migrations, models
 
 
@@ -16,11 +16,11 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='chapteredarticlepage',
             name='end_notes',
-            field=wagtail.wagtailcore.fields.StreamField([('end_note', wagtail.wagtailcore.blocks.StructBlock([(b'identifier', wagtail.wagtailcore.blocks.CharBlock()), (b'text', wagtail.wagtailcore.blocks.TextBlock())]))], null=True, blank=True),
+            field=wagtail.core.fields.StreamField([('end_note', wagtail.core.blocks.StructBlock([(b'identifier', wagtail.core.blocks.CharBlock()), (b'text', wagtail.core.blocks.TextBlock())]))], null=True, blank=True),
         ),
         migrations.AddField(
             model_name='chapteredarticlepage',
             name='works_cited',
-            field=wagtail.wagtailcore.fields.StreamField([('citation', wagtail.wagtailcore.blocks.StructBlock([(b'text', wagtail.wagtailcore.blocks.TextBlock())]))], null=True, blank=True),
+            field=wagtail.core.fields.StreamField([('citation', wagtail.core.blocks.StructBlock([(b'text', wagtail.core.blocks.TextBlock())]))], null=True, blank=True),
         ),
     ]

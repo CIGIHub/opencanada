@@ -7,15 +7,15 @@ from django.db import models
 from django.dispatch.dispatcher import receiver
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.timezone import now
-from wagtail.wagtailadmin.edit_handlers import (FieldPanel, MultiFieldPanel,
+from wagtail.admin.edit_handlers import (FieldPanel, MultiFieldPanel,
                                                 ObjectList, PageChooserPanel,
                                                 StreamFieldPanel,
                                                 TabbedInterface)
-from wagtail.wagtailcore.models import Page
-from wagtail.wagtailcore.signals import page_published
-from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
-from wagtail.wagtailsearch import index
-from wagtail.wagtailsnippets.models import register_snippet
+from wagtail.core.models import Page
+from wagtail.core.signals import page_published
+from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.search import index
+from wagtail.snippets.models import register_snippet
 
 from articles import fields as article_fields
 from articles import models as article_models
@@ -328,10 +328,13 @@ def on_publish(**kwargs):
 @python_2_unicode_compatible
 class SiteDefaults(models.Model):
     site = models.OneToOneField('wagtailcore.Site',
-                                related_name='default_settings', unique=True)
+                                related_name='default_settings',
+                                unique=True,
+                                on_delete=models.CASCADE)
     default_external_article_source_logo = models.ForeignKey(
         'images.AttributedImage',
-        related_name='+'
+        related_name='+',
+        on_delete=models.CASCADE
     )
     contact_email = models.EmailField(blank=True, default="")
 

@@ -1,11 +1,11 @@
 from __future__ import absolute_import, division, unicode_literals
 
 from django.utils.encoding import python_2_unicode_compatible
-from wagtail.wagtailadmin.edit_handlers import (ObjectList, RichTextFieldPanel,
+from wagtail.admin.edit_handlers import (ObjectList, RichTextFieldPanel,
                                                 TabbedInterface)
-from wagtail.wagtailcore.fields import RichTextField
-from wagtail.wagtailcore.models import Page
-from wagtail.wagtailsearch import index
+from wagtail.core.fields import RichTextField
+from wagtail.core.models import Page
+from wagtail.search import index
 
 from themes.models import ThemeablePage
 

@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 import django.db.models.deletion
-import wagtail.wagtailcore.blocks
+import wagtail.core.blocks
 from django.db import migrations, models
 
 import people.fields
@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ContributorPage',
             fields=[
-                ('page_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='wagtailcore.Page')),
+                ('page_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='wagtailcore.Page', on_delete=django.db.models.deletion.CASCADE)),
                 ('first_name', models.CharField(default='', max_length=255, blank=True)),
                 ('last_name', models.CharField(default='', max_length=255, blank=True)),
                 ('nickname', models.CharField(default='', max_length=1024, blank=True)),

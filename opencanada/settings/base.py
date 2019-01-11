@@ -64,25 +64,24 @@ INSTALLED_APPS = (
     'compressor',
     'taggit',
     'modelcluster',
-    'overextends',
 
     'core',
     'themes',
 
-    'wagtail.wagtailcore',
-    'wagtail.wagtailadmin',
-    'wagtail.wagtaildocs',
-    'wagtail.wagtailsnippets',
-    'wagtail.wagtailusers',
-    'wagtail.wagtailsites',
-    'wagtail.wagtailimages',
-    'wagtail.wagtailembeds',
+    'wagtail.core',
+    'wagtail.admin',
+    'wagtail.documents',
+    'wagtail.snippets',
+    'wagtail.users',
+    'wagtail.sites',
+    'wagtail.images',
+    'wagtail.embeds',
     # Overriding wagtailsearch default app registration to register slightly different signal handlers.
     'core.apps.CustomWagtailSearchAppConfig',
-    'wagtail.wagtailredirects',
-    'wagtail.wagtailforms',
-    'wagtail.contrib.wagtailstyleguide',
-    'wagtail.contrib.wagtailroutablepage',
+    'wagtail.contrib.redirects',
+    'wagtail.contrib.forms',
+    'wagtail.contrib.styleguide',
+    'wagtail.contrib.routable_page',
 
     'favicon',
 
@@ -101,18 +100,17 @@ INSTALLED_APPS = (
     'robots',
 )
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-    'wagtail.wagtailcore.middleware.SiteMiddleware',
-    'wagtail.wagtailredirects.middleware.RedirectMiddleware',
-)
+    'wagtail.core.middleware.SiteMiddleware',
+    'wagtail.contrib.redirects.middleware.RedirectMiddleware',
+]
 
 ROOT_URLCONF = 'opencanada.urls'
 WSGI_APPLICATION = 'opencanada.wsgi.application'
@@ -185,7 +183,6 @@ TEMPLATES = [
         'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
-            'builtins': ['overextends.templatetags.overextends_tags'],
             'context_processors': [
                 'django.contrib.auth.context_processors.auth',
                 'django.template.context_processors.debug',
@@ -212,7 +209,7 @@ WAGTAIL_SITE_NAME = "opencanada"
 #
 # WAGTAILSEARCH_BACKENDS = {
 #     'default': {
-#         'BACKEND': 'wagtail.wagtailsearch.backends.elasticsearch.ElasticSearch',
+#         'BACKEND': 'wagtail.search.backends.elasticsearch.ElasticSearch',
 #         'INDEX': 'opencanada',
 #     },
 # }

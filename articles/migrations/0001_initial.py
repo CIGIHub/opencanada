@@ -3,10 +3,10 @@ from __future__ import unicode_literals
 
 import django.db.models.deletion
 import modelcluster.fields
-import wagtail.wagtailcore.blocks
-import wagtail.wagtailcore.fields
-import wagtail.wagtailembeds.blocks
-import wagtail.wagtailimages.blocks
+import wagtail.core.blocks
+import wagtail.core.fields
+import wagtail.embeds.blocks
+import wagtail.images.blocks
 from django.db import migrations, models
 
 import articles.fields
@@ -34,7 +34,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ArticleListPage',
             fields=[
-                ('page_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='wagtailcore.Page')),
+                ('page_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='wagtailcore.Page', on_delete=django.db.models.deletion.CASCADE)),
             ],
             options={
                 'abstract': False,
@@ -44,10 +44,10 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ArticlePage',
             fields=[
-                ('page_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='wagtailcore.Page')),
-                ('subtitle', wagtail.wagtailcore.fields.RichTextField(default='', blank=True)),
-                ('body', articles.fields.BodyField([('Heading', wagtail.wagtailcore.blocks.CharBlock(classname='heading', icon='title')), ('Paragraph', wagtail.wagtailcore.blocks.RichTextBlock(icon='doc-full')), ('Image', wagtail.wagtailimages.blocks.ImageChooserBlock(icon='image')), ('Embed', wagtail.wagtailembeds.blocks.EmbedBlock(icon='site')), ('List', wagtail.wagtailcore.blocks.ListBlock(wagtail.wagtailcore.blocks.RichTextBlock(label='item'), icon='list-ul')), ('Sharable', articles.fields.SharableBlock())])),
-                ('excerpt', wagtail.wagtailcore.fields.RichTextField(default='', blank=True)),
+                ('page_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='wagtailcore.Page', on_delete=django.db.models.deletion.CASCADE)),
+                ('subtitle', wagtail.core.fields.RichTextField(default='', blank=True)),
+                ('body', articles.fields.BodyField([('Heading', wagtail.core.blocks.CharBlock(classname='heading', icon='title')), ('Paragraph', wagtail.core.blocks.RichTextBlock(icon='doc-full')), ('Image', wagtail.images.blocks.ImageChooserBlock(icon='image')), ('Embed', wagtail.embeds.blocks.EmbedBlock(icon='site')), ('List', wagtail.core.blocks.ListBlock(wagtail.core.blocks.RichTextBlock(label='item'), icon='list-ul')), ('Sharable', articles.fields.SharableBlock())])),
+                ('excerpt', wagtail.core.fields.RichTextField(default='', blank=True)),
                 ('main_image', models.ForeignKey(related_name='+', on_delete=django.db.models.deletion.SET_NULL, blank=True, to='wagtailimages.Image', null=True)),
             ],
             options={
@@ -67,7 +67,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('sort_order', models.IntegerField(null=True, editable=False, blank=True)),
-                ('override_text', wagtail.wagtailcore.fields.RichTextField(default='', help_text='This field is optional. If not provided, the text will be pulled from the article page automatically. This field allows you to override the automatic text.', blank=True)),
+                ('override_text', wagtail.core.fields.RichTextField(default='', help_text='This field is optional. If not provided, the text will be pulled from the article page automatically. This field allows you to override the automatic text.', blank=True)),
                 ('article', models.ForeignKey(related_name='series_links', on_delete=django.db.models.deletion.SET_NULL, blank=True, to='articles.ArticlePage', null=True)),
             ],
             options={
@@ -78,7 +78,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='SeriesListPage',
             fields=[
-                ('page_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='wagtailcore.Page')),
+                ('page_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='wagtailcore.Page', on_delete=django.db.models.deletion.CASCADE)),
             ],
             options={
                 'abstract': False,
@@ -88,8 +88,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='SeriesPage',
             fields=[
-                ('page_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='wagtailcore.Page')),
-                ('body', articles.fields.BodyField([('Heading', wagtail.wagtailcore.blocks.CharBlock(classname='heading', icon='title')), ('Paragraph', wagtail.wagtailcore.blocks.RichTextBlock(icon='doc-full')), ('Image', wagtail.wagtailimages.blocks.ImageChooserBlock(icon='image')), ('Embed', wagtail.wagtailembeds.blocks.EmbedBlock(icon='site')), ('List', wagtail.wagtailcore.blocks.ListBlock(wagtail.wagtailcore.blocks.RichTextBlock(label='item'), icon='list-ul')), ('Sharable', articles.fields.SharableBlock())], default='', blank=True)),
+                ('page_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='wagtailcore.Page', on_delete=django.db.models.deletion.CASCADE)),
+                ('body', articles.fields.BodyField([('Heading', wagtail.core.blocks.CharBlock(classname='heading', icon='title')), ('Paragraph', wagtail.core.blocks.RichTextBlock(icon='doc-full')), ('Image', wagtail.images.blocks.ImageChooserBlock(icon='image')), ('Embed', wagtail.embeds.blocks.EmbedBlock(icon='site')), ('List', wagtail.core.blocks.ListBlock(wagtail.core.blocks.RichTextBlock(label='item'), icon='list-ul')), ('Sharable', articles.fields.SharableBlock())], default='', blank=True)),
                 ('image', models.ForeignKey(related_name='+', on_delete=django.db.models.deletion.SET_NULL, blank=True, to='wagtailimages.Image', null=True)),
             ],
             options={
@@ -122,7 +122,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='articletopiclink',
             name='topic',
-            field=models.ForeignKey(related_name='article_links', to='articles.Topic'),
+            field=models.ForeignKey(related_name='article_links', on_delete=django.db.models.deletion.CASCADE, to='articles.Topic'),
         ),
         migrations.AddField(
             model_name='articlepage',

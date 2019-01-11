@@ -8,10 +8,10 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.views.defaults import server_error
 
-from wagtail.wagtailadmin import urls as wagtailadmin_urls
-from wagtail.wagtailcore import urls as wagtail_urls
-from wagtail.wagtaildocs import urls as wagtaildocs_urls
-from wagtail.wagtailsearch import urls as wagtailsearch_urls
+from wagtail.admin import urls as wagtailadmin_urls
+from wagtail.core import urls as wagtail_urls
+from wagtail.documents import urls as wagtaildocs_urls
+from wagtail.search import urls as wagtailsearch_urls
 
 from core.feeds import MainFeed
 from core.views import chooser_search, site_search, template_error
@@ -38,7 +38,7 @@ if settings.DEBUG:
     base_urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     base_urlpatterns += static(settings.MEDIA_URL + 'images/', document_root=os.path.join(settings.MEDIA_ROOT, 'images'))
     base_urlpatterns += [
-        url(r'^django-admin/', include(admin.site.urls)),
+        url(r'^django-admin/', admin.site.urls),
         url(r'^admin/choose-page/search/', chooser_search, name="wagtailadmin_choose_page_search"),
         url(r'^admin/', include(wagtailadmin_urls)),
         url(r'^500/$', server_error),
