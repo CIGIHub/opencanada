@@ -4,7 +4,7 @@ from .base import *
 import django_heroku
 
 # Disable debug mode
-DEBUG = True
+# DEBUG = True
 # DEBUG_PROPAGATE_EXCEPTIONS = True
 
 # Compress static files offline
