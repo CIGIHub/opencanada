@@ -11,7 +11,9 @@ with warnings.catch_warnings():
 
 if __name__ == "__main__":
     if os.environ.get('PYTHON_ENV') == 'production':
-        os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'opencanada.settings.production');
+        os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'opencanada.settings.production')
+    elif os.environ.get('PYTHON_ENV') === 'staging':
+        os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'opencanada.settings.staging')
     else:
         os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'opencanada.settings')
 
