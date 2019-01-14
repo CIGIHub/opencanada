@@ -3,10 +3,6 @@ from __future__ import absolute_import, unicode_literals
 from .base import *
 import django_heroku
 
-# Disable debug mode
-# DEBUG = True
-# DEBUG_PROPAGATE_EXCEPTIONS = True
-
 # Compress static files offline
 # http://django-compressor.readthedocs.org/en/latest/settings/#django.conf.settings.COMPRESS_OFFLINE
 COMPRESS_OFFLINE = True
