@@ -110,7 +110,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
+    'opencanada.middleware.BasicAuthMiddleware',
     'wagtail.core.middleware.SiteMiddleware',
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
 ]
@@ -281,3 +281,8 @@ IS_PRODUCTION = False
 ADMIN_ENABLED = True
 
 SITE_ID = 1
+
+PYTHON_ENV = get_env_variable('PYTHON_ENV', '', False)
+
+BASICAUTH_USERNAME = get_env_variable('BASICAUTH_USERNAME', '', False)
+BASICAUTH_PASSWORD = get_env_variable('BASICAUTH_PASSWORD', '', False)
