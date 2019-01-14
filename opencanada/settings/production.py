@@ -33,12 +33,14 @@ WAGTAILSEARCH_BACKENDS = {
     },
 }
 
+AWS_ACCESS_KEY_ID = get_env_variable('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = get_env_variable('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = get_env_variable("AWS_STORAGE_BUCKET_NAME")
-#
+
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 COMPRESS_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-#
+
 COMPRESS_URL = get_env_variable('STATIC_URL')
 STATIC_URL = get_env_variable('STATIC_URL')
 MEDIA_URL = get_env_variable('STATIC_URL')
