@@ -37,26 +37,12 @@ AWS_STORAGE_BUCKET_NAME = get_env_variable("AWS_STORAGE_BUCKET_NAME")
 #
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-# COMPRESS_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+COMPRESS_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 #
-# COMPRESS_URL = 'https://heroku-files.opencanada.org/'
+COMPRESS_URL = get_env_variable('STATIC_URL')
 STATIC_URL = get_env_variable('STATIC_URL')
 MEDIA_URL = get_env_variable('STATIC_URL')
 AWS_S3_CUSTOM_DOMAIN = get_env_variable('AWS_S3_CUSTOM_DOMAIN')
-
-# PostgreSQL (Recommended, but requires the psycopg2 library and Postgresql development headers)
-# TODO: Remove this
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': get_env_variable('DB_NAME'),
-#         'USER': get_env_variable('DB_USER'),
-#         'PASSWORD': get_env_variable('DB_PASSWORD'),
-#         'HOST': get_env_variable('DB_HOST'),
-#         'PORT': get_env_variable('DB_PORT'),
-#         'CONN_MAX_AGE': 600,
-#     }
-# }
 
 # RAVEN_CONFIG = {
 #     'dsn': get_env_variable('RAVEN_DSN'),
