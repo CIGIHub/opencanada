@@ -19,10 +19,10 @@ WAGTAILSEARCH_BACKENDS = {
     }
 }
 
-COMPRESS_URL = 'https://staging-files.opencanada.org/'
-STATIC_URL = 'https://staging-files.opencanada.org/'
-MEDIA_URL = 'https://staging-files.opencanada.org/'
-AWS_S3_CUSTOM_DOMAIN = 'staging-files.opencanada.org'
+# COMPRESS_URL = 'https://files-staging.opencanada.org/'
+STATIC_URL = 'https://files-staging.opencanada.org/'
+MEDIA_URL = 'https://files-staging.opencanada.org/'
+AWS_S3_CUSTOM_DOMAIN = 'files-staging.opencanada.org'
 
 IS_PRODUCTION = False
 ADMIN_ENABLED = True
