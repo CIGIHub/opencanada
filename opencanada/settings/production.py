@@ -3,10 +3,6 @@ from __future__ import absolute_import, unicode_literals
 from .base import *
 import django_heroku
 
-# Compress static files offline
-# http://django-compressor.readthedocs.org/en/latest/settings/#django.conf.settings.COMPRESS_OFFLINE
-COMPRESS_OFFLINE = True
-
 # WAGTAILSEARCH_BACKENDS = {
 #     'default': {
 #         'BACKEND': 'wagtail.search.backends.elasticsearch2',
@@ -35,12 +31,16 @@ AWS_STORAGE_BUCKET_NAME = get_env_variable("AWS_STORAGE_BUCKET_NAME")
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-COMPRESS_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
-COMPRESS_URL = get_env_variable('STATIC_URL')
 STATIC_URL = get_env_variable('STATIC_URL')
 MEDIA_URL = get_env_variable('STATIC_URL')
 AWS_S3_CUSTOM_DOMAIN = get_env_variable('AWS_S3_CUSTOM_DOMAIN')
+
+# Compress static files offline
+# http://django-compressor.readthedocs.org/en/latest/settings/#django.conf.settings.COMPRESS_OFFLINE
+COMPRESS_OFFLINE = True
+COMPRESS_STORAGE = STATICFILES_STORAGE
+COMPRESS_URL = STATIC_URL
 
 # RAVEN_CONFIG = {
 #     'dsn': get_env_variable('RAVEN_DSN'),
