@@ -43,7 +43,6 @@ STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 STATIC_URL = get_env_variable('STATIC_URL')
 MEDIA_URL = get_env_variable('STATIC_URL')
 AWS_S3_CUSTOM_DOMAIN = get_env_variable('AWS_S3_CUSTOM_DOMAIN')
-AWS_S3_CUSTOM_DOMAIN = 'heroku-files.opencanada.org'
 
 # PostgreSQL (Recommended, but requires the psycopg2 library and Postgresql development headers)
 # TODO: Remove this
