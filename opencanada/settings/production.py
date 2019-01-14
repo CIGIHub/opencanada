@@ -29,8 +29,6 @@ WAGTAILSEARCH_BACKENDS = {
     },
 }
 
-django_heroku.settings(locals())
-
 AWS_ACCESS_KEY_ID = get_env_variable('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = get_env_variable('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = get_env_variable("AWS_STORAGE_BUCKET_NAME")
@@ -187,3 +185,5 @@ LOGGING = {
 
 # ALLOWED_HOSTS = [get_env_variable('ALLOWED_HOSTS')]
 ALLOWED_HOSTS = ['*'] # TODO: Fix this
+
+django_heroku.settings(locals(), staticfiles=False)
