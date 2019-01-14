@@ -181,7 +181,7 @@ LOGGING = {
     },
 }
 
-# ADMIN_ENABLED = False
+ADMIN_ENABLED = False
 
 # ALLOWED_HOSTS = [get_env_variable('ALLOWED_HOSTS')]
 ALLOWED_HOSTS = ['*'] # TODO: Fix this
