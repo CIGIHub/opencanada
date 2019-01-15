@@ -38,7 +38,7 @@ if settings.DEBUG:
     base_urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     base_urlpatterns += static(settings.MEDIA_URL + 'images/', document_root=os.path.join(settings.MEDIA_ROOT, 'images'))
     base_urlpatterns += [
-        url(r'^django-admin/', admin.site.urls),
+        # url(r'^django-admin/', admin.site.urls),
         url(r'^admin/choose-page/search/', chooser_search, name="wagtailadmin_choose_page_search"),
         url(r'^admin/', include(wagtailadmin_urls)),
         url(r'^500/$', server_error),
