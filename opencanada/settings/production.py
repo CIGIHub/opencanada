@@ -3,6 +3,11 @@ from __future__ import absolute_import, unicode_literals
 from .base import *
 import django_heroku
 
+# Disable debug mode
+DEBUG = False
+
+ALLOWED_HOSTS = [get_env_variable('ALLOWED_HOSTS')]
+
 WAGTAILSEARCH_BACKENDS = {
     'default': {
         'BACKEND': 'wagtail.search.backends.elasticsearch2',
@@ -177,8 +182,6 @@ LOGGING = {
 }
 
 ADMIN_ENABLED = False
-
-ALLOWED_HOSTS = [get_env_variable('ALLOWED_HOSTS')]
 
 django_heroku.settings(
     locals(),
