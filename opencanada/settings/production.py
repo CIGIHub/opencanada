@@ -3,25 +3,20 @@ from __future__ import absolute_import, unicode_literals
 from .base import *
 import django_heroku
 
-# WAGTAILSEARCH_BACKENDS = {
-#     'default': {
-#         'BACKEND': 'wagtail.search.backends.elasticsearch2',
-#         'INDEX': get_env_variable('ELASTICSEARCH_INDEX'),
-#         'TIMEOUT': 5000,
-#         # This setting will not work as intended with the ElasticSearch provided by http://www.searchly.com/
-#         # 'ATOMIC_REBUILD': True,
-#         'HOSTS': [{
-#             'host': get_env_variable('ELASTICSEARCH_HOST'),
-#             'port': get_env_variable('ELASTICSEARCH_PORT'),
-#             'http_auth': (get_env_variable('ELASTICSEARCH_USER'), get_env_variable('ELASTICSEARCH_PASSWORD')),
-#             'use_ssl': True,
-#             'verify_certs': False,
-#         }]
-#     },
-# }
 WAGTAILSEARCH_BACKENDS = {
     'default': {
-        'BACKEND': 'wagtail.search.backends.db',
+        'BACKEND': 'wagtail.search.backends.elasticsearch2',
+        'INDEX': get_env_variable('ELASTICSEARCH_INDEX'),
+        'TIMEOUT': 5000,
+        # This setting will not work as intended with the ElasticSearch provided by http://www.searchly.com/
+        # 'ATOMIC_REBUILD': True,
+        'HOSTS': [{
+            'host': get_env_variable('ELASTICSEARCH_HOST'),
+            'port': get_env_variable('ELASTICSEARCH_PORT'),
+            'http_auth': (get_env_variable('ELASTICSEARCH_USER'), get_env_variable('ELASTICSEARCH_PASSWORD')),
+            'use_ssl': True,
+            'verify_certs': False,
+        }]
     },
 }
 
@@ -183,7 +178,6 @@ LOGGING = {
 
 ADMIN_ENABLED = False
 
-# ALLOWED_HOSTS = [get_env_variable('ALLOWED_HOSTS')]
-ALLOWED_HOSTS = ['*'] # TODO: Fix this
+ALLOWED_HOSTS = [get_env_variable('ALLOWED_HOSTS')]
 
 django_heroku.settings(locals(), staticfiles=False)
