@@ -48,31 +48,31 @@ RAVEN_CONFIG = {
 
 INSTALLED_APPS = INSTALLED_APPS + (
     'wagtail.contrib.frontend_cache',
-    # 'raven.contrib.django.raven_compat',
+    'raven.contrib.django.raven_compat',
     # 'interactives_content',
     'caching',
 )
 
-# WAGTAILFRONTENDCACHE = {
-#     'cloudflare': {
-#         'BACKEND': 'wagtail.contrib.frontend_cache.backends.CloudflareBackend',
-#         'EMAIL': get_env_variable('CLOUDFLARE_EMAIL'),
-#         'TOKEN': get_env_variable('CLOUDFLARE_TOKEN'),
-#         'ZONEID': get_env_variable('CLOUDFLARE_ZONE_ID'),
-#     },
-# }
+WAGTAILFRONTENDCACHE = {
+    'cloudflare': {
+        'BACKEND': 'wagtail.contrib.frontend_cache.backends.CloudflareBackend',
+        'EMAIL': get_env_variable('CLOUDFLARE_EMAIL'),
+        'TOKEN': get_env_variable('CLOUDFLARE_TOKEN'),
+        'ZONEID': get_env_variable('CLOUDFLARE_ZONE_ID'),
+    },
+}
 
 FAVICON_PATH = STATIC_URL + 'img/favicon.png'
 
-# CACHES = {
-#     'default': {
-#         'BACKEND': 'django_redis.cache.RedisCache',
-#         'LOCATION': get_env_variable('REDIS_CACHE_ENDPOINT'),
-#         'OPTIONS': {
-#             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-#         }
-#     }
-# }
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': get_env_variable('REDIS_CACHE_ENDPOINT'),
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        }
+    }
+}
 
 IS_PRODUCTION = True
 
