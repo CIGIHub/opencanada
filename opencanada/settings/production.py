@@ -6,6 +6,8 @@ import django_heroku
 # Disable debug mode
 DEBUG = False
 
+SECURE_SSL_REDIRECT = True
+
 ALLOWED_HOSTS = [get_env_variable('ALLOWED_HOSTS')]
 
 WAGTAILSEARCH_BACKENDS = {
