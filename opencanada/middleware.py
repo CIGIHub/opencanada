@@ -31,11 +31,6 @@ class BasicAuthMiddleware(object):
                 return self.unauthed()
             else:
                 authentication = request.META['HTTP_AUTHORIZATION']
-                print('hello!')
-                print(request.META['HTTP_AUTHORIZATION'])
-                (authmeth, auth) = authentication.split(' ',1)
-                print('auth:')
-                print(auth)
                 if 'basic' != authmeth.lower():
                     return self.unauthed()
                 auth = base64.b64decode(auth.strip()).decode('utf-8')
