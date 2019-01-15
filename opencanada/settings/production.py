@@ -42,9 +42,9 @@ COMPRESS_OFFLINE = True
 COMPRESS_STORAGE = STATICFILES_STORAGE
 COMPRESS_URL = STATIC_URL
 
-# RAVEN_CONFIG = {
-#     'dsn': get_env_variable('RAVEN_DSN'),
-# }
+RAVEN_CONFIG = {
+    'dsn': get_env_variable('RAVEN_DSN'),
+}
 
 INSTALLED_APPS = INSTALLED_APPS + (
     'wagtail.contrib.frontend_cache',
@@ -76,91 +76,34 @@ FAVICON_PATH = STATIC_URL + 'img/favicon.png'
 
 IS_PRODUCTION = True
 
-# LOGGING = {
-#     'version': 1,
-#     'disable_existing_loggers': True,
-#     'root': {
-#         'level': 'WARNING',
-#         'handlers': ['sentry'],
-#     },
-#     'formatters': {
-#         'verbose': {
-#             'format': '%(levelname)s %(asctime)s %(module)s '
-#                       '%(process)d %(thread)d %(message)s'
-#         },
-#     },
-#     'handlers': {
-#         'sentry': {
-#             'level': 'WARNING',
-#             'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
-#         },
-#         'console': {
-#             'level': 'DEBUG',
-#             'class': 'logging.StreamHandler',
-#             'formatter': 'verbose'
-#         }
-#     },
-#     'loggers': {
-#         'django.template': {
-#             'level': 'WARNING',
-#             'handlers': ['sentry', 'console'],
-#             'propagate': False,
-#         },
-#         'django.db.backends': {
-#             'level': 'ERROR',
-#             'handlers': ['console'],
-#             'propagate': False,
-#         },
-#         'raven': {
-#             'level': 'DEBUG',
-#             'handlers': ['console'],
-#             'propagate': False,
-#         },
-#         'sentry.errors': {
-#             'level': 'DEBUG',
-#             'handlers': ['console'],
-#             'propagate': False,
-#         },
-#     },
-# }
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,
     'root': {
         'level': 'WARNING',
-        'handlers': ['console'],
+        'handlers': ['sentry'],
     },
     'formatters': {
         'verbose': {
             'format': '%(levelname)s %(asctime)s %(module)s '
                       '%(process)d %(thread)d %(message)s'
         },
-        'django.server': {
-            '()': 'django.utils.log.ServerFormatter',
-            'format': '[%(server_time)s] %(message)s',
-        },
     },
     'handlers': {
+        'sentry': {
+            'level': 'WARNING',
+            'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
+        },
         'console': {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
             'formatter': 'verbose'
-        },
-        'django.server': {
-            'level': 'INFO',
-            'class': 'logging.StreamHandler',
-            'formatter': 'django.server',
-        },
+        }
     },
     'loggers': {
-        'django.server': {
-            'handlers': ['django.server'],
-            'level': 'INFO',
-            'propagate': False,
-        },
         'django.template': {
             'level': 'WARNING',
-            'handlers': ['console'],
+            'handlers': ['sentry', 'console'],
             'propagate': False,
         },
         'django.db.backends': {
@@ -168,16 +111,16 @@ LOGGING = {
             'handlers': ['console'],
             'propagate': False,
         },
-        # 'raven': {
-        #     'level': 'DEBUG',
-        #     'handlers': ['console'],
-        #     'propagate': False,
-        # },
-        # 'sentry.errors': {
-        #     'level': 'DEBUG',
-        #     'handlers': ['console'],
-        #     'propagate': False,
-        # },
+        'raven': {
+            'level': 'DEBUG',
+            'handlers': ['console'],
+            'propagate': False,
+        },
+        'sentry.errors': {
+            'level': 'DEBUG',
+            'handlers': ['console'],
+            'propagate': False,
+        },
     },
 }
 
