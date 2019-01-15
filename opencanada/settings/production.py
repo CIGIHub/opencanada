@@ -180,4 +180,11 @@ ADMIN_ENABLED = False
 
 ALLOWED_HOSTS = [get_env_variable('ALLOWED_HOSTS')]
 
-django_heroku.settings(locals(), staticfiles=False)
+django_heroku.settings(
+    locals(),
+    allowed_hosts=False,
+    logging=False,
+    secret_key=False,
+    staticfiles=False,
+    test_runner=False
+)
