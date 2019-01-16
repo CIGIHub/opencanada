@@ -38,7 +38,7 @@
                                 <tr>
                                     <td style="{% base_styles 'td' %}">
                                         {{ event.date|date }},  {{ event.location }}<br>
-                                        {% if event.override_text %}
+                                        {% if event.override_text|paragraph_markup %}
                                             {{ event.override_text|paragraph_markup|safe }}
                                         {% else %}
                                             {{ event.body|paragraph_markup|safe }}
@@ -55,4 +55,3 @@
     </tr>
 </table>
 {% endif %}
-
