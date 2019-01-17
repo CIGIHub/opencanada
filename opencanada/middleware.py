@@ -26,7 +26,7 @@ class BasicAuthMiddleware(object):
         return response
 
     def process_request(self,request):
-        if settings.PYTHON_ENV == 'staging':
+        if settings.PYTHON_ENV in ['admin', 'staging']:
             if 'HTTP_AUTHORIZATION' not in request.META:
                 return self.unauthed()
             else:
