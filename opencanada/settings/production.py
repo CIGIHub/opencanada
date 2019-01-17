@@ -12,25 +12,20 @@ ALLOWED_HOSTS = [get_env_variable('ALLOWED_HOSTS')]
 
 WAGTAILSEARCH_BACKENDS = {
     'default': {
-        'BACKEND': 'wagtail.search.backends.db',
-    }
+        'BACKEND': 'wagtail.search.backends.elasticsearch2',
+        'INDEX': get_env_variable('ELASTICSEARCH_INDEX'),
+        'TIMEOUT': 5000,
+        # This setting will not work as intended with the ElasticSearch provided by http://www.searchly.com/
+        # 'ATOMIC_REBUILD': True,
+        'HOSTS': [{
+            'host': get_env_variable('ELASTICSEARCH_HOST'),
+            'port': get_env_variable('ELASTICSEARCH_PORT'),
+            'http_auth': (get_env_variable('ELASTICSEARCH_USER'), get_env_variable('ELASTICSEARCH_PASSWORD')),
+            'use_ssl': True,
+            'verify_certs': False,
+        }]
+    },
 }
-# WAGTAILSEARCH_BACKENDS = {
-#     'default': {
-#         'BACKEND': 'wagtail.search.backends.elasticsearch2',
-#         'INDEX': get_env_variable('ELASTICSEARCH_INDEX'),
-#         'TIMEOUT': 5000,
-#         # This setting will not work as intended with the ElasticSearch provided by http://www.searchly.com/
-#         # 'ATOMIC_REBUILD': True,
-#         'HOSTS': [{
-#             'host': get_env_variable('ELASTICSEARCH_HOST'),
-#             'port': get_env_variable('ELASTICSEARCH_PORT'),
-#             'http_auth': (get_env_variable('ELASTICSEARCH_USER'), get_env_variable('ELASTICSEARCH_PASSWORD')),
-#             'use_ssl': True,
-#             'verify_certs': False,
-#         }]
-#     },
-# }
 
 AWS_ACCESS_KEY_ID = get_env_variable('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = get_env_variable('AWS_SECRET_ACCESS_KEY')
@@ -71,11 +66,6 @@ WAGTAILFRONTENDCACHE = {
 
 FAVICON_PATH = STATIC_URL + 'img/favicon.png'
 
-# CACHES = {
-#     'default': {
-#         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-#     }
-# }
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
