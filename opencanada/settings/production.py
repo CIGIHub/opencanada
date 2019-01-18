@@ -1,15 +1,15 @@
 from __future__ import absolute_import, unicode_literals
 
 from .base import *
+import django_heroku
 
 # Disable debug mode
 DEBUG = False
 
-ALLOWED_HOSTS = [get_env_variable('ALLOWED_HOSTS')]
+SECURE_SSL_REDIRECT = True
+PREPEND_WWW = False # TODO: Set to true for production
 
-# Compress static files offline
-# http://django-compressor.readthedocs.org/en/latest/settings/#django.conf.settings.COMPRESS_OFFLINE
-COMPRESS_OFFLINE = True
+ALLOWED_HOSTS = [get_env_variable('ALLOWED_HOSTS')]
 
 WAGTAILSEARCH_BACKENDS = {
     'default': {
@@ -28,29 +28,22 @@ WAGTAILSEARCH_BACKENDS = {
     },
 }
 
+AWS_ACCESS_KEY_ID = get_env_variable('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = get_env_variable('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = get_env_variable("AWS_STORAGE_BUCKET_NAME")
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-COMPRESS_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
-COMPRESS_URL = 'https://files.opencanada.org/'
-STATIC_URL = 'https://files.opencanada.org/'
-MEDIA_URL = 'https://files.opencanada.org/'
-AWS_S3_CUSTOM_DOMAIN = 'files.opencanada.org'
+STATIC_URL = get_env_variable('STATIC_URL')
+MEDIA_URL = get_env_variable('STATIC_URL')
+AWS_S3_CUSTOM_DOMAIN = get_env_variable('AWS_S3_CUSTOM_DOMAIN')
 
-# PostgreSQL (Recommended, but requires the psycopg2 library and Postgresql development headers)
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': get_env_variable('DB_NAME'),
-        'USER': get_env_variable('DB_USER'),
-        'PASSWORD': get_env_variable('DB_PASSWORD'),
-        'HOST': get_env_variable('DB_HOST'),
-        'PORT': get_env_variable('DB_PORT'),
-        'CONN_MAX_AGE': 600,
-    }
-}
+# Compress static files offline
+# http://django-compressor.readthedocs.org/en/latest/settings/#django.conf.settings.COMPRESS_OFFLINE
+COMPRESS_OFFLINE = True
+COMPRESS_STORAGE = STATICFILES_STORAGE
+COMPRESS_URL = STATIC_URL
 
 RAVEN_CONFIG = {
     'dsn': get_env_variable('RAVEN_DSN'),
@@ -59,7 +52,7 @@ RAVEN_CONFIG = {
 INSTALLED_APPS = INSTALLED_APPS + (
     'wagtail.contrib.frontend_cache',
     'raven.contrib.django.raven_compat',
-    'interactives_content',
+    # 'interactives_content',
     'caching',
 )
 
@@ -135,3 +128,12 @@ LOGGING = {
 }
 
 ADMIN_ENABLED = False
+
+django_heroku.settings(
+    locals(),
+    allowed_hosts=False,
+    logging=False,
+    secret_key=False,
+    staticfiles=False,
+    test_runner=False
+)

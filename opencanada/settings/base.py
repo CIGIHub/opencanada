@@ -10,6 +10,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 from __future__ import absolute_import, unicode_literals
 
+import os
 from os import environ
 from os.path import abspath, dirname, join
 
@@ -31,6 +32,8 @@ def get_env_variable(var_name, default='', required=True):
 # Absolute filesystem path to the Django project directory:
 PROJECT_ROOT = dirname(dirname(dirname(abspath(__file__))))
 
+PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
@@ -103,11 +106,12 @@ INSTALLED_APPS = (
 MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'django.middleware.security.SecurityMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
+    'opencanada.middleware.BasicAuthMiddleware',
     'wagtail.core.middleware.SiteMiddleware',
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
 ]
@@ -278,3 +282,8 @@ IS_PRODUCTION = False
 ADMIN_ENABLED = True
 
 SITE_ID = 1
+
+PYTHON_ENV = get_env_variable('PYTHON_ENV', '', False)
+
+BASICAUTH_USERNAME = get_env_variable('BASICAUTH_USERNAME', '', False)
+BASICAUTH_PASSWORD = get_env_variable('BASICAUTH_PASSWORD', '', False)
