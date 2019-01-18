@@ -4,6 +4,8 @@ from .production import *
 
 ROOT_URLCONF = 'opencanada.urls_admin'
 
+PREPEND_WWW = False
+
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
