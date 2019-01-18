@@ -7,6 +7,7 @@ import django_heroku
 DEBUG = False
 
 SECURE_SSL_REDIRECT = True
+PREPEND_WWW = True
 
 ALLOWED_HOSTS = [get_env_variable('ALLOWED_HOSTS')]
 
