@@ -10,20 +10,6 @@ ROOT_URLCONF = 'opencanada.urls_admin'
 
 PREPEND_WWW = False
 
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-    }
-}
-
-
-# Explicitly use database
-WAGTAILSEARCH_BACKENDS = {
-    'default': {
-        'BACKEND': 'wagtail.search.backends.db',
-    }
-}
-
 IS_PRODUCTION = True
 ADMIN_ENABLED = True
 
