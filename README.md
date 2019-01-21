@@ -34,7 +34,6 @@ To install the hooks:
   -  run `ln -s ../../hooks/<hookfile> <hookname>`  
     -  for example `ln -s ../../hooks/pre-commit.py pre-commit`
 
-
 ### Pre-Commit Hook
 Performs flake8 and isort checks before allowing commit.
 
