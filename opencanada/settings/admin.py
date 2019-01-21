@@ -16,6 +16,7 @@ CACHES = {
     }
 }
 
+
 # Explicitly use database
 WAGTAILSEARCH_BACKENDS = {
     'default': {
