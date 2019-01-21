@@ -4,7 +4,7 @@ python:
 # env:
 #   - DJANGO=2.0.9
 install:
-  - pip install -q Django==$DJANGO
+  # - pip install -q Django==$DJANGO
   - pip install -r requirements.txt
 before_script:
   - flake8 .
