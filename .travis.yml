@@ -1,17 +1,7 @@
 language: python
 python:
   - "3.6"
-  - "2.7"
-env:
-  - DJANGO=1.11.3
 install:
-  - pip install -q Django==$DJANGO
-  - pip install -q six
-  - pip install -r requirements/test.txt
-before_script:
-  - flake8 .
-#  - isort -c -rc .
+  - pip install -r requirements.txt
 script:
-  - coverage run --source='.' ./manage.py test --settings opencanada.settings.test -v 3
-after_success:
-  - coveralls
+  - python manage.py test
