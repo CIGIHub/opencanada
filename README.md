@@ -38,7 +38,7 @@ To install the hooks:
     -  for example `ln -s ../../hooks/pre-commit.py pre-commit`
  
 
-###Pre-Commit Hook
+### Pre-Commit Hook
 Performs flake8 and isort checks before allowing commit.
 
 
