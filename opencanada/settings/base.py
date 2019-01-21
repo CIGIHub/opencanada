@@ -10,6 +10,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 from __future__ import absolute_import, unicode_literals
 
+import os
 from os import environ
 from os.path import abspath, dirname, join
 
@@ -31,6 +32,8 @@ def get_env_variable(var_name, default='', required=True):
 # Absolute filesystem path to the Django project directory:
 PROJECT_ROOT = dirname(dirname(dirname(abspath(__file__))))
 
+PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
@@ -64,25 +67,24 @@ INSTALLED_APPS = (
     'compressor',
     'taggit',
     'modelcluster',
-    'overextends',
 
     'core',
     'themes',
 
-    'wagtail.wagtailcore',
-    'wagtail.wagtailadmin',
-    'wagtail.wagtaildocs',
-    'wagtail.wagtailsnippets',
-    'wagtail.wagtailusers',
-    'wagtail.wagtailsites',
-    'wagtail.wagtailimages',
-    'wagtail.wagtailembeds',
+    'wagtail.core',
+    'wagtail.admin',
+    'wagtail.documents',
+    'wagtail.snippets',
+    'wagtail.users',
+    'wagtail.sites',
+    'wagtail.images',
+    'wagtail.embeds',
     # Overriding wagtailsearch default app registration to register slightly different signal handlers.
     'core.apps.CustomWagtailSearchAppConfig',
-    'wagtail.wagtailredirects',
-    'wagtail.wagtailforms',
-    'wagtail.contrib.wagtailstyleguide',
-    'wagtail.contrib.wagtailroutablepage',
+    'wagtail.contrib.redirects',
+    'wagtail.contrib.forms',
+    'wagtail.contrib.styleguide',
+    'wagtail.contrib.routable_page',
 
     'favicon',
 
@@ -101,18 +103,18 @@ INSTALLED_APPS = (
     'robots',
 )
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'django.middleware.security.SecurityMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
-    'wagtail.wagtailcore.middleware.SiteMiddleware',
-    'wagtail.wagtailredirects.middleware.RedirectMiddleware',
-)
+    'opencanada.middleware.BasicAuthMiddleware',
+    'wagtail.core.middleware.SiteMiddleware',
+    'wagtail.contrib.redirects.middleware.RedirectMiddleware',
+]
 
 ROOT_URLCONF = 'opencanada.urls'
 WSGI_APPLICATION = 'opencanada.wsgi.application'
@@ -185,7 +187,6 @@ TEMPLATES = [
         'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
-            'builtins': ['overextends.templatetags.overextends_tags'],
             'context_processors': [
                 'django.contrib.auth.context_processors.auth',
                 'django.template.context_processors.debug',
@@ -212,7 +213,7 @@ WAGTAIL_SITE_NAME = "opencanada"
 #
 # WAGTAILSEARCH_BACKENDS = {
 #     'default': {
-#         'BACKEND': 'wagtail.wagtailsearch.backends.elasticsearch.ElasticSearch',
+#         'BACKEND': 'wagtail.search.backends.elasticsearch.ElasticSearch',
 #         'INDEX': 'opencanada',
 #     },
 # }
@@ -281,3 +282,8 @@ IS_PRODUCTION = False
 ADMIN_ENABLED = True
 
 SITE_ID = 1
+
+PYTHON_ENV = get_env_variable('PYTHON_ENV', '', False)
+
+BASICAUTH_USERNAME = get_env_variable('BASICAUTH_USERNAME', '', False)
+BASICAUTH_PASSWORD = get_env_variable('BASICAUTH_PASSWORD', '', False)

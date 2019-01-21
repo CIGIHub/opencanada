@@ -6,14 +6,14 @@ from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from modelcluster.fields import ParentalKey
 from modelcluster.models import ClusterableModel
-from wagtail.wagtailadmin.edit_handlers import (FieldPanel, InlinePanel,
+from wagtail.admin.edit_handlers import (FieldPanel, InlinePanel,
                                                 MultiFieldPanel)
-from wagtail.wagtailcore.blocks import StreamBlock
-from wagtail.wagtailcore.fields import RichTextField, StreamField
-from wagtail.wagtailcore.models import Page
-from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
-from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
-from wagtail.wagtailsnippets.models import register_snippet
+from wagtail.core.blocks import StreamBlock
+from wagtail.core.fields import RichTextField, StreamField
+from wagtail.core.models import Page
+from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.snippets.edit_handlers import SnippetChooserPanel
+from wagtail.snippets.models import register_snippet
 
 from .blocks import ThemeableStructBlock
 
@@ -52,7 +52,11 @@ class Theme(models.Model):
     name = models.CharField(max_length=1024)
     folder = models.CharField(max_length=1024, default="themes/default")
     is_default = models.BooleanField(default=False)
-    content = models.ForeignKey(ThemeContent, null=True)
+    content = models.ForeignKey(
+        ThemeContent,
+        null=True,
+        on_delete=models.SET_NULL
+    )
 
     def __str__(self):
         return self.name
@@ -168,6 +172,7 @@ class LogoBlock(models.Model):
     usage = models.CharField(max_length=255, blank=True, default="")
     logo = models.ForeignKey(
         'images.AttributedImage',
+        on_delete=models.CASCADE
     )
     link = models.CharField(max_length=2048, blank=True, null=True)
 
@@ -187,7 +192,8 @@ register_snippet(LogoBlock)
 class ContentBlockLink(models.Model):
     block = models.ForeignKey(
         "TextBlock",
-        related_name='content_links'
+        related_name='content_links',
+        on_delete=models.CASCADE
     )
     theme_content = ParentalKey(
         "ThemeContent",
@@ -200,7 +206,8 @@ class ContentBlockLink(models.Model):
 class ContentFollowLink(models.Model):
     block = models.ForeignKey(
         "FollowLink",
-        related_name='content_links'
+        related_name='content_links',
+        on_delete=models.CASCADE
     )
     theme_content = ParentalKey(
         "ThemeContent",
@@ -213,7 +220,8 @@ class ContentFollowLink(models.Model):
 class ContentLogoLink(models.Model):
     block = models.ForeignKey(
         "LogoBlock",
-        related_name='content_links'
+        related_name='content_links',
+        on_delete=models.CASCADE
     )
     theme_content = ParentalKey(
         "ThemeContent",

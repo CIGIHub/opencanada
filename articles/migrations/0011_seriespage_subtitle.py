@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-import wagtail.wagtailcore.fields
+import wagtail.core.fields
 from django.db import migrations, models
 
 
@@ -15,6 +15,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='seriespage',
             name='subtitle',
-            field=wagtail.wagtailcore.fields.RichTextField(default='', blank=True),
+            field=wagtail.core.fields.RichTextField(default='', blank=True),
         ),
     ]

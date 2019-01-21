@@ -4,10 +4,10 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.shortcuts import get_object_or_404, render
 from django.utils.six import text_type
 from django.utils.translation import ugettext as _
-from wagtail.wagtailadmin.forms import SearchForm
-from wagtail.wagtailadmin.modal_workflow import render_modal_workflow
-from wagtail.wagtailsearch.backends import get_search_backend
-from wagtail.wagtailsearch.index import class_is_indexed
+from wagtail.admin.forms import SearchForm
+from wagtail.admin.modal_workflow import render_modal_workflow
+from wagtail.search.backends import get_search_backend
+from wagtail.search.index import class_is_indexed
 
 from ..models import EndNote
 

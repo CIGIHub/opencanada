@@ -43,7 +43,7 @@
                                 </tr>
                                 <tr>
                                     <td style="{% base_styles 'td' %}">
-                                        {% if article.override_text %}
+                                        {% if article.override_text|paragraph_markup %}
                                             {{ article.override_text|paragraph_markup|safe }}
                                         {% else %}
                                             {{ article.body|paragraph_markup|safe }}

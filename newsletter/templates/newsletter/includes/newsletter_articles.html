@@ -27,7 +27,7 @@
                                     </tr>
                                     <tr>
                                         <td valign="top" style="{% base_styles 'td' %} " >
-                                            {% if article.override_text %}
+                                            {% if article.override_text|paragraph_markup %}
                                                 {{ article.override_text|paragraph_markup|html_cleanup|safe }}
                                             {% else %}
                                                 {{ article.excerpt|html_cleanup|safe }}
@@ -75,7 +75,7 @@
                                         </tr>
                                         <tr>
                                             <td style="{% base_styles 'td' %} padding-top:10px;">
-                                                {% if article.override_text %}
+                                            {% if article.override_text|paragraph_markup %}
                                                 {{ article.override_text|paragraph_markup|html_cleanup|safe }}
                                             {% else %}
                                                 {{ article.excerpt|html_cleanup|safe }}
@@ -88,7 +88,7 @@
 
                                 </td>
                             </tr>
-                    </table> 
+                    </table>
 
                  {% endif %}
             {% endfor %}

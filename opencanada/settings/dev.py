@@ -10,9 +10,9 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 IS_PRODUCTION = False
 
-INSTALLED_APPS = INSTALLED_APPS + (
-    'interactives_content',
-)
+# INSTALLED_APPS = INSTALLED_APPS + (
+#     'interactives_content',
+# )
 
 # To use the Django Debug Toolbar, make sure you pip install it and then uncomment the follow:
 # see root urls.py as well
@@ -28,7 +28,7 @@ INSTALLED_APPS = INSTALLED_APPS + (
 # Explicitly use database
 WAGTAILSEARCH_BACKENDS = {
     'default': {
-        'BACKEND': 'wagtail.wagtailsearch.backends.db',
+        'BACKEND': 'wagtail.search.backends.db',
     }
 }
 

@@ -10,7 +10,14 @@ with warnings.catch_warnings():
     dotenv.read_dotenv()
 
 if __name__ == "__main__":
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "opencanada.settings")
+    if os.environ.get('OPEN_CANADA_PYTHON_ENV') == 'production':
+        os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'opencanada.settings.production')
+    elif os.environ.get('OPEN_CANADA_PYTHON_ENV') == 'admin':
+        os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'opencanada.settings.admin')
+    elif os.environ.get('OPEN_CANADA_PYTHON_ENV') == 'staging':
+        os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'opencanada.settings.staging')
+    else:
+        os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'opencanada.settings')
 
     from django.core.management import execute_from_command_line
 

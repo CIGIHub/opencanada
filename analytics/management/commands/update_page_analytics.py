@@ -9,9 +9,9 @@ from django.core.exceptions import ImproperlyConfigured
 from django.core.management.base import BaseCommand
 from django.db import transaction
 from django.utils.timezone import now
-from wagtail.contrib.wagtailfrontendcache.utils import (purge_page_from_cache,
+from wagtail.contrib.frontend_cache.utils import (purge_page_from_cache,
                                                         purge_url_from_cache)
-from wagtail.wagtailcore.models import Page
+from wagtail.core.models import Page
 
 from analytics import utils
 from core.models import HomePage

@@ -1,7 +1,7 @@
 from __future__ import absolute_import, unicode_literals
 
-from wagtail.wagtailcore import blocks
-from wagtail.wagtailcore.fields import StreamField
+from wagtail.core import blocks
+from wagtail.core.fields import StreamField
 
 
 class BioField(StreamField):
