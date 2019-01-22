@@ -1,3 +1,5 @@
+The release documentation has been moved to https://github.com/CIGIHub/opencanada/releases
+
 April 7, 2017 -- 1.5.0
 
 * Migrate to elasticsearch 1.x to 2.x using searchly.
