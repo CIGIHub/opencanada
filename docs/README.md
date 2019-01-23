@@ -1,4 +1,4 @@
-# Open Canada Website
+# OpenCanada Website
 
 For simplicity sake these docs will be a series of markdown files
 readable through github directly. In the future we could use a tool like
