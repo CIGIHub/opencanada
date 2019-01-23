@@ -36,7 +36,7 @@ psycopg2==2.7.6.1
 pyasn1==0.4.5
 pyasn1-modules==0.2.3
 pycparser==2.19
-pyOpenSSL==16.2.0
+pyOpenSSL==19.0.0
 pytz==2018.9
 raven==6.9.0
 rcssmin==1.0.6
