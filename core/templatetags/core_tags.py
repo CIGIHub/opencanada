@@ -26,7 +26,7 @@ def search_string(topic):
 def get_site_defaults(context):
     try:
         return context['request'].site.default_settings
-    except ObjectDoesNotExist:
+    except (AttributeError, ObjectDoesNotExist) as e:
         return None
 
 
