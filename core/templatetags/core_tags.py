@@ -7,6 +7,8 @@ from six.moves.urllib.parse import urlparse
 
 from articles.models import Topic
 
+from ..models import SiteDefaults
+
 register = template.Library()
 
 
@@ -27,7 +29,7 @@ def get_site_defaults(context):
     try:
         return context['request'].site.default_settings
     except (AttributeError, ObjectDoesNotExist) as e:
-        return None
+        return SiteDefaults.objects.get(site__is_default_site=True)
 
 
 @register.simple_tag(takes_context=True)
