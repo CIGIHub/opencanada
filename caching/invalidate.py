@@ -50,7 +50,7 @@ def cloudflare_request(method, url, data):
         return None
 
 
-    logger(resp_json)
+    logger.info(resp_json)
     if resp_json['success'] is False:
         logger.error('Cloudflare API Error: Request did not succeed. {}'.format(resp_json))
         return None
