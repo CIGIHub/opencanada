@@ -42,12 +42,15 @@ def cloudflare_request(method, url, data):
     }
 
     resp = method(url, json=data, headers=headers)
+
     try:
         resp_json = resp.json()
     except ValueError:
         logger.error('Cloudflare API Error: Unable to parse response into JSON. {}'.format(resp.content))
         return None
 
+
+    logger(resp_json)
     if resp_json['success'] is False:
         logger.error('Cloudflare API Error: Request did not succeed. {}'.format(resp_json))
         return None
