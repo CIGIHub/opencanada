@@ -55,7 +55,6 @@ RAVEN_CONFIG = {
 }
 
 INSTALLED_APPS = INSTALLED_APPS + (
-    'wagtail.contrib.frontend_cache',
     'raven.contrib.django.raven_compat',
     # 'interactives_content',
     'caching',
