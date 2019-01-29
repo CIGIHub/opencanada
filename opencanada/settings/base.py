@@ -16,15 +16,12 @@ from os.path import abspath, dirname, join
 
 from django.core.exceptions import ImproperlyConfigured
 
-_variable_prefix = "OPEN_CANADA_"
-
-
 def get_env_variable(var_name, default='', required=True):
     try:
-        return environ[_variable_prefix + var_name]
+        return environ[var_name]
     except KeyError:
         if required:
-            error_msg = "Set the {} environment variable.".format(_variable_prefix + var_name)
+            error_msg = "Set the {} environment variable.".format(var_name)
             raise ImproperlyConfigured(error_msg)
         else:
             return default
