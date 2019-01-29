@@ -11,9 +11,9 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-if os.environ.get('OPEN_CANADA_PYTHON_ENV') == 'staging':
+if os.environ.get('PYTHON_ENV') == 'staging':
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'opencanada.settings.staging')
-elif os.environ.get('OPEN_CANADA_PYTHON_ENV') == 'admin':
+elif os.environ.get('PYTHON_ENV') == 'admin':
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'opencanada.settings.admin')
 else:
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'opencanada.settings.production')
