@@ -3,13 +3,13 @@ python:
   - "3.6"
 addons:
   postgresql: "10"
-  apt:
-    packages:
-    - postgresql-10
-    - postgresql-client-10
+  # apt:
+  #   packages:
+  #   - postgresql-10
+  #   - postgresql-client-10
 services:
   - elasticsearch
-  - postgresql
+  # - postgresql
 install:
   - pip install -r requirements.txt
 before_script:
