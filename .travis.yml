@@ -7,9 +7,9 @@ addons:
     packages:
       - postgresql-10
       - postgresql-client-10
-env:
-  global:
-    - PGPORT=5433
+# env:
+#   global:
+#     - PGPORT=5433
 services:
   - elasticsearch
   # - postgresql
@@ -17,7 +17,7 @@ install:
   - pip install -r requirements.txt
 before_script:
   - sleep 10
-  # - psql -c "CREATE DATABASE opencanada;" -U postgres
+  - psql -c "CREATE DATABASE opencanada;" -U postgres
   # - psql -c "CREATE ROLE opencanada LOGIN PASSWORD 'opencanada';" -U postgres
   # - psql -c "GRANT ALL PRIVILEGES ON DATABASE opencanada TO opencanada;" -U postgres
   - python manage.py migrate
