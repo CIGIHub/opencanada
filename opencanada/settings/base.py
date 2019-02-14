@@ -204,17 +204,6 @@ TEMPLATES = [
 
 WAGTAIL_SITE_NAME = "opencanada"
 
-# Use Elasticsearch as the search backend for extra performance and better search results:
-# http://wagtail.readthedocs.org/en/latest/howto/performance.html#search
-# http://wagtail.readthedocs.org/en/latest/core_components/search/backends.html#elasticsearch-backend
-#
-# WAGTAILSEARCH_BACKENDS = {
-#     'default': {
-#         'BACKEND': 'wagtail.search.backends.elasticsearch.ElasticSearch',
-#         'INDEX': 'opencanada',
-#     },
-# }
-
 WAGTAILSEARCH_RESULTS_TEMPLATE = 'basic_site/search_results.html'
 
 # Whether to use face/feature detection to improve image cropping - requires OpenCV

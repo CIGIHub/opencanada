@@ -24,7 +24,7 @@ django-treebeard==4.3
 djangorestframework==3.9.1
 docopt==0.6.2
 draftjs-exporter==2.1.5
-elasticsearch==2.4.1
+elasticsearch==6.3.0
 google-api-python-client==1.4.1
 gunicorn==19.9.0
 html5lib==1.0.1
