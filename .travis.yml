@@ -1,14 +1,15 @@
 language: python
 python:
   - "3.6"
-services:
-  - elasticsearch
 addons:
   postgresql: "10"
   apt:
     packages:
     - postgresql-10
     - postgresql-client-10
+services:
+  - elasticsearch
+  - postgresql
 install:
   - pip install -r requirements.txt
 before_script:
