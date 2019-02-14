@@ -1,8 +1,12 @@
 language: python
 python:
   - "3.6"
+services:
+  - elasticsearch
 install:
   - pip install -r requirements.txt
+before_script:
+  - sleep 10
 script:
   - coverage run --source='.' manage.py test
 after_success:
