@@ -28,13 +28,8 @@ IS_PRODUCTION = False
 # Explicitly use database
 WAGTAILSEARCH_BACKENDS = {
     'default': {
-        'BACKEND': 'wagtail.search.backends.elasticsearch6',
-        'URLS': [get_env_variable('BONSAI_URL')],
-        'INDEX': 'wagtail',
-        'TIMEOUT': 5,
-        'OPTIONS': {},
-        'INDEX_SETTINGS': {},
-    },
+        'BACKEND': 'wagtail.search.backends.db',
+    }
 }
 
 DATABASES = {

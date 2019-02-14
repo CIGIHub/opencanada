@@ -6,6 +6,12 @@ ROOT_URLCONF = 'opencanada.urls_admin'
 
 PREPEND_WWW = False
 
+WAGTAILSEARCH_BACKENDS = {
+    'default': {
+        'BACKEND': 'wagtail.search.backends.db',
+    }
+}
+
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
