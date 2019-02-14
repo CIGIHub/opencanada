@@ -14,6 +14,9 @@ install:
   - pip install -r requirements.txt
 before_script:
   - sleep 10
+  - psql -c "CREATE DATABASE opencanada;" -U postgres
+  - psql -c "CREATE ROLE opencanada LOGIN PASSWORD 'opencanada';" -U postgres
+  - psql -c "GRANT ALL PRIVILEGES ON DATABASE opencanada TO opencanada;" -U postgres
   - python manage.py migrate
   - python manage.py update_index
 script:
