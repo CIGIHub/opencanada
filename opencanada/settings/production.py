@@ -74,7 +74,7 @@ FAVICON_PATH = STATIC_URL + 'img/favicon.png'
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': get_env_variable('REDIS_CACHE_ENDPOINT'),
+        'LOCATION': get_env_variable('REDIS_URL'),
         'OPTIONS': {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
         }

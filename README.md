@@ -12,10 +12,10 @@ Use Python 3.6+ and Django 1.11.x for best results.
     -  for development: `pip install -r requirements/dev.txt`
 
 ## Required Environment Variables
-OPEN_CANADA_SECRET_KEY - The django SECRET_KEY setting.
+SECRET_KEY - The django SECRET_KEY setting.
 Set environment variable in bash
 
-OPEN_CANADA_BASE_URL - Base URL to use when referring to full URLs within the
+BASE_URL - Base URL to use when referring to full URLs within the
 Wagtail admin backend. e.g. in notification emails. Don't include '/admin' or
 a trailing slash.
 
