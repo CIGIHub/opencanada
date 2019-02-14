@@ -26,19 +26,9 @@ IS_PRODUCTION = False
 # INTERNAL_IPS = ['127.0.0.1']
 
 # Explicitly use database
-# WAGTAILSEARCH_BACKENDS = {
-#     'default': {
-#         'BACKEND': 'wagtail.search.backends.db',
-#     }
-# }
 WAGTAILSEARCH_BACKENDS = {
     'default': {
-        'BACKEND': 'wagtail.search.backends.elasticsearch6',
-        'URLS': [get_env_variable('FOUNDELASTICSEARCH_URL')],
-        'INDEX': 'wagtail',
-        'TIMEOUT': 5,
-        'OPTIONS': {},
-        'INDEX_SETTINGS': {},
+        'BACKEND': 'wagtail.search.backends.db',
     }
 }
 

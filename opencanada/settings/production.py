@@ -14,7 +14,7 @@ ALLOWED_HOSTS = [get_env_variable('ALLOWED_HOSTS')]
 WAGTAILSEARCH_BACKENDS = {
     'default': {
         'BACKEND': 'wagtail.search.backends.elasticsearch6',
-        'URLS': [get_env_variable('FOUNDELASTICSEARCH_URL')],
+        'URLS': [get_env_variable('BONSAI_URL')],
         'INDEX': 'wagtail',
         'TIMEOUT': 60,
         'OPTIONS': {},
