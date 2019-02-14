@@ -16,7 +16,7 @@ WAGTAILSEARCH_BACKENDS = {
         'BACKEND': 'wagtail.search.backends.elasticsearch6',
         'URLS': [get_env_variable('BONSAI_URL')],
         'INDEX': 'wagtail',
-        'TIMEOUT': 5,
+        'TIMEOUT': 60,
         'OPTIONS': {},
         'INDEX_SETTINGS': {},
     },
