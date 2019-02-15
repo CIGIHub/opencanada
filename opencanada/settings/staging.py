@@ -12,12 +12,6 @@ CACHES = {
     }
 }
 
-WAGTAILSEARCH_BACKENDS = {
-    'default': {
-        'BACKEND': 'wagtail.search.backends.db',
-    }
-}
-
 IS_PRODUCTION = False
 ADMIN_ENABLED = True
 

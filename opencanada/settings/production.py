@@ -11,17 +11,6 @@ PREPEND_WWW = False # TODO: Set to true for production
 
 ALLOWED_HOSTS = [get_env_variable('ALLOWED_HOSTS')]
 
-WAGTAILSEARCH_BACKENDS = {
-    'default': {
-        'BACKEND': 'wagtail.search.backends.elasticsearch6',
-        'URLS': [get_env_variable('FOUNDELASTICSEARCH_URL')],
-        'INDEX': 'wagtail',
-        'TIMEOUT': 60,
-        'OPTIONS': {},
-        'INDEX_SETTINGS': {},
-    },
-}
-
 AWS_ACCESS_KEY_ID = get_env_variable('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = get_env_variable('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = get_env_variable("AWS_STORAGE_BUCKET_NAME")

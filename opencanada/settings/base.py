@@ -206,6 +206,17 @@ WAGTAIL_SITE_NAME = "opencanada"
 
 WAGTAILSEARCH_RESULTS_TEMPLATE = 'basic_site/search_results.html'
 
+WAGTAILSEARCH_BACKENDS = {
+    'default': {
+        'BACKEND': 'wagtail.search.backends.elasticsearch6',
+        'URLS': [get_env_variable('BONSAI_URL')],
+        'INDEX': 'wagtail',
+        'TIMEOUT': 60,
+        'OPTIONS': {},
+        'INDEX_SETTINGS': {},
+    }
+}
+
 # Whether to use face/feature detection to improve image cropping - requires OpenCV
 WAGTAILIMAGES_FEATURE_DETECTION_ENABLED = False
 

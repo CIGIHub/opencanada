@@ -25,13 +25,6 @@ IS_PRODUCTION = False
 
 # INTERNAL_IPS = ['127.0.0.1']
 
-# Explicitly use database
-WAGTAILSEARCH_BACKENDS = {
-    'default': {
-        'BACKEND': 'wagtail.search.backends.db',
-    }
-}
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
