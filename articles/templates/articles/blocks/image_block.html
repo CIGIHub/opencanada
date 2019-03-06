@@ -52,9 +52,6 @@
     class="image"
     {% if self.expandable %}data-toggle="modal" data-target="#photoModal{{ self.image.id }}"{% endif %}
   >
-    {% if self.circle_image %}
-      hello world
-    {% endif %}
     {% if self.placement == 'left' or self.placement == 'right' %}
       {% if self.profile_image %}
         {% image self.image width-200 %}
