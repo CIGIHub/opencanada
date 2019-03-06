@@ -226,13 +226,26 @@
   .left-aligned {
     float: left;
     margin: 5px 20px 0px 0;
-    width:350px;
   }
+
   .right-aligned {
     float: right;
     margin: 5px 0px 0px 20px;
-    width:350px;
   }
+
+  .left-aligned,
+  .right-aligned {
+    width:350px;
+
+    &.profile-image {
+      width: 200px;
+
+      img {
+        border-radius: 50%;
+      }
+    }
+  }
+
   .image-wrapper {
     clear: both;
     max-width: 100%;
@@ -562,7 +575,7 @@ article {
       }
     }
   }
-  
+
   .blurb-content{
     float: right;
     font-family: $sans-serif;
