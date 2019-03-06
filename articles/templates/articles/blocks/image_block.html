@@ -4,42 +4,71 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
         <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">{% if self.label %}{{ self.label }}{% else %}{{ self.image.title }}{% endif %}</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">
+          {% if self.label %}
+            {{ self.label }}
+          {% else %}
+            {{ self.image.title }}
+          {% endif %}
+        </h4>
       </div>
       <div class="modal-body">
         {% image self.image original %}
-          <div class="credit">{{ self.image.credit }}</div>
+        <div class="credit">{{ self.image.credit }}</div>
       </div>
       <div class="modal-footer">
         {% if self.label %}
-            <div class="image-label">{{ self.label }}</div>
+          <div class="image-label">{{ self.label }}</div>
         {% endif %}
       </div>
     </div>
   </div>
 </div>
 {% endif %}
-<div class="image-wrapper {% if self.placement == 'left' %} left-aligned{% elif self.placement == 'right' %} right-aligned{% elif self.placement == 'full' %} full-width{% elif self.placement == 'nocrop' %} full-width full-width-no-crop{% endif %}{% if self.include_border %} bordered{% endif %}">
+<div
+  class="
+    image-wrapper
+    {% if self.placement == 'left' %}
+      left-aligned
+    {% elif self.placement == 'right' %}
+      right-aligned
+    {% elif self.placement == 'full' %}
+      full-width
+    {% elif self.placement == 'nocrop' %}
+      full-width full-width-no-crop
+    {% endif %}
+    {% if self.include_border %}
+      bordered
+    {% endif %}
+    {% if self.profile_image %}
+      profile-image
+    {% endif %}
+  "
+>
   <div
-          class="image"
-          {% if self.expandable %}data-toggle="modal" data-target="#photoModal{{ self.image.id }}"{% endif %}
-          >
-      {% if self.placement == 'left' or self.placement == 'right' %}
-          {% image self.image width-350 %}
-      {% elif self.placement == 'nocrop' %}
-          {% image self.image width-4096 %}
+    class="image"
+    {% if self.expandable %}data-toggle="modal" data-target="#photoModal{{ self.image.id }}"{% endif %}
+  >
+    {% if self.placement == 'left' or self.placement == 'right' %}
+      {% if self.profile_image %}
+        {% image self.image width-200 %}
       {% else %}
-          {% image self.image fill-4096x2400-c100 %}
+        {% image self.image width-350 %}
       {% endif %}
-      {% if self.expandable %}<i class="fa fa-search-plus photo-zoom"></i>{% endif %}
-      <div class="image-credit">{{ self.image.credit }}</div>
-      <div class="image-source">{{ self.image.source }}</div>
-
-
+    {% elif self.placement == 'nocrop' %}
+      {% image self.image width-4096 %}
+    {% else %}
+      {% image self.image fill-4096x2400-c100 %}
+    {% endif %}
+    {% if self.expandable %}<i class="fa fa-search-plus photo-zoom"></i>{% endif %}
+    <div class="image-credit">{{ self.image.credit }}</div>
+    <div class="image-source">{{ self.image.source }}</div>
   </div>
   {% if self.label %}
-          <div class="image-label{% if self.expandable %} clickable{% endif %}"{% if self.expandable %} data-toggle="modal" data-target="#photoModal{{ self.image.id }}" {% endif %}>{{ self.label }}</div>
-          <div class="clear"></div>
-      {% endif %}
+    <div class="image-label{% if self.expandable %} clickable{% endif %}"{% if self.expandable %} data-toggle="modal" data-target="#photoModal{{ self.image.id }}" {% endif %}>{{ self.label }}</div>
+    <div class="clear"></div>
+  {% endif %}
 </div>

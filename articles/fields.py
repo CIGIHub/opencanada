@@ -117,6 +117,11 @@ class ImageBlock(blocks.StructBlock):
     ], default='full')
     include_border = blocks.BooleanBlock(default=False, required=False)
     expandable = blocks.BooleanBlock(default=False, required=False)
+    profile_image = blocks.BooleanBlock(
+        default=False,
+        required=False,
+        help_text="Displays as a circular image, with a max-width of 200px when left or right aligned."
+    )
     label = blocks.CharBlock(required=False, help_text="Additional label to be displayed with the image.")
 
     class Meta:
