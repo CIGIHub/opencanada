@@ -14,9 +14,6 @@
                         {% if item.editors_pick %}
                             <div class="editors-pick-link"><div class="table"><div class="table-cell"><a href="{% slugurl 'editors-picks' %}" class="article-feature editors-pick">Editor's Pick</a></div></div></div>
                         {% endif %}
-                        {% if item == self.most_popular_article %}
-                            <div class="most-popular"><div class="table"><div class="table-cell"><a href="{% slugurl 'most-popular' %}" class="article-feature ">Most Popular</a></div></div></div>
-                        {% endif %}
                         <a href="{{ item.url }}">
                           <div class="feature-image" style="background-image: url('{{ background_image.url }}')">
                               <div class="feature-image-overlay" style="opacity: {{ item.opacity }};"></div>
