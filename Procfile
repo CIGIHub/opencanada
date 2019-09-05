@@ -1,1 +1,1 @@
-web: gunicorn opencanada.wsgi --log-file -
+web: gunicorn opencanada.wsgi --log-level debug --log-file -
