@@ -25,6 +25,7 @@ var/
 .venv
 .env
 secret/
+/venv
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
