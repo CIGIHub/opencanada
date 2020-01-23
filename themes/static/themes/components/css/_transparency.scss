@@ -1,9 +1,10 @@
 
 header{
 	&.transparency {
-		background: transparent !important;
-		transition: background 0s !important;
-		position: absolute;
+		// Removed for hiatus banner notice
+		// background: transparent !important;
+		// transition: background 0s !important;
+		// position: absolute;
 
 		.wordmark {
 			opacity:0.5;

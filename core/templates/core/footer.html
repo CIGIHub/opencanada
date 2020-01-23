@@ -1,79 +1,71 @@
 {% load wagtailcore_tags article_tags static core_tags wagtailembeds_tags wagtailimages_tags theme_tags  %}
 
 <footer role="contentinfo">
-    <div class="container">
-        <div class="row infobar">
-            <div class="col-sm-4">
-                {% get_text_block "about-block" as block %}
-                <h3>{{ block.heading }}</h3>
-                {{ block.content|richtext }}
-            </div>
-            <div class="col-sm-4">
-                {% get_text_block "masthead-block" as block %}
-                <h3>{{ block.heading }}</h3>
-                {{ block.content|richtext }}
-            </div>
-            <div class="col-sm-4">
-                <div class="newsletter-form">
-                    {% get_text_block "newsletter-block" as block %}
-                    <h3>{{ block.heading }}</h3>
-                    <!-- Begin MailChimp Signup Form -->
-                    <link href="//cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css">
-                    <div id="mc_embed_signup">
-                    <form action="//opencanada.us11.list-manage.com/subscribe/post?u=3489214029024915bb546afc7&amp;id=f619618f07" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-                        <div id="mc_embed_signup_scroll">
-
-                        <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="enter email address" required>
-                        <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-                        <div style="position: absolute; left: -5000px;"><input type="text" name="b_3489214029024915bb546afc7_f619618f07" tabindex="-1" value=""></div>
-                        <div class="clear">
-                            <input type="submit" value="Sign-up" name="subscribe" id="mc-embedded-subscribe" class="button">
-                        </div>
-                        </div>
-                    </form>
-                    </div>
-
-                    <!--End mc_embed_signup-->
+  <div class="container">
+    <div class="row infobar">
+      <div class="col-sm-6">
+        {% get_text_block "about-block" as block %}
+        <h3>{{ block.heading }}</h3>
+        {{ block.content|richtext }}
+      </div>
+      <div class="col-sm-6">
+        <div class="newsletter-form">
+          {% get_text_block "newsletter-block" as block %}
+          <h3>{{ block.heading }}</h3>
+          <!-- Begin MailChimp Signup Form -->
+          <link href="//cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css">
+          <div id="mc_embed_signup">
+            <form action="//opencanada.us11.list-manage.com/subscribe/post?u=3489214029024915bb546afc7&amp;id=f619618f07" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+              <div id="mc_embed_signup_scroll">
+                <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="enter email address" required>
+                <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                <div style="position: absolute; left: -5000px;"><input type="text" name="b_3489214029024915bb546afc7_f619618f07" tabindex="-1" value=""></div>
+                <div class="clear">
+                    <input type="submit" value="Sign-up" name="subscribe" id="mc-embedded-subscribe" class="button">
                 </div>
-                <div class="follow">
-                    {% get_text_block "follow-block" as block %}
-                    <h3>{{ block.heading }}</h3>
-                    {% get_follow_link "twitter" as twitter_link %}
-                    {% get_follow_link "facebook" as facebook_link %}
-                    {% get_follow_link "rss-feed" as rss_link %}
-                    <div class="social-links">
-                        <ul>
-                            <li><a href="{{ twitter_link }}"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="{{ facebook_link }}"><i class="fa fa-facebook"></i></a></li>
-                            <li><a rel="home" type="application/rss+xml" href="{{ rss_link }}"><i class="fa fa-rss"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row partner-row">
-            <div class="col-xs-12">
-                <div class="partners">
-                    {% get_text_block "tagline-block" as block %}
-                    {{ block.content|richtext }}
-               </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12">
-              <div class="partner">
-                    {% get_logo "partner-logo-3" as logo %}
-                    {% get_logo_link "partner-logo-3" as logo_link %}
-                    <a href="{{ logo_link }}">{% image logo original %}</a>
-                </div>
-            </div>
-        </div>
-        <div class="contact">
-            Copyright &copy; {% now "Y" %} Centre for International Governance Innovation, All rights reserved.<br>
-            {% get_contact_email as contact_email %}
-            <a href="mailto:{{ contact_email }}">{{ contact_email }}</a>
-        </div>
+              </div>
+            </form>
+          </div>
 
+            <!--End mc_embed_signup-->
+        </div>
+        <div class="follow">
+          {% get_text_block "follow-block" as block %}
+          <h3>{{ block.heading }}</h3>
+          {% get_follow_link "twitter" as twitter_link %}
+          {% get_follow_link "facebook" as facebook_link %}
+          {% get_follow_link "rss-feed" as rss_link %}
+          <div class="social-links">
+            <ul>
+              <li><a href="{{ twitter_link }}"><i class="fa fa-twitter"></i></a></li>
+              <li><a href="{{ facebook_link }}"><i class="fa fa-facebook"></i></a></li>
+              <li><a rel="home" type="application/rss+xml" href="{{ rss_link }}"><i class="fa fa-rss"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
-
+    <div class="row partner-row">
+      <div class="col-xs-12">
+        <div class="partners">
+          {% get_text_block "tagline-block" as block %}
+          {{ block.content|richtext }}
+       </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="partner">
+          {% get_logo "partner-logo-3" as logo %}
+          {% get_logo_link "partner-logo-3" as logo_link %}
+          <a href="{{ logo_link }}">{% image logo original %}</a>
+        </div>
+      </div>
+    </div>
+    <div class="contact">
+      Copyright &copy; {% now "Y" %} Centre for International Governance Innovation, All rights reserved.<br>
+      {% get_contact_email as contact_email %}
+      <a href="mailto:{{ contact_email }}">{{ contact_email }}</a>
+    </div>
+  </div>
 </footer>
