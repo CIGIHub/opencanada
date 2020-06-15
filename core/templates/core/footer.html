@@ -45,27 +45,12 @@
         </div>
       </div>
     </div>
-    <div class="row partner-row">
-      <div class="col-xs-12">
-        <div class="partners">
-          {% get_text_block "tagline-block" as block %}
-          {{ block.content|richtext }}
-       </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12">
-        <div class="partner">
-          {% get_logo "partner-logo-3" as logo %}
-          {% get_logo_link "partner-logo-3" as logo_link %}
-          <a href="{{ logo_link }}">{% image logo original %}</a>
-        </div>
-      </div>
-    </div>
-    <div class="contact">
-      Copyright &copy; {% now "Y" %} Centre for International Governance Innovation, All rights reserved.<br>
+  </div>
+  <div class="container contact">
+    <p>
+      All rights reserved.<br>
       {% get_contact_email as contact_email %}
       <a href="mailto:{{ contact_email }}">{{ contact_email }}</a>
-    </div>
+    </p>
   </div>
 </footer>

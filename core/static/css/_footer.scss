@@ -37,7 +37,7 @@ footer{
   }
 
   .row {
-    .col-sm-4, .col-xs-4, .col-xs-12 {
+    .col-sm-4, .col-xs-4, .col-xs-12, .col-sm-6 {
       padding-top:20px;
       padding-bottom: 20px;
 
@@ -54,8 +54,14 @@ footer{
   }
 
   .contact {
-    padding:20px;
-    text-transform: uppercase;
+    border-top: $border-light-grey;
+    padding-top: 20px;
+
+    p {
+      @include centered-fixed-width(550px);
+      text-align: center;
+      text-transform: uppercase;
+    }
   }
 
   .row.infobar{
@@ -92,20 +98,11 @@ footer{
     }
   }
 
-  .row.partner-row{
-    border-top: $border-light-grey;
-  }
-  .partners, .contact{
-    @include centered-fixed-width(550px);
-    text-align: center;
-  }
-
-
   @media(max-width: $screen-xs-max) {
     .row.infobar{
       display: block;
     }
-    .row.infobar .col-sm-4{
+    .row.infobar .col-sm-6{
       display:block;
       border-top: $border-light-grey;
       border-right: none;
@@ -143,7 +140,7 @@ footer{
   }
 
   @media(min-width: $screen-xs) and (max-width: $screen-sm + -1) {
-    .row.infobar .col-sm-4:last-child {
+    .row.infobar .col-sm-6:last-child {
       .newsletter-form, .follow {
         display: block;
         float: left;

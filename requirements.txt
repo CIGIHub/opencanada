@@ -26,11 +26,13 @@ djangorestframework==3.9.1
 docopt==0.6.2
 draftjs-exporter==2.1.5
 elasticsearch==6.3.0
+flake8==3.8.3
 google-api-python-client==1.4.1
 gunicorn==19.9.0
 html5lib==1.0.1
 httplib2==0.12.0
 idna==2.8
+importlib-metadata==1.6.1
 isort==4.3.21
 lazy-object-proxy==1.4.3
 libsass==0.17.0
@@ -41,7 +43,9 @@ Pillow==5.4.1
 psycopg2==2.7.6.1
 pyasn1==0.4.5
 pyasn1-modules==0.2.3
+pycodestyle==2.6.0
 pycparser==2.19
+pyflakes==2.2.0
 pylint==2.4.4
 pyOpenSSL==19.0.0
 pytz==2018.9
@@ -64,3 +68,4 @@ webencodings==0.5.1
 whitenoise==4.1.2
 Willow==1.1
 wrapt==1.11.2
+zipp==3.1.0
