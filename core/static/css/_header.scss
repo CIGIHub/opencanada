@@ -330,24 +330,3 @@ header{
     }
   }
 }
-.banner-notice {
-  background-color: $black;
-
-  .banner {
-    margin: 0 auto;
-    max-width: 780px;
-    padding: 20px 10px;
-
-    p {
-      color: $white;
-      font-family: $sans-serif;
-      line-height: 1.2;
-      margin: 0;
-
-      @media screen and (min-width: $screen-md-min) {
-        border: $border-grey;
-        padding: 10px;
-      }
-    }
-  }
-}
