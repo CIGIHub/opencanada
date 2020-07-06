@@ -55,10 +55,11 @@ footer{
 
   .contact {
     border-top: $border-light-grey;
-    padding-top: 20px;
+    padding-top: 30px;
 
     p {
       @include centered-fixed-width(550px);
+      padding-top: 30px;
       text-align: center;
       text-transform: uppercase;
     }
@@ -83,7 +84,7 @@ footer{
     text-align: center;
     img{
       display: inline;
-      max-height: 67px;
+      max-height: 100px;
       width: auto;
     }
   }

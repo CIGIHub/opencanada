@@ -47,6 +47,11 @@
     </div>
   </div>
   <div class="container contact">
+    <div class="partner">
+      {% get_logo "cic-logo" as logo %}
+      {% get_logo_link "cic-logo" as logo_link %}
+      <a href="{{ logo_link }}">{% image logo original %}</a>
+    </div>
     <p>
       All rights reserved.<br>
       {% get_contact_email as contact_email %}
