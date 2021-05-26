@@ -1,6 +1,6 @@
-# OpenCanada Website
-[![Build Status](https://www.travis-ci.org/CIGIHub/opencanada.svg?branch=staging)](https://www.travis-ci.org/CIGIHub/opencanada)
-[![Coverage Status](https://coveralls.io/repos/github/CIGIHub/opencanada/badge.svg?branch=staging)](https://coveralls.io/github/CIGIHub/opencanada?branch=staging)
+# opencanada
+
+**[ARCHIVED]** Since OpenCanada was [transferred to the Canadian International Council](https://opencanada.org/opencanada-returning-home-to-the-cic/), this repository is no longer maintained.
 
 The opencanada.org website source.
 
